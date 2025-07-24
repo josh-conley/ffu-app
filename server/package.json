@@ -5,11 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc",
+    "build": "tsc -b",
     "start": "node dist/index.js",
     "lint": "eslint src --ext .ts",
-    "test": "jest",
-    "postinstall": "npx tsc && ls dist"
+    "test": "jest"
 
   },
   "dependencies": {

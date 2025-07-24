@@ -11,10 +11,16 @@
     "build:server": "cd server && npm install && npm run build",
     "start": "node server/dist/index.js"
   },
-  "keywords": ["fantasy-football", "sleeper", "react", "express"],
+  "keywords": [
+    "fantasy-football",
+    "sleeper",
+    "react",
+    "express"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "typescript": "^5.8.3"
   }
 }

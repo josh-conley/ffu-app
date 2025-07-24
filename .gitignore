@@ -15,6 +15,7 @@ pnpm-debug.log*
 # Build outputs
 /client/dist/
 /server/dist/
+/shared/dist/
 build/
 
 # Runtime data
