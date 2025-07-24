@@ -50,16 +50,16 @@ app.use(cors({
 
 app.use(express.json({ limit: '10mb' }));
 
-if (isProduction) {
+// Routes
+app.use('/api/leagues', leagueRoutes);
+
+if (true) {
   const reactBuildPath = path.join(__dirname, '../../client/dist');
   app.use(express.static(reactBuildPath));
   app.get('*', (_req, res) => {
     res.sendFile(path.join(reactBuildPath, 'index.html'));
   });
 }
-
-// Routes
-app.use('/api/leagues', leagueRoutes);
 
 // Health check
 app.get('/health', (_req, res) => {

@@ -74,6 +74,7 @@ export const leagueApi = {
   // Get all league standings for all years
   getAllStandings: async (): Promise<EnhancedLeagueSeasonData[]> => {
     const response = await api.get('/leagues/standings');
+    console.log('response standings', response);
     return transformStandingsData(response.data);
   },
 
