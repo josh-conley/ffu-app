@@ -13,8 +13,8 @@ pnpm-debug.log*
 .env.production.local
 
 # Build outputs
-/frontend/dist/
-/backend/dist/
+/client/dist/
+/server/dist/
 build/
 
 # Runtime data
@@ -67,5 +67,5 @@ temp/
 deploy.sh
 
 # Local development
-/backend/.env
-/frontend/.env
+/server/.env
+/client/.env
