@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run build:*)",
+      "Bash(unzip:*)",
+      "Bash(rm:*)",
+      "Bash(ls:*)",
+      "Bash(node:*)",
+      "Bash(mv:*)"
+    ],
+    "deny": []
+  }
+}

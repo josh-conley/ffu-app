@@ -1,0 +1,308 @@
+import { useState, useMemo } from 'react';
+import { useAllStandings } from '../hooks/useLeagues';
+import { LoadingSpinner } from '../components/Common/LoadingSpinner';
+import { ErrorMessage } from '../components/Common/ErrorMessage';
+import { TeamLogo } from '../components/Common/TeamLogo';
+import { LeagueBadge } from '../components/League/LeagueBadge';
+import type { LeagueTier, UserInfo } from '../types';
+import { Trophy, Medal, Award, TrendingDown, Calendar, Target, Zap } from 'lucide-react';
+
+interface PlayerCareerStats {
+  userId: string;
+  userInfo: UserInfo;
+  totalWins: number;
+  totalLosses: number;
+  totalPointsFor: number;
+  totalPointsAgainst: number;
+  firstPlaceFinishes: number;
+  secondPlaceFinishes: number;
+  thirdPlaceFinishes: number;
+  lastPlaceFinishes: number;
+  playoffAppearances: number;
+  seasonHistory: {
+    year: string;
+    league: LeagueTier;
+    wins: number;
+    losses: number;
+    pointsFor: number;
+    pointsAgainst: number;
+    rank: number;
+    playoffFinish?: number;
+  }[];
+}
+
+
+export const PlayerStats = () => {
+  const { data: standings, isLoading, error } = useAllStandings();
+  const [selectedPlayerId, setSelectedPlayerId] = useState<string>('');
+
+  const playerStats = useMemo(() => {
+    if (!standings.length) return [];
+
+    const playerMap: Record<string, PlayerCareerStats> = {};
+
+    // Process all standings data
+    standings.forEach(leagueData => {
+      leagueData.standings.forEach(standing => {
+        if (!playerMap[standing.userId]) {
+          playerMap[standing.userId] = {
+            userId: standing.userId,
+            userInfo: standing.userInfo,
+            totalWins: 0,
+            totalLosses: 0,
+            totalPointsFor: 0,
+            totalPointsAgainst: 0,
+            firstPlaceFinishes: 0,
+            secondPlaceFinishes: 0,
+            thirdPlaceFinishes: 0,
+            lastPlaceFinishes: 0,
+            playoffAppearances: 0,
+            seasonHistory: []
+          };
+        }
+
+        const player = playerMap[standing.userId];
+        
+        // Accumulate totals
+        player.totalWins += standing.wins;
+        player.totalLosses += standing.losses;
+        player.totalPointsFor += standing.pointsFor || 0;
+        player.totalPointsAgainst += standing.pointsAgainst || 0;
+
+        // Count finishes
+        if (standing.rank === 1) player.firstPlaceFinishes++;
+        else if (standing.rank === 2) player.secondPlaceFinishes++;
+        else if (standing.rank === 3) player.thirdPlaceFinishes++;
+        else if (standing.rank === leagueData.standings.length) player.lastPlaceFinishes++;
+
+        // Check for playoff finish
+        const playoffFinish = leagueData.playoffResults?.find(p => p.userId === standing.userId);
+        if (playoffFinish) {
+          player.playoffAppearances++;
+        }
+
+        // Add to season history
+        player.seasonHistory.push({
+          year: leagueData.year,
+          league: leagueData.league as LeagueTier,
+          wins: standing.wins,
+          losses: standing.losses,
+          pointsFor: standing.pointsFor || 0,
+          pointsAgainst: standing.pointsAgainst || 0,
+          rank: standing.rank,
+          playoffFinish: playoffFinish?.placement
+        });
+      });
+    });
+
+    // Sort season history by year (newest first)
+    Object.values(playerMap).forEach(player => {
+      player.seasonHistory.sort((a, b) => b.year.localeCompare(a.year));
+    });
+
+    return Object.values(playerMap).sort((a, b) => 
+      a.userInfo.teamName.localeCompare(b.userInfo.teamName)
+    );
+  }, [standings]);
+
+  const selectedPlayer = playerStats.find(p => p.userId === selectedPlayerId);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-96">
+        <LoadingSpinner size="lg" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <ErrorMessage error={error} />;
+  }
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold text-gray-900">Player Statistics</h1>
+        <p className="mt-2 text-gray-600">View career statistics for any FFU league member</p>
+      </div>
+
+      {/* Player Selection */}
+      <div className="card">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Select a Player</h3>
+        <select
+          value={selectedPlayerId}
+          onChange={(e) => setSelectedPlayerId(e.target.value)}
+          className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
+        >
+          <option value="">Choose a player...</option>
+          {playerStats.map(player => (
+            <option key={player.userId} value={player.userId}>
+              {player.userInfo.teamName}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Player Stats Display */}
+      {selectedPlayer && (
+        <div className="space-y-6">
+          {/* Player Header */}
+          <div className="card">
+            <div className="flex items-center space-x-4">
+              <TeamLogo 
+                teamName={selectedPlayer.userInfo.teamName}
+                abbreviation={selectedPlayer.userInfo.abbreviation}
+                size="lg"
+                className="w-16 h-16 text-xl"
+              />
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.userInfo.teamName}</h2>
+                <p className="text-gray-600 dark:text-gray-400">{selectedPlayer.userInfo.abbreviation}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Career Overview Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="card text-center">
+              <Target className="h-8 w-8 text-green-600 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-gray-900">{selectedPlayer.totalWins}</div>
+              <div className="text-sm text-gray-500">Total Wins</div>
+            </div>
+            <div className="card text-center">
+              <TrendingDown className="h-8 w-8 text-red-600 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-gray-900">{selectedPlayer.totalLosses}</div>
+              <div className="text-sm text-gray-500">Total Losses</div>
+            </div>
+            <div className="card text-center">
+              <Zap className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-gray-900">{selectedPlayer.totalPointsFor.toFixed(1)}</div>
+              <div className="text-sm text-gray-500">Points For</div>
+            </div>
+            <div className="card text-center">
+              <Calendar className="h-8 w-8 text-purple-600 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-gray-900">{selectedPlayer.seasonHistory.length}</div>
+              <div className="text-sm text-gray-500">Seasons Played</div>
+            </div>
+          </div>
+
+          {/* Achievements */}
+          <div className="card">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Career Achievements</h3>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div className="text-center">
+                <div className="flex justify-center mb-2">
+                  <Trophy className="h-8 w-8 text-yellow-600" />
+                </div>
+                <div className="text-xl font-bold text-gray-900">{selectedPlayer.firstPlaceFinishes}</div>
+                <div className="text-sm text-gray-500">1st Place</div>
+              </div>
+              <div className="text-center">
+                <div className="flex justify-center mb-2">
+                  <Medal className="h-8 w-8 text-gray-500" />
+                </div>
+                <div className="text-xl font-bold text-gray-900">{selectedPlayer.secondPlaceFinishes}</div>
+                <div className="text-sm text-gray-500">2nd Place</div>
+              </div>
+              <div className="text-center">
+                <div className="flex justify-center mb-2">
+                  <Award className="h-8 w-8 text-amber-600" />
+                </div>
+                <div className="text-xl font-bold text-gray-900">{selectedPlayer.thirdPlaceFinishes}</div>
+                <div className="text-sm text-gray-500">3rd Place</div>
+              </div>
+              <div className="text-center">
+                <div className="flex justify-center mb-2">
+                  <TrendingDown className="h-8 w-8 text-gray-400" />
+                </div>
+                <div className="text-xl font-bold text-gray-900">{selectedPlayer.lastPlaceFinishes}</div>
+                <div className="text-sm text-gray-500">Last Place</div>
+              </div>
+              <div className="text-center">
+                <div className="flex justify-center mb-2">
+                  <Calendar className="h-8 w-8 text-green-600" />
+                </div>
+                <div className="text-xl font-bold text-gray-900">{selectedPlayer.playoffAppearances}</div>
+                <div className="text-sm text-gray-500">Playoff Apps</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Season History */}
+          <div className="card">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Season History</h3>
+            <div className="table-container">
+              <table className="table">
+                <thead className="table-header">
+                  <tr>
+                    <th>Year</th>
+                    <th>League</th>
+                    <th>Record</th>
+                    <th>Points For</th>
+                    <th>Points Against</th>
+                    <th>Regular Season Rank</th>
+                    <th>Playoff Finish</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {selectedPlayer.seasonHistory.map((season) => (
+                    <tr key={`${season.year}-${season.league}`} className="table-row">
+                      <td>
+                        <span className="font-medium">{season.year}</span>
+                      </td>
+                      <td>
+                        <LeagueBadge league={season.league} />
+                      </td>
+                      <td>
+                        <span className="font-medium">{season.wins}-{season.losses}</span>
+                      </td>
+                      <td>
+                        <span className="font-medium">{season.pointsFor.toFixed(1)}</span>
+                      </td>
+                      <td>
+                        <span className="font-medium">{season.pointsAgainst.toFixed(1)}</span>
+                      </td>
+                      <td>
+                        <div className="flex items-center space-x-1">
+                          {season.rank === 1 && <Trophy className="h-4 w-4 text-yellow-600" />}
+                          {season.rank === 2 && <Medal className="h-4 w-4 text-gray-500" />}
+                          {season.rank === 3 && <Award className="h-4 w-4 text-amber-600" />}
+                          <span className="font-medium">#{season.rank}</span>
+                        </div>
+                      </td>
+                      <td>
+                        {season.playoffFinish ? (
+                          <div className="flex items-center space-x-1">
+                            {season.playoffFinish === 1 && <Trophy className="h-4 w-4 text-yellow-600" />}
+                            {season.playoffFinish === 2 && <Medal className="h-4 w-4 text-gray-500" />}
+                            {season.playoffFinish === 3 && <Award className="h-4 w-4 text-amber-600" />}
+                            <span className="font-medium">
+                              {season.playoffFinish === 1 ? '1st' :
+                               season.playoffFinish === 2 ? '2nd' :
+                               season.playoffFinish === 3 ? '3rd' :
+                               `${season.playoffFinish}th`}
+                            </span>
+                          </div>
+                        ) : (
+                          <span className="text-gray-400">-</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {!selectedPlayer && (
+        <div className="text-center py-12">
+          <div className="text-gray-500">
+            Select a player above to view their career statistics
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
