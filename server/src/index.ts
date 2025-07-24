@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
+import path from 'path';
 import rateLimit from 'express-rate-limit';
 import leagueRoutes from './routes/league.routes';
 
@@ -48,6 +49,14 @@ app.use(cors({
 }));
 
 app.use(express.json({ limit: '10mb' }));
+
+if (isProduction) {
+  const reactBuildPath = path.join(__dirname, '../../client/dist');
+  app.use(express.static(reactBuildPath));
+  app.get('*', (_req, res) => {
+    res.sendFile(path.join(reactBuildPath, 'index.html'));
+  });
+}
 
 // Routes
 app.use('/api/leagues', leagueRoutes);
