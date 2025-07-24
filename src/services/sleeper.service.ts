@@ -1,4 +1,4 @@
-import { SleeperLeague, SleeperUser, SleeperRoster, SleeperMatchup } from '../types';
+import type { SleeperLeague, SleeperUser, SleeperRoster, SleeperMatchup } from '../types';
 
 export class SleeperService {
   private baseUrl = 'https://api.sleeper.app/v1';

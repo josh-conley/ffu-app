@@ -1,15 +1,20 @@
 import { SleeperService } from './sleeper.service';
-import { getLeagueId, getAllLeagueConfigs, validateLeagueAndYear } from '../config/constants';
-import { 
+import { getLeagueId, getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId } from '../config/constants';
+import type { 
   LeagueSeasonData, 
   SeasonStandings, 
   PlayoffResult, 
   WeekMatchup,
-  LeagueTier 
+  LeagueTier,
+  UserInfo
 } from '../types';
 
 export class LeagueService {
-  constructor(private sleeperService: SleeperService) {}
+  private sleeperService: SleeperService;
+
+  constructor(sleeperService: SleeperService) {
+    this.sleeperService = sleeperService;
+  }
 
   async getLeagueStandings(league: LeagueTier, year: string): Promise<LeagueSeasonData> {
     if (!validateLeagueAndYear(league, year)) {
@@ -21,12 +26,9 @@ export class LeagueService {
       throw new Error(`League ID not found for ${league} ${year}`);
     }
 
-    const [rosters, users] = await Promise.all([
-      this.sleeperService.getLeagueRosters(leagueId),
-      this.sleeperService.getLeagueUsers(leagueId)
+    const [rosters] = await Promise.all([
+      this.sleeperService.getLeagueRosters(leagueId)
     ]);
-
-    const userMap = this.sleeperService.createUserMap(users);
     
     let standings: SeasonStandings[] = rosters
       .map(roster => ({
@@ -173,6 +175,62 @@ export class LeagueService {
     return weekMatchups;
   }
 
+  // Enhanced method to get matchups with user info
+  async getWeekMatchupsWithUserInfo(league: LeagueTier, year: string, week: number) {
+    const matchups = await this.getWeekMatchups(league, year, week);
+    
+    return {
+      league,
+      year,
+      week,
+      matchups: matchups.map(matchup => ({
+        ...matchup,
+        winnerInfo: this.getUserInfo(matchup.winner),
+        loserInfo: this.getUserInfo(matchup.loser)
+      }))
+    };
+  }
+
+  // Enhanced method to get standings with user info
+  async getLeagueStandingsWithUserInfo(league: LeagueTier, year: string) {
+    const leagueData = await this.getLeagueStandings(league, year);
+    
+    return {
+      ...leagueData,
+      standings: leagueData.standings.map(standing => ({
+        ...standing,
+        userInfo: this.getUserInfo(standing.userId)
+      })),
+      playoffResults: leagueData.playoffResults.map(result => ({
+        ...result,
+        userInfo: this.getUserInfo(result.userId)
+      }))
+    };
+  }
+
+  async getAllLeagueStandingsWithUserInfo() {
+    const allStandings = await this.getAllLeagueStandings();
+    
+    return allStandings.map(leagueData => ({
+      ...leagueData,
+      standings: leagueData.standings.map(standing => ({
+        ...standing,
+        userInfo: this.getUserInfo(standing.userId)
+      })),
+      playoffResults: leagueData.playoffResults.map(result => ({
+        ...result,
+        userInfo: this.getUserInfo(result.userId)
+      }))
+    }));
+  }
+
+  private getUserInfo(userId: string): UserInfo {
+    const userInfo = getUserInfoBySleeperId(userId);
+    return userInfo 
+      ? { userId, teamName: userInfo.teamName, abbreviation: userInfo.abbreviation }
+      : { userId, teamName: 'Unknown Team', abbreviation: 'UNK' };
+  }
+
   private parsePlayoffResults(winnersBracket: any[], losersBracket: any[], rosters: any[]): PlayoffResult[] {
     const results: PlayoffResult[] = [];
     
@@ -182,13 +240,8 @@ export class LeagueService {
       rosterToOwner[roster.roster_id] = roster.owner_id;
     });
 
-    // console.log(`Parsing playoff results for ${rosters.length} team league:`, {
-    //   winnersBracketMatches: winnersBracket.length,
-    //   losersBracketMatches: losersBracket.length
-    // });
-    
     // Only log full bracket details for debugging specific leagues
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.MODE === 'development') {
       // console.log('Winners Bracket:', JSON.stringify(winnersBracket, null, 2));
       // console.log('Losers Bracket:', JSON.stringify(losersBracket, null, 2));
     }
@@ -226,9 +279,6 @@ export class LeagueService {
       if (match.l && rosterToOwner[match.l]) playoffParticipants.add(rosterToOwner[match.l]);
     });
 
-    // console.log('Playoff participants found:', Array.from(playoffParticipants));
-    // console.log('Explicit placements found:', Object.fromEntries(explicitPlacements));
-
     // Create results from explicit placements
     explicitPlacements.forEach((placement, userId) => {
       results.push({
@@ -259,7 +309,6 @@ export class LeagueService {
       index === self.findIndex(r => r.userId === result.userId)
     ).sort((a, b) => a.placement - b.placement);
 
-    // console.log('Final playoff results:', uniqueResults);
     return uniqueResults;
   }
 

@@ -1,53 +1,69 @@
-# Fantasy Football Union (FFU) App
+# React + TypeScript + Vite
 
-A full-stack application for tracking Fantasy Football Union league history, stats, and records across multiple leagues with promotion/relegation system.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Architecture
+Currently, two official plugins are available:
 
-- **Frontend**: React with TypeScript
-- **Backend**: Node.js/Express with TypeScript
-- **Data Source**: Sleeper API
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Leagues
+## Expanding the ESLint configuration
 
-- **Premier League**: Top tier
-- **Masters League**: Middle tier  
-- **National League**: Entry tier
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## Features
+```js
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-- League standings by year
-- Playoff tracking and results
-- Member history across leagues/years
-- Promotion/relegation tracking
-- Team and player statistics
+      // Remove tseslint.configs.recommended and replace with this
+      ...tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      ...tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      ...tseslint.configs.stylisticTypeChecked,
 
-## Quick Start
-
-```bash
-# Install dependencies
-npm install
-cd backend && npm install
-cd ../frontend && npm install
-
-# Set up environment files
-cd backend && cp .env.example .env && cd ..
-cd frontend && cp .env.example .env && cd ..
-
-# Run development servers (both frontend and backend)
-npm run dev
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-Visit http://localhost:5173 to see the frontend and http://localhost:3001 for the API.
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-For detailed setup instructions, see [SETUP.md](./SETUP.md).
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-## Project Structure
-
-```
-ffu-app/
-├── backend/          # Express API server
-├── frontend/         # React application
-├── shared/           # Shared types and utilities
-└── package.json      # Root package.json
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```

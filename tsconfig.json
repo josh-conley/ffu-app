@@ -1,7 +1,14 @@
 {
+  "compilerOptions": {
+    "rootDir": ".",
+  },
   "files": [],
   "references": [
-    { "path": "./server" },
-    { "path": "./client" }
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
   ]
 }

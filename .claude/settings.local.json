@@ -8,7 +8,10 @@
       "Bash(rm:*)",
       "Bash(ls:*)",
       "Bash(node:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(npm run dev:*)",
+      "Bash(true)",
+      "Bash(npm install:*)"
     ],
     "deny": []
   }

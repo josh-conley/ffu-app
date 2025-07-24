@@ -1,4 +1,4 @@
-import { LeagueTier } from '../types';
+import type { LeagueTier } from '../types';
 
 // Normalized data structures for better maintainability
 
