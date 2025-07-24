@@ -3,13 +3,14 @@
     "target": "ES2020",
     "module": "CommonJS",
     "moduleResolution": "node",
-    "outDir": "./dist",
-    "rootDir": "..",      // keep rootDir inside server folder
+    "outDir": "dist",
+    "rootDir": "src",      // keep rootDir inside server folder
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
     "composite": true    // needed for project references
   },
-  "include": ["src/**/*", "../shared/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"],
+  "references": [{ "path": "../shared" }]
 }
