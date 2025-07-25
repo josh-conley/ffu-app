@@ -20,7 +20,6 @@ export const useAllStandings = (): UseAllStandingsReturn => {
       setIsLoading(true);
       setError(undefined);
       const standings = await leagueApi.getAllStandings();
-      console.log('useLeagues standings', standings);
       setData(standings);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch standings';

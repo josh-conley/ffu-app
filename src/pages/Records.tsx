@@ -453,11 +453,11 @@ export const Records = () => {
       >
         <div className="relative">
           {/* You'll need to add the Dak image here */}
-          <div className="w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-xs shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+          <div className="w-16 h-16 flex items-center justify-center text-white font-bold text-xs transition-all duration-300 transform hover:scale-105">
             <img
               src={dakUrl}
               alt={`dak`}
-              className="w-full h-full rounded-full object-cover border-2 border-gray-300 dark:border-gray-600 transition-colors"
+              className="w-full h-full object-cover transition-colors"
               onError={() => setImageError(true)}
               onLoad={() => setImageError(false)}
             />
