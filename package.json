@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "description": "Fantasy Football Union - League History, Stats, and Records Site (Static)",
+  "homepage": "https://josh-conley.github.io/ffu-app",
   "keywords": [
     "fantasy-football",
     "sleeper",
