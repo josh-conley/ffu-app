@@ -1,7 +1,12 @@
+import { useState } from "react";
+
 export const SecretDak = () => {
+  const [, setImageError] = useState(false);
   // Extract video ID from YouTube URL
   const videoUrl = 'https://www.youtube.com/watch?v=GpJW1vv-0y4';
   const videoId = videoUrl.split('v=')[1]?.split('&')[0] || 'GpJW1vv-0y4';
+  const basePath = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
+  const dakUrl = `${basePath}/dak-head.png`;
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-8">
@@ -11,7 +16,7 @@ export const SecretDak = () => {
             🏈 1.01 🏈
           </h1>
         </div>
-        
+
         {/* Embedded YouTube Video */}
         <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
           <iframe
@@ -23,6 +28,18 @@ export const SecretDak = () => {
             allowFullScreen
           ></iframe>
         </div>
+        <div className="relative">
+          <div className="flex items-center justify-center text-white font-bold text-xs transition-all duration-300 transform hover:scale-105">
+            <img
+              src={dakUrl}
+              alt={`dak`}
+              className="w-full h-full object-cover transition-colors"
+              onError={() => setImageError(true)}
+              onLoad={() => setImageError(false)}
+            />
+          </div>
+        </div>
+
       </div>
     </div>
   );
