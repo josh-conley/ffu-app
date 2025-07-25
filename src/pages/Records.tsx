@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAllTimeRecords } from '../hooks/useLeagues';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
@@ -22,16 +22,22 @@ export const Records = () => {
 
   const leagues: (LeagueTier | 'ALL')[] = ['ALL', 'PREMIER', 'MASTERS', 'NATIONAL'];
   const years = ['ALL', '2024', '2023', '2022', '2021'];
-  // const validYearsByLeague: Record<string, string[]> = {
-  //   ALL: years,
-  //   PREMIER: years,
-  //   NATIONAL: years,
-  //   MASTERS: ['ALL', '2024', '2023', '2022'], // no 2021
-  // };
+  const validYearsByLeague: Record<string, string[]> = {
+    ALL: years,
+    PREMIER: years,
+    NATIONAL: years,
+    MASTERS: ['ALL', '2024', '2023', '2022'], // no 2021
+  };
 
-  // const filteredYears = useMemo(() => {
-  //   return validYearsByLeague[selectedLeague] || years;
-  // }, [selectedLeague]);
+  const filteredYears = useMemo(() => {
+    return validYearsByLeague[selectedLeague] || years;
+  }, [selectedLeague]);
+
+  useEffect(() => {
+    if (!filteredYears.includes(selectedYear)) {
+      setSelectedYear('ALL');
+    }
+  }, [selectedLeague, filteredYears, selectedYear]);
 
   const getLeagueName = (league: LeagueTier | 'ALL'): string => {
     switch (league) {
@@ -146,7 +152,7 @@ export const Records = () => {
             onChange={(e) => setSelectedYear(e.target.value)}
             className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
           >
-            {years.map(year => (
+            {filteredYears.map(year => (
               <option key={year} value={year}>{year === 'ALL' ? 'All Years' : year}</option>
             ))}
           </select>
