@@ -41,16 +41,11 @@ export const Overview = () => {
       {/* League Overview */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="card text-center">
-          <div className="mx-auto mb-4 w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-xl p-3 transition-colors">
+          <div className="mx-auto mb-4 w-24 h-24">
             <img 
-              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/Premier-Light.png`}
+              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/PremierLogo.png`}
               alt="Premier League Logo"
-              className="w-full h-full object-contain dark:hidden"
-            />
-            <img 
-              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/Premier-Dark.png`}
-              alt="Premier League Logo"
-              className="w-full h-full object-contain hidden dark:block"
+              className="w-full h-full object-contain"
             />
           </div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Premier League</h3>
@@ -60,16 +55,11 @@ export const Overview = () => {
         </div>
         
         <div className="card text-center">
-          <div className="mx-auto mb-4 w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-xl p-3 transition-colors">
+          <div className="mx-auto mb-4 w-24 h-24">
             <img 
-              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/Masters-Light.png`}
+              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/MastersLogo.png`}
               alt="Masters League Logo"
-              className="w-full h-full object-contain dark:hidden"
-            />
-            <img 
-              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/Masters-Dark.png`}
-              alt="Masters League Logo"
-              className="w-full h-full object-contain hidden dark:block"
+              className="w-full h-full object-contain"
             />
           </div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Masters League</h3>
@@ -79,16 +69,11 @@ export const Overview = () => {
         </div>
         
         <div className="card text-center">
-          <div className="mx-auto mb-4 w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-xl p-3 transition-colors">
+          <div className="mx-auto mb-4 w-24 h-24">
             <img 
-              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/National-Light.png`}
+              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/NationalLogo.png`}
               alt="National League Logo"
-              className="w-full h-full object-contain dark:hidden"
-            />
-            <img 
-              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/National-Dark.png`}
-              alt="National League Logo"
-              className="w-full h-full object-contain hidden dark:block"
+              className="w-full h-full object-contain"
             />
           </div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">National League</h3>
