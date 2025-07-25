@@ -13,7 +13,7 @@ export interface HistoricalLeagueData {
 }
 
 export class DataService {
-  private baseUrl = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
+  private baseUrl = '';
 
   /**
    * Load historical league data from JSON file

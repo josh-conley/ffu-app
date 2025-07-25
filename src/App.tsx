@@ -11,7 +11,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 function App() {
   return (
     <ThemeProvider>
-      <Router basename={import.meta.env.MODE === 'production' ? '/ffu-app' : '/'}>
+      <Router basename={'/'}>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Overview />} />

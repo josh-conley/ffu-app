@@ -22,7 +22,7 @@ export const TeamLogo = ({
 }: TeamLogoProps) => {
   const [imageError, setImageError] = useState(false);
   const logoFilename = getTeamLogoFilename(teamName);
-  const basePath = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
+  const basePath = '';
   const logoUrl = logoFilename ? `${basePath}/team-logos/${logoFilename}` : null;
   
   // Use provided abbreviation, or generate one from team name

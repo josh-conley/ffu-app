@@ -12,7 +12,7 @@ export const Records = () => {
   const [selectedLeague, setSelectedLeague] = useState<LeagueTier | 'ALL'>('ALL');
   const [selectedYear, setSelectedYear] = useState<string>('ALL');
   const [, setImageError] = useState(false);
-  const basePath = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
+  const basePath = '';
   const dakUrl = `${basePath}/dak-head.png`;
 
   const { data: records, isLoading, error } = useAllTimeRecords(

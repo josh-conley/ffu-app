@@ -8,7 +8,7 @@ export const Overview = () => {
       <div className="bg-gradient-to-r from-red-600 to-red-700 dark:from-red-500 dark:to-red-600 rounded-lg shadow-lg p-12 text-white text-center">
         <div className="max-w-2xl mx-auto">
           {/* <img 
-            src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/NationalLogo.png`}
+            src={`/league-logos/NationalLogo.png`}
             alt="FFU Logo"
             className="h-36 w-36 object-contain mx-auto mb-6"
           /> */}
@@ -54,7 +54,7 @@ export const Overview = () => {
         <div className="card text-center">
           <div className="mx-auto mb-4 w-24 h-24">
             <img 
-              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/PremierLogo.png`}
+              src={`/league-logos/PremierLogo.png`}
               alt="Premier League Logo"
               className="w-full h-full object-contain"
             />
@@ -68,7 +68,7 @@ export const Overview = () => {
         <div className="card text-center">
           <div className="mx-auto mb-4 w-24 h-24">
             <img 
-              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/MastersLogo.png`}
+              src={`/league-logos/MastersLogo.png`}
               alt="Masters League Logo"
               className="w-full h-full object-contain"
             />
@@ -82,7 +82,7 @@ export const Overview = () => {
         <div className="card text-center">
           <div className="mx-auto mb-4 w-24 h-24">
             <img 
-              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/NationalLogo.png`}
+              src={`/league-logos/NationalLogo.png`}
               alt="National League Logo"
               className="w-full h-full object-contain"
             />
