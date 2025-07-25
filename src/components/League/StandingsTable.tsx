@@ -84,21 +84,23 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
             {standings.map((standing) => (
               <tr key={standing.userId} className={getRowClasses(standing.rank, standings.length)}>
                 <td>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-1 sm:space-x-2">
                     {getRankIcon(standing.rank)}
-                    <span className="font-semibold text-lg">#{standing.rank}</span>
+                    <span className="font-semibold text-sm sm:text-lg">#{standing.rank}</span>
                   </div>
                 </td>
                 <td>
-                  <div className="flex items-center space-x-3">
-                    <TeamLogo 
-                      teamName={standing.userInfo.teamName}
-                      abbreviation={standing.userInfo.abbreviation}
-                      size="sm"
-                    />
+                  <div className="flex items-center space-x-2 sm:space-x-3">
+                    <div className="hidden sm:block">
+                      <TeamLogo 
+                        teamName={standing.userInfo.teamName}
+                        abbreviation={standing.userInfo.abbreviation}
+                        size="sm"
+                      />
+                    </div>
                     <div>
-                      <div className="font-medium text-gray-900 dark:text-gray-100">{standing.userInfo.teamName}</div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">{standing.userInfo.abbreviation}</div>
+                      <div className="font-medium text-gray-900 dark:text-gray-100 text-xs sm:text-sm">{standing.userInfo.teamName}</div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400 sm:hidden">{standing.userInfo.abbreviation}</div>
                     </div>
                   </div>
                 </td>

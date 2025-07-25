@@ -44,6 +44,26 @@ export const leagueApi = {
     return data;
   },
 
+  // Get all matchups for entire season
+  getAllSeasonMatchups: async (league: LeagueTier, year: string): Promise<WeekMatchupsResponse[]> => {
+    const allWeekMatchups: WeekMatchupsResponse[] = [];
+    
+    // Fetch matchups for weeks 1-17 (regular season + playoffs)
+    for (let week = 1; week <= 17; week++) {
+      try {
+        const weekData = await leagueService.getWeekMatchupsWithUserInfo(league, year, week);
+        if (weekData.matchups && weekData.matchups.length > 0) {
+          allWeekMatchups.push(weekData);
+        }
+      } catch (error) {
+        // Skip weeks that don't have data or cause errors
+        console.warn(`No matchups found for week ${week}:`, error);
+      }
+    }
+    
+    return allWeekMatchups;
+  },
+
   // Get all-time records with optional filtering
   getAllTimeRecords: async (league?: LeagueTier, year?: string): Promise<AllTimeRecords> => {
     const data = await leagueService.getAllTimeRecords(league, year);

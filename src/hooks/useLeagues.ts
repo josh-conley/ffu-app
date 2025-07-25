@@ -130,6 +130,39 @@ export const useWeekMatchups = (league: LeagueTier, year: string, week: number):
   return { data, isLoading, error };
 };
 
+export const useAllSeasonMatchups = (league: LeagueTier, year: string) => {
+  const [data, setData] = useState<WeekMatchupsResponse[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string>();
+
+  const fetchData = useCallback(async () => {
+    if (!league || !year) {
+      setError('League and year are required');
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      setError(undefined);
+      const allMatchups = await leagueApi.getAllSeasonMatchups(league, year);
+      setData(allMatchups);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch season matchups';
+      setError(errorMessage);
+      console.error('Error fetching all season matchups:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [league, year]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  return { data, isLoading, error };
+};
+
 export const useAllTimeRecords = (league?: LeagueTier, year?: string) => {
   const [data, setData] = useState<AllTimeRecords | null>(null);
   const [isLoading, setIsLoading] = useState(true);
