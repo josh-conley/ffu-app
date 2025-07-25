@@ -8,7 +8,7 @@ export const Header = () => {
   const navItems = [
     { path: '/', label: 'Overview', icon: Trophy },
     { path: '/standings', label: 'Standings', icon: Users },
-    { path: '/players', label: 'Player Stats', icon: BarChart3 },
+    { path: '/players', label: 'Members', icon: BarChart3 },
     { path: '/matchups', label: 'Matchups', icon: Calendar },
   ];
 

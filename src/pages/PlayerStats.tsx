@@ -122,19 +122,19 @@ export const PlayerStats = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Player Statistics</h1>
-        <p className="mt-2 text-gray-600">View career statistics for any FFU league member</p>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">League Members</h1>
+        <p className="mt-2 text-gray-600 dark:text-gray-400">View career statistics for any FFU league member</p>
       </div>
 
       {/* Player Selection */}
       <div className="card">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Select a Player</h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Select a Member</h3>
         <select
           value={selectedPlayerId}
           onChange={(e) => setSelectedPlayerId(e.target.value)}
-          className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
+          className="block w-full pl-3 pr-10 py-2 text-base bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md transition-colors"
         >
-          <option value="">Choose a player...</option>
+          <option value="">Choose a member...</option>
           {playerStats.map(player => (
             <option key={player.userId} value={player.userId}>
               {player.userInfo.teamName}
@@ -166,71 +166,71 @@ export const PlayerStats = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="card text-center">
               <Target className="h-8 w-8 text-green-600 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-gray-900">{selectedPlayer.totalWins}</div>
-              <div className="text-sm text-gray-500">Total Wins</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.totalWins}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">Total Wins</div>
             </div>
             <div className="card text-center">
               <TrendingDown className="h-8 w-8 text-red-600 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-gray-900">{selectedPlayer.totalLosses}</div>
-              <div className="text-sm text-gray-500">Total Losses</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.totalLosses}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">Total Losses</div>
             </div>
             <div className="card text-center">
               <Zap className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-gray-900">{selectedPlayer.totalPointsFor.toFixed(1)}</div>
-              <div className="text-sm text-gray-500">Points For</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.totalPointsFor.toFixed(1)}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">Points For</div>
             </div>
             <div className="card text-center">
               <Calendar className="h-8 w-8 text-purple-600 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-gray-900">{selectedPlayer.seasonHistory.length}</div>
-              <div className="text-sm text-gray-500">Seasons Played</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.seasonHistory.length}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">Seasons Played</div>
             </div>
           </div>
 
           {/* Achievements */}
           <div className="card">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Career Achievements</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Career Achievements</h3>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               <div className="text-center">
                 <div className="flex justify-center mb-2">
                   <Trophy className="h-8 w-8 text-yellow-600" />
                 </div>
-                <div className="text-xl font-bold text-gray-900">{selectedPlayer.firstPlaceFinishes}</div>
-                <div className="text-sm text-gray-500">1st Place</div>
+                <div className="text-xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.firstPlaceFinishes}</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">1st Place</div>
               </div>
               <div className="text-center">
                 <div className="flex justify-center mb-2">
                   <Medal className="h-8 w-8 text-gray-500" />
                 </div>
-                <div className="text-xl font-bold text-gray-900">{selectedPlayer.secondPlaceFinishes}</div>
-                <div className="text-sm text-gray-500">2nd Place</div>
+                <div className="text-xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.secondPlaceFinishes}</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">2nd Place</div>
               </div>
               <div className="text-center">
                 <div className="flex justify-center mb-2">
                   <Award className="h-8 w-8 text-amber-600" />
                 </div>
-                <div className="text-xl font-bold text-gray-900">{selectedPlayer.thirdPlaceFinishes}</div>
-                <div className="text-sm text-gray-500">3rd Place</div>
+                <div className="text-xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.thirdPlaceFinishes}</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">3rd Place</div>
               </div>
               <div className="text-center">
                 <div className="flex justify-center mb-2">
                   <TrendingDown className="h-8 w-8 text-gray-400" />
                 </div>
-                <div className="text-xl font-bold text-gray-900">{selectedPlayer.lastPlaceFinishes}</div>
-                <div className="text-sm text-gray-500">Last Place</div>
+                <div className="text-xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.lastPlaceFinishes}</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">Last Place</div>
               </div>
               <div className="text-center">
                 <div className="flex justify-center mb-2">
                   <Calendar className="h-8 w-8 text-green-600" />
                 </div>
-                <div className="text-xl font-bold text-gray-900">{selectedPlayer.playoffAppearances}</div>
-                <div className="text-sm text-gray-500">Playoff Apps</div>
+                <div className="text-xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.playoffAppearances}</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">Playoff Apps</div>
               </div>
             </div>
           </div>
 
           {/* Season History */}
           <div className="card">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Season History</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Season History</h3>
             <div className="table-container">
               <table className="table">
                 <thead className="table-header">
@@ -298,8 +298,8 @@ export const PlayerStats = () => {
 
       {!selectedPlayer && (
         <div className="text-center py-12">
-          <div className="text-gray-500">
-            Select a player above to view their career statistics
+          <div className="text-gray-500 dark:text-gray-400">
+            Select a member above to view their career statistics
           </div>
         </div>
       )}
