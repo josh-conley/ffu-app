@@ -240,47 +240,110 @@ export class LeagueService {
       rosterToOwner[roster.roster_id] = roster.owner_id;
     });
 
-    // Only log full bracket details for debugging specific leagues
+    // Debug logging
     if (import.meta.env.MODE === 'development') {
-      // console.log('Winners Bracket:', JSON.stringify(winnersBracket, null, 2));
-      // console.log('Losers Bracket:', JSON.stringify(losersBracket, null, 2));
+      console.log('Winners Bracket (Playoffs - places 1-6):', JSON.stringify(winnersBracket, null, 2));
+      console.log('Losers Bracket (Consolation - places 7-12):', JSON.stringify(losersBracket, null, 2));
     }
 
-    // Combine all matches and sort by round (later rounds = higher placement)
-    const allMatches = [...winnersBracket, ...losersBracket];
-    
-    // First, extract explicit placements from match.p values
-    const explicitPlacements = new Map<string, number>();
-    
-    allMatches.forEach(match => {
-      if (match.p && match.w && rosterToOwner[match.w]) {
-        explicitPlacements.set(rosterToOwner[match.w], match.p);
-      }
-      // For matches with explicit placement, loser gets next placement
-      if (match.p && match.l && rosterToOwner[match.l] && match.p < 10) {
-        explicitPlacements.set(rosterToOwner[match.l], match.p + 1);
-      }
-    });
-
-    // Handle championship specifically
-    const maxRound = Math.max(...winnersBracket.map(match => match.r));
-    const championshipMatch = winnersBracket.find(match => match.r === maxRound);
-    
-    if (championshipMatch && championshipMatch.w && championshipMatch.l) {
-      explicitPlacements.set(rosterToOwner[championshipMatch.w], 1);
-      explicitPlacements.set(rosterToOwner[championshipMatch.l], 2);
-    }
-
-    // For consolation brackets, systematically assign positions
-    // Find all playoff participants (anyone who appears in winners or losers bracket)
+    // STEP 1: Process Winners Bracket (Playoffs - places 1-6)
     const playoffParticipants = new Set<string>();
-    allMatches.forEach(match => {
+    const playoffPlacements = new Map<string, number>();
+    
+    // Collect all playoff participants
+    winnersBracket.forEach(match => {
       if (match.w && rosterToOwner[match.w]) playoffParticipants.add(rosterToOwner[match.w]);
       if (match.l && rosterToOwner[match.l]) playoffParticipants.add(rosterToOwner[match.l]);
     });
 
-    // Create results from explicit placements
-    explicitPlacements.forEach((placement, userId) => {
+    // Handle championship (places 1st and 2nd)
+    const maxRound = winnersBracket.length > 0 ? Math.max(...winnersBracket.map(match => match.r)) : 0;
+    const championshipMatch = winnersBracket.find(match => match.r === maxRound);
+    
+    if (championshipMatch && championshipMatch.w && championshipMatch.l) {
+      playoffPlacements.set(rosterToOwner[championshipMatch.w], 1); // Champion
+      playoffPlacements.set(rosterToOwner[championshipMatch.l], 2); // Runner-up
+    }
+
+    // Extract explicit placements from winners bracket
+    winnersBracket.forEach(match => {
+      if (match.p && match.w && rosterToOwner[match.w]) {
+        playoffPlacements.set(rosterToOwner[match.w], match.p);
+      }
+      if (match.p && match.l && rosterToOwner[match.l] && match.p < 6) {
+        playoffPlacements.set(rosterToOwner[match.l], match.p + 1);
+      }
+    });
+
+    // Assign remaining playoff participants to places 3-6
+    const assignedPlayoffUsers = new Set(playoffPlacements.keys());
+    const unplacedPlayoffUsers = Array.from(playoffParticipants).filter(userId => !assignedPlayoffUsers.has(userId));
+    
+    let nextPlayoffPlace = 3;
+    while (Array.from(playoffPlacements.values()).includes(nextPlayoffPlace) && nextPlayoffPlace <= 6) {
+      nextPlayoffPlace++;
+    }
+    
+    unplacedPlayoffUsers.forEach(userId => {
+      if (nextPlayoffPlace <= 6) {
+        playoffPlacements.set(userId, nextPlayoffPlace);
+        nextPlayoffPlace++;
+      }
+    });
+
+    // STEP 2: Process Losers Bracket (Consolation - places 7-12)
+    const consolationParticipants = new Set<string>();
+    const consolationPlacements = new Map<string, number>();
+    
+    // Collect all consolation participants
+    losersBracket.forEach(match => {
+      if (match.w && rosterToOwner[match.w]) consolationParticipants.add(rosterToOwner[match.w]);
+      if (match.l && rosterToOwner[match.l]) consolationParticipants.add(rosterToOwner[match.l]);
+    });
+
+    // Handle consolation championship (7th place)
+    const consolationMaxRound = losersBracket.length > 0 ? Math.max(...losersBracket.map(match => match.r)) : 0;
+    const consolationChampMatch = losersBracket.find(match => match.r === consolationMaxRound);
+    
+    if (consolationChampMatch && consolationChampMatch.w && consolationChampMatch.l) {
+      consolationPlacements.set(rosterToOwner[consolationChampMatch.w], 7); // Consolation champion
+      consolationPlacements.set(rosterToOwner[consolationChampMatch.l], 8); // Consolation runner-up
+    }
+
+    // Extract explicit placements from losers bracket (offset by 6 for consolation)
+    losersBracket.forEach(match => {
+      if (match.p && match.w && rosterToOwner[match.w]) {
+        const consolationPlace = match.p + 6; // Convert to consolation placement
+        if (consolationPlace >= 7 && consolationPlace <= 12) {
+          consolationPlacements.set(rosterToOwner[match.w], consolationPlace);
+        }
+      }
+      if (match.p && match.l && rosterToOwner[match.l]) {
+        const consolationPlace = match.p + 7; // Loser gets next place
+        if (consolationPlace >= 7 && consolationPlace <= 12) {
+          consolationPlacements.set(rosterToOwner[match.l], consolationPlace);
+        }
+      }
+    });
+
+    // Assign remaining consolation participants to places 9-12
+    const assignedConsolationUsers = new Set(consolationPlacements.keys());
+    const unplacedConsolationUsers = Array.from(consolationParticipants).filter(userId => !assignedConsolationUsers.has(userId));
+    
+    let nextConsolationPlace = 9;
+    while (Array.from(consolationPlacements.values()).includes(nextConsolationPlace) && nextConsolationPlace <= 12) {
+      nextConsolationPlace++;
+    }
+    
+    unplacedConsolationUsers.forEach(userId => {
+      if (nextConsolationPlace <= 12) {
+        consolationPlacements.set(userId, nextConsolationPlace);
+        nextConsolationPlace++;
+      }
+    });
+
+    // STEP 3: Combine results
+    playoffPlacements.forEach((placement, userId) => {
       results.push({
         userId,
         placement,
@@ -288,15 +351,7 @@ export class LeagueService {
       });
     });
 
-    // For remaining playoff participants without explicit placement,
-    // assign them positions after the highest explicit placement
-    const assignedUserIds = new Set(results.map(r => r.userId));
-    const remainingParticipants = Array.from(playoffParticipants).filter(userId => !assignedUserIds.has(userId));
-    
-    const highestAssignedPlacement = results.length > 0 ? Math.max(...results.map(r => r.placement)) : 0;
-    
-    remainingParticipants.forEach((userId, index) => {
-      const placement = highestAssignedPlacement + index + 1;
+    consolationPlacements.forEach((placement, userId) => {
       results.push({
         userId,
         placement,
@@ -304,12 +359,8 @@ export class LeagueService {
       });
     });
 
-    // Remove duplicates and sort by placement
-    const uniqueResults = results.filter((result, index, self) => 
-      index === self.findIndex(r => r.userId === result.userId)
-    ).sort((a, b) => a.placement - b.placement);
-
-    return uniqueResults;
+    // Sort by placement and return
+    return results.sort((a, b) => a.placement - b.placement);
   }
 
   private getPlacementName(placement: number): string {

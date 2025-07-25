@@ -240,8 +240,7 @@ export const PlayerStats = () => {
                     <th>Record</th>
                     <th>Points For</th>
                     <th>Points Against</th>
-                    <th>Regular Season Rank</th>
-                    <th>Playoff Finish</th>
+                    <th>Final Placement</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -263,14 +262,6 @@ export const PlayerStats = () => {
                         <span className="font-medium">{season.pointsAgainst.toFixed(1)}</span>
                       </td>
                       <td>
-                        <div className="flex items-center space-x-1">
-                          {season.rank === 1 && <Trophy className="h-4 w-4 text-yellow-600" />}
-                          {season.rank === 2 && <Medal className="h-4 w-4 text-gray-500" />}
-                          {season.rank === 3 && <Award className="h-4 w-4 text-amber-600" />}
-                          <span className="font-medium">#{season.rank}</span>
-                        </div>
-                      </td>
-                      <td>
                         {season.playoffFinish ? (
                           <div className="flex items-center space-x-1">
                             {season.playoffFinish === 1 && <Trophy className="h-4 w-4 text-yellow-600" />}
@@ -282,9 +273,18 @@ export const PlayerStats = () => {
                                season.playoffFinish === 3 ? '3rd' :
                                `${season.playoffFinish}th`}
                             </span>
+                            <span className="text-xs text-gray-500 ml-1">
+                              {season.playoffFinish <= 6 ? '(Playoffs)' : '(Consolation)'}
+                            </span>
                           </div>
                         ) : (
-                          <span className="text-gray-400">-</span>
+                          <div className="flex items-center space-x-1">
+                            {season.rank === 1 && <Trophy className="h-4 w-4 text-yellow-600" />}
+                            {season.rank === 2 && <Medal className="h-4 w-4 text-gray-500" />}
+                            {season.rank === 3 && <Award className="h-4 w-4 text-amber-600" />}
+                            <span className="font-medium">#{season.rank}</span>
+                            <span className="text-xs text-gray-500 ml-1">(Regular Season)</span>
+                          </div>
                         )}
                       </td>
                     </tr>
