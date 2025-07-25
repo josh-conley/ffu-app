@@ -5,6 +5,7 @@ import { Standings } from './pages/Standings';
 import { PlayerStats } from './pages/PlayerStats';
 import { Matchups } from './pages/Matchups';
 import { Records } from './pages/Records';
+import { SecretDak } from './pages/SecretDak';
 import { ThemeProvider } from './contexts/ThemeContext';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="players" element={<PlayerStats />} />
             <Route path="matchups" element={<Matchups />} />
             <Route path="records" element={<Records />} />
+            <Route path="secret-dak" element={<SecretDak />} />
           </Route>
         </Routes>
       </Router>

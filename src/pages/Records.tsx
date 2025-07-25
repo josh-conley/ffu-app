@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAllTimeRecords } from '../hooks/useLeagues';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { ErrorMessage } from '../components/Common/ErrorMessage';
@@ -10,7 +11,10 @@ import { Trophy, Target, TrendingDown, Award, Calendar, Zap } from 'lucide-react
 export const Records = () => {
   const [selectedLeague, setSelectedLeague] = useState<LeagueTier | 'ALL'>('ALL');
   const [selectedYear, setSelectedYear] = useState<string>('ALL');
-  
+  const [, setImageError] = useState(false);
+  const basePath = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
+  const dakUrl = `${basePath}/dak-head.png`;
+
   const { data: records, isLoading, error } = useAllTimeRecords(
     selectedLeague === 'ALL' ? undefined : selectedLeague,
     selectedYear === 'ALL' ? undefined : selectedYear
@@ -48,7 +52,7 @@ export const Records = () => {
               <option>Loading...</option>
             </select>
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Year</label>
             <select
@@ -124,7 +128,7 @@ export const Records = () => {
             ))}
           </select>
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Year</label>
           <select
@@ -156,7 +160,7 @@ export const Records = () => {
                   <Trophy className="h-5 w-5 text-green-600" />
                 </div>
                 <div className="flex items-center space-x-3">
-                  <TeamLogo 
+                  <TeamLogo
                     teamName={records.highestSingleGame.userInfo.teamName}
                     abbreviation={records.highestSingleGame.userInfo.abbreviation}
                     size="md"
@@ -186,7 +190,7 @@ export const Records = () => {
                   <TrendingDown className="h-5 w-5 text-red-600" />
                 </div>
                 <div className="flex items-center space-x-3">
-                  <TeamLogo 
+                  <TeamLogo
                     teamName={records.lowestSingleGame.userInfo.teamName}
                     abbreviation={records.lowestSingleGame.userInfo.abbreviation}
                     size="md"
@@ -225,7 +229,7 @@ export const Records = () => {
                   <Trophy className="h-5 w-5 text-blue-600" />
                 </div>
                 <div className="flex items-center space-x-3">
-                  <TeamLogo 
+                  <TeamLogo
                     teamName={records.mostPointsSeason.userInfo.teamName}
                     abbreviation={records.mostPointsSeason.userInfo.abbreviation}
                     size="md"
@@ -255,7 +259,7 @@ export const Records = () => {
                   <TrendingDown className="h-5 w-5 text-gray-600" />
                 </div>
                 <div className="flex items-center space-x-3">
-                  <TeamLogo 
+                  <TeamLogo
                     teamName={records.leastPointsSeason.userInfo.teamName}
                     abbreviation={records.leastPointsSeason.userInfo.abbreviation}
                     size="md"
@@ -295,7 +299,7 @@ export const Records = () => {
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
-                    <TeamLogo 
+                    <TeamLogo
                       teamName={records.mostPointsInLoss.userInfo.teamName}
                       abbreviation={records.mostPointsInLoss.userInfo.abbreviation}
                       size="md"
@@ -314,7 +318,7 @@ export const Records = () => {
                     <div className="pt-2 border-t border-orange-200 dark:border-orange-700">
                       <div className="text-xs text-orange-700 dark:text-orange-300 mb-1">Lost to:</div>
                       <div className="flex items-center space-x-2">
-                        <TeamLogo 
+                        <TeamLogo
                           teamName={records.mostPointsInLoss.opponent.teamName}
                           abbreviation={records.mostPointsInLoss.opponent.abbreviation}
                           size="md"
@@ -339,7 +343,7 @@ export const Records = () => {
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
-                    <TeamLogo 
+                    <TeamLogo
                       teamName={records.fewestPointsInWin.userInfo.teamName}
                       abbreviation={records.fewestPointsInWin.userInfo.abbreviation}
                       size="md"
@@ -358,7 +362,7 @@ export const Records = () => {
                     <div className="pt-2 border-t border-purple-200 dark:border-purple-700">
                       <div className="text-xs text-purple-700 dark:text-purple-300 mb-1">Beat:</div>
                       <div className="flex items-center space-x-2">
-                        <TeamLogo 
+                        <TeamLogo
                           teamName={records.fewestPointsInWin.opponent.teamName}
                           abbreviation={records.fewestPointsInWin.opponent.abbreviation}
                           size="md"
@@ -387,11 +391,11 @@ export const Records = () => {
                       {records.closestGame.margin.toFixed(2)} pts
                     </div>
                   </div>
-                  
+
                   {/* Team Logos vs each other */}
                   <div className="flex items-start justify-center space-x-4 py-2">
                     <div className="flex flex-col items-center space-y-1">
-                      <TeamLogo 
+                      <TeamLogo
                         teamName={records.closestGame.winner.teamName}
                         abbreviation={records.closestGame.winner.abbreviation}
                         size="md"
@@ -403,11 +407,11 @@ export const Records = () => {
                         {records.closestGame.winnerScore.toFixed(2)}
                       </div>
                     </div>
-                    
+
                     <div className="text-yellow-600 font-bold text-sm self-center">VS</div>
-                    
+
                     <div className="flex flex-col items-center space-y-1">
-                      <TeamLogo 
+                      <TeamLogo
                         teamName={records.closestGame.loser.teamName}
                         abbreviation={records.closestGame.loser.abbreviation}
                         size="md"
@@ -440,6 +444,34 @@ export const Records = () => {
           </div>
         </div>
       )}
+
+      {/* Secret Dak Trigger - Bottom Right */}
+      <Link
+        to="/secret-dak"
+        className="fixed bottom-4 right-4 group"
+        title="Secret Dak"
+      >
+        <div className="relative">
+          {/* You'll need to add the Dak image here */}
+          <div className="w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-xs shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+            <img
+              src={dakUrl}
+              alt={`dak`}
+              className="w-full h-full rounded-full object-cover border-2 border-gray-300 dark:border-gray-600 transition-colors"
+              onError={() => setImageError(true)}
+              onLoad={() => setImageError(false)}
+            />
+          </div>
+
+          {/* Speech bubble */}
+          <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+            <div className="bg-gray-800 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap relative">
+              pssst! pick me 1.01!
+              <div className="absolute top-full right-4 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
+            </div>
+          </div>
+        </div>
+      </Link>
     </div>
   );
 };
