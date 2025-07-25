@@ -274,7 +274,7 @@ export const PlayerStats = () => {
                                `${season.playoffFinish}th`}
                             </span>
                             <span className="text-xs text-gray-500 ml-1">
-                              {season.playoffFinish <= 6 ? '(Playoffs)' : '(Consolation)'}
+                              {season.playoffFinish <= 6 ? '(Playoffs)' : '(Toilet Bowl)'}
                             </span>
                           </div>
                         ) : (

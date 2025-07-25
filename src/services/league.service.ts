@@ -243,7 +243,7 @@ export class LeagueService {
     // Debug logging
     if (import.meta.env.MODE === 'development') {
       console.log('Winners Bracket (Playoffs - places 1-6):', JSON.stringify(winnersBracket, null, 2));
-      console.log('Losers Bracket (Consolation - places 7-12):', JSON.stringify(losersBracket, null, 2));
+      console.log('Losers Bracket (Toilet Bowl - places 7-12, LOSERS ADVANCE):', JSON.stringify(losersBracket, null, 2));
     }
 
     // STEP 1: Process Winners Bracket (Playoffs - places 1-6)
@@ -291,54 +291,56 @@ export class LeagueService {
       }
     });
 
-    // STEP 2: Process Losers Bracket (Consolation - places 7-12)
-    const consolationParticipants = new Set<string>();
-    const consolationPlacements = new Map<string, number>();
+    // STEP 2: Process Losers Bracket (Toilet Bowl - places 7-12, LOSERS ADVANCE)
+    const toiletBowlParticipants = new Set<string>();
+    const toiletBowlPlacements = new Map<string, number>();
     
-    // Collect all consolation participants
+    // Collect all toilet bowl participants
     losersBracket.forEach(match => {
-      if (match.w && rosterToOwner[match.w]) consolationParticipants.add(rosterToOwner[match.w]);
-      if (match.l && rosterToOwner[match.l]) consolationParticipants.add(rosterToOwner[match.l]);
+      if (match.w && rosterToOwner[match.w]) toiletBowlParticipants.add(rosterToOwner[match.w]);
+      if (match.l && rosterToOwner[match.l]) toiletBowlParticipants.add(rosterToOwner[match.l]);
     });
 
-    // Handle consolation championship (7th place)
-    const consolationMaxRound = losersBracket.length > 0 ? Math.max(...losersBracket.map(match => match.r)) : 0;
-    const consolationChampMatch = losersBracket.find(match => match.r === consolationMaxRound);
+    // Handle toilet bowl championship - WINNER gets 12th place (worst), LOSER gets 11th
+    const toiletBowlMaxRound = losersBracket.length > 0 ? Math.max(...losersBracket.map(match => match.r)) : 0;
+    const toiletBowlChampMatch = losersBracket.find(match => match.r === toiletBowlMaxRound);
     
-    if (consolationChampMatch && consolationChampMatch.w && consolationChampMatch.l) {
-      consolationPlacements.set(rosterToOwner[consolationChampMatch.w], 7); // Consolation champion
-      consolationPlacements.set(rosterToOwner[consolationChampMatch.l], 8); // Consolation runner-up
+    if (toiletBowlChampMatch && toiletBowlChampMatch.w && toiletBowlChampMatch.l) {
+      toiletBowlPlacements.set(rosterToOwner[toiletBowlChampMatch.w], 12); // Toilet bowl "champion" = 12th place (worst)
+      toiletBowlPlacements.set(rosterToOwner[toiletBowlChampMatch.l], 11); // Toilet bowl "runner-up" = 11th place
     }
 
-    // Extract explicit placements from losers bracket (offset by 6 for consolation)
+    // Extract explicit placements from losers bracket - reverse the logic
     losersBracket.forEach(match => {
       if (match.p && match.w && rosterToOwner[match.w]) {
-        const consolationPlace = match.p + 6; // Convert to consolation placement
-        if (consolationPlace >= 7 && consolationPlace <= 12) {
-          consolationPlacements.set(rosterToOwner[match.w], consolationPlace);
+        // Winner in toilet bowl gets worse placement (higher number)
+        const toiletBowlPlace = 13 - match.p; // Reverse: p=1 becomes 12th, p=2 becomes 11th, etc.
+        if (toiletBowlPlace >= 7 && toiletBowlPlace <= 12) {
+          toiletBowlPlacements.set(rosterToOwner[match.w], toiletBowlPlace);
         }
       }
       if (match.p && match.l && rosterToOwner[match.l]) {
-        const consolationPlace = match.p + 7; // Loser gets next place
-        if (consolationPlace >= 7 && consolationPlace <= 12) {
-          consolationPlacements.set(rosterToOwner[match.l], consolationPlace);
+        // Loser in toilet bowl gets better placement (lower number)
+        const toiletBowlPlace = 12 - match.p; // Loser gets better place
+        if (toiletBowlPlace >= 7 && toiletBowlPlace <= 12) {
+          toiletBowlPlacements.set(rosterToOwner[match.l], toiletBowlPlace);
         }
       }
     });
 
-    // Assign remaining consolation participants to places 9-12
-    const assignedConsolationUsers = new Set(consolationPlacements.keys());
-    const unplacedConsolationUsers = Array.from(consolationParticipants).filter(userId => !assignedConsolationUsers.has(userId));
+    // Assign remaining toilet bowl participants to places 7-10
+    const assignedToiletBowlUsers = new Set(toiletBowlPlacements.keys());
+    const unplacedToiletBowlUsers = Array.from(toiletBowlParticipants).filter(userId => !assignedToiletBowlUsers.has(userId));
     
-    let nextConsolationPlace = 9;
-    while (Array.from(consolationPlacements.values()).includes(nextConsolationPlace) && nextConsolationPlace <= 12) {
-      nextConsolationPlace++;
+    let nextToiletBowlPlace = 7;
+    while (Array.from(toiletBowlPlacements.values()).includes(nextToiletBowlPlace) && nextToiletBowlPlace <= 10) {
+      nextToiletBowlPlace++;
     }
     
-    unplacedConsolationUsers.forEach(userId => {
-      if (nextConsolationPlace <= 12) {
-        consolationPlacements.set(userId, nextConsolationPlace);
-        nextConsolationPlace++;
+    unplacedToiletBowlUsers.forEach(userId => {
+      if (nextToiletBowlPlace <= 10) {
+        toiletBowlPlacements.set(userId, nextToiletBowlPlace);
+        nextToiletBowlPlace++;
       }
     });
 
@@ -351,7 +353,7 @@ export class LeagueService {
       });
     });
 
-    consolationPlacements.forEach((placement, userId) => {
+    toiletBowlPlacements.forEach((placement, userId) => {
       results.push({
         userId,
         placement,
