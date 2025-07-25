@@ -4,14 +4,8 @@ import { Link } from 'react-router-dom';
 export const Overview = () => {
   return (
     <div className="space-y-8">
-      {/* Welcome Hero Section */}
       <div className="bg-gradient-to-r from-red-600 to-red-700 dark:from-red-500 dark:to-red-600 rounded-lg shadow-lg p-12 text-white text-center">
         <div className="max-w-2xl mx-auto">
-          {/* <img 
-            src={`/league-logos/NationalLogo.png`}
-            alt="FFU Logo"
-            className="h-36 w-36 object-contain mx-auto mb-6"
-          /> */}
           <h1 className="text-5xl font-bold mb-4">Welcome to the FFU</h1>
           <p className="text-xl text-red-100 mb-8">
             Fantasy Football Union - A multi-tier league system featuring Premier, Masters, and National leagues.
@@ -54,7 +48,7 @@ export const Overview = () => {
         <div className="card text-center">
           <div className="mx-auto mb-4 w-24 h-24">
             <img 
-              src={`/league-logos/PremierLogo.png`}
+              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/PremierLogo.png`}
               alt="Premier League Logo"
               className="w-full h-full object-contain"
             />
@@ -68,7 +62,7 @@ export const Overview = () => {
         <div className="card text-center">
           <div className="mx-auto mb-4 w-24 h-24">
             <img 
-              src={`/league-logos/MastersLogo.png`}
+              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/MastersLogo.png`}
               alt="Masters League Logo"
               className="w-full h-full object-contain"
             />
@@ -82,7 +76,7 @@ export const Overview = () => {
         <div className="card text-center">
           <div className="mx-auto mb-4 w-24 h-24">
             <img 
-              src={`/league-logos/NationalLogo.png`}
+              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/NationalLogo.png`}
               alt="National League Logo"
               className="w-full h-full object-contain"
             />

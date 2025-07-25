@@ -20,7 +20,7 @@ export const Header = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-3">
               <img 
-                src={`/league-logos/NationalLogo.png`}
+                src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/NationalLogo.png`}
                 alt="FFU Logo"
                 className="h-16 w-16 object-contain"
               />

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAllTimeRecords } from '../hooks/useLeagues';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
@@ -12,7 +12,7 @@ export const Records = () => {
   const [selectedLeague, setSelectedLeague] = useState<LeagueTier | 'ALL'>('ALL');
   const [selectedYear, setSelectedYear] = useState<string>('ALL');
   const [, setImageError] = useState(false);
-  const basePath = '';
+  const basePath = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
   const dakUrl = `${basePath}/dak-head.png`;
 
   const { data: records, isLoading, error } = useAllTimeRecords(
@@ -22,6 +22,16 @@ export const Records = () => {
 
   const leagues: (LeagueTier | 'ALL')[] = ['ALL', 'PREMIER', 'MASTERS', 'NATIONAL'];
   const years = ['ALL', '2024', '2023', '2022', '2021'];
+  // const validYearsByLeague: Record<string, string[]> = {
+  //   ALL: years,
+  //   PREMIER: years,
+  //   NATIONAL: years,
+  //   MASTERS: ['ALL', '2024', '2023', '2022'], // no 2021
+  // };
+
+  // const filteredYears = useMemo(() => {
+  //   return validYearsByLeague[selectedLeague] || years;
+  // }, [selectedLeague]);
 
   const getLeagueName = (league: LeagueTier | 'ALL'): string => {
     switch (league) {
