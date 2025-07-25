@@ -10,7 +10,6 @@ export interface UserInfo {
   userId: string;
   teamName: string;
   abbreviation: string;
-  avatar?: string; // Sleeper avatar ID
 }
 
 export interface WeekMatchup {
