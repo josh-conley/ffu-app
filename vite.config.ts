@@ -7,10 +7,13 @@ export default defineConfig(({ command }) => ({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true
+      },
       manifest: {
         name: 'Fantasy Football Union',
         short_name: 'FFU',
-        start_url: '/',
+        start_url: '/ffu-app/',
         display: 'standalone',
         background_color: '#f9fafb',
         theme_color: '#2563eb',
