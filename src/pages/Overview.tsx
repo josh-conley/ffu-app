@@ -41,7 +41,7 @@ export const Overview = () => {
       {/* League Overview */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="card text-center">
-          <div className="mx-auto mb-4 w-24 h-24">
+          <div className="mx-auto mb-4 w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-xl p-3 transition-colors">
             <img 
               src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/Premier-Light.png`}
               alt="Premier League Logo"
@@ -60,7 +60,7 @@ export const Overview = () => {
         </div>
         
         <div className="card text-center">
-          <div className="mx-auto mb-4 w-24 h-24">
+          <div className="mx-auto mb-4 w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-xl p-3 transition-colors">
             <img 
               src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/Masters-Light.png`}
               alt="Masters League Logo"
@@ -79,7 +79,7 @@ export const Overview = () => {
         </div>
         
         <div className="card text-center">
-          <div className="mx-auto mb-4 w-24 h-24">
+          <div className="mx-auto mb-4 w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-xl p-3 transition-colors">
             <img 
               src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/National-Light.png`}
               alt="National League Logo"
