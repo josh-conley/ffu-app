@@ -22,7 +22,8 @@ export const TeamLogo = ({
 }: TeamLogoProps) => {
   const [imageError, setImageError] = useState(false);
   const logoFilename = getTeamLogoFilename(teamName);
-  const logoUrl = logoFilename ? `/team-logos/${logoFilename}` : null;
+  const basePath = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
+  const logoUrl = logoFilename ? `${basePath}/team-logos/${logoFilename}` : null;
   
   // Use provided abbreviation, or generate one from team name
   const displayAbbreviation = abbreviation || generateTeamAbbreviation(teamName);
