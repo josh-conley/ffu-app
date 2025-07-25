@@ -1,4 +1,3 @@
-import { LeagueBadge } from '../components/League/LeagueBadge';
 import { Trophy, Users, Calendar, BarChart3 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -42,7 +41,18 @@ export const Overview = () => {
       {/* League Overview */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="card text-center">
-          <LeagueBadge league="PREMIER" className="mx-auto mb-4" />
+          <div className="mx-auto mb-4 w-24 h-24">
+            <img 
+              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/Premier-Light.png`}
+              alt="Premier League Logo"
+              className="w-full h-full object-contain dark:hidden"
+            />
+            <img 
+              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/Premier-Dark.png`}
+              alt="Premier League Logo"
+              className="w-full h-full object-contain hidden dark:block"
+            />
+          </div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Premier League</h3>
           <p className="text-gray-600 dark:text-gray-300">
             The top tier of FFU competition. Elite managers battle for ultimate supremacy.
@@ -50,7 +60,18 @@ export const Overview = () => {
         </div>
         
         <div className="card text-center">
-          <LeagueBadge league="MASTERS" className="mx-auto mb-4" />
+          <div className="mx-auto mb-4 w-24 h-24">
+            <img 
+              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/Masters-Light.png`}
+              alt="Masters League Logo"
+              className="w-full h-full object-contain dark:hidden"
+            />
+            <img 
+              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/Masters-Dark.png`}
+              alt="Masters League Logo"
+              className="w-full h-full object-contain hidden dark:block"
+            />
+          </div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Masters League</h3>
           <p className="text-gray-600 dark:text-gray-300">
             Competitive middle tier where experienced managers hone their skills.
@@ -58,7 +79,18 @@ export const Overview = () => {
         </div>
         
         <div className="card text-center">
-          <LeagueBadge league="NATIONAL" className="mx-auto mb-4" />
+          <div className="mx-auto mb-4 w-24 h-24">
+            <img 
+              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/National-Light.png`}
+              alt="National League Logo"
+              className="w-full h-full object-contain dark:hidden"
+            />
+            <img 
+              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/National-Dark.png`}
+              alt="National League Logo"
+              className="w-full h-full object-contain hidden dark:block"
+            />
+          </div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">National League</h3>
           <p className="text-gray-600 dark:text-gray-300">
             Entry level competition perfect for newcomers and developing managers.
