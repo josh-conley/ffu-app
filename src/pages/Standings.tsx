@@ -10,8 +10,35 @@ export const Standings = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-96">
-        <LoadingSpinner size="lg" />
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">League Standings</h1>
+          <p className="mt-2 text-gray-600 dark:text-gray-300">Current standings and historical results across all FFU leagues</p>
+        </div>
+
+        {/* Year Filter Loading */}
+        <div className="flex justify-center">
+          <select
+            disabled
+            className="px-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md text-gray-500 dark:text-gray-400"
+          >
+            <option>Loading years...</option>
+          </select>
+        </div>
+
+        {/* Loading Standings Display */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {['Premier', 'Masters', 'National'].map((league) => (
+            <div key={league} className="card">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">{league} League</h2>
+              </div>
+              <div className="flex justify-center items-center min-h-64">
+                <LoadingSpinner size="md" />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

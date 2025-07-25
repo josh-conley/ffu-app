@@ -1,4 +1,4 @@
-import { Trophy, Users, Calendar, BarChart3 } from 'lucide-react';
+import { Users, Calendar, BarChart3, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const Overview = () => {
@@ -7,12 +7,16 @@ export const Overview = () => {
       {/* Welcome Hero Section */}
       <div className="bg-gradient-to-r from-primary-600 to-primary-700 dark:from-primary-500 dark:to-primary-600 rounded-lg shadow-lg p-12 text-white text-center">
         <div className="max-w-2xl mx-auto">
-          <Trophy className="h-16 w-16 text-yellow-300 mx-auto mb-6" />
-          <h1 className="text-5xl font-bold mb-4">Welcome to FFU</h1>
+          {/* <img 
+            src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/NationalLogo.png`}
+            alt="FFU Logo"
+            className="h-36 w-36 object-contain mx-auto mb-6"
+          /> */}
+          <h1 className="text-5xl font-bold mb-4">Welcome to the FFU</h1>
           <p className="text-xl text-primary-100 mb-8">
             Fantasy Football Union - A multi-tier league system featuring Premier, Masters, and National leagues.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-lg mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 max-w-lg mx-auto">
             <Link 
               to="/standings" 
               className="bg-white/10 hover:bg-white/20 rounded-lg p-4 transition-colors"
@@ -25,7 +29,7 @@ export const Overview = () => {
               className="bg-white/10 hover:bg-white/20 rounded-lg p-4 transition-colors"
             >
               <BarChart3 className="h-6 w-6 mx-auto mb-2" />
-              <div className="font-semibold">Player Stats</div>
+              <div className="font-semibold">Members</div>
             </Link>
             <Link 
               to="/matchups" 
@@ -33,6 +37,13 @@ export const Overview = () => {
             >
               <Calendar className="h-6 w-6 mx-auto mb-2" />
               <div className="font-semibold">Matchups</div>
+            </Link>
+            <Link 
+              to="/records" 
+              className="bg-white/10 hover:bg-white/20 rounded-lg p-4 transition-colors"
+            >
+              <Award className="h-6 w-6 mx-auto mb-2" />
+              <div className="font-semibold">Records</div>
             </Link>
           </div>
         </div>

@@ -3,7 +3,8 @@ import { LeagueService } from './league.service';
 import type { 
   LeagueTier,
   EnhancedLeagueSeasonData,
-  WeekMatchupsResponse
+  WeekMatchupsResponse,
+  AllTimeRecords
 } from '../types';
 
 // Initialize services
@@ -40,6 +41,12 @@ export const leagueApi = {
   // Get matchups for specific week
   getWeekMatchups: async (league: LeagueTier, year: string, week: number): Promise<WeekMatchupsResponse> => {
     const data = await leagueService.getWeekMatchupsWithUserInfo(league, year, week);
+    return data;
+  },
+
+  // Get all-time records with optional filtering
+  getAllTimeRecords: async (league?: LeagueTier, year?: string): Promise<AllTimeRecords> => {
+    const data = await leagueService.getAllTimeRecords(league, year);
     return data;
   },
 };

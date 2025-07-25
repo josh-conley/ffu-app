@@ -6,7 +6,8 @@ import type {
   UseAllStandingsReturn,
   UseLeagueStandingsReturn,
   UseWeekMatchupsReturn,
-  WeekMatchupsResponse 
+  WeekMatchupsResponse,
+  AllTimeRecords
 } from '../types';
 
 export const useAllStandings = (): UseAllStandingsReturn => {
@@ -122,6 +123,33 @@ export const useWeekMatchups = (league: LeagueTier, year: string, week: number):
       setIsLoading(false);
     }
   }, [league, year, week]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  return { data, isLoading, error };
+};
+
+export const useAllTimeRecords = (league?: LeagueTier, year?: string) => {
+  const [data, setData] = useState<AllTimeRecords | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string>();
+
+  const fetchData = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      setError(undefined);
+      const records = await leagueApi.getAllTimeRecords(league, year);
+      setData(records);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch records';
+      setError(errorMessage);
+      console.error('Error fetching all-time records:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [league, year]);
 
   useEffect(() => {
     fetchData();

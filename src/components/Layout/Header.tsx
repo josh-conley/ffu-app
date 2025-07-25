@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Trophy, Users, Calendar, BarChart3 } from 'lucide-react';
+import { Trophy, Users, Calendar, BarChart3, Award } from 'lucide-react';
 import { ThemeToggle } from '../Common/ThemeToggle';
 
 export const Header = () => {
@@ -10,6 +10,7 @@ export const Header = () => {
     { path: '/standings', label: 'Standings', icon: Users },
     { path: '/players', label: 'Members', icon: BarChart3 },
     { path: '/matchups', label: 'Matchups', icon: Calendar },
+    { path: '/records', label: 'Records', icon: Award },
   ];
 
   return (
@@ -18,7 +19,11 @@ export const Header = () => {
         <div className="flex justify-between items-center py-6">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-3">
-              <Trophy className="h-8 w-8 text-primary-600 dark:text-primary-400" />
+              <img 
+                src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/NationalLogo.png`}
+                alt="FFU Logo"
+                className="h-16 w-16 object-contain"
+              />
               <div>
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white">FFU</h1>
                 <p className="text-sm text-gray-500 dark:text-gray-400">Fantasy Football Union</p>

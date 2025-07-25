@@ -74,4 +74,23 @@ export class SleeperService {
     });
     return map;
   }
+
+  async getAllSeasonMatchups(leagueId: string, startWeek: number = 1, endWeek: number = 17): Promise<{week: number, matchups: SleeperMatchup[]}[]> {
+    // Create an array of all week requests in parallel
+    const weekPromises = [];
+    for (let week = startWeek; week <= endWeek; week++) {
+      weekPromises.push(
+        this.getMatchupsForWeek(leagueId, week)
+          .then(matchups => ({ week, matchups }))
+          .catch(error => {
+            console.warn(`Failed to fetch week ${week} for league ${leagueId}:`, error);
+            return { week, matchups: [] };
+          })
+      );
+    }
+
+    // Wait for all weeks to complete in parallel
+    const results = await Promise.all(weekPromises);
+    return results.filter(result => result.matchups.length > 0);
+  }
 }

@@ -1,12 +1,16 @@
 import { SleeperService } from './sleeper.service';
-import { getLeagueId, getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId } from '../config/constants';
+import { dataService } from './data.service';
+import { getLeagueId, getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId, isHistoricalYear } from '../config/constants';
 import type { 
   LeagueSeasonData, 
   SeasonStandings, 
   PlayoffResult, 
   WeekMatchup,
   LeagueTier,
-  UserInfo
+  UserInfo,
+  AllTimeRecords,
+  GameRecord,
+  SeasonRecord
 } from '../types';
 
 export class LeagueService {
@@ -20,7 +24,18 @@ export class LeagueService {
     if (!validateLeagueAndYear(league, year)) {
       throw new Error(`League ${league} for year ${year} not found`);
     }
-    
+
+    // Check if we should use historical data
+    if (isHistoricalYear(year)) {
+      const historicalData = await dataService.loadHistoricalLeagueData(league, year);
+      if (historicalData) {
+        return dataService.convertHistoricalToEnhanced(historicalData);
+      }
+      // Fall back to API if historical data not available
+      console.warn(`Historical data not found for ${league} ${year}, falling back to API`);
+    }
+
+    // Use live API for current year or when historical data is not available
     const leagueId = getLeagueId(league, year);
     if (!leagueId) {
       throw new Error(`League ID not found for ${league} ${year}`);
@@ -124,7 +139,19 @@ export class LeagueService {
     if (!validateLeagueAndYear(league, year)) {
       throw new Error(`League ${league} for year ${year} not found`);
     }
-    
+
+    // Check if we should use historical data
+    if (isHistoricalYear(year)) {
+      const historicalData = await dataService.loadHistoricalLeagueData(league, year);
+      if (historicalData) {
+        const weekMatchups = historicalData.matchupsByWeek[week];
+        return weekMatchups || [];
+      }
+      // Fall back to API if historical data not available
+      console.warn(`Historical matchup data not found for ${league} ${year} week ${week}, falling back to API`);
+    }
+
+    // Use live API for current year or when historical data is not available
     const leagueId = getLeagueId(league, year);
     if (!leagueId) {
       throw new Error(`League ID not found for ${league} ${year}`);
@@ -229,6 +256,47 @@ export class LeagueService {
     return userInfo 
       ? { userId, teamName: userInfo.teamName, abbreviation: userInfo.abbreviation }
       : { userId, teamName: 'Unknown Team', abbreviation: 'UNK' };
+  }
+
+  private processRawMatchups(matchups: any[], rosters: any[]): WeekMatchup[] {
+    const rosterOwnerMap = this.sleeperService.createRosterOwnerMap(rosters);
+    
+    // Group matchups by matchup_id
+    const groupedMatchups: Record<number, typeof matchups> = {};
+    matchups.forEach(matchup => {
+      if (!groupedMatchups[matchup.matchup_id]) {
+        groupedMatchups[matchup.matchup_id] = [];
+      }
+      groupedMatchups[matchup.matchup_id].push(matchup);
+    });
+
+    // Create head-to-head matchups
+    const weekMatchups: WeekMatchup[] = [];
+    Object.values(groupedMatchups).forEach(matchupPair => {
+      if (matchupPair.length === 2) {
+        const [team1, team2] = matchupPair;
+        const team1Owner = rosterOwnerMap[team1.roster_id];
+        const team2Owner = rosterOwnerMap[team2.roster_id];
+        
+        if (team1.points > team2.points) {
+          weekMatchups.push({
+            winner: team1Owner,
+            loser: team2Owner,
+            winnerScore: team1.points,
+            loserScore: team2.points
+          });
+        } else {
+          weekMatchups.push({
+            winner: team2Owner,
+            loser: team1Owner,
+            winnerScore: team2.points,
+            loserScore: team1.points
+          });
+        }
+      }
+    });
+
+    return weekMatchups;
   }
 
   private parsePlayoffResults(winnersBracket: any[], losersBracket: any[], rosters: any[]): PlayoffResult[] {
@@ -384,5 +452,239 @@ export class LeagueService {
     
     // Typically bottom 2 get relegated (adjust as needed for your league rules)
     return standings.slice(-2).map(s => s.userId);
+  }
+
+  async getAllTimeRecords(league?: LeagueTier, year?: string): Promise<AllTimeRecords> {
+    const allLeagues = getAllLeagueConfigs();
+    
+    // Filter leagues based on parameters
+    const filteredLeagues = allLeagues.filter(config => {
+      if (league && league !== config.tier) return false;
+      if (year && year !== config.year) return false;
+      return true;
+    });
+
+    let allGameRecords: (GameRecord & { isWin: boolean, isLoss: boolean })[] = [];
+    let allSeasonRecords: SeasonRecord[] = [];
+    let allMatchups: (WeekMatchup & { 
+      week: number, 
+      year: string, 
+      league: LeagueTier,
+      margin: number,
+      winnerInfo: UserInfo,
+      loserInfo: UserInfo 
+    })[] = [];
+
+    // Collect all data
+    for (const leagueConfig of filteredLeagues) {
+      try {
+        // Get season standings for season records
+        const leagueData = await this.getLeagueStandings(leagueConfig.tier, leagueConfig.year);
+        
+        // Add season records
+        leagueData.standings.forEach(standing => {
+          allSeasonRecords.push({
+            userInfo: this.getUserInfo(standing.userId),
+            points: standing.pointsFor,
+            year: leagueConfig.year,
+            league: leagueConfig.tier,
+            wins: standing.wins,
+            losses: standing.losses
+          });
+        });
+
+        // Get all season matchup data - use historical data if available
+        try {
+          if (isHistoricalYear(leagueConfig.year)) {
+            const historicalData = await dataService.loadHistoricalLeagueData(leagueConfig.tier, leagueConfig.year);
+            if (historicalData) {
+              const allWeekData = dataService.getAllHistoricalMatchups(historicalData);
+              
+              allWeekData.forEach(({ week, matchups }) => {
+                matchups.forEach(matchup => {
+                  const winnerInfo = this.getUserInfo(matchup.winner);
+                  const loserInfo = this.getUserInfo(matchup.loser);
+                  const margin = matchup.winnerScore - matchup.loserScore;
+
+                  // Add to matchups for closest game calculation
+                  allMatchups.push({
+                    ...matchup,
+                    week,
+                    year: leagueConfig.year,
+                    league: leagueConfig.tier,
+                    margin,
+                    winnerInfo,
+                    loserInfo
+                  });
+
+                  // Add winner game record
+                  allGameRecords.push({
+                    userInfo: winnerInfo,
+                    score: matchup.winnerScore,
+                    opponent: loserInfo,
+                    opponentScore: matchup.loserScore,
+                    week,
+                    year: leagueConfig.year,
+                    league: leagueConfig.tier,
+                    isWin: true,
+                    isLoss: false
+                  });
+
+                  // Add loser game record
+                  allGameRecords.push({
+                    userInfo: loserInfo,
+                    score: matchup.loserScore,
+                    opponent: winnerInfo,
+                    opponentScore: matchup.winnerScore,
+                    week,
+                    year: leagueConfig.year,
+                    league: leagueConfig.tier,
+                    isWin: false,
+                    isLoss: true
+                  });
+                });
+              });
+            } else {
+              console.warn(`Historical data not found for ${leagueConfig.tier} ${leagueConfig.year}, skipping matchup data for records`);
+            }
+          } else {
+            // Use live API for current year
+            const leagueId = getLeagueId(leagueConfig.tier, leagueConfig.year);
+            if (leagueId) {
+              const [allWeekData, rosters] = await Promise.all([
+                this.sleeperService.getAllSeasonMatchups(leagueId),
+                this.sleeperService.getLeagueRosters(leagueId)
+              ]);
+              
+              allWeekData.forEach(({ week, matchups }) => {
+                const weekMatchups = this.processRawMatchups(matchups, rosters);
+                
+                weekMatchups.forEach(matchup => {
+                  const winnerInfo = this.getUserInfo(matchup.winner);
+                  const loserInfo = this.getUserInfo(matchup.loser);
+                  const margin = matchup.winnerScore - matchup.loserScore;
+
+                  // Add to matchups for closest game calculation
+                  allMatchups.push({
+                    ...matchup,
+                    week,
+                    year: leagueConfig.year,
+                    league: leagueConfig.tier,
+                    margin,
+                    winnerInfo,
+                    loserInfo
+                  });
+
+                  // Add winner game record
+                  allGameRecords.push({
+                    userInfo: winnerInfo,
+                    score: matchup.winnerScore,
+                    opponent: loserInfo,
+                    opponentScore: matchup.loserScore,
+                    week,
+                    year: leagueConfig.year,
+                    league: leagueConfig.tier,
+                    isWin: true,
+                    isLoss: false
+                  });
+
+                  // Add loser game record
+                  allGameRecords.push({
+                    userInfo: loserInfo,
+                    score: matchup.loserScore,
+                    opponent: winnerInfo,
+                    opponentScore: matchup.winnerScore,
+                    week,
+                    year: leagueConfig.year,
+                    league: leagueConfig.tier,
+                    isWin: false,
+                    isLoss: true
+                  });
+                });
+              });
+            }
+          }
+        } catch (error) {
+          console.warn(`Could not fetch season matchups for ${leagueConfig.tier} ${leagueConfig.year}:`, error);
+        }
+      } catch (error) {
+        console.error(`Error processing ${leagueConfig.tier} ${leagueConfig.year}:`, error);
+      }
+    }
+
+    // Calculate records
+    const records: AllTimeRecords = {
+      highestSingleGame: this.findHighestScore(allGameRecords),
+      lowestSingleGame: this.findLowestScore(allGameRecords),
+      mostPointsSeason: this.findMostPointsSeason(allSeasonRecords),
+      leastPointsSeason: this.findLeastPointsSeason(allSeasonRecords),
+      mostPointsInLoss: this.findMostPointsInLoss(allGameRecords),
+      fewestPointsInWin: this.findFewestPointsInWin(allGameRecords),
+      closestGame: this.findClosestGame(allMatchups)
+    };
+
+    return records;
+  }
+
+  private findHighestScore(gameRecords: GameRecord[]): GameRecord {
+    return gameRecords.reduce((highest, current) => 
+      current.score > highest.score ? current : highest
+    );
+  }
+
+  private findLowestScore(gameRecords: GameRecord[]): GameRecord {
+    return gameRecords.reduce((lowest, current) => 
+      current.score < lowest.score ? current : lowest
+    );
+  }
+
+  private findMostPointsSeason(seasonRecords: SeasonRecord[]): SeasonRecord {
+    return seasonRecords.reduce((highest, current) => 
+      current.points > highest.points ? current : highest
+    );
+  }
+
+  private findLeastPointsSeason(seasonRecords: SeasonRecord[]): SeasonRecord {
+    return seasonRecords.reduce((lowest, current) => 
+      current.points < lowest.points ? current : lowest
+    );
+  }
+
+  private findMostPointsInLoss(gameRecords: (GameRecord & { isLoss: boolean })[]): GameRecord {
+    const losses = gameRecords.filter(record => record.isLoss);
+    return losses.reduce((highest, current) => 
+      current.score > highest.score ? current : highest
+    );
+  }
+
+  private findFewestPointsInWin(gameRecords: (GameRecord & { isWin: boolean })[]): GameRecord {
+    const wins = gameRecords.filter(record => record.isWin);
+    return wins.reduce((lowest, current) => 
+      current.score < lowest.score ? current : lowest
+    );
+  }
+
+  private findClosestGame(matchups: (WeekMatchup & { 
+    week: number, 
+    year: string, 
+    league: LeagueTier,
+    margin: number,
+    winnerInfo: UserInfo,
+    loserInfo: UserInfo 
+  })[]): AllTimeRecords['closestGame'] {
+    const closest = matchups.reduce((closest, current) => 
+      current.margin < closest.margin ? current : closest
+    );
+
+    return {
+      winner: closest.winnerInfo,
+      loser: closest.loserInfo,
+      winnerScore: closest.winnerScore,
+      loserScore: closest.loserScore,
+      margin: closest.margin,
+      week: closest.week,
+      year: closest.year,
+      league: closest.league
+    };
   }
 }

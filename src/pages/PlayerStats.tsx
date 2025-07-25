@@ -109,8 +109,29 @@ export const PlayerStats = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-96">
-        <LoadingSpinner size="lg" />
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">League Members</h1>
+          <p className="mt-2 text-gray-600 dark:text-gray-400">View career statistics for any FFU league member</p>
+        </div>
+
+        {/* Player Selection Loading */}
+        <div className="card">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Select a Member</h3>
+          <select
+            disabled
+            className="block w-full pl-3 pr-10 py-2 text-base bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-300 dark:border-gray-600 sm:text-sm rounded-md"
+          >
+            <option>Loading members...</option>
+          </select>
+        </div>
+
+        <div className="text-center py-12">
+          <LoadingSpinner size="lg" />
+          <div className="mt-4 text-gray-500 dark:text-gray-400">
+            Loading player statistics...
+          </div>
+        </div>
       </div>
     );
   }

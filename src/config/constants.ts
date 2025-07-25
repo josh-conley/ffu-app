@@ -155,5 +155,17 @@ export const getAllLeagueConfigs = (): LeagueConfig[] => {
 
 export const LEAGUE_HIERARCHY = ['PREMIER', 'MASTERS', 'NATIONAL'] as const;
 
+// Define which years are historical (cached) vs current (live API)
+export const HISTORICAL_YEARS = ['2021', '2022', '2023', '2024'] as const;
+export const CURRENT_YEAR = '2025'; // Update this when the new season starts
+
+export const isHistoricalYear = (year: string): boolean => {
+  return HISTORICAL_YEARS.includes(year as any);
+};
+
+export const isCurrentYear = (year: string): boolean => {
+  return year === CURRENT_YEAR;
+};
+
 // Type exports for the configs
 export type { LeagueConfig, UserConfig };

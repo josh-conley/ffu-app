@@ -205,3 +205,42 @@ export interface UseWeekMatchupsReturn {
   error?: string;
 }
 
+// Records types
+export interface GameRecord {
+  userInfo: UserInfo;
+  score: number;
+  opponent?: UserInfo;
+  opponentScore?: number;
+  week: number;
+  year: string;
+  league: LeagueTier;
+}
+
+export interface SeasonRecord {
+  userInfo: UserInfo;
+  points: number;
+  year: string;
+  league: LeagueTier;
+  wins?: number;
+  losses?: number;
+}
+
+export interface AllTimeRecords {
+  highestSingleGame: GameRecord;
+  lowestSingleGame: GameRecord;
+  mostPointsSeason: SeasonRecord;
+  leastPointsSeason: SeasonRecord;
+  mostPointsInLoss: GameRecord;
+  fewestPointsInWin: GameRecord;
+  closestGame: {
+    winner: UserInfo;
+    loser: UserInfo;
+    winnerScore: number;
+    loserScore: number;
+    margin: number;
+    week: number;
+    year: string;
+    league: LeagueTier;
+  };
+}
+
