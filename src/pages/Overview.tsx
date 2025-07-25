@@ -5,7 +5,7 @@ export const Overview = () => {
   return (
     <div className="space-y-8">
       {/* Welcome Hero Section */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-700 dark:from-primary-500 dark:to-primary-600 rounded-lg shadow-lg p-12 text-white text-center">
+      <div className="bg-gradient-to-r from-red-600 to-red-700 dark:from-red-500 dark:to-red-600 rounded-lg shadow-lg p-12 text-white text-center">
         <div className="max-w-2xl mx-auto">
           {/* <img 
             src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/NationalLogo.png`}
@@ -13,7 +13,7 @@ export const Overview = () => {
             className="h-36 w-36 object-contain mx-auto mb-6"
           /> */}
           <h1 className="text-5xl font-bold mb-4">Welcome to the FFU</h1>
-          <p className="text-xl text-primary-100 mb-8">
+          <p className="text-xl text-red-100 mb-8">
             Fantasy Football Union - A multi-tier league system featuring Premier, Masters, and National leagues.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 max-w-lg mx-auto">

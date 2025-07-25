@@ -309,10 +309,10 @@ export class LeagueService {
     });
 
     // Debug logging
-    if (import.meta.env.MODE === 'development') {
-      console.log('Winners Bracket (Playoffs - places 1-6):', JSON.stringify(winnersBracket, null, 2));
-      console.log('Losers Bracket (Toilet Bowl - places 7-12, LOSERS ADVANCE):', JSON.stringify(losersBracket, null, 2));
-    }
+    // if (import.meta.env.MODE === 'development') {
+    //   console.log('Winners Bracket (Playoffs - places 1-6):', JSON.stringify(winnersBracket, null, 2));
+    //   console.log('Losers Bracket (Toilet Bowl - places 7-12, LOSERS ADVANCE):', JSON.stringify(losersBracket, null, 2));
+    // }
 
     // STEP 1: Process Winners Bracket (Playoffs - places 1-6)
     const playoffParticipants = new Set<string>();
