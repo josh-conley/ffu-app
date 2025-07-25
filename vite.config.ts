@@ -15,8 +15,8 @@ export default defineConfig(({ command }) => ({
         short_name: 'FFU',
         start_url: '/ffu-app/',
         display: 'standalone',
-        background_color: '#f9fafb',
-        theme_color: '#2563eb',
+        background_color: '#111827',
+        theme_color: '#111827',
         icons: [
           {
             src: '/ffu-app/league-logos/NationalLogo.png',
