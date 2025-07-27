@@ -44,6 +44,15 @@ export class LeagueService {
     const [rosters] = await Promise.all([
       this.sleeperService.getLeagueRosters(leagueId)
     ]);
+
+    // Calculate high/low games from live matchup data
+    let memberGameStats: Record<string, { highGame: number; lowGame: number }> = {};
+    try {
+      const allWeekData = await this.sleeperService.getAllSeasonMatchups(leagueId);
+      memberGameStats = this.calculateMemberGameStatsFromLive(allWeekData, rosters);
+    } catch (error) {
+      console.warn(`Could not fetch season matchups for high/low game calculation:`, error);
+    }
     
     let standings: SeasonStandings[] = rosters
       .map(roster => ({
@@ -52,7 +61,9 @@ export class LeagueService {
         losses: roster.settings?.losses || 0,
         pointsFor: (roster.settings?.fpts || 0) + (roster.settings?.fpts_decimal || 0) / 100,
         pointsAgainst: (roster.settings?.fpts_against || 0) + (roster.settings?.fpts_against_decimal || 0) / 100,
-        rank: 0 // Will be calculated after sorting
+        rank: 0, // Will be calculated after sorting
+        highGame: memberGameStats[roster.owner_id]?.highGame || 0,
+        lowGame: memberGameStats[roster.owner_id]?.lowGame || 0
       }));
 
     // Get playoff results if available
@@ -686,5 +697,55 @@ export class LeagueService {
       year: closest.year,
       league: closest.league
     };
+  }
+
+  private calculateMemberGameStatsFromLive(
+    allWeekData: { week: number; matchups: any[] }[], 
+    rosters: any[]
+  ): Record<string, { highGame: number; lowGame: number }> {
+    const memberStats: Record<string, { highGame: number; lowGame: number; games: number[] }> = {};
+
+    allWeekData.forEach(({ matchups }) => {
+      const weekMatchups = this.processRawMatchups(matchups, rosters);
+      
+      weekMatchups.forEach(matchup => {
+        // Track winner's score
+        if (!memberStats[matchup.winner]) {
+          memberStats[matchup.winner] = {
+            highGame: matchup.winnerScore,
+            lowGame: matchup.winnerScore,
+            games: []
+          };
+        }
+        const winnerStats = memberStats[matchup.winner];
+        winnerStats.games.push(matchup.winnerScore);
+        winnerStats.highGame = Math.max(winnerStats.highGame, matchup.winnerScore);
+        winnerStats.lowGame = Math.min(winnerStats.lowGame, matchup.winnerScore);
+
+        // Track loser's score
+        if (!memberStats[matchup.loser]) {
+          memberStats[matchup.loser] = {
+            highGame: matchup.loserScore,
+            lowGame: matchup.loserScore,
+            games: []
+          };
+        }
+        const loserStats = memberStats[matchup.loser];
+        loserStats.games.push(matchup.loserScore);
+        loserStats.highGame = Math.max(loserStats.highGame, matchup.loserScore);
+        loserStats.lowGame = Math.min(loserStats.lowGame, matchup.loserScore);
+      });
+    });
+
+    // Return simplified format without games array
+    const result: Record<string, { highGame: number; lowGame: number }> = {};
+    Object.entries(memberStats).forEach(([userId, stats]) => {
+      result[userId] = {
+        highGame: stats.highGame,
+        lowGame: stats.lowGame
+      };
+    });
+
+    return result;
   }
 }

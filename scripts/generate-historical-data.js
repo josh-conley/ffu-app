@@ -117,9 +117,6 @@ class HistoricalDataGenerator {
       // Generate playoff results first
       const playoffResults = this.parsePlayoffResults(winnersBracket, losersBracket, rosters);
 
-      // Generate standings based on playoff results
-      const standings = this.generateStandings(rosters, playoffResults);
-
       // Get all matchups
       const allWeekData = await this.sleeperService.getAllSeasonMatchups(league.sleeperId);
       const matchupsByWeek = {};
@@ -130,6 +127,12 @@ class HistoricalDataGenerator {
         matchupsByWeek[week] = weekMatchups;
         processedMatchups.push(...weekMatchups.map(m => ({ ...m, week })));
       });
+
+      // Calculate member game stats (high/low games)
+      const memberGameStats = this.calculateMemberGameStats(matchupsByWeek);
+
+      // Generate standings based on playoff results and include game stats
+      const standings = this.generateStandings(rosters, playoffResults, memberGameStats);
 
       // Calculate promotions and relegations (simplified)
       const promotions = this.calculatePromotions(league.tier, standings);
@@ -143,7 +146,8 @@ class HistoricalDataGenerator {
         playoffResults: playoffResults,
         promotions: promotions,
         relegations: relegations,
-        matchupsByWeek: matchupsByWeek
+        matchupsByWeek: matchupsByWeek,
+        memberGameStats: memberGameStats
       };
 
       // Save to file
@@ -158,7 +162,7 @@ class HistoricalDataGenerator {
     }
   }
 
-  generateStandings(rosters, playoffResults) {
+  generateStandings(rosters, playoffResults, memberGameStats = {}) {
     let standings = rosters
       .map(roster => ({
         userId: roster.owner_id,
@@ -166,7 +170,9 @@ class HistoricalDataGenerator {
         losses: roster.settings?.losses || 0,
         pointsFor: (roster.settings?.fpts || 0) + (roster.settings?.fpts_decimal || 0) / 100,
         pointsAgainst: (roster.settings?.fpts_against || 0) + (roster.settings?.fpts_against_decimal || 0) / 100,
-        rank: 0 // Will be calculated after sorting
+        rank: 0, // Will be calculated after sorting
+        highGame: memberGameStats[roster.owner_id]?.highGame || 0,
+        lowGame: memberGameStats[roster.owner_id]?.lowGame || 0
       }));
 
     // Sort standings based on playoff results if available, otherwise by regular season
@@ -398,6 +404,43 @@ class HistoricalDataGenerator {
   calculateRelegations(tier, standings) {
     if (tier === 'NATIONAL') return [];
     return standings.slice(-2).map(s => s.userId);
+  }
+
+  calculateMemberGameStats(matchupsByWeek) {
+    const memberStats = {};
+
+    // Process all weeks of matchups
+    Object.values(matchupsByWeek).forEach(weekMatchups => {
+      weekMatchups.forEach(matchup => {
+        // Track winner's score
+        if (!memberStats[matchup.winner]) {
+          memberStats[matchup.winner] = {
+            highGame: matchup.winnerScore,
+            lowGame: matchup.winnerScore,
+            games: []
+          };
+        }
+        const winnerStats = memberStats[matchup.winner];
+        winnerStats.games.push(matchup.winnerScore);
+        winnerStats.highGame = Math.max(winnerStats.highGame, matchup.winnerScore);
+        winnerStats.lowGame = Math.min(winnerStats.lowGame, matchup.winnerScore);
+
+        // Track loser's score
+        if (!memberStats[matchup.loser]) {
+          memberStats[matchup.loser] = {
+            highGame: matchup.loserScore,
+            lowGame: matchup.loserScore,
+            games: []
+          };
+        }
+        const loserStats = memberStats[matchup.loser];
+        loserStats.games.push(matchup.loserScore);
+        loserStats.highGame = Math.max(loserStats.highGame, matchup.loserScore);
+        loserStats.lowGame = Math.min(loserStats.lowGame, matchup.loserScore);
+      });
+    });
+
+    return memberStats;
   }
 
   async saveLeagueData(year, tier, data) {

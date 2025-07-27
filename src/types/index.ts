@@ -26,6 +26,8 @@ export interface SeasonStandings {
   pointsFor: number;
   pointsAgainst: number;
   rank: number;
+  highGame?: number;
+  lowGame?: number;
 }
 
 export interface PlayoffResult {
@@ -109,6 +111,8 @@ export interface RawSeasonStandings {
   pointsFor: number;
   pointsAgainst: number;
   rank: number;
+  highGame?: number;
+  lowGame?: number;
   userInfo?: UserInfo;
 }
 

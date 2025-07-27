@@ -5,7 +5,7 @@ import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import type { LeagueTier, UserInfo } from '../types';
-import { Trophy, Medal, Award, TrendingDown, Calendar, Target, Zap } from 'lucide-react';
+import { Trophy, Medal, Award, TrendingDown, Calendar, Target, BarChart3 } from 'lucide-react';
 
 interface PlayerCareerStats {
   userId: string;
@@ -184,21 +184,24 @@ export const PlayerStats = () => {
           </div>
 
           {/* Career Overview Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="card text-center">
-              <Target className="h-8 w-8 text-green-600 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.totalWins}</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">Total Wins</div>
+              <BarChart3 className="h-8 w-8 text-green-600 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.totalWins}-{selectedPlayer.totalLosses}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">Win-Loss Record</div>
             </div>
             <div className="card text-center">
-              <TrendingDown className="h-8 w-8 text-red-600 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.totalLosses}</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">Total Losses</div>
-            </div>
-            <div className="card text-center">
-              <Zap className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.totalPointsFor.toFixed(1)}</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">Points For</div>
+              <Target className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+              <div className="flex justify-center items-end space-x-6 mb-2">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    {((selectedPlayer.totalWins + selectedPlayer.totalLosses) > 0 ? 
+                      (selectedPlayer.totalPointsFor / (selectedPlayer.totalWins + selectedPlayer.totalLosses)).toFixed(1) : 
+                      '0.0')}
+                  </div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400">Points Per Game</div>
+                </div>
+              </div>
             </div>
             <div className="card text-center">
               <Calendar className="h-8 w-8 text-purple-600 mx-auto mb-2" />
@@ -244,7 +247,7 @@ export const PlayerStats = () => {
                   <Calendar className="h-8 w-8 text-green-600" />
                 </div>
                 <div className="text-xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.playoffAppearances}</div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">Playoff Apps</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">Playoff Appearances</div>
               </div>
             </div>
           </div>

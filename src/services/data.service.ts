@@ -10,6 +10,7 @@ export interface HistoricalLeagueData {
   promotions: string[];
   relegations: string[];
   matchupsByWeek: Record<number, any[]>; // All matchups for each week
+  memberGameStats?: Record<string, { highGame: number; lowGame: number; games: number[] }>; // High/low game stats per member
 }
 
 export class DataService {
@@ -124,6 +125,46 @@ export class DataService {
         matchups
       }))
       .sort((a, b) => a.week - b.week);
+  }
+
+  /**
+   * Calculate high/low game stats for each member from matchup data
+   */
+  calculateMemberGameStats(matchupsByWeek: Record<number, any[]>): Record<string, { highGame: number; lowGame: number; games: number[] }> {
+    const memberStats: Record<string, { highGame: number; lowGame: number; games: number[] }> = {};
+
+    // Process all weeks of matchups
+    Object.values(matchupsByWeek).forEach(weekMatchups => {
+      weekMatchups.forEach(matchup => {
+        // Track winner's score
+        if (!memberStats[matchup.winner]) {
+          memberStats[matchup.winner] = {
+            highGame: matchup.winnerScore,
+            lowGame: matchup.winnerScore,
+            games: []
+          };
+        }
+        const winnerStats = memberStats[matchup.winner];
+        winnerStats.games.push(matchup.winnerScore);
+        winnerStats.highGame = Math.max(winnerStats.highGame, matchup.winnerScore);
+        winnerStats.lowGame = Math.min(winnerStats.lowGame, matchup.winnerScore);
+
+        // Track loser's score
+        if (!memberStats[matchup.loser]) {
+          memberStats[matchup.loser] = {
+            highGame: matchup.loserScore,
+            lowGame: matchup.loserScore,
+            games: []
+          };
+        }
+        const loserStats = memberStats[matchup.loser];
+        loserStats.games.push(matchup.loserScore);
+        loserStats.highGame = Math.max(loserStats.highGame, matchup.loserScore);
+        loserStats.lowGame = Math.min(loserStats.lowGame, matchup.loserScore);
+      });
+    });
+
+    return memberStats;
   }
 }
 

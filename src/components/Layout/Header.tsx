@@ -33,7 +33,7 @@ export const Header = () => {
             </Link>
           </div>
           
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden lg:flex space-x-8">
             {navItems.map(({ path, label, icon: Icon }) => (
               <Link
                 key={path}
@@ -54,7 +54,7 @@ export const Header = () => {
             <ThemeToggle />
             
             {/* Mobile menu button */}
-            <div className="md:hidden">
+            <div className="lg:hidden">
               <button 
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white p-2"
@@ -72,7 +72,7 @@ export const Header = () => {
 
         {/* Mobile Navigation Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+          <div className="lg:hidden border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
             <div className="px-4 py-2 space-y-1">
               {navItems.map(({ path, label, icon: Icon }) => (
                 <Link

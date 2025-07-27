@@ -1,16 +1,21 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAllTimeRecords } from '../hooks/useLeagues';
+import { useAllTimeRecords, useAllStandings } from '../hooks/useLeagues';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import type { LeagueTier } from '../types';
-import { Trophy, Target, TrendingDown, Award, Calendar, Zap } from 'lucide-react';
+import { Target, TrendingDown, TrendingUp, Award, Calendar, BarChart3, ChevronUp, ChevronDown, Crown, Sparkles, Gauge, Zap, Trophy, Skull, Laugh, Swords, Angry} from 'lucide-react';
+
+type SortKey = 'team' | 'year' | 'league' | 'record' | 'pointsFor' | 'avgPPG' | 'pointsAgainst' | 'placement';
+type SortOrder = 'asc' | 'desc';
 
 export const Records = () => {
   const [selectedLeague, setSelectedLeague] = useState<LeagueTier | 'ALL'>('ALL');
   const [selectedYear, setSelectedYear] = useState<string>('ALL');
+  const [sortKey, setSortKey] = useState<SortKey>('year');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
   const [, setImageError] = useState(false);
   const basePath = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
   const dakUrl = `${basePath}/dak-head.png`;
@@ -19,6 +24,7 @@ export const Records = () => {
     selectedLeague === 'ALL' ? undefined : selectedLeague,
     selectedYear === 'ALL' ? undefined : selectedYear
   );
+  const { data: allStandings } = useAllStandings();
 
   const leagues: (LeagueTier | 'ALL')[] = ['ALL', 'PREMIER', 'MASTERS', 'NATIONAL'];
   const years = ['ALL', '2024', '2023', '2022', '2021'];
@@ -47,6 +53,83 @@ export const Records = () => {
       case 'ALL': return 'All Leagues';
     }
   };
+
+  const handleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortKey(key);
+      setSortOrder('desc');
+    }
+  };
+
+  const getSortValue = (season: any, key: SortKey) => {
+    switch (key) {
+      case 'team':
+        return season.userInfo.teamName.toLowerCase();
+      case 'year':
+        return season.year;
+      case 'league':
+        const leagueOrder: Record<string, number> = { 'PREMIER': 1, 'MASTERS': 2, 'NATIONAL': 3 };
+        return leagueOrder[season.league] || 4;
+      case 'record':
+        return season.wins; // Use wins as sort key for records
+      case 'pointsFor':
+        return season.pointsFor;
+      case 'avgPPG':
+        return season.avgPointsPerGame;
+      case 'pointsAgainst':
+        return season.pointsAgainst;
+      case 'placement':
+        return season.playoffFinish || season.rank;
+      default:
+        return 0;
+    }
+  };
+
+  const filteredSeasonHistory = useMemo(() => {
+    if (!allStandings.length) return [];
+
+    const filtered = allStandings.filter(leagueData => {
+      if (selectedLeague !== 'ALL' && leagueData.league !== selectedLeague) return false;
+      if (selectedYear !== 'ALL' && leagueData.year !== selectedYear) return false;
+      return true;
+    });
+
+    const seasonEntries = filtered.flatMap(leagueData => 
+      leagueData.standings.map(standing => {
+        const totalGames = standing.wins + standing.losses;
+        const avgScore = totalGames > 0 ? (standing.pointsFor || 0) / totalGames : 0;
+
+        return {
+          userId: standing.userId,
+          userInfo: standing.userInfo,
+          year: leagueData.year,
+          league: leagueData.league as LeagueTier,
+          wins: standing.wins,
+          losses: standing.losses,
+          pointsFor: standing.pointsFor || 0,
+          pointsAgainst: standing.pointsAgainst || 0,
+          rank: standing.rank,
+          avgPointsPerGame: avgScore,
+          playoffFinish: leagueData.playoffResults?.find(p => p.userId === standing.userId)?.placement
+        };
+      })
+    );
+
+    return seasonEntries.sort((a, b) => {
+      const aValue = getSortValue(a, sortKey);
+      const bValue = getSortValue(b, sortKey);
+      
+      if (typeof aValue === 'string' && typeof bValue === 'string') {
+        const comparison = aValue.localeCompare(bValue);
+        return sortOrder === 'asc' ? comparison : -comparison;
+      } else {
+        const comparison = (aValue as number) - (bValue as number);
+        return sortOrder === 'asc' ? comparison : -comparison;
+      }
+    });
+  }, [allStandings, selectedLeague, selectedYear, sortKey, sortOrder]);
 
 
   if (isLoading) {
@@ -165,7 +248,7 @@ export const Records = () => {
           {/* Single Game Records */}
           <div className="card">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
-              <Zap className="h-5 w-5 mr-2" />
+              <Gauge className="h-5 w-5 mr-2" />
               Single Game Records
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -173,7 +256,7 @@ export const Records = () => {
               <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-medium text-green-800 dark:text-green-300">Highest Score</h3>
-                  <Trophy className="h-5 w-5 text-green-600" />
+                  <Crown className="h-5 w-5 text-green-600" />
                 </div>
                 <div className="flex items-center space-x-3">
                   <TeamLogo
@@ -203,7 +286,7 @@ export const Records = () => {
               <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-medium text-red-800 dark:text-red-300">Lowest Score</h3>
-                  <TrendingDown className="h-5 w-5 text-red-600" />
+                  <Skull className="h-5 w-5 text-red-600" />
                 </div>
                 <div className="flex items-center space-x-3">
                   <TeamLogo
@@ -234,7 +317,7 @@ export const Records = () => {
           {/* Season Records */}
           <div className="card">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
-              <Calendar className="h-5 w-5 mr-2" />
+              <Zap className="h-5 w-5 mr-2" />
               Season Records
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -242,7 +325,7 @@ export const Records = () => {
               <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-medium text-blue-800 dark:text-blue-300">Most Points</h3>
-                  <Trophy className="h-5 w-5 text-blue-600" />
+                  <TrendingUp className="h-5 w-5 text-blue-600" />
                 </div>
                 <div className="flex items-center space-x-3">
                   <TeamLogo
@@ -269,10 +352,10 @@ export const Records = () => {
               </div>
 
               {/* Least Points Season */}
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+              <div className="bg-amber-50 dark:bg-amber-800/20 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-medium text-gray-700 dark:text-gray-300">Fewest Points</h3>
-                  <TrendingDown className="h-5 w-5 text-gray-600" />
+                  <h3 className="font-medium text-amber-700 dark:text-amber-300">Fewest Points</h3>
+                  <TrendingDown className="h-5 w-5 text-amber-500" />
                 </div>
                 <div className="flex items-center space-x-3">
                   <TeamLogo
@@ -289,7 +372,7 @@ export const Records = () => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-gray-600">{records.leastPointsSeason.points.toFixed(1)}</div>
+                    <div className="text-2xl font-bold text-amber-500">{records.leastPointsSeason.points.toFixed(1)}</div>
                     <div className="flex items-center justify-end space-x-2">
                       <LeagueBadge league={records.leastPointsSeason.league} />
                       <span className="text-xs text-gray-500 dark:text-gray-400">{records.leastPointsSeason.year}</span>
@@ -303,7 +386,7 @@ export const Records = () => {
           {/* Special Game Records */}
           <div className="card">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
-              <Target className="h-5 w-5 mr-2" />
+              <Sparkles className="h-5 w-5 mr-2" />
               Special Game Records
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -311,7 +394,7 @@ export const Records = () => {
               <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-medium text-orange-800 dark:text-orange-300">Most Points in a Loss</h3>
-                  <Award className="h-5 w-5 text-orange-600" />
+                  <Angry className="h-5 w-5 text-orange-600" />
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
@@ -355,7 +438,7 @@ export const Records = () => {
               <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-medium text-purple-800 dark:text-purple-300">Fewest Points in a Win</h3>
-                  <Trophy className="h-5 w-5 text-purple-600" />
+                  <Laugh className="h-5 w-5 text-purple-600" />
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
@@ -399,7 +482,7 @@ export const Records = () => {
               <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-medium text-yellow-800 dark:text-yellow-300">Closest Game</h3>
-                  <Zap className="h-5 w-5 text-yellow-600" />
+                  <Swords className="h-5 w-5 text-yellow-600" />
                 </div>
                 <div className="space-y-2">
                   <div className="text-center">
@@ -450,6 +533,203 @@ export const Records = () => {
               </div>
             </div>
           </div>
+
+          {/* Season History Table */}
+          {filteredSeasonHistory.length > 0 && (
+            <div className="card">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
+                <BarChart3 className="h-5 w-5 mr-2" />
+                Season History
+                <span className="ml-2 text-sm font-normal text-gray-500 dark:text-gray-400">
+                  ({filteredSeasonHistory.length} total)
+                </span>
+              </h2>
+              <div className="overflow-x-auto">
+                <table className="table md:table-fixed w-full min-w-[800px]">
+                  <colgroup className="hidden md:table-column-group">
+                    <col className="w-[28%]" />
+                    <col className="w-[8%]" />
+                    <col className="w-[9%]" />
+                    <col className="w-[9%]" />
+                    <col className="w-[11%]" />
+                    <col className="w-[9%]" />
+                    <col className="w-[11%]" />
+                    <col className="w-[15%]" />
+                  </colgroup>
+                  <thead className="table-header">
+                    <tr>
+                      <th 
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        onClick={() => handleSort('team')}
+                      >
+                        <div className="flex items-center justify-between text-xs">
+                          Team
+                          <div className="flex flex-col ml-1">
+                            <ChevronUp className={`h-3 w-3 ${sortKey === 'team' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                            <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'team' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          </div>
+                        </div>
+                      </th>
+                      <th 
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        onClick={() => handleSort('year')}
+                      >
+                        <div className="flex items-center justify-center text-xs">
+                          Year
+                          <div className="flex flex-col ml-1">
+                            <ChevronUp className={`h-3 w-3 ${sortKey === 'year' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                            <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'year' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          </div>
+                        </div>
+                      </th>
+                      <th 
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        onClick={() => handleSort('league')}
+                      >
+                        <div className="flex items-center justify-center text-xs">
+                          League
+                          <div className="flex flex-col ml-1">
+                            <ChevronUp className={`h-3 w-3 ${sortKey === 'league' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                            <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'league' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          </div>
+                        </div>
+                      </th>
+                      <th 
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        onClick={() => handleSort('record')}
+                      >
+                        <div className="flex items-center justify-center text-xs">
+                          Record
+                          <div className="flex flex-col ml-1">
+                            <ChevronUp className={`h-3 w-3 ${sortKey === 'record' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                            <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'record' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          </div>
+                        </div>
+                      </th>
+                      <th 
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        onClick={() => handleSort('pointsFor')}
+                      >
+                        <div className="flex items-center justify-center text-xs">
+                          Points For
+                          <div className="flex flex-col ml-1">
+                            <ChevronUp className={`h-3 w-3 ${sortKey === 'pointsFor' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                            <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'pointsFor' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          </div>
+                        </div>
+                      </th>
+                      <th 
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        onClick={() => handleSort('avgPPG')}
+                      >
+                        <div className="flex items-center justify-center text-xs">
+                          Avg PPG
+                          <div className="flex flex-col ml-1">
+                            <ChevronUp className={`h-3 w-3 ${sortKey === 'avgPPG' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                            <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'avgPPG' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          </div>
+                        </div>
+                      </th>
+                      <th 
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        onClick={() => handleSort('pointsAgainst')}
+                      >
+                        <div className="flex items-center justify-center text-xs">
+                          Points Against
+                          <div className="flex flex-col ml-1">
+                            <ChevronUp className={`h-3 w-3 ${sortKey === 'pointsAgainst' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                            <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'pointsAgainst' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          </div>
+                        </div>
+                      </th>
+                      <th 
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        onClick={() => handleSort('placement')}
+                      >
+                        <div className="flex items-center justify-center text-xs">
+                          Placement
+                          <div className="flex flex-col ml-1">
+                            <ChevronUp className={`h-3 w-3 ${sortKey === 'placement' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                            <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'placement' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          </div>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredSeasonHistory.map((season) => (
+                      <tr key={`${season.userId}-${season.year}-${season.league}`} className="table-row h-16">
+                        <td className="align-middle">
+                          <div className="flex items-center space-x-2 h-full">
+                            <TeamLogo
+                              teamName={season.userInfo.teamName}
+                              abbreviation={season.userInfo.abbreviation}
+                              size="sm"
+                              className="flex-shrink-0"
+                            />
+                            <div className="min-w-0 flex-1">
+                              <div className="font-medium text-gray-900 dark:text-gray-100 text-sm leading-tight break-words">
+                                {season.userInfo.teamName}
+                              </div>
+                              <div className="text-xs text-gray-500 dark:text-gray-400">
+                                {season.userInfo.abbreviation}
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="text-center align-middle">
+                          <span className="text-sm font-medium">{season.year}</span>
+                        </td>
+                        <td className="text-center align-middle">
+                          <LeagueBadge league={season.league} />
+                        </td>
+                        <td className="text-center align-middle">
+                          <span className="text-sm font-medium">{season.wins}-{season.losses}</span>
+                        </td>
+                        <td className="text-center align-middle">
+                          <span className="text-sm font-medium">{season.pointsFor.toFixed(1)}</span>
+                        </td>
+                        <td className="text-center align-middle">
+                          <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
+                            {season.avgPointsPerGame.toFixed(1)}
+                          </span>
+                        </td>
+                        <td className="text-center align-middle">
+                          <span className="text-sm font-medium">{season.pointsAgainst.toFixed(1)}</span>
+                        </td>
+                        <td className="text-center align-middle">
+                          {season.playoffFinish ? (
+                            <div className="flex items-center justify-center space-x-1">
+                              {season.playoffFinish === 1 && <Trophy className="h-3 w-3 text-yellow-600" />}
+                              {season.playoffFinish === 2 && <Award className="h-3 w-3 text-gray-500" />}
+                              {season.playoffFinish === 3 && <Award className="h-3 w-3 text-amber-600" />}
+                              <div className="text-center">
+                                <div className="text-sm font-medium">
+                                  {season.playoffFinish === 1 ? '1st' :
+                                   season.playoffFinish === 2 ? '2nd' :
+                                   season.playoffFinish === 3 ? '3rd' :
+                                   `${season.playoffFinish}th`}
+                                </div>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="flex items-center justify-center space-x-1">
+                              {season.rank === 1 && <Trophy className="h-3 w-3 text-yellow-600" />}
+                              {season.rank === 2 && <Award className="h-3 w-3 text-gray-500" />}
+                              {season.rank === 3 && <Award className="h-3 w-3 text-amber-600" />}
+                              <div className="text-center">
+                                <div className="text-sm font-medium">#{season.rank}</div>
+                              </div>
+                            </div>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
