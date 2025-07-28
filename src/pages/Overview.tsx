@@ -12,7 +12,7 @@ export const Overview = () => {
 
   return (
     <div className="space-y-8">
-      <div className="bg-gradient-to-r from-red-600 to-red-700 dark:from-red-500 dark:to-red-600 rounded-lg shadow-lg p-6 sm:p-8 lg:p-12 text-white text-center">
+      <div className="bg-red-600 dark:bg-red-500 rounded-lg shadow-lg p-6 sm:p-8 lg:p-12 text-white text-center">
         <div className="max-w-2xl mx-auto">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Welcome to the FFU</h1>
           <p className="text-base sm:text-lg lg:text-xl text-red-100 mb-8">

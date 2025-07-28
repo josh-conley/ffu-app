@@ -1,28 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --ffu-red: 220 38 38;
+    --ffu-red-dark: 185 28 28;
+    --ffu-black: 0 0 0;
+    --ffu-gray: 20 20 22;
+    --ffu-gray-light: 107 114 128;
+  }
+
   html {
-    font-family: system-ui, sans-serif;
+    font-family: 'Barlow', system-ui, sans-serif;
   }
   
   body {
-    @apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors;
+    @apply bg-gray-50 text-gray-900 dark:text-gray-100 transition-colors font-sans;
+  }
+  
+  .dark body {
+    background-color: rgb(var(--ffu-gray));
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white font-medium py-2 px-4 rounded-lg transition-colors min-h-[44px] min-w-[44px];
+    @apply bg-ffu-red hover:bg-ffu-red-700 dark:bg-ffu-red dark:hover:bg-ffu-red-800 text-white font-semibold py-2 px-4 rounded-lg transition-colors min-h-[44px] min-w-[44px];
   }
   
   .btn-secondary {
-    @apply bg-secondary-200 hover:bg-secondary-300 dark:bg-secondary-700 dark:hover:bg-secondary-600 text-secondary-800 dark:text-secondary-200 font-medium py-2 px-4 rounded-lg transition-colors min-h-[44px] min-w-[44px];
+    @apply bg-secondary-200 hover:bg-secondary-300 dark:bg-secondary-700 dark:hover:bg-secondary-600 text-secondary-800 dark:text-secondary-200 font-semibold py-2 px-4 rounded-lg transition-colors min-h-[44px] min-w-[44px];
   }
   
   .card {
-    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/20 p-6 transition-colors;
+    @apply bg-white p-6 transition-colors border border-gray-200 relative;
+    background-color: white;
+  }
+  
+  .dark .card {
+    background-color: rgb(var(--ffu-gray));
+    border-color: rgb(var(--ffu-gray-light));
+  }
+  
+  
+  .angular-card {
+    @apply card;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  }
+  
+  .angular-card::before {
+    content: '';
+    @apply absolute top-0 right-0 w-5 h-5 bg-ffu-red/10 dark:bg-ffu-red/20 transform rotate-45 translate-x-2.5 -translate-y-2.5;
   }
   
   @media (max-width: 640px) {
@@ -42,15 +74,19 @@
   }
   
   .table {
-    @apply min-w-full bg-white dark:bg-gray-800 transition-colors;
+    @apply min-w-full bg-white transition-colors;
+  }
+  
+  .dark .table {
+    background-color: rgb(var(--ffu-gray));
   }
   
   .table-header {
-    @apply bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600 transition-colors;
+    @apply bg-ffu-red dark:bg-ffu-red-800 border-b border-ffu-red-700 transition-colors;
   }
   
   .table-header th {
-    @apply px-2 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider;
+    @apply px-2 py-2 text-left text-xs font-bold text-white uppercase tracking-wider;
   }
   
   @media (max-width: 640px) {
@@ -60,7 +96,15 @@
   }
   
   .table-row {
-    @apply border-b border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors;
+    @apply border-b border-gray-200 hover:bg-gray-50 transition-colors;
+  }
+  
+  .dark .table-row {
+    border-color: rgb(var(--ffu-gray-light));
+  }
+  
+  .dark .table-row:hover {
+    background-color: rgba(var(--ffu-gray-light), 0.1);
   }
   
   .table-row td {
@@ -90,6 +134,81 @@
   }
   
   .loading-spinner {
-    @apply inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-gray-900 dark:border-gray-100 transition-colors;
+    @apply inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-ffu-red dark:border-ffu-red transition-colors;
   }
+  
+  /* Angular Design Utilities */
+  .angular-cut {
+    clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+  }
+  
+  .angular-cut-small {
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+  
+  .angular-cut-dramatic {
+    clip-path: polygon(0 0, calc(100% - 40px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 40px));
+  }
+  
+  .newsletter-style-card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .newsletter-style-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: rgba(220, 38, 38, 0.1);
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+  }
+  
+  .newsletter-style-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.05);
+    clip-path: polygon(0 0, 0 100%, 100% 100%);
+  }
+  
+  .skew-container {
+    @apply transform -skew-x-12;
+  }
+  
+  .skew-content {
+    @apply transform skew-x-12;
+  }
+  
+  .diagonal-border::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-1 bg-ffu-red;
+    transform: skewX(-30deg);
+    transform-origin: bottom left;
+  }
+  
+  .champion-highlight {
+    @apply bg-ffu-red-50 dark:bg-ffu-red-900/20 border-l-4 border-ffu-red;
+  }
+  
+  /* FFU Branding */
+  .ffu-text-gradient {
+    @apply text-gray-900 dark:text-gray-100 font-bold;
+  }
+  
+  .footer-custom {
+    background-color: white;
+    border-color: #e5e7eb;
+  }
+  
+  .dark .footer-custom {
+    background-color: rgb(var(--ffu-gray));
+    border-color: rgb(var(--ffu-gray-light));
+  }
+
 }

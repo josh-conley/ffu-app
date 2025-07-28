@@ -9,11 +9,11 @@ export const SecretDak = () => {
   const dakUrl = `${basePath}/dak-head.png`;
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-8">
+    <div className="min-h-screen p-8">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-            🏈 1.01 🏈
+            🏈 YEAHHHH HERE WE GO 🏈
           </h1>
         </div>
 
@@ -21,7 +21,7 @@ export const SecretDak = () => {
         <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
           <iframe
             className="absolute top-0 left-0 w-full h-full rounded-lg shadow-2xl"
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0`}
             title="Secret Dak Video"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

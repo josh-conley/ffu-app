@@ -277,13 +277,13 @@ export const PlayerStats = () => {
                         <LeagueBadge league={season.league} />
                       </td>
                       <td>
-                        <span className="font-medium">{season.wins}-{season.losses}</span>
+                        <span className="font-mono">{season.wins}-{season.losses}</span>
                       </td>
                       <td>
-                        <span className="font-medium">{season.pointsFor.toFixed(1)}</span>
+                        <span className="font-mono">{season.pointsFor.toFixed(1)}</span>
                       </td>
                       <td>
-                        <span className="font-medium">{season.pointsAgainst.toFixed(1)}</span>
+                        <span className="font-mono">{season.pointsAgainst.toFixed(1)}</span>
                       </td>
                       <td>
                         {season.playoffFinish ? (
@@ -296,9 +296,6 @@ export const PlayerStats = () => {
                                season.playoffFinish === 2 ? '2nd' :
                                season.playoffFinish === 3 ? '3rd' :
                                `${season.playoffFinish}th`}
-                            </span>
-                            <span className="text-xs text-gray-500 ml-1">
-                              {season.playoffFinish <= 6 ? '(Playoffs)' : '(Toilet Bowl)'}
                             </span>
                           </div>
                         ) : (
