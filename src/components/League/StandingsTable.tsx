@@ -12,7 +12,7 @@ interface StandingsTableProps {
 }
 
 export const StandingsTable = ({ standings, league, year }: StandingsTableProps) => {
-  const getRowClasses = (rank: number, totalTeams: number) => {
+  const getRowClasses = (rank: number) => {
     let classes = 'table-row';
     
     if (rank === 1) {
@@ -85,7 +85,7 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
           </thead>
           <tbody>
             {standings.map((standing) => (
-              <tr key={standing.userId} className={getRowClasses(standing.rank, standings.length)}>
+              <tr key={standing.userId} className={getRowClasses(standing.rank)}>
                 <td className="text-center">
                   <div className="flex items-center justify-center space-x-2">
                     {getRankIcon(standing.rank)}
