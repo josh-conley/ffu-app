@@ -26,14 +26,12 @@ export class DataService {
 
     try {
       const url = `${this.baseUrl}/data/${year}/${league.toLowerCase()}.json`;
-      console.log(`🗂️ Loading historical data from: ${url}`);
       const response = await fetch(url);
       if (!response.ok) {
         console.warn(`No historical data found for ${league} ${year}`);
         return null;
       }
       const data = await response.json();
-      console.log(`✅ Loaded historical data for ${league} ${year} (${Object.keys(data.matchupsByWeek).length} weeks of matchups)`);
       return data;
     } catch (error) {
       console.error(`Failed to load historical data for ${league} ${year}:`, error);
