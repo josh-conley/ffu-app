@@ -12,16 +12,18 @@ function App() {
   return (
     <ThemeProvider>
       <Router basename={'/'}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Overview />} />
-            <Route path="standings" element={<Standings />} />
-            <Route path="players" element={<PlayerStats />} />
-            <Route path="matchups" element={<Matchups />} />
-            <Route path="records" element={<Records />} />
-            <Route path="secret-dak" element={<SecretDak />} />
-          </Route>
-        </Routes>
+        <div className="relative min-h-screen">
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Overview />} />
+              <Route path="standings" element={<Standings />} />
+              <Route path="players" element={<PlayerStats />} />
+              <Route path="matchups" element={<Matchups />} />
+              <Route path="records" element={<Records />} />
+              <Route path="secret-dak" element={<SecretDak />} />
+            </Route>
+          </Routes>
+        </div>
       </Router>
     </ThemeProvider>
   );

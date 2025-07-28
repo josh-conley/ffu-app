@@ -209,8 +209,8 @@ export const Records = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">All-Time Records</h1>
-        <p className="mt-2 text-gray-600 dark:text-gray-300">Legendary performances across FFU history</p>
+        <h1 className="text-4xl font-heading font-black text-gray-900 dark:text-gray-100 uppercase tracking-wide">All-Time Records</h1>
+        <p className="mt-3 text-gray-600 dark:text-gray-300 font-semibold text-lg">Legendary performances across FFU history</p>
       </div>
 
       {/* Filters */}
@@ -247,66 +247,66 @@ export const Records = () => {
         <div className="space-y-6">
           {/* Single Game Records */}
           <div className="card">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
-              <Gauge className="h-5 w-5 mr-2" />
+            <h2 className="text-2xl font-heading font-black text-gray-900 dark:text-gray-100 mb-6 flex items-center uppercase tracking-wide">
+              <Gauge className="h-6 w-6 mr-3 text-ffu-red" />
               Single Game Records
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Highest Single Game */}
-              <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-medium text-green-800 dark:text-green-300">Highest Score</h3>
-                  <Crown className="h-5 w-5 text-green-600" />
+              <div className="bg-green-50 dark:bg-green-900/30 angular-cut-small p-6 border-l-4 border-green-500 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-12 h-12 bg-green-500/10 transform rotate-45 translate-x-6 -translate-y-6"></div>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-heading font-bold text-green-800 dark:text-green-300 uppercase tracking-wide">Highest Score</h3>
+                  <Crown className="h-6 w-6 text-green-600" />
                 </div>
                 <div className="flex items-center space-x-3">
                   <TeamLogo
                     teamName={records.highestSingleGame.userInfo.teamName}
-                    abbreviation={records.highestSingleGame.userInfo.abbreviation}
                     size="md"
                   />
                   <div className="flex-1">
-                    <div className="font-semibold text-gray-900 dark:text-gray-100">
+                    <div className="font-heading font-bold text-gray-900 dark:text-gray-100 text-lg">
                       {records.highestSingleGame.userInfo.teamName}
                     </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                    <div className="text-sm text-gray-600 dark:text-gray-400 font-semibold">
                       Week {records.highestSingleGame.week}
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-green-600">{records.highestSingleGame.score.toFixed(2)}</div>
-                    <div className="flex items-center justify-end space-x-2">
+                    <div className="text-3xl font-heading font-black text-gray-900 dark:text-gray-100 font-mono">{records.highestSingleGame.score.toFixed(2)}</div>
+                    <div className="flex items-center justify-end space-x-2 mt-1">
                       <LeagueBadge league={records.highestSingleGame.league} />
-                      <span className="text-xs text-gray-500 dark:text-gray-400">{records.highestSingleGame.year}</span>
+                      <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{records.highestSingleGame.year}</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Lowest Single Game */}
-              <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-medium text-red-800 dark:text-red-300">Lowest Score</h3>
-                  <Skull className="h-5 w-5 text-red-600" />
+              <div className="bg-red-50 dark:bg-red-900/30 angular-cut-small p-6 border-l-4 border-red-500 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-12 h-12 bg-red-500/10 transform rotate-45 translate-x-6 -translate-y-6"></div>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-heading font-bold text-red-800 dark:text-red-300 uppercase tracking-wide">Lowest Score</h3>
+                  <Skull className="h-6 w-6 text-red-600" />
                 </div>
                 <div className="flex items-center space-x-3">
                   <TeamLogo
                     teamName={records.lowestSingleGame.userInfo.teamName}
-                    abbreviation={records.lowestSingleGame.userInfo.abbreviation}
                     size="md"
                   />
                   <div className="flex-1">
-                    <div className="font-semibold text-gray-900 dark:text-gray-100">
+                    <div className="font-heading font-bold text-gray-900 dark:text-gray-100 text-lg">
                       {records.lowestSingleGame.userInfo.teamName}
                     </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                    <div className="text-sm text-gray-600 dark:text-gray-400 font-semibold">
                       Week {records.lowestSingleGame.week}
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-red-600">{records.lowestSingleGame.score.toFixed(2)}</div>
-                    <div className="flex items-center justify-end space-x-2">
+                    <div className="text-3xl font-heading font-black text-gray-900 dark:text-gray-100 font-mono">{records.lowestSingleGame.score.toFixed(2)}</div>
+                    <div className="flex items-center justify-end space-x-2 mt-1">
                       <LeagueBadge league={records.lowestSingleGame.league} />
-                      <span className="text-xs text-gray-500 dark:text-gray-400">{records.lowestSingleGame.year}</span>
+                      <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{records.lowestSingleGame.year}</span>
                     </div>
                   </div>
                 </div>
@@ -316,66 +316,66 @@ export const Records = () => {
 
           {/* Season Records */}
           <div className="card">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
-              <Zap className="h-5 w-5 mr-2" />
+            <h2 className="text-2xl font-heading font-black text-gray-900 dark:text-gray-100 mb-6 flex items-center uppercase tracking-wide">
+              <Zap className="h-6 w-6 mr-3 text-ffu-red" />
               Season Records
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Most Points Season */}
-              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-medium text-blue-800 dark:text-blue-300">Most Points</h3>
-                  <TrendingUp className="h-5 w-5 text-blue-600" />
+              <div className="bg-blue-50 dark:bg-blue-900/30 angular-cut-small p-6 border-l-4 border-blue-500 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-12 h-12 bg-blue-500/10 transform rotate-45 translate-x-6 -translate-y-6"></div>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-heading font-bold text-blue-800 dark:text-blue-300 uppercase tracking-wide">Most Points</h3>
+                  <TrendingUp className="h-6 w-6 text-blue-600" />
                 </div>
                 <div className="flex items-center space-x-3">
                   <TeamLogo
                     teamName={records.mostPointsSeason.userInfo.teamName}
-                    abbreviation={records.mostPointsSeason.userInfo.abbreviation}
                     size="md"
                   />
                   <div className="flex-1">
-                    <div className="font-semibold text-gray-900 dark:text-gray-100">
+                    <div className="font-heading font-bold text-gray-900 dark:text-gray-100 text-lg">
                       {records.mostPointsSeason.userInfo.teamName}
                     </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                    <div className="text-sm text-gray-600 dark:text-gray-400 font-semibold">
                       {records.mostPointsSeason.year} Season
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-blue-600">{records.mostPointsSeason.points.toFixed(1)}</div>
-                    <div className="flex items-center justify-end space-x-2">
+                    <div className="text-3xl font-heading font-black text-gray-900 dark:text-gray-100 font-mono">{records.mostPointsSeason.points.toFixed(1)}</div>
+                    <div className="flex items-center justify-end space-x-2 mt-1">
                       <LeagueBadge league={records.mostPointsSeason.league} />
-                      <span className="text-xs text-gray-500 dark:text-gray-400">{records.mostPointsSeason.year}</span>
+                      <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{records.mostPointsSeason.year}</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Least Points Season */}
-              <div className="bg-amber-50 dark:bg-amber-800/20 rounded-lg p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-medium text-amber-700 dark:text-amber-300">Fewest Points</h3>
-                  <TrendingDown className="h-5 w-5 text-amber-500" />
+              <div className="bg-amber-50 dark:bg-amber-900/30 angular-cut-small p-6 border-l-4 border-amber-500 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-12 h-12 bg-amber-500/10 transform rotate-45 translate-x-6 -translate-y-6"></div>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-heading font-bold text-amber-700 dark:text-amber-300 uppercase tracking-wide">Fewest Points</h3>
+                  <TrendingDown className="h-6 w-6 text-amber-500" />
                 </div>
                 <div className="flex items-center space-x-3">
                   <TeamLogo
                     teamName={records.leastPointsSeason.userInfo.teamName}
-                    abbreviation={records.leastPointsSeason.userInfo.abbreviation}
                     size="md"
                   />
                   <div className="flex-1">
-                    <div className="font-semibold text-gray-900 dark:text-gray-100">
+                    <div className="font-heading font-bold text-gray-900 dark:text-gray-100 text-lg">
                       {records.leastPointsSeason.userInfo.teamName}
                     </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                    <div className="text-sm text-gray-600 dark:text-gray-400 font-semibold">
                       {records.leastPointsSeason.year} Season
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-amber-500">{records.leastPointsSeason.points.toFixed(1)}</div>
-                    <div className="flex items-center justify-end space-x-2">
+                    <div className="text-3xl font-heading font-black text-gray-900 dark:text-gray-100 font-mono">{records.leastPointsSeason.points.toFixed(1)}</div>
+                    <div className="flex items-center justify-end space-x-2 mt-1">
                       <LeagueBadge league={records.leastPointsSeason.league} />
-                      <span className="text-xs text-gray-500 dark:text-gray-400">{records.leastPointsSeason.year}</span>
+                      <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{records.leastPointsSeason.year}</span>
                     </div>
                   </div>
                 </div>
@@ -385,47 +385,46 @@ export const Records = () => {
 
           {/* Special Game Records */}
           <div className="card">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
-              <Sparkles className="h-5 w-5 mr-2" />
+            <h2 className="text-2xl font-heading font-black text-gray-900 dark:text-gray-100 mb-6 flex items-center uppercase tracking-wide">
+              <Sparkles className="h-6 w-6 mr-3 text-ffu-red" />
               Special Game Records
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Most Points in Loss */}
-              <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-medium text-orange-800 dark:text-orange-300">Most Points in a Loss</h3>
-                  <Angry className="h-5 w-5 text-orange-600" />
+              <div className="bg-orange-50 dark:bg-orange-900/30 angular-cut-small p-6 border-l-4 border-orange-500 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-12 h-12 bg-orange-500/10 transform rotate-45 translate-x-6 -translate-y-6"></div>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-heading font-bold text-orange-800 dark:text-orange-300 uppercase tracking-wide text-sm">Most Points in a Loss</h3>
+                  <Angry className="h-6 w-6 text-orange-600" />
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
                     <TeamLogo
                       teamName={records.mostPointsInLoss.userInfo.teamName}
-                      abbreviation={records.mostPointsInLoss.userInfo.abbreviation}
                       size="md"
                     />
-                    <div className="font-semibold text-gray-900 dark:text-gray-100 text-sm">
+                    <div className="font-bold text-gray-900 dark:text-gray-100 text-base">
                       {records.mostPointsInLoss.userInfo.teamName}
                     </div>
                   </div>
-                  <div className="text-lg font-bold text-orange-600">{records.mostPointsInLoss.score.toFixed(2)}</div>
+                  <div className="text-2xl font-heading font-black text-gray-900 dark:text-gray-100 font-mono">{records.mostPointsInLoss.score.toFixed(2)}</div>
                   <div className="flex items-center space-x-2">
                     <LeagueBadge league={records.mostPointsInLoss.league} />
-                    <span className="text-xs text-gray-500 dark:text-gray-400">Week {records.mostPointsInLoss.week}</span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">{records.mostPointsInLoss.year}</span>
+                    <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">Week {records.mostPointsInLoss.week}</span>
+                    <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{records.mostPointsInLoss.year}</span>
                   </div>
                   {records.mostPointsInLoss.opponent && (
                     <div className="pt-2 border-t border-orange-200 dark:border-orange-700">
-                      <div className="text-xs text-orange-700 dark:text-orange-300 mb-1">Lost to:</div>
+                      <div className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Lost to:</div>
                       <div className="flex items-center space-x-2">
                         <TeamLogo
                           teamName={records.mostPointsInLoss.opponent.teamName}
-                          abbreviation={records.mostPointsInLoss.opponent.abbreviation}
                           size="md"
                         />
-                        <div className="text-xs text-gray-600 dark:text-gray-400">
+                        <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                           {records.mostPointsInLoss.opponent.teamName}
                         </div>
-                        <div className="text-xs font-medium text-orange-600">
+                        <div className="text-sm font-bold text-gray-900 dark:text-gray-100 font-mono">
                           {records.mostPointsInLoss.opponentScore?.toFixed(2)}
                         </div>
                       </div>
@@ -435,41 +434,40 @@ export const Records = () => {
               </div>
 
               {/* Fewest Points in Win */}
-              <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-medium text-purple-800 dark:text-purple-300">Fewest Points in a Win</h3>
-                  <Laugh className="h-5 w-5 text-purple-600" />
+              <div className="bg-purple-50 dark:bg-purple-900/30 angular-cut-small p-6 border-l-4 border-purple-500 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-12 h-12 bg-purple-500/10 transform rotate-45 translate-x-6 -translate-y-6"></div>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-heading font-bold text-purple-800 dark:text-purple-300 uppercase tracking-wide text-sm">Fewest Points in a Win</h3>
+                  <Laugh className="h-6 w-6 text-purple-600" />
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
                     <TeamLogo
                       teamName={records.fewestPointsInWin.userInfo.teamName}
-                      abbreviation={records.fewestPointsInWin.userInfo.abbreviation}
                       size="md"
                     />
-                    <div className="font-semibold text-gray-900 dark:text-gray-100 text-sm">
+                    <div className="font-bold text-gray-900 dark:text-gray-100 text-base">
                       {records.fewestPointsInWin.userInfo.teamName}
                     </div>
                   </div>
-                  <div className="text-lg font-bold text-purple-600">{records.fewestPointsInWin.score.toFixed(2)}</div>
+                  <div className="text-2xl font-heading font-black text-gray-900 dark:text-gray-100 font-mono">{records.fewestPointsInWin.score.toFixed(2)}</div>
                   <div className="flex items-center space-x-2">
                     <LeagueBadge league={records.fewestPointsInWin.league} />
-                    <span className="text-xs text-gray-500 dark:text-gray-400">Week {records.fewestPointsInWin.week}</span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">{records.fewestPointsInWin.year}</span>
+                    <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">Week {records.fewestPointsInWin.week}</span>
+                    <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{records.fewestPointsInWin.year}</span>
                   </div>
                   {records.fewestPointsInWin.opponent && (
                     <div className="pt-2 border-t border-purple-200 dark:border-purple-700">
-                      <div className="text-xs text-purple-700 dark:text-purple-300 mb-1">Beat:</div>
+                      <div className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Beat:</div>
                       <div className="flex items-center space-x-2">
                         <TeamLogo
                           teamName={records.fewestPointsInWin.opponent.teamName}
-                          abbreviation={records.fewestPointsInWin.opponent.abbreviation}
                           size="md"
                         />
-                        <div className="text-xs text-gray-600 dark:text-gray-400">
+                        <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                           {records.fewestPointsInWin.opponent.teamName}
                         </div>
-                        <div className="text-xs font-medium text-purple-600">
+                        <div className="text-sm font-bold text-gray-900 dark:text-gray-100 font-mono">
                           {records.fewestPointsInWin.opponentScore?.toFixed(2)}
                         </div>
                       </div>
@@ -479,14 +477,15 @@ export const Records = () => {
               </div>
 
               {/* Closest Game */}
-              <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-medium text-yellow-800 dark:text-yellow-300">Closest Game</h3>
-                  <Swords className="h-5 w-5 text-yellow-600" />
+              <div className="bg-yellow-50 dark:bg-yellow-900/30 angular-cut-small p-6 border-l-4 border-yellow-500 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-12 h-12 bg-yellow-500/10 transform rotate-45 translate-x-6 -translate-y-6"></div>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-heading font-bold text-yellow-800 dark:text-yellow-300 uppercase tracking-wide text-sm">Closest Game</h3>
+                  <Swords className="h-6 w-6 text-yellow-600" />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <div className="text-center">
-                    <div className="text-lg font-bold text-yellow-600">
+                    <div className="text-2xl font-heading font-black text-gray-900 dark:text-gray-100 font-mono">
                       {records.closestGame.margin.toFixed(2)} pts
                     </div>
                   </div>
@@ -496,29 +495,27 @@ export const Records = () => {
                     <div className="flex flex-col items-center space-y-1">
                       <TeamLogo
                         teamName={records.closestGame.winner.teamName}
-                        abbreviation={records.closestGame.winner.abbreviation}
                         size="md"
                       />
-                      <div className="text-xs font-medium text-center">
+                      <div className="text-sm font-semibold text-center text-gray-900 dark:text-gray-100">
                         {records.closestGame.winner.teamName}
                       </div>
-                      <div className="text-sm font-bold text-green-600">
+                      <div className="text-lg font-bold text-gray-900 dark:text-gray-100 font-mono">
                         {records.closestGame.winnerScore.toFixed(2)}
                       </div>
                     </div>
 
-                    <div className="text-yellow-600 font-bold text-sm self-center">VS</div>
+                    <div className="text-gray-900 dark:text-gray-100 font-heading font-black text-lg self-center">VS</div>
 
                     <div className="flex flex-col items-center space-y-1">
                       <TeamLogo
                         teamName={records.closestGame.loser.teamName}
-                        abbreviation={records.closestGame.loser.abbreviation}
                         size="md"
                       />
-                      <div className="text-xs font-medium text-center">
+                      <div className="text-sm font-semibold text-center text-gray-900 dark:text-gray-100">
                         {records.closestGame.loser.teamName}
                       </div>
-                      <div className="text-sm font-bold text-red-600">
+                      <div className="text-lg font-bold text-gray-900 dark:text-gray-100 font-mono">
                         {records.closestGame.loserScore.toFixed(2)}
                       </div>
                     </div>
@@ -526,8 +523,8 @@ export const Records = () => {
 
                   <div className="flex justify-center items-center space-x-2">
                     <LeagueBadge league={records.closestGame.league} />
-                    <span className="text-xs text-gray-500 dark:text-gray-400">Week {records.closestGame.week}</span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">{records.closestGame.year}</span>
+                    <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">Week {records.closestGame.week}</span>
+                    <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{records.closestGame.year}</span>
                   </div>
                 </div>
               </div>
@@ -537,14 +534,14 @@ export const Records = () => {
           {/* Season History Table */}
           {filteredSeasonHistory.length > 0 && (
             <div className="card">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
-                <BarChart3 className="h-5 w-5 mr-2" />
+              <h2 className="text-2xl font-heading font-black text-gray-900 dark:text-gray-100 mb-6 flex items-center uppercase tracking-wide">
+                <BarChart3 className="h-6 w-6 mr-3 text-ffu-red" />
                 Season History
-                <span className="ml-2 text-sm font-normal text-gray-500 dark:text-gray-400">
+                <span className="ml-3 text-lg font-bold text-gray-500 dark:text-gray-400">
                   ({filteredSeasonHistory.length} total)
                 </span>
               </h2>
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto table-container">
                 <table className="table md:table-fixed w-full min-w-[800px]">
                   <colgroup className="hidden md:table-column-group">
                     <col className="w-[28%]" />
@@ -663,16 +660,12 @@ export const Records = () => {
                           <div className="flex items-center space-x-2 h-full">
                             <TeamLogo
                               teamName={season.userInfo.teamName}
-                              abbreviation={season.userInfo.abbreviation}
                               size="sm"
                               className="flex-shrink-0"
                             />
                             <div className="min-w-0 flex-1">
                               <div className="font-medium text-gray-900 dark:text-gray-100 text-sm leading-tight break-words">
                                 {season.userInfo.teamName}
-                              </div>
-                              <div className="text-xs text-gray-500 dark:text-gray-400">
-                                {season.userInfo.abbreviation}
                               </div>
                             </div>
                           </div>
@@ -684,18 +677,18 @@ export const Records = () => {
                           <LeagueBadge league={season.league} />
                         </td>
                         <td className="text-center align-middle">
-                          <span className="text-sm font-medium">{season.wins}-{season.losses}</span>
+                          <span className="text-sm font-medium font-mono">{season.wins}-{season.losses}</span>
                         </td>
                         <td className="text-center align-middle">
-                          <span className="text-sm font-medium">{season.pointsFor.toFixed(1)}</span>
+                          <span className="text-sm font-medium font-mono">{season.pointsFor.toFixed(1)}</span>
                         </td>
                         <td className="text-center align-middle">
-                          <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
+                          <span className="text-sm font-medium text-blue-600 dark:text-blue-400 font-mono">
                             {season.avgPointsPerGame.toFixed(1)}
                           </span>
                         </td>
                         <td className="text-center align-middle">
-                          <span className="text-sm font-medium">{season.pointsAgainst.toFixed(1)}</span>
+                          <span className="text-sm font-medium font-mono">{season.pointsAgainst.toFixed(1)}</span>
                         </td>
                         <td className="text-center align-middle">
                           {season.playoffFinish ? (

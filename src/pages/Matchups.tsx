@@ -152,9 +152,9 @@ export const Matchups = () => {
                   {/* Score Row */}
                   <div className="text-center py-1.5 border-y border-gray-200/50 dark:border-gray-600/50">
                     <div className="text-base font-bold">
-                      <span className="text-green-600 dark:text-green-400">{matchup.winnerScore?.toFixed(1)}</span>
+                      <span className="text-green-600 dark:text-green-400 font-mono">{matchup.winnerScore?.toFixed(1)}</span>
                       <span className="text-gray-500 dark:text-gray-400 mx-2">-</span>
-                      <span className="text-red-600 dark:text-red-400">{matchup.loserScore?.toFixed(1)}</span>
+                      <span className="text-red-600 dark:text-red-400 font-mono">{matchup.loserScore?.toFixed(1)}</span>
                     </div>
                   </div>
                   
@@ -192,9 +192,9 @@ export const Matchups = () => {
                   {/* Score */}
                   <div className="text-center flex-shrink-0 px-4">
                     <div className="text-lg font-bold whitespace-nowrap">
-                      <span className="text-green-600 dark:text-green-400">{matchup.winnerScore?.toFixed(1)}</span>
+                      <span className="text-green-600 dark:text-green-400 font-mono">{matchup.winnerScore?.toFixed(1)}</span>
                       <span className="text-gray-500 dark:text-gray-400 mx-2">-</span>
-                      <span className="text-red-600 dark:text-red-400">{matchup.loserScore?.toFixed(1)}</span>
+                      <span className="text-red-600 dark:text-red-400 font-mono">{matchup.loserScore?.toFixed(1)}</span>
                     </div>
                   </div>
 
@@ -268,9 +268,9 @@ export const Matchups = () => {
                         {/* Score Row */}
                         <div className="text-center py-1.5 border-y border-gray-200/50 dark:border-gray-600/50">
                           <div className="text-base font-bold">
-                            <span className="text-green-600 dark:text-green-400">{matchup.winnerScore?.toFixed(1)}</span>
+                            <span className="text-green-600 dark:text-green-400 font-mono">{matchup.winnerScore?.toFixed(1)}</span>
                             <span className="text-gray-500 dark:text-gray-400 mx-2">-</span>
-                            <span className="text-red-600 dark:text-red-400">{matchup.loserScore?.toFixed(1)}</span>
+                            <span className="text-red-600 dark:text-red-400 font-mono">{matchup.loserScore?.toFixed(1)}</span>
                           </div>
                         </div>
                         
@@ -308,9 +308,9 @@ export const Matchups = () => {
                         {/* Score */}
                         <div className="text-center flex-shrink-0 px-4">
                           <div className="text-lg font-bold whitespace-nowrap">
-                            <span className="text-green-600 dark:text-green-400">{matchup.winnerScore?.toFixed(1)}</span>
+                            <span className="text-green-600 dark:text-green-400 font-mono">{matchup.winnerScore?.toFixed(1)}</span>
                             <span className="text-gray-500 dark:text-gray-400 mx-2">-</span>
-                            <span className="text-red-600 dark:text-red-400">{matchup.loserScore?.toFixed(1)}</span>
+                            <span className="text-red-600 dark:text-red-400 font-mono">{matchup.loserScore?.toFixed(1)}</span>
                           </div>
                         </div>
 

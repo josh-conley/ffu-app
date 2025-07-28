@@ -16,36 +16,42 @@ export const Header = () => {
   ];
 
   return (
-    <header className="bg-white dark:bg-gray-900 shadow-lg border-b border-gray-200 dark:border-gray-700 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="bg-ffu-black shadow-xl border-b-4 border-ffu-red transition-colors relative">
+      <div className="absolute inset-0 bg-ffu-black"></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex justify-between items-center py-6">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-3">
-              <img 
-                src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/NationalLogo.png`}
-                alt="FFU Logo"
-                className="h-12 w-12 sm:h-16 sm:w-16 object-contain"
-              />
+            <Link to="/" className="flex items-center space-x-4 group">
+              <div className="relative">
+                <img 
+                  src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/NationalLogo.png`}
+                  alt="FFU Logo"
+                  className="h-12 w-12 sm:h-16 sm:w-16 object-contain angular-cut transition-all duration-300"
+                />
+              </div>
               <div>
-                <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">FFU</h1>
-                <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Fantasy Football Union</p>
+                <h1 className="text-xl sm:text-3xl font-black text-white ffu-text-gradient tracking-wide">FFU</h1>
+                <p className="text-xs sm:text-sm text-gray-300 font-semibold tracking-wider uppercase">Fantasy Football Union</p>
               </div>
             </Link>
           </div>
           
-          <nav className="hidden lg:flex space-x-8">
+          <nav className="hidden lg:flex space-x-2">
             {navItems.map(({ path, label, icon: Icon }) => (
               <Link
                 key={path}
                 to={path}
-                className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`flex items-center space-x-2 px-4 py-3 text-sm font-bold transition-all duration-300 relative group angular-cut-small ${
                   location.pathname === path
-                    ? 'bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300'
-                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
+                    ? 'bg-ffu-red text-white shadow-lg ffu-shadow'
+                    : 'text-gray-300 hover:text-white hover:bg-ffu-red/20'
                 }`}
               >
                 <Icon className="h-4 w-4" />
-                <span>{label}</span>
+                <span className="tracking-wide uppercase">{label}</span>
+                {location.pathname !== path && (
+                  <div className="absolute inset-0 bg-ffu-red opacity-0 group-hover:opacity-10 transition-opacity duration-300 angular-cut-small"></div>
+                )}
               </Link>
             ))}
           </nav>
@@ -57,7 +63,7 @@ export const Header = () => {
             <div className="lg:hidden">
               <button 
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white p-2"
+                className="text-gray-300 hover:text-white hover:bg-ffu-red/20 p-3 angular-cut-small transition-all duration-300"
                 aria-label="Toggle mobile menu"
               >
                 {mobileMenuOpen ? (
@@ -72,21 +78,21 @@ export const Header = () => {
 
         {/* Mobile Navigation Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
-            <div className="px-4 py-2 space-y-1">
+          <div className="lg:hidden border-t-2 border-ffu-red bg-ffu-black">
+            <div className="px-4 py-3 space-y-2">
               {navItems.map(({ path, label, icon: Icon }) => (
                 <Link
                   key={path}
                   to={path}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center space-x-3 px-3 py-3 rounded-md text-base font-medium transition-colors ${
+                  className={`flex items-center space-x-3 px-4 py-4 text-base font-bold transition-all duration-300 angular-cut-small ${
                     location.pathname === path
-                      ? 'bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300'
-                      : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
+                      ? 'bg-ffu-red text-white shadow-lg'
+                      : 'text-gray-300 hover:text-white hover:bg-ffu-red/20'
                   }`}
                 >
                   <Icon className="h-5 w-5" />
-                  <span>{label}</span>
+                  <span className="tracking-wide uppercase">{label}</span>
                 </Link>
               ))}
             </div>
