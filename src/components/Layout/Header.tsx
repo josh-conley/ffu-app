@@ -26,7 +26,7 @@ export const Header = () => {
                 <img 
                   src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/NationalLogo.png`}
                   alt="FFU Logo"
-                  className="h-12 w-12 sm:h-16 sm:w-16 object-contain angular-cut transition-all duration-300"
+                  className="h-12 w-12 sm:h-16 sm:w-16 object-contain transition-all duration-300"
                 />
               </div>
               <div>
@@ -44,7 +44,7 @@ export const Header = () => {
                 className={`flex items-center space-x-2 px-4 py-3 text-sm font-bold transition-all duration-300 relative group angular-cut-small ${
                   location.pathname === path
                     ? 'bg-ffu-red text-white shadow-lg ffu-shadow'
-                    : 'text-gray-300 hover:text-white hover:bg-ffu-red/20'
+                    : 'text-gray-300 hover:text-white hover:bg-ffu-red/50'
                 }`}
               >
                 <Icon className="h-4 w-4" />

@@ -136,10 +136,14 @@
   .loading-spinner {
     @apply inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-ffu-red dark:border-ffu-red transition-colors;
   }
+
+  .welcome-card {
+    @apply angular-cut bg-ffu-red shadow-lg p-6 sm:p-8 lg:p-12 text-white text-center;
+  }
   
   /* Angular Design Utilities */
   .angular-cut {
-    clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+    clip-path: polygon(0 0, calc(100% - 36px) 0, 100% 36px, 100% 100%, 36px 100%, 0 calc(100% - 36px));
   }
   
   .angular-cut-small {
