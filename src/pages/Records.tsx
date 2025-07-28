@@ -137,7 +137,6 @@ export const Records = () => {
       <div className="space-y-6">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">All-Time Records</h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-300">Legendary performances across FFU history</p>
         </div>
 
         {/* Filters */}
@@ -210,7 +209,6 @@ export const Records = () => {
     <div className="space-y-6">
       <div>
         <h1 className="text-4xl font-heading font-black text-gray-900 dark:text-gray-100 uppercase tracking-wide">All-Time Records</h1>
-        <p className="mt-3 text-gray-600 dark:text-gray-300 font-semibold text-lg">Legendary performances across FFU history</p>
       </div>
 
       {/* Filters */}
@@ -253,8 +251,7 @@ export const Records = () => {
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Highest Single Game */}
-              <div className="bg-green-50 dark:bg-green-900/30 angular-cut-small p-6 border-l-4 border-green-500 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-12 h-12 bg-green-500/10 transform rotate-45 translate-x-6 -translate-y-6"></div>
+              <div className="bg-green-50 dark:bg-green-900/30 angular-cut-medium p-6 border-l-4 border-green-500 relative overflow-hidden">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-heading font-bold text-green-800 dark:text-green-300 uppercase tracking-wide">Highest Score</h3>
                   <Crown className="h-6 w-6 text-green-600" />
@@ -283,8 +280,7 @@ export const Records = () => {
               </div>
 
               {/* Lowest Single Game */}
-              <div className="bg-red-50 dark:bg-red-900/30 angular-cut-small p-6 border-l-4 border-red-500 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-12 h-12 bg-red-500/10 transform rotate-45 translate-x-6 -translate-y-6"></div>
+              <div className="bg-red-50 dark:bg-red-900/30 angular-cut-medium p-6 border-l-4 border-red-500 relative overflow-hidden">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-heading font-bold text-red-800 dark:text-red-300 uppercase tracking-wide">Lowest Score</h3>
                   <Skull className="h-6 w-6 text-red-600" />
@@ -322,8 +318,7 @@ export const Records = () => {
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Most Points Season */}
-              <div className="bg-blue-50 dark:bg-blue-900/30 angular-cut-small p-6 border-l-4 border-blue-500 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-12 h-12 bg-blue-500/10 transform rotate-45 translate-x-6 -translate-y-6"></div>
+              <div className="bg-blue-50 dark:bg-blue-900/30 angular-cut-medium p-6 border-l-4 border-blue-500 relative overflow-hidden">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-heading font-bold text-blue-800 dark:text-blue-300 uppercase tracking-wide">Most Points</h3>
                   <TrendingUp className="h-6 w-6 text-blue-600" />
@@ -352,8 +347,7 @@ export const Records = () => {
               </div>
 
               {/* Least Points Season */}
-              <div className="bg-amber-50 dark:bg-amber-900/30 angular-cut-small p-6 border-l-4 border-amber-500 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-12 h-12 bg-amber-500/10 transform rotate-45 translate-x-6 -translate-y-6"></div>
+              <div className="bg-amber-50 dark:bg-amber-900/30 angular-cut-medium p-6 border-l-4 border-amber-500 relative overflow-hidden">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-heading font-bold text-amber-700 dark:text-amber-300 uppercase tracking-wide">Fewest Points</h3>
                   <TrendingDown className="h-6 w-6 text-amber-500" />
@@ -391,8 +385,7 @@ export const Records = () => {
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Most Points in Loss */}
-              <div className="bg-orange-50 dark:bg-orange-900/30 angular-cut-small p-6 border-l-4 border-orange-500 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-12 h-12 bg-orange-500/10 transform rotate-45 translate-x-6 -translate-y-6"></div>
+              <div className="bg-orange-50 dark:bg-orange-900/30 angular-cut-medium p-6 border-l-4 border-orange-500 relative overflow-hidden">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-heading font-bold text-orange-800 dark:text-orange-300 uppercase tracking-wide text-sm">Most Points in a Loss</h3>
                   <Angry className="h-6 w-6 text-orange-600" />
@@ -434,8 +427,7 @@ export const Records = () => {
               </div>
 
               {/* Fewest Points in Win */}
-              <div className="bg-purple-50 dark:bg-purple-900/30 angular-cut-small p-6 border-l-4 border-purple-500 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-12 h-12 bg-purple-500/10 transform rotate-45 translate-x-6 -translate-y-6"></div>
+              <div className="bg-purple-50 dark:bg-purple-900/30 angular-cut-medium p-6 border-l-4 border-purple-500 relative overflow-hidden">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-heading font-bold text-purple-800 dark:text-purple-300 uppercase tracking-wide text-sm">Fewest Points in a Win</h3>
                   <Laugh className="h-6 w-6 text-purple-600" />
@@ -477,8 +469,7 @@ export const Records = () => {
               </div>
 
               {/* Closest Game */}
-              <div className="bg-yellow-50 dark:bg-yellow-900/30 angular-cut-small p-6 border-l-4 border-yellow-500 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-12 h-12 bg-yellow-500/10 transform rotate-45 translate-x-6 -translate-y-6"></div>
+              <div className="bg-yellow-50 dark:bg-yellow-900/30 angular-cut-medium p-6 border-l-4 border-yellow-500 relative overflow-hidden">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-heading font-bold text-yellow-800 dark:text-yellow-300 uppercase tracking-wide text-sm">Closest Game</h3>
                   <Swords className="h-6 w-6 text-yellow-600" />

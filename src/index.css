@@ -17,11 +17,11 @@
   html {
     font-family: 'Barlow', system-ui, sans-serif;
   }
-  
+
   body {
     @apply bg-gray-50 text-gray-900 dark:text-gray-100 transition-colors font-sans;
   }
-  
+
   .dark body {
     background-color: rgb(var(--ffu-gray));
   }
@@ -31,134 +31,142 @@
   .btn-primary {
     @apply bg-ffu-red hover:bg-ffu-red-700 dark:bg-ffu-red dark:hover:bg-ffu-red-800 text-white font-semibold py-2 px-4 rounded-lg transition-colors min-h-[44px] min-w-[44px];
   }
-  
+
   .btn-secondary {
     @apply bg-secondary-200 hover:bg-secondary-300 dark:bg-secondary-700 dark:hover:bg-secondary-600 text-secondary-800 dark:text-secondary-200 font-semibold py-2 px-4 rounded-lg transition-colors min-h-[44px] min-w-[44px];
   }
-  
+
   .card {
     @apply bg-white p-6 transition-colors border border-gray-200 relative;
     background-color: white;
   }
-  
+
   .dark .card {
     background-color: rgb(var(--ffu-gray));
     border-color: rgb(var(--ffu-gray-light));
   }
-  
-  
-  .angular-card {
-    @apply card;
-    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
-  }
-  
-  .angular-card::before {
-    content: '';
-    @apply absolute top-0 right-0 w-5 h-5 bg-ffu-red/10 dark:bg-ffu-red/20 transform rotate-45 translate-x-2.5 -translate-y-2.5;
-  }
-  
+
   @media (max-width: 640px) {
     .card {
       @apply p-4;
     }
   }
-  
+
   .table-container {
-    @apply overflow-x-auto shadow-lg dark:shadow-gray-900/20 rounded-lg;
+    @apply overflow-x-auto shadow-none dark:shadow-gray-900/20 rounded-none;
   }
-  
+
   @media (max-width: 640px) {
     .table-container {
       @apply -mx-4 rounded-none shadow-none border-t border-b border-gray-200 dark:border-gray-600;
     }
   }
-  
+
   .table {
     @apply min-w-full bg-white transition-colors;
   }
-  
+
   .dark .table {
     background-color: rgb(var(--ffu-gray));
   }
-  
+
   .table-header {
     @apply bg-ffu-red dark:bg-ffu-red-800 border-b border-ffu-red-700 transition-colors;
   }
-  
+
   .table-header th {
     @apply px-2 py-2 text-left text-xs font-bold text-white uppercase tracking-wider;
   }
-  
+
   @media (max-width: 640px) {
     .table-header th {
       @apply px-3 py-2 text-xs;
     }
   }
-  
+
   .table-row {
     @apply border-b border-gray-200 hover:bg-gray-50 transition-colors;
   }
-  
+
   .dark .table-row {
     border-color: rgb(var(--ffu-gray-light));
   }
-  
+
   .dark .table-row:hover {
     background-color: rgba(var(--ffu-gray-light), 0.1);
   }
-  
+
   .table-row td {
     @apply px-2 py-2 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100;
   }
-  
+
   @media (max-width: 640px) {
     .table-row td {
       @apply px-3 py-3 text-xs;
     }
   }
-  
+
   .badge {
     @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium transition-colors;
   }
-  
+
   .badge-premier {
     @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200;
   }
-  
+
   .badge-masters {
     @apply bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200;
   }
-  
+
   .badge-national {
     @apply bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200;
   }
-  
+
   .loading-spinner {
     @apply inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-ffu-red dark:border-ffu-red transition-colors;
   }
 
-  .welcome-card {
-    @apply angular-cut bg-ffu-red shadow-lg p-6 sm:p-8 lg:p-12 text-white text-center;
+  .welcome-card-wrap {
+    filter: drop-shadow(16px 16px 0px black);
   }
-  
+
+  .welcome-card {
+    @apply angular-cut bg-ffu-red shadow-lg p-6 sm:p-8 lg:p-12 text-white text-center shadow-lg;
+  }
+
   /* Angular Design Utilities */
   .angular-cut {
-    clip-path: polygon(0 0, calc(100% - 36px) 0, 100% 36px, 100% 100%, 36px 100%, 0 calc(100% - 36px));
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 60px), calc(100% - 60px) 100%, 0 100%, 0% 50%);
   }
-  
+
   .angular-cut-small {
-    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0% 50%);
   }
-  
-  .angular-cut-dramatic {
-    clip-path: polygon(0 0, calc(100% - 40px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 40px));
+
+  .angular-cut-16 {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0% 50%);
   }
-  
+
+  .angular-cut-medium {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0% 50%);
+  }
+
+  @media (max-width: 640px) {
+    .welcome-card {
+      @apply angular-cut-medium bg-ffu-red shadow-lg p-6 sm:p-8 lg:p-12 text-white text-center shadow-lg;
+    }
+
+    .welcome-card-wrap {
+      filter: drop-shadow(16px 16px 0px black);
+      padding-right: 8px;
+    }
+  }
+
   .newsletter-style-card {
     position: relative;
     overflow: hidden;
   }
-  
+
   .newsletter-style-card::before {
     content: '';
     position: absolute;
@@ -169,7 +177,7 @@
     background: rgba(220, 38, 38, 0.1);
     clip-path: polygon(0 0, 100% 0, 100% 100%);
   }
-  
+
   .newsletter-style-card::after {
     content: '';
     position: absolute;
@@ -180,36 +188,36 @@
     background: rgba(0, 0, 0, 0.05);
     clip-path: polygon(0 0, 0 100%, 100% 100%);
   }
-  
+
   .skew-container {
     @apply transform -skew-x-12;
   }
-  
+
   .skew-content {
     @apply transform skew-x-12;
   }
-  
+
   .diagonal-border::after {
     content: '';
     @apply absolute bottom-0 left-0 w-full h-1 bg-ffu-red;
     transform: skewX(-30deg);
     transform-origin: bottom left;
   }
-  
+
   .champion-highlight {
     @apply bg-ffu-red-50 dark:bg-ffu-red-900/20 border-l-4 border-ffu-red;
   }
-  
+
   /* FFU Branding */
   .ffu-text-gradient {
     @apply text-gray-900 dark:text-gray-100 font-bold;
   }
-  
+
   .footer-custom {
     background-color: white;
     border-color: #e5e7eb;
   }
-  
+
   .dark .footer-custom {
     background-color: rgb(var(--ffu-gray));
     border-color: rgb(var(--ffu-gray-light));

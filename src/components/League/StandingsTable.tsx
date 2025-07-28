@@ -36,7 +36,6 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
       {/* Champion Highlight */}
       {standings[0] && (
         <div className="champion-highlight angular-cut p-6 mb-6 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-16 h-16 bg-ffu-red transform rotate-45 translate-x-8 -translate-y-8 opacity-20"></div>
           <div className="flex items-center space-x-3 mb-3">
             <div className="p-2 bg-ffu-red rounded-full">
               <Trophy className="h-6 w-6 text-white" />
@@ -72,7 +71,7 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
         <LeagueBadge league={league as LeagueTier} />
       </div>
       
-      <div className="table-container ffu-shadow">
+      <div className="table-container">
         <table className="table">
           <thead className="table-header">
             <tr>

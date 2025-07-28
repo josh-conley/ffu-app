@@ -12,44 +12,47 @@ export const Overview = () => {
 
   return (
     <div className="space-y-8">
-      <div className="welcome-card">
-        <div className="max-w-2xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Welcome to the FFU</h1>
-          <p className="text-base sm:text-lg lg:text-xl text-red-100 mb-8">
-            Explore stats, standings, and records across all leagues.
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-xlg mx-auto">
-            <Link
-              to="/standings"
-              className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
-            >
-              <Users className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
-              <div className="font-semibold text-sm sm:text-base">Standings</div>
-            </Link>
-            <Link
-              to="/players"
-              className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
-            >
-              <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
-              <div className="font-semibold text-sm sm:text-base">Members</div>
-            </Link>
-            <Link
-              to="/matchups"
-              className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
-            >
-              <Calendar className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
-              <div className="font-semibold text-sm sm:text-base">Matchups</div>
-            </Link>
-            <Link
-              to="/records"
-              className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
-            >
-              <Award className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
-              <div className="font-semibold text-sm sm:text-base">Records</div>
-            </Link>
+      <div className="welcome-card-wrap">
+        <div className="welcome-card">
+          <div className="max-w-2xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Welcome to the FFU</h1>
+            <p className="text-base sm:text-lg lg:text-xl text-red-100 mb-8">
+              Explore stats, standings, and records across all leagues.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-xlg mx-auto">
+              <Link
+                to="/standings"
+                className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
+              >
+                <Users className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
+                <div className="font-semibold text-sm sm:text-base">Standings</div>
+              </Link>
+              <Link
+                to="/players"
+                className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
+              >
+                <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
+                <div className="font-semibold text-sm sm:text-base">Members</div>
+              </Link>
+              <Link
+                to="/matchups"
+                className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
+              >
+                <Calendar className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
+                <div className="font-semibold text-sm sm:text-base">Matchups</div>
+              </Link>
+              <Link
+                to="/records"
+                className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
+              >
+                <Award className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
+                <div className="font-semibold text-sm sm:text-base">Records</div>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
+
 
       {/* League Overview */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">

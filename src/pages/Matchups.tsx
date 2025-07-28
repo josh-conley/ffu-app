@@ -12,12 +12,12 @@ export const Matchups = () => {
   const [selectedWeek, setSelectedWeek] = useState<number | 'ALL'>(0); // 0 represents "All Weeks"
 
   const { data: weekMatchupsData, isLoading: weekLoading, error: weekError } = useWeekMatchups(
-    selectedLeague, 
-    selectedYear, 
+    selectedLeague,
+    selectedYear,
     selectedWeek as number
   );
   const { data: allSeasonData, isLoading: seasonLoading, error: seasonError } = useAllSeasonMatchups(
-    selectedLeague, 
+    selectedLeague,
     selectedYear
   );
 
@@ -29,7 +29,7 @@ export const Matchups = () => {
   const error = isShowingAllWeeks ? seasonError : weekError;
 
   const leagues: LeagueTier[] = ['PREMIER', 'MASTERS', 'NATIONAL'];
-  
+
   const getLeagueName = (league: LeagueTier): string => {
     switch (league) {
       case 'PREMIER': return 'Premier';
@@ -61,7 +61,7 @@ export const Matchups = () => {
             ))}
           </select>
         </div>
-        
+
         <div>
           <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Year</label>
           <select
@@ -74,7 +74,7 @@ export const Matchups = () => {
             ))}
           </select>
         </div>
-        
+
         <div>
           <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Week</label>
           <select
@@ -132,13 +132,13 @@ export const Matchups = () => {
 
           <div className="space-y-3 sm:space-y-4">
             {matchupsData.matchups?.map((matchup, index: number) => (
-              <div key={index} className="bg-gray-50 dark:bg-gray-800 rounded-lg p-2 sm:p-4 transition-colors">
+              <div key={index} className="transition-colors">
                 {/* Mobile Stacked Layout */}
-                <div className="sm:hidden space-y-0.5">
+                <div className="sm:hidden space-y-0.5 border border-gray-100 dark:border-gray-800">
                   {/* Winner Row */}
                   <div className="flex items-center space-x-2 py-1.5 px-2 bg-green-50/50 dark:bg-green-900/10 rounded">
                     <div className="flex-shrink-0">
-                      <TeamLogo 
+                      <TeamLogo
                         teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
                         abbreviation={matchup.winnerInfo?.abbreviation}
                         size="sm"
@@ -148,7 +148,7 @@ export const Matchups = () => {
                       {matchup.winnerInfo?.teamName || 'Unknown Team'}
                     </div>
                   </div>
-                  
+
                   {/* Score Row */}
                   <div className="text-center py-1.5 border-y border-gray-200/50 dark:border-gray-600/50">
                     <div className="text-base font-bold">
@@ -157,14 +157,14 @@ export const Matchups = () => {
                       <span className="text-red-600 dark:text-red-400 font-mono">{matchup.loserScore?.toFixed(1)}</span>
                     </div>
                   </div>
-                  
+
                   {/* Loser Row */}
                   <div className="flex items-center justify-end space-x-2 py-1.5 px-2 bg-red-50/50 dark:bg-red-900/10 rounded">
                     <div className="font-medium text-gray-900 dark:text-gray-100 text-sm text-right">
                       {matchup.loserInfo?.teamName || 'Unknown Team'}
                     </div>
                     <div className="flex-shrink-0">
-                      <TeamLogo 
+                      <TeamLogo
                         teamName={matchup.loserInfo?.teamName || 'Unknown Team'}
                         abbreviation={matchup.loserInfo?.abbreviation}
                         size="sm"
@@ -174,11 +174,11 @@ export const Matchups = () => {
                 </div>
 
                 {/* Desktop Horizontal Layout */}
-                <div className="hidden sm:flex items-center justify-between gap-4">
+                <div className="hidden sm:flex items-center justify-between gap-4 border border-gray-100 dark:border-gray-800 p-2">
                   {/* Winner Side */}
                   <div className="flex items-center space-x-3 flex-1 min-w-0">
                     <div className="flex-shrink-0">
-                      <TeamLogo 
+                      <TeamLogo
                         teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
                         abbreviation={matchup.winnerInfo?.abbreviation}
                         size="md"
@@ -204,7 +204,7 @@ export const Matchups = () => {
                       {matchup.loserInfo?.teamName || 'Unknown Team'}
                     </div>
                     <div className="flex-shrink-0">
-                      <TeamLogo 
+                      <TeamLogo
                         teamName={matchup.loserInfo?.teamName || 'Unknown Team'}
                         abbreviation={matchup.loserInfo?.abbreviation}
                         size="md"
@@ -246,15 +246,15 @@ export const Matchups = () => {
                 <h3 className="text-sm sm:text-base font-semibold text-gray-800 dark:text-gray-200 mb-4 border-b border-gray-200 dark:border-gray-600 pb-2">
                   Week {weekData.week}
                 </h3>
-                <div className="space-y-3 sm:space-y-4">
+                <div className="space-y-3 sm:space-y-2">
                   {weekData.matchups?.map((matchup, index: number) => (
-                    <div key={index} className="bg-gray-50 dark:bg-gray-800 rounded-lg p-2 sm:p-4 transition-colors">
+                    <div key={index} className="transition-colors">
                       {/* Mobile Stacked Layout */}
-                      <div className="sm:hidden space-y-0.5">
+                      <div className="sm:hidden space-y-0.5 border border-gray-100 dark:border-gray-800">
                         {/* Winner Row */}
                         <div className="flex items-center space-x-2 py-1.5 px-2 bg-green-50/50 dark:bg-green-900/10 rounded">
                           <div className="flex-shrink-0">
-                            <TeamLogo 
+                            <TeamLogo
                               teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
                               abbreviation={matchup.winnerInfo?.abbreviation}
                               size="sm"
@@ -264,7 +264,7 @@ export const Matchups = () => {
                             {matchup.winnerInfo?.teamName || 'Unknown Team'}
                           </div>
                         </div>
-                        
+
                         {/* Score Row */}
                         <div className="text-center py-1.5 border-y border-gray-200/50 dark:border-gray-600/50">
                           <div className="text-base font-bold">
@@ -273,14 +273,14 @@ export const Matchups = () => {
                             <span className="text-red-600 dark:text-red-400 font-mono">{matchup.loserScore?.toFixed(1)}</span>
                           </div>
                         </div>
-                        
+
                         {/* Loser Row */}
                         <div className="flex items-center justify-end space-x-2 py-1.5 px-2 bg-red-50/50 dark:bg-red-900/10 rounded">
                           <div className="font-medium text-gray-900 dark:text-gray-100 text-sm text-right">
                             {matchup.loserInfo?.teamName || 'Unknown Team'}
                           </div>
                           <div className="flex-shrink-0">
-                            <TeamLogo 
+                            <TeamLogo
                               teamName={matchup.loserInfo?.teamName || 'Unknown Team'}
                               abbreviation={matchup.loserInfo?.abbreviation}
                               size="sm"
@@ -290,11 +290,11 @@ export const Matchups = () => {
                       </div>
 
                       {/* Desktop Horizontal Layout */}
-                      <div className="hidden sm:flex items-center justify-between gap-4">
+                      <div className="hidden sm:flex items-center justify-between gap-4 border border-gray-100 dark:border-gray-800 p-2">
                         {/* Winner Side */}
                         <div className="flex items-center space-x-3 flex-1 min-w-0">
                           <div className="flex-shrink-0">
-                            <TeamLogo 
+                            <TeamLogo
                               teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
                               abbreviation={matchup.winnerInfo?.abbreviation}
                               size="md"
@@ -320,7 +320,7 @@ export const Matchups = () => {
                             {matchup.loserInfo?.teamName || 'Unknown Team'}
                           </div>
                           <div className="flex-shrink-0">
-                            <TeamLogo 
+                            <TeamLogo
                               teamName={matchup.loserInfo?.teamName || 'Unknown Team'}
                               abbreviation={matchup.loserInfo?.abbreviation}
                               size="md"

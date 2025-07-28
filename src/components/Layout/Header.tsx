@@ -41,7 +41,7 @@ export const Header = () => {
               <Link
                 key={path}
                 to={path}
-                className={`flex items-center space-x-2 px-4 py-3 text-sm font-bold transition-all duration-300 relative group angular-cut-small ${
+                className={`flex items-center space-x-2 px-4 py-3 text-sm font-bold transition-all duration-300 relative group angular-cut-16 ${
                   location.pathname === path
                     ? 'bg-ffu-red text-white shadow-lg ffu-shadow'
                     : 'text-gray-300 hover:text-white hover:bg-ffu-red/50'
@@ -50,7 +50,7 @@ export const Header = () => {
                 <Icon className="h-4 w-4" />
                 <span className="tracking-wide uppercase">{label}</span>
                 {location.pathname !== path && (
-                  <div className="absolute inset-0 bg-ffu-red opacity-0 group-hover:opacity-10 transition-opacity duration-300 angular-cut-small"></div>
+                  <div className="absolute inset-0 bg-ffu-red opacity-0 group-hover:opacity-10 transition-opacity duration-300 angular-cut-16"></div>
                 )}
               </Link>
             ))}
@@ -63,7 +63,7 @@ export const Header = () => {
             <div className="lg:hidden">
               <button 
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-gray-300 hover:text-white hover:bg-ffu-red/20 p-3 angular-cut-small transition-all duration-300"
+                className="text-gray-300 hover:text-white hover:bg-ffu-red/20 p-3 angular-cut-16 transition-all duration-300"
                 aria-label="Toggle mobile menu"
               >
                 {mobileMenuOpen ? (
@@ -85,7 +85,7 @@ export const Header = () => {
                   key={path}
                   to={path}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center space-x-3 px-4 py-4 text-base font-bold transition-all duration-300 angular-cut-small ${
+                  className={`flex items-center space-x-3 px-4 py-4 text-base font-bold transition-all duration-300 angular-cut-16 ${
                     location.pathname === path
                       ? 'bg-ffu-red text-white shadow-lg'
                       : 'text-gray-300 hover:text-white hover:bg-ffu-red/20'
