@@ -17,6 +17,9 @@ export interface WeekMatchup {
   loser: string;
   winnerScore: number;
   loserScore: number;
+  winnerRecord?: string;
+  loserRecord?: string;
+  placementType?: string;
 }
 
 export interface SeasonStandings {
@@ -138,6 +141,9 @@ export interface RawMatchup {
   loser: string;
   winnerScore: number;
   loserScore: number;
+  winnerRecord?: string;
+  loserRecord?: string;
+  placementType?: string;
   winnerInfo?: UserInfo;
   loserInfo?: UserInfo;
 }
@@ -179,6 +185,9 @@ export interface MatchupWithUserInfo {
   loser: string;
   winnerScore: number;
   loserScore: number;
+  winnerRecord?: string;
+  loserRecord?: string;
+  placementType?: string;
   winnerInfo: UserInfo;
   loserInfo: UserInfo;
 }
@@ -237,6 +246,16 @@ export interface AllTimeRecords {
   mostPointsInLoss: GameRecord;
   fewestPointsInWin: GameRecord;
   closestGame: {
+    winner: UserInfo;
+    loser: UserInfo;
+    winnerScore: number;
+    loserScore: number;
+    margin: number;
+    week: number;
+    year: string;
+    league: LeagueTier;
+  };
+  biggestBlowout: {
     winner: UserInfo;
     loser: UserInfo;
     winnerScore: number;

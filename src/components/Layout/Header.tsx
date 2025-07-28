@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Trophy, Users, Calendar, BarChart3, Award, Menu, X } from 'lucide-react';
+import { Users, Calendar, BarChart3, Award, Menu, X } from 'lucide-react';
 import { ThemeToggle } from '../Common/ThemeToggle';
 import { useState } from 'react';
 
@@ -8,7 +8,6 @@ export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { path: '/', label: 'Overview', icon: Trophy },
     { path: '/standings', label: 'Standings', icon: Users },
     { path: '/players', label: 'Members', icon: BarChart3 },
     { path: '/matchups', label: 'Matchups', icon: Calendar },

@@ -12,20 +12,52 @@ interface StandingsTableProps {
 }
 
 export const StandingsTable = ({ standings, league, year }: StandingsTableProps) => {
+  const getLeagueColors = (leagueType: string) => {
+    const colorMap = {
+      PREMIER: {
+        bg: 'bg-yellow-50 dark:bg-yellow-900/20',
+        border: 'border-yellow-300 dark:border-yellow-700',
+        borderHeavy: 'border-yellow-500',
+        text: 'text-yellow-800 dark:text-yellow-300',
+        iconBg: 'bg-yellow-500',
+        highlight: 'bg-yellow-100 dark:bg-yellow-900/30'
+      },
+      MASTERS: {
+        bg: 'bg-purple-50 dark:bg-purple-900/20',
+        border: 'border-purple-300 dark:border-purple-700',
+        borderHeavy: 'border-purple-500',
+        text: 'text-purple-800 dark:text-purple-300',
+        iconBg: 'bg-purple-500',
+        highlight: 'bg-purple-100 dark:bg-purple-900/30'
+      },
+      NATIONAL: {
+        bg: 'bg-red-50 dark:bg-red-900/20',
+        border: 'border-red-300 dark:border-red-700',
+        borderHeavy: 'border-red-500',
+        text: 'text-red-800 dark:text-red-300',
+        iconBg: 'bg-red-500',
+        highlight: 'bg-red-100 dark:bg-red-900/30'
+      }
+    };
+    return colorMap[leagueType as keyof typeof colorMap] || colorMap.NATIONAL;
+  };
+
+  const leagueColors = getLeagueColors(league);
+
   const getRowClasses = (rank: number) => {
     let classes = 'table-row';
     
     if (rank === 1) {
-      classes += ' champion-highlight font-bold border-l-4 border-ffu-red';
+      classes += ` champion-highlight font-bold border-l-4 ${leagueColors.borderHeavy} ${leagueColors.highlight}`;
     } else if (rank <= 3) {
-      classes += ' bg-ffu-red-50 dark:bg-ffu-red-900/20 border-ffu-red-200 dark:border-ffu-red-700 border-l-2 border-ffu-red/50';
+      classes += ` ${leagueColors.bg} ${leagueColors.border} border-l-2 ${leagueColors.borderHeavy}/50`;
     }
     
     return classes;
   };
 
   const getRankIcon = (rank: number) => {
-    if (rank === 1) return <Trophy className="h-5 w-5 text-ffu-red" />;
+    if (rank === 1) return <Trophy className={`h-5 w-5 ${leagueColors.text}`} />;
     if (rank === 2) return <Medal className="h-4 w-4 text-gray-600 dark:text-gray-300" />;
     if (rank === 3) return <Award className="h-4 w-4 text-amber-600 dark:text-amber-400" />;
     return null;
@@ -35,12 +67,12 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
     <div className="card">
       {/* Champion Highlight */}
       {standings[0] && (
-        <div className="champion-highlight angular-cut p-6 mb-6 relative overflow-hidden">
+        <div className={`champion-highlight angular-cut p-6 mb-6 relative overflow-hidden border-l4 ${leagueColors.highlight}`}>
           <div className="flex items-center space-x-3 mb-3">
-            <div className="p-2 bg-ffu-red rounded-full">
+            <div className={`p-2 ${leagueColors.iconBg} rounded-full`}>
               <Trophy className="h-6 w-6 text-white" />
             </div>
-            <span className="text-lg font-black text-ffu-red tracking-wide uppercase">
+            <span className={`text-lg font-black ${leagueColors.text} tracking-wide uppercase`}>
               {getLeagueName(league as LeagueTier)} League Champion - {year}
             </span>
           </div>
@@ -56,7 +88,7 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
               <div className="font-black text-gray-900 dark:text-gray-100 text-xl tracking-wide">
                 {standings[0].userInfo.teamName}
               </div>
-              <div className="text-lg font-bold text-ffu-red">
+              <div className={`text-lg font-bold ${leagueColors.text}`}>
                 {standings[0].wins}-{standings[0].losses} • {standings[0].pointsFor?.toFixed(2)} pts
               </div>
             </div>
@@ -88,7 +120,7 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
                 <td className="text-center">
                   <div className="flex items-center justify-center space-x-2">
                     {getRankIcon(standing.rank)}
-                    <span className={`font-black text-lg ${standing.rank === 1 ? 'text-ffu-red' : 'text-gray-900 dark:text-gray-100'}`}>
+                    <span className={`font-black text-lg ${standing.rank === 1 ? leagueColors.text : 'text-gray-900 dark:text-gray-100'}`}>
                       #{standing.rank}
                     </span>
                   </div>

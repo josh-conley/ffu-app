@@ -6,7 +6,7 @@ import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import type { LeagueTier } from '../types';
-import { Target, TrendingDown, TrendingUp, Award, Calendar, BarChart3, ChevronUp, ChevronDown, Crown, Sparkles, Gauge, Zap, Trophy, Skull, Laugh, Swords, Angry} from 'lucide-react';
+import { Target, TrendingDown, TrendingUp, Award, Calendar, BarChart3, ChevronUp, ChevronDown, Crown, Sparkles, Gauge, Zap, Trophy, Skull, Laugh, Swords, Angry, Bomb} from 'lucide-react';
 
 type SortKey = 'team' | 'year' | 'league' | 'record' | 'pointsFor' | 'avgPPG' | 'pointsAgainst' | 'placement';
 type SortOrder = 'asc' | 'desc';
@@ -212,31 +212,41 @@ export const Records = () => {
       </div>
 
       {/* Filters */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">League</label>
-          <select
-            value={selectedLeague}
-            onChange={(e) => setSelectedLeague(e.target.value as LeagueTier | 'ALL')}
-            className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
-          >
-            {leagues.map(league => (
-              <option key={league} value={league}>{getLeagueName(league)}</option>
-            ))}
-          </select>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-2">
+          <label className="block text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">League</label>
+          <div className="relative">
+            <select
+              value={selectedLeague}
+              onChange={(e) => setSelectedLeague(e.target.value as LeagueTier | 'ALL')}
+              className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+            >
+              {leagues.map(league => (
+                <option key={league} value={league}>{getLeagueName(league)}</option>
+              ))}
+            </select>
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+              <ChevronDown className="h-5 w-5 text-gray-400" />
+            </div>
+          </div>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Year</label>
-          <select
-            value={selectedYear}
-            onChange={(e) => setSelectedYear(e.target.value)}
-            className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
-          >
-            {filteredYears.map(year => (
-              <option key={year} value={year}>{year === 'ALL' ? 'All Years' : year}</option>
-            ))}
-          </select>
+        <div className="space-y-2">
+          <label className="block text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Year</label>
+          <div className="relative">
+            <select
+              value={selectedYear}
+              onChange={(e) => setSelectedYear(e.target.value)}
+              className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+            >
+              {filteredYears.map(year => (
+                <option key={year} value={year}>{year === 'ALL' ? 'All Years' : year}</option>
+              ))}
+            </select>
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+              <ChevronDown className="h-5 w-5 text-gray-400" />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -383,47 +393,51 @@ export const Records = () => {
               <Sparkles className="h-6 w-6 mr-3 text-ffu-red" />
               Special Game Records
             </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Most Points in Loss */}
               <div className="bg-orange-50 dark:bg-orange-900/30 angular-cut-medium p-6 border-l-4 border-orange-500 relative overflow-hidden">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-heading font-bold text-orange-800 dark:text-orange-300 uppercase tracking-wide text-sm">Most Points in a Loss</h3>
                   <Angry className="h-6 w-6 text-orange-600" />
                 </div>
-                <div className="space-y-2">
-                  <div className="flex items-center space-x-2">
-                    <TeamLogo
-                      teamName={records.mostPointsInLoss.userInfo.teamName}
-                      size="md"
-                    />
-                    <div className="font-bold text-gray-900 dark:text-gray-100 text-base">
+                <div className="flex items-center space-x-3">
+                  <TeamLogo
+                    teamName={records.mostPointsInLoss.userInfo.teamName}
+                    size="md"
+                  />
+                  <div className="flex-1">
+                    <div className="font-heading font-bold text-gray-900 dark:text-gray-100 text-lg">
                       {records.mostPointsInLoss.userInfo.teamName}
                     </div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400 font-semibold">
+                      Week {records.mostPointsInLoss.week}
+                    </div>
                   </div>
-                  <div className="text-2xl font-heading font-black text-gray-900 dark:text-gray-100 font-mono">{records.mostPointsInLoss.score.toFixed(2)}</div>
-                  <div className="flex items-center space-x-2">
-                    <LeagueBadge league={records.mostPointsInLoss.league} />
-                    <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">Week {records.mostPointsInLoss.week}</span>
-                    <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{records.mostPointsInLoss.year}</span>
+                  <div className="text-right">
+                    <div className="text-3xl font-heading font-black text-gray-900 dark:text-gray-100 font-mono">{records.mostPointsInLoss.score.toFixed(2)}</div>
+                    <div className="flex items-center justify-end space-x-2 mt-1">
+                      <LeagueBadge league={records.mostPointsInLoss.league} />
+                      <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{records.mostPointsInLoss.year}</span>
+                    </div>
                   </div>
-                  {records.mostPointsInLoss.opponent && (
-                    <div className="pt-2 border-t border-orange-200 dark:border-orange-700">
-                      <div className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Lost to:</div>
-                      <div className="flex items-center space-x-2">
-                        <TeamLogo
-                          teamName={records.mostPointsInLoss.opponent.teamName}
-                          size="md"
-                        />
-                        <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                          {records.mostPointsInLoss.opponent.teamName}
-                        </div>
-                        <div className="text-sm font-bold text-gray-900 dark:text-gray-100 font-mono">
-                          {records.mostPointsInLoss.opponentScore?.toFixed(2)}
-                        </div>
+                </div>
+                {records.mostPointsInLoss.opponent && (
+                  <div className="pt-3 mt-3 border-t border-orange-200 dark:border-orange-700">
+                    <div className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Lost to:</div>
+                    <div className="flex items-center space-x-2">
+                      <TeamLogo
+                        teamName={records.mostPointsInLoss.opponent.teamName}
+                        size="sm"
+                      />
+                      <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                        {records.mostPointsInLoss.opponent.teamName}
+                      </div>
+                      <div className="text-sm font-bold text-gray-900 dark:text-gray-100 font-mono">
+                        {records.mostPointsInLoss.opponentScore?.toFixed(2)}
                       </div>
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
 
               {/* Fewest Points in Win */}
@@ -432,40 +446,44 @@ export const Records = () => {
                   <h3 className="font-heading font-bold text-purple-800 dark:text-purple-300 uppercase tracking-wide text-sm">Fewest Points in a Win</h3>
                   <Laugh className="h-6 w-6 text-purple-600" />
                 </div>
-                <div className="space-y-2">
-                  <div className="flex items-center space-x-2">
-                    <TeamLogo
-                      teamName={records.fewestPointsInWin.userInfo.teamName}
-                      size="md"
-                    />
-                    <div className="font-bold text-gray-900 dark:text-gray-100 text-base">
+                <div className="flex items-center space-x-3">
+                  <TeamLogo
+                    teamName={records.fewestPointsInWin.userInfo.teamName}
+                    size="md"
+                  />
+                  <div className="flex-1">
+                    <div className="font-heading font-bold text-gray-900 dark:text-gray-100 text-lg">
                       {records.fewestPointsInWin.userInfo.teamName}
                     </div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400 font-semibold">
+                      Week {records.fewestPointsInWin.week}
+                    </div>
                   </div>
-                  <div className="text-2xl font-heading font-black text-gray-900 dark:text-gray-100 font-mono">{records.fewestPointsInWin.score.toFixed(2)}</div>
-                  <div className="flex items-center space-x-2">
-                    <LeagueBadge league={records.fewestPointsInWin.league} />
-                    <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">Week {records.fewestPointsInWin.week}</span>
-                    <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{records.fewestPointsInWin.year}</span>
+                  <div className="text-right">
+                    <div className="text-3xl font-heading font-black text-gray-900 dark:text-gray-100 font-mono">{records.fewestPointsInWin.score.toFixed(2)}</div>
+                    <div className="flex items-center justify-end space-x-2 mt-1">
+                      <LeagueBadge league={records.fewestPointsInWin.league} />
+                      <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{records.fewestPointsInWin.year}</span>
+                    </div>
                   </div>
-                  {records.fewestPointsInWin.opponent && (
-                    <div className="pt-2 border-t border-purple-200 dark:border-purple-700">
-                      <div className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Beat:</div>
-                      <div className="flex items-center space-x-2">
-                        <TeamLogo
-                          teamName={records.fewestPointsInWin.opponent.teamName}
-                          size="md"
-                        />
-                        <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                          {records.fewestPointsInWin.opponent.teamName}
-                        </div>
-                        <div className="text-sm font-bold text-gray-900 dark:text-gray-100 font-mono">
-                          {records.fewestPointsInWin.opponentScore?.toFixed(2)}
-                        </div>
+                </div>
+                {records.fewestPointsInWin.opponent && (
+                  <div className="pt-3 mt-3 border-t border-purple-200 dark:border-purple-700">
+                    <div className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Beat:</div>
+                    <div className="flex items-center space-x-2">
+                      <TeamLogo
+                        teamName={records.fewestPointsInWin.opponent.teamName}
+                        size="sm"
+                      />
+                      <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                        {records.fewestPointsInWin.opponent.teamName}
+                      </div>
+                      <div className="text-sm font-bold text-gray-900 dark:text-gray-100 font-mono">
+                        {records.fewestPointsInWin.opponentScore?.toFixed(2)}
                       </div>
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
 
               {/* Closest Game */}
@@ -516,6 +534,58 @@ export const Records = () => {
                     <LeagueBadge league={records.closestGame.league} />
                     <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">Week {records.closestGame.week}</span>
                     <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{records.closestGame.year}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Biggest Blowout */}
+              <div className="bg-pink-50 dark:bg-pink-900/30 angular-cut-medium p-6 border-l-4 border-pink-500 relative overflow-hidden">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-heading font-bold text-pink-800 dark:text-pink-300 uppercase tracking-wide text-sm">Biggest Blowout</h3>
+                  <Bomb className="h-6 w-6 text-pink-600" />
+                </div>
+                <div className="space-y-3">
+                  <div className="text-center">
+                    <div className="text-2xl font-heading font-black text-gray-900 dark:text-gray-100 font-mono">
+                      {records.biggestBlowout.margin.toFixed(2)} pts
+                    </div>
+                  </div>
+
+                  {/* Team Logos vs each other */}
+                  <div className="flex items-start justify-center space-x-4 py-2">
+                    <div className="flex flex-col items-center space-y-1">
+                      <TeamLogo
+                        teamName={records.biggestBlowout.winner.teamName}
+                        size="md"
+                      />
+                      <div className="text-sm font-semibold text-center text-gray-900 dark:text-gray-100">
+                        {records.biggestBlowout.winner.teamName}
+                      </div>
+                      <div className="text-lg font-bold text-gray-900 dark:text-gray-100 font-mono">
+                        {records.biggestBlowout.winnerScore.toFixed(2)}
+                      </div>
+                    </div>
+
+                    <div className="text-gray-900 dark:text-gray-100 font-heading font-black text-lg self-center">VS</div>
+
+                    <div className="flex flex-col items-center space-y-1">
+                      <TeamLogo
+                        teamName={records.biggestBlowout.loser.teamName}
+                        size="md"
+                      />
+                      <div className="text-sm font-semibold text-center text-gray-900 dark:text-gray-100">
+                        {records.biggestBlowout.loser.teamName}
+                      </div>
+                      <div className="text-lg font-bold text-gray-900 dark:text-gray-100 font-mono">
+                        {records.biggestBlowout.loserScore.toFixed(2)}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center items-center space-x-2">
+                    <LeagueBadge league={records.biggestBlowout.league} />
+                    <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">Week {records.biggestBlowout.week}</span>
+                    <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{records.biggestBlowout.year}</span>
                   </div>
                 </div>
               </div>
@@ -657,6 +727,9 @@ export const Records = () => {
                             <div className="min-w-0 flex-1">
                               <div className="font-medium text-gray-900 dark:text-gray-100 text-sm leading-tight break-words">
                                 {season.userInfo.teamName}
+                              </div>
+                              <div className="text-xs text-gray-500 dark:text-gray-400 font-mono uppercase">
+                                {season.userInfo.abbreviation}
                               </div>
                             </div>
                           </div>

@@ -3,6 +3,7 @@ import { useAllStandings } from '../hooks/useLeagues';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { StandingsTable } from '../components/League/StandingsTable';
+import { ChevronDown } from 'lucide-react';
 
 export const Standings = () => {
   const { data: standings, isLoading, error } = useAllStandings();
@@ -18,12 +19,20 @@ export const Standings = () => {
 
         {/* Year Filter Loading */}
         <div className="flex justify-center">
-          <select
-            disabled
-            className="px-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md text-gray-500 dark:text-gray-400"
-          >
-            <option>Loading years...</option>
-          </select>
+          <div className="space-y-2">
+            <label className="block text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Season</label>
+            <div className="relative">
+              <select
+                disabled
+                className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 rounded appearance-none"
+              >
+                <option>Loading years...</option>
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                <ChevronDown className="h-5 w-5 text-gray-400" />
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Loading Standings Display */}
@@ -63,15 +72,23 @@ export const Standings = () => {
         </div>
         
         <div className="mt-4 sm:mt-0">
-          <select
-            value={currentYear}
-            onChange={(e) => setSelectedYear(e.target.value)}
-            className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
-          >
-            {availableYears.map(year => (
-              <option key={year} value={year}>{year} Season</option>
-            ))}
-          </select>
+          <div className="space-y-2">
+            <label className="block text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Season</label>
+            <div className="relative">
+              <select
+                value={currentYear}
+                onChange={(e) => setSelectedYear(e.target.value)}
+                className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+              >
+                {availableYears.map(year => (
+                  <option key={year} value={year}>{year} Season</option>
+                ))}
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                <ChevronDown className="h-5 w-5 text-gray-400" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

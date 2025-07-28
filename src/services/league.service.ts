@@ -625,7 +625,8 @@ export class LeagueService {
       leastPointsSeason: this.findLeastPointsSeason(allSeasonRecords),
       mostPointsInLoss: this.findMostPointsInLoss(allGameRecords),
       fewestPointsInWin: this.findFewestPointsInWin(allGameRecords),
-      closestGame: this.findClosestGame(allMatchups)
+      closestGame: this.findClosestGame(allMatchups),
+      biggestBlowout: this.findBiggestBlowout(allMatchups)
     };
 
     return records;
@@ -690,6 +691,30 @@ export class LeagueService {
       week: closest.week,
       year: closest.year,
       league: closest.league
+    };
+  }
+
+  private findBiggestBlowout(matchups: (WeekMatchup & { 
+    week: number, 
+    year: string, 
+    league: LeagueTier,
+    margin: number,
+    winnerInfo: UserInfo,
+    loserInfo: UserInfo 
+  })[]): AllTimeRecords['biggestBlowout'] {
+    const biggest = matchups.reduce((biggest, current) => 
+      current.margin > biggest.margin ? current : biggest
+    );
+
+    return {
+      winner: biggest.winnerInfo,
+      loser: biggest.loserInfo,
+      winnerScore: biggest.winnerScore,
+      loserScore: biggest.loserScore,
+      margin: biggest.margin,
+      week: biggest.week,
+      year: biggest.year,
+      league: biggest.league
     };
   }
 

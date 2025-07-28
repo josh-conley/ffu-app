@@ -128,6 +128,12 @@ class HistoricalDataGenerator {
         processedMatchups.push(...weekMatchups.map(m => ({ ...m, week })));
       });
 
+      // Add running records to each week's matchups
+      this.addRunningRecordsToMatchups(matchupsByWeek);
+
+      // Add placement indicators to playoff matchups
+      this.addPlacementIndicators(matchupsByWeek, winnersBracket, losersBracket, rosters);
+
       // Calculate member game stats (high/low games)
       const memberGameStats = this.calculateMemberGameStats(matchupsByWeek);
 
@@ -404,6 +410,171 @@ class HistoricalDataGenerator {
   calculateRelegations(tier, standings) {
     if (tier === 'NATIONAL') return [];
     return standings.slice(-2).map(s => s.userId);
+  }
+
+  addRunningRecordsToMatchups(matchupsByWeek) {
+    // Initialize record tracking for all users
+    const userRecords = {};
+    
+    // Sort weeks to ensure proper order, only include regular season (weeks 1-14)
+    const sortedWeeks = Object.keys(matchupsByWeek)
+      .map(Number)
+      .filter(week => week <= 14) // Only regular season
+      .sort((a, b) => a - b);
+    
+    sortedWeeks.forEach(week => {
+      const weekMatchups = matchupsByWeek[week];
+      
+      // Add records to each matchup for this week
+      weekMatchups.forEach(matchup => {
+        // Initialize records if first time seeing these users
+        if (!userRecords[matchup.winner]) {
+          userRecords[matchup.winner] = { wins: 0, losses: 0 };
+        }
+        if (!userRecords[matchup.loser]) {
+          userRecords[matchup.loser] = { wins: 0, losses: 0 };
+        }
+        
+        // Update records AFTER this game (inclusive)
+        userRecords[matchup.winner].wins++;
+        userRecords[matchup.loser].losses++;
+        
+        // Add updated records to the matchup (AFTER updating for this game)
+        const winnerRecord = userRecords[matchup.winner];
+        const loserRecord = userRecords[matchup.loser];
+        
+        matchup.winnerRecord = `${winnerRecord.wins}-${winnerRecord.losses}`;
+        matchup.loserRecord = `${loserRecord.wins}-${loserRecord.losses}`;
+      });
+    });
+
+    // Add final regular season records to playoff weeks (15-17)
+    const playoffWeeks = Object.keys(matchupsByWeek)
+      .map(Number)
+      .filter(week => week >= 15)
+      .sort((a, b) => a - b);
+    
+    playoffWeeks.forEach(week => {
+      const weekMatchups = matchupsByWeek[week];
+      
+      weekMatchups.forEach(matchup => {
+        // Add final regular season record to playoff matchups
+        if (userRecords[matchup.winner]) {
+          const winnerRecord = userRecords[matchup.winner];
+          matchup.winnerRecord = `${winnerRecord.wins}-${winnerRecord.losses}`;
+        }
+        if (userRecords[matchup.loser]) {
+          const loserRecord = userRecords[matchup.loser];
+          matchup.loserRecord = `${loserRecord.wins}-${loserRecord.losses}`;
+        }
+      });
+    });
+  }
+
+  addPlacementIndicators(matchupsByWeek, winnersBracket, losersBracket, rosters) {
+    // Create roster ID to owner ID mapping
+    const rosterToOwner = {};
+    rosters.forEach(roster => {
+      rosterToOwner[roster.roster_id] = roster.owner_id;
+    });
+
+    // Process winners bracket (playoffs) - weeks 15-17
+    winnersBracket.forEach(match => {
+      const winner = rosterToOwner[match.w];
+      const loser = rosterToOwner[match.l];
+      
+      if (!winner || !loser) return;
+
+      // Find the matchup in the appropriate week
+      for (let week = 15; week <= 17; week++) {
+        if (!matchupsByWeek[week]) continue;
+        
+        const matchup = matchupsByWeek[week].find(m => 
+          (m.winner === winner && m.loser === loser) || 
+          (m.winner === loser && m.loser === winner)
+        );
+        
+        if (matchup) {
+          // Determine placement based on match properties
+          let placementType = '';
+          
+          // Championship game (round 3, final match)
+          if (match.r === 3 && match.p === 1) {
+            placementType = 'Championship';
+          }
+          // 3rd place game
+          else if (match.r === 3 && match.p === 3) {
+            placementType = '3rd Place';
+          }
+          // 5th place game  
+          else if (match.r === 2 && match.p === 5) {
+            placementType = '5th Place';
+          }
+          // Semi-finals
+          else if (match.r === 2) {
+            placementType = 'Semifinal';
+          }
+          // Quarter-finals
+          else if (match.r === 1) {
+            placementType = 'Quarterfinal';
+          }
+          
+          if (placementType) {
+            matchup.placementType = placementType;
+          }
+          break;
+        }
+      }
+    });
+
+    // Process losers bracket (toilet bowl) - weeks 15-17
+    losersBracket.forEach(match => {
+      const winner = rosterToOwner[match.w];
+      const loser = rosterToOwner[match.l];
+      
+      if (!winner || !loser) return;
+
+      // Find the matchup in the appropriate week
+      for (let week = 15; week <= 17; week++) {
+        if (!matchupsByWeek[week]) continue;
+        
+        const matchup = matchupsByWeek[week].find(m => 
+          (m.winner === winner && m.loser === loser) || 
+          (m.winner === loser && m.loser === winner)
+        );
+        
+        if (matchup) {
+          // Determine placement based on match properties
+          let placementType = '';
+          
+          // Last place game (toilet bowl championship - round 3)
+          if (match.r === 3 && match.p === 1) {
+            placementType = 'Last Place';
+          }
+          // 9th place game
+          else if (match.r === 3 && match.p === 3) {
+            placementType = '9th Place';
+          }
+          // 7th place game
+          else if (match.r === 2 && match.p === 5) {
+            placementType = '7th Place';
+          }
+          // Toilet bowl semi-finals
+          else if (match.r === 2) {
+            placementType = 'Toilet Bowl Semifinal';
+          }
+          // Toilet bowl quarter-finals
+          else if (match.r === 1) {
+            placementType = 'Toilet Bowl Quarterfinal';
+          }
+          
+          if (placementType) {
+            matchup.placementType = placementType;
+          }
+          break;
+        }
+      }
+    });
   }
 
   calculateMemberGameStats(matchupsByWeek) {

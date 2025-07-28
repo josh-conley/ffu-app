@@ -5,7 +5,7 @@ import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import type { LeagueTier, UserInfo } from '../types';
-import { Trophy, Medal, Award, TrendingDown, Calendar, Target, BarChart3 } from 'lucide-react';
+import { Trophy, Medal, Award, TrendingDown, Calendar, Target, BarChart3, ChevronDown } from 'lucide-react';
 
 interface PlayerCareerStats {
   userId: string;
@@ -117,13 +117,20 @@ export const PlayerStats = () => {
 
         {/* Player Selection Loading */}
         <div className="card">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Select a Member</h3>
-          <select
-            disabled
-            className="block w-full pl-3 pr-10 py-2 text-base bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-300 dark:border-gray-600 sm:text-sm rounded-md"
-          >
-            <option>Loading members...</option>
-          </select>
+          <div className="space-y-2">
+            <label className="block text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Select a Member</label>
+            <div className="relative">
+              <select
+                disabled
+                className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 rounded appearance-none"
+              >
+                <option>Loading members...</option>
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                <ChevronDown className="h-5 w-5 text-gray-400" />
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="text-center py-12">
@@ -149,19 +156,26 @@ export const PlayerStats = () => {
 
       {/* Player Selection */}
       <div className="card">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Select a Member</h3>
-        <select
-          value={selectedPlayerId}
-          onChange={(e) => setSelectedPlayerId(e.target.value)}
-          className="block w-full pl-3 pr-10 py-2 text-base bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md transition-colors"
-        >
-          <option value="">Choose a member...</option>
-          {playerStats.map(player => (
-            <option key={player.userId} value={player.userId}>
-              {player.userInfo.teamName}
-            </option>
-          ))}
-        </select>
+        <div className="space-y-2">
+          <label className="block text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Select a Member</label>
+          <div className="relative">
+            <select
+              value={selectedPlayerId}
+              onChange={(e) => setSelectedPlayerId(e.target.value)}
+              className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+            >
+              <option value="">Choose a member...</option>
+              {playerStats.map(player => (
+                <option key={player.userId} value={player.userId}>
+                  {player.userInfo.teamName}
+                </option>
+              ))}
+            </select>
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+              <ChevronDown className="h-5 w-5 text-gray-400" />
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Player Stats Display */}

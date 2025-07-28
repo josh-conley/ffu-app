@@ -28,6 +28,18 @@
 }
 
 @layer components {
+  .premier-colors {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300;
+  }
+
+  .masters-colors {
+    @apply bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300;
+  }
+
+  .national-colors {
+    @apply bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300;
+  }
+
   .btn-primary {
     @apply bg-ffu-red hover:bg-ffu-red-700 dark:bg-ffu-red dark:hover:bg-ffu-red-800 text-white font-semibold py-2 px-4 rounded-lg transition-colors min-h-[44px] min-w-[44px];
   }
@@ -204,8 +216,16 @@
     transform-origin: bottom left;
   }
 
-  .champion-highlight {
-    @apply bg-ffu-red-50 dark:bg-ffu-red-900/20 border-l-4 border-ffu-red;
+  .champion-highlight-premier {
+    @apply border-l-4 border-l-yellow-500;
+  }
+
+  .champion-highlight-masters {
+    @apply border-l-4 border-l-purple-500;
+  }
+
+  .champion-highlight-national {
+    @apply border-l-4 border-l-red-500;
   }
 
   /* FFU Branding */
