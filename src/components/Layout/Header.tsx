@@ -30,7 +30,7 @@ export const Header = () => {
                 />
               </div>
               <div>
-                <h1 className="text-xl sm:text-3xl font-black text-white ffu-text-gradient tracking-wide">FFU</h1>
+                <h1 className="text-xl sm:text-3xl font-black text-white ffu-text-gradient tracking-wide italic">FFU</h1>
                 <p className="text-xs sm:text-sm text-gray-300 font-semibold tracking-wider uppercase">Fantasy Football Union</p>
               </div>
             </Link>
@@ -63,7 +63,7 @@ export const Header = () => {
             <div className="lg:hidden">
               <button 
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-gray-300 hover:text-white hover:bg-ffu-red/20 p-3 angular-cut-16 transition-all duration-300"
+                className="text-gray-300 hover:text-white hover:bg-ffu-red/50 p-3 angular-cut-16 transition-all duration-300"
                 aria-label="Toggle mobile menu"
               >
                 {mobileMenuOpen ? (
@@ -88,7 +88,7 @@ export const Header = () => {
                   className={`flex items-center space-x-3 px-4 py-4 text-base font-bold transition-all duration-300 angular-cut-16 ${
                     location.pathname === path
                       ? 'bg-ffu-red text-white shadow-lg'
-                      : 'text-gray-300 hover:text-white hover:bg-ffu-red/20'
+                      : 'text-gray-300 hover:text-white hover:bg-ffu-red/50'
                   }`}
                 >
                   <Icon className="h-5 w-5" />
