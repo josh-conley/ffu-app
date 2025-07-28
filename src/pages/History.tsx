@@ -87,7 +87,7 @@ export const History = () => {
                                 {leagueData.standings[0].userInfo?.teamName || 'Unknown Team'}
                               </div>
                               <div className="text-sm text-gray-600">
-                                {leagueData.standings[0].wins}-{leagueData.standings[0].losses} • {leagueData.standings[0].pointsFor?.toFixed(1)} pts
+                                {leagueData.standings[0].wins}-{leagueData.standings[0].losses} • {leagueData.standings[0].pointsFor?.toFixed(2)} pts
                               </div>
                             </div>
                           </div>

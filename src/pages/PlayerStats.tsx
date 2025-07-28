@@ -196,7 +196,7 @@ export const PlayerStats = () => {
                 <div className="text-center">
                   <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                     {((selectedPlayer.totalWins + selectedPlayer.totalLosses) > 0 ? 
-                      (selectedPlayer.totalPointsFor / (selectedPlayer.totalWins + selectedPlayer.totalLosses)).toFixed(1) : 
+                      (selectedPlayer.totalPointsFor / (selectedPlayer.totalWins + selectedPlayer.totalLosses)).toFixed(2) : 
                       '0.0')}
                   </div>
                   <div className="text-sm text-gray-500 dark:text-gray-400">Points Per Game</div>
@@ -280,10 +280,10 @@ export const PlayerStats = () => {
                         <span className="font-mono">{season.wins}-{season.losses}</span>
                       </td>
                       <td>
-                        <span className="font-mono">{season.pointsFor.toFixed(1)}</span>
+                        <span className="font-mono">{season.pointsFor.toFixed(2)}</span>
                       </td>
                       <td>
-                        <span className="font-mono">{season.pointsAgainst.toFixed(1)}</span>
+                        <span className="font-mono">{season.pointsAgainst.toFixed(2)}</span>
                       </td>
                       <td>
                         {season.playoffFinish ? (

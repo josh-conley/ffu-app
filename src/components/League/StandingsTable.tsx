@@ -57,7 +57,7 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
                 {standings[0].userInfo.teamName}
               </div>
               <div className="text-lg font-bold text-ffu-red">
-                {standings[0].wins}-{standings[0].losses} • {standings[0].pointsFor?.toFixed(1)} pts
+                {standings[0].wins}-{standings[0].losses} • {standings[0].pointsFor?.toFixed(2)} pts
               </div>
             </div>
           </div>

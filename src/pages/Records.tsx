@@ -337,7 +337,7 @@ export const Records = () => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-3xl font-heading font-black text-gray-900 dark:text-gray-100 font-mono">{records.mostPointsSeason.points.toFixed(1)}</div>
+                    <div className="text-3xl font-heading font-black text-gray-900 dark:text-gray-100 font-mono">{records.mostPointsSeason.points.toFixed(2)}</div>
                     <div className="flex items-center justify-end space-x-2 mt-1">
                       <LeagueBadge league={records.mostPointsSeason.league} />
                       <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{records.mostPointsSeason.year}</span>
@@ -366,7 +366,7 @@ export const Records = () => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-3xl font-heading font-black text-gray-900 dark:text-gray-100 font-mono">{records.leastPointsSeason.points.toFixed(1)}</div>
+                    <div className="text-3xl font-heading font-black text-gray-900 dark:text-gray-100 font-mono">{records.leastPointsSeason.points.toFixed(2)}</div>
                     <div className="flex items-center justify-end space-x-2 mt-1">
                       <LeagueBadge league={records.leastPointsSeason.league} />
                       <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{records.leastPointsSeason.year}</span>
@@ -671,15 +671,15 @@ export const Records = () => {
                           <span className="text-sm font-medium font-mono">{season.wins}-{season.losses}</span>
                         </td>
                         <td className="text-center align-middle">
-                          <span className="text-sm font-medium font-mono">{season.pointsFor.toFixed(1)}</span>
+                          <span className="text-sm font-medium font-mono">{season.pointsFor.toFixed(2)}</span>
                         </td>
                         <td className="text-center align-middle">
                           <span className="text-sm font-medium text-blue-600 dark:text-blue-400 font-mono">
-                            {season.avgPointsPerGame.toFixed(1)}
+                            {season.avgPointsPerGame.toFixed(2)}
                           </span>
                         </td>
                         <td className="text-center align-middle">
-                          <span className="text-sm font-medium font-mono">{season.pointsAgainst.toFixed(1)}</span>
+                          <span className="text-sm font-medium font-mono">{season.pointsAgainst.toFixed(2)}</span>
                         </td>
                         <td className="text-center align-middle">
                           {season.playoffFinish ? (
