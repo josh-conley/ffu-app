@@ -14,7 +14,8 @@
       "Bash(npm install:*)",
       "Bash(mkdir:*)",
       "Bash(python3:*)",
-      "mcp__ide__executeCode"
+      "mcp__ide__executeCode",
+      "Bash(git checkout:*)"
     ],
     "deny": []
   }

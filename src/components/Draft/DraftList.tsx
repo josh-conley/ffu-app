@@ -38,6 +38,22 @@ export const DraftList: React.FC<DraftListProps> = ({ draftData, userMap }) => {
     }
   };
 
+  // Format pick number as round.pick (e.g., 1.01, 1.02) accounting for snake draft
+  const formatPickNumber = (pick: { round: number; draftSlot: number }): string => {
+    const { round, draftSlot } = pick;
+    let pickInRound;
+    if (round % 2 === 1) {
+      // Odd rounds: left to right (1, 2, 3, ...)
+      pickInRound = draftSlot;
+    } else {
+      // Even rounds: right to left (reverse order)
+      // Need to calculate total teams from the draftData settings
+      const totalTeams = draftData.settings.teams;
+      pickInRound = totalTeams - draftSlot + 1;
+    }
+    return `${round}.${pickInRound.toString().padStart(2, '0')}`;
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -72,33 +88,36 @@ export const DraftList: React.FC<DraftListProps> = ({ draftData, userMap }) => {
         <table className="table">
           <thead className="table-header">
             <tr>
-              <th>Pick</th>
-              <th>Round</th>
-              <th>Player</th>
-              <th>Position</th>
-              <th>Team</th>
-              <th>Drafted By</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Pick</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Player</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Position</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Team</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Drafted By</th>
             </tr>
           </thead>
           <tbody>
             {filteredPicks.map((pick) => {
               const userInfo = userMap[pick.userInfo.userId];
+              const isEvenRound = pick.round % 2 === 0;
+              const rowBackgroundClass = isEvenRound 
+                ? 'bg-gray-50 dark:bg-gray-800/50' 
+                : 'bg-white dark:bg-gray-800';
+              
               return (
-                <tr key={pick.pickNumber} className="table-row">
-                  <td className="font-mono">#{pick.pickNumber}</td>
-                  <td>{pick.round}</td>
-                  <td>
-                    <div className="font-medium">
+                <tr key={pick.pickNumber} className={`border-b border-gray-200 dark:border-gray-600 ${rowBackgroundClass}`}>
+                  <td className="px-4 py-3 text-sm font-mono">{formatPickNumber(pick)}</td>
+                  <td className="px-4 py-3">
+                    <div className="text-sm font-medium text-gray-900 dark:text-white">
                       {pick.playerInfo.name}
                     </div>
                   </td>
-                  <td>
+                  <td className="px-4 py-3">
                     <span className={`px-2 py-1 text-xs font-bold uppercase tracking-wider angular-cut-small ${getPositionColor(pick.playerInfo.position)}`}>
                       {pick.playerInfo.position}
                     </span>
                   </td>
-                  <td>{pick.playerInfo.team || '-'}</td>
-                  <td>{userInfo?.teamName || userInfo?.abbreviation || `User ${pick.userInfo.userId}`}</td>
+                  <td className="px-4 py-3 text-sm text-gray-900 dark:text-white">{pick.playerInfo.team || '-'}</td>
+                  <td className="px-4 py-3 text-sm text-gray-900 dark:text-white">{userInfo?.teamName || userInfo?.abbreviation || `User ${pick.userInfo.userId}`}</td>
                 </tr>
               );
             })}

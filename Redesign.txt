@@ -1,0 +1,57 @@
+FFU Theme Implementation Plan                                                                                                                              │
+     │                                                                                                                                                            │
+     │ Overview                                                                                                                                                   │
+     │                                                                                                                                                            │
+     │ Transform the Fantasy Football Union app with a bold red/black sports theme inspired by the newsletter design, featuring angular design elements and       │
+     │ enhanced branding.                                                                                                                                         │
+     │                                                                                                                                                            │
+     │ Implementation Phases                                                                                                                                      │
+     │                                                                                                                                                            │
+     │ Phase 1: Foundation & Color System (Priority: High)                                                                                                        │
+     │                                                                                                                                                            │
+     │ - Update Tailwind config with FFU red/black color palette                                                                                                  │
+     │ - Add CSS custom properties for the new color system                                                                                                       │
+     │ - Replace existing blue primary colors with red (#dc2626) theme                                                                                            │
+     │ - Update dark mode colors to complement the new palette                                                                                                    │
+     │                                                                                                                                                            │
+     │ Phase 2: Typography & Visual Hierarchy (Priority: High)                                                                                                    │
+     │                                                                                                                                                            │
+     │ - Add Inter font family for modern, bold typography                                                                                                        │
+     │ - Implement font weight scale (400-900) for strong visual hierarchy                                                                                        │
+     │ - Add monospace fonts for statistical data display                                                                                                         │
+     │ - Update heading styles with bold, impactful appearance                                                                                                    │
+     │                                                                                                                                                            │
+     │ Phase 3: Angular Design Elements (Priority: Medium)                                                                                                        │
+     │                                                                                                                                                            │
+     │ - Create CSS utility classes for angular/diagonal cuts using clip-path                                                                                     │
+     │ - Add skewed container classes for dynamic layouts                                                                                                         │
+     │ - Implement diagonal border effects with pseudo-elements                                                                                                   │
+     │ - Create geometric overlay patterns for section dividers                                                                                                   │
+     │                                                                                                                                                            │
+     │ Phase 4: Component Redesign (Priority: High)                                                                                                               │
+     │                                                                                                                                                            │
+     │ - Header: Black background with red accents, enhanced logo prominence                                                                                      │
+     │ - Standings Tables: Red headers, angular elements, bold champion highlights                                                                                │
+     │ - League Badges: Geometric designs with angular cuts                                                                                                       │
+     │ - Cards: Angular corner cuts, red border accents, enhanced shadows                                                                                         │
+     │                                                                                                                                                            │
+     │ Phase 5: Branding Enhancement (Priority: Medium)                                                                                                           │
+     │                                                                                                                                                            │
+     │ - Integrate existing FFU shield logo more prominently                                                                                                      │
+     │ - Add subtle logo watermarks in data sections                                                                                                              │
+     │ - Implement branded loading states with logo animations                                                                                                    │
+     │ - Add consistent angular accent elements throughout                                                                                                        │
+     │                                                                                                                                                            │
+     │ Files to Modify                                                                                                                                            │
+     │                                                                                                                                                            │
+     │ 1. tailwind.config.js - New color palette                                                                                                                  │
+     │ 2. src/index.css - CSS variables and utility classes                                                                                                       │
+     │ 3. src/components/Layout/Header.tsx - Bold header redesign                                                                                                 │
+     │ 4. src/components/League/StandingsTable.tsx - Sports-themed table styling                                                                                  │
+     │ 5. src/components/League/LeagueBadge.tsx - Geometric badge designs                                                                                         │
+     │ 6. src/App.css - Remove default React styles, add FFU branding                                                                                             │
+     │                                                                                                                                                            │
+     │ Expected Outcome                                                                                                                                           │
+     │                                                                                                                                                            │
+     │ A cohesive, bold sports-themed application that captures the energy of the newsletter design while maintaining excellent usability for fantasy football    │
+     │ data.               
