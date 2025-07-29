@@ -297,11 +297,11 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
                             </span>
                           </div>
                         </div>
-                        {/* Subtle arrow positioned at bottom right */}
+                        {/* Subtle arrow positioned at top right below trade banner */}
                         {(() => {
                           const arrow = getNextPickArrow(roundIndex + 1, teamIndex);
                           return arrow ? (
-                            <div className="absolute bottom-1 right-1 text-gray-300 dark:text-gray-600" style={{ fontSize: '10px' }}>
+                            <div className="absolute top-4 right-1 text-gray-300 dark:text-gray-600" style={{ fontSize: '10px' }}>
                               {arrow}
                             </div>
                           ) : null;
