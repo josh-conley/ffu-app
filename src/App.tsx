@@ -6,6 +6,7 @@ import { PlayerStats } from './pages/PlayerStats';
 import { Matchups } from './pages/Matchups';
 import { Draft } from './pages/Draft';
 import { Records } from './pages/Records';
+import { DraftTrendsAnalysis } from './components/DraftAnalysis/DraftTrendsAnalysis';
 import { SecretDak } from './pages/SecretDak';
 import { ThemeProvider } from './contexts/ThemeContext';
 
@@ -21,6 +22,7 @@ function App() {
               <Route path="players" element={<PlayerStats />} />
               <Route path="matchups" element={<Matchups />} />
               <Route path="drafts" element={<Draft />} />
+              <Route path="draft-trends" element={<DraftTrendsAnalysis />} />
               <Route path="records" element={<Records />} />
               <Route path="secret-dak" element={<SecretDak />} />
             </Route>
