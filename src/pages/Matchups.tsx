@@ -97,7 +97,7 @@ export const Matchups = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">Matchups</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Matchups</h1>
         <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-300">View weekly matchups and scores</p>
       </div>
 

@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Users, Calendar, BarChart3, Award, Menu, X } from 'lucide-react';
+import { Users, Calendar, BarChart3, Award, Menu, X, UserPlus } from 'lucide-react';
 import { ThemeToggle } from '../Common/ThemeToggle';
 import { useState } from 'react';
 
@@ -11,6 +11,7 @@ export const Header = () => {
     { path: '/standings', label: 'Standings', icon: Users },
     { path: '/players', label: 'Members', icon: BarChart3 },
     { path: '/matchups', label: 'Matchups', icon: Calendar },
+    { path: '/drafts', label: 'Drafts', icon: UserPlus },
     { path: '/records', label: 'Records', icon: Award },
   ];
 

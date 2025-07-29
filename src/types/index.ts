@@ -106,6 +106,102 @@ export interface SleeperMatchup {
   players_points: Record<string, number>;
 }
 
+export interface SleeperDraft {
+  draft_id: string;
+  created: number;
+  draft_order: Record<string, number> | null;
+  league_id: string;
+  metadata: {
+    scoring_type: string;
+    name: string;
+    description: string;
+  };
+  settings: {
+    teams: number;
+    slots_qb: number;
+    slots_rb: number;
+    slots_wr: number;
+    slots_te: number;
+    slots_k: number;
+    slots_def: number;
+    slots_bn: number;
+    rounds: number;
+    draft_type: number;
+    cpu_autopick?: boolean;
+  };
+  sport: string;
+  start_time: number;
+  status: string;
+  type: number;
+  season: string;
+  season_type: string;
+}
+
+export interface SleeperDraftPick {
+  draft_id: string;
+  draft_slot: number;
+  pick_no: number;
+  player_id: string;
+  picked_by: string;
+  roster_id: number;
+  round: number;
+  metadata: {
+    years_exp: string;
+    team: string;
+    status: string;
+    sport: string;
+    position: string;
+    player_id: string;
+    number: string;
+    news_updated: string;
+    last_name: string;
+    injury_status: string;
+    first_name: string;
+  };
+}
+
+export interface SleeperPlayer {
+  player_id: string;
+  active: boolean;
+  age: number;
+  birth_date: string;
+  college: string;
+  depth_chart_order: number | null;
+  depth_chart_position: string | null;
+  fantasy_data_id: number;
+  fantasy_positions: string[];
+  first_name: string;
+  full_name: string;
+  gsis_id: string | null;
+  height: string;
+  high_school: string;
+  injury_body_part: string | null;
+  injury_notes: string | null;
+  injury_start_date: string | null;
+  injury_status: string | null;
+  last_name: string;
+  metadata: Record<string, any>;
+  number: number;
+  oddsjam_id: string | null;
+  position: string;
+  practice_participation: string | null;
+  rotowire_id: number | null;
+  rotoworld_id: number | null;
+  search_first_name: string;
+  search_full_name: string;
+  search_last_name: string;
+  search_rank: number;
+  sport: string;
+  sportradar_id: string | null;
+  stats_id: number | null;
+  status: string;
+  swish_id: number | null;
+  team: string | null;
+  weight: string;
+  yahoo_id: number | null;
+  years_exp: number;
+}
+
 // Raw API data interfaces (before transformation)
 export interface RawSeasonStandings {
   userId: string;
@@ -265,5 +361,69 @@ export interface AllTimeRecords {
     year: string;
     league: LeagueTier;
   };
+}
+
+// Draft-related application types
+export interface DraftPick {
+  pickNumber: number;
+  round: number;
+  draftSlot: number;
+  playerId: string;
+  playerInfo: {
+    name: string;
+    position: string;
+    team: string | null;
+    college?: string;
+    age?: number;
+  };
+  pickedBy: string;
+  userInfo: UserInfo;
+  draftId: string;
+}
+
+export interface DraftData {
+  draftId: string;
+  leagueId: string;
+  year: string;
+  league: LeagueTier;
+  draftOrder: Record<string, number>;
+  picks: DraftPick[];
+  settings: {
+    teams: number;
+    rounds: number;
+    draftType: string;
+  };
+  metadata: {
+    name: string;
+    description: string;
+    scoringType: string;
+  };
+  startTime: number;
+  status: string;
+}
+
+export interface HistoricalLeagueDataWithDrafts {
+  league: LeagueTier;
+  year: string;
+  leagueId: string;
+  standings: SeasonStandings[];
+  playoffResults: PlayoffResult[];
+  promotions: string[];
+  relegations: string[];
+  matchupsByWeek: Record<number, WeekMatchup[]>;
+  memberGameStats?: Record<string, { highGame: number; lowGame: number; games: number[] }>;
+  draftData?: DraftData;
+}
+
+export interface PlayerData {
+  lastUpdated: string;
+  totalPlayers: number;
+  players: Record<string, SleeperPlayer>;
+}
+
+export interface UseDraftDataReturn {
+  data: DraftData | null;
+  isLoading: boolean;
+  error?: string;
 }
 

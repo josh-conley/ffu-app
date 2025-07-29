@@ -35,7 +35,7 @@ export const History = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">League History</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">League History</h1>
         <p className="mt-2 text-gray-600">Historical standings and champions across all seasons</p>
       </div>
 

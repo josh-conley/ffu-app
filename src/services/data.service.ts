@@ -11,6 +11,7 @@ export interface HistoricalLeagueData {
   relegations: string[];
   matchupsByWeek: Record<number, any[]>; // All matchups for each week
   memberGameStats?: Record<string, { highGame: number; lowGame: number; games: number[] }>; // High/low game stats per member
+  draftData?: import('../types').DraftData; // Draft data if available
 }
 
 export class DataService {
@@ -163,6 +164,47 @@ export class DataService {
     });
 
     return memberStats;
+  }
+
+  /**
+   * Load cached NFL player data
+   */
+  async loadPlayerData(): Promise<import('../types').PlayerData | null> {
+    try {
+      const url = `${this.baseUrl}/data/players/nfl-players.json`;
+      const response = await fetch(url);
+      if (!response.ok) {
+        console.warn('No cached player data found');
+        return null;
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Failed to load player data:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Get player information by ID
+   */
+  getPlayerById(playerId: string, playerData: import('../types').PlayerData | null): import('../types').SleeperPlayer | null {
+    if (!playerData || !playerData.players) return null;
+    return playerData.players[playerId] || null;
+  }
+
+  /**
+   * Get draft data from historical league data
+   */
+  getDraftData(historicalData: HistoricalLeagueData): import('../types').DraftData | null {
+    return historicalData.draftData || null;
+  }
+
+  /**
+   * Check if draft data is available for a league/year
+   */
+  hasDraftData(historicalData: HistoricalLeagueData): boolean {
+    return !!(historicalData.draftData && historicalData.draftData.picks.length > 0);
   }
 }
 

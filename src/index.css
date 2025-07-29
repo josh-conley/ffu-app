@@ -12,6 +12,49 @@
     --ffu-black: 0 0 0;
     --ffu-gray: 20 20 22;
     --ffu-gray-light: 107 114 128;
+    
+    /* Position Colors */
+    --pos-qb-bg: 252 165 165;
+    --pos-qb-text: 153 27 27;
+    --pos-qb-bg-dark: 220 38 38;
+    --pos-qb-text-dark: 255 255 255;
+    --pos-qb-cell-bg: 254 226 226;
+    --pos-qb-cell-bg-dark: 127 29 29;
+    
+    --pos-rb-bg: 134 239 172;
+    --pos-rb-text: 22 101 52;
+    --pos-rb-bg-dark: 34 197 94;
+    --pos-rb-text-dark: 255 255 255;
+    --pos-rb-cell-bg: 220 252 231;
+    --pos-rb-cell-bg-dark: 22 101 52;
+    
+    --pos-wr-bg: 147 197 253;
+    --pos-wr-text: 29 78 216;
+    --pos-wr-bg-dark: 59 130 246;
+    --pos-wr-text-dark: 255 255 255;
+    --pos-wr-cell-bg: 219 234 254;
+    --pos-wr-cell-bg-dark: 30 58 138;
+    
+    --pos-te-bg: 255 165 0;
+    --pos-te-text: 255 255 255;
+    --pos-te-bg-dark: 255 165 0;
+    --pos-te-text-dark: 255 255 255;
+    --pos-te-cell-bg: 255 237 213;
+    --pos-te-cell-bg-dark: 146 64 14;
+    
+    --pos-k-bg: 250 204 21;
+    --pos-k-text: 113 63 18;
+    --pos-k-bg-dark: 245 158 11;
+    --pos-k-text-dark: 255 255 255;
+    --pos-k-cell-bg: 254 240 138;
+    --pos-k-cell-bg-dark: 133 77 14;
+    
+    --pos-def-bg: 110 60 30;
+    --pos-def-text: 255 255 255;
+    --pos-def-bg-dark: 101 67 33;
+    --pos-def-text-dark: 255 255 255;
+    --pos-def-cell-bg: 237, 209, 199;
+    --pos-def-cell-bg-dark: 154 52 18;
   }
 
   html {
@@ -241,6 +284,97 @@
   .dark .footer-custom {
     background-color: rgb(var(--ffu-gray));
     border-color: rgb(var(--ffu-gray-light));
+  }
+
+  /* Position Badge Classes */
+  .pos-qb-badge {
+    background-color: rgb(var(--pos-qb-bg));
+    color: rgb(var(--pos-qb-text));
+  }
+  .dark .pos-qb-badge {
+    background-color: rgb(var(--pos-qb-bg-dark) / 0.4);
+    color: rgb(var(--pos-qb-text-dark));
+  }
+  .pos-qb-cell {
+    background-color: rgb(var(--pos-qb-cell-bg));
+  }
+  .dark .pos-qb-cell {
+    background-color: rgb(var(--pos-qb-cell-bg-dark) / 0.40);
+  }
+
+  .pos-rb-badge {
+    background-color: rgb(var(--pos-rb-bg));
+    color: rgb(var(--pos-rb-text));
+  }
+  .dark .pos-rb-badge {
+    background-color: rgb(var(--pos-rb-bg-dark) / 0.3);
+    color: rgb(var(--pos-rb-text-dark));
+  }
+  .pos-rb-cell {
+    background-color: rgb(var(--pos-rb-cell-bg));
+  }
+  .dark .pos-rb-cell {
+    background-color: rgb(var(--pos-rb-cell-bg-dark) / 0.30);
+  }
+
+  .pos-wr-badge {
+    background-color: rgb(var(--pos-wr-bg));
+    color: rgb(var(--pos-wr-text));
+  }
+  .dark .pos-wr-badge {
+    background-color: rgb(var(--pos-wr-bg-dark) / 0.4);
+    color: rgb(var(--pos-wr-text-dark));
+  }
+  .pos-wr-cell {
+    background-color: rgb(var(--pos-wr-cell-bg));
+  }
+  .dark .pos-wr-cell {
+    background-color: rgb(var(--pos-wr-cell-bg-dark) / 0.30);
+  }
+
+  .pos-te-badge {
+    background-color: rgb(var(--pos-te-bg));
+    color: rgb(var(--pos-te-text));
+  }
+  .dark .pos-te-badge {
+    background-color: rgb(var(--pos-te-bg-dark) / 0.4);
+    color: rgb(var(--pos-te-text-dark));
+  }
+  .pos-te-cell {
+    background-color: rgb(var(--pos-te-cell-bg));
+  }
+  .dark .pos-te-cell {
+    background-color: rgb(var(--pos-te-cell-bg-dark) / 0.50);
+  }
+
+  .pos-k-badge {
+    background-color: rgb(var(--pos-k-bg));
+    color: rgb(var(--pos-k-text));
+  }
+  .dark .pos-k-badge {
+    background-color: rgb(var(--pos-k-bg-dark) / 0.3);
+    color: rgb(var(--pos-k-text-dark));
+  }
+  .pos-k-cell {
+    background-color: rgb(var(--pos-k-cell-bg));
+  }
+  .dark .pos-k-cell {
+    background-color: rgb(var(--pos-k-cell-bg-dark) / 0.30);
+  }
+
+  .pos-def-badge {
+    background-color: rgb(var(--pos-def-bg));
+    color: rgb(var(--pos-def-text));
+  }
+  .dark .pos-def-badge {
+    background-color: rgb(var(--pos-def-bg-dark) / 0.4);
+    color: rgb(var(--pos-def-text-dark));
+  }
+  .pos-def-cell {
+    background-color: rgb(var(--pos-def-cell-bg));
+  }
+  .dark .pos-def-cell {
+    background-color: rgb(var(--pos-def-cell-bg-dark) / 0.20);
   }
 
 }

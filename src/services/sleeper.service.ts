@@ -1,4 +1,4 @@
-import type { SleeperLeague, SleeperUser, SleeperRoster, SleeperMatchup } from '../types';
+import type { SleeperLeague, SleeperUser, SleeperRoster, SleeperMatchup, SleeperDraft, SleeperDraftPick } from '../types';
 
 export class SleeperService {
   private baseUrl = 'https://api.sleeper.app/v1';
@@ -92,5 +92,53 @@ export class SleeperService {
     // Wait for all weeks to complete in parallel
     const results = await Promise.all(weekPromises);
     return results.filter(result => result.matchups.length > 0);
+  }
+
+  async getLeagueDrafts(leagueId: string): Promise<SleeperDraft[]> {
+    const response = await fetch(`${this.baseUrl}/league/${leagueId}/drafts`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch drafts for league ${leagueId}: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  async getDraft(draftId: string): Promise<SleeperDraft> {
+    const response = await fetch(`${this.baseUrl}/draft/${draftId}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch draft ${draftId}: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  async getDraftPicks(draftId: string): Promise<SleeperDraftPick[]> {
+    const response = await fetch(`${this.baseUrl}/draft/${draftId}/picks`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch draft picks for draft ${draftId}: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  async getUserDrafts(userId: string, sport: string = 'nfl', season: string): Promise<SleeperDraft[]> {
+    const response = await fetch(`${this.baseUrl}/user/${userId}/drafts/${sport}/${season}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch drafts for user ${userId} in ${sport} ${season}: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  async getNFLPlayers(): Promise<Record<string, any>> {
+    const response = await fetch(`${this.baseUrl}/players/nfl`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch NFL players: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  createPlayerMap(players: Record<string, any>): Record<string, any> {
+    return players;
+  }
+
+  getPlayerById(playerId: string, playerMap: Record<string, any>): any | null {
+    return playerMap[playerId] || null;
   }
 }

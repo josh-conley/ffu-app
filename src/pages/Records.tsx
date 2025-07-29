@@ -208,7 +208,7 @@ export const Records = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-4xl font-heading font-black text-gray-900 dark:text-gray-100 uppercase tracking-wide">All-Time Records</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">All-Time Records</h1>
       </div>
 
       {/* Filters */}
@@ -255,7 +255,7 @@ export const Records = () => {
         <div className="space-y-6">
           {/* Single Game Records */}
           <div className="card">
-            <h2 className="text-2xl font-heading font-black text-gray-900 dark:text-gray-100 mb-6 flex items-center uppercase tracking-wide">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
               <Gauge className="h-6 w-6 mr-3 text-ffu-red" />
               Single Game Records
             </h2>
@@ -322,7 +322,7 @@ export const Records = () => {
 
           {/* Season Records */}
           <div className="card">
-            <h2 className="text-2xl font-heading font-black text-gray-900 dark:text-gray-100 mb-6 flex items-center uppercase tracking-wide">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
               <Zap className="h-6 w-6 mr-3 text-ffu-red" />
               Season Records
             </h2>
@@ -389,7 +389,7 @@ export const Records = () => {
 
           {/* Special Game Records */}
           <div className="card">
-            <h2 className="text-2xl font-heading font-black text-gray-900 dark:text-gray-100 mb-6 flex items-center uppercase tracking-wide">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
               <Sparkles className="h-6 w-6 mr-3 text-ffu-red" />
               Special Game Records
             </h2>
@@ -595,7 +595,7 @@ export const Records = () => {
           {/* Season History Table */}
           {filteredSeasonHistory.length > 0 && (
             <div className="card">
-              <h2 className="text-2xl font-heading font-black text-gray-900 dark:text-gray-100 mb-6 flex items-center uppercase tracking-wide">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
                 <BarChart3 className="h-6 w-6 mr-3 text-ffu-red" />
                 Season History
                 <span className="ml-3 text-lg font-bold text-gray-500 dark:text-gray-400">

@@ -95,12 +95,73 @@ class SleeperAPIService {
     });
     return map;
   }
+
+  async getLeagueDrafts(leagueId) {
+    const response = await fetch(`${this.baseUrl}/league/${leagueId}/drafts`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch drafts for league ${leagueId}: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  async getDraftPicks(draftId) {
+    const response = await fetch(`${this.baseUrl}/draft/${draftId}/picks`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch draft picks for draft ${draftId}: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  async getDraft(draftId) {
+    const response = await fetch(`${this.baseUrl}/draft/${draftId}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch draft ${draftId}: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  async getNFLPlayers() {
+    const response = await fetch(`${this.baseUrl}/players/nfl`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch NFL players: ${response.statusText}`);
+    }
+    return response.json();
+  }
 }
 
 class HistoricalDataGenerator {
   constructor() {
     this.sleeperService = new SleeperAPIService();
     this.outputDir = path.join(__dirname, '../public/data');
+    this.playerData = null;
+  }
+
+  async loadPlayerData() {
+    if (this.playerData) return this.playerData;
+
+    try {
+      const playerFilePath = path.join(this.outputDir, 'players', 'nfl-players.json');
+      if (fs.existsSync(playerFilePath)) {
+        const data = JSON.parse(fs.readFileSync(playerFilePath, 'utf8'));
+        this.playerData = data.players;
+        console.log(`📋 Loaded ${Object.keys(this.playerData).length} cached players`);
+        return this.playerData;
+      }
+    } catch (error) {
+      console.warn('⚠️ Could not load cached player data:', error.message);
+    }
+
+    console.log('📥 No cached player data found, fetching from API...');
+    console.log('💡 Consider running: node scripts/fetch-player-data.js first');
+    
+    try {
+      this.playerData = await this.sleeperService.getNFLPlayers();
+      console.log(`📋 Fetched ${Object.keys(this.playerData).length} players from API`);
+      return this.playerData;
+    } catch (error) {
+      console.error('❌ Failed to fetch player data from API:', error);
+      return {};
+    }
   }
 
   async generateLeagueData(league) {
@@ -144,6 +205,16 @@ class HistoricalDataGenerator {
       const promotions = this.calculatePromotions(league.tier, standings);
       const relegations = this.calculateRelegations(league.tier, standings);
 
+      // Get draft data
+      let draftData = null;
+      try {
+        console.log(`Fetching draft data for ${league.tier} ${league.year}...`);
+        draftData = await this.generateDraftData(league.sleeperId, league.tier, league.year, rosters);
+        console.log(`✅ Draft data generated for ${league.tier} ${league.year}`);
+      } catch (error) {
+        console.warn(`⚠️ Could not fetch draft data for ${league.tier} ${league.year}:`, error.message);
+      }
+
       const historicalData = {
         league: league.tier,
         year: league.year,
@@ -153,7 +224,8 @@ class HistoricalDataGenerator {
         promotions: promotions,
         relegations: relegations,
         matchupsByWeek: matchupsByWeek,
-        memberGameStats: memberGameStats
+        memberGameStats: memberGameStats,
+        draftData: draftData
       };
 
       // Save to file
@@ -612,6 +684,90 @@ class HistoricalDataGenerator {
     });
 
     return memberStats;
+  }
+
+  async generateDraftData(leagueId, tier, year, rosters) {
+    // Load player data first
+    const playerMap = await this.loadPlayerData();
+    
+    // Get drafts for this league
+    const drafts = await this.sleeperService.getLeagueDrafts(leagueId);
+    
+    if (!drafts || drafts.length === 0) {
+      throw new Error('No drafts found for this league');
+    }
+
+    // Get the main draft (usually the first one)
+    const mainDraft = drafts[0];
+    
+    // Get draft details and picks
+    const [draftDetails, draftPicks] = await Promise.all([
+      this.sleeperService.getDraft(mainDraft.draft_id),
+      this.sleeperService.getDraftPicks(mainDraft.draft_id)
+    ]);
+
+    // Create roster to owner mapping
+    const rosterOwnerMap = this.sleeperService.createRosterOwnerMap(rosters);
+
+    // Process picks with player information
+    const processedPicks = draftPicks.map(pick => {
+      const player = playerMap[pick.player_id] || {};
+      const ownerUserId = rosterOwnerMap[pick.roster_id];
+      
+      return {
+        pickNumber: pick.pick_no,
+        round: pick.round,
+        draftSlot: pick.draft_slot,
+        playerId: pick.player_id,
+        playerInfo: {
+          name: player.full_name || `${player.first_name || ''} ${player.last_name || ''}`.trim() || 'Unknown Player',
+          position: player.position || pick.metadata?.position || 'UNK',
+          team: player.team || pick.metadata?.team || null,
+          college: player.college || undefined,
+          age: player.age || undefined
+        },
+        pickedBy: pick.picked_by,
+        userInfo: {
+          userId: ownerUserId || pick.picked_by,
+          teamName: '', // Will be filled in when displaying
+          abbreviation: ''
+        },
+        draftId: pick.draft_id
+      };
+    });
+
+    // Sort picks by pick number
+    processedPicks.sort((a, b) => a.pickNumber - b.pickNumber);
+
+    return {
+      draftId: draftDetails.draft_id,
+      leagueId: leagueId,
+      year: year,
+      league: tier,
+      draftOrder: draftDetails.draft_order || {},
+      picks: processedPicks,
+      settings: {
+        teams: draftDetails.settings?.teams || 12,
+        rounds: draftDetails.settings?.rounds || 16,
+        draftType: this.getDraftTypeName(draftDetails.type)
+      },
+      metadata: {
+        name: draftDetails.metadata?.name || 'Draft',
+        description: draftDetails.metadata?.description || '',
+        scoringType: draftDetails.metadata?.scoring_type || 'ppr'
+      },
+      startTime: draftDetails.start_time,
+      status: draftDetails.status
+    };
+  }
+
+  getDraftTypeName(draftType) {
+    switch (draftType) {
+      case 0: return 'Snake';
+      case 1: return 'Linear';
+      case 2: return 'Auction';
+      default: return 'Unknown';
+    }
   }
 
   async saveLeagueData(year, tier, data) {
