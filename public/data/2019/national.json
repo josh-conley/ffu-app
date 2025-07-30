@@ -1,0 +1,283 @@
+{
+  "league": "NATIONAL",
+  "year": "2019",
+  "leagueId": "espn-2019-national",
+  "standings": [
+    {
+      "userId": "espn-historical-019",
+      "wins": 9,
+      "losses": 4,
+      "pointsFor": 1561.15,
+      "pointsAgainst": 1393.3,
+      "rank": 1,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    },
+    {
+      "userId": "espn-historical-019",
+      "wins": 10,
+      "losses": 3,
+      "pointsFor": 1441.7,
+      "pointsAgainst": 1353.85,
+      "rank": 2,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    },
+    {
+      "userId": "espn-historical-019",
+      "wins": 10,
+      "losses": 3,
+      "pointsFor": 1463.8,
+      "pointsAgainst": 1168.95,
+      "rank": 3,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    },
+    {
+      "userId": "espn-historical-019",
+      "wins": 7,
+      "losses": 6,
+      "pointsFor": 1315.4,
+      "pointsAgainst": 1394.75,
+      "rank": 4,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    },
+    {
+      "userId": "espn-historical-019",
+      "wins": 7,
+      "losses": 6,
+      "pointsFor": 1499.75,
+      "pointsAgainst": 1473.85,
+      "rank": 5,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    },
+    {
+      "userId": "espn-historical-019",
+      "wins": 7,
+      "losses": 6,
+      "pointsFor": 1605.5,
+      "pointsAgainst": 1451.9,
+      "rank": 6,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    },
+    {
+      "userId": "espn-historical-019",
+      "wins": 6,
+      "losses": 7,
+      "pointsFor": 1494.3,
+      "pointsAgainst": 1461.95,
+      "rank": 7,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    },
+    {
+      "userId": "espn-historical-019",
+      "wins": 5,
+      "losses": 8,
+      "pointsFor": 1541.7,
+      "pointsAgainst": 1382.85,
+      "rank": 8,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    },
+    {
+      "userId": "espn-historical-019",
+      "wins": 4,
+      "losses": 9,
+      "pointsFor": 1321.85,
+      "pointsAgainst": 1722.65,
+      "rank": 9,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    },
+    {
+      "userId": "espn-historical-019",
+      "wins": 7,
+      "losses": 6,
+      "pointsFor": 1415.2,
+      "pointsAgainst": 1389.3,
+      "rank": 10,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    },
+    {
+      "userId": "espn-historical-019",
+      "wins": 2,
+      "losses": 11,
+      "pointsFor": 1161.15,
+      "pointsAgainst": 1394.5,
+      "rank": 11,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    },
+    {
+      "userId": "espn-historical-019",
+      "wins": 4,
+      "losses": 9,
+      "pointsFor": 1272.35,
+      "pointsAgainst": 1506,
+      "rank": 12,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    }
+  ],
+  "playoffResults": [
+    {
+      "userId": "espn-historical-019",
+      "placement": 1,
+      "placementName": "1st",
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    },
+    {
+      "userId": "espn-historical-019",
+      "placement": 2,
+      "placementName": "2nd",
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    },
+    {
+      "userId": "espn-historical-019",
+      "placement": 3,
+      "placementName": "3rd",
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    },
+    {
+      "userId": "espn-historical-019",
+      "placement": 4,
+      "placementName": "4th",
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    },
+    {
+      "userId": "espn-historical-019",
+      "placement": 5,
+      "placementName": "5th",
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    },
+    {
+      "userId": "espn-historical-019",
+      "placement": 6,
+      "placementName": "6th",
+      "userInfo": {
+        "userId": "espn-historical-019",
+        "teamName": "",
+        "abbreviation": "UNK"
+      }
+    }
+  ],
+  "promotions": [],
+  "relegations": [],
+  "matchupsByWeek": {
+    "0": [
+      {
+        "winner": "espn-historical-019",
+        "loser": "espn-historical-019",
+        "winnerScore": 0,
+        "loserScore": 0
+      }
+    ],
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": [],
+    "7": [],
+    "8": [],
+    "9": [],
+    "10": [],
+    "11": [],
+    "12": [],
+    "13": [],
+    "14": [],
+    "15": [],
+    "16": []
+  },
+  "memberGameStats": {
+    "espn-historical-019": {
+      "highGame": 0,
+      "lowGame": 0
+    }
+  }
+}

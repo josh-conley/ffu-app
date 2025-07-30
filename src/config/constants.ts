@@ -1,4 +1,5 @@
 import type { LeagueTier } from '../types';
+import { getAvailableLeagues, isEspnEra, isSleeperEra } from '../utils/era-detection';
 
 // Normalized data structures for better maintainability
 
@@ -16,6 +17,9 @@ interface UserConfig {
   abbreviation: string;
   joinedYear: number;
   isActive: boolean;
+  // New fields for ESPN era support
+  espnUsername?: string; // For historical mapping
+  historicalTeamNames?: { [year: string]: string }; // Year -> team name
 }
 
 // Master league configuration - single source of truth
@@ -25,17 +29,24 @@ export const LEAGUES: LeagueConfig[] = [
   { sleeperId: '989237166217723904', year: '2023', tier: 'PREMIER', status: 'completed', startYear: 2023 },
   { sleeperId: '856271024054996992', year: '2022', tier: 'PREMIER', status: 'completed', startYear: 2022 },
   { sleeperId: '710961812656455680', year: '2021', tier: 'PREMIER', status: 'completed', startYear: 2021 },
+  { sleeperId: 'espn-2020-premier', year: '2020', tier: 'PREMIER', status: 'completed', startYear: 2020 },
+  { sleeperId: 'espn-2019-premier', year: '2019', tier: 'PREMIER', status: 'completed', startYear: 2019 },
+  { sleeperId: 'espn-2018-premier', year: '2018', tier: 'PREMIER', status: 'completed', startYear: 2018 },
   
   // MASTERS LEAGUE  
   { sleeperId: '1124833010697379840', year: '2024', tier: 'MASTERS', status: 'active', startYear: 2024 },
   { sleeperId: '989238596353794048', year: '2023', tier: 'MASTERS', status: 'completed', startYear: 2023 },
   { sleeperId: '856271401471029248', year: '2022', tier: 'MASTERS', status: 'completed', startYear: 2022 },
+  // Note: No Masters league in ESPN era (2018-2020)
   
   // NATIONAL LEAGUE
   { sleeperId: '1124834889196134400', year: '2024', tier: 'NATIONAL', status: 'active', startYear: 2024 },
   { sleeperId: '989240797381951488', year: '2023', tier: 'NATIONAL', status: 'completed', startYear: 2023 },
   { sleeperId: '856271753788403712', year: '2022', tier: 'NATIONAL', status: 'completed', startYear: 2022 },
   { sleeperId: '726573082608775168', year: '2021', tier: 'NATIONAL', status: 'completed', startYear: 2021 },
+  { sleeperId: 'espn-2020-national', year: '2020', tier: 'NATIONAL', status: 'completed', startYear: 2020 },
+  { sleeperId: 'espn-2019-national', year: '2019', tier: 'NATIONAL', status: 'completed', startYear: 2019 },
+  { sleeperId: 'espn-2018-national', year: '2018', tier: 'NATIONAL', status: 'completed', startYear: 2018 },
 ];
 
 // Master user configuration - single source of truth
@@ -156,7 +167,7 @@ export const getAllLeagueConfigs = (): LeagueConfig[] => {
 export const LEAGUE_HIERARCHY = ['PREMIER', 'MASTERS', 'NATIONAL'] as const;
 
 // Define which years are historical (cached) vs current (live API)
-export const HISTORICAL_YEARS = ['2021', '2022', '2023', '2024'] as const;
+export const HISTORICAL_YEARS = ['2018', '2019', '2020', '2021', '2022', '2023', '2024'] as const;
 export const CURRENT_YEAR = '2025'; // Update this when the new season starts
 
 export const isHistoricalYear = (year: string): boolean => {
@@ -166,6 +177,19 @@ export const isHistoricalYear = (year: string): boolean => {
 export const isCurrentYear = (year: string): boolean => {
   return year === CURRENT_YEAR;
 };
+
+// Era-specific helper functions
+export const getLeaguesByYear = (year: string): LeagueConfig[] => {
+  const availableLeagues = getAvailableLeagues(year);
+  return LEAGUES.filter(l => l.year === year && availableLeagues.includes(l.tier));
+};
+
+export const isValidLeagueForYear = (tier: LeagueTier, year: string): boolean => {
+  return getAvailableLeagues(year).includes(tier);
+};
+
+// Re-export era detection utilities for convenience
+export { isEspnEra, isSleeperEra, getAvailableLeagues };
 
 // Type exports for the configs
 export type { LeagueConfig, UserConfig };

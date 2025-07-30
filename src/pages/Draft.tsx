@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 // import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { DraftBoard } from '../components/Draft/DraftBoard';
@@ -6,7 +6,7 @@ import { MobileDraftBoard } from '../components/Draft/MobileDraftBoard';
 import { DraftList } from '../components/Draft/DraftList';
 import type { DraftData, UserInfo, LeagueTier } from '../types';
 import { dataService } from '../services/data.service';
-import { LEAGUE_NAMES, AVAILABLE_YEARS } from '../constants/leagues';
+import { LEAGUE_NAMES, AVAILABLE_YEARS, getAvailableLeaguesForYear } from '../constants/leagues';
 import { getUserInfoBySleeperId } from '../config/constants';
 import { ChevronDown } from 'lucide-react';
 
@@ -20,6 +20,16 @@ export const Draft: React.FC = () => {
   const [, setError] = useState<string | undefined>();
   const [selectedLeague, setSelectedLeague] = useState<string>('PREMIER');
   const [selectedYear, setSelectedYear] = useState<string>('2024');
+  
+  // Era-aware available leagues
+  const availableLeagues = useMemo(() => getAvailableLeaguesForYear(selectedYear), [selectedYear]);
+  
+  // Reset league selection if current league is not available in selected year
+  useMemo(() => {
+    if (!availableLeagues.includes(selectedLeague as LeagueTier)) {
+      setSelectedLeague(availableLeagues[0]); // Default to first available league
+    }
+  }, [availableLeagues, selectedLeague]);
 
   const loadDraftData = async (league: string, year: string) => {
     try {
@@ -108,8 +118,8 @@ export const Draft: React.FC = () => {
                 onChange={(e) => setSelectedLeague(e.target.value)}
                 className="block w-20 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-1.5 sm:py-3 text-xs sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
-                {Object.entries(LEAGUE_NAMES).map(([key, name]) => (
-                  <option key={key} value={key}>{name}</option>
+                {availableLeagues.map((league) => (
+                  <option key={league} value={league}>{LEAGUE_NAMES[league]}</option>
                 ))}
               </select>
               <div className="absolute inset-y-0 right-0 flex items-center pr-1 sm:pr-3 pointer-events-none">

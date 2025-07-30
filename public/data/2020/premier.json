@@ -1,0 +1,270 @@
+{
+  "league": "PREMIER",
+  "year": "2020",
+  "leagueId": "espn-2020-premier",
+  "standings": [
+    {
+      "userId": "espn-historical-007",
+      "wins": 8,
+      "losses": 5,
+      "pointsFor": 1475.8,
+      "pointsAgainst": 1468.35,
+      "rank": 1,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-007",
+        "teamName": "user044",
+        "abbreviation": "USE"
+      }
+    },
+    {
+      "userId": "espn-historical-008",
+      "wins": 8,
+      "losses": 5,
+      "pointsFor": 1350.25,
+      "pointsAgainst": 1232.5,
+      "rank": 2,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-008",
+        "teamName": "user045",
+        "abbreviation": "USE"
+      }
+    },
+    {
+      "userId": "espn-historical-012",
+      "wins": 11,
+      "losses": 2,
+      "pointsFor": 1724.9,
+      "pointsAgainst": 1289.2,
+      "rank": 3,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-012",
+        "teamName": "user036",
+        "abbreviation": "USE"
+      }
+    },
+    {
+      "userId": "espn-historical-020",
+      "wins": 10,
+      "losses": 3,
+      "pointsFor": 1685.35,
+      "pointsAgainst": 1461.4,
+      "rank": 4,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-020",
+        "teamName": "user049",
+        "abbreviation": "USE"
+      }
+    },
+    {
+      "userId": "espn-historical-021",
+      "wins": 7,
+      "losses": 6,
+      "pointsFor": 1426.4,
+      "pointsAgainst": 1455.75,
+      "rank": 5,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-021",
+        "teamName": "user050",
+        "abbreviation": "USE"
+      }
+    },
+    {
+      "userId": "espn-historical-010",
+      "wins": 7,
+      "losses": 6,
+      "pointsFor": 1548.3,
+      "pointsAgainst": 1486.3,
+      "rank": 6,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-010",
+        "teamName": "user003",
+        "abbreviation": "USE"
+      }
+    },
+    {
+      "userId": "espn-historical-011",
+      "wins": 5,
+      "losses": 8,
+      "pointsFor": 1357.35,
+      "pointsAgainst": 1438.05,
+      "rank": 7,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-011",
+        "teamName": "user046",
+        "abbreviation": "USE"
+      }
+    },
+    {
+      "userId": "espn-historical-009",
+      "wins": 6,
+      "losses": 7,
+      "pointsFor": 1580.3,
+      "pointsAgainst": 1536.05,
+      "rank": 8,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-009",
+        "teamName": "user032",
+        "abbreviation": "USE"
+      }
+    },
+    {
+      "userId": "espn-historical-022",
+      "wins": 2,
+      "losses": 11,
+      "pointsFor": 1232.25,
+      "pointsAgainst": 1617.95,
+      "rank": 9,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-022",
+        "teamName": "user051",
+        "abbreviation": "USE"
+      }
+    },
+    {
+      "userId": "espn-historical-023",
+      "wins": 5,
+      "losses": 8,
+      "pointsFor": 1316.15,
+      "pointsAgainst": 1374.05,
+      "rank": 10,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-023",
+        "teamName": "user040",
+        "abbreviation": "USE"
+      }
+    },
+    {
+      "userId": "espn-historical-024",
+      "wins": 4,
+      "losses": 9,
+      "pointsFor": 1355.7,
+      "pointsAgainst": 1447.3,
+      "rank": 11,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-024",
+        "teamName": "user043",
+        "abbreviation": "USE"
+      }
+    },
+    {
+      "userId": "espn-historical-015",
+      "wins": 5,
+      "losses": 8,
+      "pointsFor": 1216.25,
+      "pointsAgainst": 1462.1,
+      "rank": 12,
+      "highGame": 0,
+      "lowGame": 0,
+      "userInfo": {
+        "userId": "espn-historical-015",
+        "teamName": "user038",
+        "abbreviation": "USE"
+      }
+    }
+  ],
+  "playoffResults": [
+    {
+      "userId": "espn-historical-007",
+      "placement": 1,
+      "placementName": "1st",
+      "userInfo": {
+        "userId": "espn-historical-007",
+        "teamName": "user044",
+        "abbreviation": "USE"
+      }
+    },
+    {
+      "userId": "espn-historical-008",
+      "placement": 2,
+      "placementName": "2nd",
+      "userInfo": {
+        "userId": "espn-historical-008",
+        "teamName": "user045",
+        "abbreviation": "USE"
+      }
+    },
+    {
+      "userId": "espn-historical-012",
+      "placement": 3,
+      "placementName": "3rd",
+      "userInfo": {
+        "userId": "espn-historical-012",
+        "teamName": "user036",
+        "abbreviation": "USE"
+      }
+    },
+    {
+      "userId": "espn-historical-020",
+      "placement": 4,
+      "placementName": "4th",
+      "userInfo": {
+        "userId": "espn-historical-020",
+        "teamName": "user049",
+        "abbreviation": "USE"
+      }
+    },
+    {
+      "userId": "espn-historical-021",
+      "placement": 5,
+      "placementName": "5th",
+      "userInfo": {
+        "userId": "espn-historical-021",
+        "teamName": "user050",
+        "abbreviation": "USE"
+      }
+    },
+    {
+      "userId": "espn-historical-010",
+      "placement": 6,
+      "placementName": "6th",
+      "userInfo": {
+        "userId": "espn-historical-010",
+        "teamName": "user003",
+        "abbreviation": "USE"
+      }
+    }
+  ],
+  "promotions": [],
+  "relegations": [],
+  "matchupsByWeek": {
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": [],
+    "7": [],
+    "8": [],
+    "9": [],
+    "10": [],
+    "11": [],
+    "12": [],
+    "13": [],
+    "14": [],
+    "15": [],
+    "16": []
+  },
+  "memberGameStats": {}
+}

@@ -253,11 +253,11 @@ export class LeagueService {
       ...leagueData,
       standings: leagueData.standings.map(standing => ({
         ...standing,
-        userInfo: this.getUserInfo(standing.userId)
+        userInfo: (standing as any).userInfo || this.getUserInfo(standing.userId)
       })),
       playoffResults: leagueData.playoffResults.map(result => ({
         ...result,
-        userInfo: this.getUserInfo(result.userId)
+        userInfo: (result as any).userInfo || this.getUserInfo(result.userId)
       }))
     }));
   }
