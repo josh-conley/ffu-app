@@ -240,7 +240,7 @@ export const Matchups = () => {
                 {placementInfo && placementInfo.tag}
                 
                 {/* Mobile Stacked Layout */}
-                <div className={`sm:hidden space-y-0.5 border border-gray-100 dark:border-gray-800 ${placementInfo ? placementInfo.borderColor : ''}`}>
+                <div className={`sm:hidden space-y-0.5 border-gray-100 dark:border-gray-800 ${placementInfo ? placementInfo.borderColor : ''}`}>
                   {/* Winner Row */}
                   <div className="flex items-center space-x-2 py-1 px-2 bg-green-50 dark:bg-green-900/25 rounded">
                     <div className="flex-shrink-0">
@@ -290,7 +290,7 @@ export const Matchups = () => {
                 </div>
 
                 {/* Desktop Horizontal Layout */}
-                <div className={`hidden sm:flex items-center justify-between gap-4 border border-gray-100 dark:border-gray-800 p-2 ${placementInfo ? placementInfo.borderColor : ''}`}>
+                <div className={`hidden sm:flex items-center justify-between gap-4 border-gray-100 dark:border-gray-800 p-2 ${placementInfo ? placementInfo.borderColor : ''}`}>
                   {/* Winner Side */}
                   <div className="flex items-center space-x-3 flex-1 min-w-0">
                     <div className="flex-shrink-0">
@@ -386,7 +386,7 @@ export const Matchups = () => {
                       {placementInfo && placementInfo.tag}
                       
                       {/* Mobile Stacked Layout */}
-                      <div className={`sm:hidden space-y-0.5 border border-gray-100 dark:border-gray-800 ${placementInfo ? placementInfo.borderColor : ''}`}>
+                      <div className={`sm:hidden space-y-0.5 border-gray-100 dark:border-gray-800 ${placementInfo ? placementInfo.borderColor : ''}`}>
                         {/* Winner Row */}
                         <div className="flex items-center space-x-2 py-1 px-2 bg-green-50 dark:bg-green-900/25 rounded">
                           <div className="flex-shrink-0">
@@ -436,7 +436,7 @@ export const Matchups = () => {
                       </div>
 
                       {/* Desktop Horizontal Layout */}
-                      <div className={`hidden sm:flex items-center justify-between gap-4 border border-gray-100 dark:border-gray-800 p-2 ${placementInfo ? placementInfo.borderColor : ''}`}>
+                      <div className={`hidden sm:flex items-center justify-between gap-4 border-gray-100 dark:border-gray-800 p-2 ${placementInfo ? placementInfo.borderColor : ''}`}>
                         {/* Winner Side */}
                         <div className="flex items-center space-x-3 flex-1 min-w-0">
                           <div className="flex-shrink-0">
