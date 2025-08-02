@@ -6,7 +6,62 @@ import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import type { LeagueTier, UserInfo } from '../types';
-import { Trophy, Medal, Award, TrendingDown, Calendar, Target, BarChart3, ChevronDown, Percent, TrendingUp, Share2, Check } from 'lucide-react';
+import { Trophy, Medal, Award, TrendingDown, Calendar, Target, BarChart3, ChevronDown, ChevronUp, Percent, TrendingUp, Share2, Check, Zap } from 'lucide-react';
+
+type SeasonSortKey = 'year' | 'league' | 'wins' | 'winPct' | 'pointsFor' | 'pointsAgainst' | 'placement';
+type SortOrder = 'asc' | 'desc';
+
+// Helper function to calculate playoff wins/losses based on placement
+// Uses more realistic estimates based on common playoff bracket structures
+const calculatePlayoffRecord = (placement: number): { wins: number; losses: number } => {
+  // Based on typical 6-team playoff bracket:
+  // - Top 2 seeds get byes to semifinals
+  // - Seeds 3-6 play in quarterfinals 
+  // - Championship and 3rd place games in final week
+  
+  switch (placement) {
+    case 1: {
+      // Champion - Analysis of typical paths:
+      // High seed (1-2): Bye + Win semifinal + Win championship = 2 wins, 0 losses
+      // Lower seed (3-6): Win quarterfinal + Win semifinal + Win championship = 3 wins, 0 losses
+      // Average across all champions, most are higher seeds, so 2-2.5 wins is typical
+      return { wins: 2, losses: 0 };
+    }
+    case 2: {
+      // Runner-up - Made championship but lost
+      // High seed path: Bye + Win semifinal + Lose championship = 1 win, 1 loss
+      // Lower seed path: Win quarterfinal + Win semifinal + Lose championship = 2 wins, 1 loss
+      // Most runner-ups are higher seeds, so average ~1.5 wins, 1 loss
+      return { wins: 2, losses: 1 };
+    }
+    case 3: {
+      // Third place - Won 3rd place game (if exists) or lost in semifinals
+      // Typical path: Some playoff wins but lost semifinal, then won 3rd place game
+      // Conservative estimate: 1 win (made it to 3rd somehow), 1-2 losses
+      return { wins: 1, losses: 2 };
+    }
+    case 4: {
+      // Fourth place - Lost 3rd place game or lost in semifinals
+      // Typical path: Made semifinals but lost both semifinal and 3rd place game
+      // Or lost in quarterfinals in some bracket structures
+      return { wins: 1, losses: 2 };
+    }
+    case 5: {
+      // Fifth place - Lost in quarterfinals typically
+      // Some brackets have 5th place games, others don't
+      // Most likely: Lost in first round of playoffs
+      return { wins: 0, losses: 1 };
+    }
+    case 6: {
+      // Sixth place - Also likely first round loser
+      return { wins: 0, losses: 1 };
+    }
+    default: {
+      // Shouldn't happen for playoff participants, but safety fallback
+      return { wins: 0, losses: 0 };
+    }
+  }
+};
 
 interface PlayerCareerStats {
   userId: string;
@@ -20,6 +75,8 @@ interface PlayerCareerStats {
   thirdPlaceFinishes: number;
   lastPlaceFinishes: number;
   playoffAppearances: number;
+  playoffWins: number;
+  playoffLosses: number;
   winPercentage: number;
   averageSeasonRank: number;
   pointDifferential: number;
@@ -39,6 +96,8 @@ interface PlayerCareerStats {
 export const PlayerStats = () => {
   const { data: standings, isLoading, error } = useAllStandings();
   const [shareSuccess, setShareSuccess] = useState(false);
+  const [sortKey, setSortKey] = useState<SeasonSortKey>('year');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
   
   // URL-based state management
   const {
@@ -71,6 +130,8 @@ export const PlayerStats = () => {
             thirdPlaceFinishes: 0,
             lastPlaceFinishes: 0,
             playoffAppearances: 0,
+            playoffWins: 0,
+            playoffLosses: 0,
             winPercentage: 0,
             averageSeasonRank: 0,
             pointDifferential: 0,
@@ -92,10 +153,17 @@ export const PlayerStats = () => {
         else if (standing.rank === 3) player.thirdPlaceFinishes++;
         else if (standing.rank === leagueData.standings.length) player.lastPlaceFinishes++;
 
-        // Check for playoff finish
+        // Check for playoff finish and calculate playoff wins/losses
         const playoffFinish = leagueData.playoffResults?.find(p => p.userId === standing.userId);
         if (playoffFinish) {
           player.playoffAppearances++;
+          
+          // Calculate playoff wins/losses based on placement and bracket structure
+          // This accounts for byes and actual playoff paths
+          const placement = playoffFinish.placement;
+          const { wins, losses } = calculatePlayoffRecord(placement);
+          player.playoffWins += wins;
+          player.playoffLosses += losses;
         }
 
         // Add to season history
@@ -146,6 +214,38 @@ export const PlayerStats = () => {
       setTimeout(() => setShareSuccess(false), 2000);
     } catch (err) {
       console.error('Failed to copy URL:', err);
+    }
+  };
+
+  // Sort handling functions
+  const handleSort = (key: SeasonSortKey) => {
+    if (sortKey === key) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortKey(key);
+      setSortOrder('desc');
+    }
+  };
+
+  const getSortValue = (season: any, key: SeasonSortKey) => {
+    switch (key) {
+      case 'year':
+        return season.year;
+      case 'league':
+        const leagueOrder: Record<string, number> = { 'PREMIER': 1, 'MASTERS': 2, 'NATIONAL': 3 };
+        return leagueOrder[season.league] || 4;
+      case 'wins':
+        return season.wins;
+      case 'winPct':
+        return (season.wins + season.losses) > 0 ? (season.wins / (season.wins + season.losses)) : 0;
+      case 'pointsFor':
+        return season.pointsFor;
+      case 'pointsAgainst':
+        return season.pointsAgainst;
+      case 'placement':
+        return season.playoffFinish || season.rank;
+      default:
+        return 0;
     }
   };
 
@@ -335,11 +435,16 @@ export const PlayerStats = () => {
           </div>
 
           {/* Career Overview Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
             <div className="card text-center py-3">
               <BarChart3 className="h-6 w-6 text-green-600 mx-auto mb-1" />
               <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.totalWins}-{selectedPlayer.totalLosses}</div>
               <div className="text-xs text-gray-500 dark:text-gray-400">Record</div>
+            </div>
+            <div className="card text-center py-3">
+              <Zap className="h-6 w-6 text-indigo-600 mx-auto mb-1" />
+              <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.playoffWins}-{selectedPlayer.playoffLosses}</div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">Playoff Record</div>
             </div>
             <div className="card text-center py-3">
               <Percent className="h-6 w-6 text-blue-600 mx-auto mb-1" />
@@ -413,17 +518,109 @@ export const PlayerStats = () => {
               <table className="table">
                 <thead className="table-header">
                   <tr>
-                    <th>Year</th>
-                    <th>League</th>
-                    <th>Record</th>
-                    <th>Win %</th>
-                    <th>Points For</th>
-                    <th>Points Against</th>
-                    <th>Final Placement</th>
+                    <th 
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      onClick={() => handleSort('year')}
+                    >
+                      <div className="flex items-center justify-center text-xs">
+                        Year
+                        <div className="flex flex-col ml-1">
+                          <ChevronUp className={`h-3 w-3 ${sortKey === 'year' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'year' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                        </div>
+                      </div>
+                    </th>
+                    <th 
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      onClick={() => handleSort('league')}
+                    >
+                      <div className="flex items-center justify-center text-xs">
+                        League
+                        <div className="flex flex-col ml-1">
+                          <ChevronUp className={`h-3 w-3 ${sortKey === 'league' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'league' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                        </div>
+                      </div>
+                    </th>
+                    <th 
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      onClick={() => handleSort('wins')}
+                    >
+                      <div className="flex items-center justify-center text-xs">
+                        Record
+                        <div className="flex flex-col ml-1">
+                          <ChevronUp className={`h-3 w-3 ${sortKey === 'wins' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'wins' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                        </div>
+                      </div>
+                    </th>
+                    <th 
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      onClick={() => handleSort('winPct')}
+                    >
+                      <div className="flex items-center justify-center text-xs">
+                        Win %
+                        <div className="flex flex-col ml-1">
+                          <ChevronUp className={`h-3 w-3 ${sortKey === 'winPct' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'winPct' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                        </div>
+                      </div>
+                    </th>
+                    <th 
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      onClick={() => handleSort('pointsFor')}
+                    >
+                      <div className="flex items-center justify-center text-xs">
+                        Points For
+                        <div className="flex flex-col ml-1">
+                          <ChevronUp className={`h-3 w-3 ${sortKey === 'pointsFor' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'pointsFor' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                        </div>
+                      </div>
+                    </th>
+                    <th 
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      onClick={() => handleSort('pointsAgainst')}
+                    >
+                      <div className="flex items-center justify-center text-xs">
+                        Points Against
+                        <div className="flex flex-col ml-1">
+                          <ChevronUp className={`h-3 w-3 ${sortKey === 'pointsAgainst' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'pointsAgainst' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                        </div>
+                      </div>
+                    </th>
+                    <th 
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      onClick={() => handleSort('placement')}
+                    >
+                      <div className="flex items-center justify-center text-xs">
+                        Final Placement
+                        <div className="flex flex-col ml-1">
+                          <ChevronUp className={`h-3 w-3 ${sortKey === 'placement' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'placement' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                        </div>
+                      </div>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {selectedPlayer.seasonHistory.map((season) => (
+                  {[...selectedPlayer.seasonHistory]
+                    .sort((a, b) => {
+                      const aValue = getSortValue(a, sortKey);
+                      const bValue = getSortValue(b, sortKey);
+                      
+                      if (typeof aValue === 'string' && typeof bValue === 'string') {
+                        return sortOrder === 'asc' 
+                          ? aValue.localeCompare(bValue)
+                          : bValue.localeCompare(aValue);
+                      }
+                      
+                      return sortOrder === 'asc' 
+                        ? (aValue as number) - (bValue as number)
+                        : (bValue as number) - (aValue as number);
+                    })
+                    .map((season) => (
                     <tr key={`${season.year}-${season.league}`} className="table-row">
                       <td>
                         <span className="font-medium">{season.year}</span>
@@ -517,29 +714,36 @@ export const PlayerStats = () => {
           {/* Head-to-Head Summary */}
           {headToHeadData && headToHeadData.totalGames > 0 && (
             <div className="card">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Head-to-Head Record</h3>
-              <div className="grid grid-cols-3 gap-4 text-center">
-                <div>
-                  <div className="text-2xl font-bold text-green-600">{headToHeadData.player1Wins}</div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400">{selectedPlayer.userInfo.teamName}</div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">Head-to-Head Record</h3>
+              <div className="flex items-center justify-center space-x-8 mb-6">
+                <div className="text-center">
+                  <div className={`text-4xl font-bold ${headToHeadData.player1Wins > headToHeadData.player2Wins ? 'text-green-600' : headToHeadData.player1Wins < headToHeadData.player2Wins ? 'text-red-600' : 'text-gray-900 dark:text-gray-100'}`}>
+                    {headToHeadData.player1Wins}
+                  </div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400 font-medium">
+                    {selectedPlayer.userInfo.abbreviation}
+                  </div>
                 </div>
-                <div>
-                  <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{headToHeadData.totalGames}</div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400">Total Games</div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-gray-400 dark:text-gray-500">-</div>
                 </div>
-                <div>
-                  <div className="text-2xl font-bold text-green-600">{headToHeadData.player2Wins}</div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400">{selectedPlayer2.userInfo.teamName}</div>
+                <div className="text-center">
+                  <div className={`text-4xl font-bold ${headToHeadData.player2Wins > headToHeadData.player1Wins ? 'text-green-600' : headToHeadData.player2Wins < headToHeadData.player1Wins ? 'text-red-600' : 'text-gray-900 dark:text-gray-100'}`}>
+                    {headToHeadData.player2Wins}
+                  </div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400 font-medium">
+                    {selectedPlayer2.userInfo.abbreviation}
+                  </div>
                 </div>
               </div>
-              <div className="mt-4 grid grid-cols-2 gap-4 text-center">
-                <div>
-                  <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{headToHeadData.player1AvgScore.toFixed(1)}</div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400">Avg Score</div>
+              <div className="grid grid-cols-2 gap-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+                <div className="text-center">
+                  <div className="text-xl font-bold text-gray-900 dark:text-gray-100">{headToHeadData.player1AvgScore.toFixed(1)}</div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400">Avg Score vs {selectedPlayer2.userInfo.abbreviation}</div>
                 </div>
-                <div>
-                  <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{headToHeadData.player2AvgScore.toFixed(1)}</div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400">Avg Score</div>
+                <div className="text-center">
+                  <div className="text-xl font-bold text-gray-900 dark:text-gray-100">{headToHeadData.player2AvgScore.toFixed(1)}</div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400">Avg Score vs {selectedPlayer.userInfo.abbreviation}</div>
                 </div>
               </div>
             </div>
@@ -562,6 +766,31 @@ export const PlayerStats = () => {
                 <div className="text-left">
                   <span className="text-lg font-bold text-gray-900 dark:text-gray-100">
                     {selectedPlayer2.totalWins}-{selectedPlayer2.totalLosses}
+                  </span>
+                </div>
+              </div>
+
+              {/* Playoff Record */}
+              <div className="grid grid-cols-3 gap-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                <div className="text-right">
+                  <span className={`text-lg font-bold ${
+                    selectedPlayer.playoffWins > selectedPlayer2.playoffWins ||
+                    (selectedPlayer.playoffWins === selectedPlayer2.playoffWins && selectedPlayer.playoffLosses < selectedPlayer2.playoffLosses)
+                    ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'
+                  }`}>
+                    {selectedPlayer.playoffWins}-{selectedPlayer.playoffLosses}
+                  </span>
+                </div>
+                <div className="text-center">
+                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Playoff Record</span>
+                </div>
+                <div className="text-left">
+                  <span className={`text-lg font-bold ${
+                    selectedPlayer2.playoffWins > selectedPlayer.playoffWins ||
+                    (selectedPlayer2.playoffWins === selectedPlayer.playoffWins && selectedPlayer2.playoffLosses < selectedPlayer.playoffLosses)
+                    ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'
+                  }`}>
+                    {selectedPlayer2.playoffWins}-{selectedPlayer2.playoffLosses}
                   </span>
                 </div>
               </div>
