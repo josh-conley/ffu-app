@@ -5,8 +5,9 @@ import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
+import { AllMembersStatsTable } from '../components/Players/AllMembersStatsTable';
 import type { LeagueTier, UserInfo } from '../types';
-import { Trophy, Medal, Award, TrendingDown, Calendar, Target, BarChart3, ChevronDown, ChevronUp, Percent, TrendingUp, Share2, Check, Zap } from 'lucide-react';
+import { Trophy, Medal, Award, TrendingDown, Calendar, Target, BarChart3, ChevronDown, ChevronUp, Percent, TrendingUp, Share2, Check, Zap, Users } from 'lucide-react';
 
 type SeasonSortKey = 'year' | 'league' | 'wins' | 'winPct' | 'pointsFor' | 'pointsAgainst' | 'placement';
 type SortOrder = 'asc' | 'desc';
@@ -98,6 +99,7 @@ export const PlayerStats = () => {
   const [shareSuccess, setShareSuccess] = useState(false);
   const [sortKey, setSortKey] = useState<SeasonSortKey>('year');
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
+  const [showAllMembersTable, setShowAllMembersTable] = useState(false);
   
   // URL-based state management
   const {
@@ -313,6 +315,13 @@ export const PlayerStats = () => {
           </p>
         </div>
         <div className="mt-4 sm:mt-0 flex space-x-3">
+          <button
+            onClick={() => setShowAllMembersTable(true)}
+            className="px-4 py-2 rounded-lg font-medium transition-colors duration-200 bg-blue-600 text-white hover:bg-blue-700 flex items-center space-x-2"
+          >
+            <Users className="h-4 w-4" />
+            <span>View All Members</span>
+          </button>
           {hasSelectionToShare && (
             <button
               onClick={handleShare}
@@ -963,6 +972,14 @@ export const PlayerStats = () => {
             Select two members above to compare their career statistics
           </div>
         </div>
+      )}
+
+      {/* All Members Stats Table Modal */}
+      {showAllMembersTable && (
+        <AllMembersStatsTable 
+          players={playerStats}
+          onClose={() => setShowAllMembersTable(false)}
+        />
       )}
     </div>
   );
