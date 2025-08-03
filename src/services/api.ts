@@ -1,5 +1,6 @@
 import { SleeperService } from './sleeper.service';
 import { LeagueService } from './league.service';
+import { getSeasonLength } from '../utils/era-detection';
 import type { 
   LeagueTier,
   EnhancedLeagueSeasonData,
@@ -48,8 +49,11 @@ export const leagueApi = {
   getAllSeasonMatchups: async (league: LeagueTier, year: string): Promise<WeekMatchupsResponse[]> => {
     const allWeekMatchups: WeekMatchupsResponse[] = [];
     
-    // Fetch matchups for weeks 1-17 (regular season + playoffs)
-    for (let week = 1; week <= 17; week++) {
+    // Get era-aware season length (16 for ESPN era, 17 for Sleeper era)
+    const seasonLength = getSeasonLength(year);
+    
+    // Fetch matchups for all weeks in the season
+    for (let week = 1; week <= seasonLength; week++) {
       try {
         const weekData = await leagueService.getWeekMatchupsWithUserInfo(league, year, week);
         if (weekData.matchups && weekData.matchups.length > 0) {

@@ -1,6 +1,6 @@
 import { SleeperService } from './sleeper.service';
 import { dataService } from './data.service';
-import { getLeagueId, getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId, getUserInfoByFFUId, getFFUIdBySleeperId, isHistoricalYear } from '../config/constants';
+import { getLeagueId, getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId, getUserInfoByFFUId, getFFUIdBySleeperId, isHistoricalYear, isEspnEra } from '../config/constants';
 import type { 
   LeagueSeasonData, 
   SeasonStandings, 
@@ -161,7 +161,15 @@ export class LeagueService {
       const historicalData = await dataService.loadHistoricalLeagueData(league, year);
       if (historicalData) {
         const weekMatchups = historicalData.matchupsByWeek[week];
-        return weekMatchups || [];
+        if (weekMatchups) {
+          // Only convert ESPN era data (2018-2020) - Sleeper era data (2021+) is already in correct format
+          if (isEspnEra(year)) {
+            return this.convertHistoricalMatchupsToWeekMatchups(weekMatchups);
+          } else {
+            // Sleeper era data is already in WeekMatchup[] format
+            return weekMatchups;
+          }
+        }
       }
       // Fall back to API if historical data not available
       console.warn(`Historical matchup data not found for ${league} ${year} week ${week}, falling back to API`);
@@ -298,6 +306,38 @@ export class LeagueService {
       teamName: 'Unknown Team', 
       abbreviation: 'UNK' 
     };
+  }
+
+  private convertHistoricalMatchupsToWeekMatchups(historicalMatchups: any[]): WeekMatchup[] {
+    const weekMatchups: WeekMatchup[] = [];
+    
+    // Convert each individual matchup to winner/loser format
+    historicalMatchups.forEach(matchup => {
+      const userScore = matchup.userScore || 0;
+      const opponentScore = matchup.opponentScore || 0;
+      
+      if (userScore > opponentScore) {
+        // User won
+        weekMatchups.push({
+          winner: matchup.userId,
+          loser: matchup.opponentId,
+          winnerScore: userScore,
+          loserScore: opponentScore,
+          placementType: matchup.placementType
+        });
+      } else {
+        // Opponent won
+        weekMatchups.push({
+          winner: matchup.opponentId,
+          loser: matchup.userId,
+          winnerScore: opponentScore,
+          loserScore: userScore,
+          placementType: matchup.placementType
+        });
+      }
+    });
+
+    return weekMatchups;
   }
 
   private processRawMatchups(matchups: any[], rosters: any[]): WeekMatchup[] {

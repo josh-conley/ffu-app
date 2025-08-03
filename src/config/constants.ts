@@ -52,16 +52,16 @@ export const LEAGUES: LeagueConfig[] = [
 
 // Master user configuration - single source of truth
 export const USERS: UserConfig[] = [
-  { ffuId: 'ffu-001', sleeperId: '331590801261883392', teamName: 'The Stallions', abbreviation: 'STA', joinedYear: 2021, isActive: true },
+  { ffuId: 'ffu-001', sleeperId: '331590801261883392', teamName: 'The Stallions', abbreviation: 'STA', joinedYear: 2020, isActive: true, espnUsername: 'stallions', historicalTeamNames: { '2020': 'The Stallions' } },
   { ffuId: 'ffu-002', sleeperId: '396808818157182976', teamName: 'FFUcked Up', abbreviation: 'FU', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-003', sleeperId: '398574272387297280', teamName: 'Dmandre161', abbreviation: 'DMAN', joinedYear: 2021, isActive: true },
-  { ffuId: 'ffu-004', sleeperId: '398576262546735104', teamName: 'Blood, Sweat, and Beers', abbreviation: 'BEER', joinedYear: 2021, isActive: true },
+  { ffuId: 'ffu-004', sleeperId: '398576262546735104', teamName: 'Blood, Sweat, and Beers', abbreviation: 'BEER', joinedYear: 2020, isActive: true, espnUsername: 'beers', historicalTeamNames: { '2020': 'Blood, Sweat and Beers' } },
   { ffuId: 'ffu-005', sleeperId: '467404039059927040', teamName: 'Malibu Leopards', abbreviation: 'MLBU', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-006', sleeperId: '470715135581745152', teamName: 'Pottsville Maroons', abbreviation: 'POTT', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-007', sleeperId: '705642514408886272', teamName: 'The Dark Knights', abbreviation: 'BATS', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-008', sleeperId: '710981985102802944', teamName: 'Frank\'s Little Beauties', abbreviation: 'FLB', joinedYear: 2021, isActive: true },
-  { ffuId: 'ffu-009', sleeperId: '727368657923063808', teamName: 'Fort Wayne Banana Bread', abbreviation: 'FWBB', joinedYear: 2021, isActive: true },
-  { ffuId: 'ffu-010', sleeperId: '729741648338210816', teamName: 'ChicagoPick6', abbreviation: 'CP6', joinedYear: 2021, isActive: true },
+  { ffuId: 'ffu-009', sleeperId: '727368657923063808', teamName: 'Fort Wayne Banana Bread', abbreviation: 'FWBB', joinedYear: 2020, isActive: true, espnUsername: 'bread', historicalTeamNames: { '2020': 'Wisconsian Banana Bread' } },
+  { ffuId: 'ffu-010', sleeperId: '729741648338210816', teamName: 'ChicagoPick6', abbreviation: 'CP6', joinedYear: 2020, isActive: true, espnUsername: 'picks', historicalTeamNames: { '2020': 'Chicago Pick 6s' } },
   { ffuId: 'ffu-011', sleeperId: '798327505219096576', teamName: 'TKO Blow', abbreviation: 'TKO', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-012', sleeperId: '860973514839199744', teamName: 'Show Biz Kitten', abbreviation: 'SBK', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-013', sleeperId: '862142522036703232', teamName: 'Boca Ciega Banditos', abbreviation: 'BOCA', joinedYear: 2021, isActive: true },
@@ -74,15 +74,15 @@ export const USERS: UserConfig[] = [
   { ffuId: 'ffu-020', sleeperId: '856248808915480576', teamName: 'The Tooth Tuggers', abbreviation: 'TT', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-021', sleeperId: '864966364937461760', teamName: 'Nighthawks', abbreviation: 'HAWK', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-022', sleeperId: '865078270985629696', teamName: 'The Gaston Ramblers', abbreviation: 'TGR', joinedYear: 2021, isActive: true },
-  { ffuId: 'ffu-023', sleeperId: '84006772809285632', teamName: 'The Minutemen', abbreviation: 'MMEN', joinedYear: 2021, isActive: true },
-  { ffuId: 'ffu-024', sleeperId: '325766631336714240', teamName: 'Act More Stupidly', abbreviation: 'AMS', joinedYear: 2021, isActive: true },
-  { ffuId: 'ffu-025', sleeperId: '386791325690994688', teamName: 'Indianapolis Aztecs', abbreviation: 'AZTC', joinedYear: 2021, isActive: true },
-  { ffuId: 'ffu-026', sleeperId: '462383465753473024', teamName: 'Raging Rhinos', abbreviation: 'RAGE', joinedYear: 2021, isActive: true },
+  { ffuId: 'ffu-023', sleeperId: '84006772809285632', teamName: 'The Minutemen', abbreviation: 'MMEN', joinedYear: 2020, isActive: true, espnUsername: 'mmen', historicalTeamNames: { '2020': 'The Minutemen' } },
+  { ffuId: 'ffu-024', sleeperId: '325766631336714240', teamName: 'Act More Stupidly', abbreviation: 'AMS', joinedYear: 2020, isActive: true, espnUsername: 'swaggy', historicalTeamNames: { '2020': 'Goat Emoji II' } },
+  { ffuId: 'ffu-025', sleeperId: '386791325690994688', teamName: 'Indianapolis Aztecs', abbreviation: 'AZTC', joinedYear: 2020, isActive: true, espnUsername: 'aztecs' },
+  { ffuId: 'ffu-026', sleeperId: '462383465753473024', teamName: 'Raging Rhinos', abbreviation: 'RAGE', joinedYear: 2020, isActive: true, espnUsername: 'rhinos', historicalTeamNames: { '2020': 'Currier Island Raging Rhinos' } },
   { ffuId: 'ffu-027', sleeperId: '465884883869233152', teamName: 'CamDelphia', abbreviation: 'CAM', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-028', sleeperId: '507633950666584064', teamName: 'El Guapo Puto', abbreviation: 'EGP', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-029', sleeperId: '508719015656099840', teamName: 'Team Pancake', abbreviation: 'TP', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-030', sleeperId: '527884868880531456', teamName: 'Johnkshire Cats', abbreviation: 'CATS', joinedYear: 2021, isActive: true },
-  { ffuId: 'ffu-031', sleeperId: '726572095210930176', teamName: 'Team Dogecoin', abbreviation: 'DOGE', joinedYear: 2021, isActive: true },
+  { ffuId: 'ffu-031', sleeperId: '726572095210930176', teamName: 'Team Dogecoin', abbreviation: 'DOGE', joinedYear: 2020, isActive: true, espnUsername: 'doge', historicalTeamNames: { '2020': 'Team Dogecoin' } },
   { ffuId: 'ffu-032', sleeperId: '731211092713402368', teamName: 'Team Dogecoin', abbreviation: 'DOGE', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-033', sleeperId: '639877229681147904', teamName: 'He Hate Me', abbreviation: 'HATE', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-034', sleeperId: '664739261735591936', teamName: 'CENATION', abbreviation: 'CENA', joinedYear: 2021, isActive: true },
@@ -102,7 +102,11 @@ export const USERS: UserConfig[] = [
   { ffuId: 'ffu-048', sleeperId: '1003144735223099392', teamName: 'dewdoc', abbreviation: 'DEW', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-049', sleeperId: '726584695151734784', teamName: 'The Ducklings', abbreviation: 'DUCK', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-050', sleeperId: '729571025750208512', teamName: 'chetmaynard', abbreviation: 'CHET', joinedYear: 2021, isActive: true },
-  { ffuId: 'ffu-051', sleeperId: '399379352174768128', teamName: 'Stone Cold Steve Irwins', abbreviation: 'SCSI', joinedYear: 2021, isActive: true },
+  { ffuId: 'ffu-051', sleeperId: '399379352174768128', teamName: 'Stone Cold Steve Irwins', abbreviation: 'SCSI', joinedYear: 2020, isActive: true, espnUsername: 'scsi', historicalTeamNames: { '2020': 'Stone Cold Steve Irwins' } },
+  
+  // Historical users who participated in ESPN era but didn't continue to Sleeper era
+  { ffuId: 'ffu-h01', sleeperId: 'historical-naptown-makos', teamName: 'Naptown Makos', abbreviation: 'NM', joinedYear: 2020, isActive: false, espnUsername: 'makos', historicalTeamNames: { '2020': 'Naptown Makos' } },
+  { ffuId: 'ffu-h02', sleeperId: 'historical-speedway-ritual-cog', teamName: 'Speedway Ritual Cog', abbreviation: 'SRC', joinedYear: 2020, isActive: false, espnUsername: 'cog', historicalTeamNames: { '2020': 'Speedway Ritual Cog' } },
 ];
 
 // Helper functions for accessing data
@@ -260,6 +264,73 @@ export const convertSleeperIdToFFUId = (sleeperId: string): string | null => {
 
 export const convertFFUIdToSleeperId = (ffuId: string): string | null => {
   return getSleeperIdByFFUId(ffuId);
+};
+
+// Historical team name utilities
+export const getTeamNameForYear = (userId: string, year: string): string | null => {
+  if (!userId?.trim() || !year?.trim()) return null;
+  
+  // Try to find user by Sleeper ID first (backward compatibility)
+  let user = USERS.find(u => u.sleeperId === userId);
+  
+  // If not found, try by FFU ID
+  if (!user) {
+    user = USERS.find(u => u.ffuId === userId);
+  }
+  
+  if (!user) return null;
+  
+  // Check if we have a historical team name for this year
+  if (user.historicalTeamNames && user.historicalTeamNames[year]) {
+    return user.historicalTeamNames[year];
+  }
+  
+  // Fall back to current team name
+  return user.teamName;
+};
+
+export const getTeamNameForYearByFFUId = (ffuId: string, year: string): string | null => {
+  if (!ffuId?.trim() || !year?.trim()) return null;
+  
+  const user = USERS.find(u => u.ffuId === ffuId);
+  if (!user) return null;
+  
+  // Check if we have a historical team name for this year
+  if (user.historicalTeamNames && user.historicalTeamNames[year]) {
+    return user.historicalTeamNames[year];
+  }
+  
+  // Fall back to current team name
+  return user.teamName;
+};
+
+export const hasHistoricalTeamName = (userId: string, year: string): boolean => {
+  if (!userId?.trim() || !year?.trim()) return false;
+  
+  // Try to find user by Sleeper ID first (backward compatibility)
+  let user = USERS.find(u => u.sleeperId === userId);
+  
+  // If not found, try by FFU ID
+  if (!user) {
+    user = USERS.find(u => u.ffuId === userId);
+  }
+  
+  return !!(user?.historicalTeamNames?.[year]);
+};
+
+// Get all historical team names for a user
+export const getAllHistoricalTeamNames = (userId: string): Record<string, string> => {
+  if (!userId?.trim()) return {};
+  
+  // Try to find user by Sleeper ID first (backward compatibility)
+  let user = USERS.find(u => u.sleeperId === userId);
+  
+  // If not found, try by FFU ID
+  if (!user) {
+    user = USERS.find(u => u.ffuId === userId);
+  }
+  
+  return user?.historicalTeamNames || {};
 };
 
 // Re-export era detection utilities for convenience

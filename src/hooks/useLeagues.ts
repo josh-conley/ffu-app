@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { leagueApi } from '../services/api';
+import { getSeasonLength } from '../utils/era-detection';
 import type { 
   EnhancedLeagueSeasonData, 
   LeagueTier, 
@@ -106,8 +107,11 @@ export const useWeekMatchups = (league: LeagueTier, year: string, week: number):
   const [error, setError] = useState<string>();
 
   const fetchData = useCallback(async () => {
-    if (!league || !year || !week || week < 1 || week > 18) {
-      setError('Valid league, year, and week (1-18) are required');
+    // Get era-aware season length for validation
+    const seasonLength = getSeasonLength(year);
+    
+    if (!league || !year || !week || week < 1 || week > seasonLength) {
+      setError(`Valid league, year, and week (1-${seasonLength}) are required`);
       setIsLoading(false);
       return;
     }

@@ -6,6 +6,7 @@ import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import { AllMembersStatsTable } from '../components/Players/AllMembersStatsTable';
+import { getFFUIdBySleeperId } from '../config/constants';
 import type { LeagueTier, UserInfo } from '../types';
 import { Trophy, Medal, Award, TrendingDown, Calendar, Target, BarChart3, ChevronDown, ChevronUp, Percent, TrendingUp, Share2, Check, Zap, Users } from 'lucide-react';
 
@@ -120,8 +121,13 @@ export const PlayerStats = () => {
     // Process all standings data
     standings.forEach(leagueData => {
       leagueData.standings.forEach(standing => {
-        // Use FFU ID as primary key, fall back to legacy user ID if needed
-        const playerId = standing.ffuUserId || standing.userId;
+        // Use FFU ID as primary key, with robust fallback logic
+        let playerId = standing.ffuUserId;
+        
+        // If no FFU ID, try to convert from legacy user ID
+        if (!playerId || playerId === 'unknown') {
+          playerId = getFFUIdBySleeperId(standing.userId) || standing.userId;
+        }
         if (!playerMap[playerId]) {
           playerMap[playerId] = {
             userId: standing.userId, // Legacy ID
