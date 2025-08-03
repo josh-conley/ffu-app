@@ -7,7 +7,7 @@ import { DraftList } from '../components/Draft/DraftList';
 import type { DraftData, UserInfo, LeagueTier } from '../types';
 import { dataService } from '../services/data.service';
 import { LEAGUE_NAMES, AVAILABLE_YEARS, getAvailableLeaguesForYear } from '../constants/leagues';
-import { getUserInfoBySleeperId } from '../config/constants';
+import { getUserInfoBySleeperId, getFFUIdBySleeperId } from '../config/constants';
 import { ChevronDown } from 'lucide-react';
 
 type ViewMode = 'board' | 'list';
@@ -64,8 +64,10 @@ export const Draft: React.FC = () => {
         const userInfo = getUserInfoBySleeperId(userId);
         
         if (userInfo) {
+          const ffuUserId = getFFUIdBySleeperId(userId) || 'unknown';
           userMapping[userId] = {
             userId,
+            ffuUserId,
             teamName: userInfo.teamName,
             abbreviation: userInfo.abbreviation
           };
@@ -76,8 +78,10 @@ export const Draft: React.FC = () => {
             userMapping[userId] = pickWithUser.userInfo;
           } else {
             // Last fallback
+            const ffuUserId = getFFUIdBySleeperId(userId) || 'unknown';
             userMapping[userId] = {
               userId,
+              ffuUserId,
               teamName: `User ${userId}`,
               abbreviation: 'UNK'
             };

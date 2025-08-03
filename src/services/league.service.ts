@@ -1,6 +1,6 @@
 import { SleeperService } from './sleeper.service';
 import { dataService } from './data.service';
-import { getLeagueId, getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId, isHistoricalYear } from '../config/constants';
+import { getLeagueId, getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId, getUserInfoByFFUId, getFFUIdBySleeperId, isHistoricalYear } from '../config/constants';
 import type { 
   LeagueSeasonData, 
   SeasonStandings, 
@@ -55,16 +55,21 @@ export class LeagueService {
     }
     
     let standings: SeasonStandings[] = rosters
-      .map(roster => ({
-        userId: roster.owner_id,
-        wins: roster.settings?.wins || 0,
-        losses: roster.settings?.losses || 0,
-        pointsFor: (roster.settings?.fpts || 0) + (roster.settings?.fpts_decimal || 0) / 100,
-        pointsAgainst: (roster.settings?.fpts_against || 0) + (roster.settings?.fpts_against_decimal || 0) / 100,
-        rank: 0, // Will be calculated after sorting
-        highGame: memberGameStats[roster.owner_id]?.highGame || 0,
-        lowGame: memberGameStats[roster.owner_id]?.lowGame || 0
-      }));
+      .map(roster => {
+        const sleeperId = roster.owner_id;
+        const ffuUserId = getFFUIdBySleeperId(sleeperId) || 'unknown';
+        return {
+          userId: sleeperId, // Legacy Sleeper ID
+          ffuUserId, // New FFU ID
+          wins: roster.settings?.wins || 0,
+          losses: roster.settings?.losses || 0,
+          pointsFor: (roster.settings?.fpts || 0) + (roster.settings?.fpts_decimal || 0) / 100,
+          pointsAgainst: (roster.settings?.fpts_against || 0) + (roster.settings?.fpts_against_decimal || 0) / 100,
+          rank: 0, // Will be calculated after sorting
+          highGame: memberGameStats[sleeperId]?.highGame || 0,
+          lowGame: memberGameStats[sleeperId]?.lowGame || 0
+        };
+      });
 
     // Get playoff results if available
     let playoffResults: PlayoffResult[] = [];
@@ -263,10 +268,36 @@ export class LeagueService {
   }
 
   private getUserInfo(userId: string): UserInfo {
+    // Try to get user info by Sleeper ID first (backward compatibility)
     const userInfo = getUserInfoBySleeperId(userId);
-    return userInfo 
-      ? { userId, teamName: userInfo.teamName, abbreviation: userInfo.abbreviation }
-      : { userId, teamName: 'Unknown Team', abbreviation: 'UNK' };
+    if (userInfo) {
+      const ffuUserId = getFFUIdBySleeperId(userId) || 'unknown';
+      return { 
+        userId, // Legacy Sleeper ID
+        ffuUserId, // New FFU ID
+        teamName: userInfo.teamName, 
+        abbreviation: userInfo.abbreviation 
+      };
+    }
+    
+    // Try to get user info by FFU ID (new system)
+    const ffuUserInfo = getUserInfoByFFUId(userId);
+    if (ffuUserInfo) {
+      return { 
+        userId: 'legacy-unknown', // No legacy ID available
+        ffuUserId: userId, // This IS the FFU ID
+        teamName: ffuUserInfo.teamName, 
+        abbreviation: ffuUserInfo.abbreviation 
+      };
+    }
+    
+    // Fallback for unknown users
+    return { 
+      userId, 
+      ffuUserId: 'unknown', 
+      teamName: 'Unknown Team', 
+      abbreviation: 'UNK' 
+    };
   }
 
   private processRawMatchups(matchups: any[], rosters: any[]): WeekMatchup[] {
@@ -419,16 +450,20 @@ export class LeagueService {
 
     // STEP 3: Combine results
     playoffPlacements.forEach((placement, userId) => {
+      const ffuUserId = getFFUIdBySleeperId(userId) || 'unknown';
       results.push({
-        userId,
+        userId, // Legacy Sleeper ID
+        ffuUserId, // New FFU ID
         placement,
         placementName: this.getPlacementName(placement)
       });
     });
 
     toiletBowlPlacements.forEach((placement, userId) => {
+      const ffuUserId = getFFUIdBySleeperId(userId) || 'unknown';
       results.push({
-        userId,
+        userId, // Legacy Sleeper ID
+        ffuUserId, // New FFU ID
         placement,
         placementName: this.getPlacementName(placement)
       });

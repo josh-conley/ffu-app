@@ -65,7 +65,8 @@ const calculatePlayoffRecord = (placement: number): { wins: number; losses: numb
 };
 
 interface PlayerCareerStats {
-  userId: string;
+  userId: string; // Deprecated: use ffuUserId instead
+  ffuUserId: string; // Primary identifier
   userInfo: UserInfo;
   totalWins: number;
   totalLosses: number;
@@ -119,9 +120,12 @@ export const PlayerStats = () => {
     // Process all standings data
     standings.forEach(leagueData => {
       leagueData.standings.forEach(standing => {
-        if (!playerMap[standing.userId]) {
-          playerMap[standing.userId] = {
-            userId: standing.userId,
+        // Use FFU ID as primary key, fall back to legacy user ID if needed
+        const playerId = standing.ffuUserId || standing.userId;
+        if (!playerMap[playerId]) {
+          playerMap[playerId] = {
+            userId: standing.userId, // Legacy ID
+            ffuUserId: standing.ffuUserId || 'unknown', // Primary ID
             userInfo: standing.userInfo,
             totalWins: 0,
             totalLosses: 0,
@@ -141,7 +145,7 @@ export const PlayerStats = () => {
           };
         }
 
-        const player = playerMap[standing.userId];
+        const player = playerMap[playerId];
         
         // Accumulate totals
         player.totalWins += standing.wins;
@@ -156,7 +160,10 @@ export const PlayerStats = () => {
         else if (standing.rank === leagueData.standings.length) player.lastPlaceFinishes++;
 
         // Check for playoff finish and calculate playoff wins/losses
-        const playoffFinish = leagueData.playoffResults?.find(p => p.userId === standing.userId);
+        const playoffFinish = leagueData.playoffResults?.find(p => 
+          (p.ffuUserId && p.ffuUserId === standing.ffuUserId) || 
+          (p.userId === standing.userId)
+        );
         if (playoffFinish) {
           player.playoffAppearances++;
           
