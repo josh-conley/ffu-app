@@ -386,19 +386,19 @@ function determineplacementType(team1Name, team2Name, team1Score, team2Score, fi
 
 // Generate draft data
 function generateDraftData(draftData) {
-  const picks = draftData.map((pick, index) => {
+  // First pass: collect all picks and establish team order
+  const allPicks = draftData.map((pick, index) => {
     const pickInfo = pick.Pick.match(/(\d+)\.(\d+) \((\d+)\)/);
     if (!pickInfo) return null;
     
     const [, round, pickInRound, overallPick] = pickInfo;
     const playerInfo = pick.Player.split(' · ');
-    
     const userInfo = getUserByTeamName(pick.Team);
     
     return {
       pickNumber: parseInt(overallPick),
       round: parseInt(round),
-      draftSlot: parseInt(pickInRound),
+      pickInRound: parseInt(pickInRound),
       playerId: `espn-player-${playerInfo[0].toLowerCase().replace(/\s+/g, '-')}`,
       playerInfo: {
         name: playerInfo[0],
@@ -406,27 +406,64 @@ function generateDraftData(draftData) {
         team: playerInfo[2] ? playerInfo[2].replace(/[()]/g, '') : 'UNKNOWN'
       },
       pickedBy: userInfo.userId,
-      pickedByFFUUserId: userInfo.ffuUserId,
       userInfo: {
+        userId: userInfo.userId,
+        ffuUserId: userInfo.ffuUserId,
         teamName: userInfo.teamName,
         abbreviation: userInfo.abbreviation
       },
       draftId: 'espn-2020-premier-draft'
     };
   }).filter(Boolean);
+
+  // Extract draft order from first round
+  const round1Picks = allPicks.filter(pick => pick.round === 1).sort((a, b) => a.pickInRound - b.pickInRound);
+  const draftOrderArray = round1Picks.map(pick => pick.pickedBy);
   
+  // Calculate correct draftSlot for snake draft
+  const picks = allPicks.map(pick => {
+    const { round, pickInRound } = pick;
+    let draftSlot;
+    
+    if (round % 2 === 1) {
+      // Odd rounds: normal order (1, 2, 3, ..., 12)
+      draftSlot = pickInRound;
+    } else {
+      // Even rounds: reverse order (12, 11, 10, ..., 1)  
+      draftSlot = 13 - pickInRound;
+    }
+    
+    return {
+      ...pick,
+      draftSlot
+    };
+  });
+  
+  // Generate draft order mapping from first round order
+  const draftOrder = {};
+  draftOrderArray.forEach((userId, index) => {
+    draftOrder[userId] = index + 1;
+  });
+
   return {
     draftId: 'espn-2020-premier-draft',
     leagueId: 'espn-2020-premier',
     year: '2020',
     league: 'PREMIER',
+    draftOrder,
     picks,
     settings: {
-      rounds: 15,
       teams: 12,
-      pickTimeLimit: 60,
-      type: 'snake'
-    }
+      rounds: 15,
+      draftType: 'snake'
+    },
+    metadata: {
+      name: 'ESPN 2020 Premier Draft',
+      description: 'Premier League Draft for 2020 season',
+      scoringType: 'standard'
+    },
+    startTime: new Date('2020-08-15').getTime(), // Approximate draft date
+    status: 'complete'
   };
 }
 

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { leagueApi } from '../services/api';
-import { getSeasonLength } from '../utils/era-detection';
+import { getSeasonLength, getPlayoffWeeks } from '../utils/era-detection';
+import { getAllYears } from '../config/constants';
 import type { 
   EnhancedLeagueSeasonData, 
   LeagueTier, 
@@ -215,7 +216,7 @@ export const useHeadToHeadMatchups = (player1Id: string, player2Id: string): Use
       
       // Fetch all season matchups for all leagues and years
       const allLeagues: LeagueTier[] = ['PREMIER', 'MASTERS', 'NATIONAL'];
-      const allYears = ['2024', '2023', '2022', '2021'];
+      const allYears = getAllYears();
       
       const headToHeadMatchups: HeadToHeadMatchup[] = [];
       
@@ -233,6 +234,10 @@ export const useHeadToHeadMatchups = (player1Id: string, player2Id: string): Use
                   (matchup.winner === player2Id && matchup.loser === player1Id);
                 
                 if (isHeadToHead) {
+                  // Determine if this is a playoff week based on era
+                  const playoffWeeks = getPlayoffWeeks(year);
+                  const isPlayoffWeek = playoffWeeks.includes(weekData.week);
+                  
                   headToHeadMatchups.push({
                     year,
                     league,
@@ -243,7 +248,7 @@ export const useHeadToHeadMatchups = (player1Id: string, player2Id: string): Use
                     loserScore: matchup.loserScore,
                     winnerInfo: matchup.winnerInfo,
                     loserInfo: matchup.loserInfo,
-                    isPlayoff: weekData.week > 17,
+                    isPlayoff: isPlayoffWeek,
                     placementType: matchup.placementType
                   });
                 }
