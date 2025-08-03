@@ -156,6 +156,24 @@ export const getDefaultUserInfo = (): { teamName: string; abbreviation: string }
   abbreviation: 'UNK'
 });
 
+// Abbreviation mapping utilities for URL state management
+export const getSleeperIdByAbbreviation = (abbreviation: string): string | null => {
+  if (!abbreviation?.trim()) return null;
+  const user = USERS.find(u => u.abbreviation.toLowerCase() === abbreviation.toLowerCase());
+  return user?.sleeperId || null;
+};
+
+export const getAbbreviationBySleeperId = (sleeperId: string): string | null => {
+  if (!sleeperId?.trim()) return null;
+  const user = USERS.find(u => u.sleeperId === sleeperId);
+  return user?.abbreviation || null;
+};
+
+export const isValidAbbreviation = (abbreviation: string): boolean => {
+  if (!abbreviation?.trim()) return false;
+  return USERS.some(u => u.abbreviation.toLowerCase() === abbreviation.toLowerCase());
+};
+
 export const getAllLeagueConfigs = (): LeagueConfig[] => {
   return [...LEAGUES].sort((a, b) => {
     if (a.year !== b.year) return b.year.localeCompare(a.year);

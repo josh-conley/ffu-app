@@ -314,6 +314,36 @@ export interface UseWeekMatchupsReturn {
   error?: string;
 }
 
+// Head-to-head comparison types
+export interface HeadToHeadMatchup {
+  year: string;
+  league: LeagueTier;
+  week: number;
+  winner: string;
+  loser: string;
+  winnerScore: number;
+  loserScore: number;
+  winnerInfo: UserInfo;
+  loserInfo: UserInfo;
+  isPlayoff?: boolean;
+  placementType?: string;
+}
+
+export interface HeadToHeadStats {
+  player1Wins: number;
+  player2Wins: number;
+  totalGames: number;
+  player1AvgScore: number;
+  player2AvgScore: number;
+  matchups: HeadToHeadMatchup[];
+}
+
+export interface UseHeadToHeadReturn {
+  data: HeadToHeadStats | null;
+  isLoading: boolean;
+  error?: string;
+}
+
 // Records types
 export interface GameRecord {
   userInfo: UserInfo;
