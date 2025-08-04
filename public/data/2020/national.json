@@ -121,16 +121,16 @@
       }
     },
     {
-      "userId": "historical-purple-parade",
-      "ffuUserId": "ffu-037",
+      "userId": "705642514408886272",
+      "ffuUserId": "ffu-007",
       "wins": 5,
       "losses": 8,
       "pointsFor": 1415.3,
       "pointsAgainst": 1372.3,
       "rank": 10,
       "userInfo": {
-        "teamName": "Purple Parade",
-        "abbreviation": "PP"
+        "teamName": "The Dark Knights",
+        "abbreviation": "BATS"
       }
     },
     {
@@ -252,13 +252,13 @@
       }
     },
     {
-      "userId": "historical-purple-parade",
-      "ffuUserId": "ffu-037",
+      "userId": "705642514408886272",
+      "ffuUserId": "ffu-007",
       "placement": 10,
       "placementName": "10th",
       "userInfo": {
-        "teamName": "Purple Parade",
-        "abbreviation": "PP"
+        "teamName": "The Dark Knights",
+        "abbreviation": "BATS"
       }
     },
     {
@@ -299,7 +299,7 @@
         "loserScore": 100.5
       },
       {
-        "winner": "historical-purple-parade",
+        "winner": "705642514408886272",
         "loser": "507633950666584064",
         "winnerScore": 128.95,
         "loserScore": 124.4
@@ -350,7 +350,7 @@
       },
       {
         "winner": "399297882890440704",
-        "loser": "historical-purple-parade",
+        "loser": "705642514408886272",
         "winnerScore": 126.3,
         "loserScore": 121.05
       },
@@ -382,7 +382,7 @@
       },
       {
         "winner": "396808818157182976",
-        "loser": "historical-purple-parade",
+        "loser": "705642514408886272",
         "winnerScore": 132.35,
         "loserScore": 108.2
       },
@@ -413,7 +413,7 @@
         "loserScore": 76.35
       },
       {
-        "winner": "historical-purple-parade",
+        "winner": "705642514408886272",
         "loser": "599711204499312640",
         "winnerScore": 124.35,
         "loserScore": 118.25
@@ -452,7 +452,7 @@
       },
       {
         "winner": "727366898383122432",
-        "loser": "historical-purple-parade",
+        "loser": "705642514408886272",
         "winnerScore": 126.2,
         "loserScore": 121.25
       },
@@ -490,7 +490,7 @@
       },
       {
         "winner": "467553389673181184",
-        "loser": "historical-purple-parade",
+        "loser": "705642514408886272",
         "winnerScore": 112.25,
         "loserScore": 95.15
       },
@@ -516,7 +516,7 @@
     "7": [
       {
         "winner": "508719015656099840",
-        "loser": "historical-purple-parade",
+        "loser": "705642514408886272",
         "winnerScore": 94.85,
         "loserScore": 90.95
       },
@@ -554,7 +554,7 @@
     "8": [
       {
         "winner": "399322397750124544",
-        "loser": "historical-purple-parade",
+        "loser": "705642514408886272",
         "winnerScore": 98.65,
         "loserScore": 76
       },
@@ -615,7 +615,7 @@
         "loserScore": 127
       },
       {
-        "winner": "historical-purple-parade",
+        "winner": "705642514408886272",
         "loser": "710981985102802944",
         "winnerScore": 106.15,
         "loserScore": 57.75
@@ -659,7 +659,7 @@
         "loserScore": 98.7
       },
       {
-        "winner": "historical-purple-parade",
+        "winner": "705642514408886272",
         "loser": "465884883869233152",
         "winnerScore": 115.75,
         "loserScore": 49.6
@@ -680,7 +680,7 @@
       },
       {
         "winner": "507633950666584064",
-        "loser": "historical-purple-parade",
+        "loser": "705642514408886272",
         "winnerScore": 102.05,
         "loserScore": 96.9
       },
@@ -723,7 +723,7 @@
         "loserScore": 136.25
       },
       {
-        "winner": "historical-purple-parade",
+        "winner": "705642514408886272",
         "loser": "399297882890440704",
         "winnerScore": 121.6,
         "loserScore": 120.3
@@ -744,7 +744,7 @@
     "13": [
       {
         "winner": "527884868880531456",
-        "loser": "historical-purple-parade",
+        "loser": "705642514408886272",
         "winnerScore": 109.35,
         "loserScore": 109
       },
@@ -781,7 +781,7 @@
     ],
     "14": [
       {
-        "winner": "historical-purple-parade",
+        "winner": "705642514408886272",
         "loser": "465884883869233152",
         "winnerScore": 102.45,
         "loserScore": 72.8,
@@ -840,7 +840,7 @@
       },
       {
         "winner": "399297882890440704",
-        "loser": "historical-purple-parade",
+        "loser": "705642514408886272",
         "winnerScore": 143.05,
         "loserScore": 132,
         "placementType": "Toilet Bowl Semifinal"
@@ -891,7 +891,7 @@
       },
       {
         "winner": "465884883869233152",
-        "loser": "historical-purple-parade",
+        "loser": "705642514408886272",
         "winnerScore": 108.75,
         "loserScore": 91.6,
         "placementType": "9th Place"
@@ -919,7 +919,7 @@
       "727366898383122432": 5,
       "508719015656099840": 6,
       "467553389673181184": 7,
-      "historical-purple-parade": 8,
+      "705642514408886272": 8,
       "507633950666584064": 9,
       "396808818157182976": 10,
       "527884868880531456": 11,
@@ -1076,12 +1076,12 @@
           "position": "QB",
           "team": "HOU"
         },
-        "pickedBy": "historical-purple-parade",
+        "pickedBy": "705642514408886272",
         "userInfo": {
-          "userId": "historical-purple-parade",
-          "ffuUserId": "ffu-037",
-          "teamName": "Purple Parade",
-          "abbreviation": "PP"
+          "userId": "705642514408886272",
+          "ffuUserId": "ffu-007",
+          "teamName": "The Dark Knights",
+          "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -1256,12 +1256,12 @@
           "position": "RB",
           "team": "LV"
         },
-        "pickedBy": "historical-purple-parade",
+        "pickedBy": "705642514408886272",
         "userInfo": {
-          "userId": "historical-purple-parade",
-          "ffuUserId": "ffu-037",
-          "teamName": "Purple Parade",
-          "abbreviation": "PP"
+          "userId": "705642514408886272",
+          "ffuUserId": "ffu-007",
+          "teamName": "The Dark Knights",
+          "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -1556,12 +1556,12 @@
           "position": "RB",
           "team": "LAC"
         },
-        "pickedBy": "historical-purple-parade",
+        "pickedBy": "705642514408886272",
         "userInfo": {
-          "userId": "historical-purple-parade",
-          "ffuUserId": "ffu-037",
-          "teamName": "Purple Parade",
-          "abbreviation": "PP"
+          "userId": "705642514408886272",
+          "ffuUserId": "ffu-007",
+          "teamName": "The Dark Knights",
+          "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -1736,12 +1736,12 @@
           "position": "WR",
           "team": "PIT"
         },
-        "pickedBy": "historical-purple-parade",
+        "pickedBy": "705642514408886272",
         "userInfo": {
-          "userId": "historical-purple-parade",
-          "ffuUserId": "ffu-037",
-          "teamName": "Purple Parade",
-          "abbreviation": "PP"
+          "userId": "705642514408886272",
+          "ffuUserId": "ffu-007",
+          "teamName": "The Dark Knights",
+          "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -2036,12 +2036,12 @@
           "position": "WR",
           "team": "CLE"
         },
-        "pickedBy": "historical-purple-parade",
+        "pickedBy": "705642514408886272",
         "userInfo": {
-          "userId": "historical-purple-parade",
-          "ffuUserId": "ffu-037",
-          "teamName": "Purple Parade",
-          "abbreviation": "PP"
+          "userId": "705642514408886272",
+          "ffuUserId": "ffu-007",
+          "teamName": "The Dark Knights",
+          "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -2216,12 +2216,12 @@
           "position": "TE",
           "team": "SF"
         },
-        "pickedBy": "historical-purple-parade",
+        "pickedBy": "705642514408886272",
         "userInfo": {
-          "userId": "historical-purple-parade",
-          "ffuUserId": "ffu-037",
-          "teamName": "Purple Parade",
-          "abbreviation": "PP"
+          "userId": "705642514408886272",
+          "ffuUserId": "ffu-007",
+          "teamName": "The Dark Knights",
+          "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -2516,12 +2516,12 @@
           "position": "WR",
           "team": "CIN"
         },
-        "pickedBy": "historical-purple-parade",
+        "pickedBy": "705642514408886272",
         "userInfo": {
-          "userId": "historical-purple-parade",
-          "ffuUserId": "ffu-037",
-          "teamName": "Purple Parade",
-          "abbreviation": "PP"
+          "userId": "705642514408886272",
+          "ffuUserId": "ffu-007",
+          "teamName": "The Dark Knights",
+          "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -2696,12 +2696,12 @@
           "position": "TE",
           "team": "NYG"
         },
-        "pickedBy": "historical-purple-parade",
+        "pickedBy": "705642514408886272",
         "userInfo": {
-          "userId": "historical-purple-parade",
-          "ffuUserId": "ffu-037",
-          "teamName": "Purple Parade",
-          "abbreviation": "PP"
+          "userId": "705642514408886272",
+          "ffuUserId": "ffu-007",
+          "teamName": "The Dark Knights",
+          "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -2996,12 +2996,12 @@
           "position": "DEF",
           "team": "BAL"
         },
-        "pickedBy": "historical-purple-parade",
+        "pickedBy": "705642514408886272",
         "userInfo": {
-          "userId": "historical-purple-parade",
-          "ffuUserId": "ffu-037",
-          "teamName": "Purple Parade",
-          "abbreviation": "PP"
+          "userId": "705642514408886272",
+          "ffuUserId": "ffu-007",
+          "teamName": "The Dark Knights",
+          "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -3176,12 +3176,12 @@
           "position": "WR",
           "team": "BUF"
         },
-        "pickedBy": "historical-purple-parade",
+        "pickedBy": "705642514408886272",
         "userInfo": {
-          "userId": "historical-purple-parade",
-          "ffuUserId": "ffu-037",
-          "teamName": "Purple Parade",
-          "abbreviation": "PP"
+          "userId": "705642514408886272",
+          "ffuUserId": "ffu-007",
+          "teamName": "The Dark Knights",
+          "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -3476,12 +3476,12 @@
           "position": "WR",
           "team": "CAR"
         },
-        "pickedBy": "historical-purple-parade",
+        "pickedBy": "705642514408886272",
         "userInfo": {
-          "userId": "historical-purple-parade",
-          "ffuUserId": "ffu-037",
-          "teamName": "Purple Parade",
-          "abbreviation": "PP"
+          "userId": "705642514408886272",
+          "ffuUserId": "ffu-007",
+          "teamName": "The Dark Knights",
+          "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -3656,12 +3656,12 @@
           "position": "RB",
           "team": "DAL"
         },
-        "pickedBy": "historical-purple-parade",
+        "pickedBy": "705642514408886272",
         "userInfo": {
-          "userId": "historical-purple-parade",
-          "ffuUserId": "ffu-037",
-          "teamName": "Purple Parade",
-          "abbreviation": "PP"
+          "userId": "705642514408886272",
+          "ffuUserId": "ffu-007",
+          "teamName": "The Dark Knights",
+          "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -3956,12 +3956,12 @@
           "position": "WR",
           "team": "IND"
         },
-        "pickedBy": "historical-purple-parade",
+        "pickedBy": "705642514408886272",
         "userInfo": {
-          "userId": "historical-purple-parade",
-          "ffuUserId": "ffu-037",
-          "teamName": "Purple Parade",
-          "abbreviation": "PP"
+          "userId": "705642514408886272",
+          "ffuUserId": "ffu-007",
+          "teamName": "The Dark Knights",
+          "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -4136,12 +4136,12 @@
           "position": "RB",
           "team": "NE"
         },
-        "pickedBy": "historical-purple-parade",
+        "pickedBy": "705642514408886272",
         "userInfo": {
-          "userId": "historical-purple-parade",
-          "ffuUserId": "ffu-037",
-          "teamName": "Purple Parade",
-          "abbreviation": "PP"
+          "userId": "705642514408886272",
+          "ffuUserId": "ffu-007",
+          "teamName": "The Dark Knights",
+          "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -4436,12 +4436,12 @@
           "position": "QB",
           "team": "MIN"
         },
-        "pickedBy": "historical-purple-parade",
+        "pickedBy": "705642514408886272",
         "userInfo": {
-          "userId": "historical-purple-parade",
-          "ffuUserId": "ffu-037",
-          "teamName": "Purple Parade",
-          "abbreviation": "PP"
+          "userId": "705642514408886272",
+          "ffuUserId": "ffu-007",
+          "teamName": "The Dark Knights",
+          "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8

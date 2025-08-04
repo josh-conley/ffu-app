@@ -162,13 +162,8 @@ export class LeagueService {
       if (historicalData) {
         const weekMatchups = historicalData.matchupsByWeek[week];
         if (weekMatchups) {
-          // Only convert ESPN era data (2018-2020) - Sleeper era data (2021+) is already in correct format
-          if (isEspnEra(year)) {
-            return this.convertHistoricalMatchupsToWeekMatchups(weekMatchups);
-          } else {
-            // Sleeper era data is already in WeekMatchup[] format
-            return weekMatchups;
-          }
+          // Both ESPN era (2018-2020) and Sleeper era (2021+) data are already in WeekMatchup[] format
+          return weekMatchups;
         }
       }
       // Fall back to API if historical data not available

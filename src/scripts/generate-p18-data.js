@@ -87,6 +87,7 @@ const teamNameMapping = {
   'The Minutemen': 'mmen',
   "Disney's PigskinSlingers": 'bandits',
   'Durham Handsome Devils': 'devils',
+  'Durham Actually Ugly D...': 'devils', // Truncated name from matchups CSV
   'FFUcked Up': 'ffuckedup',
   'The Stallions': 'stallions',
   'Not Your Average Joes': 'joes',
@@ -95,7 +96,8 @@ const teamNameMapping = {
   'Indianapolis Aztecs': 'aztecs',
   'El Guapo Puto': 'guapo',
   'The Losers': 'losers',
-  'Currier Island Raging Rhinos': 'rhinos'
+  'Currier Island Raging Rhinos': 'rhinos',
+  'Currier Island Raging ...': 'rhinos' // Truncated name from matchups CSV
 };
 
 // Helper function to get user info by team name
@@ -245,9 +247,12 @@ function generateMatchupsByWeek(matchupsData, teamsData) {
   const finalRankings = {};
   teamsData.forEach(team => {
     finalRankings[team.Team] = parseInt(team['Final Rank']);
-    // Also add truncated version for CSV matching
+    // Also add truncated versions for CSV matching
     if (team.Team === 'Currier Island Raging Rhinos') {
       finalRankings['Currier Island Raging ...'] = parseInt(team['Final Rank']);
+    }
+    if (team.Team === 'Durham Handsome Devils') {
+      finalRankings['Durham Actually Ugly D...'] = parseInt(team['Final Rank']);
     }
   });
   

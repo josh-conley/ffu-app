@@ -95,7 +95,7 @@
       }
     },
     {
-      "userId": "historical-atlanta-handsome-devils",
+      "userId": "historical-durham-handsome-devils",
       "ffuUserId": "ffu-h04",
       "wins": 4,
       "losses": 9,
@@ -232,7 +232,7 @@
       }
     },
     {
-      "userId": "historical-atlanta-handsome-devils",
+      "userId": "historical-durham-handsome-devils",
       "ffuUserId": "ffu-h04",
       "placement": 8,
       "placementName": "8th",
@@ -312,7 +312,7 @@
       },
       {
         "winner": "84006772809285632",
-        "loser": "historical-atlanta-handsome-devils",
+        "loser": "historical-durham-handsome-devils",
         "winnerScore": 97.9,
         "loserScore": 71.5
       },
@@ -332,7 +332,7 @@
       },
       {
         "winner": "399379352174768128",
-        "loser": "historical-atlanta-handsome-devils",
+        "loser": "historical-durham-handsome-devils",
         "winnerScore": 126.75,
         "loserScore": 115.6
       },
@@ -381,7 +381,7 @@
         "loserScore": 121.75
       },
       {
-        "winner": "historical-atlanta-handsome-devils",
+        "winner": "historical-durham-handsome-devils",
         "loser": "472876832719368192",
         "winnerScore": 102.55,
         "loserScore": 101.65
@@ -419,7 +419,7 @@
         "loserScore": 91.25
       },
       {
-        "winner": "historical-atlanta-handsome-devils",
+        "winner": "historical-durham-handsome-devils",
         "loser": "historical-well-done-stakes",
         "winnerScore": 130.95,
         "loserScore": 118.35
@@ -446,7 +446,7 @@
       },
       {
         "winner": "331590801261883392",
-        "loser": "historical-atlanta-handsome-devils",
+        "loser": "historical-durham-handsome-devils",
         "winnerScore": 137.05,
         "loserScore": 135.6
       },
@@ -502,7 +502,7 @@
       },
       {
         "winner": "398576262546735104",
-        "loser": "historical-atlanta-handsome-devils",
+        "loser": "historical-durham-handsome-devils",
         "winnerScore": 115.6,
         "loserScore": 90
       },
@@ -527,7 +527,7 @@
         "loserScore": 82.95
       },
       {
-        "winner": "historical-atlanta-handsome-devils",
+        "winner": "historical-durham-handsome-devils",
         "loser": "396808818157182976",
         "winnerScore": 95.25,
         "loserScore": 94.3
@@ -560,7 +560,7 @@
       },
       {
         "winner": "727366898383122432",
-        "loser": "historical-atlanta-handsome-devils",
+        "loser": "historical-durham-handsome-devils",
         "winnerScore": 129.45,
         "loserScore": 103.5
       },
@@ -592,7 +592,7 @@
     "9": [
       {
         "winner": "726572095210930176",
-        "loser": "historical-atlanta-handsome-devils",
+        "loser": "historical-durham-handsome-devils",
         "winnerScore": 120.75,
         "loserScore": 116.5
       },
@@ -635,7 +635,7 @@
         "loserScore": 113.55
       },
       {
-        "winner": "historical-atlanta-handsome-devils",
+        "winner": "historical-durham-handsome-devils",
         "loser": "325766631336714240",
         "winnerScore": 119.2,
         "loserScore": 106.9
@@ -698,7 +698,7 @@
       },
       {
         "winner": "727368657923063808",
-        "loser": "historical-atlanta-handsome-devils",
+        "loser": "historical-durham-handsome-devils",
         "winnerScore": 108.35,
         "loserScore": 101.05
       }
@@ -712,7 +712,7 @@
       },
       {
         "winner": "399379352174768128",
-        "loser": "historical-atlanta-handsome-devils",
+        "loser": "historical-durham-handsome-devils",
         "winnerScore": 113.35,
         "loserScore": 70.25
       },
@@ -774,7 +774,7 @@
       },
       {
         "winner": "472876832719368192",
-        "loser": "historical-atlanta-handsome-devils",
+        "loser": "historical-durham-handsome-devils",
         "winnerScore": 120,
         "loserScore": 104.9
       }
@@ -802,7 +802,7 @@
         "placementType": "Toilet Bowl Quarterfinal"
       },
       {
-        "winner": "historical-atlanta-handsome-devils",
+        "winner": "historical-durham-handsome-devils",
         "loser": "472876832719368192",
         "winnerScore": 150,
         "loserScore": 76.45,
@@ -832,7 +832,7 @@
         "placementType": "Toilet Bowl Semifinal"
       },
       {
-        "winner": "historical-atlanta-handsome-devils",
+        "winner": "historical-durham-handsome-devils",
         "loser": "398576262546735104",
         "winnerScore": 125,
         "loserScore": 116.8,
@@ -877,7 +877,7 @@
       },
       {
         "winner": "historical-well-done-stakes",
-        "loser": "historical-atlanta-handsome-devils",
+        "loser": "historical-durham-handsome-devils",
         "winnerScore": 87.15,
         "loserScore": 78.2,
         "placementType": "7th Place"
@@ -913,7 +913,7 @@
     "league": "PREMIER",
     "draftOrder": {
       "84006772809285632": 1,
-      "historical-atlanta-handsome-devils": 2,
+      "historical-durham-handsome-devils": 2,
       "325766631336714240": 3,
       "727368657923063808": 4,
       "331590801261883392": 5,
@@ -956,9 +956,9 @@
           "position": "RB",
           "team": "NO"
         },
-        "pickedBy": "historical-atlanta-handsome-devils",
+        "pickedBy": "historical-durham-handsome-devils",
         "userInfo": {
-          "userId": "historical-atlanta-handsome-devils",
+          "userId": "historical-durham-handsome-devils",
           "ffuUserId": "ffu-h04",
           "teamName": "Atlanta Handsome Devils",
           "abbreviation": "AHD"
@@ -1376,9 +1376,9 @@
           "position": "RB",
           "team": "DET"
         },
-        "pickedBy": "historical-atlanta-handsome-devils",
+        "pickedBy": "historical-durham-handsome-devils",
         "userInfo": {
-          "userId": "historical-atlanta-handsome-devils",
+          "userId": "historical-durham-handsome-devils",
           "ffuUserId": "ffu-h04",
           "teamName": "Atlanta Handsome Devils",
           "abbreviation": "AHD"
@@ -1436,9 +1436,9 @@
           "position": "WR",
           "team": "NE"
         },
-        "pickedBy": "historical-atlanta-handsome-devils",
+        "pickedBy": "historical-durham-handsome-devils",
         "userInfo": {
-          "userId": "historical-atlanta-handsome-devils",
+          "userId": "historical-durham-handsome-devils",
           "ffuUserId": "ffu-h04",
           "teamName": "Atlanta Handsome Devils",
           "abbreviation": "AHD"
@@ -1856,9 +1856,9 @@
           "position": "WR",
           "team": "TB"
         },
-        "pickedBy": "historical-atlanta-handsome-devils",
+        "pickedBy": "historical-durham-handsome-devils",
         "userInfo": {
-          "userId": "historical-atlanta-handsome-devils",
+          "userId": "historical-durham-handsome-devils",
           "ffuUserId": "ffu-h04",
           "teamName": "Atlanta Handsome Devils",
           "abbreviation": "AHD"
@@ -1916,9 +1916,9 @@
           "position": "TE",
           "team": "TB"
         },
-        "pickedBy": "historical-atlanta-handsome-devils",
+        "pickedBy": "historical-durham-handsome-devils",
         "userInfo": {
-          "userId": "historical-atlanta-handsome-devils",
+          "userId": "historical-durham-handsome-devils",
           "ffuUserId": "ffu-h04",
           "teamName": "Atlanta Handsome Devils",
           "abbreviation": "AHD"
@@ -2336,9 +2336,9 @@
           "position": "WR",
           "team": "NYJ"
         },
-        "pickedBy": "historical-atlanta-handsome-devils",
+        "pickedBy": "historical-durham-handsome-devils",
         "userInfo": {
-          "userId": "historical-atlanta-handsome-devils",
+          "userId": "historical-durham-handsome-devils",
           "ffuUserId": "ffu-h04",
           "teamName": "Atlanta Handsome Devils",
           "abbreviation": "AHD"
@@ -2396,9 +2396,9 @@
           "position": "WR",
           "team": "ARI"
         },
-        "pickedBy": "historical-atlanta-handsome-devils",
+        "pickedBy": "historical-durham-handsome-devils",
         "userInfo": {
-          "userId": "historical-atlanta-handsome-devils",
+          "userId": "historical-durham-handsome-devils",
           "ffuUserId": "ffu-h04",
           "teamName": "Atlanta Handsome Devils",
           "abbreviation": "AHD"
@@ -2816,9 +2816,9 @@
           "position": "RB",
           "team": "TB"
         },
-        "pickedBy": "historical-atlanta-handsome-devils",
+        "pickedBy": "historical-durham-handsome-devils",
         "userInfo": {
-          "userId": "historical-atlanta-handsome-devils",
+          "userId": "historical-durham-handsome-devils",
           "ffuUserId": "ffu-h04",
           "teamName": "Atlanta Handsome Devils",
           "abbreviation": "AHD"
@@ -2876,9 +2876,9 @@
           "position": "WR",
           "team": "SF"
         },
-        "pickedBy": "historical-atlanta-handsome-devils",
+        "pickedBy": "historical-durham-handsome-devils",
         "userInfo": {
-          "userId": "historical-atlanta-handsome-devils",
+          "userId": "historical-durham-handsome-devils",
           "ffuUserId": "ffu-h04",
           "teamName": "Atlanta Handsome Devils",
           "abbreviation": "AHD"
@@ -3296,9 +3296,9 @@
           "position": "WR",
           "team": "FA"
         },
-        "pickedBy": "historical-atlanta-handsome-devils",
+        "pickedBy": "historical-durham-handsome-devils",
         "userInfo": {
-          "userId": "historical-atlanta-handsome-devils",
+          "userId": "historical-durham-handsome-devils",
           "ffuUserId": "ffu-h04",
           "teamName": "Atlanta Handsome Devils",
           "abbreviation": "AHD"
@@ -3356,9 +3356,9 @@
           "position": "QB",
           "team": "BAL"
         },
-        "pickedBy": "historical-atlanta-handsome-devils",
+        "pickedBy": "historical-durham-handsome-devils",
         "userInfo": {
-          "userId": "historical-atlanta-handsome-devils",
+          "userId": "historical-durham-handsome-devils",
           "ffuUserId": "ffu-h04",
           "teamName": "Atlanta Handsome Devils",
           "abbreviation": "AHD"
@@ -3776,9 +3776,9 @@
           "position": "RB",
           "team": "BAL"
         },
-        "pickedBy": "historical-atlanta-handsome-devils",
+        "pickedBy": "historical-durham-handsome-devils",
         "userInfo": {
-          "userId": "historical-atlanta-handsome-devils",
+          "userId": "historical-durham-handsome-devils",
           "ffuUserId": "ffu-h04",
           "teamName": "Atlanta Handsome Devils",
           "abbreviation": "AHD"
@@ -3836,9 +3836,9 @@
           "position": "WR",
           "team": "MIA"
         },
-        "pickedBy": "historical-atlanta-handsome-devils",
+        "pickedBy": "historical-durham-handsome-devils",
         "userInfo": {
-          "userId": "historical-atlanta-handsome-devils",
+          "userId": "historical-durham-handsome-devils",
           "ffuUserId": "ffu-h04",
           "teamName": "Atlanta Handsome Devils",
           "abbreviation": "AHD"
@@ -4256,9 +4256,9 @@
           "position": "DEF",
           "team": "DAL"
         },
-        "pickedBy": "historical-atlanta-handsome-devils",
+        "pickedBy": "historical-durham-handsome-devils",
         "userInfo": {
-          "userId": "historical-atlanta-handsome-devils",
+          "userId": "historical-durham-handsome-devils",
           "ffuUserId": "ffu-h04",
           "teamName": "Atlanta Handsome Devils",
           "abbreviation": "AHD"
@@ -4316,9 +4316,9 @@
           "position": "K",
           "team": "DET"
         },
-        "pickedBy": "historical-atlanta-handsome-devils",
+        "pickedBy": "historical-durham-handsome-devils",
         "userInfo": {
-          "userId": "historical-atlanta-handsome-devils",
+          "userId": "historical-durham-handsome-devils",
           "ffuUserId": "ffu-h04",
           "teamName": "Atlanta Handsome Devils",
           "abbreviation": "AHD"

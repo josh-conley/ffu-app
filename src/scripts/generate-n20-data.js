@@ -77,7 +77,7 @@ const userMapping = {
   'blackdeath': { ffuId: 'ffu-045', sleeperId: '599711204499312640' },
   // Note: stark (472876832719368192) was not in National 2020, removed from mapping
   'camdelphia': { ffuId: 'ffu-036', sleeperId: '465884883869233152' },
-  'purple': { ffuId: 'ffu-037', sleeperId: 'historical-purple-parade' }, // No current mapping found
+  'purple': { ffuId: 'ffu-007', sleeperId: '705642514408886272' }, // The Dark Knights
   'strikers': { ffuId: 'ffu-038', sleeperId: '467553389673181184' },
   'ffuckedup': { ffuId: 'ffu-039', sleeperId: '396808818157182976' }
 };
@@ -148,7 +148,7 @@ function getCurrentTeamNameBySleeperId(sleeperId) {
     '599711204499312640': 'Team Black Death', // blackdeath
     // Note: 472876832719368192 (stark) was not in National 2020
     '465884883869233152': 'Always Sunny in Camdelphia', // camdelphia
-    'historical-purple-parade': 'Purple Parade', // purple - historical
+    '705642514408886272': 'The Dark Knights', // purple -> ffu-007
     '467553389673181184': 'Brown Town', // strikers
     '396808818157182976': 'FFUcked Up' // ffuckedup
   };
@@ -169,7 +169,7 @@ function getCurrentAbbreviationBySleeperId(sleeperId) {
     '599711204499312640': 'TBD', // blackdeath
     // Note: 472876832719368192 (stark) was not in National 2020
     '465884883869233152': 'ASIC', // camdelphia
-    'historical-purple-parade': 'PP', // purple - historical
+    '705642514408886272': 'BATS', // purple -> ffu-007
     '467553389673181184': 'BT', // strikers
     '396808818157182976': 'FFU' // ffuckedup
   };

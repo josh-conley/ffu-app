@@ -78,7 +78,7 @@ const userMapping = {
   'ffuckedup': { ffuId: 'ffu-039', sleeperId: '396808818157182976' },
   // Historical users who participated in P19 but didn't continue to Sleeper era
   'stakes': { ffuId: 'ffu-h03', sleeperId: 'historical-well-done-stakes' },
-  'devils': { ffuId: 'ffu-h04', sleeperId: 'historical-atlanta-handsome-devils' },
+  'devils': { ffuId: 'ffu-h04', sleeperId: 'historical-durham-handsome-devils' },
   'stark': { ffuId: 'ffu-042', sleeperId: '472876832719368192' }
 };
 
@@ -148,7 +148,7 @@ function getCurrentTeamNameBySleeperId(sleeperId) {
     '472876832719368192': 'Team Stark', // stark -> ffu-042
     // Historical users who participated in P19 but didn't continue to Sleeper era
     'historical-well-done-stakes': 'The Well Done Stakes', // stakes -> ffu-h03
-    'historical-atlanta-handsome-devils': 'Atlanta Handsome Devils' // devils -> ffu-h04
+    'historical-durham-handsome-devils': 'Atlanta Handsome Devils' // devils -> ffu-h04
   };
   
   return userMappingToCurrent[sleeperId];
@@ -169,7 +169,7 @@ function getCurrentAbbreviationBySleeperId(sleeperId) {
     '472876832719368192': 'STRK', // stark -> ffu-042
     // Historical users who participated in P19 but didn't continue to Sleeper era
     'historical-well-done-stakes': 'WDS', // stakes -> ffu-h03
-    'historical-atlanta-handsome-devils': 'AHD' // devils -> ffu-h04
+    'historical-durham-handsome-devils': 'AHD' // devils -> ffu-h04
   };
   
   return abbreviationMapping[sleeperId];
