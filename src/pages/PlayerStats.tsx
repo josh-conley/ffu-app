@@ -114,6 +114,7 @@ export const PlayerStats = () => {
   } = useUrlPlayerState();
 
   const playerStats = useMemo(() => {
+    console.log(standings)
     if (!standings.length) return [];
 
     const playerMap: Record<string, PlayerCareerStats> = {};
@@ -131,7 +132,7 @@ export const PlayerStats = () => {
         if (!playerMap[playerId]) {
           playerMap[playerId] = {
             userId: standing.userId, // Legacy ID
-            ffuUserId: standing.ffuUserId || 'unknown', // Primary ID
+            ffuUserId: standing.ffuUserId || standing.userId, // Primary ID
             userInfo: standing.userInfo,
             totalWins: 0,
             totalLosses: 0,
