@@ -842,4 +842,65 @@ export class LeagueService {
 
     return result;
   }
+
+  /**
+   * Bulk load all matchup data for head-to-head comparisons
+   * This is much more efficient than loading week-by-week
+   */
+  async getAllMatchupsForComparison(): Promise<{
+    year: string;
+    league: LeagueTier;
+    week: number;
+    matchups: any[];
+  }[]> {
+    const allLeagues = getAllLeagueConfigs();
+    const allMatchupData: {
+      year: string;
+      league: LeagueTier;
+      week: number;
+      matchups: any[];
+    }[] = [];
+
+    // Load all historical data in parallel for better performance
+    const dataLoadPromises = allLeagues.map(async (leagueConfig) => {
+      try {
+        if (isHistoricalYear(leagueConfig.year)) {
+          // Load historical data from JSON files
+          const historicalData = await dataService.loadHistoricalLeagueData(leagueConfig.tier, leagueConfig.year);
+          if (historicalData) {
+            const allWeekData = dataService.getAllHistoricalMatchups(historicalData);
+            
+            return allWeekData.map(({ week, matchups }) => ({
+              year: leagueConfig.year,
+              league: leagueConfig.tier,
+              week,
+              matchups: matchups.map(matchup => ({
+                ...matchup,
+                winnerInfo: this.getUserInfo(matchup.winner),
+                loserInfo: this.getUserInfo(matchup.loser)
+              }))
+            }));
+          }
+        } else {
+          // For current year, skip for now (can be added later if needed)
+          // Most head-to-head comparisons will be historical data anyway
+          console.log(`Skipping current year data for ${leagueConfig.tier} ${leagueConfig.year} - using historical data only for now`);
+        }
+        return [];
+      } catch (error) {
+        console.warn(`Failed to load matchups for ${leagueConfig.tier} ${leagueConfig.year}:`, error);
+        return [];
+      }
+    });
+
+    // Wait for all data to load and flatten results
+    const results = await Promise.all(dataLoadPromises);
+    results.forEach(leagueMatchups => {
+      if (leagueMatchups) {
+        allMatchupData.push(...leagueMatchups);
+      }
+    });
+
+    return allMatchupData;
+  }
 }

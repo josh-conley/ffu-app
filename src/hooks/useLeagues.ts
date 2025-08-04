@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { leagueApi } from '../services/api';
-import { getSeasonLength, getPlayoffWeeks } from '../utils/era-detection';
-import { getAllYears } from '../config/constants';
+import { getSeasonLength } from '../utils/era-detection';
+import { useMatchupCache } from './useMatchupCache';
+import { getHeadToHeadMatchups, calculateHeadToHeadStats } from '../utils/matchup-indexer';
 import type { 
   EnhancedLeagueSeasonData, 
   LeagueTier, 
@@ -200,112 +201,65 @@ export const useAllTimeRecords = (league?: LeagueTier, year?: string) => {
 
 export const useHeadToHeadMatchups = (player1Id: string, player2Id: string): UseHeadToHeadReturn => {
   const [data, setData] = useState<HeadToHeadStats | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>();
+  const { index, isLoading: cacheLoading, error: cacheError } = useMatchupCache();
 
-  const fetchData = useCallback(async () => {
+  const calculateHeadToHead = useCallback(() => {
     if (!player1Id || !player2Id || player1Id === player2Id) {
       setData(null);
-      setIsLoading(false);
+      setError(undefined);
+      return;
+    }
+
+    if (!index) {
+      // Cache not loaded yet
+      setData(null);
+      setError(cacheError || undefined);
       return;
     }
 
     try {
-      setIsLoading(true);
       setError(undefined);
       
-      // Fetch all season matchups for all leagues and years
-      const allLeagues: LeagueTier[] = ['PREMIER', 'MASTERS', 'NATIONAL'];
-      const allYears = getAllYears();
+      // Get head-to-head matchups from index (instant lookup!)
+      const matchups = getHeadToHeadMatchups(index, player1Id, player2Id);
       
-      const headToHeadMatchups: HeadToHeadMatchup[] = [];
+      // Calculate stats using the utility function
+      const stats = calculateHeadToHeadStats(matchups, player1Id, player2Id);
       
-      // Collect all matchups across leagues and years
-      for (const league of allLeagues) {
-        for (const year of allYears) {
-          try {
-            const seasonMatchups = await leagueApi.getAllSeasonMatchups(league, year);
-            
-            // Filter for matchups between the two selected players
-            for (const weekData of seasonMatchups) {
-              for (const matchup of weekData.matchups) {
-                const isHeadToHead = 
-                  (matchup.winner === player1Id && matchup.loser === player2Id) ||
-                  (matchup.winner === player2Id && matchup.loser === player1Id);
-                
-                if (isHeadToHead) {
-                  // Determine if this is a playoff week based on era
-                  const playoffWeeks = getPlayoffWeeks(year);
-                  const isPlayoffWeek = playoffWeeks.includes(weekData.week);
-                  
-                  headToHeadMatchups.push({
-                    year,
-                    league,
-                    week: weekData.week,
-                    winner: matchup.winner,
-                    loser: matchup.loser,
-                    winnerScore: matchup.winnerScore,
-                    loserScore: matchup.loserScore,
-                    winnerInfo: matchup.winnerInfo,
-                    loserInfo: matchup.loserInfo,
-                    isPlayoff: isPlayoffWeek,
-                    placementType: matchup.placementType
-                  });
-                }
-              }
-            }
-          } catch (err) {
-            // Ignore individual league/year fetch errors
-            console.warn(`Could not fetch matchups for ${league} ${year}:`, err);
-          }
-        }
-      }
-
-      // Calculate head-to-head stats
-      const player1Wins = headToHeadMatchups.filter(m => m.winner === player1Id).length;
-      const player2Wins = headToHeadMatchups.filter(m => m.winner === player2Id).length;
-      const totalGames = headToHeadMatchups.length;
-      
-      const player1Scores = headToHeadMatchups.map(m => 
-        m.winner === player1Id ? m.winnerScore : m.loserScore
-      );
-      const player2Scores = headToHeadMatchups.map(m => 
-        m.winner === player2Id ? m.winnerScore : m.loserScore
-      );
-      
-      const player1AvgScore = player1Scores.length > 0 
-        ? player1Scores.reduce((sum, score) => sum + score, 0) / player1Scores.length 
-        : 0;
-      const player2AvgScore = player2Scores.length > 0 
-        ? player2Scores.reduce((sum, score) => sum + score, 0) / player2Scores.length 
-        : 0;
-
-      // Sort matchups by year and week (most recent first)
-      headToHeadMatchups.sort((a, b) => {
-        if (a.year !== b.year) return b.year.localeCompare(a.year);
-        return b.week - a.week;
-      });
+      // Convert indexed matchups to the expected format
+      const headToHeadMatchups: HeadToHeadMatchup[] = matchups.map(matchup => ({
+        year: matchup.year,
+        league: matchup.league,
+        week: matchup.week,
+        winner: matchup.winner,
+        loser: matchup.loser,
+        winnerScore: matchup.winnerScore,
+        loserScore: matchup.loserScore,
+        winnerInfo: matchup.winnerInfo,
+        loserInfo: matchup.loserInfo,
+        isPlayoff: matchup.isPlayoff,
+        placementType: matchup.placementType
+      }));
 
       setData({
-        player1Wins,
-        player2Wins,
-        totalGames,
-        player1AvgScore,
-        player2AvgScore,
+        ...stats,
         matchups: headToHeadMatchups
       });
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch head-to-head matchups';
+      const errorMessage = err instanceof Error ? err.message : 'Failed to calculate head-to-head matchups';
       setError(errorMessage);
-      console.error('Error fetching head-to-head matchups:', err);
-    } finally {
-      setIsLoading(false);
+      console.error('Error calculating head-to-head matchups:', err);
     }
-  }, [player1Id, player2Id]);
+  }, [player1Id, player2Id, index, cacheError]);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    calculateHeadToHead();
+  }, [calculateHeadToHead]);
 
-  return { data, isLoading, error };
+  return { 
+    data, 
+    isLoading: cacheLoading, 
+    error: error || cacheError || undefined
+  };
 };

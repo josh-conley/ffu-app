@@ -287,1570 +287,620 @@
   "matchupsByWeek": {
     "1": [
       {
-        "userId": "462383465753473024",
-        "ffuUserId": "ffu-026",
-        "opponentId": "727368657923063808",
-        "opponentFFUUserId": "ffu-009",
-        "userScore": 115.25,
-        "opponentScore": 134.25,
-        "userInfo": {
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
-        },
-        "opponentInfo": {
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
-        }
+        "winner": "727368657923063808",
+        "loser": "462383465753473024",
+        "winnerScore": 134.25,
+        "loserScore": 115.25
       },
       {
-        "userId": "historical-naptown-makos",
-        "ffuUserId": "ffu-h01",
-        "opponentId": "84006772809285632",
-        "opponentFFUUserId": "ffu-023",
-        "userScore": 151.7,
-        "opponentScore": 104.1,
-        "userInfo": {
-          "teamName": "Naptown Makos",
-          "abbreviation": "NM"
-        },
-        "opponentInfo": {
-          "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
-        }
+        "winner": "historical-naptown-makos",
+        "loser": "84006772809285632",
+        "winnerScore": 151.7,
+        "loserScore": 104.1
       },
       {
-        "userId": "399379352174768128",
-        "ffuUserId": "ffu-051",
-        "opponentId": "325766631336714240",
-        "opponentFFUUserId": "ffu-024",
-        "userScore": 135.25,
-        "opponentScore": 93.45,
-        "userInfo": {
-          "teamName": "Stone Cold Steve Irwins",
-          "abbreviation": "SCSI"
-        },
-        "opponentInfo": {
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
-        }
+        "winner": "399379352174768128",
+        "loser": "325766631336714240",
+        "winnerScore": 135.25,
+        "loserScore": 93.45
       },
       {
-        "userId": "398576262546735104",
-        "ffuUserId": "ffu-004",
-        "opponentId": "729741648338210816",
-        "opponentFFUUserId": "ffu-010",
-        "userScore": 110.4,
-        "opponentScore": 149.3,
-        "userInfo": {
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
-        },
-        "opponentInfo": {
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
-        }
+        "winner": "729741648338210816",
+        "loser": "398576262546735104",
+        "winnerScore": 149.3,
+        "loserScore": 110.4
       },
       {
-        "userId": "historical-speedway-ritual-cog",
-        "ffuUserId": "ffu-h02",
-        "opponentId": "726572095210930176",
-        "opponentFFUUserId": "ffu-031",
-        "userScore": 96.05,
-        "opponentScore": 133.5,
-        "userInfo": {
-          "teamName": "Speedway Ritual Cog",
-          "abbreviation": "SRC"
-        },
-        "opponentInfo": {
-          "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
-        }
+        "winner": "726572095210930176",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 133.5,
+        "loserScore": 96.05
       },
       {
-        "userId": "386791325690994688",
-        "ffuUserId": "ffu-025",
-        "opponentId": "331590801261883392",
-        "opponentFFUUserId": "ffu-001",
-        "userScore": 75.1,
-        "opponentScore": 102.4,
-        "userInfo": {
-          "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
-        },
-        "opponentInfo": {
-          "teamName": "The Stallions",
-          "abbreviation": "STA"
-        }
+        "winner": "331590801261883392",
+        "loser": "386791325690994688",
+        "winnerScore": 102.4,
+        "loserScore": 75.1
       }
     ],
     "2": [
       {
-        "userId": "386791325690994688",
-        "ffuUserId": "ffu-025",
-        "opponentId": "398576262546735104",
-        "opponentFFUUserId": "ffu-004",
-        "userScore": 109.1,
-        "opponentScore": 115,
-        "userInfo": {
-          "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
-        },
-        "opponentInfo": {
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
-        }
+        "winner": "398576262546735104",
+        "loser": "386791325690994688",
+        "winnerScore": 115,
+        "loserScore": 109.1
       },
       {
-        "userId": "462383465753473024",
-        "ffuUserId": "ffu-026",
-        "opponentId": "331590801261883392",
-        "opponentFFUUserId": "ffu-001",
-        "userScore": 96.35,
-        "opponentScore": 140.2,
-        "userInfo": {
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
-        },
-        "opponentInfo": {
-          "teamName": "The Stallions",
-          "abbreviation": "STA"
-        }
+        "winner": "331590801261883392",
+        "loser": "462383465753473024",
+        "winnerScore": 140.2,
+        "loserScore": 96.35
       },
       {
-        "userId": "399379352174768128",
-        "ffuUserId": "ffu-051",
-        "opponentId": "historical-naptown-makos",
-        "opponentFFUUserId": "ffu-h01",
-        "userScore": 133.8,
-        "opponentScore": 137.9,
-        "userInfo": {
-          "teamName": "Stone Cold Steve Irwins",
-          "abbreviation": "SCSI"
-        },
-        "opponentInfo": {
-          "teamName": "Naptown Makos",
-          "abbreviation": "NM"
-        }
+        "winner": "historical-naptown-makos",
+        "loser": "399379352174768128",
+        "winnerScore": 137.9,
+        "loserScore": 133.8
       },
       {
-        "userId": "726572095210930176",
-        "ffuUserId": "ffu-031",
-        "opponentId": "84006772809285632",
-        "opponentFFUUserId": "ffu-023",
-        "userScore": 113.5,
-        "opponentScore": 109.15,
-        "userInfo": {
-          "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
-        },
-        "opponentInfo": {
-          "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
-        }
+        "winner": "726572095210930176",
+        "loser": "84006772809285632",
+        "winnerScore": 113.5,
+        "loserScore": 109.15
       },
       {
-        "userId": "729741648338210816",
-        "ffuUserId": "ffu-010",
-        "opponentId": "727368657923063808",
-        "opponentFFUUserId": "ffu-009",
-        "userScore": 132,
-        "opponentScore": 137.25,
-        "userInfo": {
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
-        },
-        "opponentInfo": {
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
-        }
+        "winner": "727368657923063808",
+        "loser": "729741648338210816",
+        "winnerScore": 137.25,
+        "loserScore": 132
       },
       {
-        "userId": "325766631336714240",
-        "ffuUserId": "ffu-024",
-        "opponentId": "historical-speedway-ritual-cog",
-        "opponentFFUUserId": "ffu-h02",
-        "userScore": 128,
-        "opponentScore": 91.55,
-        "userInfo": {
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
-        },
-        "opponentInfo": {
-          "teamName": "Speedway Ritual Cog",
-          "abbreviation": "SRC"
-        }
+        "winner": "325766631336714240",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 128,
+        "loserScore": 91.55
       }
     ],
     "3": [
       {
-        "userId": "331590801261883392",
-        "ffuUserId": "ffu-001",
-        "opponentId": "398576262546735104",
-        "opponentFFUUserId": "ffu-004",
-        "userScore": 174.3,
-        "opponentScore": 117.4,
-        "userInfo": {
-          "teamName": "The Stallions",
-          "abbreviation": "STA"
-        },
-        "opponentInfo": {
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
-        }
+        "winner": "331590801261883392",
+        "loser": "398576262546735104",
+        "winnerScore": 174.3,
+        "loserScore": 117.4
       },
       {
-        "userId": "729741648338210816",
-        "ffuUserId": "ffu-010",
-        "opponentId": "462383465753473024",
-        "opponentFFUUserId": "ffu-026",
-        "userScore": 130.9,
-        "opponentScore": 124.95,
-        "userInfo": {
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
-        },
-        "opponentInfo": {
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
-        }
+        "winner": "729741648338210816",
+        "loser": "462383465753473024",
+        "winnerScore": 130.9,
+        "loserScore": 124.95
       },
       {
-        "userId": "325766631336714240",
-        "ffuUserId": "ffu-024",
-        "opponentId": "historical-naptown-makos",
-        "opponentFFUUserId": "ffu-h01",
-        "userScore": 142.25,
-        "opponentScore": 95.95,
-        "userInfo": {
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
-        },
-        "opponentInfo": {
-          "teamName": "Naptown Makos",
-          "abbreviation": "NM"
-        }
+        "winner": "325766631336714240",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 142.25,
+        "loserScore": 95.95
       },
       {
-        "userId": "84006772809285632",
-        "ffuUserId": "ffu-023",
-        "opponentId": "historical-speedway-ritual-cog",
-        "opponentFFUUserId": "ffu-h02",
-        "userScore": 141.45,
-        "opponentScore": 81.8,
-        "userInfo": {
-          "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
-        },
-        "opponentInfo": {
-          "teamName": "Speedway Ritual Cog",
-          "abbreviation": "SRC"
-        }
+        "winner": "84006772809285632",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 141.45,
+        "loserScore": 81.8
       },
       {
-        "userId": "727368657923063808",
-        "ffuUserId": "ffu-009",
-        "opponentId": "386791325690994688",
-        "opponentFFUUserId": "ffu-025",
-        "userScore": 136.65,
-        "opponentScore": 95.15,
-        "userInfo": {
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
-        },
-        "opponentInfo": {
-          "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
-        }
+        "winner": "727368657923063808",
+        "loser": "386791325690994688",
+        "winnerScore": 136.65,
+        "loserScore": 95.15
       },
       {
-        "userId": "726572095210930176",
-        "ffuUserId": "ffu-031",
-        "opponentId": "399379352174768128",
-        "opponentFFUUserId": "ffu-051",
-        "userScore": 79.65,
-        "opponentScore": 111.85,
-        "userInfo": {
-          "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
-        },
-        "opponentInfo": {
-          "teamName": "Stone Cold Steve Irwins",
-          "abbreviation": "SCSI"
-        }
+        "winner": "399379352174768128",
+        "loser": "726572095210930176",
+        "winnerScore": 111.85,
+        "loserScore": 79.65
       }
     ],
     "4": [
       {
-        "userId": "399379352174768128",
-        "ffuUserId": "ffu-051",
-        "opponentId": "84006772809285632",
-        "opponentFFUUserId": "ffu-023",
-        "userScore": 139.65,
-        "opponentScore": 99.2,
-        "userInfo": {
-          "teamName": "Stone Cold Steve Irwins",
-          "abbreviation": "SCSI"
-        },
-        "opponentInfo": {
-          "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
-        }
+        "winner": "399379352174768128",
+        "loser": "84006772809285632",
+        "winnerScore": 139.65,
+        "loserScore": 99.2
       },
       {
-        "userId": "historical-speedway-ritual-cog",
-        "ffuUserId": "ffu-h02",
-        "opponentId": "historical-naptown-makos",
-        "opponentFFUUserId": "ffu-h01",
-        "userScore": 114.1,
-        "opponentScore": 139.8,
-        "userInfo": {
-          "teamName": "Speedway Ritual Cog",
-          "abbreviation": "SRC"
-        },
-        "opponentInfo": {
-          "teamName": "Naptown Makos",
-          "abbreviation": "NM"
-        }
+        "winner": "historical-naptown-makos",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 139.8,
+        "loserScore": 114.1
       },
       {
-        "userId": "325766631336714240",
-        "ffuUserId": "ffu-024",
-        "opponentId": "726572095210930176",
-        "opponentFFUUserId": "ffu-031",
-        "userScore": 126.15,
-        "opponentScore": 108.55,
-        "userInfo": {
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
-        },
-        "opponentInfo": {
-          "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
-        }
+        "winner": "325766631336714240",
+        "loser": "726572095210930176",
+        "winnerScore": 126.15,
+        "loserScore": 108.55
       },
       {
-        "userId": "386791325690994688",
-        "ffuUserId": "ffu-025",
-        "opponentId": "729741648338210816",
-        "opponentFFUUserId": "ffu-010",
-        "userScore": 120.15,
-        "opponentScore": 147.4,
-        "userInfo": {
-          "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
-        },
-        "opponentInfo": {
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
-        }
+        "winner": "729741648338210816",
+        "loser": "386791325690994688",
+        "winnerScore": 147.4,
+        "loserScore": 120.15
       },
       {
-        "userId": "462383465753473024",
-        "ffuUserId": "ffu-026",
-        "opponentId": "398576262546735104",
-        "opponentFFUUserId": "ffu-004",
-        "userScore": 124.65,
-        "opponentScore": 94.7,
-        "userInfo": {
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
-        },
-        "opponentInfo": {
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
-        }
+        "winner": "462383465753473024",
+        "loser": "398576262546735104",
+        "winnerScore": 124.65,
+        "loserScore": 94.7
       },
       {
-        "userId": "727368657923063808",
-        "ffuUserId": "ffu-009",
-        "opponentId": "331590801261883392",
-        "opponentFFUUserId": "ffu-001",
-        "userScore": 127.6,
-        "opponentScore": 104.55,
-        "userInfo": {
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
-        },
-        "opponentInfo": {
-          "teamName": "The Stallions",
-          "abbreviation": "STA"
-        }
+        "winner": "727368657923063808",
+        "loser": "331590801261883392",
+        "winnerScore": 127.6,
+        "loserScore": 104.55
       }
     ],
     "5": [
       {
-        "userId": "462383465753473024",
-        "ffuUserId": "ffu-026",
-        "opponentId": "historical-speedway-ritual-cog",
-        "opponentFFUUserId": "ffu-h02",
-        "userScore": 84.25,
-        "opponentScore": 100.15,
-        "userInfo": {
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
-        },
-        "opponentInfo": {
-          "teamName": "Speedway Ritual Cog",
-          "abbreviation": "SRC"
-        }
+        "winner": "historical-speedway-ritual-cog",
+        "loser": "462383465753473024",
+        "winnerScore": 100.15,
+        "loserScore": 84.25
       },
       {
-        "userId": "729741648338210816",
-        "ffuUserId": "ffu-010",
-        "opponentId": "84006772809285632",
-        "opponentFFUUserId": "ffu-023",
-        "userScore": 127.6,
-        "opponentScore": 132.65,
-        "userInfo": {
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
-        },
-        "opponentInfo": {
-          "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
-        }
+        "winner": "84006772809285632",
+        "loser": "729741648338210816",
+        "winnerScore": 132.65,
+        "loserScore": 127.6
       },
       {
-        "userId": "386791325690994688",
-        "ffuUserId": "ffu-025",
-        "opponentId": "399379352174768128",
-        "opponentFFUUserId": "ffu-051",
-        "userScore": 95.25,
-        "opponentScore": 116.7,
-        "userInfo": {
-          "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
-        },
-        "opponentInfo": {
-          "teamName": "Stone Cold Steve Irwins",
-          "abbreviation": "SCSI"
-        }
+        "winner": "399379352174768128",
+        "loser": "386791325690994688",
+        "winnerScore": 116.7,
+        "loserScore": 95.25
       },
       {
-        "userId": "325766631336714240",
-        "ffuUserId": "ffu-024",
-        "opponentId": "331590801261883392",
-        "opponentFFUUserId": "ffu-001",
-        "userScore": 115,
-        "opponentScore": 135.2,
-        "userInfo": {
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
-        },
-        "opponentInfo": {
-          "teamName": "The Stallions",
-          "abbreviation": "STA"
-        }
+        "winner": "331590801261883392",
+        "loser": "325766631336714240",
+        "winnerScore": 135.2,
+        "loserScore": 115
       },
       {
-        "userId": "398576262546735104",
-        "ffuUserId": "ffu-004",
-        "opponentId": "historical-naptown-makos",
-        "opponentFFUUserId": "ffu-h01",
-        "userScore": 117.25,
-        "opponentScore": 75.65,
-        "userInfo": {
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
-        },
-        "opponentInfo": {
-          "teamName": "Naptown Makos",
-          "abbreviation": "NM"
-        }
+        "winner": "398576262546735104",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 117.25,
+        "loserScore": 75.65
       },
       {
-        "userId": "726572095210930176",
-        "ffuUserId": "ffu-031",
-        "opponentId": "727368657923063808",
-        "opponentFFUUserId": "ffu-009",
-        "userScore": 119.95,
-        "opponentScore": 141.25,
-        "userInfo": {
-          "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
-        },
-        "opponentInfo": {
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
-        }
+        "winner": "727368657923063808",
+        "loser": "726572095210930176",
+        "winnerScore": 141.25,
+        "loserScore": 119.95
       }
     ],
     "6": [
       {
-        "userId": "729741648338210816",
-        "ffuUserId": "ffu-010",
-        "opponentId": "historical-naptown-makos",
-        "opponentFFUUserId": "ffu-h01",
-        "userScore": 93.65,
-        "opponentScore": 81.65,
-        "userInfo": {
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
-        },
-        "opponentInfo": {
-          "teamName": "Naptown Makos",
-          "abbreviation": "NM"
-        }
+        "winner": "729741648338210816",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 93.65,
+        "loserScore": 81.65
       },
       {
-        "userId": "399379352174768128",
-        "ffuUserId": "ffu-051",
-        "opponentId": "727368657923063808",
-        "opponentFFUUserId": "ffu-009",
-        "userScore": 112.2,
-        "opponentScore": 76.65,
-        "userInfo": {
-          "teamName": "Stone Cold Steve Irwins",
-          "abbreviation": "SCSI"
-        },
-        "opponentInfo": {
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
-        }
+        "winner": "399379352174768128",
+        "loser": "727368657923063808",
+        "winnerScore": 112.2,
+        "loserScore": 76.65
       },
       {
-        "userId": "331590801261883392",
-        "ffuUserId": "ffu-001",
-        "opponentId": "historical-speedway-ritual-cog",
-        "opponentFFUUserId": "ffu-h02",
-        "userScore": 128.6,
-        "opponentScore": 79.45,
-        "userInfo": {
-          "teamName": "The Stallions",
-          "abbreviation": "STA"
-        },
-        "opponentInfo": {
-          "teamName": "Speedway Ritual Cog",
-          "abbreviation": "SRC"
-        }
+        "winner": "331590801261883392",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 128.6,
+        "loserScore": 79.45
       },
       {
-        "userId": "398576262546735104",
-        "ffuUserId": "ffu-004",
-        "opponentId": "84006772809285632",
-        "opponentFFUUserId": "ffu-023",
-        "userScore": 89.65,
-        "opponentScore": 108.4,
-        "userInfo": {
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
-        },
-        "opponentInfo": {
-          "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
-        }
+        "winner": "84006772809285632",
+        "loser": "398576262546735104",
+        "winnerScore": 108.4,
+        "loserScore": 89.65
       },
       {
-        "userId": "726572095210930176",
-        "ffuUserId": "ffu-031",
-        "opponentId": "386791325690994688",
-        "opponentFFUUserId": "ffu-025",
-        "userScore": 105.7,
-        "opponentScore": 94.65,
-        "userInfo": {
-          "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
-        },
-        "opponentInfo": {
-          "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
-        }
+        "winner": "726572095210930176",
+        "loser": "386791325690994688",
+        "winnerScore": 105.7,
+        "loserScore": 94.65
       },
       {
-        "userId": "325766631336714240",
-        "ffuUserId": "ffu-024",
-        "opponentId": "462383465753473024",
-        "opponentFFUUserId": "ffu-026",
-        "userScore": 82.05,
-        "opponentScore": 123.3,
-        "userInfo": {
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
-        },
-        "opponentInfo": {
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
-        }
+        "winner": "462383465753473024",
+        "loser": "325766631336714240",
+        "winnerScore": 123.3,
+        "loserScore": 82.05
       }
     ],
     "7": [
       {
-        "userId": "historical-naptown-makos",
-        "ffuUserId": "ffu-h01",
-        "opponentId": "726572095210930176",
-        "opponentFFUUserId": "ffu-031",
-        "userScore": 143.5,
-        "opponentScore": 142.35,
-        "userInfo": {
-          "teamName": "Naptown Makos",
-          "abbreviation": "NM"
-        },
-        "opponentInfo": {
-          "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
-        }
+        "winner": "historical-naptown-makos",
+        "loser": "726572095210930176",
+        "winnerScore": 143.5,
+        "loserScore": 142.35
       },
       {
-        "userId": "historical-speedway-ritual-cog",
-        "ffuUserId": "ffu-h02",
-        "opponentId": "399379352174768128",
-        "opponentFFUUserId": "ffu-051",
-        "userScore": 88.65,
-        "opponentScore": 106.65,
-        "userInfo": {
-          "teamName": "Speedway Ritual Cog",
-          "abbreviation": "SRC"
-        },
-        "opponentInfo": {
-          "teamName": "Stone Cold Steve Irwins",
-          "abbreviation": "SCSI"
-        }
+        "winner": "399379352174768128",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 106.65,
+        "loserScore": 88.65
       },
       {
-        "userId": "729741648338210816",
-        "ffuUserId": "ffu-010",
-        "opponentId": "331590801261883392",
-        "opponentFFUUserId": "ffu-001",
-        "userScore": 92.4,
-        "opponentScore": 166.2,
-        "userInfo": {
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
-        },
-        "opponentInfo": {
-          "teamName": "The Stallions",
-          "abbreviation": "STA"
-        }
+        "winner": "331590801261883392",
+        "loser": "729741648338210816",
+        "winnerScore": 166.2,
+        "loserScore": 92.4
       },
       {
-        "userId": "84006772809285632",
-        "ffuUserId": "ffu-023",
-        "opponentId": "325766631336714240",
-        "opponentFFUUserId": "ffu-024",
-        "userScore": 130.45,
-        "opponentScore": 92.3,
-        "userInfo": {
-          "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
-        },
-        "opponentInfo": {
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
-        }
+        "winner": "84006772809285632",
+        "loser": "325766631336714240",
+        "winnerScore": 130.45,
+        "loserScore": 92.3
       },
       {
-        "userId": "398576262546735104",
-        "ffuUserId": "ffu-004",
-        "opponentId": "727368657923063808",
-        "opponentFFUUserId": "ffu-009",
-        "userScore": 96.95,
-        "opponentScore": 80.9,
-        "userInfo": {
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
-        },
-        "opponentInfo": {
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
-        }
+        "winner": "398576262546735104",
+        "loser": "727368657923063808",
+        "winnerScore": 96.95,
+        "loserScore": 80.9
       },
       {
-        "userId": "386791325690994688",
-        "ffuUserId": "ffu-025",
-        "opponentId": "462383465753473024",
-        "opponentFFUUserId": "ffu-026",
-        "userScore": 147.65,
-        "opponentScore": 109.85,
-        "userInfo": {
-          "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
-        },
-        "opponentInfo": {
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
-        }
+        "winner": "386791325690994688",
+        "loser": "462383465753473024",
+        "winnerScore": 147.65,
+        "loserScore": 109.85
       }
     ],
     "8": [
       {
-        "userId": "386791325690994688",
-        "ffuUserId": "ffu-025",
-        "opponentId": "84006772809285632",
-        "opponentFFUUserId": "ffu-023",
-        "userScore": 90.3,
-        "opponentScore": 96.1,
-        "userInfo": {
-          "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
-        },
-        "opponentInfo": {
-          "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
-        }
+        "winner": "84006772809285632",
+        "loser": "386791325690994688",
+        "winnerScore": 96.1,
+        "loserScore": 90.3
       },
       {
-        "userId": "325766631336714240",
-        "ffuUserId": "ffu-024",
-        "opponentId": "729741648338210816",
-        "opponentFFUUserId": "ffu-010",
-        "userScore": 110.1,
-        "opponentScore": 129.95,
-        "userInfo": {
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
-        },
-        "opponentInfo": {
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
-        }
+        "winner": "729741648338210816",
+        "loser": "325766631336714240",
+        "winnerScore": 129.95,
+        "loserScore": 110.1
       },
       {
-        "userId": "historical-naptown-makos",
-        "ffuUserId": "ffu-h01",
-        "opponentId": "727368657923063808",
-        "opponentFFUUserId": "ffu-009",
-        "userScore": 107.95,
-        "opponentScore": 93.25,
-        "userInfo": {
-          "teamName": "Naptown Makos",
-          "abbreviation": "NM"
-        },
-        "opponentInfo": {
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
-        }
+        "winner": "historical-naptown-makos",
+        "loser": "727368657923063808",
+        "winnerScore": 107.95,
+        "loserScore": 93.25
       },
       {
-        "userId": "726572095210930176",
-        "ffuUserId": "ffu-031",
-        "opponentId": "331590801261883392",
-        "opponentFFUUserId": "ffu-001",
-        "userScore": 73.05,
-        "opponentScore": 120.35,
-        "userInfo": {
-          "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
-        },
-        "opponentInfo": {
-          "teamName": "The Stallions",
-          "abbreviation": "STA"
-        }
+        "winner": "331590801261883392",
+        "loser": "726572095210930176",
+        "winnerScore": 120.35,
+        "loserScore": 73.05
       },
       {
-        "userId": "462383465753473024",
-        "ffuUserId": "ffu-026",
-        "opponentId": "399379352174768128",
-        "opponentFFUUserId": "ffu-051",
-        "userScore": 63.05,
-        "opponentScore": 73.9,
-        "userInfo": {
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
-        },
-        "opponentInfo": {
-          "teamName": "Stone Cold Steve Irwins",
-          "abbreviation": "SCSI"
-        }
+        "winner": "399379352174768128",
+        "loser": "462383465753473024",
+        "winnerScore": 73.9,
+        "loserScore": 63.05
       },
       {
-        "userId": "398576262546735104",
-        "ffuUserId": "ffu-004",
-        "opponentId": "historical-speedway-ritual-cog",
-        "opponentFFUUserId": "ffu-h02",
-        "userScore": 107.5,
-        "opponentScore": 105.7,
-        "userInfo": {
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
-        },
-        "opponentInfo": {
-          "teamName": "Speedway Ritual Cog",
-          "abbreviation": "SRC"
-        }
+        "winner": "398576262546735104",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 107.5,
+        "loserScore": 105.7
       }
     ],
     "9": [
       {
-        "userId": "729741648338210816",
-        "ffuUserId": "ffu-010",
-        "opponentId": "historical-speedway-ritual-cog",
-        "opponentFFUUserId": "ffu-h02",
-        "userScore": 136.8,
-        "opponentScore": 62.5,
-        "userInfo": {
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
-        },
-        "opponentInfo": {
-          "teamName": "Speedway Ritual Cog",
-          "abbreviation": "SRC"
-        }
+        "winner": "729741648338210816",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 136.8,
+        "loserScore": 62.5
       },
       {
-        "userId": "386791325690994688",
-        "ffuUserId": "ffu-025",
-        "opponentId": "325766631336714240",
-        "opponentFFUUserId": "ffu-024",
-        "userScore": 108.15,
-        "opponentScore": 73.2,
-        "userInfo": {
-          "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
-        },
-        "opponentInfo": {
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
-        }
+        "winner": "386791325690994688",
+        "loser": "325766631336714240",
+        "winnerScore": 108.15,
+        "loserScore": 73.2
       },
       {
-        "userId": "historical-naptown-makos",
-        "ffuUserId": "ffu-h01",
-        "opponentId": "331590801261883392",
-        "opponentFFUUserId": "ffu-001",
-        "userScore": 121.7,
-        "opponentScore": 119.05,
-        "userInfo": {
-          "teamName": "Naptown Makos",
-          "abbreviation": "NM"
-        },
-        "opponentInfo": {
-          "teamName": "The Stallions",
-          "abbreviation": "STA"
-        }
+        "winner": "historical-naptown-makos",
+        "loser": "331590801261883392",
+        "winnerScore": 121.7,
+        "loserScore": 119.05
       },
       {
-        "userId": "726572095210930176",
-        "ffuUserId": "ffu-031",
-        "opponentId": "462383465753473024",
-        "opponentFFUUserId": "ffu-026",
-        "userScore": 112.45,
-        "opponentScore": 73.45,
-        "userInfo": {
-          "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
-        },
-        "opponentInfo": {
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
-        }
+        "winner": "726572095210930176",
+        "loser": "462383465753473024",
+        "winnerScore": 112.45,
+        "loserScore": 73.45
       },
       {
-        "userId": "84006772809285632",
-        "ffuUserId": "ffu-023",
-        "opponentId": "727368657923063808",
-        "opponentFFUUserId": "ffu-009",
-        "userScore": 122.05,
-        "opponentScore": 145.2,
-        "userInfo": {
-          "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
-        },
-        "opponentInfo": {
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
-        }
+        "winner": "727368657923063808",
+        "loser": "84006772809285632",
+        "winnerScore": 145.2,
+        "loserScore": 122.05
       },
       {
-        "userId": "398576262546735104",
-        "ffuUserId": "ffu-004",
-        "opponentId": "399379352174768128",
-        "opponentFFUUserId": "ffu-051",
-        "userScore": 97.5,
-        "opponentScore": 56.2,
-        "userInfo": {
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
-        },
-        "opponentInfo": {
-          "teamName": "Stone Cold Steve Irwins",
-          "abbreviation": "SCSI"
-        }
+        "winner": "398576262546735104",
+        "loser": "399379352174768128",
+        "winnerScore": 97.5,
+        "loserScore": 56.2
       }
     ],
     "10": [
       {
-        "userId": "historical-speedway-ritual-cog",
-        "ffuUserId": "ffu-h02",
-        "opponentId": "386791325690994688",
-        "opponentFFUUserId": "ffu-025",
-        "userScore": 59.15,
-        "opponentScore": 69.4,
-        "userInfo": {
-          "teamName": "Speedway Ritual Cog",
-          "abbreviation": "SRC"
-        },
-        "opponentInfo": {
-          "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
-        }
+        "winner": "386791325690994688",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 69.4,
+        "loserScore": 59.15
       },
       {
-        "userId": "historical-naptown-makos",
-        "ffuUserId": "ffu-h01",
-        "opponentId": "462383465753473024",
-        "opponentFFUUserId": "ffu-026",
-        "userScore": 96.7,
-        "opponentScore": 101.05,
-        "userInfo": {
-          "teamName": "Naptown Makos",
-          "abbreviation": "NM"
-        },
-        "opponentInfo": {
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
-        }
+        "winner": "462383465753473024",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 101.05,
+        "loserScore": 96.7
       },
       {
-        "userId": "729741648338210816",
-        "ffuUserId": "ffu-010",
-        "opponentId": "399379352174768128",
-        "opponentFFUUserId": "ffu-051",
-        "userScore": 118.55,
-        "opponentScore": 86.65,
-        "userInfo": {
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
-        },
-        "opponentInfo": {
-          "teamName": "Stone Cold Steve Irwins",
-          "abbreviation": "SCSI"
-        }
+        "winner": "729741648338210816",
+        "loser": "399379352174768128",
+        "winnerScore": 118.55,
+        "loserScore": 86.65
       },
       {
-        "userId": "726572095210930176",
-        "ffuUserId": "ffu-031",
-        "opponentId": "398576262546735104",
-        "opponentFFUUserId": "ffu-004",
-        "userScore": 128.15,
-        "opponentScore": 75.7,
-        "userInfo": {
-          "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
-        },
-        "opponentInfo": {
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
-        }
+        "winner": "726572095210930176",
+        "loser": "398576262546735104",
+        "winnerScore": 128.15,
+        "loserScore": 75.7
       },
       {
-        "userId": "325766631336714240",
-        "ffuUserId": "ffu-024",
-        "opponentId": "727368657923063808",
-        "opponentFFUUserId": "ffu-009",
-        "userScore": 73.95,
-        "opponentScore": 101,
-        "userInfo": {
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
-        },
-        "opponentInfo": {
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
-        }
+        "winner": "727368657923063808",
+        "loser": "325766631336714240",
+        "winnerScore": 101,
+        "loserScore": 73.95
       },
       {
-        "userId": "331590801261883392",
-        "ffuUserId": "ffu-001",
-        "opponentId": "84006772809285632",
-        "opponentFFUUserId": "ffu-023",
-        "userScore": 135.95,
-        "opponentScore": 133.3,
-        "userInfo": {
-          "teamName": "The Stallions",
-          "abbreviation": "STA"
-        },
-        "opponentInfo": {
-          "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
-        }
+        "winner": "331590801261883392",
+        "loser": "84006772809285632",
+        "winnerScore": 135.95,
+        "loserScore": 133.3
       }
     ],
     "11": [
       {
-        "userId": "325766631336714240",
-        "ffuUserId": "ffu-024",
-        "opponentId": "399379352174768128",
-        "opponentFFUUserId": "ffu-051",
-        "userScore": 74.8,
-        "opponentScore": 105.7,
-        "userInfo": {
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
-        },
-        "opponentInfo": {
-          "teamName": "Stone Cold Steve Irwins",
-          "abbreviation": "SCSI"
-        }
+        "winner": "399379352174768128",
+        "loser": "325766631336714240",
+        "winnerScore": 105.7,
+        "loserScore": 74.8
       },
       {
-        "userId": "462383465753473024",
-        "ffuUserId": "ffu-026",
-        "opponentId": "727368657923063808",
-        "opponentFFUUserId": "ffu-009",
-        "userScore": 84.9,
-        "opponentScore": 101,
-        "userInfo": {
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
-        },
-        "opponentInfo": {
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
-        }
+        "winner": "727368657923063808",
+        "loser": "462383465753473024",
+        "winnerScore": 101,
+        "loserScore": 84.9
       },
       {
-        "userId": "331590801261883392",
-        "ffuUserId": "ffu-001",
-        "opponentId": "398576262546735104",
-        "opponentFFUUserId": "ffu-004",
-        "userScore": 132.75,
-        "opponentScore": 40.7,
-        "userInfo": {
-          "teamName": "The Stallions",
-          "abbreviation": "STA"
-        },
-        "opponentInfo": {
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
-        }
+        "winner": "331590801261883392",
+        "loser": "398576262546735104",
+        "winnerScore": 132.75,
+        "loserScore": 40.7
       },
       {
-        "userId": "386791325690994688",
-        "ffuUserId": "ffu-025",
-        "opponentId": "historical-naptown-makos",
-        "opponentFFUUserId": "ffu-h01",
-        "userScore": 120.85,
-        "opponentScore": 108.85,
-        "userInfo": {
-          "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
-        },
-        "opponentInfo": {
-          "teamName": "Naptown Makos",
-          "abbreviation": "NM"
-        }
+        "winner": "386791325690994688",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 120.85,
+        "loserScore": 108.85
       },
       {
-        "userId": "historical-speedway-ritual-cog",
-        "ffuUserId": "ffu-h02",
-        "opponentId": "84006772809285632",
-        "opponentFFUUserId": "ffu-023",
-        "userScore": 77.4,
-        "opponentScore": 175,
-        "userInfo": {
-          "teamName": "Speedway Ritual Cog",
-          "abbreviation": "SRC"
-        },
-        "opponentInfo": {
-          "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
-        }
+        "winner": "84006772809285632",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 175,
+        "loserScore": 77.4
       },
       {
-        "userId": "726572095210930176",
-        "ffuUserId": "ffu-031",
-        "opponentId": "729741648338210816",
-        "opponentFFUUserId": "ffu-010",
-        "userScore": 143.45,
-        "opponentScore": 153.25,
-        "userInfo": {
-          "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
-        },
-        "opponentInfo": {
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
-        }
+        "winner": "729741648338210816",
+        "loser": "726572095210930176",
+        "winnerScore": 153.25,
+        "loserScore": 143.45
       }
     ],
     "12": [
       {
-        "userId": "729741648338210816",
-        "ffuUserId": "ffu-010",
-        "opponentId": "727368657923063808",
-        "opponentFFUUserId": "ffu-009",
-        "userScore": 151.8,
-        "opponentScore": 84.75,
-        "userInfo": {
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
-        },
-        "opponentInfo": {
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
-        }
+        "winner": "729741648338210816",
+        "loser": "727368657923063808",
+        "winnerScore": 151.8,
+        "loserScore": 84.75
       },
       {
-        "userId": "84006772809285632",
-        "ffuUserId": "ffu-023",
-        "opponentId": "462383465753473024",
-        "opponentFFUUserId": "ffu-026",
-        "userScore": 111.6,
-        "opponentScore": 153.95,
-        "userInfo": {
-          "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
-        },
-        "opponentInfo": {
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
-        }
+        "winner": "462383465753473024",
+        "loser": "84006772809285632",
+        "winnerScore": 153.95,
+        "loserScore": 111.6
       },
       {
-        "userId": "726572095210930176",
-        "ffuUserId": "ffu-031",
-        "opponentId": "historical-speedway-ritual-cog",
-        "opponentFFUUserId": "ffu-h02",
-        "userScore": 150.95,
-        "opponentScore": 124.1,
-        "userInfo": {
-          "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
-        },
-        "opponentInfo": {
-          "teamName": "Speedway Ritual Cog",
-          "abbreviation": "SRC"
-        }
+        "winner": "726572095210930176",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 150.95,
+        "loserScore": 124.1
       },
       {
-        "userId": "historical-naptown-makos",
-        "ffuUserId": "ffu-h01",
-        "opponentId": "399379352174768128",
-        "opponentFFUUserId": "ffu-051",
-        "userScore": 85.7,
-        "opponentScore": 50.35,
-        "userInfo": {
-          "teamName": "Naptown Makos",
-          "abbreviation": "NM"
-        },
-        "opponentInfo": {
-          "teamName": "Stone Cold Steve Irwins",
-          "abbreviation": "SCSI"
-        }
+        "winner": "historical-naptown-makos",
+        "loser": "399379352174768128",
+        "winnerScore": 85.7,
+        "loserScore": 50.35
       },
       {
-        "userId": "325766631336714240",
-        "ffuUserId": "ffu-024",
-        "opponentId": "398576262546735104",
-        "opponentFFUUserId": "ffu-004",
-        "userScore": 122.4,
-        "opponentScore": 93.65,
-        "userInfo": {
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
-        },
-        "opponentInfo": {
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
-        }
+        "winner": "325766631336714240",
+        "loser": "398576262546735104",
+        "winnerScore": 122.4,
+        "loserScore": 93.65
       },
       {
-        "userId": "331590801261883392",
-        "ffuUserId": "ffu-001",
-        "opponentId": "386791325690994688",
-        "opponentFFUUserId": "ffu-025",
-        "userScore": 143.2,
-        "opponentScore": 95.8,
-        "userInfo": {
-          "teamName": "The Stallions",
-          "abbreviation": "STA"
-        },
-        "opponentInfo": {
-          "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
-        }
+        "winner": "331590801261883392",
+        "loser": "386791325690994688",
+        "winnerScore": 143.2,
+        "loserScore": 95.8
       }
     ],
     "13": [
       {
-        "userId": "84006772809285632",
-        "ffuUserId": "ffu-023",
-        "opponentId": "726572095210930176",
-        "opponentFFUUserId": "ffu-031",
-        "userScore": 116.85,
-        "opponentScore": 137.05,
-        "userInfo": {
-          "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
-        },
-        "opponentInfo": {
-          "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
-        }
+        "winner": "726572095210930176",
+        "loser": "84006772809285632",
+        "winnerScore": 137.05,
+        "loserScore": 116.85
       },
       {
-        "userId": "399379352174768128",
-        "ffuUserId": "ffu-051",
-        "opponentId": "331590801261883392",
-        "opponentFFUUserId": "ffu-001",
-        "userScore": 121.35,
-        "opponentScore": 122.15,
-        "userInfo": {
-          "teamName": "Stone Cold Steve Irwins",
-          "abbreviation": "SCSI"
-        },
-        "opponentInfo": {
-          "teamName": "The Stallions",
-          "abbreviation": "STA"
-        }
+        "winner": "331590801261883392",
+        "loser": "399379352174768128",
+        "winnerScore": 122.15,
+        "loserScore": 121.35
       },
       {
-        "userId": "historical-naptown-makos",
-        "ffuUserId": "ffu-h01",
-        "opponentId": "325766631336714240",
-        "opponentFFUUserId": "ffu-024",
-        "userScore": 79.35,
-        "opponentScore": 123.7,
-        "userInfo": {
-          "teamName": "Naptown Makos",
-          "abbreviation": "NM"
-        },
-        "opponentInfo": {
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
-        }
+        "winner": "325766631336714240",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 123.7,
+        "loserScore": 79.35
       },
       {
-        "userId": "historical-speedway-ritual-cog",
-        "ffuUserId": "ffu-h02",
-        "opponentId": "727368657923063808",
-        "opponentFFUUserId": "ffu-009",
-        "userScore": 151.65,
-        "opponentScore": 116.05,
-        "userInfo": {
-          "teamName": "Speedway Ritual Cog",
-          "abbreviation": "SRC"
-        },
-        "opponentInfo": {
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
-        }
+        "winner": "historical-speedway-ritual-cog",
+        "loser": "727368657923063808",
+        "winnerScore": 151.65,
+        "loserScore": 116.05
       },
       {
-        "userId": "729741648338210816",
-        "ffuUserId": "ffu-010",
-        "opponentId": "462383465753473024",
-        "opponentFFUUserId": "ffu-026",
-        "userScore": 121.75,
-        "opponentScore": 100.7,
-        "userInfo": {
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
-        },
-        "opponentInfo": {
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
-        }
+        "winner": "729741648338210816",
+        "loser": "462383465753473024",
+        "winnerScore": 121.75,
+        "loserScore": 100.7
       },
       {
-        "userId": "398576262546735104",
-        "ffuUserId": "ffu-004",
-        "opponentId": "386791325690994688",
-        "opponentFFUUserId": "ffu-025",
-        "userScore": 59.85,
-        "opponentScore": 94.6,
-        "userInfo": {
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
-        },
-        "opponentInfo": {
-          "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
-        }
+        "winner": "386791325690994688",
+        "loser": "398576262546735104",
+        "winnerScore": 94.6,
+        "loserScore": 59.85
       }
     ],
     "14": [
       {
-        "userId": "727368657923063808",
-        "ffuUserId": "ffu-009",
-        "opponentId": "726572095210930176",
-        "opponentFFUUserId": "ffu-031",
-        "userScore": 102.65,
-        "opponentScore": 99.9,
-        "userInfo": {
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
-        },
-        "opponentInfo": {
-          "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
-        },
+        "winner": "727368657923063808",
+        "loser": "726572095210930176",
+        "winnerScore": 102.65,
+        "loserScore": 99.9,
         "placementType": "Championship Quarterfinal"
       },
       {
-        "userId": "historical-naptown-makos",
-        "ffuUserId": "ffu-h01",
-        "opponentId": "399379352174768128",
-        "opponentFFUUserId": "ffu-051",
-        "userScore": 83.9,
-        "opponentScore": 144.65,
-        "userInfo": {
-          "teamName": "Naptown Makos",
-          "abbreviation": "NM"
-        },
-        "opponentInfo": {
-          "teamName": "Stone Cold Steve Irwins",
-          "abbreviation": "SCSI"
-        },
+        "winner": "399379352174768128",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 144.65,
+        "loserScore": 83.9,
         "placementType": "Championship Quarterfinal"
       },
       {
-        "userId": "325766631336714240",
-        "ffuUserId": "ffu-024",
-        "opponentId": "84006772809285632",
-        "opponentFFUUserId": "ffu-023",
-        "userScore": 132.55,
-        "opponentScore": 145.15,
-        "userInfo": {
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
-        },
-        "opponentInfo": {
-          "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
-        },
+        "winner": "84006772809285632",
+        "loser": "325766631336714240",
+        "winnerScore": 145.15,
+        "loserScore": 132.55,
         "placementType": "Toilet Bowl Quarterfinal"
       },
       {
-        "userId": "398576262546735104",
-        "ffuUserId": "ffu-004",
-        "opponentId": "386791325690994688",
-        "opponentFFUUserId": "ffu-025",
-        "userScore": 58.7,
-        "opponentScore": 106.25,
-        "userInfo": {
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
-        },
-        "opponentInfo": {
-          "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
-        },
+        "winner": "386791325690994688",
+        "loser": "398576262546735104",
+        "winnerScore": 106.25,
+        "loserScore": 58.7,
         "placementType": "Toilet Bowl Quarterfinal"
       },
       {
-        "userId": "historical-speedway-ritual-cog",
-        "ffuUserId": "ffu-h02",
-        "opponentId": "462383465753473024",
-        "opponentFFUUserId": "ffu-026",
-        "userScore": 67.35,
-        "opponentScore": 107.4,
-        "userInfo": {
-          "teamName": "Speedway Ritual Cog",
-          "abbreviation": "SRC"
-        },
-        "opponentInfo": {
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
-        },
+        "winner": "462383465753473024",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 107.4,
+        "loserScore": 67.35,
         "placementType": "Toilet Bowl Quarterfinal"
       }
     ],
     "15": [
       {
-        "userId": "462383465753473024",
-        "ffuUserId": "ffu-026",
-        "opponentId": "325766631336714240",
-        "opponentFFUUserId": "ffu-024",
-        "userScore": 71.2,
-        "opponentScore": 157.4,
-        "userInfo": {
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
-        },
-        "opponentInfo": {
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
-        },
+        "winner": "325766631336714240",
+        "loser": "462383465753473024",
+        "winnerScore": 157.4,
+        "loserScore": 71.2,
         "placementType": "Toilet Bowl Semifinal"
       },
       {
-        "userId": "398576262546735104",
-        "ffuUserId": "ffu-004",
-        "opponentId": "historical-speedway-ritual-cog",
-        "opponentFFUUserId": "ffu-h02",
-        "userScore": 89.55,
-        "opponentScore": 101.05,
-        "userInfo": {
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
-        },
-        "opponentInfo": {
-          "teamName": "Speedway Ritual Cog",
-          "abbreviation": "SRC"
-        },
+        "winner": "historical-speedway-ritual-cog",
+        "loser": "398576262546735104",
+        "winnerScore": 101.05,
+        "loserScore": 89.55,
         "placementType": "Toilet Bowl Semifinal"
       },
       {
-        "userId": "84006772809285632",
-        "ffuUserId": "ffu-023",
-        "opponentId": "386791325690994688",
-        "opponentFFUUserId": "ffu-025",
-        "userScore": 140,
-        "opponentScore": 114.05,
-        "userInfo": {
-          "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
-        },
-        "opponentInfo": {
-          "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
-        },
+        "winner": "84006772809285632",
+        "loser": "386791325690994688",
+        "winnerScore": 140,
+        "loserScore": 114.05,
         "placementType": "Toilet Bowl Semifinal"
       },
       {
-        "userId": "historical-naptown-makos",
-        "ffuUserId": "ffu-h01",
-        "opponentId": "726572095210930176",
-        "opponentFFUUserId": "ffu-031",
-        "userScore": 113.25,
-        "opponentScore": 110.15,
-        "userInfo": {
-          "teamName": "Naptown Makos",
-          "abbreviation": "NM"
-        },
-        "opponentInfo": {
-          "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
-        },
+        "winner": "historical-naptown-makos",
+        "loser": "726572095210930176",
+        "winnerScore": 113.25,
+        "loserScore": 110.15,
         "placementType": "Championship Semifinal"
       },
       {
-        "userId": "729741648338210816",
-        "ffuUserId": "ffu-010",
-        "opponentId": "399379352174768128",
-        "opponentFFUUserId": "ffu-051",
-        "userScore": 104.6,
-        "opponentScore": 112.55,
-        "userInfo": {
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
-        },
-        "opponentInfo": {
-          "teamName": "Stone Cold Steve Irwins",
-          "abbreviation": "SCSI"
-        },
+        "winner": "399379352174768128",
+        "loser": "729741648338210816",
+        "winnerScore": 112.55,
+        "loserScore": 104.6,
         "placementType": "Championship Semifinal"
       },
       {
-        "userId": "331590801261883392",
-        "ffuUserId": "ffu-001",
-        "opponentId": "727368657923063808",
-        "opponentFFUUserId": "ffu-009",
-        "userScore": 131.4,
-        "opponentScore": 155.2,
-        "userInfo": {
-          "teamName": "The Stallions",
-          "abbreviation": "STA"
-        },
-        "opponentInfo": {
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
-        },
+        "winner": "727368657923063808",
+        "loser": "331590801261883392",
+        "winnerScore": 155.2,
+        "loserScore": 131.4,
         "placementType": "Championship Semifinal"
       }
     ],
     "16": [
       {
-        "userId": "398576262546735104",
-        "ffuUserId": "ffu-004",
-        "opponentId": "462383465753473024",
-        "opponentFFUUserId": "ffu-026",
-        "userScore": 88.4,
-        "opponentScore": 135.1,
-        "userInfo": {
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
-        },
-        "opponentInfo": {
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
-        },
+        "winner": "462383465753473024",
+        "loser": "398576262546735104",
+        "winnerScore": 135.1,
+        "loserScore": 88.4,
         "placementType": "Last Place"
       },
       {
-        "userId": "386791325690994688",
-        "ffuUserId": "ffu-025",
-        "opponentId": "historical-speedway-ritual-cog",
-        "opponentFFUUserId": "ffu-h02",
-        "userScore": 82.3,
-        "opponentScore": 82.6,
-        "userInfo": {
-          "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
-        },
-        "opponentInfo": {
-          "teamName": "Speedway Ritual Cog",
-          "abbreviation": "SRC"
-        },
+        "winner": "historical-speedway-ritual-cog",
+        "loser": "386791325690994688",
+        "winnerScore": 82.6,
+        "loserScore": 82.3,
         "placementType": "9th Place"
       },
       {
-        "userId": "84006772809285632",
-        "ffuUserId": "ffu-023",
-        "opponentId": "325766631336714240",
-        "opponentFFUUserId": "ffu-024",
-        "userScore": 109.55,
-        "opponentScore": 124.6,
-        "userInfo": {
-          "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
-        },
-        "opponentInfo": {
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
-        },
+        "winner": "325766631336714240",
+        "loser": "84006772809285632",
+        "winnerScore": 124.6,
+        "loserScore": 109.55,
         "placementType": "7th Place"
       },
       {
-        "userId": "726572095210930176",
-        "ffuUserId": "ffu-031",
-        "opponentId": "historical-naptown-makos",
-        "opponentFFUUserId": "ffu-h01",
-        "userScore": 92.75,
-        "opponentScore": 101.05,
-        "userInfo": {
-          "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
-        },
-        "opponentInfo": {
-          "teamName": "Naptown Makos",
-          "abbreviation": "NM"
-        },
+        "winner": "historical-naptown-makos",
+        "loser": "726572095210930176",
+        "winnerScore": 101.05,
+        "loserScore": 92.75,
         "placementType": "5th Place"
       },
       {
-        "userId": "331590801261883392",
-        "ffuUserId": "ffu-001",
-        "opponentId": "729741648338210816",
-        "opponentFFUUserId": "ffu-010",
-        "userScore": 194.45,
-        "opponentScore": 122.25,
-        "userInfo": {
-          "teamName": "The Stallions",
-          "abbreviation": "STA"
-        },
-        "opponentInfo": {
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
-        },
+        "winner": "331590801261883392",
+        "loser": "729741648338210816",
+        "winnerScore": 194.45,
+        "loserScore": 122.25,
         "placementType": "3rd Place"
       },
       {
-        "userId": "399379352174768128",
-        "ffuUserId": "ffu-051",
-        "opponentId": "727368657923063808",
-        "opponentFFUUserId": "ffu-009",
-        "userScore": 122.45,
-        "opponentScore": 147.9,
-        "userInfo": {
-          "teamName": "Stone Cold Steve Irwins",
-          "abbreviation": "SCSI"
-        },
-        "opponentInfo": {
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
-        },
+        "winner": "727368657923063808",
+        "loser": "399379352174768128",
+        "winnerScore": 147.9,
+        "loserScore": 122.45,
         "placementType": "Championship"
       }
     ]

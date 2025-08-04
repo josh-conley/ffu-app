@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * ESPN P20 Data Generation Script
+ * ESPN P18 Data Generation Script
  * 
- * This script processes the ESPN Fantasy Scrapes CSV files for P20 (2020 Premier league)
+ * This script processes the ESPN Fantasy Scrapes CSV files for P18 (2018 Premier league)
  * and generates a JSON file matching the existing Sleeper data structure.
  */
 
@@ -65,39 +65,37 @@ function parseCSVLine(line) {
   return values;
 }
 
-// User mapping based on the Sleeper ID Key and configuration
+// User mapping based on the Sleeper ID Key and configuration for P18
 const userMapping = {
-  'bread': { ffuId: 'ffu-009', sleeperId: '727368657923063808' },
-  'scsi': { ffuId: 'ffu-051', sleeperId: '399379352174768128' },
-  'stallions': { ffuId: 'ffu-001', sleeperId: '331590801261883392' },
-  'picks': { ffuId: 'ffu-010', sleeperId: '729741648338210816' },
-  'doge': { ffuId: 'ffu-031', sleeperId: '726572095210930176' },
-  'swaggy': { ffuId: 'ffu-024', sleeperId: '325766631336714240' },
   'mmen': { ffuId: 'ffu-023', sleeperId: '84006772809285632' },
-  'aztecs': { ffuId: 'ffu-025', sleeperId: '386791325690994688' },
-  'rhinos': { ffuId: 'ffu-026', sleeperId: '462383465753473024' },
+  'bandits': { ffuId: 'ffu-028', sleeperId: '727366898383122432' },
+  'ffuckedup': { ffuId: 'ffu-039', sleeperId: '396808818157182976' },
+  'stallions': { ffuId: 'ffu-001', sleeperId: '331590801261883392' },
   'beers': { ffuId: 'ffu-004', sleeperId: '398576262546735104' },
-  // Historical users who participated in ESPN era but didn't continue to Sleeper era
-  'makos': { ffuId: 'ffu-h01', sleeperId: 'historical-naptown-makos' },
-  'cog': { ffuId: 'ffu-h02', sleeperId: 'historical-speedway-ritual-cog' }
+  'tcool': { ffuId: 'ffu-034', sleeperId: '399297882890440704' },
+  'aztecs': { ffuId: 'ffu-025', sleeperId: '386791325690994688' },
+  'guapo': { ffuId: 'ffu-032', sleeperId: '507633950666584064' },
+  'rhinos': { ffuId: 'ffu-026', sleeperId: '462383465753473024' },
+  // Historical users who participated in P18 but didn't continue to Sleeper era
+  'devils': { ffuId: 'ffu-h04', sleeperId: 'historical-durham-handsome-devils' },
+  'joes': { ffuId: 'ffu-h07', sleeperId: 'historical-not-your-average-joes' },
+  'losers': { ffuId: 'ffu-h05', sleeperId: 'historical-the-losers' }
 };
 
-// Team name to ESPN username mapping
+// Team name to ESPN username mapping for P18
 const teamNameMapping = {
-  'Wisconsian Banana Bread': 'bread',
-  'Stone Cold Steve Irwins': 'scsi',
-  'The Stallions': 'stallions',
-  'Chicago Pick 6s': 'picks',
-  'Team Dogecoin': 'doge',
-  'Goat Emoji II': 'swaggy',
   'The Minutemen': 'mmen',
-  'Indianapolis Aztecs': 'aztecs',
-  'Currier Island Raging Rhinos': 'rhinos',
-  'Currier Island Raging ...': 'rhinos', // Truncated version from CSV
+  "Disney's PigskinSlingers": 'bandits',
+  'Durham Handsome Devils': 'devils',
+  'FFUcked Up': 'ffuckedup',
+  'The Stallions': 'stallions',
+  'Not Your Average Joes': 'joes',
   'Blood, Sweat and Beers': 'beers',
-  // Historical users who participated in ESPN era but didn't continue to Sleeper era
-  'Naptown Makos': 'makos',
-  'Speedway Ritual Cog': 'cog'
+  'Bailando Cabras': 'tcool',
+  'Indianapolis Aztecs': 'aztecs',
+  'El Guapo Puto': 'guapo',
+  'The Losers': 'losers',
+  'Currier Island Raging Rhinos': 'rhinos'
 };
 
 // Helper function to get user info by team name
@@ -135,44 +133,43 @@ function getUserByTeamName(teamName) {
   };
 }
 
-// Helper function to get current team name by Sleeper ID
+// Helper function to get current team name by Sleeper ID for P18
 function getCurrentTeamNameBySleeperId(sleeperId) {
-  // This is a simplified version - in a real implementation you'd import from constants
   const userMappingToCurrent = {
-    '727368657923063808': 'Fort Wayne Banana Bread', // bread -> ffu-009
-    '399379352174768128': 'Stone Cold Steve Irwins', // scsi -> ffu-051
-    '331590801261883392': 'The Stallions', // stallions -> ffu-001
-    '729741648338210816': 'ChicagoPick6', // picks -> ffu-010
-    '726572095210930176': 'Team Dogecoin', // doge -> ffu-031
-    '325766631336714240': 'Act More Stupidly', // swaggy -> ffu-024
     '84006772809285632': 'The Minutemen', // mmen -> ffu-023
-    '386791325690994688': 'Indianapolis Aztecs', // aztecs -> ffu-025
-    '462383465753473024': 'Raging Rhinos', // rhinos -> ffu-026
+    '727366898383122432': 'Big Ten Bandits', // bandits -> ffu-028
+    '396808818157182976': 'FFUcked Up', // ffuckedup -> ffu-039
+    '331590801261883392': 'The Stallions', // stallions -> ffu-001
     '398576262546735104': 'Blood, Sweat, and Beers', // beers -> ffu-004
-    // Historical users who participated in ESPN era but didn't continue to Sleeper era
-    'historical-naptown-makos': 'Naptown Makos', // makos -> ffu-h01
-    'historical-speedway-ritual-cog': 'Speedway Ritual Cog' // cog -> ffu-h02
+    '399297882890440704': 'Elm Street Skywalkers', // tcool -> ffu-034
+    '386791325690994688': 'Indianapolis Aztecs', // aztecs -> ffu-025
+    '507633950666584064': 'El Guapo Puto', // guapo -> ffu-032
+    '462383465753473024': 'Raging Rhinos', // rhinos -> ffu-026
+    // Historical users who participated in P18 but didn't continue to Sleeper era
+    'historical-durham-handsome-devils': 'Durham Handsome Devils', // devils -> ffu-h04
+    'historical-not-your-average-joes': 'Not Your Average Joes', // joes -> ffu-h07
+    'historical-the-losers': 'The Losers' // losers -> ffu-h05
   };
   
   return userMappingToCurrent[sleeperId];
 }
 
-// Helper function to get current abbreviation by Sleeper ID
+// Helper function to get current abbreviation by Sleeper ID for P18
 function getCurrentAbbreviationBySleeperId(sleeperId) {
   const abbreviationMapping = {
-    '727368657923063808': 'FWBB', // bread -> ffu-009
-    '399379352174768128': 'SCSI', // scsi -> ffu-051
-    '331590801261883392': 'STA', // stallions -> ffu-001
-    '729741648338210816': 'CP6', // picks -> ffu-010
-    '726572095210930176': 'DOGE', // doge -> ffu-031
-    '325766631336714240': 'AMS', // swaggy -> ffu-024
     '84006772809285632': 'MMEN', // mmen -> ffu-023
-    '386791325690994688': 'AZTC', // aztecs -> ffu-025
-    '462383465753473024': 'RAGE', // rhinos -> ffu-026
+    '727366898383122432': 'BTB', // bandits -> ffu-028
+    '396808818157182976': 'FFU', // ffuckedup -> ffu-039
+    '331590801261883392': 'STA', // stallions -> ffu-001
     '398576262546735104': 'BEER', // beers -> ffu-004
-    // Historical users who participated in ESPN era but didn't continue to Sleeper era
-    'historical-naptown-makos': 'NM', // makos -> ffu-h01
-    'historical-speedway-ritual-cog': 'SRC' // cog -> ffu-h02
+    '399297882890440704': 'ESS', // tcool -> ffu-034
+    '386791325690994688': 'AZTC', // aztecs -> ffu-025
+    '507633950666584064': 'EGP', // guapo -> ffu-032
+    '462383465753473024': 'RAGE', // rhinos -> ffu-026
+    // Historical users who participated in P18 but didn't continue to Sleeper era
+    'historical-durham-handsome-devils': 'DHD', // devils -> ffu-h04
+    'historical-not-your-average-joes': 'NYAJ', // joes -> ffu-h07  
+    'historical-the-losers': 'TL' // losers -> ffu-h05
   };
   
   return abbreviationMapping[sleeperId];
@@ -182,9 +179,9 @@ function getCurrentAbbreviationBySleeperId(sleeperId) {
 function loadCSVData() {
   const dataPath = path.join(process.cwd(), 'public', 'espn-league-data');
   
-  const teamsCSV = fs.readFileSync(path.join(dataPath, 'ESPN Fantasy Scrapes - Teams P20.original.csv'), 'utf8');
-  const matchupsCSV = fs.readFileSync(path.join(dataPath, 'ESPN Fantasy Scrapes - Matchups P20.original.csv'), 'utf8');
-  const draftCSV = fs.readFileSync(path.join(dataPath, 'ESPN Fantasy Scrapes - Draft Results P20.original.csv'), 'utf8');
+  const teamsCSV = fs.readFileSync(path.join(dataPath, 'ESPN Fantasy Scrapes - Teams P18.original.csv'), 'utf8');
+  const matchupsCSV = fs.readFileSync(path.join(dataPath, 'ESPN Fantasy Scrapes - Matchups P18.original.csv'), 'utf8');
+  const draftCSV = fs.readFileSync(path.join(dataPath, 'ESPN Fantasy Scrapes - Draft Results P18.original.csv'), 'utf8');
   
   return {
     teams: parseCSV(teamsCSV),
@@ -409,7 +406,7 @@ function generateDraftData(draftData) {
         teamName: userInfo.teamName,
         abbreviation: userInfo.abbreviation
       },
-      draftId: 'espn-2020-premier-draft'
+      draftId: 'espn-2018-premier-draft'
     };
   }).filter(Boolean);
 
@@ -443,9 +440,9 @@ function generateDraftData(draftData) {
   });
 
   return {
-    draftId: 'espn-2020-premier-draft',
-    leagueId: 'espn-2020-premier',
-    year: '2020',
+    draftId: 'espn-2018-premier-draft',
+    leagueId: 'espn-2018-premier',
+    year: '2018',
     league: 'PREMIER',
     draftOrder,
     picks,
@@ -455,17 +452,17 @@ function generateDraftData(draftData) {
       draftType: 'snake'
     },
     metadata: {
-      name: 'ESPN 2020 Premier Draft',
-      description: 'Premier League Draft for 2020 season',
+      name: 'ESPN 2018 Premier Draft',
+      description: 'Premier League Draft for 2018 season',
       scoringType: 'standard'
     },
-    startTime: new Date('2020-08-15').getTime(), // Approximate draft date
+    startTime: new Date('2018-08-15').getTime(), // Approximate draft date
     status: 'complete'
   };
 }
 
-// Main function to generate P20 data
-function generateP20Data() {
+// Main function to generate P18 data
+function generateP18Data() {
   console.log('Loading CSV data...');
   const csvData = loadCSVData();
   
@@ -481,10 +478,10 @@ function generateP20Data() {
   console.log('Generating draft data...');
   const draftData = generateDraftData(csvData.draft);
   
-  const p20Data = {
+  const p18Data = {
     league: 'PREMIER',
-    year: '2020',
-    leagueId: 'espn-2020-premier',
+    year: '2018',
+    leagueId: 'espn-2018-premier',
     standings,
     playoffResults,
     promotions: [], // No promotions in ESPN era
@@ -495,16 +492,16 @@ function generateP20Data() {
   };
   
   // Ensure output directory exists
-  const outputDir = path.join(process.cwd(), 'public', 'data', '2020');
+  const outputDir = path.join(process.cwd(), 'public', 'data', '2018');
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
   
   // Write the data file
   const outputPath = path.join(outputDir, 'premier.json');
-  fs.writeFileSync(outputPath, JSON.stringify(p20Data, null, 2));
+  fs.writeFileSync(outputPath, JSON.stringify(p18Data, null, 2));
   
-  console.log(`✅ P20 data generated successfully: ${outputPath}`);
+  console.log(`✅ P18 data generated successfully: ${outputPath}`);
   console.log(`📊 Generated data includes:`);
   console.log(`   - ${standings.length} teams in standings`);
   console.log(`   - ${Object.keys(matchupsByWeek).length} weeks of matchups`);
@@ -516,17 +513,17 @@ function generateP20Data() {
   const historicalUsers = standings.filter(s => s.userId.startsWith('historical-')).length;
   console.log(`👥 User mapping: ${mappedUsers} current users, ${historicalUsers} historical users`);
   
-  return p20Data;
+  return p18Data;
 }
 
 // Run the script
 if (import.meta.url === `file://${process.argv[1]}`) {
   try {
-    generateP20Data();
+    generateP18Data();
   } catch (error) {
-    console.error('❌ Error generating P20 data:', error.message);
+    console.error('❌ Error generating P18 data:', error.message);
     process.exit(1);
   }
 }
 
-export { generateP20Data };
+export { generateP18Data };

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * ESPN P20 Data Generation Script
+ * ESPN N20 Data Generation Script
  * 
- * This script processes the ESPN Fantasy Scrapes CSV files for P20 (2020 Premier league)
+ * This script processes the ESPN Fantasy Scrapes CSV files for N20 (2020 National league)
  * and generates a JSON file matching the existing Sleeper data structure.
  */
 
@@ -65,39 +65,38 @@ function parseCSVLine(line) {
   return values;
 }
 
-// User mapping based on the Sleeper ID Key and configuration
+// User mapping based on the Sleeper ID Key and configuration for National league
 const userMapping = {
-  'bread': { ffuId: 'ffu-009', sleeperId: '727368657923063808' },
-  'scsi': { ffuId: 'ffu-051', sleeperId: '399379352174768128' },
-  'stallions': { ffuId: 'ffu-001', sleeperId: '331590801261883392' },
-  'picks': { ffuId: 'ffu-010', sleeperId: '729741648338210816' },
-  'doge': { ffuId: 'ffu-031', sleeperId: '726572095210930176' },
-  'swaggy': { ffuId: 'ffu-024', sleeperId: '325766631336714240' },
-  'mmen': { ffuId: 'ffu-023', sleeperId: '84006772809285632' },
-  'aztecs': { ffuId: 'ffu-025', sleeperId: '386791325690994688' },
-  'rhinos': { ffuId: 'ffu-026', sleeperId: '462383465753473024' },
-  'beers': { ffuId: 'ffu-004', sleeperId: '398576262546735104' },
-  // Historical users who participated in ESPN era but didn't continue to Sleeper era
-  'makos': { ffuId: 'ffu-h01', sleeperId: 'historical-naptown-makos' },
-  'cog': { ffuId: 'ffu-h02', sleeperId: 'historical-speedway-ritual-cog' }
+  'flb': { ffuId: 'ffu-027', sleeperId: '710981985102802944' },
+  'bandits': { ffuId: 'ffu-028', sleeperId: '727366898383122432' },
+  'pancake': { ffuId: 'ffu-029', sleeperId: '508719015656099840' },
+  'jacamart': { ffuId: 'ffu-030', sleeperId: '399322397750124544' },
+  'guapo': { ffuId: 'ffu-032', sleeperId: '507633950666584064' },
+  'cats': { ffuId: 'ffu-033', sleeperId: '527884868880531456' },
+  'tcool': { ffuId: 'ffu-034', sleeperId: '399297882890440704' },
+  'blackdeath': { ffuId: 'ffu-045', sleeperId: '599711204499312640' },
+  // Note: stark (472876832719368192) was not in National 2020, removed from mapping
+  'camdelphia': { ffuId: 'ffu-036', sleeperId: '465884883869233152' },
+  'purple': { ffuId: 'ffu-037', sleeperId: 'historical-purple-parade' }, // No current mapping found
+  'strikers': { ffuId: 'ffu-038', sleeperId: '467553389673181184' },
+  'ffuckedup': { ffuId: 'ffu-039', sleeperId: '396808818157182976' }
 };
 
-// Team name to ESPN username mapping
+// Team name to ESPN username mapping for National league
 const teamNameMapping = {
-  'Wisconsian Banana Bread': 'bread',
-  'Stone Cold Steve Irwins': 'scsi',
-  'The Stallions': 'stallions',
-  'Chicago Pick 6s': 'picks',
-  'Team Dogecoin': 'doge',
-  'Goat Emoji II': 'swaggy',
-  'The Minutemen': 'mmen',
-  'Indianapolis Aztecs': 'aztecs',
-  'Currier Island Raging Rhinos': 'rhinos',
-  'Currier Island Raging ...': 'rhinos', // Truncated version from CSV
-  'Blood, Sweat and Beers': 'beers',
-  // Historical users who participated in ESPN era but didn't continue to Sleeper era
-  'Naptown Makos': 'makos',
-  'Speedway Ritual Cog': 'cog'
+  "Frank's Little Beauties": 'flb',
+  'Big Ten Bandits': 'bandits',
+  'Team Pancake': 'pancake',
+  'Great Team Name': 'jacamart',
+  'El Guapo Puto': 'guapo',
+  'Johnkshire Cats': 'cats',
+  'Elm Street Skywalkers': 'tcool',
+  'Team Black Death': 'blackdeath',
+  'Always Sunny in Camdelphia': 'camdelphia',
+  'Always Sunny in Camdel...': 'camdelphia', // Truncated version from CSV
+  'Purple Parade': 'purple',
+  'Brown Town': 'strikers',
+  'FFUcked Up': 'ffuckedup'
 };
 
 // Helper function to get user info by team name
@@ -135,44 +134,44 @@ function getUserByTeamName(teamName) {
   };
 }
 
-// Helper function to get current team name by Sleeper ID
+// Helper function to get current team name by Sleeper ID for National league
 function getCurrentTeamNameBySleeperId(sleeperId) {
-  // This is a simplified version - in a real implementation you'd import from constants
+  // This maps to current team names for users who continued to Sleeper era
   const userMappingToCurrent = {
-    '727368657923063808': 'Fort Wayne Banana Bread', // bread -> ffu-009
-    '399379352174768128': 'Stone Cold Steve Irwins', // scsi -> ffu-051
-    '331590801261883392': 'The Stallions', // stallions -> ffu-001
-    '729741648338210816': 'ChicagoPick6', // picks -> ffu-010
-    '726572095210930176': 'Team Dogecoin', // doge -> ffu-031
-    '325766631336714240': 'Act More Stupidly', // swaggy -> ffu-024
-    '84006772809285632': 'The Minutemen', // mmen -> ffu-023
-    '386791325690994688': 'Indianapolis Aztecs', // aztecs -> ffu-025
-    '462383465753473024': 'Raging Rhinos', // rhinos -> ffu-026
-    '398576262546735104': 'Blood, Sweat, and Beers', // beers -> ffu-004
-    // Historical users who participated in ESPN era but didn't continue to Sleeper era
-    'historical-naptown-makos': 'Naptown Makos', // makos -> ffu-h01
-    'historical-speedway-ritual-cog': 'Speedway Ritual Cog' // cog -> ffu-h02
+    '710981985102802944': "Frank's Little Beauties", // flb
+    '727366898383122432': 'Big Ten Bandits', // bandits  
+    '508719015656099840': 'Team Pancake', // pancake
+    '399322397750124544': 'Great Team Name', // jacamart
+    '507633950666584064': 'El Guapo Puto', // guapo
+    '527884868880531456': 'Johnkshire Cats', // cats
+    '399297882890440704': 'Elm Street Skywalkers', // tcool
+    '599711204499312640': 'Team Black Death', // blackdeath
+    // Note: 472876832719368192 (stark) was not in National 2020
+    '465884883869233152': 'Always Sunny in Camdelphia', // camdelphia
+    'historical-purple-parade': 'Purple Parade', // purple - historical
+    '467553389673181184': 'Brown Town', // strikers
+    '396808818157182976': 'FFUcked Up' // ffuckedup
   };
   
   return userMappingToCurrent[sleeperId];
 }
 
-// Helper function to get current abbreviation by Sleeper ID
+// Helper function to get current abbreviation by Sleeper ID for National league  
 function getCurrentAbbreviationBySleeperId(sleeperId) {
   const abbreviationMapping = {
-    '727368657923063808': 'FWBB', // bread -> ffu-009
-    '399379352174768128': 'SCSI', // scsi -> ffu-051
-    '331590801261883392': 'STA', // stallions -> ffu-001
-    '729741648338210816': 'CP6', // picks -> ffu-010
-    '726572095210930176': 'DOGE', // doge -> ffu-031
-    '325766631336714240': 'AMS', // swaggy -> ffu-024
-    '84006772809285632': 'MMEN', // mmen -> ffu-023
-    '386791325690994688': 'AZTC', // aztecs -> ffu-025
-    '462383465753473024': 'RAGE', // rhinos -> ffu-026
-    '398576262546735104': 'BEER', // beers -> ffu-004
-    // Historical users who participated in ESPN era but didn't continue to Sleeper era
-    'historical-naptown-makos': 'NM', // makos -> ffu-h01
-    'historical-speedway-ritual-cog': 'SRC' // cog -> ffu-h02
+    '710981985102802944': 'FLB', // flb
+    '727366898383122432': 'BTB', // bandits
+    '508719015656099840': 'PCKE', // pancake
+    '399322397750124544': 'GTN', // jacamart
+    '507633950666584064': 'EGP', // guapo
+    '527884868880531456': 'CATS', // cats
+    '399297882890440704': 'ESS', // tcool
+    '599711204499312640': 'TBD', // blackdeath
+    // Note: 472876832719368192 (stark) was not in National 2020
+    '465884883869233152': 'ASIC', // camdelphia
+    'historical-purple-parade': 'PP', // purple - historical
+    '467553389673181184': 'BT', // strikers
+    '396808818157182976': 'FFU' // ffuckedup
   };
   
   return abbreviationMapping[sleeperId];
@@ -182,9 +181,9 @@ function getCurrentAbbreviationBySleeperId(sleeperId) {
 function loadCSVData() {
   const dataPath = path.join(process.cwd(), 'public', 'espn-league-data');
   
-  const teamsCSV = fs.readFileSync(path.join(dataPath, 'ESPN Fantasy Scrapes - Teams P20.original.csv'), 'utf8');
-  const matchupsCSV = fs.readFileSync(path.join(dataPath, 'ESPN Fantasy Scrapes - Matchups P20.original.csv'), 'utf8');
-  const draftCSV = fs.readFileSync(path.join(dataPath, 'ESPN Fantasy Scrapes - Draft Results P20.original.csv'), 'utf8');
+  const teamsCSV = fs.readFileSync(path.join(dataPath, 'ESPN Fantasy Scrapes - Teams N20.original.csv'), 'utf8');
+  const matchupsCSV = fs.readFileSync(path.join(dataPath, 'ESPN Fantasy Scrapes - Matchups N20.original.csv'), 'utf8');
+  const draftCSV = fs.readFileSync(path.join(dataPath, 'ESPN Fantasy Scrapes - Draft Results N20.original.csv'), 'utf8');
   
   return {
     teams: parseCSV(teamsCSV),
@@ -249,8 +248,8 @@ function generateMatchupsByWeek(matchupsData, teamsData) {
   teamsData.forEach(team => {
     finalRankings[team.Team] = parseInt(team['Final Rank']);
     // Also add truncated version for CSV matching
-    if (team.Team === 'Currier Island Raging Rhinos') {
-      finalRankings['Currier Island Raging ...'] = parseInt(team['Final Rank']);
+    if (team.Team === 'Always Sunny in Camdelphia') {
+      finalRankings['Always Sunny in Camdel...'] = parseInt(team['Final Rank']);
     }
   });
   
@@ -409,7 +408,7 @@ function generateDraftData(draftData) {
         teamName: userInfo.teamName,
         abbreviation: userInfo.abbreviation
       },
-      draftId: 'espn-2020-premier-draft'
+      draftId: 'espn-2020-national-draft'
     };
   }).filter(Boolean);
 
@@ -443,10 +442,10 @@ function generateDraftData(draftData) {
   });
 
   return {
-    draftId: 'espn-2020-premier-draft',
-    leagueId: 'espn-2020-premier',
+    draftId: 'espn-2020-national-draft',
+    leagueId: 'espn-2020-national',
     year: '2020',
-    league: 'PREMIER',
+    league: 'NATIONAL',
     draftOrder,
     picks,
     settings: {
@@ -455,8 +454,8 @@ function generateDraftData(draftData) {
       draftType: 'snake'
     },
     metadata: {
-      name: 'ESPN 2020 Premier Draft',
-      description: 'Premier League Draft for 2020 season',
+      name: 'ESPN 2020 National Draft',
+      description: 'National League Draft for 2020 season',
       scoringType: 'standard'
     },
     startTime: new Date('2020-08-15').getTime(), // Approximate draft date
@@ -464,8 +463,8 @@ function generateDraftData(draftData) {
   };
 }
 
-// Main function to generate P20 data
-function generateP20Data() {
+// Main function to generate N20 data
+function generateN20Data() {
   console.log('Loading CSV data...');
   const csvData = loadCSVData();
   
@@ -481,10 +480,10 @@ function generateP20Data() {
   console.log('Generating draft data...');
   const draftData = generateDraftData(csvData.draft);
   
-  const p20Data = {
-    league: 'PREMIER',
+  const n20Data = {
+    league: 'NATIONAL',
     year: '2020',
-    leagueId: 'espn-2020-premier',
+    leagueId: 'espn-2020-national',
     standings,
     playoffResults,
     promotions: [], // No promotions in ESPN era
@@ -501,10 +500,10 @@ function generateP20Data() {
   }
   
   // Write the data file
-  const outputPath = path.join(outputDir, 'premier.json');
-  fs.writeFileSync(outputPath, JSON.stringify(p20Data, null, 2));
+  const outputPath = path.join(outputDir, 'national.json');
+  fs.writeFileSync(outputPath, JSON.stringify(n20Data, null, 2));
   
-  console.log(`✅ P20 data generated successfully: ${outputPath}`);
+  console.log(`✅ N20 data generated successfully: ${outputPath}`);
   console.log(`📊 Generated data includes:`);
   console.log(`   - ${standings.length} teams in standings`);
   console.log(`   - ${Object.keys(matchupsByWeek).length} weeks of matchups`);
@@ -516,17 +515,17 @@ function generateP20Data() {
   const historicalUsers = standings.filter(s => s.userId.startsWith('historical-')).length;
   console.log(`👥 User mapping: ${mappedUsers} current users, ${historicalUsers} historical users`);
   
-  return p20Data;
+  return n20Data;
 }
 
 // Run the script
 if (import.meta.url === `file://${process.argv[1]}`) {
   try {
-    generateP20Data();
+    generateN20Data();
   } catch (error) {
-    console.error('❌ Error generating P20 data:', error.message);
+    console.error('❌ Error generating N20 data:', error.message);
     process.exit(1);
   }
 }
 
-export { generateP20Data };
+export { generateN20Data };

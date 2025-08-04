@@ -27,12 +27,12 @@ export const Records = () => {
   const { data: allStandings } = useAllStandings();
 
   const leagues: (LeagueTier | 'ALL')[] = ['ALL', 'PREMIER', 'MASTERS', 'NATIONAL'];
-  const years = ['ALL', '2024', '2023', '2022', '2021'];
+  const years = ['ALL', '2024', '2023', '2022', '2021', '2020', '2019', '2018'];
   const validYearsByLeague: Record<string, string[]> = {
     ALL: years,
     PREMIER: years,
     NATIONAL: years,
-    MASTERS: ['ALL', '2024', '2023', '2022'], // no 2021
+    MASTERS: ['ALL', '2024', '2023', '2022'], // no 2021, 2020
   };
 
   const filteredYears = useMemo(() => {

@@ -96,7 +96,7 @@ export const USERS: UserConfig[] = [
   { ffuId: 'ffu-042', sleeperId: '472876832719368192', teamName: 'Stark Direwolves', abbreviation: 'STRK', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-043', sleeperId: '399297882890440704', teamName: 'Circle City Phantoms', abbreviation: 'CCP', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-044', sleeperId: '467553389673181184', teamName: 'Shton\'s Strikers', abbreviation: 'SHTN', joinedYear: 2021, isActive: true },
-  { ffuId: 'ffu-045', sleeperId: '599711204499312640', teamName: 'Drixxlepix48', abbreviation: 'DRIX', joinedYear: 2021, isActive: true },
+  { ffuId: 'ffu-045', sleeperId: '599711204499312640', teamName: 'Team Black Death', abbreviation: 'TBD', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-046', sleeperId: '739275676649144320', teamName: 'Birds of War', abbreviation: 'BOW', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-047', sleeperId: '563223565497249792', teamName: 'bstarrr', abbreviation: 'BSTA', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-048', sleeperId: '1003144735223099392', teamName: 'dewdoc', abbreviation: 'DEW', joinedYear: 2021, isActive: true },
@@ -105,8 +105,14 @@ export const USERS: UserConfig[] = [
   { ffuId: 'ffu-051', sleeperId: '399379352174768128', teamName: 'Stone Cold Steve Irwins', abbreviation: 'SCSI', joinedYear: 2020, isActive: true, espnUsername: 'scsi', historicalTeamNames: { '2020': 'Stone Cold Steve Irwins' } },
   
   // Historical users who participated in ESPN era but didn't continue to Sleeper era
-  { ffuId: 'ffu-h01', sleeperId: 'historical-naptown-makos', teamName: 'Naptown Makos', abbreviation: 'NM', joinedYear: 2020, isActive: false, espnUsername: 'makos', historicalTeamNames: { '2020': 'Naptown Makos' } },
-  { ffuId: 'ffu-h02', sleeperId: 'historical-speedway-ritual-cog', teamName: 'Speedway Ritual Cog', abbreviation: 'SRC', joinedYear: 2020, isActive: false, espnUsername: 'cog', historicalTeamNames: { '2020': 'Speedway Ritual Cog' } },
+  { ffuId: 'ffu-h01', sleeperId: 'historical-naptown-makos', teamName: 'Naptown Makos', abbreviation: 'NM', joinedYear: 2019, isActive: false, espnUsername: 'makos', historicalTeamNames: { '2019': 'Naptown Makos' } },
+  { ffuId: 'ffu-h02', sleeperId: 'historical-speedway-ritual-cog', teamName: 'Speedway\'s Ritual Cog', abbreviation: 'SRC', joinedYear: 2018, isActive: false, espnUsername: 'cog', historicalTeamNames: { '2018': 'Speedway\'s Ritual Cog', '2019': 'Speedway\'s Ritual Cog' } },
+  { ffuId: 'ffu-h03', sleeperId: 'historical-well-done-stakes', teamName: 'The Well Done Stakes', abbreviation: 'WDS', joinedYear: 2018, isActive: false, espnUsername: 'twds', historicalTeamNames: { '2018': 'The Well Done Stakes' } },
+  { ffuId: 'ffu-h04', sleeperId: 'historical-durham-handsome-devils', teamName: 'Durham Handsome Devils', abbreviation: 'DHD', joinedYear: 2018, isActive: false, espnUsername: 'devils', historicalTeamNames: { '2018': 'Durham Handsome Devils' } },
+  { ffuId: 'ffu-h05', sleeperId: 'historical-the-losers', teamName: 'The Losers', abbreviation: 'TL', joinedYear: 2018, isActive: false, espnUsername: 'losers', historicalTeamNames: { '2018': 'The Losers', '2019': 'The Losers' } },
+  { ffuId: 'ffu-h06', sleeperId: 'historical-gingy-flame', teamName: 'Gingy Flame', abbreviation: 'GF', joinedYear: 2018, isActive: false, espnUsername: 'flame', historicalTeamNames: { '2018': 'Gingy Flame', '2019': 'Gingy Flame' } },
+  { ffuId: 'ffu-h07', sleeperId: 'historical-not-your-average-joes', teamName: 'Not Your Average Joes', abbreviation: 'NYAJ', joinedYear: 2018, isActive: false, espnUsername: 'joes', historicalTeamNames: { '2018': 'Not Your Average Joes' } },
+  { ffuId: 'ffu-h08', sleeperId: 'historical-team-team-casa', teamName: 'Team Team Casa', abbreviation: 'TTC', joinedYear: 2018, isActive: false, espnUsername: 'casa', historicalTeamNames: { '2018': 'Team Team Casa' } },
 ];
 
 // Helper functions for accessing data

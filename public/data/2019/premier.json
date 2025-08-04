@@ -1,0 +1,4543 @@
+{
+  "league": "PREMIER",
+  "year": "2019",
+  "leagueId": "espn-2019-premier",
+  "standings": [
+    {
+      "userId": "727368657923063808",
+      "ffuUserId": "ffu-009",
+      "wins": 10,
+      "losses": 3,
+      "pointsFor": 1447.05,
+      "pointsAgainst": 1442.7,
+      "rank": 1,
+      "userInfo": {
+        "teamName": "Fort Wayne Banana Bread",
+        "abbreviation": "FWBB"
+      }
+    },
+    {
+      "userId": "399379352174768128",
+      "ffuUserId": "ffu-051",
+      "wins": 10,
+      "losses": 3,
+      "pointsFor": 1522.1,
+      "pointsAgainst": 1314.15,
+      "rank": 2,
+      "userInfo": {
+        "teamName": "Stone Cold Steve Irwins",
+        "abbreviation": "SCSI"
+      }
+    },
+    {
+      "userId": "84006772809285632",
+      "ffuUserId": "ffu-023",
+      "wins": 8,
+      "losses": 5,
+      "pointsFor": 1380.25,
+      "pointsAgainst": 1301.3,
+      "rank": 3,
+      "userInfo": {
+        "teamName": "The Minutemen",
+        "abbreviation": "MMEN"
+      }
+    },
+    {
+      "userId": "726572095210930176",
+      "ffuUserId": "ffu-031",
+      "wins": 8,
+      "losses": 5,
+      "pointsFor": 1481.1,
+      "pointsAgainst": 1440.2,
+      "rank": 4,
+      "userInfo": {
+        "teamName": "Team Dogecoin",
+        "abbreviation": "DOGE"
+      }
+    },
+    {
+      "userId": "325766631336714240",
+      "ffuUserId": "ffu-024",
+      "wins": 7,
+      "losses": 6,
+      "pointsFor": 1609.25,
+      "pointsAgainst": 1379.7,
+      "rank": 5,
+      "userInfo": {
+        "teamName": "Act More Stupidly",
+        "abbreviation": "AMS"
+      }
+    },
+    {
+      "userId": "331590801261883392",
+      "ffuUserId": "ffu-001",
+      "wins": 7,
+      "losses": 6,
+      "pointsFor": 1621.55,
+      "pointsAgainst": 1496.75,
+      "rank": 6,
+      "userInfo": {
+        "teamName": "The Stallions",
+        "abbreviation": "STA"
+      }
+    },
+    {
+      "userId": "historical-well-done-stakes",
+      "ffuUserId": "ffu-h03",
+      "wins": 3,
+      "losses": 10,
+      "pointsFor": 1241.2,
+      "pointsAgainst": 1464,
+      "rank": 7,
+      "userInfo": {
+        "teamName": "The Well Done Stakes",
+        "abbreviation": "WDS"
+      }
+    },
+    {
+      "userId": "historical-atlanta-handsome-devils",
+      "ffuUserId": "ffu-h04",
+      "wins": 4,
+      "losses": 9,
+      "pointsFor": 1356.85,
+      "pointsAgainst": 1490.4,
+      "rank": 8,
+      "userInfo": {
+        "teamName": "Atlanta Handsome Devils",
+        "abbreviation": "AHD"
+      }
+    },
+    {
+      "userId": "398576262546735104",
+      "ffuUserId": "ffu-004",
+      "wins": 7,
+      "losses": 6,
+      "pointsFor": 1449.85,
+      "pointsAgainst": 1420.65,
+      "rank": 9,
+      "userInfo": {
+        "teamName": "Blood, Sweat, and Beers",
+        "abbreviation": "BEER"
+      }
+    },
+    {
+      "userId": "472876832719368192",
+      "ffuUserId": "ffu-042",
+      "wins": 5,
+      "losses": 8,
+      "pointsFor": 1304.95,
+      "pointsAgainst": 1404.65,
+      "rank": 10,
+      "userInfo": {
+        "teamName": "Team Stark",
+        "abbreviation": "STRK"
+      }
+    },
+    {
+      "userId": "396808818157182976",
+      "ffuUserId": "ffu-039",
+      "wins": 2,
+      "losses": 11,
+      "pointsFor": 1212.55,
+      "pointsAgainst": 1450.95,
+      "rank": 11,
+      "userInfo": {
+        "teamName": "FFUcked Up",
+        "abbreviation": "FFU"
+      }
+    },
+    {
+      "userId": "727366898383122432",
+      "ffuUserId": "ffu-028",
+      "wins": 7,
+      "losses": 6,
+      "pointsFor": 1374,
+      "pointsAgainst": 1395.25,
+      "rank": 12,
+      "userInfo": {
+        "teamName": "Big Ten Bandits",
+        "abbreviation": "BTB"
+      }
+    }
+  ],
+  "playoffResults": [
+    {
+      "userId": "727368657923063808",
+      "ffuUserId": "ffu-009",
+      "placement": 1,
+      "placementName": "1st",
+      "userInfo": {
+        "teamName": "Fort Wayne Banana Bread",
+        "abbreviation": "FWBB"
+      }
+    },
+    {
+      "userId": "399379352174768128",
+      "ffuUserId": "ffu-051",
+      "placement": 2,
+      "placementName": "2nd",
+      "userInfo": {
+        "teamName": "Stone Cold Steve Irwins",
+        "abbreviation": "SCSI"
+      }
+    },
+    {
+      "userId": "84006772809285632",
+      "ffuUserId": "ffu-023",
+      "placement": 3,
+      "placementName": "3rd",
+      "userInfo": {
+        "teamName": "The Minutemen",
+        "abbreviation": "MMEN"
+      }
+    },
+    {
+      "userId": "726572095210930176",
+      "ffuUserId": "ffu-031",
+      "placement": 4,
+      "placementName": "4th",
+      "userInfo": {
+        "teamName": "Team Dogecoin",
+        "abbreviation": "DOGE"
+      }
+    },
+    {
+      "userId": "325766631336714240",
+      "ffuUserId": "ffu-024",
+      "placement": 5,
+      "placementName": "5th",
+      "userInfo": {
+        "teamName": "Act More Stupidly",
+        "abbreviation": "AMS"
+      }
+    },
+    {
+      "userId": "331590801261883392",
+      "ffuUserId": "ffu-001",
+      "placement": 6,
+      "placementName": "6th",
+      "userInfo": {
+        "teamName": "The Stallions",
+        "abbreviation": "STA"
+      }
+    },
+    {
+      "userId": "historical-well-done-stakes",
+      "ffuUserId": "ffu-h03",
+      "placement": 7,
+      "placementName": "7th",
+      "userInfo": {
+        "teamName": "The Well Done Stakes",
+        "abbreviation": "WDS"
+      }
+    },
+    {
+      "userId": "historical-atlanta-handsome-devils",
+      "ffuUserId": "ffu-h04",
+      "placement": 8,
+      "placementName": "8th",
+      "userInfo": {
+        "teamName": "Atlanta Handsome Devils",
+        "abbreviation": "AHD"
+      }
+    },
+    {
+      "userId": "398576262546735104",
+      "ffuUserId": "ffu-004",
+      "placement": 9,
+      "placementName": "9th",
+      "userInfo": {
+        "teamName": "Blood, Sweat, and Beers",
+        "abbreviation": "BEER"
+      }
+    },
+    {
+      "userId": "472876832719368192",
+      "ffuUserId": "ffu-042",
+      "placement": 10,
+      "placementName": "10th",
+      "userInfo": {
+        "teamName": "Team Stark",
+        "abbreviation": "STRK"
+      }
+    },
+    {
+      "userId": "396808818157182976",
+      "ffuUserId": "ffu-039",
+      "placement": 11,
+      "placementName": "11th",
+      "userInfo": {
+        "teamName": "FFUcked Up",
+        "abbreviation": "FFU"
+      }
+    },
+    {
+      "userId": "727366898383122432",
+      "ffuUserId": "ffu-028",
+      "placement": 12,
+      "placementName": "12th",
+      "userInfo": {
+        "teamName": "Big Ten Bandits",
+        "abbreviation": "BTB"
+      }
+    }
+  ],
+  "promotions": [],
+  "relegations": [],
+  "matchupsByWeek": {
+    "1": [
+      {
+        "winner": "727368657923063808",
+        "loser": "726572095210930176",
+        "winnerScore": 139.15,
+        "loserScore": 92.7
+      },
+      {
+        "winner": "727366898383122432",
+        "loser": "325766631336714240",
+        "winnerScore": 172.05,
+        "loserScore": 141
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "472876832719368192",
+        "winnerScore": 121.5,
+        "loserScore": 118.15
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "398576262546735104",
+        "winnerScore": 123,
+        "loserScore": 111.9
+      },
+      {
+        "winner": "84006772809285632",
+        "loser": "historical-atlanta-handsome-devils",
+        "winnerScore": 97.9,
+        "loserScore": 71.5
+      },
+      {
+        "winner": "historical-well-done-stakes",
+        "loser": "396808818157182976",
+        "winnerScore": 130.1,
+        "loserScore": 75.45
+      }
+    ],
+    "2": [
+      {
+        "winner": "727366898383122432",
+        "loser": "398576262546735104",
+        "winnerScore": 104.35,
+        "loserScore": 54.45
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "historical-atlanta-handsome-devils",
+        "winnerScore": 126.75,
+        "loserScore": 115.6
+      },
+      {
+        "winner": "84006772809285632",
+        "loser": "396808818157182976",
+        "winnerScore": 106.5,
+        "loserScore": 105.05
+      },
+      {
+        "winner": "726572095210930176",
+        "loser": "325766631336714240",
+        "winnerScore": 130.45,
+        "loserScore": 97.35
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "727368657923063808",
+        "winnerScore": 159.9,
+        "loserScore": 113.25
+      },
+      {
+        "winner": "472876832719368192",
+        "loser": "historical-well-done-stakes",
+        "winnerScore": 100.45,
+        "loserScore": 74.1
+      }
+    ],
+    "3": [
+      {
+        "winner": "726572095210930176",
+        "loser": "331590801261883392",
+        "winnerScore": 126.2,
+        "loserScore": 116.05
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "727366898383122432",
+        "winnerScore": 124.35,
+        "loserScore": 88.85
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "396808818157182976",
+        "winnerScore": 123.8,
+        "loserScore": 121.75
+      },
+      {
+        "winner": "historical-atlanta-handsome-devils",
+        "loser": "472876832719368192",
+        "winnerScore": 102.55,
+        "loserScore": 101.65
+      },
+      {
+        "winner": "84006772809285632",
+        "loser": "historical-well-done-stakes",
+        "winnerScore": 120.2,
+        "loserScore": 113.95
+      },
+      {
+        "winner": "325766631336714240",
+        "loser": "398576262546735104",
+        "winnerScore": 118.75,
+        "loserScore": 114.3
+      }
+    ],
+    "4": [
+      {
+        "winner": "84006772809285632",
+        "loser": "399379352174768128",
+        "winnerScore": 78.2,
+        "loserScore": 63.65
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "325766631336714240",
+        "winnerScore": 132.95,
+        "loserScore": 129.6
+      },
+      {
+        "winner": "727366898383122432",
+        "loser": "726572095210930176",
+        "winnerScore": 98.1,
+        "loserScore": 91.25
+      },
+      {
+        "winner": "historical-atlanta-handsome-devils",
+        "loser": "historical-well-done-stakes",
+        "winnerScore": 130.95,
+        "loserScore": 118.35
+      },
+      {
+        "winner": "472876832719368192",
+        "loser": "396808818157182976",
+        "winnerScore": 90.55,
+        "loserScore": 80.95
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "398576262546735104",
+        "winnerScore": 110,
+        "loserScore": 91.65
+      }
+    ],
+    "5": [
+      {
+        "winner": "726572095210930176",
+        "loser": "472876832719368192",
+        "winnerScore": 146.55,
+        "loserScore": 111.7
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "historical-atlanta-handsome-devils",
+        "winnerScore": 137.05,
+        "loserScore": 135.6
+      },
+      {
+        "winner": "396808818157182976",
+        "loser": "727366898383122432",
+        "winnerScore": 92.65,
+        "loserScore": 86.45
+      },
+      {
+        "winner": "325766631336714240",
+        "loser": "historical-well-done-stakes",
+        "winnerScore": 201.3,
+        "loserScore": 97.8
+      },
+      {
+        "winner": "84006772809285632",
+        "loser": "398576262546735104",
+        "winnerScore": 149,
+        "loserScore": 119.25
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "399379352174768128",
+        "winnerScore": 113.75,
+        "loserScore": 92.65
+      }
+    ],
+    "6": [
+      {
+        "winner": "325766631336714240",
+        "loser": "472876832719368192",
+        "winnerScore": 122.6,
+        "loserScore": 77.4
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "396808818157182976",
+        "winnerScore": 108.2,
+        "loserScore": 90.45
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "84006772809285632",
+        "winnerScore": 139.4,
+        "loserScore": 117.7
+      },
+      {
+        "winner": "726572095210930176",
+        "loser": "historical-well-done-stakes",
+        "winnerScore": 116.3,
+        "loserScore": 105.7
+      },
+      {
+        "winner": "398576262546735104",
+        "loser": "historical-atlanta-handsome-devils",
+        "winnerScore": 115.6,
+        "loserScore": 90
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "727366898383122432",
+        "winnerScore": 149.35,
+        "loserScore": 81.3
+      }
+    ],
+    "7": [
+      {
+        "winner": "472876832719368192",
+        "loser": "84006772809285632",
+        "winnerScore": 92.6,
+        "loserScore": 85.15
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "historical-well-done-stakes",
+        "winnerScore": 125,
+        "loserScore": 82.95
+      },
+      {
+        "winner": "historical-atlanta-handsome-devils",
+        "loser": "396808818157182976",
+        "winnerScore": 95.25,
+        "loserScore": 94.3
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "325766631336714240",
+        "winnerScore": 91.55,
+        "loserScore": 73.15
+      },
+      {
+        "winner": "398576262546735104",
+        "loser": "726572095210930176",
+        "winnerScore": 119.65,
+        "loserScore": 100.55
+      },
+      {
+        "winner": "727366898383122432",
+        "loser": "331590801261883392",
+        "winnerScore": 135.85,
+        "loserScore": 128.3
+      }
+    ],
+    "8": [
+      {
+        "winner": "331590801261883392",
+        "loser": "historical-well-done-stakes",
+        "winnerScore": 129.4,
+        "loserScore": 65.5
+      },
+      {
+        "winner": "727366898383122432",
+        "loser": "historical-atlanta-handsome-devils",
+        "winnerScore": 129.45,
+        "loserScore": 103.5
+      },
+      {
+        "winner": "325766631336714240",
+        "loser": "399379352174768128",
+        "winnerScore": 151.85,
+        "loserScore": 117.25
+      },
+      {
+        "winner": "396808818157182976",
+        "loser": "726572095210930176",
+        "winnerScore": 125.95,
+        "loserScore": 113.15
+      },
+      {
+        "winner": "84006772809285632",
+        "loser": "727368657923063808",
+        "winnerScore": 165.65,
+        "loserScore": 93.85
+      },
+      {
+        "winner": "398576262546735104",
+        "loser": "472876832719368192",
+        "winnerScore": 127.75,
+        "loserScore": 90
+      }
+    ],
+    "9": [
+      {
+        "winner": "726572095210930176",
+        "loser": "historical-atlanta-handsome-devils",
+        "winnerScore": 120.75,
+        "loserScore": 116.5
+      },
+      {
+        "winner": "398576262546735104",
+        "loser": "historical-well-done-stakes",
+        "winnerScore": 92.85,
+        "loserScore": 56.35
+      },
+      {
+        "winner": "325766631336714240",
+        "loser": "396808818157182976",
+        "winnerScore": 122,
+        "loserScore": 67.5
+      },
+      {
+        "winner": "84006772809285632",
+        "loser": "727366898383122432",
+        "winnerScore": 129.35,
+        "loserScore": 104.65
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "472876832719368192",
+        "winnerScore": 136.5,
+        "loserScore": 135.15
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "331590801261883392",
+        "winnerScore": 127.05,
+        "loserScore": 102.3
+      }
+    ],
+    "10": [
+      {
+        "winner": "727368657923063808",
+        "loser": "historical-well-done-stakes",
+        "winnerScore": 114.9,
+        "loserScore": 113.55
+      },
+      {
+        "winner": "historical-atlanta-handsome-devils",
+        "loser": "325766631336714240",
+        "winnerScore": 119.2,
+        "loserScore": 106.9
+      },
+      {
+        "winner": "727366898383122432",
+        "loser": "472876832719368192",
+        "winnerScore": 93.65,
+        "loserScore": 75.75
+      },
+      {
+        "winner": "726572095210930176",
+        "loser": "84006772809285632",
+        "winnerScore": 112.55,
+        "loserScore": 107
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "398576262546735104",
+        "winnerScore": 155.8,
+        "loserScore": 117.35
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "396808818157182976",
+        "winnerScore": 126.5,
+        "loserScore": 96.2
+      }
+    ],
+    "11": [
+      {
+        "winner": "399379352174768128",
+        "loser": "472876832719368192",
+        "winnerScore": 112.7,
+        "loserScore": 90.85
+      },
+      {
+        "winner": "726572095210930176",
+        "loser": "331590801261883392",
+        "winnerScore": 127.1,
+        "loserScore": 126.7
+      },
+      {
+        "winner": "398576262546735104",
+        "loser": "396808818157182976",
+        "winnerScore": 143.5,
+        "loserScore": 98.1
+      },
+      {
+        "winner": "325766631336714240",
+        "loser": "727366898383122432",
+        "winnerScore": 111.45,
+        "loserScore": 68.2
+      },
+      {
+        "winner": "historical-well-done-stakes",
+        "loser": "84006772809285632",
+        "winnerScore": 88.3,
+        "loserScore": 69.9
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "historical-atlanta-handsome-devils",
+        "winnerScore": 108.35,
+        "loserScore": 101.05
+      }
+    ],
+    "12": [
+      {
+        "winner": "726572095210930176",
+        "loser": "727368657923063808",
+        "winnerScore": 133.7,
+        "loserScore": 83.1
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "historical-atlanta-handsome-devils",
+        "winnerScore": 113.35,
+        "loserScore": 70.25
+      },
+      {
+        "winner": "325766631336714240",
+        "loser": "84006772809285632",
+        "winnerScore": 110.8,
+        "loserScore": 66.6
+      },
+      {
+        "winner": "398576262546735104",
+        "loser": "727366898383122432",
+        "winnerScore": 117.15,
+        "loserScore": 102.25
+      },
+      {
+        "winner": "historical-well-done-stakes",
+        "loser": "396808818157182976",
+        "winnerScore": 117.85,
+        "loserScore": 78.45
+      },
+      {
+        "winner": "472876832719368192",
+        "loser": "331590801261883392",
+        "winnerScore": 100.7,
+        "loserScore": 95.75
+      }
+    ],
+    "13": [
+      {
+        "winner": "398576262546735104",
+        "loser": "325766631336714240",
+        "winnerScore": 124.45,
+        "loserScore": 122.5
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "331590801261883392",
+        "winnerScore": 110.1,
+        "loserScore": 104.25
+      },
+      {
+        "winner": "727366898383122432",
+        "loser": "historical-well-done-stakes",
+        "winnerScore": 108.85,
+        "loserScore": 76.7
+      },
+      {
+        "winner": "84006772809285632",
+        "loser": "396808818157182976",
+        "winnerScore": 87.1,
+        "loserScore": 85.75
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "726572095210930176",
+        "winnerScore": 93.25,
+        "loserScore": 69.85
+      },
+      {
+        "winner": "472876832719368192",
+        "loser": "historical-atlanta-handsome-devils",
+        "winnerScore": 120,
+        "loserScore": 104.9
+      }
+    ],
+    "14": [
+      {
+        "winner": "726572095210930176",
+        "loser": "325766631336714240",
+        "winnerScore": 103.6,
+        "loserScore": 84.85,
+        "placementType": "Championship Quarterfinal"
+      },
+      {
+        "winner": "84006772809285632",
+        "loser": "331590801261883392",
+        "winnerScore": 126.05,
+        "loserScore": 102.1,
+        "placementType": "Championship Quarterfinal"
+      },
+      {
+        "winner": "398576262546735104",
+        "loser": "727366898383122432",
+        "winnerScore": 116.25,
+        "loserScore": 94.15,
+        "placementType": "Toilet Bowl Quarterfinal"
+      },
+      {
+        "winner": "historical-atlanta-handsome-devils",
+        "loser": "472876832719368192",
+        "winnerScore": 150,
+        "loserScore": 76.45,
+        "placementType": "Toilet Bowl Quarterfinal"
+      },
+      {
+        "winner": "historical-well-done-stakes",
+        "loser": "396808818157182976",
+        "winnerScore": 93.55,
+        "loserScore": 86.45,
+        "placementType": "Toilet Bowl Quarterfinal"
+      }
+    ],
+    "15": [
+      {
+        "winner": "historical-well-done-stakes",
+        "loser": "727366898383122432",
+        "winnerScore": 119.95,
+        "loserScore": 83.85,
+        "placementType": "Toilet Bowl Semifinal"
+      },
+      {
+        "winner": "472876832719368192",
+        "loser": "396808818157182976",
+        "winnerScore": 127.7,
+        "loserScore": 102.05,
+        "placementType": "Toilet Bowl Semifinal"
+      },
+      {
+        "winner": "historical-atlanta-handsome-devils",
+        "loser": "398576262546735104",
+        "winnerScore": 125,
+        "loserScore": 116.8,
+        "placementType": "Toilet Bowl Semifinal"
+      },
+      {
+        "winner": "325766631336714240",
+        "loser": "331590801261883392",
+        "winnerScore": 165.9,
+        "loserScore": 103.75,
+        "placementType": "Championship Semifinal"
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "84006772809285632",
+        "winnerScore": 125.7,
+        "loserScore": 125.3,
+        "placementType": "Championship Semifinal"
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "726572095210930176",
+        "winnerScore": 131.1,
+        "loserScore": 112.7,
+        "placementType": "Championship Semifinal"
+      }
+    ],
+    "16": [
+      {
+        "winner": "396808818157182976",
+        "loser": "727366898383122432",
+        "winnerScore": 84.8,
+        "loserScore": 58.8,
+        "placementType": "Last Place"
+      },
+      {
+        "winner": "398576262546735104",
+        "loser": "472876832719368192",
+        "winnerScore": 123.8,
+        "loserScore": 100.35,
+        "placementType": "9th Place"
+      },
+      {
+        "winner": "historical-well-done-stakes",
+        "loser": "historical-atlanta-handsome-devils",
+        "winnerScore": 87.15,
+        "loserScore": 78.2,
+        "placementType": "7th Place"
+      },
+      {
+        "winner": "325766631336714240",
+        "loser": "331590801261883392",
+        "winnerScore": 117.8,
+        "loserScore": 103.5,
+        "placementType": "5th Place"
+      },
+      {
+        "winner": "84006772809285632",
+        "loser": "726572095210930176",
+        "winnerScore": 154.15,
+        "loserScore": 117.35,
+        "placementType": "3rd Place"
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "399379352174768128",
+        "winnerScore": 107.6,
+        "loserScore": 102.65,
+        "placementType": "Championship"
+      }
+    ]
+  },
+  "memberGameStats": {},
+  "draftData": {
+    "draftId": "espn-2019-premier-draft",
+    "leagueId": "espn-2019-premier",
+    "year": "2019",
+    "league": "PREMIER",
+    "draftOrder": {
+      "84006772809285632": 1,
+      "historical-atlanta-handsome-devils": 2,
+      "325766631336714240": 3,
+      "727368657923063808": 4,
+      "331590801261883392": 5,
+      "398576262546735104": 6,
+      "historical-well-done-stakes": 7,
+      "399379352174768128": 8,
+      "472876832719368192": 9,
+      "727366898383122432": 10,
+      "726572095210930176": 11,
+      "396808818157182976": 12
+    },
+    "picks": [
+      {
+        "pickNumber": 1,
+        "round": 1,
+        "pickInRound": 1,
+        "playerId": "espn-player-saquon-barkley",
+        "playerInfo": {
+          "name": "Saquon Barkley",
+          "position": "RB",
+          "team": "NYG"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "MMEN"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 2,
+        "round": 1,
+        "pickInRound": 2,
+        "playerId": "espn-player-alvin-kamara",
+        "playerInfo": {
+          "name": "Alvin Kamara",
+          "position": "RB",
+          "team": "NO"
+        },
+        "pickedBy": "historical-atlanta-handsome-devils",
+        "userInfo": {
+          "userId": "historical-atlanta-handsome-devils",
+          "ffuUserId": "ffu-h04",
+          "teamName": "Atlanta Handsome Devils",
+          "abbreviation": "AHD"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 3,
+        "round": 1,
+        "pickInRound": 3,
+        "playerId": "espn-player-christian-mccaffrey",
+        "playerInfo": {
+          "name": "Christian McCaffrey",
+          "position": "RB",
+          "team": "CAR"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Act More Stupidly",
+          "abbreviation": "AMS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 4,
+        "round": 1,
+        "pickInRound": 4,
+        "playerId": "espn-player-david-johnson",
+        "playerInfo": {
+          "name": "David Johnson",
+          "position": "RB",
+          "team": "ARI"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Fort Wayne Banana Bread",
+          "abbreviation": "FWBB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 5,
+        "round": 1,
+        "pickInRound": 5,
+        "playerId": "espn-player-le'veon-bell",
+        "playerInfo": {
+          "name": "Le'Veon Bell",
+          "position": "RB",
+          "team": "NYJ"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "STA"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 6,
+        "round": 1,
+        "pickInRound": 6,
+        "playerId": "espn-player-deandre-hopkins",
+        "playerInfo": {
+          "name": "DeAndre Hopkins",
+          "position": "WR",
+          "team": "HOU"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat, and Beers",
+          "abbreviation": "BEER"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 7,
+        "round": 1,
+        "pickInRound": 7,
+        "playerId": "espn-player-davante-adams",
+        "playerInfo": {
+          "name": "Davante Adams",
+          "position": "WR",
+          "team": "GB"
+        },
+        "pickedBy": "historical-well-done-stakes",
+        "userInfo": {
+          "userId": "historical-well-done-stakes",
+          "ffuUserId": "ffu-h03",
+          "teamName": "The Well Done Stakes",
+          "abbreviation": "WDS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 8,
+        "round": 1,
+        "pickInRound": 8,
+        "playerId": "espn-player-ezekiel-elliott",
+        "playerInfo": {
+          "name": "Ezekiel Elliott",
+          "position": "RB",
+          "team": "DAL"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 9,
+        "round": 1,
+        "pickInRound": 9,
+        "playerId": "espn-player-julio-jones",
+        "playerInfo": {
+          "name": "Julio Jones",
+          "position": "WR",
+          "team": "ATL"
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "ffuUserId": "ffu-042",
+          "teamName": "Team Stark",
+          "abbreviation": "STRK"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 10,
+        "round": 1,
+        "pickInRound": 10,
+        "playerId": "espn-player-james-conner",
+        "playerInfo": {
+          "name": "James Conner",
+          "position": "RB",
+          "team": "PIT"
+        },
+        "pickedBy": "727366898383122432",
+        "userInfo": {
+          "userId": "727366898383122432",
+          "ffuUserId": "ffu-028",
+          "teamName": "Big Ten Bandits",
+          "abbreviation": "BTB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 11,
+        "round": 1,
+        "pickInRound": 11,
+        "playerId": "espn-player-michael-thomas",
+        "playerInfo": {
+          "name": "Michael Thomas",
+          "position": "WR",
+          "team": "NO"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "DOGE"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 12,
+        "round": 1,
+        "pickInRound": 12,
+        "playerId": "espn-player-juju-smith-schuster",
+        "playerInfo": {
+          "name": "JuJu Smith-Schuster",
+          "position": "WR",
+          "team": "PIT"
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "ffuUserId": "ffu-039",
+          "teamName": "FFUcked Up",
+          "abbreviation": "FFU"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 13,
+        "round": 2,
+        "pickInRound": 1,
+        "playerId": "espn-player-mike-evans",
+        "playerInfo": {
+          "name": "Mike Evans",
+          "position": "WR",
+          "team": "TB"
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "ffuUserId": "ffu-039",
+          "teamName": "FFUcked Up",
+          "abbreviation": "FFU"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 14,
+        "round": 2,
+        "pickInRound": 2,
+        "playerId": "espn-player-odell-beckham",
+        "playerInfo": {
+          "name": "Odell Beckham",
+          "position": "WR",
+          "team": "CLE"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "DOGE"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 15,
+        "round": 2,
+        "pickInRound": 3,
+        "playerId": "espn-player-travis-kelce",
+        "playerInfo": {
+          "name": "Travis Kelce",
+          "position": "TE",
+          "team": "KC"
+        },
+        "pickedBy": "727366898383122432",
+        "userInfo": {
+          "userId": "727366898383122432",
+          "ffuUserId": "ffu-028",
+          "teamName": "Big Ten Bandits",
+          "abbreviation": "BTB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 16,
+        "round": 2,
+        "pickInRound": 4,
+        "playerId": "espn-player-todd-gurley",
+        "playerInfo": {
+          "name": "Todd Gurley",
+          "position": "RB",
+          "team": "LAR"
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "ffuUserId": "ffu-042",
+          "teamName": "Team Stark",
+          "abbreviation": "STRK"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 17,
+        "round": 2,
+        "pickInRound": 5,
+        "playerId": "espn-player-tyreek-hill",
+        "playerInfo": {
+          "name": "Tyreek Hill",
+          "position": "WR",
+          "team": "KC"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 18,
+        "round": 2,
+        "pickInRound": 6,
+        "playerId": "espn-player-nick-chubb",
+        "playerInfo": {
+          "name": "Nick Chubb",
+          "position": "RB",
+          "team": "CLE"
+        },
+        "pickedBy": "historical-well-done-stakes",
+        "userInfo": {
+          "userId": "historical-well-done-stakes",
+          "ffuUserId": "ffu-h03",
+          "teamName": "The Well Done Stakes",
+          "abbreviation": "WDS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 19,
+        "round": 2,
+        "pickInRound": 7,
+        "playerId": "espn-player-joe-mixon",
+        "playerInfo": {
+          "name": "Joe Mixon",
+          "position": "RB",
+          "team": "CIN"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat, and Beers",
+          "abbreviation": "BEER"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 20,
+        "round": 2,
+        "pickInRound": 8,
+        "playerId": "espn-player-dalvin-cook",
+        "playerInfo": {
+          "name": "Dalvin Cook",
+          "position": "RB",
+          "team": "MIN"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "STA"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 21,
+        "round": 2,
+        "pickInRound": 9,
+        "playerId": "espn-player-keenan-allen",
+        "playerInfo": {
+          "name": "Keenan Allen",
+          "position": "WR",
+          "team": "LAC"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Fort Wayne Banana Bread",
+          "abbreviation": "FWBB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 22,
+        "round": 2,
+        "pickInRound": 10,
+        "playerId": "espn-player-antonio-brown",
+        "playerInfo": {
+          "name": "Antonio Brown",
+          "position": "WR",
+          "team": "FA"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Act More Stupidly",
+          "abbreviation": "AMS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 23,
+        "round": 2,
+        "pickInRound": 11,
+        "playerId": "espn-player-kerryon-johnson",
+        "playerInfo": {
+          "name": "Kerryon Johnson",
+          "position": "RB",
+          "team": "DET"
+        },
+        "pickedBy": "historical-atlanta-handsome-devils",
+        "userInfo": {
+          "userId": "historical-atlanta-handsome-devils",
+          "ffuUserId": "ffu-h04",
+          "teamName": "Atlanta Handsome Devils",
+          "abbreviation": "AHD"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 24,
+        "round": 2,
+        "pickInRound": 12,
+        "playerId": "espn-player-aaron-jones",
+        "playerInfo": {
+          "name": "Aaron Jones",
+          "position": "RB",
+          "team": "GB"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "MMEN"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 25,
+        "round": 3,
+        "pickInRound": 1,
+        "playerId": "espn-player-devonta-freeman",
+        "playerInfo": {
+          "name": "Devonta Freeman",
+          "position": "RB",
+          "team": "ATL"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "MMEN"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 26,
+        "round": 3,
+        "pickInRound": 2,
+        "playerId": "espn-player-julian-edelman",
+        "playerInfo": {
+          "name": "Julian Edelman",
+          "position": "WR",
+          "team": "NE"
+        },
+        "pickedBy": "historical-atlanta-handsome-devils",
+        "userInfo": {
+          "userId": "historical-atlanta-handsome-devils",
+          "ffuUserId": "ffu-h04",
+          "teamName": "Atlanta Handsome Devils",
+          "abbreviation": "AHD"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 27,
+        "round": 3,
+        "pickInRound": 3,
+        "playerId": "espn-player-chris-carson",
+        "playerInfo": {
+          "name": "Chris Carson",
+          "position": "RB",
+          "team": "SEA"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Act More Stupidly",
+          "abbreviation": "AMS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 28,
+        "round": 3,
+        "pickInRound": 4,
+        "playerId": "espn-player-josh-jacobs",
+        "playerInfo": {
+          "name": "Josh Jacobs",
+          "position": "RB",
+          "team": "LV"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Fort Wayne Banana Bread",
+          "abbreviation": "FWBB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 29,
+        "round": 3,
+        "pickInRound": 5,
+        "playerId": "espn-player-george-kittle",
+        "playerInfo": {
+          "name": "George Kittle",
+          "position": "TE",
+          "team": "SF"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "STA"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 30,
+        "round": 3,
+        "pickInRound": 6,
+        "playerId": "espn-player-zach-ertz",
+        "playerInfo": {
+          "name": "Zach Ertz",
+          "position": "TE",
+          "team": "PHI"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat, and Beers",
+          "abbreviation": "BEER"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 31,
+        "round": 3,
+        "pickInRound": 7,
+        "playerId": "espn-player-adam-thielen",
+        "playerInfo": {
+          "name": "Adam Thielen",
+          "position": "WR",
+          "team": "MIN"
+        },
+        "pickedBy": "historical-well-done-stakes",
+        "userInfo": {
+          "userId": "historical-well-done-stakes",
+          "ffuUserId": "ffu-h03",
+          "teamName": "The Well Done Stakes",
+          "abbreviation": "WDS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 32,
+        "round": 3,
+        "pickInRound": 8,
+        "playerId": "espn-player-patrick-mahomes",
+        "playerInfo": {
+          "name": "Patrick Mahomes",
+          "position": "QB",
+          "team": "KC"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 33,
+        "round": 3,
+        "pickInRound": 9,
+        "playerId": "espn-player-damien-williams",
+        "playerInfo": {
+          "name": "Damien Williams",
+          "position": "RB",
+          "team": "KC"
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "ffuUserId": "ffu-042",
+          "teamName": "Team Stark",
+          "abbreviation": "STRK"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 34,
+        "round": 3,
+        "pickInRound": 10,
+        "playerId": "espn-player-derrick-henry",
+        "playerInfo": {
+          "name": "Derrick Henry",
+          "position": "RB",
+          "team": "TEN"
+        },
+        "pickedBy": "727366898383122432",
+        "userInfo": {
+          "userId": "727366898383122432",
+          "ffuUserId": "ffu-028",
+          "teamName": "Big Ten Bandits",
+          "abbreviation": "BTB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 35,
+        "round": 3,
+        "pickInRound": 11,
+        "playerId": "espn-player-david-montgomery",
+        "playerInfo": {
+          "name": "David Montgomery",
+          "position": "RB",
+          "team": "CHI"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "DOGE"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 36,
+        "round": 3,
+        "pickInRound": 12,
+        "playerId": "espn-player-sony-michel",
+        "playerInfo": {
+          "name": "Sony Michel",
+          "position": "RB",
+          "team": "NE"
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "ffuUserId": "ffu-039",
+          "teamName": "FFUcked Up",
+          "abbreviation": "FFU"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 37,
+        "round": 4,
+        "pickInRound": 1,
+        "playerId": "espn-player-robert-woods",
+        "playerInfo": {
+          "name": "Robert Woods",
+          "position": "WR",
+          "team": "LAR"
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "ffuUserId": "ffu-039",
+          "teamName": "FFUcked Up",
+          "abbreviation": "FFU"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 38,
+        "round": 4,
+        "pickInRound": 2,
+        "playerId": "espn-player-leonard-fournette",
+        "playerInfo": {
+          "name": "Leonard Fournette",
+          "position": "RB",
+          "team": "JAX"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "DOGE"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 39,
+        "round": 4,
+        "pickInRound": 3,
+        "playerId": "espn-player-brandin-cooks",
+        "playerInfo": {
+          "name": "Brandin Cooks",
+          "position": "WR",
+          "team": "LAR"
+        },
+        "pickedBy": "727366898383122432",
+        "userInfo": {
+          "userId": "727366898383122432",
+          "ffuUserId": "ffu-028",
+          "teamName": "Big Ten Bandits",
+          "abbreviation": "BTB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 40,
+        "round": 4,
+        "pickInRound": 4,
+        "playerId": "espn-player-amari-cooper",
+        "playerInfo": {
+          "name": "Amari Cooper",
+          "position": "WR",
+          "team": "DAL"
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "ffuUserId": "ffu-042",
+          "teamName": "Team Stark",
+          "abbreviation": "STRK"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 41,
+        "round": 4,
+        "pickInRound": 5,
+        "playerId": "espn-player-melvin-gordon",
+        "playerInfo": {
+          "name": "Melvin Gordon",
+          "position": "RB",
+          "team": "FA"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 42,
+        "round": 4,
+        "pickInRound": 6,
+        "playerId": "espn-player-mark-ingram",
+        "playerInfo": {
+          "name": "Mark Ingram",
+          "position": "RB",
+          "team": "BAL"
+        },
+        "pickedBy": "historical-well-done-stakes",
+        "userInfo": {
+          "userId": "historical-well-done-stakes",
+          "ffuUserId": "ffu-h03",
+          "teamName": "The Well Done Stakes",
+          "abbreviation": "WDS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 43,
+        "round": 4,
+        "pickInRound": 7,
+        "playerId": "espn-player-stefon-diggs",
+        "playerInfo": {
+          "name": "Stefon Diggs",
+          "position": "WR",
+          "team": "MIN"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat, and Beers",
+          "abbreviation": "BEER"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 44,
+        "round": 4,
+        "pickInRound": 8,
+        "playerId": "espn-player-t.y.-hilton",
+        "playerInfo": {
+          "name": "T.Y. Hilton",
+          "position": "WR",
+          "team": "IND"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "STA"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 45,
+        "round": 4,
+        "pickInRound": 9,
+        "playerId": "espn-player-kenny-golladay",
+        "playerInfo": {
+          "name": "Kenny Golladay",
+          "position": "WR",
+          "team": "DET"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Fort Wayne Banana Bread",
+          "abbreviation": "FWBB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 46,
+        "round": 4,
+        "pickInRound": 10,
+        "playerId": "espn-player-cooper-kupp",
+        "playerInfo": {
+          "name": "Cooper Kupp",
+          "position": "WR",
+          "team": "LAR"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Act More Stupidly",
+          "abbreviation": "AMS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 47,
+        "round": 4,
+        "pickInRound": 11,
+        "playerId": "espn-player-chris-godwin",
+        "playerInfo": {
+          "name": "Chris Godwin",
+          "position": "WR",
+          "team": "TB"
+        },
+        "pickedBy": "historical-atlanta-handsome-devils",
+        "userInfo": {
+          "userId": "historical-atlanta-handsome-devils",
+          "ffuUserId": "ffu-h04",
+          "teamName": "Atlanta Handsome Devils",
+          "abbreviation": "AHD"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 48,
+        "round": 4,
+        "pickInRound": 12,
+        "playerId": "espn-player-tyler-lockett",
+        "playerInfo": {
+          "name": "Tyler Lockett",
+          "position": "WR",
+          "team": "SEA"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "MMEN"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 49,
+        "round": 5,
+        "pickInRound": 1,
+        "playerId": "espn-player-allen-robinson",
+        "playerInfo": {
+          "name": "Allen Robinson",
+          "position": "WR",
+          "team": "CHI"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "MMEN"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 50,
+        "round": 5,
+        "pickInRound": 2,
+        "playerId": "espn-player-o.j.-howard",
+        "playerInfo": {
+          "name": "O.J. Howard",
+          "position": "TE",
+          "team": "TB"
+        },
+        "pickedBy": "historical-atlanta-handsome-devils",
+        "userInfo": {
+          "userId": "historical-atlanta-handsome-devils",
+          "ffuUserId": "ffu-h04",
+          "teamName": "Atlanta Handsome Devils",
+          "abbreviation": "AHD"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 51,
+        "round": 5,
+        "pickInRound": 3,
+        "playerId": "espn-player-deshaun-watson",
+        "playerInfo": {
+          "name": "Deshaun Watson",
+          "position": "QB",
+          "team": "HOU"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Act More Stupidly",
+          "abbreviation": "AMS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 52,
+        "round": 5,
+        "pickInRound": 4,
+        "playerId": "espn-player-kenyan-drake",
+        "playerInfo": {
+          "name": "Kenyan Drake",
+          "position": "RB",
+          "team": "MIA"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Fort Wayne Banana Bread",
+          "abbreviation": "FWBB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 53,
+        "round": 5,
+        "pickInRound": 5,
+        "playerId": "espn-player-tyler-boyd",
+        "playerInfo": {
+          "name": "Tyler Boyd",
+          "position": "WR",
+          "team": "CIN"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "STA"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 54,
+        "round": 5,
+        "pickInRound": 6,
+        "playerId": "espn-player-marlon-mack",
+        "playerInfo": {
+          "name": "Marlon Mack",
+          "position": "RB",
+          "team": "IND"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat, and Beers",
+          "abbreviation": "BEER"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 55,
+        "round": 5,
+        "pickInRound": 7,
+        "playerId": "espn-player-duke-johnson",
+        "playerInfo": {
+          "name": "Duke Johnson",
+          "position": "RB",
+          "team": "HOU"
+        },
+        "pickedBy": "historical-well-done-stakes",
+        "userInfo": {
+          "userId": "historical-well-done-stakes",
+          "ffuUserId": "ffu-h03",
+          "teamName": "The Well Done Stakes",
+          "abbreviation": "WDS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 56,
+        "round": 5,
+        "pickInRound": 8,
+        "playerId": "espn-player-evan-engram",
+        "playerInfo": {
+          "name": "Evan Engram",
+          "position": "TE",
+          "team": "NYG"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 57,
+        "round": 5,
+        "pickInRound": 9,
+        "playerId": "espn-player-james-white",
+        "playerInfo": {
+          "name": "James White",
+          "position": "RB",
+          "team": "NE"
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "ffuUserId": "ffu-042",
+          "teamName": "Team Stark",
+          "abbreviation": "STRK"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 58,
+        "round": 5,
+        "pickInRound": 10,
+        "playerId": "espn-player-calvin-ridley",
+        "playerInfo": {
+          "name": "Calvin Ridley",
+          "position": "WR",
+          "team": "ATL"
+        },
+        "pickedBy": "727366898383122432",
+        "userInfo": {
+          "userId": "727366898383122432",
+          "ffuUserId": "ffu-028",
+          "teamName": "Big Ten Bandits",
+          "abbreviation": "BTB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 59,
+        "round": 5,
+        "pickInRound": 11,
+        "playerId": "espn-player-jared-cook",
+        "playerInfo": {
+          "name": "Jared Cook",
+          "position": "TE",
+          "team": "NO"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "DOGE"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 60,
+        "round": 5,
+        "pickInRound": 12,
+        "playerId": "espn-player-tevin-coleman",
+        "playerInfo": {
+          "name": "Tevin Coleman",
+          "position": "RB",
+          "team": "SF"
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "ffuUserId": "ffu-039",
+          "teamName": "FFUcked Up",
+          "abbreviation": "FFU"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 61,
+        "round": 6,
+        "pickInRound": 1,
+        "playerId": "espn-player-miles-sanders",
+        "playerInfo": {
+          "name": "Miles Sanders",
+          "position": "RB",
+          "team": "PHI"
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "ffuUserId": "ffu-039",
+          "teamName": "FFUcked Up",
+          "abbreviation": "FFU"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 62,
+        "round": 6,
+        "pickInRound": 2,
+        "playerId": "espn-player-dede-westbrook",
+        "playerInfo": {
+          "name": "Dede Westbrook",
+          "position": "WR",
+          "team": "JAX"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "DOGE"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 63,
+        "round": 6,
+        "pickInRound": 3,
+        "playerId": "espn-player-alshon-jeffery",
+        "playerInfo": {
+          "name": "Alshon Jeffery",
+          "position": "WR",
+          "team": "PHI"
+        },
+        "pickedBy": "727366898383122432",
+        "userInfo": {
+          "userId": "727366898383122432",
+          "ffuUserId": "ffu-028",
+          "teamName": "Big Ten Bandits",
+          "abbreviation": "BTB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 64,
+        "round": 6,
+        "pickInRound": 4,
+        "playerId": "espn-player-mike-williams",
+        "playerInfo": {
+          "name": "Mike Williams",
+          "position": "WR",
+          "team": "LAC"
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "ffuUserId": "ffu-042",
+          "teamName": "Team Stark",
+          "abbreviation": "STRK"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 65,
+        "round": 6,
+        "pickInRound": 5,
+        "playerId": "espn-player-d.j.-moore",
+        "playerInfo": {
+          "name": "D.J. Moore",
+          "position": "WR",
+          "team": "CAR"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 66,
+        "round": 6,
+        "pickInRound": 6,
+        "playerId": "espn-player-derrius-guice",
+        "playerInfo": {
+          "name": "Derrius Guice",
+          "position": "RB",
+          "team": "WAS"
+        },
+        "pickedBy": "historical-well-done-stakes",
+        "userInfo": {
+          "userId": "historical-well-done-stakes",
+          "ffuUserId": "ffu-h03",
+          "teamName": "The Well Done Stakes",
+          "abbreviation": "WDS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 67,
+        "round": 6,
+        "pickInRound": 7,
+        "playerId": "espn-player-phillip-lindsay",
+        "playerInfo": {
+          "name": "Phillip Lindsay",
+          "position": "RB",
+          "team": "DEN"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat, and Beers",
+          "abbreviation": "BEER"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 68,
+        "round": 6,
+        "pickInRound": 8,
+        "playerId": "espn-player-austin-ekeler",
+        "playerInfo": {
+          "name": "Austin Ekeler",
+          "position": "RB",
+          "team": "LAC"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "STA"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 69,
+        "round": 6,
+        "pickInRound": 9,
+        "playerId": "espn-player-hunter-henry",
+        "playerInfo": {
+          "name": "Hunter Henry",
+          "position": "TE",
+          "team": "LAC"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Fort Wayne Banana Bread",
+          "abbreviation": "FWBB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 70,
+        "round": 6,
+        "pickInRound": 10,
+        "playerId": "espn-player-josh-gordon",
+        "playerInfo": {
+          "name": "Josh Gordon",
+          "position": "WR",
+          "team": "NE"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Act More Stupidly",
+          "abbreviation": "AMS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 71,
+        "round": 6,
+        "pickInRound": 11,
+        "playerId": "espn-player-robbie-chosen",
+        "playerInfo": {
+          "name": "Robbie Chosen",
+          "position": "WR",
+          "team": "NYJ"
+        },
+        "pickedBy": "historical-atlanta-handsome-devils",
+        "userInfo": {
+          "userId": "historical-atlanta-handsome-devils",
+          "ffuUserId": "ffu-h04",
+          "teamName": "Atlanta Handsome Devils",
+          "abbreviation": "AHD"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 72,
+        "round": 6,
+        "pickInRound": 12,
+        "playerId": "espn-player-sammy-watkins",
+        "playerInfo": {
+          "name": "Sammy Watkins",
+          "position": "WR",
+          "team": "KC"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "MMEN"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 73,
+        "round": 7,
+        "pickInRound": 1,
+        "playerId": "espn-player-curtis-samuel",
+        "playerInfo": {
+          "name": "Curtis Samuel",
+          "position": "WR",
+          "team": "CAR"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "MMEN"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 74,
+        "round": 7,
+        "pickInRound": 2,
+        "playerId": "espn-player-christian-kirk",
+        "playerInfo": {
+          "name": "Christian Kirk",
+          "position": "WR",
+          "team": "ARI"
+        },
+        "pickedBy": "historical-atlanta-handsome-devils",
+        "userInfo": {
+          "userId": "historical-atlanta-handsome-devils",
+          "ffuUserId": "ffu-h04",
+          "teamName": "Atlanta Handsome Devils",
+          "abbreviation": "AHD"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 75,
+        "round": 7,
+        "pickInRound": 3,
+        "playerId": "espn-player-tony-pollard",
+        "playerInfo": {
+          "name": "Tony Pollard",
+          "position": "RB",
+          "team": "DAL"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Act More Stupidly",
+          "abbreviation": "AMS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 76,
+        "round": 7,
+        "pickInRound": 4,
+        "playerId": "espn-player-marvin-jones",
+        "playerInfo": {
+          "name": "Marvin Jones",
+          "position": "WR",
+          "team": "DET"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Fort Wayne Banana Bread",
+          "abbreviation": "FWBB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 77,
+        "round": 7,
+        "pickInRound": 5,
+        "playerId": "espn-player-latavius-murray",
+        "playerInfo": {
+          "name": "Latavius Murray",
+          "position": "RB",
+          "team": "NO"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "STA"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 78,
+        "round": 7,
+        "pickInRound": 6,
+        "playerId": "espn-player-tarik-cohen",
+        "playerInfo": {
+          "name": "Tarik Cohen",
+          "position": "RB",
+          "team": "CHI"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat, and Beers",
+          "abbreviation": "BEER"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 79,
+        "round": 7,
+        "pickInRound": 7,
+        "playerId": "espn-player-larry-fitzgerald",
+        "playerInfo": {
+          "name": "Larry Fitzgerald",
+          "position": "WR",
+          "team": "ARI"
+        },
+        "pickedBy": "historical-well-done-stakes",
+        "userInfo": {
+          "userId": "historical-well-done-stakes",
+          "ffuUserId": "ffu-h03",
+          "teamName": "The Well Done Stakes",
+          "abbreviation": "WDS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 80,
+        "round": 7,
+        "pickInRound": 8,
+        "playerId": "espn-player-a.j.-green",
+        "playerInfo": {
+          "name": "A.J. Green",
+          "position": "WR",
+          "team": "FA"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 81,
+        "round": 7,
+        "pickInRound": 9,
+        "playerId": "espn-player-sterling-shepard",
+        "playerInfo": {
+          "name": "Sterling Shepard",
+          "position": "WR",
+          "team": "NYG"
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "ffuUserId": "ffu-042",
+          "teamName": "Team Stark",
+          "abbreviation": "STRK"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 82,
+        "round": 7,
+        "pickInRound": 10,
+        "playerId": "espn-player-aaron-rodgers",
+        "playerInfo": {
+          "name": "Aaron Rodgers",
+          "position": "QB",
+          "team": "GB"
+        },
+        "pickedBy": "727366898383122432",
+        "userInfo": {
+          "userId": "727366898383122432",
+          "ffuUserId": "ffu-028",
+          "teamName": "Big Ten Bandits",
+          "abbreviation": "BTB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 83,
+        "round": 7,
+        "pickInRound": 11,
+        "playerId": "espn-player-chicago-bears",
+        "playerInfo": {
+          "name": "Chicago Bears",
+          "position": "DEF",
+          "team": "CHI"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "DOGE"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 84,
+        "round": 7,
+        "pickInRound": 12,
+        "playerId": "espn-player-vance-mcdonald",
+        "playerInfo": {
+          "name": "Vance McDonald",
+          "position": "TE",
+          "team": "PIT"
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "ffuUserId": "ffu-039",
+          "teamName": "FFUcked Up",
+          "abbreviation": "FFU"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 85,
+        "round": 8,
+        "pickInRound": 1,
+        "playerId": "espn-player-emmanuel-sanders",
+        "playerInfo": {
+          "name": "Emmanuel Sanders",
+          "position": "WR",
+          "team": "DEN"
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "ffuUserId": "ffu-039",
+          "teamName": "FFUcked Up",
+          "abbreviation": "FFU"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 86,
+        "round": 8,
+        "pickInRound": 2,
+        "playerId": "espn-player-corey-davis",
+        "playerInfo": {
+          "name": "Corey Davis",
+          "position": "WR",
+          "team": "TEN"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "DOGE"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 87,
+        "round": 8,
+        "pickInRound": 3,
+        "playerId": "espn-player-royce-freeman",
+        "playerInfo": {
+          "name": "Royce Freeman",
+          "position": "RB",
+          "team": "DEN"
+        },
+        "pickedBy": "727366898383122432",
+        "userInfo": {
+          "userId": "727366898383122432",
+          "ffuUserId": "ffu-028",
+          "teamName": "Big Ten Bandits",
+          "abbreviation": "BTB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 88,
+        "round": 8,
+        "pickInRound": 4,
+        "playerId": "espn-player-david-njoku",
+        "playerInfo": {
+          "name": "David Njoku",
+          "position": "TE",
+          "team": "CLE"
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "ffuUserId": "ffu-042",
+          "teamName": "Team Stark",
+          "abbreviation": "STRK"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 89,
+        "round": 8,
+        "pickInRound": 5,
+        "playerId": "espn-player-los-angeles-rams",
+        "playerInfo": {
+          "name": "Los Angeles Rams",
+          "position": "DEF",
+          "team": "LAR"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 90,
+        "round": 8,
+        "pickInRound": 6,
+        "playerId": "espn-player-matt-breida",
+        "playerInfo": {
+          "name": "Matt Breida",
+          "position": "RB",
+          "team": "SF"
+        },
+        "pickedBy": "historical-well-done-stakes",
+        "userInfo": {
+          "userId": "historical-well-done-stakes",
+          "ffuUserId": "ffu-h03",
+          "teamName": "The Well Done Stakes",
+          "abbreviation": "WDS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 91,
+        "round": 8,
+        "pickInRound": 7,
+        "playerId": "espn-player-jarvis-landry",
+        "playerInfo": {
+          "name": "Jarvis Landry",
+          "position": "WR",
+          "team": "CLE"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat, and Beers",
+          "abbreviation": "BEER"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 92,
+        "round": 8,
+        "pickInRound": 8,
+        "playerId": "espn-player-rashaad-penny",
+        "playerInfo": {
+          "name": "Rashaad Penny",
+          "position": "RB",
+          "team": "SEA"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "STA"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 93,
+        "round": 8,
+        "pickInRound": 9,
+        "playerId": "espn-player-michael-gallup",
+        "playerInfo": {
+          "name": "Michael Gallup",
+          "position": "WR",
+          "team": "DAL"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Fort Wayne Banana Bread",
+          "abbreviation": "FWBB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 94,
+        "round": 8,
+        "pickInRound": 10,
+        "playerId": "espn-player-will-fuller",
+        "playerInfo": {
+          "name": "Will Fuller",
+          "position": "WR",
+          "team": "HOU"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Act More Stupidly",
+          "abbreviation": "AMS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 95,
+        "round": 8,
+        "pickInRound": 11,
+        "playerId": "espn-player-peyton-barber",
+        "playerInfo": {
+          "name": "Peyton Barber",
+          "position": "RB",
+          "team": "TB"
+        },
+        "pickedBy": "historical-atlanta-handsome-devils",
+        "userInfo": {
+          "userId": "historical-atlanta-handsome-devils",
+          "ffuUserId": "ffu-h04",
+          "teamName": "Atlanta Handsome Devils",
+          "abbreviation": "AHD"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 96,
+        "round": 8,
+        "pickInRound": 12,
+        "playerId": "espn-player-darwin-thompson",
+        "playerInfo": {
+          "name": "Darwin Thompson",
+          "position": "RB",
+          "team": "KC"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "MMEN"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 97,
+        "round": 9,
+        "pickInRound": 1,
+        "playerId": "espn-player-darrell-henderson",
+        "playerInfo": {
+          "name": "Darrell Henderson",
+          "position": "RB",
+          "team": "LAR"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "MMEN"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 98,
+        "round": 9,
+        "pickInRound": 2,
+        "playerId": "espn-player-dante-pettis",
+        "playerInfo": {
+          "name": "Dante Pettis",
+          "position": "WR",
+          "team": "SF"
+        },
+        "pickedBy": "historical-atlanta-handsome-devils",
+        "userInfo": {
+          "userId": "historical-atlanta-handsome-devils",
+          "ffuUserId": "ffu-h04",
+          "teamName": "Atlanta Handsome Devils",
+          "abbreviation": "AHD"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 99,
+        "round": 9,
+        "pickInRound": 3,
+        "playerId": "espn-player-mark-andrews",
+        "playerInfo": {
+          "name": "Mark Andrews",
+          "position": "TE",
+          "team": "BAL"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Act More Stupidly",
+          "abbreviation": "AMS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 100,
+        "round": 9,
+        "pickInRound": 4,
+        "playerId": "espn-player-carson-wentz",
+        "playerInfo": {
+          "name": "Carson Wentz",
+          "position": "QB",
+          "team": "PHI"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Fort Wayne Banana Bread",
+          "abbreviation": "FWBB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 101,
+        "round": 9,
+        "pickInRound": 5,
+        "playerId": "espn-player-keke-coutee",
+        "playerInfo": {
+          "name": "Keke Coutee",
+          "position": "WR",
+          "team": "FA"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "STA"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 102,
+        "round": 9,
+        "pickInRound": 6,
+        "playerId": "espn-player-jamison-crowder",
+        "playerInfo": {
+          "name": "Jamison Crowder",
+          "position": "WR",
+          "team": "NYJ"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat, and Beers",
+          "abbreviation": "BEER"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 103,
+        "round": 9,
+        "pickInRound": 7,
+        "playerId": "espn-player-lesean-mccoy",
+        "playerInfo": {
+          "name": "LeSean McCoy",
+          "position": "RB",
+          "team": "KC"
+        },
+        "pickedBy": "historical-well-done-stakes",
+        "userInfo": {
+          "userId": "historical-well-done-stakes",
+          "ffuUserId": "ffu-h03",
+          "teamName": "The Well Done Stakes",
+          "abbreviation": "WDS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 104,
+        "round": 9,
+        "pickInRound": 8,
+        "playerId": "espn-player-matt-ryan",
+        "playerInfo": {
+          "name": "Matt Ryan",
+          "position": "QB",
+          "team": "ATL"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 105,
+        "round": 9,
+        "pickInRound": 9,
+        "playerId": "espn-player-nyheim-hines",
+        "playerInfo": {
+          "name": "Nyheim Hines",
+          "position": "RB",
+          "team": "IND"
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "ffuUserId": "ffu-042",
+          "teamName": "Team Stark",
+          "abbreviation": "STRK"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 106,
+        "round": 9,
+        "pickInRound": 10,
+        "playerId": "espn-player-indianapolis-colts",
+        "playerInfo": {
+          "name": "Indianapolis Colts",
+          "position": "DEF",
+          "team": "IND"
+        },
+        "pickedBy": "727366898383122432",
+        "userInfo": {
+          "userId": "727366898383122432",
+          "ffuUserId": "ffu-028",
+          "teamName": "Big Ten Bandits",
+          "abbreviation": "BTB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 107,
+        "round": 9,
+        "pickInRound": 11,
+        "playerId": "espn-player-courtland-sutton",
+        "playerInfo": {
+          "name": "Courtland Sutton",
+          "position": "WR",
+          "team": "DEN"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "DOGE"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 108,
+        "round": 9,
+        "pickInRound": 12,
+        "playerId": "espn-player-marquez-valdes-scantling",
+        "playerInfo": {
+          "name": "Marquez Valdes-Scantling",
+          "position": "WR",
+          "team": "GB"
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "ffuUserId": "ffu-039",
+          "teamName": "FFUcked Up",
+          "abbreviation": "FFU"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 109,
+        "round": 10,
+        "pickInRound": 1,
+        "playerId": "espn-player-cam-newton",
+        "playerInfo": {
+          "name": "Cam Newton",
+          "position": "QB",
+          "team": "CAR"
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "ffuUserId": "ffu-039",
+          "teamName": "FFUcked Up",
+          "abbreviation": "FFU"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 110,
+        "round": 10,
+        "pickInRound": 2,
+        "playerId": "espn-player-james-washington",
+        "playerInfo": {
+          "name": "James Washington",
+          "position": "WR",
+          "team": "PIT"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "DOGE"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 111,
+        "round": 10,
+        "pickInRound": 3,
+        "playerId": "espn-player-kenny-stills",
+        "playerInfo": {
+          "name": "Kenny Stills",
+          "position": "WR",
+          "team": "HOU"
+        },
+        "pickedBy": "727366898383122432",
+        "userInfo": {
+          "userId": "727366898383122432",
+          "ffuUserId": "ffu-028",
+          "teamName": "Big Ten Bandits",
+          "abbreviation": "BTB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 112,
+        "round": 10,
+        "pickInRound": 4,
+        "playerId": "espn-player-baker-mayfield",
+        "playerInfo": {
+          "name": "Baker Mayfield",
+          "position": "QB",
+          "team": "CLE"
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "ffuUserId": "ffu-042",
+          "teamName": "Team Stark",
+          "abbreviation": "STRK"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 113,
+        "round": 10,
+        "pickInRound": 5,
+        "playerId": "espn-player-jordan-howard",
+        "playerInfo": {
+          "name": "Jordan Howard",
+          "position": "RB",
+          "team": "PHI"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 114,
+        "round": 10,
+        "pickInRound": 6,
+        "playerId": "espn-player-drew-brees",
+        "playerInfo": {
+          "name": "Drew Brees",
+          "position": "QB",
+          "team": "NO"
+        },
+        "pickedBy": "historical-well-done-stakes",
+        "userInfo": {
+          "userId": "historical-well-done-stakes",
+          "ffuUserId": "ffu-h03",
+          "teamName": "The Well Done Stakes",
+          "abbreviation": "WDS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 115,
+        "round": 10,
+        "pickInRound": 7,
+        "playerId": "espn-player-donte-moncrief",
+        "playerInfo": {
+          "name": "Donte Moncrief",
+          "position": "WR",
+          "team": "PIT"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat, and Beers",
+          "abbreviation": "BEER"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 116,
+        "round": 10,
+        "pickInRound": 8,
+        "playerId": "espn-player-kalen-ballage",
+        "playerInfo": {
+          "name": "Kalen Ballage",
+          "position": "RB",
+          "team": "MIA"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "STA"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 117,
+        "round": 10,
+        "pickInRound": 9,
+        "playerId": "espn-player-jalen-richard",
+        "playerInfo": {
+          "name": "Jalen Richard",
+          "position": "RB",
+          "team": "LV"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Fort Wayne Banana Bread",
+          "abbreviation": "FWBB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 118,
+        "round": 10,
+        "pickInRound": 10,
+        "playerId": "espn-player-desean-jackson",
+        "playerInfo": {
+          "name": "DeSean Jackson",
+          "position": "WR",
+          "team": "PHI"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Act More Stupidly",
+          "abbreviation": "AMS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 119,
+        "round": 10,
+        "pickInRound": 11,
+        "playerId": "espn-player-geronimo-allison",
+        "playerInfo": {
+          "name": "Geronimo Allison",
+          "position": "WR",
+          "team": "FA"
+        },
+        "pickedBy": "historical-atlanta-handsome-devils",
+        "userInfo": {
+          "userId": "historical-atlanta-handsome-devils",
+          "ffuUserId": "ffu-h04",
+          "teamName": "Atlanta Handsome Devils",
+          "abbreviation": "AHD"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 120,
+        "round": 10,
+        "pickInRound": 12,
+        "playerId": "espn-player-john-brown",
+        "playerInfo": {
+          "name": "John Brown",
+          "position": "WR",
+          "team": "BUF"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "MMEN"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 121,
+        "round": 11,
+        "pickInRound": 1,
+        "playerId": "espn-player-russell-wilson",
+        "playerInfo": {
+          "name": "Russell Wilson",
+          "position": "QB",
+          "team": "SEA"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "MMEN"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 122,
+        "round": 11,
+        "pickInRound": 2,
+        "playerId": "espn-player-lamar-jackson",
+        "playerInfo": {
+          "name": "Lamar Jackson",
+          "position": "QB",
+          "team": "BAL"
+        },
+        "pickedBy": "historical-atlanta-handsome-devils",
+        "userInfo": {
+          "userId": "historical-atlanta-handsome-devils",
+          "ffuUserId": "ffu-h04",
+          "teamName": "Atlanta Handsome Devils",
+          "abbreviation": "AHD"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 123,
+        "round": 11,
+        "pickInRound": 3,
+        "playerId": "espn-player-anthony-miller",
+        "playerInfo": {
+          "name": "Anthony Miller",
+          "position": "WR",
+          "team": "CHI"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Act More Stupidly",
+          "abbreviation": "AMS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 124,
+        "round": 11,
+        "pickInRound": 4,
+        "playerId": "espn-player-kyler-murray",
+        "playerInfo": {
+          "name": "Kyler Murray",
+          "position": "QB",
+          "team": "ARI"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Fort Wayne Banana Bread",
+          "abbreviation": "FWBB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 125,
+        "round": 11,
+        "pickInRound": 5,
+        "playerId": "espn-player-devin-singletary",
+        "playerInfo": {
+          "name": "Devin Singletary",
+          "position": "RB",
+          "team": "BUF"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "STA"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 126,
+        "round": 11,
+        "pickInRound": 6,
+        "playerId": "espn-player-ben-roethlisberger",
+        "playerInfo": {
+          "name": "Ben Roethlisberger",
+          "position": "QB",
+          "team": "PIT"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat, and Beers",
+          "abbreviation": "BEER"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 127,
+        "round": 11,
+        "pickInRound": 7,
+        "playerId": "espn-player-delanie-walker",
+        "playerInfo": {
+          "name": "Delanie Walker",
+          "position": "TE",
+          "team": "TEN"
+        },
+        "pickedBy": "historical-well-done-stakes",
+        "userInfo": {
+          "userId": "historical-well-done-stakes",
+          "ffuUserId": "ffu-h03",
+          "teamName": "The Well Done Stakes",
+          "abbreviation": "WDS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 128,
+        "round": 11,
+        "pickInRound": 8,
+        "playerId": "espn-player-dak-prescott",
+        "playerInfo": {
+          "name": "Dak Prescott",
+          "position": "QB",
+          "team": "DAL"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 129,
+        "round": 11,
+        "pickInRound": 9,
+        "playerId": "espn-player-jaylen-samuels",
+        "playerInfo": {
+          "name": "Jaylen Samuels",
+          "position": "RB",
+          "team": "PIT"
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "ffuUserId": "ffu-042",
+          "teamName": "Team Stark",
+          "abbreviation": "STRK"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 130,
+        "round": 11,
+        "pickInRound": 10,
+        "playerId": "espn-player-dk-metcalf",
+        "playerInfo": {
+          "name": "DK Metcalf",
+          "position": "WR",
+          "team": "SEA"
+        },
+        "pickedBy": "727366898383122432",
+        "userInfo": {
+          "userId": "727366898383122432",
+          "ffuUserId": "ffu-028",
+          "teamName": "Big Ten Bandits",
+          "abbreviation": "BTB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 131,
+        "round": 11,
+        "pickInRound": 11,
+        "playerId": "espn-player-justin-tucker",
+        "playerInfo": {
+          "name": "Justin Tucker",
+          "position": "K",
+          "team": "BAL"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "DOGE"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 132,
+        "round": 11,
+        "pickInRound": 12,
+        "playerId": "espn-player-justin-jackson",
+        "playerInfo": {
+          "name": "Justin Jackson",
+          "position": "RB",
+          "team": "LAC"
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "ffuUserId": "ffu-039",
+          "teamName": "FFUcked Up",
+          "abbreviation": "FFU"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 133,
+        "round": 12,
+        "pickInRound": 1,
+        "playerId": "espn-player-tyrell-williams",
+        "playerInfo": {
+          "name": "Tyrell Williams",
+          "position": "WR",
+          "team": "LV"
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "ffuUserId": "ffu-039",
+          "teamName": "FFUcked Up",
+          "abbreviation": "FFU"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 134,
+        "round": 12,
+        "pickInRound": 2,
+        "playerId": "espn-player-mitchell-trubisky",
+        "playerInfo": {
+          "name": "Mitchell Trubisky",
+          "position": "QB",
+          "team": "CHI"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "DOGE"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 135,
+        "round": 12,
+        "pickInRound": 3,
+        "playerId": "espn-player-greg-zuerlein",
+        "playerInfo": {
+          "name": "Greg Zuerlein",
+          "position": "K",
+          "team": "LAR"
+        },
+        "pickedBy": "727366898383122432",
+        "userInfo": {
+          "userId": "727366898383122432",
+          "ffuUserId": "ffu-028",
+          "teamName": "Big Ten Bandits",
+          "abbreviation": "BTB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 136,
+        "round": 12,
+        "pickInRound": 4,
+        "playerId": "espn-player-harrison-butker",
+        "playerInfo": {
+          "name": "Harrison Butker",
+          "position": "K",
+          "team": "KC"
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "ffuUserId": "ffu-042",
+          "teamName": "Team Stark",
+          "abbreviation": "STRK"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 137,
+        "round": 12,
+        "pickInRound": 5,
+        "playerId": "espn-player-austin-hooper",
+        "playerInfo": {
+          "name": "Austin Hooper",
+          "position": "TE",
+          "team": "ATL"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 138,
+        "round": 12,
+        "pickInRound": 6,
+        "playerId": "espn-player-jacksonville-jaguars",
+        "playerInfo": {
+          "name": "Jacksonville Jaguars",
+          "position": "DEF",
+          "team": "JAX"
+        },
+        "pickedBy": "historical-well-done-stakes",
+        "userInfo": {
+          "userId": "historical-well-done-stakes",
+          "ffuUserId": "ffu-h03",
+          "teamName": "The Well Done Stakes",
+          "abbreviation": "WDS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 139,
+        "round": 12,
+        "pickInRound": 7,
+        "playerId": "espn-player-new-orleans-saints",
+        "playerInfo": {
+          "name": "New Orleans Saints",
+          "position": "DEF",
+          "team": "NO"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat, and Beers",
+          "abbreviation": "BEER"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 140,
+        "round": 12,
+        "pickInRound": 8,
+        "playerId": "espn-player-josh-allen",
+        "playerInfo": {
+          "name": "Josh Allen",
+          "position": "QB",
+          "team": "BUF"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "STA"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 141,
+        "round": 12,
+        "pickInRound": 9,
+        "playerId": "espn-player-ronald-jones",
+        "playerInfo": {
+          "name": "Ronald Jones",
+          "position": "RB",
+          "team": "TB"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Fort Wayne Banana Bread",
+          "abbreviation": "FWBB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 142,
+        "round": 12,
+        "pickInRound": 10,
+        "playerId": "espn-player-damarea-crockett",
+        "playerInfo": {
+          "name": "Damarea Crockett",
+          "position": "RB",
+          "team": "FA"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Act More Stupidly",
+          "abbreviation": "AMS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 143,
+        "round": 12,
+        "pickInRound": 11,
+        "playerId": "espn-player-justice-hill",
+        "playerInfo": {
+          "name": "Justice Hill",
+          "position": "RB",
+          "team": "BAL"
+        },
+        "pickedBy": "historical-atlanta-handsome-devils",
+        "userInfo": {
+          "userId": "historical-atlanta-handsome-devils",
+          "ffuUserId": "ffu-h04",
+          "teamName": "Atlanta Handsome Devils",
+          "abbreviation": "AHD"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 144,
+        "round": 12,
+        "pickInRound": 12,
+        "playerId": "espn-player-t.j.-hockenson",
+        "playerInfo": {
+          "name": "T.J. Hockenson",
+          "position": "TE",
+          "team": "DET"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "MMEN"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 145,
+        "round": 13,
+        "pickInRound": 1,
+        "playerId": "espn-player-damien-harris",
+        "playerInfo": {
+          "name": "Damien Harris",
+          "position": "RB",
+          "team": "FA"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "MMEN"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 146,
+        "round": 13,
+        "pickInRound": 2,
+        "playerId": "espn-player-albert-wilson",
+        "playerInfo": {
+          "name": "Albert Wilson",
+          "position": "WR",
+          "team": "MIA"
+        },
+        "pickedBy": "historical-atlanta-handsome-devils",
+        "userInfo": {
+          "userId": "historical-atlanta-handsome-devils",
+          "ffuUserId": "ffu-h04",
+          "teamName": "Atlanta Handsome Devils",
+          "abbreviation": "AHD"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 147,
+        "round": 13,
+        "pickInRound": 3,
+        "playerId": "espn-player-ka'imi-fairbairn",
+        "playerInfo": {
+          "name": "Ka'imi Fairbairn",
+          "position": "K",
+          "team": "HOU"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Act More Stupidly",
+          "abbreviation": "AMS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 148,
+        "round": 13,
+        "pickInRound": 4,
+        "playerId": "espn-player-darren-waller",
+        "playerInfo": {
+          "name": "Darren Waller",
+          "position": "TE",
+          "team": "LV"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Fort Wayne Banana Bread",
+          "abbreviation": "FWBB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 149,
+        "round": 13,
+        "pickInRound": 5,
+        "playerId": "espn-player-cleveland-browns",
+        "playerInfo": {
+          "name": "Cleveland Browns",
+          "position": "DEF",
+          "team": "CLE"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "STA"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 150,
+        "round": 13,
+        "pickInRound": 6,
+        "playerId": "espn-player-stephen-gostkowski",
+        "playerInfo": {
+          "name": "Stephen Gostkowski",
+          "position": "K",
+          "team": "NE"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat, and Beers",
+          "abbreviation": "BEER"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 151,
+        "round": 13,
+        "pickInRound": 7,
+        "playerId": "espn-player-devin-funchess",
+        "playerInfo": {
+          "name": "Devin Funchess",
+          "position": "TE",
+          "team": "IND"
+        },
+        "pickedBy": "historical-well-done-stakes",
+        "userInfo": {
+          "userId": "historical-well-done-stakes",
+          "ffuUserId": "ffu-h03",
+          "teamName": "The Well Done Stakes",
+          "abbreviation": "WDS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 152,
+        "round": 13,
+        "pickInRound": 8,
+        "playerId": "espn-player-jared-goff",
+        "playerInfo": {
+          "name": "Jared Goff",
+          "position": "QB",
+          "team": "LAR"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 153,
+        "round": 13,
+        "pickInRound": 9,
+        "playerId": "espn-player-parris-campbell",
+        "playerInfo": {
+          "name": "Parris Campbell",
+          "position": "WR",
+          "team": "IND"
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "ffuUserId": "ffu-042",
+          "teamName": "Team Stark",
+          "abbreviation": "STRK"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 154,
+        "round": 13,
+        "pickInRound": 10,
+        "playerId": "espn-player-philip-rivers",
+        "playerInfo": {
+          "name": "Philip Rivers",
+          "position": "QB",
+          "team": "LAC"
+        },
+        "pickedBy": "727366898383122432",
+        "userInfo": {
+          "userId": "727366898383122432",
+          "ffuUserId": "ffu-028",
+          "teamName": "Big Ten Bandits",
+          "abbreviation": "BTB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 155,
+        "round": 13,
+        "pickInRound": 11,
+        "playerId": "espn-player-adrian-peterson",
+        "playerInfo": {
+          "name": "Adrian Peterson",
+          "position": "RB",
+          "team": "FA"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "DOGE"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 156,
+        "round": 13,
+        "pickInRound": 12,
+        "playerId": "espn-player-alexander-mattison",
+        "playerInfo": {
+          "name": "Alexander Mattison",
+          "position": "RB",
+          "team": "MIN"
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "ffuUserId": "ffu-039",
+          "teamName": "FFUcked Up",
+          "abbreviation": "FFU"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 157,
+        "round": 14,
+        "pickInRound": 1,
+        "playerId": "espn-player-wil-lutz",
+        "playerInfo": {
+          "name": "Wil Lutz",
+          "position": "K",
+          "team": "NO"
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "ffuUserId": "ffu-039",
+          "teamName": "FFUcked Up",
+          "abbreviation": "FFU"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 158,
+        "round": 14,
+        "pickInRound": 2,
+        "playerId": "espn-player-marquise-brown",
+        "playerInfo": {
+          "name": "Marquise Brown",
+          "position": "WR",
+          "team": "BAL"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "DOGE"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 159,
+        "round": 14,
+        "pickInRound": 3,
+        "playerId": "espn-player-c.j.-anderson",
+        "playerInfo": {
+          "name": "C.J. Anderson",
+          "position": "RB",
+          "team": "DET"
+        },
+        "pickedBy": "727366898383122432",
+        "userInfo": {
+          "userId": "727366898383122432",
+          "ffuUserId": "ffu-028",
+          "teamName": "Big Ten Bandits",
+          "abbreviation": "BTB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 160,
+        "round": 14,
+        "pickInRound": 4,
+        "playerId": "espn-player-seattle-seahawks",
+        "playerInfo": {
+          "name": "Seattle Seahawks",
+          "position": "DEF",
+          "team": "SEA"
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "ffuUserId": "ffu-042",
+          "teamName": "Team Stark",
+          "abbreviation": "STRK"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 161,
+        "round": 14,
+        "pickInRound": 5,
+        "playerId": "espn-player-adam-humphries",
+        "playerInfo": {
+          "name": "Adam Humphries",
+          "position": "WR",
+          "team": "TEN"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 162,
+        "round": 14,
+        "pickInRound": 6,
+        "playerId": "espn-player-golden-tate",
+        "playerInfo": {
+          "name": "Golden Tate",
+          "position": "WR",
+          "team": "FA"
+        },
+        "pickedBy": "historical-well-done-stakes",
+        "userInfo": {
+          "userId": "historical-well-done-stakes",
+          "ffuUserId": "ffu-h03",
+          "teamName": "The Well Done Stakes",
+          "abbreviation": "WDS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 163,
+        "round": 14,
+        "pickInRound": 7,
+        "playerId": "espn-player-giovani-bernard",
+        "playerInfo": {
+          "name": "Giovani Bernard",
+          "position": "RB",
+          "team": "CIN"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat, and Beers",
+          "abbreviation": "BEER"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 164,
+        "round": 14,
+        "pickInRound": 8,
+        "playerId": "espn-player-jake-elliott",
+        "playerInfo": {
+          "name": "Jake Elliott",
+          "position": "K",
+          "team": "PHI"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "STA"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 165,
+        "round": 14,
+        "pickInRound": 9,
+        "playerId": "espn-player-los-angeles-chargers",
+        "playerInfo": {
+          "name": "Los Angeles Chargers",
+          "position": "DEF",
+          "team": "LAC"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Fort Wayne Banana Bread",
+          "abbreviation": "FWBB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 166,
+        "round": 14,
+        "pickInRound": 10,
+        "playerId": "espn-player-kareem-hunt",
+        "playerInfo": {
+          "name": "Kareem Hunt",
+          "position": "RB",
+          "team": "KC"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Act More Stupidly",
+          "abbreviation": "AMS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 167,
+        "round": 14,
+        "pickInRound": 11,
+        "playerId": "espn-player-dallas-cowboys",
+        "playerInfo": {
+          "name": "Dallas Cowboys",
+          "position": "DEF",
+          "team": "DAL"
+        },
+        "pickedBy": "historical-atlanta-handsome-devils",
+        "userInfo": {
+          "userId": "historical-atlanta-handsome-devils",
+          "ffuUserId": "ffu-h04",
+          "teamName": "Atlanta Handsome Devils",
+          "abbreviation": "AHD"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 168,
+        "round": 14,
+        "pickInRound": 12,
+        "playerId": "espn-player-baltimore-ravens",
+        "playerInfo": {
+          "name": "Baltimore Ravens",
+          "position": "DEF",
+          "team": "BAL"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "MMEN"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 169,
+        "round": 15,
+        "pickInRound": 1,
+        "playerId": "espn-player-robbie-gould",
+        "playerInfo": {
+          "name": "Robbie Gould",
+          "position": "K",
+          "team": "SF"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "MMEN"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 170,
+        "round": 15,
+        "pickInRound": 2,
+        "playerId": "espn-player-mike-badgley",
+        "playerInfo": {
+          "name": "Mike Badgley",
+          "position": "K",
+          "team": "DET"
+        },
+        "pickedBy": "historical-atlanta-handsome-devils",
+        "userInfo": {
+          "userId": "historical-atlanta-handsome-devils",
+          "ffuUserId": "ffu-h04",
+          "teamName": "Atlanta Handsome Devils",
+          "abbreviation": "AHD"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 171,
+        "round": 15,
+        "pickInRound": 3,
+        "playerId": "espn-player-philadelphia-eagles",
+        "playerInfo": {
+          "name": "Philadelphia Eagles",
+          "position": "DEF",
+          "team": "PHI"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Act More Stupidly",
+          "abbreviation": "AMS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 172,
+        "round": 15,
+        "pickInRound": 4,
+        "playerId": "espn-player-ryan-succop",
+        "playerInfo": {
+          "name": "Ryan Succop",
+          "position": "K",
+          "team": "FA"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Fort Wayne Banana Bread",
+          "abbreviation": "FWBB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 173,
+        "round": 15,
+        "pickInRound": 5,
+        "playerId": "espn-player-marquise-goodwin",
+        "playerInfo": {
+          "name": "Marquise Goodwin",
+          "position": "WR",
+          "team": "SF"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "STA"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 174,
+        "round": 15,
+        "pickInRound": 6,
+        "playerId": "espn-player-andrew-luck",
+        "playerInfo": {
+          "name": "Andrew Luck",
+          "position": "QB",
+          "team": "FA"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat, and Beers",
+          "abbreviation": "BEER"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 175,
+        "round": 15,
+        "pickInRound": 7,
+        "playerId": "espn-player-adam-vinatieri",
+        "playerInfo": {
+          "name": "Adam Vinatieri",
+          "position": "K",
+          "team": "IND"
+        },
+        "pickedBy": "historical-well-done-stakes",
+        "userInfo": {
+          "userId": "historical-well-done-stakes",
+          "ffuUserId": "ffu-h03",
+          "teamName": "The Well Done Stakes",
+          "abbreviation": "WDS"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 176,
+        "round": 15,
+        "pickInRound": 8,
+        "playerId": "espn-player-brett-maher",
+        "playerInfo": {
+          "name": "Brett Maher",
+          "position": "K",
+          "team": "DAL"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 177,
+        "round": 15,
+        "pickInRound": 9,
+        "playerId": "espn-player-trey-burton",
+        "playerInfo": {
+          "name": "Trey Burton",
+          "position": "TE",
+          "team": "FA"
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "ffuUserId": "ffu-042",
+          "teamName": "Team Stark",
+          "abbreviation": "STRK"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 178,
+        "round": 15,
+        "pickInRound": 10,
+        "playerId": "espn-player-cole-beasley",
+        "playerInfo": {
+          "name": "Cole Beasley",
+          "position": "WR",
+          "team": "BUF"
+        },
+        "pickedBy": "727366898383122432",
+        "userInfo": {
+          "userId": "727366898383122432",
+          "ffuUserId": "ffu-028",
+          "teamName": "Big Ten Bandits",
+          "abbreviation": "BTB"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 179,
+        "round": 15,
+        "pickInRound": 11,
+        "playerId": "espn-player-deebo-samuel",
+        "playerInfo": {
+          "name": "Deebo Samuel",
+          "position": "WR",
+          "team": "SF"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "DOGE"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 180,
+        "round": 15,
+        "pickInRound": 12,
+        "playerId": "espn-player-buffalo-bills",
+        "playerInfo": {
+          "name": "Buffalo Bills",
+          "position": "DEF",
+          "team": "BUF"
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "ffuUserId": "ffu-039",
+          "teamName": "FFUcked Up",
+          "abbreviation": "FFU"
+        },
+        "draftId": "espn-2019-premier-draft",
+        "draftSlot": 12
+      }
+    ],
+    "settings": {
+      "teams": 12,
+      "rounds": 15,
+      "draftType": "snake"
+    },
+    "metadata": {
+      "name": "ESPN 2019 Premier Draft",
+      "description": "Premier League Draft for 2019 season",
+      "scoringType": "standard"
+    },
+    "startTime": 1565827200000,
+    "status": "complete"
+  }
+}

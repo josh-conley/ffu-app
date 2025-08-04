@@ -911,7 +911,6 @@ export const PlayerStats = () => {
                         <LeagueBadge league={matchup.league} />
                         <span className="text-sm text-gray-600 dark:text-gray-400">
                           {matchup.year} • Week {matchup.week}
-                          {matchup.isPlayoff && <span className="ml-1 text-orange-600 font-medium">(Playoff)</span>}
                         </span>
                         {matchup.placementType && (
                           <span className="text-xs bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 px-2 py-1 rounded">
@@ -923,12 +922,12 @@ export const PlayerStats = () => {
                       <div className="flex items-center justify-between sm:justify-end space-x-4">
                         <div className="flex items-center space-x-2 min-w-0">
                           <TeamLogo
-                            teamName={matchup.winnerInfo.teamName}
-                            abbreviation={matchup.winnerInfo.abbreviation}
+                            teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
+                            abbreviation={matchup.winnerInfo?.abbreviation || 'UNK'}
                             size="sm"
                           />
                           <span className="font-medium text-gray-900 dark:text-gray-100 truncate">
-                            {matchup.winnerInfo.abbreviation}
+                            {matchup.winnerInfo?.abbreviation || 'UNK'}
                           </span>
                         </div>
                         
@@ -942,11 +941,11 @@ export const PlayerStats = () => {
                         
                         <div className="flex items-center space-x-2 min-w-0">
                           <span className="font-medium text-gray-900 dark:text-gray-100 truncate">
-                            {matchup.loserInfo.abbreviation}
+                            {matchup.loserInfo?.abbreviation || 'UNK'}
                           </span>
                           <TeamLogo
-                            teamName={matchup.loserInfo.teamName}
-                            abbreviation={matchup.loserInfo.abbreviation}
+                            teamName={matchup.loserInfo?.teamName || 'Unknown Team'}
+                            abbreviation={matchup.loserInfo?.abbreviation || 'UNK'}
                             size="sm"
                           />
                         </div>

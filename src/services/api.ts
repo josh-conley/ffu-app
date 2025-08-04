@@ -73,6 +73,11 @@ export const leagueApi = {
     const data = await leagueService.getAllTimeRecords(league, year);
     return data;
   },
+
+  // Bulk load all matchup data for efficient head-to-head comparisons
+  getAllMatchupsForComparison: async () => {
+    return await leagueService.getAllMatchupsForComparison();
+  },
 };
 
 export { sleeperService, leagueService };
