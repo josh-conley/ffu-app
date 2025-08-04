@@ -68,13 +68,13 @@ function parseCSVLine(line) {
 // User mapping based on the Sleeper ID Key and configuration for P18
 const userMapping = {
   'mmen': { ffuId: 'ffu-023', sleeperId: '84006772809285632' },
-  'bandits': { ffuId: 'ffu-028', sleeperId: '727366898383122432' },
-  'ffuckedup': { ffuId: 'ffu-039', sleeperId: '396808818157182976' },
+  'bandits': { ffuId: 'ffu-036', sleeperId: '727366898383122432' },
+  'ffuckedup': { ffuId: 'ffu-002', sleeperId: '396808818157182976' },
   'stallions': { ffuId: 'ffu-001', sleeperId: '331590801261883392' },
   'beers': { ffuId: 'ffu-004', sleeperId: '398576262546735104' },
-  'tcool': { ffuId: 'ffu-034', sleeperId: '399297882890440704' },
+  'tcool': { ffuId: 'ffu-043', sleeperId: '399297882890440704' },
   'aztecs': { ffuId: 'ffu-025', sleeperId: '386791325690994688' },
-  'guapo': { ffuId: 'ffu-032', sleeperId: '507633950666584064' },
+  'guapo': { ffuId: 'ffu-028', sleeperId: '507633950666584064' },
   'rhinos': { ffuId: 'ffu-026', sleeperId: '462383465753473024' },
   // Historical users who participated in P18 but didn't continue to Sleeper era
   'devils': { ffuId: 'ffu-h04', sleeperId: 'historical-durham-handsome-devils' },
@@ -138,19 +138,19 @@ function getUserByTeamName(teamName) {
 // Helper function to get current team name by Sleeper ID for P18
 function getCurrentTeamNameBySleeperId(sleeperId) {
   const userMappingToCurrent = {
-    '84006772809285632': 'The Minutemen', // mmen -> ffu-023
-    '727366898383122432': 'Big Ten Bandits', // bandits -> ffu-028
-    '396808818157182976': 'FFUcked Up', // ffuckedup -> ffu-039
-    '331590801261883392': 'The Stallions', // stallions -> ffu-001
-    '398576262546735104': 'Blood, Sweat, and Beers', // beers -> ffu-004
-    '399297882890440704': 'Elm Street Skywalkers', // tcool -> ffu-034
-    '386791325690994688': 'Indianapolis Aztecs', // aztecs -> ffu-025
-    '507633950666584064': 'El Guapo Puto', // guapo -> ffu-032
-    '462383465753473024': 'Raging Rhinos', // rhinos -> ffu-026
+    '84006772809285632': 'The Minutemen',
+    '727366898383122432': 'Big Ten Bandits',
+    '396808818157182976': 'FFUcked Up',
+    '331590801261883392': 'The Stallions',
+    '398576262546735104': 'Blood, Sweat, and Beers',
+    '399297882890440704': 'Elm Street Skywalkers',
+    '386791325690994688': 'Indianapolis Aztecs',
+    '507633950666584064': 'El Guapo Puto',
+    '462383465753473024': 'Raging Rhinos',
     // Historical users who participated in P18 but didn't continue to Sleeper era
-    'historical-durham-handsome-devils': 'Durham Handsome Devils', // devils -> ffu-h04
-    'historical-not-your-average-joes': 'Not Your Average Joes', // joes -> ffu-h07
-    'historical-the-losers': 'The Losers' // losers -> ffu-h05
+    'historical-durham-handsome-devils': 'Durham Handsome Devils',
+    'historical-not-your-average-joes': 'Not Your Average Joes',
+    'historical-the-losers': 'The Losers'
   };
   
   return userMappingToCurrent[sleeperId];
@@ -159,19 +159,19 @@ function getCurrentTeamNameBySleeperId(sleeperId) {
 // Helper function to get current abbreviation by Sleeper ID for P18
 function getCurrentAbbreviationBySleeperId(sleeperId) {
   const abbreviationMapping = {
-    '84006772809285632': 'MMEN', // mmen -> ffu-023
-    '727366898383122432': 'BTB', // bandits -> ffu-028
-    '396808818157182976': 'FFU', // ffuckedup -> ffu-039
-    '331590801261883392': 'STA', // stallions -> ffu-001
-    '398576262546735104': 'BEER', // beers -> ffu-004
-    '399297882890440704': 'ESS', // tcool -> ffu-034
-    '386791325690994688': 'AZTC', // aztecs -> ffu-025
-    '507633950666584064': 'EGP', // guapo -> ffu-032
-    '462383465753473024': 'RAGE', // rhinos -> ffu-026
+    '84006772809285632': 'MMEN',
+    '727366898383122432': 'BTB',
+    '396808818157182976': 'FFU',
+    '331590801261883392': 'STA',
+    '398576262546735104': 'BEER',
+    '399297882890440704': 'ESS',
+    '386791325690994688': 'AZTC',
+    '507633950666584064': 'EGP',
+    '462383465753473024': 'RAGE',
     // Historical users who participated in P18 but didn't continue to Sleeper era
-    'historical-durham-handsome-devils': 'DHD', // devils -> ffu-h04
-    'historical-not-your-average-joes': 'NYAJ', // joes -> ffu-h07  
-    'historical-the-losers': 'TL' // losers -> ffu-h05
+    'historical-durham-handsome-devils': 'DHD',
+    'historical-not-your-average-joes': 'NYAJ',
+    'historical-the-losers': 'TL'
   };
   
   return abbreviationMapping[sleeperId];

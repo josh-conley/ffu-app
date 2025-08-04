@@ -5,7 +5,7 @@
   "standings": [
     {
       "userId": "710981985102802944",
-      "ffuUserId": "ffu-027",
+      "ffuUserId": "ffu-008",
       "wins": 9,
       "losses": 4,
       "pointsFor": 1603.25,
@@ -18,7 +18,7 @@
     },
     {
       "userId": "727366898383122432",
-      "ffuUserId": "ffu-028",
+      "ffuUserId": "ffu-036",
       "wins": 7,
       "losses": 6,
       "pointsFor": 1492.75,
@@ -44,7 +44,7 @@
     },
     {
       "userId": "399322397750124544",
-      "ffuUserId": "ffu-030",
+      "ffuUserId": "ffu-041",
       "wins": 9,
       "losses": 4,
       "pointsFor": 1592.6,
@@ -57,7 +57,7 @@
     },
     {
       "userId": "507633950666584064",
-      "ffuUserId": "ffu-032",
+      "ffuUserId": "ffu-028",
       "wins": 6,
       "losses": 7,
       "pointsFor": 1445.6,
@@ -70,7 +70,7 @@
     },
     {
       "userId": "527884868880531456",
-      "ffuUserId": "ffu-033",
+      "ffuUserId": "ffu-030",
       "wins": 7,
       "losses": 6,
       "pointsFor": 1394.65,
@@ -83,7 +83,7 @@
     },
     {
       "userId": "399297882890440704",
-      "ffuUserId": "ffu-034",
+      "ffuUserId": "ffu-043",
       "wins": 6,
       "losses": 7,
       "pointsFor": 1387.2,
@@ -109,7 +109,7 @@
     },
     {
       "userId": "465884883869233152",
-      "ffuUserId": "ffu-036",
+      "ffuUserId": "ffu-027",
       "wins": 5,
       "losses": 8,
       "pointsFor": 1403.05,
@@ -129,13 +129,13 @@
       "pointsAgainst": 1372.3,
       "rank": 10,
       "userInfo": {
-        "teamName": "The Dark Knights",
+        "teamName": "Purple Parade",
         "abbreviation": "BATS"
       }
     },
     {
       "userId": "467553389673181184",
-      "ffuUserId": "ffu-038",
+      "ffuUserId": "ffu-044",
       "wins": 4,
       "losses": 9,
       "pointsFor": 1370.5,
@@ -148,7 +148,7 @@
     },
     {
       "userId": "396808818157182976",
-      "ffuUserId": "ffu-039",
+      "ffuUserId": "ffu-002",
       "wins": 7,
       "losses": 6,
       "pointsFor": 1424.25,
@@ -163,7 +163,7 @@
   "playoffResults": [
     {
       "userId": "710981985102802944",
-      "ffuUserId": "ffu-027",
+      "ffuUserId": "ffu-008",
       "placement": 1,
       "placementName": "1st",
       "userInfo": {
@@ -173,7 +173,7 @@
     },
     {
       "userId": "727366898383122432",
-      "ffuUserId": "ffu-028",
+      "ffuUserId": "ffu-036",
       "placement": 2,
       "placementName": "2nd",
       "userInfo": {
@@ -193,7 +193,7 @@
     },
     {
       "userId": "399322397750124544",
-      "ffuUserId": "ffu-030",
+      "ffuUserId": "ffu-041",
       "placement": 4,
       "placementName": "4th",
       "userInfo": {
@@ -203,7 +203,7 @@
     },
     {
       "userId": "507633950666584064",
-      "ffuUserId": "ffu-032",
+      "ffuUserId": "ffu-028",
       "placement": 5,
       "placementName": "5th",
       "userInfo": {
@@ -213,7 +213,7 @@
     },
     {
       "userId": "527884868880531456",
-      "ffuUserId": "ffu-033",
+      "ffuUserId": "ffu-030",
       "placement": 6,
       "placementName": "6th",
       "userInfo": {
@@ -223,7 +223,7 @@
     },
     {
       "userId": "399297882890440704",
-      "ffuUserId": "ffu-034",
+      "ffuUserId": "ffu-043",
       "placement": 7,
       "placementName": "7th",
       "userInfo": {
@@ -243,7 +243,7 @@
     },
     {
       "userId": "465884883869233152",
-      "ffuUserId": "ffu-036",
+      "ffuUserId": "ffu-027",
       "placement": 9,
       "placementName": "9th",
       "userInfo": {
@@ -257,13 +257,13 @@
       "placement": 10,
       "placementName": "10th",
       "userInfo": {
-        "teamName": "The Dark Knights",
+        "teamName": "Purple Parade",
         "abbreviation": "BATS"
       }
     },
     {
       "userId": "467553389673181184",
-      "ffuUserId": "ffu-038",
+      "ffuUserId": "ffu-044",
       "placement": 11,
       "placementName": "11th",
       "userInfo": {
@@ -273,7 +273,7 @@
     },
     {
       "userId": "396808818157182976",
-      "ffuUserId": "ffu-039",
+      "ffuUserId": "ffu-002",
       "placement": 12,
       "placementName": "12th",
       "userInfo": {
@@ -939,7 +939,7 @@
         "pickedBy": "399322397750124544",
         "userInfo": {
           "userId": "399322397750124544",
-          "ffuUserId": "ffu-030",
+          "ffuUserId": "ffu-041",
           "teamName": "Great Team Name",
           "abbreviation": "GTN"
         },
@@ -959,7 +959,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -999,7 +999,7 @@
         "pickedBy": "710981985102802944",
         "userInfo": {
           "userId": "710981985102802944",
-          "ffuUserId": "ffu-027",
+          "ffuUserId": "ffu-008",
           "teamName": "Frank's Little Beauties",
           "abbreviation": "FLB"
         },
@@ -1019,7 +1019,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -1059,7 +1059,7 @@
         "pickedBy": "467553389673181184",
         "userInfo": {
           "userId": "467553389673181184",
-          "ffuUserId": "ffu-038",
+          "ffuUserId": "ffu-044",
           "teamName": "Brown Town",
           "abbreviation": "BT"
         },
@@ -1080,7 +1080,7 @@
         "userInfo": {
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
-          "teamName": "The Dark Knights",
+          "teamName": "Purple Parade",
           "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
@@ -1099,7 +1099,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -1119,7 +1119,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -1139,7 +1139,7 @@
         "pickedBy": "527884868880531456",
         "userInfo": {
           "userId": "527884868880531456",
-          "ffuUserId": "ffu-033",
+          "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
           "abbreviation": "CATS"
         },
@@ -1159,7 +1159,7 @@
         "pickedBy": "465884883869233152",
         "userInfo": {
           "userId": "465884883869233152",
-          "ffuUserId": "ffu-036",
+          "ffuUserId": "ffu-027",
           "teamName": "Always Sunny in Camdelphia",
           "abbreviation": "ASIC"
         },
@@ -1179,7 +1179,7 @@
         "pickedBy": "465884883869233152",
         "userInfo": {
           "userId": "465884883869233152",
-          "ffuUserId": "ffu-036",
+          "ffuUserId": "ffu-027",
           "teamName": "Always Sunny in Camdelphia",
           "abbreviation": "ASIC"
         },
@@ -1199,7 +1199,7 @@
         "pickedBy": "527884868880531456",
         "userInfo": {
           "userId": "527884868880531456",
-          "ffuUserId": "ffu-033",
+          "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
           "abbreviation": "CATS"
         },
@@ -1219,7 +1219,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -1239,7 +1239,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -1260,7 +1260,7 @@
         "userInfo": {
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
-          "teamName": "The Dark Knights",
+          "teamName": "Purple Parade",
           "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
@@ -1279,7 +1279,7 @@
         "pickedBy": "467553389673181184",
         "userInfo": {
           "userId": "467553389673181184",
-          "ffuUserId": "ffu-038",
+          "ffuUserId": "ffu-044",
           "teamName": "Brown Town",
           "abbreviation": "BT"
         },
@@ -1319,7 +1319,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -1339,7 +1339,7 @@
         "pickedBy": "710981985102802944",
         "userInfo": {
           "userId": "710981985102802944",
-          "ffuUserId": "ffu-027",
+          "ffuUserId": "ffu-008",
           "teamName": "Frank's Little Beauties",
           "abbreviation": "FLB"
         },
@@ -1379,7 +1379,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -1399,7 +1399,7 @@
         "pickedBy": "399322397750124544",
         "userInfo": {
           "userId": "399322397750124544",
-          "ffuUserId": "ffu-030",
+          "ffuUserId": "ffu-041",
           "teamName": "Great Team Name",
           "abbreviation": "GTN"
         },
@@ -1419,7 +1419,7 @@
         "pickedBy": "399322397750124544",
         "userInfo": {
           "userId": "399322397750124544",
-          "ffuUserId": "ffu-030",
+          "ffuUserId": "ffu-041",
           "teamName": "Great Team Name",
           "abbreviation": "GTN"
         },
@@ -1439,7 +1439,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -1479,7 +1479,7 @@
         "pickedBy": "710981985102802944",
         "userInfo": {
           "userId": "710981985102802944",
-          "ffuUserId": "ffu-027",
+          "ffuUserId": "ffu-008",
           "teamName": "Frank's Little Beauties",
           "abbreviation": "FLB"
         },
@@ -1499,7 +1499,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -1539,7 +1539,7 @@
         "pickedBy": "467553389673181184",
         "userInfo": {
           "userId": "467553389673181184",
-          "ffuUserId": "ffu-038",
+          "ffuUserId": "ffu-044",
           "teamName": "Brown Town",
           "abbreviation": "BT"
         },
@@ -1560,7 +1560,7 @@
         "userInfo": {
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
-          "teamName": "The Dark Knights",
+          "teamName": "Purple Parade",
           "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
@@ -1579,7 +1579,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -1599,7 +1599,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -1619,7 +1619,7 @@
         "pickedBy": "527884868880531456",
         "userInfo": {
           "userId": "527884868880531456",
-          "ffuUserId": "ffu-033",
+          "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
           "abbreviation": "CATS"
         },
@@ -1639,7 +1639,7 @@
         "pickedBy": "465884883869233152",
         "userInfo": {
           "userId": "465884883869233152",
-          "ffuUserId": "ffu-036",
+          "ffuUserId": "ffu-027",
           "teamName": "Always Sunny in Camdelphia",
           "abbreviation": "ASIC"
         },
@@ -1659,7 +1659,7 @@
         "pickedBy": "465884883869233152",
         "userInfo": {
           "userId": "465884883869233152",
-          "ffuUserId": "ffu-036",
+          "ffuUserId": "ffu-027",
           "teamName": "Always Sunny in Camdelphia",
           "abbreviation": "ASIC"
         },
@@ -1679,7 +1679,7 @@
         "pickedBy": "527884868880531456",
         "userInfo": {
           "userId": "527884868880531456",
-          "ffuUserId": "ffu-033",
+          "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
           "abbreviation": "CATS"
         },
@@ -1699,7 +1699,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -1719,7 +1719,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -1740,7 +1740,7 @@
         "userInfo": {
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
-          "teamName": "The Dark Knights",
+          "teamName": "Purple Parade",
           "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
@@ -1759,7 +1759,7 @@
         "pickedBy": "467553389673181184",
         "userInfo": {
           "userId": "467553389673181184",
-          "ffuUserId": "ffu-038",
+          "ffuUserId": "ffu-044",
           "teamName": "Brown Town",
           "abbreviation": "BT"
         },
@@ -1799,7 +1799,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -1819,7 +1819,7 @@
         "pickedBy": "710981985102802944",
         "userInfo": {
           "userId": "710981985102802944",
-          "ffuUserId": "ffu-027",
+          "ffuUserId": "ffu-008",
           "teamName": "Frank's Little Beauties",
           "abbreviation": "FLB"
         },
@@ -1859,7 +1859,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -1879,7 +1879,7 @@
         "pickedBy": "399322397750124544",
         "userInfo": {
           "userId": "399322397750124544",
-          "ffuUserId": "ffu-030",
+          "ffuUserId": "ffu-041",
           "teamName": "Great Team Name",
           "abbreviation": "GTN"
         },
@@ -1899,7 +1899,7 @@
         "pickedBy": "399322397750124544",
         "userInfo": {
           "userId": "399322397750124544",
-          "ffuUserId": "ffu-030",
+          "ffuUserId": "ffu-041",
           "teamName": "Great Team Name",
           "abbreviation": "GTN"
         },
@@ -1919,7 +1919,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -1959,7 +1959,7 @@
         "pickedBy": "710981985102802944",
         "userInfo": {
           "userId": "710981985102802944",
-          "ffuUserId": "ffu-027",
+          "ffuUserId": "ffu-008",
           "teamName": "Frank's Little Beauties",
           "abbreviation": "FLB"
         },
@@ -1979,7 +1979,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -2019,7 +2019,7 @@
         "pickedBy": "467553389673181184",
         "userInfo": {
           "userId": "467553389673181184",
-          "ffuUserId": "ffu-038",
+          "ffuUserId": "ffu-044",
           "teamName": "Brown Town",
           "abbreviation": "BT"
         },
@@ -2040,7 +2040,7 @@
         "userInfo": {
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
-          "teamName": "The Dark Knights",
+          "teamName": "Purple Parade",
           "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
@@ -2059,7 +2059,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -2079,7 +2079,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -2099,7 +2099,7 @@
         "pickedBy": "527884868880531456",
         "userInfo": {
           "userId": "527884868880531456",
-          "ffuUserId": "ffu-033",
+          "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
           "abbreviation": "CATS"
         },
@@ -2119,7 +2119,7 @@
         "pickedBy": "465884883869233152",
         "userInfo": {
           "userId": "465884883869233152",
-          "ffuUserId": "ffu-036",
+          "ffuUserId": "ffu-027",
           "teamName": "Always Sunny in Camdelphia",
           "abbreviation": "ASIC"
         },
@@ -2139,7 +2139,7 @@
         "pickedBy": "465884883869233152",
         "userInfo": {
           "userId": "465884883869233152",
-          "ffuUserId": "ffu-036",
+          "ffuUserId": "ffu-027",
           "teamName": "Always Sunny in Camdelphia",
           "abbreviation": "ASIC"
         },
@@ -2159,7 +2159,7 @@
         "pickedBy": "527884868880531456",
         "userInfo": {
           "userId": "527884868880531456",
-          "ffuUserId": "ffu-033",
+          "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
           "abbreviation": "CATS"
         },
@@ -2179,7 +2179,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -2199,7 +2199,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -2220,7 +2220,7 @@
         "userInfo": {
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
-          "teamName": "The Dark Knights",
+          "teamName": "Purple Parade",
           "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
@@ -2239,7 +2239,7 @@
         "pickedBy": "467553389673181184",
         "userInfo": {
           "userId": "467553389673181184",
-          "ffuUserId": "ffu-038",
+          "ffuUserId": "ffu-044",
           "teamName": "Brown Town",
           "abbreviation": "BT"
         },
@@ -2279,7 +2279,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -2299,7 +2299,7 @@
         "pickedBy": "710981985102802944",
         "userInfo": {
           "userId": "710981985102802944",
-          "ffuUserId": "ffu-027",
+          "ffuUserId": "ffu-008",
           "teamName": "Frank's Little Beauties",
           "abbreviation": "FLB"
         },
@@ -2339,7 +2339,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -2359,7 +2359,7 @@
         "pickedBy": "399322397750124544",
         "userInfo": {
           "userId": "399322397750124544",
-          "ffuUserId": "ffu-030",
+          "ffuUserId": "ffu-041",
           "teamName": "Great Team Name",
           "abbreviation": "GTN"
         },
@@ -2379,7 +2379,7 @@
         "pickedBy": "399322397750124544",
         "userInfo": {
           "userId": "399322397750124544",
-          "ffuUserId": "ffu-030",
+          "ffuUserId": "ffu-041",
           "teamName": "Great Team Name",
           "abbreviation": "GTN"
         },
@@ -2399,7 +2399,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -2439,7 +2439,7 @@
         "pickedBy": "710981985102802944",
         "userInfo": {
           "userId": "710981985102802944",
-          "ffuUserId": "ffu-027",
+          "ffuUserId": "ffu-008",
           "teamName": "Frank's Little Beauties",
           "abbreviation": "FLB"
         },
@@ -2459,7 +2459,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -2499,7 +2499,7 @@
         "pickedBy": "467553389673181184",
         "userInfo": {
           "userId": "467553389673181184",
-          "ffuUserId": "ffu-038",
+          "ffuUserId": "ffu-044",
           "teamName": "Brown Town",
           "abbreviation": "BT"
         },
@@ -2520,7 +2520,7 @@
         "userInfo": {
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
-          "teamName": "The Dark Knights",
+          "teamName": "Purple Parade",
           "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
@@ -2539,7 +2539,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -2559,7 +2559,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -2579,7 +2579,7 @@
         "pickedBy": "527884868880531456",
         "userInfo": {
           "userId": "527884868880531456",
-          "ffuUserId": "ffu-033",
+          "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
           "abbreviation": "CATS"
         },
@@ -2599,7 +2599,7 @@
         "pickedBy": "465884883869233152",
         "userInfo": {
           "userId": "465884883869233152",
-          "ffuUserId": "ffu-036",
+          "ffuUserId": "ffu-027",
           "teamName": "Always Sunny in Camdelphia",
           "abbreviation": "ASIC"
         },
@@ -2619,7 +2619,7 @@
         "pickedBy": "465884883869233152",
         "userInfo": {
           "userId": "465884883869233152",
-          "ffuUserId": "ffu-036",
+          "ffuUserId": "ffu-027",
           "teamName": "Always Sunny in Camdelphia",
           "abbreviation": "ASIC"
         },
@@ -2639,7 +2639,7 @@
         "pickedBy": "527884868880531456",
         "userInfo": {
           "userId": "527884868880531456",
-          "ffuUserId": "ffu-033",
+          "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
           "abbreviation": "CATS"
         },
@@ -2659,7 +2659,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -2679,7 +2679,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -2700,7 +2700,7 @@
         "userInfo": {
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
-          "teamName": "The Dark Knights",
+          "teamName": "Purple Parade",
           "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
@@ -2719,7 +2719,7 @@
         "pickedBy": "467553389673181184",
         "userInfo": {
           "userId": "467553389673181184",
-          "ffuUserId": "ffu-038",
+          "ffuUserId": "ffu-044",
           "teamName": "Brown Town",
           "abbreviation": "BT"
         },
@@ -2759,7 +2759,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -2779,7 +2779,7 @@
         "pickedBy": "710981985102802944",
         "userInfo": {
           "userId": "710981985102802944",
-          "ffuUserId": "ffu-027",
+          "ffuUserId": "ffu-008",
           "teamName": "Frank's Little Beauties",
           "abbreviation": "FLB"
         },
@@ -2819,7 +2819,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -2839,7 +2839,7 @@
         "pickedBy": "399322397750124544",
         "userInfo": {
           "userId": "399322397750124544",
-          "ffuUserId": "ffu-030",
+          "ffuUserId": "ffu-041",
           "teamName": "Great Team Name",
           "abbreviation": "GTN"
         },
@@ -2859,7 +2859,7 @@
         "pickedBy": "399322397750124544",
         "userInfo": {
           "userId": "399322397750124544",
-          "ffuUserId": "ffu-030",
+          "ffuUserId": "ffu-041",
           "teamName": "Great Team Name",
           "abbreviation": "GTN"
         },
@@ -2879,7 +2879,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -2919,7 +2919,7 @@
         "pickedBy": "710981985102802944",
         "userInfo": {
           "userId": "710981985102802944",
-          "ffuUserId": "ffu-027",
+          "ffuUserId": "ffu-008",
           "teamName": "Frank's Little Beauties",
           "abbreviation": "FLB"
         },
@@ -2939,7 +2939,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -2979,7 +2979,7 @@
         "pickedBy": "467553389673181184",
         "userInfo": {
           "userId": "467553389673181184",
-          "ffuUserId": "ffu-038",
+          "ffuUserId": "ffu-044",
           "teamName": "Brown Town",
           "abbreviation": "BT"
         },
@@ -3000,7 +3000,7 @@
         "userInfo": {
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
-          "teamName": "The Dark Knights",
+          "teamName": "Purple Parade",
           "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
@@ -3019,7 +3019,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -3039,7 +3039,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -3059,7 +3059,7 @@
         "pickedBy": "527884868880531456",
         "userInfo": {
           "userId": "527884868880531456",
-          "ffuUserId": "ffu-033",
+          "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
           "abbreviation": "CATS"
         },
@@ -3079,7 +3079,7 @@
         "pickedBy": "465884883869233152",
         "userInfo": {
           "userId": "465884883869233152",
-          "ffuUserId": "ffu-036",
+          "ffuUserId": "ffu-027",
           "teamName": "Always Sunny in Camdelphia",
           "abbreviation": "ASIC"
         },
@@ -3099,7 +3099,7 @@
         "pickedBy": "465884883869233152",
         "userInfo": {
           "userId": "465884883869233152",
-          "ffuUserId": "ffu-036",
+          "ffuUserId": "ffu-027",
           "teamName": "Always Sunny in Camdelphia",
           "abbreviation": "ASIC"
         },
@@ -3119,7 +3119,7 @@
         "pickedBy": "527884868880531456",
         "userInfo": {
           "userId": "527884868880531456",
-          "ffuUserId": "ffu-033",
+          "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
           "abbreviation": "CATS"
         },
@@ -3139,7 +3139,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -3159,7 +3159,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -3180,7 +3180,7 @@
         "userInfo": {
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
-          "teamName": "The Dark Knights",
+          "teamName": "Purple Parade",
           "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
@@ -3199,7 +3199,7 @@
         "pickedBy": "467553389673181184",
         "userInfo": {
           "userId": "467553389673181184",
-          "ffuUserId": "ffu-038",
+          "ffuUserId": "ffu-044",
           "teamName": "Brown Town",
           "abbreviation": "BT"
         },
@@ -3239,7 +3239,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -3259,7 +3259,7 @@
         "pickedBy": "710981985102802944",
         "userInfo": {
           "userId": "710981985102802944",
-          "ffuUserId": "ffu-027",
+          "ffuUserId": "ffu-008",
           "teamName": "Frank's Little Beauties",
           "abbreviation": "FLB"
         },
@@ -3299,7 +3299,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -3319,7 +3319,7 @@
         "pickedBy": "399322397750124544",
         "userInfo": {
           "userId": "399322397750124544",
-          "ffuUserId": "ffu-030",
+          "ffuUserId": "ffu-041",
           "teamName": "Great Team Name",
           "abbreviation": "GTN"
         },
@@ -3339,7 +3339,7 @@
         "pickedBy": "399322397750124544",
         "userInfo": {
           "userId": "399322397750124544",
-          "ffuUserId": "ffu-030",
+          "ffuUserId": "ffu-041",
           "teamName": "Great Team Name",
           "abbreviation": "GTN"
         },
@@ -3359,7 +3359,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -3399,7 +3399,7 @@
         "pickedBy": "710981985102802944",
         "userInfo": {
           "userId": "710981985102802944",
-          "ffuUserId": "ffu-027",
+          "ffuUserId": "ffu-008",
           "teamName": "Frank's Little Beauties",
           "abbreviation": "FLB"
         },
@@ -3419,7 +3419,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -3459,7 +3459,7 @@
         "pickedBy": "467553389673181184",
         "userInfo": {
           "userId": "467553389673181184",
-          "ffuUserId": "ffu-038",
+          "ffuUserId": "ffu-044",
           "teamName": "Brown Town",
           "abbreviation": "BT"
         },
@@ -3480,7 +3480,7 @@
         "userInfo": {
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
-          "teamName": "The Dark Knights",
+          "teamName": "Purple Parade",
           "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
@@ -3499,7 +3499,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -3519,7 +3519,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -3539,7 +3539,7 @@
         "pickedBy": "527884868880531456",
         "userInfo": {
           "userId": "527884868880531456",
-          "ffuUserId": "ffu-033",
+          "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
           "abbreviation": "CATS"
         },
@@ -3559,7 +3559,7 @@
         "pickedBy": "465884883869233152",
         "userInfo": {
           "userId": "465884883869233152",
-          "ffuUserId": "ffu-036",
+          "ffuUserId": "ffu-027",
           "teamName": "Always Sunny in Camdelphia",
           "abbreviation": "ASIC"
         },
@@ -3579,7 +3579,7 @@
         "pickedBy": "465884883869233152",
         "userInfo": {
           "userId": "465884883869233152",
-          "ffuUserId": "ffu-036",
+          "ffuUserId": "ffu-027",
           "teamName": "Always Sunny in Camdelphia",
           "abbreviation": "ASIC"
         },
@@ -3599,7 +3599,7 @@
         "pickedBy": "527884868880531456",
         "userInfo": {
           "userId": "527884868880531456",
-          "ffuUserId": "ffu-033",
+          "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
           "abbreviation": "CATS"
         },
@@ -3619,7 +3619,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -3639,7 +3639,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -3660,7 +3660,7 @@
         "userInfo": {
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
-          "teamName": "The Dark Knights",
+          "teamName": "Purple Parade",
           "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
@@ -3679,7 +3679,7 @@
         "pickedBy": "467553389673181184",
         "userInfo": {
           "userId": "467553389673181184",
-          "ffuUserId": "ffu-038",
+          "ffuUserId": "ffu-044",
           "teamName": "Brown Town",
           "abbreviation": "BT"
         },
@@ -3719,7 +3719,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -3739,7 +3739,7 @@
         "pickedBy": "710981985102802944",
         "userInfo": {
           "userId": "710981985102802944",
-          "ffuUserId": "ffu-027",
+          "ffuUserId": "ffu-008",
           "teamName": "Frank's Little Beauties",
           "abbreviation": "FLB"
         },
@@ -3779,7 +3779,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -3799,7 +3799,7 @@
         "pickedBy": "399322397750124544",
         "userInfo": {
           "userId": "399322397750124544",
-          "ffuUserId": "ffu-030",
+          "ffuUserId": "ffu-041",
           "teamName": "Great Team Name",
           "abbreviation": "GTN"
         },
@@ -3819,7 +3819,7 @@
         "pickedBy": "399322397750124544",
         "userInfo": {
           "userId": "399322397750124544",
-          "ffuUserId": "ffu-030",
+          "ffuUserId": "ffu-041",
           "teamName": "Great Team Name",
           "abbreviation": "GTN"
         },
@@ -3839,7 +3839,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -3879,7 +3879,7 @@
         "pickedBy": "710981985102802944",
         "userInfo": {
           "userId": "710981985102802944",
-          "ffuUserId": "ffu-027",
+          "ffuUserId": "ffu-008",
           "teamName": "Frank's Little Beauties",
           "abbreviation": "FLB"
         },
@@ -3899,7 +3899,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -3939,7 +3939,7 @@
         "pickedBy": "467553389673181184",
         "userInfo": {
           "userId": "467553389673181184",
-          "ffuUserId": "ffu-038",
+          "ffuUserId": "ffu-044",
           "teamName": "Brown Town",
           "abbreviation": "BT"
         },
@@ -3960,7 +3960,7 @@
         "userInfo": {
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
-          "teamName": "The Dark Knights",
+          "teamName": "Purple Parade",
           "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
@@ -3979,7 +3979,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -3999,7 +3999,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -4019,7 +4019,7 @@
         "pickedBy": "527884868880531456",
         "userInfo": {
           "userId": "527884868880531456",
-          "ffuUserId": "ffu-033",
+          "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
           "abbreviation": "CATS"
         },
@@ -4039,7 +4039,7 @@
         "pickedBy": "465884883869233152",
         "userInfo": {
           "userId": "465884883869233152",
-          "ffuUserId": "ffu-036",
+          "ffuUserId": "ffu-027",
           "teamName": "Always Sunny in Camdelphia",
           "abbreviation": "ASIC"
         },
@@ -4059,7 +4059,7 @@
         "pickedBy": "465884883869233152",
         "userInfo": {
           "userId": "465884883869233152",
-          "ffuUserId": "ffu-036",
+          "ffuUserId": "ffu-027",
           "teamName": "Always Sunny in Camdelphia",
           "abbreviation": "ASIC"
         },
@@ -4079,7 +4079,7 @@
         "pickedBy": "527884868880531456",
         "userInfo": {
           "userId": "527884868880531456",
-          "ffuUserId": "ffu-033",
+          "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
           "abbreviation": "CATS"
         },
@@ -4099,7 +4099,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -4119,7 +4119,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -4140,7 +4140,7 @@
         "userInfo": {
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
-          "teamName": "The Dark Knights",
+          "teamName": "Purple Parade",
           "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
@@ -4159,7 +4159,7 @@
         "pickedBy": "467553389673181184",
         "userInfo": {
           "userId": "467553389673181184",
-          "ffuUserId": "ffu-038",
+          "ffuUserId": "ffu-044",
           "teamName": "Brown Town",
           "abbreviation": "BT"
         },
@@ -4199,7 +4199,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -4219,7 +4219,7 @@
         "pickedBy": "710981985102802944",
         "userInfo": {
           "userId": "710981985102802944",
-          "ffuUserId": "ffu-027",
+          "ffuUserId": "ffu-008",
           "teamName": "Frank's Little Beauties",
           "abbreviation": "FLB"
         },
@@ -4259,7 +4259,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -4279,7 +4279,7 @@
         "pickedBy": "399322397750124544",
         "userInfo": {
           "userId": "399322397750124544",
-          "ffuUserId": "ffu-030",
+          "ffuUserId": "ffu-041",
           "teamName": "Great Team Name",
           "abbreviation": "GTN"
         },
@@ -4299,7 +4299,7 @@
         "pickedBy": "399322397750124544",
         "userInfo": {
           "userId": "399322397750124544",
-          "ffuUserId": "ffu-030",
+          "ffuUserId": "ffu-041",
           "teamName": "Great Team Name",
           "abbreviation": "GTN"
         },
@@ -4319,7 +4319,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -4359,7 +4359,7 @@
         "pickedBy": "710981985102802944",
         "userInfo": {
           "userId": "710981985102802944",
-          "ffuUserId": "ffu-027",
+          "ffuUserId": "ffu-008",
           "teamName": "Frank's Little Beauties",
           "abbreviation": "FLB"
         },
@@ -4379,7 +4379,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -4419,7 +4419,7 @@
         "pickedBy": "467553389673181184",
         "userInfo": {
           "userId": "467553389673181184",
-          "ffuUserId": "ffu-038",
+          "ffuUserId": "ffu-044",
           "teamName": "Brown Town",
           "abbreviation": "BT"
         },
@@ -4440,7 +4440,7 @@
         "userInfo": {
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
-          "teamName": "The Dark Knights",
+          "teamName": "Purple Parade",
           "abbreviation": "BATS"
         },
         "draftId": "espn-2020-national-draft",
@@ -4459,7 +4459,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -4479,7 +4479,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -4499,7 +4499,7 @@
         "pickedBy": "527884868880531456",
         "userInfo": {
           "userId": "527884868880531456",
-          "ffuUserId": "ffu-033",
+          "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
           "abbreviation": "CATS"
         },
@@ -4519,7 +4519,7 @@
         "pickedBy": "465884883869233152",
         "userInfo": {
           "userId": "465884883869233152",
-          "ffuUserId": "ffu-036",
+          "ffuUserId": "ffu-027",
           "teamName": "Always Sunny in Camdelphia",
           "abbreviation": "ASIC"
         },

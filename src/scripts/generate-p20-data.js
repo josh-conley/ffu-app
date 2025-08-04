@@ -139,19 +139,19 @@ function getUserByTeamName(teamName) {
 function getCurrentTeamNameBySleeperId(sleeperId) {
   // This is a simplified version - in a real implementation you'd import from constants
   const userMappingToCurrent = {
-    '727368657923063808': 'Fort Wayne Banana Bread', // bread -> ffu-009
-    '399379352174768128': 'Stone Cold Steve Irwins', // scsi -> ffu-051
-    '331590801261883392': 'The Stallions', // stallions -> ffu-001
-    '729741648338210816': 'ChicagoPick6', // picks -> ffu-010
-    '726572095210930176': 'Team Dogecoin', // doge -> ffu-031
-    '325766631336714240': 'Act More Stupidly', // swaggy -> ffu-024
-    '84006772809285632': 'The Minutemen', // mmen -> ffu-023
-    '386791325690994688': 'Indianapolis Aztecs', // aztecs -> ffu-025
-    '462383465753473024': 'Raging Rhinos', // rhinos -> ffu-026
-    '398576262546735104': 'Blood, Sweat, and Beers', // beers -> ffu-004
+    '727368657923063808': 'Fort Wayne Banana Bread',
+    '399379352174768128': 'Stone Cold Steve Irwins',
+    '331590801261883392': 'The Stallions',
+    '729741648338210816': 'ChicagoPick6',
+    '726572095210930176': 'Team Dogecoin',
+    '325766631336714240': 'Act More Stupidly',
+    '84006772809285632': 'The Minutemen',
+    '386791325690994688': 'Indianapolis Aztecs',
+    '462383465753473024': 'Raging Rhinos',
+    '398576262546735104': 'Blood, Sweat, and Beers',
     // Historical users who participated in ESPN era but didn't continue to Sleeper era
-    'historical-naptown-makos': 'Naptown Makos', // makos -> ffu-h01
-    'historical-speedway-ritual-cog': 'Speedway Ritual Cog' // cog -> ffu-h02
+    'historical-naptown-makos': 'Naptown Makos',
+    'historical-speedway-ritual-cog': 'Speedway Ritual Cog'
   };
   
   return userMappingToCurrent[sleeperId];
@@ -160,19 +160,19 @@ function getCurrentTeamNameBySleeperId(sleeperId) {
 // Helper function to get current abbreviation by Sleeper ID
 function getCurrentAbbreviationBySleeperId(sleeperId) {
   const abbreviationMapping = {
-    '727368657923063808': 'FWBB', // bread -> ffu-009
-    '399379352174768128': 'SCSI', // scsi -> ffu-051
-    '331590801261883392': 'STA', // stallions -> ffu-001
-    '729741648338210816': 'CP6', // picks -> ffu-010
-    '726572095210930176': 'DOGE', // doge -> ffu-031
-    '325766631336714240': 'AMS', // swaggy -> ffu-024
-    '84006772809285632': 'MMEN', // mmen -> ffu-023
-    '386791325690994688': 'AZTC', // aztecs -> ffu-025
-    '462383465753473024': 'RAGE', // rhinos -> ffu-026
-    '398576262546735104': 'BEER', // beers -> ffu-004
+    '727368657923063808': 'FWBB',
+    '399379352174768128': 'SCSI',
+    '331590801261883392': 'STA',
+    '729741648338210816': 'CP6',
+    '726572095210930176': 'DOGE',
+    '325766631336714240': 'AMS',
+    '84006772809285632': 'MMEN',
+    '386791325690994688': 'AZTC',
+    '462383465753473024': 'RAGE',
+    '398576262546735104': 'BEER',
     // Historical users who participated in ESPN era but didn't continue to Sleeper era
-    'historical-naptown-makos': 'NM', // makos -> ffu-h01
-    'historical-speedway-ritual-cog': 'SRC' // cog -> ffu-h02
+    'historical-naptown-makos': 'NM',
+    'historical-speedway-ritual-cog': 'SRC'
   };
   
   return abbreviationMapping[sleeperId];

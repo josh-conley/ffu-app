@@ -67,19 +67,18 @@ function parseCSVLine(line) {
 
 // User mapping based on the Sleeper ID Key and configuration for National league
 const userMapping = {
-  'flb': { ffuId: 'ffu-027', sleeperId: '710981985102802944' },
-  'bandits': { ffuId: 'ffu-028', sleeperId: '727366898383122432' },
+  'flb': { ffuId: 'ffu-008', sleeperId: '710981985102802944' },
+  'bandits': { ffuId: 'ffu-036', sleeperId: '727366898383122432' },
   'pancake': { ffuId: 'ffu-029', sleeperId: '508719015656099840' },
-  'jacamart': { ffuId: 'ffu-030', sleeperId: '399322397750124544' },
-  'guapo': { ffuId: 'ffu-032', sleeperId: '507633950666584064' },
-  'cats': { ffuId: 'ffu-033', sleeperId: '527884868880531456' },
-  'tcool': { ffuId: 'ffu-034', sleeperId: '399297882890440704' },
+  'jacamart': { ffuId: 'ffu-041', sleeperId: '399322397750124544' },
+  'guapo': { ffuId: 'ffu-028', sleeperId: '507633950666584064' },
+  'cats': { ffuId: 'ffu-030', sleeperId: '527884868880531456' },
+  'tcool': { ffuId: 'ffu-043', sleeperId: '399297882890440704' },
   'blackdeath': { ffuId: 'ffu-045', sleeperId: '599711204499312640' },
-  // Note: stark (472876832719368192) was not in National 2020, removed from mapping
-  'camdelphia': { ffuId: 'ffu-036', sleeperId: '465884883869233152' },
-  'purple': { ffuId: 'ffu-007', sleeperId: '705642514408886272' }, // The Dark Knights
-  'strikers': { ffuId: 'ffu-038', sleeperId: '467553389673181184' },
-  'ffuckedup': { ffuId: 'ffu-039', sleeperId: '396808818157182976' }
+  'camdelphia': { ffuId: 'ffu-027', sleeperId: '465884883869233152' },
+  'purple': { ffuId: 'ffu-007', sleeperId: '705642514408886272' },
+  'strikers': { ffuId: 'ffu-044', sleeperId: '467553389673181184' },
+  'ffuckedup': { ffuId: 'ffu-002', sleeperId: '396808818157182976' }
 };
 
 // Team name to ESPN username mapping for National league
@@ -148,7 +147,7 @@ function getCurrentTeamNameBySleeperId(sleeperId) {
     '599711204499312640': 'Team Black Death', // blackdeath
     // Note: 472876832719368192 (stark) was not in National 2020
     '465884883869233152': 'Always Sunny in Camdelphia', // camdelphia
-    '705642514408886272': 'The Dark Knights', // purple -> ffu-007
+    '705642514408886272': 'Purple Parade',
     '467553389673181184': 'Brown Town', // strikers
     '396808818157182976': 'FFUcked Up' // ffuckedup
   };
@@ -167,9 +166,8 @@ function getCurrentAbbreviationBySleeperId(sleeperId) {
     '527884868880531456': 'CATS', // cats
     '399297882890440704': 'ESS', // tcool
     '599711204499312640': 'TBD', // blackdeath
-    // Note: 472876832719368192 (stark) was not in National 2020
     '465884883869233152': 'ASIC', // camdelphia
-    '705642514408886272': 'BATS', // purple -> ffu-007
+    '705642514408886272': 'BATS', // purple
     '467553389673181184': 'BT', // strikers
     '396808818157182976': 'FFU' // ffuckedup
   };

@@ -82,7 +82,7 @@ const userMapping = {
   'doge': { ffuId: 'ffu-031', sleeperId: '726572095210930176' },
   'stark': { ffuId: 'ffu-042', sleeperId: '472876832719368192' },
   'scsi': { ffuId: 'ffu-051', sleeperId: '399379352174768128' },
-  'jacamart': { ffuId: 'ffu-030', sleeperId: '399322397750124544' },
+  'jacamart': { ffuId: 'ffu-041', sleeperId: '399322397750124544' },
   'blackdeath': { ffuId: 'ffu-045', sleeperId: '599711204499312640' },
   'picks': { ffuId: 'ffu-010', sleeperId: '729741648338210816' },
   // Historical users who participated in N18 but didn't continue to Sleeper era
@@ -146,19 +146,19 @@ function getUserByTeamName(teamName) {
 // Helper function to get current team name by Sleeper ID for N18
 function getCurrentTeamNameBySleeperId(sleeperId) {
   const userMappingToCurrent = {
-    '325766631336714240': 'Act More Stupidly', // swaggy -> ffu-024
-    '727368657923063808': 'Fort Wayne Banana Bread', // bread -> ffu-009
-    '726572095210930176': 'Team Dogecoin', // doge -> ffu-031
-    '472876832719368192': 'Team Stark', // stark -> ffu-042
-    '399379352174768128': 'Stone Cold Steve Irwins', // scsi -> ffu-051
-    '399322397750124544': 'Great Team Name', // jacamart -> ffu-030
-    '599711204499312640': 'Team Black Death', // blackdeath -> ffu-045
-    '729741648338210816': 'ChicagoPick6', // picks -> ffu-010
+    '325766631336714240': 'Goat Emoji',
+    '727368657923063808': 'Oklahoma Banana Bread',
+    '726572095210930176': 'Team Dogecoin',
+    '472876832719368192': 'Team Stark',
+    '399379352174768128': 'Stone Cold Steve Irwins',
+    '399322397750124544': 'Great Team Name',
+    '599711204499312640': 'Team Black Death',
+    '729741648338210816': 'Team Painter Pick 6s',
     // Historical users who participated in N18 but didn't continue to Sleeper era
-    'historical-well-done-stakes': 'The Well Done Stakes', // twds -> ffu-h03
-    'historical-team-team-casa': 'Team Team Casa', // casa -> ffu-h08
-    'historical-gingy-flame': 'Gingy Flame', // flame -> ffu-h06
-    'historical-speedway-ritual-cog': "Speedway's Ritual Cog" // cog -> ffu-h02
+    'historical-well-done-stakes': 'The Well Done Stakes',
+    'historical-team-team-casa': 'Team Team Casa',
+    'historical-gingy-flame': 'Gingy Flame',
+    'historical-speedway-ritual-cog': "Speedway's Ritual Cog"
   };
   
   return userMappingToCurrent[sleeperId];
@@ -167,19 +167,19 @@ function getCurrentTeamNameBySleeperId(sleeperId) {
 // Helper function to get current abbreviation by Sleeper ID for N18
 function getCurrentAbbreviationBySleeperId(sleeperId) {
   const abbreviationMapping = {
-    '325766631336714240': 'AMS', // swaggy -> ffu-024
-    '727368657923063808': 'FWBB', // bread -> ffu-009
-    '726572095210930176': 'DOGE', // doge -> ffu-031
-    '472876832719368192': 'STRK', // stark -> ffu-042
-    '399379352174768128': 'SCSI', // scsi -> ffu-051
-    '399322397750124544': 'GTN', // jacamart -> ffu-030
-    '599711204499312640': 'TBD', // blackdeath -> ffu-045
-    '729741648338210816': 'CP6', // picks -> ffu-010
+    '325766631336714240': 'AMS',
+    '727368657923063808': 'FWBB',
+    '726572095210930176': 'DOGE',
+    '472876832719368192': 'STRK',
+    '399379352174768128': 'SCSI',
+    '399322397750124544': 'GTN',
+    '599711204499312640': 'TBD',
+    '729741648338210816': 'CP6',
     // Historical users who participated in N18 but didn't continue to Sleeper era
-    'historical-well-done-stakes': 'WDS', // twds -> ffu-h03
-    'historical-team-team-casa': 'TTC', // casa -> ffu-h08
-    'historical-gingy-flame': 'GF', // flame -> ffu-h06
-    'historical-speedway-ritual-cog': 'SRC' // cog -> ffu-h02
+    'historical-well-done-stakes': 'WDS',
+    'historical-team-team-casa': 'TTC',
+    'historical-gingy-flame': 'GF',
+    'historical-speedway-ritual-cog': 'SRC'
   };
   
   return abbreviationMapping[sleeperId];

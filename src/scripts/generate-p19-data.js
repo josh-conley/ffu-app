@@ -74,7 +74,7 @@ const userMapping = {
   'swaggy': { ffuId: 'ffu-024', sleeperId: '325766631336714240' },
   'stallions': { ffuId: 'ffu-001', sleeperId: '331590801261883392' },
   'beers': { ffuId: 'ffu-004', sleeperId: '398576262546735104' },
-  'bandits': { ffuId: 'ffu-028', sleeperId: '727366898383122432' },
+  'bandits': { ffuId: 'ffu-036', sleeperId: '727366898383122432' },
   'ffuckedup': { ffuId: 'ffu-039', sleeperId: '396808818157182976' },
   // Historical users who participated in P19 but didn't continue to Sleeper era
   'stakes': { ffuId: 'ffu-h03', sleeperId: 'historical-well-done-stakes' },
@@ -136,19 +136,19 @@ function getUserByTeamName(teamName) {
 // Helper function to get current team name by Sleeper ID for P19
 function getCurrentTeamNameBySleeperId(sleeperId) {
   const userMappingToCurrent = {
-    '727368657923063808': 'Fort Wayne Banana Bread', // bread -> ffu-009
-    '399379352174768128': 'Stone Cold Steve Irwins', // scsi -> ffu-051
-    '84006772809285632': 'The Minutemen', // mmen -> ffu-023
-    '726572095210930176': 'Team Dogecoin', // doge -> ffu-031
-    '325766631336714240': 'Act More Stupidly', // swaggy -> ffu-024
-    '331590801261883392': 'The Stallions', // stallions -> ffu-001
-    '398576262546735104': 'Blood, Sweat, and Beers', // beers -> ffu-004
-    '727366898383122432': 'Big Ten Bandits', // bandits -> ffu-028
-    '396808818157182976': 'FFUcked Up', // ffuckedup -> ffu-039
-    '472876832719368192': 'Team Stark', // stark -> ffu-042
+    '727368657923063808': 'Fort Wayne Banana Bread',
+    '399379352174768128': 'Stone Cold Steve Irwins',
+    '84006772809285632': 'The Minutemen',
+    '726572095210930176': 'Team Dogecoin',
+    '325766631336714240': 'Act More Stupidly',
+    '331590801261883392': 'The Stallions',
+    '398576262546735104': 'Blood, Sweat, and Beers',
+    '727366898383122432': 'Big Ten Bandits',
+    '396808818157182976': 'FFUcked Up',
+    '472876832719368192': 'Team Stark',
     // Historical users who participated in P19 but didn't continue to Sleeper era
-    'historical-well-done-stakes': 'The Well Done Stakes', // stakes -> ffu-h03
-    'historical-durham-handsome-devils': 'Atlanta Handsome Devils' // devils -> ffu-h04
+    'historical-well-done-stakes': 'The Well Done Stakes',
+    'historical-durham-handsome-devils': 'Atlanta Handsome Devils'
   };
   
   return userMappingToCurrent[sleeperId];
@@ -157,19 +157,19 @@ function getCurrentTeamNameBySleeperId(sleeperId) {
 // Helper function to get current abbreviation by Sleeper ID for P19
 function getCurrentAbbreviationBySleeperId(sleeperId) {
   const abbreviationMapping = {
-    '727368657923063808': 'FWBB', // bread -> ffu-009
-    '399379352174768128': 'SCSI', // scsi -> ffu-051
-    '84006772809285632': 'MMEN', // mmen -> ffu-023
-    '726572095210930176': 'DOGE', // doge -> ffu-031
-    '325766631336714240': 'AMS', // swaggy -> ffu-024
-    '331590801261883392': 'STA', // stallions -> ffu-001
-    '398576262546735104': 'BEER', // beers -> ffu-004
-    '727366898383122432': 'BTB', // bandits -> ffu-028
-    '396808818157182976': 'FFU', // ffuckedup -> ffu-039
-    '472876832719368192': 'STRK', // stark -> ffu-042
+    '727368657923063808': 'FWBB',
+    '399379352174768128': 'SCSI',
+    '84006772809285632': 'MMEN',
+    '726572095210930176': 'DOGE',
+    '325766631336714240': 'AMS',
+    '331590801261883392': 'STA',
+    '398576262546735104': 'BEER',
+    '727366898383122432': 'BTB',
+    '396808818157182976': 'FFU',
+    '472876832719368192': 'STRK',
     // Historical users who participated in P19 but didn't continue to Sleeper era
-    'historical-well-done-stakes': 'WDS', // stakes -> ffu-h03
-    'historical-durham-handsome-devils': 'AHD' // devils -> ffu-h04
+    'historical-well-done-stakes': 'WDS',
+    'historical-durham-handsome-devils': 'AHD'
   };
   
   return abbreviationMapping[sleeperId];

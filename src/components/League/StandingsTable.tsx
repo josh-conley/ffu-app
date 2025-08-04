@@ -12,6 +12,7 @@ interface StandingsTableProps {
 }
 
 export const StandingsTable = ({ standings, league, year }: StandingsTableProps) => {
+
   const getLeagueColors = (leagueType: string) => {
     const colorMap = {
       PREMIER: {
@@ -135,7 +136,9 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
                       />
                     </div>
                     <div>
-                      <div className="font-bold text-gray-900 dark:text-gray-100 text-sm">{standing.userInfo.teamName}</div>
+                      <div className="font-bold text-gray-900 dark:text-gray-100 text-sm">
+                        {standing.userInfo.teamName}
+                      </div>
                       <div className="text-xs text-gray-500 dark:text-gray-400 sm:hidden font-mono">{standing.userInfo.abbreviation}</div>
                     </div>
                   </div>

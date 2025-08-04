@@ -18,7 +18,7 @@
     },
     {
       "userId": "727366898383122432",
-      "ffuUserId": "ffu-028",
+      "ffuUserId": "ffu-036",
       "wins": 9,
       "losses": 4,
       "pointsFor": 1453.45,
@@ -44,7 +44,7 @@
     },
     {
       "userId": "396808818157182976",
-      "ffuUserId": "ffu-039",
+      "ffuUserId": "ffu-002",
       "wins": 8,
       "losses": 5,
       "pointsFor": 1703.5,
@@ -96,7 +96,7 @@
     },
     {
       "userId": "399297882890440704",
-      "ffuUserId": "ffu-034",
+      "ffuUserId": "ffu-043",
       "wins": 6,
       "losses": 7,
       "pointsFor": 1368.2,
@@ -122,7 +122,7 @@
     },
     {
       "userId": "507633950666584064",
-      "ffuUserId": "ffu-032",
+      "ffuUserId": "ffu-028",
       "wins": 5,
       "losses": 8,
       "pointsFor": 1481.8,
@@ -173,7 +173,7 @@
     },
     {
       "userId": "727366898383122432",
-      "ffuUserId": "ffu-028",
+      "ffuUserId": "ffu-036",
       "placement": 2,
       "placementName": "2nd",
       "userInfo": {
@@ -193,7 +193,7 @@
     },
     {
       "userId": "396808818157182976",
-      "ffuUserId": "ffu-039",
+      "ffuUserId": "ffu-002",
       "placement": 4,
       "placementName": "4th",
       "userInfo": {
@@ -233,7 +233,7 @@
     },
     {
       "userId": "399297882890440704",
-      "ffuUserId": "ffu-034",
+      "ffuUserId": "ffu-043",
       "placement": 8,
       "placementName": "8th",
       "userInfo": {
@@ -253,7 +253,7 @@
     },
     {
       "userId": "507633950666584064",
-      "ffuUserId": "ffu-032",
+      "ffuUserId": "ffu-028",
       "placement": 10,
       "placementName": "10th",
       "userInfo": {
@@ -939,7 +939,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -999,7 +999,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -1059,7 +1059,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -1099,7 +1099,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -1239,7 +1239,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -1279,7 +1279,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -1339,7 +1339,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -1399,7 +1399,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -1419,7 +1419,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -1479,7 +1479,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -1539,7 +1539,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -1579,7 +1579,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -1719,7 +1719,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -1759,7 +1759,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -1819,7 +1819,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -1879,7 +1879,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -1899,7 +1899,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -1959,7 +1959,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -2019,7 +2019,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -2059,7 +2059,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -2199,7 +2199,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -2239,7 +2239,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -2299,7 +2299,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -2359,7 +2359,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -2379,7 +2379,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -2439,7 +2439,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -2499,7 +2499,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -2539,7 +2539,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -2679,7 +2679,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -2719,7 +2719,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -2779,7 +2779,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -2839,7 +2839,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -2859,7 +2859,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -2919,7 +2919,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -2979,7 +2979,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -3019,7 +3019,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -3159,7 +3159,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -3199,7 +3199,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -3259,7 +3259,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -3319,7 +3319,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -3339,7 +3339,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -3399,7 +3399,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -3459,7 +3459,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -3499,7 +3499,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -3639,7 +3639,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -3679,7 +3679,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -3739,7 +3739,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -3799,7 +3799,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -3819,7 +3819,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -3879,7 +3879,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -3939,7 +3939,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -3979,7 +3979,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -4119,7 +4119,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },
@@ -4159,7 +4159,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -4219,7 +4219,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -4279,7 +4279,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -4299,7 +4299,7 @@
         "pickedBy": "396808818157182976",
         "userInfo": {
           "userId": "396808818157182976",
-          "ffuUserId": "ffu-039",
+          "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
           "abbreviation": "FFU"
         },
@@ -4359,7 +4359,7 @@
         "pickedBy": "727366898383122432",
         "userInfo": {
           "userId": "727366898383122432",
-          "ffuUserId": "ffu-028",
+          "ffuUserId": "ffu-036",
           "teamName": "Big Ten Bandits",
           "abbreviation": "BTB"
         },
@@ -4419,7 +4419,7 @@
         "pickedBy": "507633950666584064",
         "userInfo": {
           "userId": "507633950666584064",
-          "ffuUserId": "ffu-032",
+          "ffuUserId": "ffu-028",
           "teamName": "El Guapo Puto",
           "abbreviation": "EGP"
         },
@@ -4459,7 +4459,7 @@
         "pickedBy": "399297882890440704",
         "userInfo": {
           "userId": "399297882890440704",
-          "ffuUserId": "ffu-034",
+          "ffuUserId": "ffu-043",
           "teamName": "Elm Street Skywalkers",
           "abbreviation": "ESS"
         },

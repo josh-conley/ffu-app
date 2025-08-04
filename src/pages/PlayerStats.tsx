@@ -5,10 +5,9 @@ import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
-import { AllMembersStatsTable } from '../components/Players/AllMembersStatsTable';
 import { getFFUIdBySleeperId } from '../config/constants';
 import type { LeagueTier, UserInfo } from '../types';
-import { Trophy, Medal, Award, TrendingDown, Calendar, Target, BarChart3, ChevronDown, ChevronUp, Percent, TrendingUp, Share2, Check, Zap, Users } from 'lucide-react';
+import { Trophy, Medal, Award, TrendingDown, Calendar, Target, BarChart3, ChevronDown, ChevronUp, Percent, TrendingUp, Share2, Check, Zap } from 'lucide-react';
 
 type SeasonSortKey = 'year' | 'league' | 'wins' | 'winPct' | 'pointsFor' | 'pointsAgainst' | 'placement';
 type SortOrder = 'asc' | 'desc';
@@ -101,7 +100,6 @@ export const PlayerStats = () => {
   const [shareSuccess, setShareSuccess] = useState(false);
   const [sortKey, setSortKey] = useState<SeasonSortKey>('year');
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
-  const [showAllMembersTable, setShowAllMembersTable] = useState(false);
   
   // URL-based state management
   const {
@@ -166,23 +164,29 @@ export const PlayerStats = () => {
         else if (standing.rank === 3) player.thirdPlaceFinishes++;
         else if (standing.rank === leagueData.standings.length) player.lastPlaceFinishes++;
 
-        // Check for playoff finish and calculate playoff wins/losses
-        const playoffFinish = leagueData.playoffResults?.find(p => 
-          (p.ffuUserId && p.ffuUserId === standing.ffuUserId) || 
-          (p.userId === standing.userId)
-        );
-        if (playoffFinish) {
+        // Check for playoff appearance (rank 6 or better = playoff berth)
+        // In FFU, top 6 teams make playoffs regardless of league size
+        if (standing.rank <= 6) {
           player.playoffAppearances++;
           
-          // Calculate playoff wins/losses based on placement and bracket structure
-          // This accounts for byes and actual playoff paths
-          const placement = playoffFinish.placement;
-          const { wins, losses } = calculatePlayoffRecord(placement);
+          // Use playoff results if available, otherwise use regular season rank
+          const playoffFinish = leagueData.playoffResults?.find(p => 
+            (p.ffuUserId && p.ffuUserId === standing.ffuUserId) || 
+            (p.userId === standing.userId)
+          );
+          
+          const finalPlacement = playoffFinish ? playoffFinish.placement : standing.rank;
+          const { wins, losses } = calculatePlayoffRecord(finalPlacement);
           player.playoffWins += wins;
           player.playoffLosses += losses;
         }
 
         // Add to season history
+        const playoffFinish = leagueData.playoffResults?.find(p => 
+          (p.ffuUserId && p.ffuUserId === standing.ffuUserId) || 
+          (p.userId === standing.userId)
+        );
+        
         player.seasonHistory.push({
           year: leagueData.year,
           league: leagueData.league as LeagueTier,
@@ -191,7 +195,7 @@ export const PlayerStats = () => {
           pointsFor: standing.pointsFor || 0,
           pointsAgainst: standing.pointsAgainst || 0,
           rank: standing.rank,
-          playoffFinish: playoffFinish?.placement
+          playoffFinish: standing.rank <= 6 ? (playoffFinish?.placement || standing.rank) : undefined
         });
       });
     });
@@ -329,13 +333,6 @@ export const PlayerStats = () => {
           </p>
         </div>
         <div className="mt-4 sm:mt-0 flex space-x-3">
-          <button
-            onClick={() => setShowAllMembersTable(true)}
-            className="px-4 py-2 rounded-lg font-medium transition-colors duration-200 bg-blue-600 text-white hover:bg-blue-700 flex items-center space-x-2"
-          >
-            <Users className="h-4 w-4" />
-            <span>View All Members</span>
-          </button>
           {hasSelectionToShare && (
             <button
               onClick={handleShare}
@@ -686,7 +683,6 @@ export const PlayerStats = () => {
                             {season.rank === 2 && <Medal className="h-4 w-4 text-gray-500" />}
                             {season.rank === 3 && <Award className="h-4 w-4 text-amber-600" />}
                             <span className="font-medium">#{season.rank}</span>
-                            <span className="text-xs text-gray-500 ml-1">(Regular Season)</span>
                           </div>
                         )}
                       </td>
@@ -987,13 +983,6 @@ export const PlayerStats = () => {
         </div>
       )}
 
-      {/* All Members Stats Table Modal */}
-      {showAllMembersTable && (
-        <AllMembersStatsTable 
-          players={playerStats}
-          onClose={() => setShowAllMembersTable(false)}
-        />
-      )}
     </div>
   );
 };

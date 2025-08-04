@@ -81,15 +81,15 @@ const userMapping = {
   'aztecs': { ffuId: 'ffu-025', sleeperId: '386791325690994688' },
   'picks': { ffuId: 'ffu-010', sleeperId: '729741648338210816' },
   'blackdeath': { ffuId: 'ffu-045', sleeperId: '599711204499312640' },
-  'jacamart': { ffuId: 'ffu-030', sleeperId: '399322397750124544' },
-  'tcool': { ffuId: 'ffu-034', sleeperId: '399297882890440704' },
-  'guapo': { ffuId: 'ffu-032', sleeperId: '507633950666584064' },
+  'jacamart': { ffuId: 'ffu-041', sleeperId: '399322397750124544' },
+  'tcool': { ffuId: 'ffu-043', sleeperId: '399297882890440704' },
+  'guapo': { ffuId: 'ffu-028', sleeperId: '507633950666584064' },
   'pancake': { ffuId: 'ffu-029', sleeperId: '508719015656099840' },
   // Historical users who participated in N19 but didn't continue to Sleeper era
   'makos': { ffuId: 'ffu-h01', sleeperId: 'historical-naptown-makos' },
   'cog': { ffuId: 'ffu-h02', sleeperId: 'historical-speedway-ritual-cog' },
   'losers': { ffuId: 'ffu-h05', sleeperId: 'historical-the-losers' },
-  'flame': { ffuId: 'ffu-h06', sleeperId: 'historical-gingy-flame' }
+  'flame': { ffuId: 'ffu-h06', sleeperId: 'historical-gingy-flame' },
 };
 
 // Team name to ESPN username mapping for N19
@@ -148,19 +148,19 @@ function getUserByTeamName(teamName) {
 // Helper function to get current team name by Sleeper ID for N19
 function getCurrentTeamNameBySleeperId(sleeperId) {
   const userMappingToCurrent = {
-    '462383465753473024': 'Raging Rhinos', // rhinos -> ffu-026
-    '386791325690994688': 'Indianapolis Aztecs', // aztecs -> ffu-025
-    '729741648338210816': 'ChicagoPick6', // picks -> ffu-010
-    '599711204499312640': 'Team Black Death', // blackdeath -> ffu-045
-    '399322397750124544': 'Great Team Name', // jacamart -> ffu-030
-    '399297882890440704': 'Elm Street Skywalkers', // tcool -> ffu-034
-    '507633950666584064': 'El Guapo Puto', // guapo -> ffu-032
-    '508719015656099840': 'Team Pancake', // pancake -> ffu-029
+    '462383465753473024': 'Raging Rhinos',
+    '386791325690994688': 'Indianapolis Aztecs',
+    '729741648338210816': 'ChicagoPick6',
+    '599711204499312640': 'Team Black Death',
+    '399322397750124544': 'Great Team Name',
+    '399297882890440704': 'Elm Street Skywalkers',
+    '507633950666584064': 'El Guapo Puto',
+    '508719015656099840': 'Team Pancake',
     // Historical users who participated in N19 but didn't continue to Sleeper era
-    'historical-naptown-makos': 'Naptown Makos', // makos -> ffu-h01
-    'historical-speedway-ritual-cog': "Speedway's Ritual Cog", // cog -> ffu-h02
-    'historical-the-losers': 'The Losers', // losers -> ffu-h05
-    'historical-gingy-flame': 'Gingy Flame' // flame -> ffu-h06
+    'historical-naptown-makos': 'Naptown Makos',
+    'historical-speedway-ritual-cog': "Speedway's Ritual Cog",
+    'historical-the-losers': 'The Losers',
+    'historical-gingy-flame': 'Gingy Flame'
   };
   
   return userMappingToCurrent[sleeperId];
@@ -169,19 +169,19 @@ function getCurrentTeamNameBySleeperId(sleeperId) {
 // Helper function to get current abbreviation by Sleeper ID for N19
 function getCurrentAbbreviationBySleeperId(sleeperId) {
   const abbreviationMapping = {
-    '462383465753473024': 'RAGE', // rhinos -> ffu-026
-    '386791325690994688': 'AZTC', // aztecs -> ffu-025
-    '729741648338210816': 'CP6', // picks -> ffu-010
-    '599711204499312640': 'TBD', // blackdeath -> ffu-045
-    '399322397750124544': 'GTN', // jacamart -> ffu-030
-    '399297882890440704': 'ESS', // tcool -> ffu-034
-    '507633950666584064': 'EGP', // guapo -> ffu-032
-    '508719015656099840': 'PCKE', // pancake -> ffu-029
+    '462383465753473024': 'RAGE',
+    '386791325690994688': 'AZTC',
+    '729741648338210816': 'CP6',
+    '599711204499312640': 'TBD',
+    '399322397750124544': 'GTN',
+    '399297882890440704': 'ESS',
+    '507633950666584064': 'EGP',
+    '508719015656099840': 'PCKE',
     // Historical users who participated in N19 but didn't continue to Sleeper era
-    'historical-naptown-makos': 'NM', // makos -> ffu-h01
-    'historical-speedway-ritual-cog': 'SRC', // cog -> ffu-h02
-    'historical-the-losers': 'TL', // losers -> ffu-h05
-    'historical-gingy-flame': 'GF' // flame -> ffu-h06
+    'historical-naptown-makos': 'NM',
+    'historical-speedway-ritual-cog': 'SRC',
+    'historical-the-losers': 'TL',
+    'historical-gingy-flame': 'GF'
   };
   
   return abbreviationMapping[sleeperId];
