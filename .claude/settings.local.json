@@ -16,7 +16,9 @@
       "Bash(python3:*)",
       "mcp__ide__executeCode",
       "Bash(git checkout:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(cp:*)"
     ],
     "deny": []
   }

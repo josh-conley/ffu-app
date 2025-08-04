@@ -6,6 +6,7 @@ import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import { AllMembersStatsTable } from '../components/Players/AllMembersStatsTable';
+import { getFFUIdBySleeperId } from '../config/constants';
 import type { LeagueTier, UserInfo } from '../types';
 import { Trophy, Medal, Award, TrendingDown, Calendar, Target, BarChart3, ChevronDown, ChevronUp, Percent, TrendingUp, Share2, Check, Zap, Users } from 'lucide-react';
 
@@ -65,7 +66,8 @@ const calculatePlayoffRecord = (placement: number): { wins: number; losses: numb
 };
 
 interface PlayerCareerStats {
-  userId: string;
+  userId: string; // Deprecated: use ffuUserId instead
+  ffuUserId: string; // Primary identifier
   userInfo: UserInfo;
   totalWins: number;
   totalLosses: number;
@@ -119,9 +121,17 @@ export const PlayerStats = () => {
     // Process all standings data
     standings.forEach(leagueData => {
       leagueData.standings.forEach(standing => {
-        if (!playerMap[standing.userId]) {
-          playerMap[standing.userId] = {
-            userId: standing.userId,
+        // Use FFU ID as primary key, with robust fallback logic
+        let playerId = standing.ffuUserId;
+        
+        // If no FFU ID, try to convert from legacy user ID
+        if (!playerId || playerId === 'unknown') {
+          playerId = getFFUIdBySleeperId(standing.userId) || standing.userId;
+        }
+        if (!playerMap[playerId]) {
+          playerMap[playerId] = {
+            userId: standing.userId, // Legacy ID
+            ffuUserId: standing.ffuUserId || 'unknown', // Primary ID
             userInfo: standing.userInfo,
             totalWins: 0,
             totalLosses: 0,
@@ -141,7 +151,7 @@ export const PlayerStats = () => {
           };
         }
 
-        const player = playerMap[standing.userId];
+        const player = playerMap[playerId];
         
         // Accumulate totals
         player.totalWins += standing.wins;
@@ -156,7 +166,10 @@ export const PlayerStats = () => {
         else if (standing.rank === leagueData.standings.length) player.lastPlaceFinishes++;
 
         // Check for playoff finish and calculate playoff wins/losses
-        const playoffFinish = leagueData.playoffResults?.find(p => p.userId === standing.userId);
+        const playoffFinish = leagueData.playoffResults?.find(p => 
+          (p.ffuUserId && p.ffuUserId === standing.ffuUserId) || 
+          (p.userId === standing.userId)
+        );
         if (playoffFinish) {
           player.playoffAppearances++;
           
@@ -898,7 +911,6 @@ export const PlayerStats = () => {
                         <LeagueBadge league={matchup.league} />
                         <span className="text-sm text-gray-600 dark:text-gray-400">
                           {matchup.year} • Week {matchup.week}
-                          {matchup.isPlayoff && <span className="ml-1 text-orange-600 font-medium">(Playoff)</span>}
                         </span>
                         {matchup.placementType && (
                           <span className="text-xs bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 px-2 py-1 rounded">
@@ -910,12 +922,12 @@ export const PlayerStats = () => {
                       <div className="flex items-center justify-between sm:justify-end space-x-4">
                         <div className="flex items-center space-x-2 min-w-0">
                           <TeamLogo
-                            teamName={matchup.winnerInfo.teamName}
-                            abbreviation={matchup.winnerInfo.abbreviation}
+                            teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
+                            abbreviation={matchup.winnerInfo?.abbreviation || 'UNK'}
                             size="sm"
                           />
                           <span className="font-medium text-gray-900 dark:text-gray-100 truncate">
-                            {matchup.winnerInfo.abbreviation}
+                            {matchup.winnerInfo?.abbreviation || 'UNK'}
                           </span>
                         </div>
                         
@@ -929,11 +941,11 @@ export const PlayerStats = () => {
                         
                         <div className="flex items-center space-x-2 min-w-0">
                           <span className="font-medium text-gray-900 dark:text-gray-100 truncate">
-                            {matchup.loserInfo.abbreviation}
+                            {matchup.loserInfo?.abbreviation || 'UNK'}
                           </span>
                           <TeamLogo
-                            teamName={matchup.loserInfo.teamName}
-                            abbreviation={matchup.loserInfo.abbreviation}
+                            teamName={matchup.loserInfo?.teamName || 'Unknown Team'}
+                            abbreviation={matchup.loserInfo?.abbreviation || 'UNK'}
                             size="sm"
                           />
                         </div>

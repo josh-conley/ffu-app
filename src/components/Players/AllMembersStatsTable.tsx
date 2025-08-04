@@ -3,7 +3,8 @@ import { TeamLogo } from '../Common/TeamLogo';
 import { Trophy, Medal, Award, TrendingDown, Calendar, Target, BarChart3, ChevronDown, ChevronUp, Percent, TrendingUp, Zap } from 'lucide-react';
 
 interface PlayerCareerStats {
-  userId: string;
+  userId: string; // Deprecated: use ffuUserId instead
+  ffuUserId: string; // Primary identifier
   userInfo: {
     teamName: string;
     abbreviation: string;
@@ -159,7 +160,7 @@ export const AllMembersStatsTable = ({ players, onClose }: AllMembersStatsTableP
                   const ppg = totalGames > 0 ? player.totalPointsFor / totalGames : 0;
                   
                   return (
-                    <tr key={player.userId} className="table-row">
+                    <tr key={player.ffuUserId || player.userId} className="table-row">
                       <td>
                         <div className="flex items-center space-x-3">
                           <TeamLogo 

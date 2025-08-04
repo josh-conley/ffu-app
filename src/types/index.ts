@@ -7,9 +7,37 @@ export interface LeagueInfo {
 }
 
 export interface UserInfo {
-  userId: string;
+  userId: string; // Deprecated: use ffuUserId instead
+  ffuUserId: string; // Primary identifier
   teamName: string;
   abbreviation: string;
+}
+
+// New unified user interface for the FFU system
+export interface FFUUser {
+  ffuId: string;          // Primary ID: "ffu-001", "ffu-002", etc.
+  sleeperId?: string;     // Optional: exists for Sleeper era users
+  espnId?: string;        // Optional: exists for ESPN era users  
+  teamName: string;
+  abbreviation: string;
+  joinedYear: number;
+  isActive: boolean;
+  historicalNames?: { [year: string]: string };
+}
+
+// Helper types for unified user system
+export type FFUUserId = string; // FFU ID format: "ffu-001", "ffu-002", etc.
+
+// Backward compatibility types
+export interface LegacyUserInfo {
+  userId: string; // Sleeper ID
+  teamName: string;
+  abbreviation: string;
+}
+
+// Enhanced UserInfo with both old and new IDs for transition period
+export interface EnhancedUserInfo extends UserInfo {
+  sleeperId?: string; // For backward compatibility
 }
 
 export interface WeekMatchup {
@@ -23,7 +51,8 @@ export interface WeekMatchup {
 }
 
 export interface SeasonStandings {
-  userId: string;
+  userId: string; // Deprecated: use ffuUserId instead
+  ffuUserId: string; // Primary identifier
   wins: number;
   losses: number;
   pointsFor: number;
@@ -34,7 +63,8 @@ export interface SeasonStandings {
 }
 
 export interface PlayoffResult {
-  userId: string;
+  userId: string; // Deprecated: use ffuUserId instead
+  ffuUserId: string; // Primary identifier
   placement: number;
   placementName: string; // '1st', '2nd', '3rd', etc.
 }
@@ -50,7 +80,8 @@ export interface LeagueSeasonData {
 }
 
 export interface MemberHistory {
-  userId: string;
+  userId: string; // Deprecated: use ffuUserId instead
+  ffuUserId: string; // Primary identifier
   userInfo: UserInfo;
   seasons: {
     year: string;
@@ -204,7 +235,8 @@ export interface SleeperPlayer {
 
 // Raw API data interfaces (before transformation)
 export interface RawSeasonStandings {
-  userId: string;
+  userId: string; // Deprecated: use ffuUserId instead
+  ffuUserId: string; // Primary identifier
   wins: number;
   losses: number;
   pointsFor: number;
@@ -216,7 +248,8 @@ export interface RawSeasonStandings {
 }
 
 export interface RawPlayoffResult {
-  userId: string;
+  userId: string; // Deprecated: use ffuUserId instead
+  ffuUserId: string; // Primary identifier
   placement: number;
   placementName: string;
   userInfo?: UserInfo;

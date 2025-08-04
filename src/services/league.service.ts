@@ -1,6 +1,6 @@
 import { SleeperService } from './sleeper.service';
 import { dataService } from './data.service';
-import { getLeagueId, getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId, isHistoricalYear } from '../config/constants';
+import { getLeagueId, getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId, getUserInfoByFFUId, getFFUIdBySleeperId, isHistoricalYear, isEspnEra } from '../config/constants';
 import type { 
   LeagueSeasonData, 
   SeasonStandings, 
@@ -55,16 +55,21 @@ export class LeagueService {
     }
     
     let standings: SeasonStandings[] = rosters
-      .map(roster => ({
-        userId: roster.owner_id,
-        wins: roster.settings?.wins || 0,
-        losses: roster.settings?.losses || 0,
-        pointsFor: (roster.settings?.fpts || 0) + (roster.settings?.fpts_decimal || 0) / 100,
-        pointsAgainst: (roster.settings?.fpts_against || 0) + (roster.settings?.fpts_against_decimal || 0) / 100,
-        rank: 0, // Will be calculated after sorting
-        highGame: memberGameStats[roster.owner_id]?.highGame || 0,
-        lowGame: memberGameStats[roster.owner_id]?.lowGame || 0
-      }));
+      .map(roster => {
+        const sleeperId = roster.owner_id;
+        const ffuUserId = getFFUIdBySleeperId(sleeperId) || 'unknown';
+        return {
+          userId: sleeperId, // Legacy Sleeper ID
+          ffuUserId, // New FFU ID
+          wins: roster.settings?.wins || 0,
+          losses: roster.settings?.losses || 0,
+          pointsFor: (roster.settings?.fpts || 0) + (roster.settings?.fpts_decimal || 0) / 100,
+          pointsAgainst: (roster.settings?.fpts_against || 0) + (roster.settings?.fpts_against_decimal || 0) / 100,
+          rank: 0, // Will be calculated after sorting
+          highGame: memberGameStats[sleeperId]?.highGame || 0,
+          lowGame: memberGameStats[sleeperId]?.lowGame || 0
+        };
+      });
 
     // Get playoff results if available
     let playoffResults: PlayoffResult[] = [];
@@ -156,7 +161,10 @@ export class LeagueService {
       const historicalData = await dataService.loadHistoricalLeagueData(league, year);
       if (historicalData) {
         const weekMatchups = historicalData.matchupsByWeek[week];
-        return weekMatchups || [];
+        if (weekMatchups) {
+          // Both ESPN era (2018-2020) and Sleeper era (2021+) data are already in WeekMatchup[] format
+          return weekMatchups;
+        }
       }
       // Fall back to API if historical data not available
       console.warn(`Historical matchup data not found for ${league} ${year} week ${week}, falling back to API`);
@@ -253,20 +261,78 @@ export class LeagueService {
       ...leagueData,
       standings: leagueData.standings.map(standing => ({
         ...standing,
-        userInfo: this.getUserInfo(standing.userId)
+        userInfo: (standing as any).userInfo || this.getUserInfo(standing.userId)
       })),
       playoffResults: leagueData.playoffResults.map(result => ({
         ...result,
-        userInfo: this.getUserInfo(result.userId)
+        userInfo: (result as any).userInfo || this.getUserInfo(result.userId)
       }))
     }));
   }
 
   private getUserInfo(userId: string): UserInfo {
+    // Try to get user info by Sleeper ID first (backward compatibility)
     const userInfo = getUserInfoBySleeperId(userId);
-    return userInfo 
-      ? { userId, teamName: userInfo.teamName, abbreviation: userInfo.abbreviation }
-      : { userId, teamName: 'Unknown Team', abbreviation: 'UNK' };
+    if (userInfo) {
+      const ffuUserId = getFFUIdBySleeperId(userId) || 'unknown';
+      return { 
+        userId, // Legacy Sleeper ID
+        ffuUserId, // New FFU ID
+        teamName: userInfo.teamName, 
+        abbreviation: userInfo.abbreviation 
+      };
+    }
+    
+    // Try to get user info by FFU ID (new system)
+    const ffuUserInfo = getUserInfoByFFUId(userId);
+    if (ffuUserInfo) {
+      return { 
+        userId: 'legacy-unknown', // No legacy ID available
+        ffuUserId: userId, // This IS the FFU ID
+        teamName: ffuUserInfo.teamName, 
+        abbreviation: ffuUserInfo.abbreviation 
+      };
+    }
+    
+    // Fallback for unknown users
+    return { 
+      userId, 
+      ffuUserId: 'unknown', 
+      teamName: 'Unknown Team', 
+      abbreviation: 'UNK' 
+    };
+  }
+
+  private convertHistoricalMatchupsToWeekMatchups(historicalMatchups: any[]): WeekMatchup[] {
+    const weekMatchups: WeekMatchup[] = [];
+    
+    // Convert each individual matchup to winner/loser format
+    historicalMatchups.forEach(matchup => {
+      const userScore = matchup.userScore || 0;
+      const opponentScore = matchup.opponentScore || 0;
+      
+      if (userScore > opponentScore) {
+        // User won
+        weekMatchups.push({
+          winner: matchup.userId,
+          loser: matchup.opponentId,
+          winnerScore: userScore,
+          loserScore: opponentScore,
+          placementType: matchup.placementType
+        });
+      } else {
+        // Opponent won
+        weekMatchups.push({
+          winner: matchup.opponentId,
+          loser: matchup.userId,
+          winnerScore: opponentScore,
+          loserScore: userScore,
+          placementType: matchup.placementType
+        });
+      }
+    });
+
+    return weekMatchups;
   }
 
   private processRawMatchups(matchups: any[], rosters: any[]): WeekMatchup[] {
@@ -419,16 +485,20 @@ export class LeagueService {
 
     // STEP 3: Combine results
     playoffPlacements.forEach((placement, userId) => {
+      const ffuUserId = getFFUIdBySleeperId(userId) || 'unknown';
       results.push({
-        userId,
+        userId, // Legacy Sleeper ID
+        ffuUserId, // New FFU ID
         placement,
         placementName: this.getPlacementName(placement)
       });
     });
 
     toiletBowlPlacements.forEach((placement, userId) => {
+      const ffuUserId = getFFUIdBySleeperId(userId) || 'unknown';
       results.push({
-        userId,
+        userId, // Legacy Sleeper ID
+        ffuUserId, // New FFU ID
         placement,
         placementName: this.getPlacementName(placement)
       });
@@ -766,5 +836,66 @@ export class LeagueService {
     });
 
     return result;
+  }
+
+  /**
+   * Bulk load all matchup data for head-to-head comparisons
+   * This is much more efficient than loading week-by-week
+   */
+  async getAllMatchupsForComparison(): Promise<{
+    year: string;
+    league: LeagueTier;
+    week: number;
+    matchups: any[];
+  }[]> {
+    const allLeagues = getAllLeagueConfigs();
+    const allMatchupData: {
+      year: string;
+      league: LeagueTier;
+      week: number;
+      matchups: any[];
+    }[] = [];
+
+    // Load all historical data in parallel for better performance
+    const dataLoadPromises = allLeagues.map(async (leagueConfig) => {
+      try {
+        if (isHistoricalYear(leagueConfig.year)) {
+          // Load historical data from JSON files
+          const historicalData = await dataService.loadHistoricalLeagueData(leagueConfig.tier, leagueConfig.year);
+          if (historicalData) {
+            const allWeekData = dataService.getAllHistoricalMatchups(historicalData);
+            
+            return allWeekData.map(({ week, matchups }) => ({
+              year: leagueConfig.year,
+              league: leagueConfig.tier,
+              week,
+              matchups: matchups.map(matchup => ({
+                ...matchup,
+                winnerInfo: this.getUserInfo(matchup.winner),
+                loserInfo: this.getUserInfo(matchup.loser)
+              }))
+            }));
+          }
+        } else {
+          // For current year, skip for now (can be added later if needed)
+          // Most head-to-head comparisons will be historical data anyway
+          console.log(`Skipping current year data for ${leagueConfig.tier} ${leagueConfig.year} - using historical data only for now`);
+        }
+        return [];
+      } catch (error) {
+        console.warn(`Failed to load matchups for ${leagueConfig.tier} ${leagueConfig.year}:`, error);
+        return [];
+      }
+    });
+
+    // Wait for all data to load and flatten results
+    const results = await Promise.all(dataLoadPromises);
+    results.forEach(leagueMatchups => {
+      if (leagueMatchups) {
+        allMatchupData.push(...leagueMatchups);
+      }
+    });
+
+    return allMatchupData;
   }
 }

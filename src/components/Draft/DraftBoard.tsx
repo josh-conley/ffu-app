@@ -40,8 +40,19 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
   
   for (let team = 1; team <= teams; team++) {
     // Find the userId that was assigned to this draft slot
-    const userId = Object.keys(draftOrder).find(uid => draftOrder[uid] === team);
-    const userInfo = userId ? userMap[userId] : null;
+    let userId = Object.keys(draftOrder).find(uid => draftOrder[uid] === team);
+    let userInfo = userId ? userMap[userId] : null;
+    
+    // Handle missing draftOrder entries (e.g., mid-season replacements)
+    // If no user found in draftOrder for this slot, look for picks with this draftSlot
+    if (!userId) {
+      const pickForSlot = picks.find(pick => pick.draftSlot === team);
+      if (pickForSlot) {
+        userId = pickForSlot.pickedBy;
+        userInfo = userMap[userId];
+      }
+    }
+    
     teamHeaders.push({
       slot: team,
       userId: userId,

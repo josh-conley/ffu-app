@@ -5,7 +5,8 @@ import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import type { LeagueTier } from '../types';
-import { USERS } from '../config/constants';
+import { USERS, getAllYears, getAvailableLeagues } from '../config/constants';
+import { getSeasonLength } from '../utils/era-detection';
 import { ChevronDown, Filter } from 'lucide-react';
 
 // Placement Tag Component
@@ -64,7 +65,15 @@ export const Matchups = () => {
   const isLoading = isShowingAllWeeks ? seasonLoading : weekLoading;
   const error = isShowingAllWeeks ? seasonError : weekError;
 
-  const leagues: LeagueTier[] = ['PREMIER', 'MASTERS', 'NATIONAL'];
+  // Era-aware leagues - filter based on selected year
+  const leagues = useMemo(() => getAvailableLeagues(selectedYear), [selectedYear]);
+  
+  // Reset league selection if current league is not available in selected year
+  useMemo(() => {
+    if (!leagues.includes(selectedLeague)) {
+      setSelectedLeague(leagues[0]); // Default to first available league
+    }
+  }, [leagues, selectedLeague]);
 
   const getLeagueName = (league: LeagueTier): string => {
     switch (league) {
@@ -73,8 +82,12 @@ export const Matchups = () => {
       case 'NATIONAL': return 'National';
     }
   };
-  const years = ['2024', '2023', '2022', '2021'];
-  const weeks = Array.from({ length: 17 }, (_, i) => i + 1);
+  // Era-aware years and weeks
+  const years = getAllYears();
+  const weeks = useMemo(() => {
+    const totalWeeks = getSeasonLength(selectedYear);
+    return Array.from({ length: totalWeeks }, (_, i) => i + 1);
+  }, [selectedYear]);
 
   // Get sorted list of active team members
   const teamOptions = useMemo(() => {
