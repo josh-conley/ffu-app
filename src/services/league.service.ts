@@ -1,6 +1,6 @@
 import { SleeperService } from './sleeper.service';
 import { dataService } from './data.service';
-import { getLeagueId, getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId, getUserInfoByFFUId, getFFUIdBySleeperId, isHistoricalYear, isEspnEra } from '../config/constants';
+import { getLeagueId, getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId, getUserInfoByFFUId, getFFUIdBySleeperId, isHistoricalYear } from '../config/constants';
 import type { 
   LeagueSeasonData, 
   SeasonStandings, 
@@ -303,37 +303,6 @@ export class LeagueService {
     };
   }
 
-  private convertHistoricalMatchupsToWeekMatchups(historicalMatchups: any[]): WeekMatchup[] {
-    const weekMatchups: WeekMatchup[] = [];
-    
-    // Convert each individual matchup to winner/loser format
-    historicalMatchups.forEach(matchup => {
-      const userScore = matchup.userScore || 0;
-      const opponentScore = matchup.opponentScore || 0;
-      
-      if (userScore > opponentScore) {
-        // User won
-        weekMatchups.push({
-          winner: matchup.userId,
-          loser: matchup.opponentId,
-          winnerScore: userScore,
-          loserScore: opponentScore,
-          placementType: matchup.placementType
-        });
-      } else {
-        // Opponent won
-        weekMatchups.push({
-          winner: matchup.opponentId,
-          loser: matchup.userId,
-          winnerScore: opponentScore,
-          loserScore: userScore,
-          placementType: matchup.placementType
-        });
-      }
-    });
-
-    return weekMatchups;
-  }
 
   private processRawMatchups(matchups: any[], rosters: any[]): WeekMatchup[] {
     const rosterOwnerMap = this.sleeperService.createRosterOwnerMap(rosters);
