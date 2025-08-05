@@ -100,6 +100,23 @@ const teamNameMapping = {
   'Speedway Ritual Cog': 'cog'
 };
 
+// Mapping from any team name (including truncated) to full team name
+const fullTeamNameMapping = {
+  'Wisconsian Banana Bread': 'Wisconsian Banana Bread',
+  'Stone Cold Steve Irwins': 'Stone Cold Steve Irwins',
+  'The Stallions': 'The Stallions',
+  'Chicago Pick 6s': 'Chicago Pick 6s',
+  'Team Dogecoin': 'Team Dogecoin',
+  'Goat Emoji II': 'Goat Emoji II',
+  'The Minutemen': 'The Minutemen',
+  'Indianapolis Aztecs': 'Indianapolis Aztecs',
+  'Currier Island Raging Rhinos': 'Currier Island Raging Rhinos',
+  'Currier Island Raging ...': 'Currier Island Raging Rhinos', // Fix truncated name
+  'Blood, Sweat and Beers': 'Blood, Sweat and Beers',
+  'Naptown Makos': 'Naptown Makos',
+  'Speedway Ritual Cog': 'Speedway Ritual Cog'
+};
+
 // Helper function to get user info by team name
 function getUserByTeamName(teamName) {
   const espnUsername = teamNameMapping[teamName];
@@ -107,11 +124,12 @@ function getUserByTeamName(teamName) {
   if (!espnUsername) {
     // Create historical user ID for unmapped teams
     const historicalId = `historical-${teamName.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
+    const fullTeamName = fullTeamNameMapping[teamName] || teamName;
     return {
       userId: historicalId,
       ffuUserId: null,
-      teamName: teamName, // For unmapped users, use the historical name
-      abbreviation: teamName.split(' ').map(w => w[0]).join('').substr(0, 4).toUpperCase(),
+      teamName: fullTeamName, // For unmapped users, use the full historical name
+      abbreviation: fullTeamName.split(' ').map(w => w[0]).join('').substr(0, 4).toUpperCase(),
       isHistorical: true
     };
   }
@@ -121,16 +139,13 @@ function getUserByTeamName(teamName) {
     throw new Error(`No user mapping found for ESPN username: ${espnUsername}`);
   }
   
-  // For mapped users, get their CURRENT team name from the USERS configuration
-  const currentUser = userMapping[espnUsername];
-  const currentTeamName = getCurrentTeamNameBySleeperId(currentUser.sleeperId);
-  const currentAbbreviation = getCurrentAbbreviationBySleeperId(currentUser.sleeperId);
-  
+  // For historical consistency, use the full 2020 team name (fix any truncated names)
+  const fullTeamName = fullTeamNameMapping[teamName] || teamName;
   return {
     userId: userInfo.sleeperId,
     ffuUserId: userInfo.ffuId,
-    teamName: currentTeamName || teamName, // Use current name, fallback to historical
-    abbreviation: currentAbbreviation || teamName.split(' ').map(w => w[0]).join('').substr(0, 4).toUpperCase(),
+    teamName: fullTeamName, // Use full historical 2020 team name
+    abbreviation: fullTeamName.split(' ').map(w => w[0]).join('').substr(0, 4).toUpperCase(),
     isHistorical: false
   };
 }

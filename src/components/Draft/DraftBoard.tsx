@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { DraftData, DraftPick, UserInfo } from '../../types';
 import { TeamLogo } from '../Common/TeamLogo';
+import { getDisplayTeamName } from '../../config/constants';
 
 interface DraftBoardProps {
   draftData: DraftData;
@@ -56,7 +57,7 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
     teamHeaders.push({
       slot: team,
       userId: userId,
-      teamName: userInfo?.teamName || `Team ${team}`,
+      teamName: userInfo?.teamName ? getDisplayTeamName(userId || '', userInfo.teamName, draftData.year) : `Team ${team}`,
       abbreviation: userInfo?.abbreviation || `T${team}`
     });
   }
@@ -270,7 +271,7 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
                         height: '100px',
                         minHeight: '100px'
                       }}
-                      title={pick ? `${pick.playerInfo.name}${isPickTraded(pick, teamHeaders[teamIndex]?.userId) ? `\nDrafted by: ${userMap[pick.pickedBy]?.teamName || userMap[pick.pickedBy]?.abbreviation || 'Unknown'}` : ''}` : ''}
+                      title={pick ? `${pick.playerInfo.name}${isPickTraded(pick, teamHeaders[teamIndex]?.userId) ? `\nDrafted by: ${userMap[pick.pickedBy]?.teamName ? getDisplayTeamName(pick.pickedBy, userMap[pick.pickedBy].teamName, draftData.year) : userMap[pick.pickedBy]?.abbreviation || 'Unknown'}` : ''}` : ''}
                       onClick={pick ? (e) => {
                         e.stopPropagation();
                         setSelectedTeamUserId(selectedTeamUserId === pick.pickedBy ? null : pick.pickedBy);

@@ -39,7 +39,7 @@
       "rank": 3,
       "userInfo": {
         "teamName": "Team Pancake",
-        "abbreviation": "PCKE"
+        "abbreviation": "TP"
       }
     },
     {
@@ -78,7 +78,7 @@
       "rank": 6,
       "userInfo": {
         "teamName": "Johnkshire Cats",
-        "abbreviation": "CATS"
+        "abbreviation": "JC"
       }
     },
     {
@@ -130,7 +130,7 @@
       "rank": 10,
       "userInfo": {
         "teamName": "Purple Parade",
-        "abbreviation": "BATS"
+        "abbreviation": "PP"
       }
     },
     {
@@ -156,7 +156,7 @@
       "rank": 12,
       "userInfo": {
         "teamName": "FFUcked Up",
-        "abbreviation": "FFU"
+        "abbreviation": "FU"
       }
     }
   ],
@@ -188,7 +188,7 @@
       "placementName": "3rd",
       "userInfo": {
         "teamName": "Team Pancake",
-        "abbreviation": "PCKE"
+        "abbreviation": "TP"
       }
     },
     {
@@ -218,7 +218,7 @@
       "placementName": "6th",
       "userInfo": {
         "teamName": "Johnkshire Cats",
-        "abbreviation": "CATS"
+        "abbreviation": "JC"
       }
     },
     {
@@ -258,7 +258,7 @@
       "placementName": "10th",
       "userInfo": {
         "teamName": "Purple Parade",
-        "abbreviation": "BATS"
+        "abbreviation": "PP"
       }
     },
     {
@@ -278,7 +278,7 @@
       "placementName": "12th",
       "userInfo": {
         "teamName": "FFUcked Up",
-        "abbreviation": "FFU"
+        "abbreviation": "FU"
       }
     }
   ],
@@ -1041,7 +1041,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 6
@@ -1081,7 +1081,7 @@
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
           "teamName": "Purple Parade",
-          "abbreviation": "BATS"
+          "abbreviation": "PP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -1121,7 +1121,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 10
@@ -1141,7 +1141,7 @@
           "userId": "527884868880531456",
           "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
-          "abbreviation": "CATS"
+          "abbreviation": "JC"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 11
@@ -1201,7 +1201,7 @@
           "userId": "527884868880531456",
           "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
-          "abbreviation": "CATS"
+          "abbreviation": "JC"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 11
@@ -1221,7 +1221,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 10
@@ -1261,7 +1261,7 @@
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
           "teamName": "Purple Parade",
-          "abbreviation": "BATS"
+          "abbreviation": "PP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -1301,7 +1301,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 6
@@ -1521,7 +1521,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 6
@@ -1561,7 +1561,7 @@
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
           "teamName": "Purple Parade",
-          "abbreviation": "BATS"
+          "abbreviation": "PP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -1601,7 +1601,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 10
@@ -1621,7 +1621,7 @@
           "userId": "527884868880531456",
           "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
-          "abbreviation": "CATS"
+          "abbreviation": "JC"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 11
@@ -1681,7 +1681,7 @@
           "userId": "527884868880531456",
           "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
-          "abbreviation": "CATS"
+          "abbreviation": "JC"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 11
@@ -1701,7 +1701,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 10
@@ -1741,7 +1741,7 @@
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
           "teamName": "Purple Parade",
-          "abbreviation": "BATS"
+          "abbreviation": "PP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -1781,7 +1781,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 6
@@ -2001,7 +2001,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 6
@@ -2041,7 +2041,7 @@
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
           "teamName": "Purple Parade",
-          "abbreviation": "BATS"
+          "abbreviation": "PP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -2081,7 +2081,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 10
@@ -2101,7 +2101,7 @@
           "userId": "527884868880531456",
           "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
-          "abbreviation": "CATS"
+          "abbreviation": "JC"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 11
@@ -2161,7 +2161,7 @@
           "userId": "527884868880531456",
           "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
-          "abbreviation": "CATS"
+          "abbreviation": "JC"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 11
@@ -2181,7 +2181,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 10
@@ -2221,7 +2221,7 @@
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
           "teamName": "Purple Parade",
-          "abbreviation": "BATS"
+          "abbreviation": "PP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -2261,7 +2261,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 6
@@ -2481,7 +2481,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 6
@@ -2521,7 +2521,7 @@
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
           "teamName": "Purple Parade",
-          "abbreviation": "BATS"
+          "abbreviation": "PP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -2561,7 +2561,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 10
@@ -2581,7 +2581,7 @@
           "userId": "527884868880531456",
           "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
-          "abbreviation": "CATS"
+          "abbreviation": "JC"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 11
@@ -2641,7 +2641,7 @@
           "userId": "527884868880531456",
           "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
-          "abbreviation": "CATS"
+          "abbreviation": "JC"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 11
@@ -2661,7 +2661,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 10
@@ -2701,7 +2701,7 @@
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
           "teamName": "Purple Parade",
-          "abbreviation": "BATS"
+          "abbreviation": "PP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -2741,7 +2741,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 6
@@ -2961,7 +2961,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 6
@@ -3001,7 +3001,7 @@
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
           "teamName": "Purple Parade",
-          "abbreviation": "BATS"
+          "abbreviation": "PP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -3041,7 +3041,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 10
@@ -3061,7 +3061,7 @@
           "userId": "527884868880531456",
           "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
-          "abbreviation": "CATS"
+          "abbreviation": "JC"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 11
@@ -3121,7 +3121,7 @@
           "userId": "527884868880531456",
           "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
-          "abbreviation": "CATS"
+          "abbreviation": "JC"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 11
@@ -3141,7 +3141,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 10
@@ -3181,7 +3181,7 @@
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
           "teamName": "Purple Parade",
-          "abbreviation": "BATS"
+          "abbreviation": "PP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -3221,7 +3221,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 6
@@ -3441,7 +3441,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 6
@@ -3481,7 +3481,7 @@
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
           "teamName": "Purple Parade",
-          "abbreviation": "BATS"
+          "abbreviation": "PP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -3521,7 +3521,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 10
@@ -3541,7 +3541,7 @@
           "userId": "527884868880531456",
           "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
-          "abbreviation": "CATS"
+          "abbreviation": "JC"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 11
@@ -3601,7 +3601,7 @@
           "userId": "527884868880531456",
           "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
-          "abbreviation": "CATS"
+          "abbreviation": "JC"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 11
@@ -3621,7 +3621,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 10
@@ -3661,7 +3661,7 @@
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
           "teamName": "Purple Parade",
-          "abbreviation": "BATS"
+          "abbreviation": "PP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -3701,7 +3701,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 6
@@ -3921,7 +3921,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 6
@@ -3961,7 +3961,7 @@
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
           "teamName": "Purple Parade",
-          "abbreviation": "BATS"
+          "abbreviation": "PP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -4001,7 +4001,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 10
@@ -4021,7 +4021,7 @@
           "userId": "527884868880531456",
           "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
-          "abbreviation": "CATS"
+          "abbreviation": "JC"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 11
@@ -4081,7 +4081,7 @@
           "userId": "527884868880531456",
           "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
-          "abbreviation": "CATS"
+          "abbreviation": "JC"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 11
@@ -4101,7 +4101,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 10
@@ -4141,7 +4141,7 @@
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
           "teamName": "Purple Parade",
-          "abbreviation": "BATS"
+          "abbreviation": "PP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -4181,7 +4181,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 6
@@ -4401,7 +4401,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 6
@@ -4441,7 +4441,7 @@
           "userId": "705642514408886272",
           "ffuUserId": "ffu-007",
           "teamName": "Purple Parade",
-          "abbreviation": "BATS"
+          "abbreviation": "PP"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 8
@@ -4481,7 +4481,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-002",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 10
@@ -4501,7 +4501,7 @@
           "userId": "527884868880531456",
           "ffuUserId": "ffu-030",
           "teamName": "Johnkshire Cats",
-          "abbreviation": "CATS"
+          "abbreviation": "JC"
         },
         "draftId": "espn-2020-national-draft",
         "draftSlot": 11

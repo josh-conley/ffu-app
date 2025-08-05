@@ -775,7 +775,12 @@ export const Records = () => {
                               {season.rank === 2 && <Award className="h-3 w-3 text-gray-500" />}
                               {season.rank === 3 && <Award className="h-3 w-3 text-amber-600" />}
                               <div className="text-center">
-                                <div className="text-sm font-medium">#{season.rank}</div>
+                                <div className="text-sm font-medium">
+                                  {season.rank === 1 ? '1st' :
+                                   season.rank === 2 ? '2nd' :
+                                   season.rank === 3 ? '3rd' :
+                                   `${season.rank}th`}
+                                </div>
                               </div>
                             </div>
                           )}

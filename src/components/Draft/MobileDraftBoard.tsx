@@ -1,6 +1,7 @@
 import React from 'react';
 import type { DraftData, DraftPick, UserInfo } from '../../types';
 import { TeamLogo } from '../Common/TeamLogo';
+import { getDisplayTeamName } from '../../config/constants';
 
 interface MobileDraftBoardProps {
   draftData: DraftData;
@@ -43,7 +44,7 @@ export const MobileDraftBoard: React.FC<MobileDraftBoardProps> = ({ draftData, u
     teamHeaders.push({
       slot: team,
       userId: userId,
-      teamName: userInfo?.teamName || `Team ${team}`,
+      teamName: userInfo?.teamName ? getDisplayTeamName(userId || '', userInfo.teamName, draftData.year) : `Team ${team}`,
       abbreviation: userInfo?.abbreviation || `T${team}`
     });
   }
@@ -80,7 +81,9 @@ export const MobileDraftBoard: React.FC<MobileDraftBoardProps> = ({ draftData, u
   // Get the team info for who actually made the pick
   const getTradingTeamInfo = (pick: DraftPick): string => {
     const tradingUserInfo = userMap[pick.pickedBy];
-    return tradingUserInfo?.abbreviation || tradingUserInfo?.teamName || 'UNK';
+    // For trading banners, prefer abbreviation to keep it compact, but fall back to enhanced team name
+    return tradingUserInfo?.abbreviation || 
+           (tradingUserInfo?.teamName ? getDisplayTeamName(pick.pickedBy, tradingUserInfo.teamName, draftData.year) : 'UNK');
   };
 
   // Format player name for wrapping - first name on first line, last name on second

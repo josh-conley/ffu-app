@@ -682,7 +682,12 @@ export const PlayerStats = () => {
                             {season.rank === 1 && <Trophy className="h-4 w-4 text-yellow-600" />}
                             {season.rank === 2 && <Medal className="h-4 w-4 text-gray-500" />}
                             {season.rank === 3 && <Award className="h-4 w-4 text-amber-600" />}
-                            <span className="font-medium">#{season.rank}</span>
+                            <span className="font-medium">
+                              {season.rank === 1 ? '1st' :
+                               season.rank === 2 ? '2nd' :
+                               season.rank === 3 ? '3rd' :
+                               `${season.rank}th`}
+                            </span>
                           </div>
                         )}
                       </td>

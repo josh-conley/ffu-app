@@ -60,22 +60,24 @@ export const Draft: React.FC = () => {
       const uniqueUserIds = [...new Set(historicalData.draftData.picks.map(pick => pick.userInfo.userId))];
       
       uniqueUserIds.forEach(userId => {
-        // Try to get user info from constants first
-        const userInfo = getUserInfoBySleeperId(userId);
+        // Prioritize historical team names from draft data over current constants
+        const pickWithUser = historicalData.draftData?.picks.find(pick => pick.userInfo.userId === userId);
         
-        if (userInfo) {
-          const ffuUserId = getFFUIdBySleeperId(userId) || 'unknown';
-          userMapping[userId] = {
-            userId,
-            ffuUserId,
-            teamName: userInfo.teamName,
-            abbreviation: userInfo.abbreviation
-          };
+        if (pickWithUser && pickWithUser.userInfo.teamName) {
+          // Use historical team name from draft data
+          userMapping[userId] = pickWithUser.userInfo;
         } else {
-          // Fallback to draft pick user info if available
-          const pickWithUser = historicalData.draftData?.picks.find(pick => pick.userInfo.userId === userId);
-          if (pickWithUser) {
-            userMapping[userId] = pickWithUser.userInfo;
+          // Fallback to constants if historical data not available
+          const userInfo = getUserInfoBySleeperId(userId);
+          
+          if (userInfo) {
+            const ffuUserId = getFFUIdBySleeperId(userId) || 'unknown';
+            userMapping[userId] = {
+              userId,
+              ffuUserId,
+              teamName: userInfo.teamName,
+              abbreviation: userInfo.abbreviation
+            };
           } else {
             // Last fallback
             const ffuUserId = getFFUIdBySleeperId(userId) || 'unknown';

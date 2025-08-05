@@ -12,8 +12,8 @@
       "pointsAgainst": 1442.7,
       "rank": 1,
       "userInfo": {
-        "teamName": "Fort Wayne Banana Bread",
-        "abbreviation": "FWBB"
+        "teamName": "Wisconsian Banana Bread",
+        "abbreviation": "WBB"
       }
     },
     {
@@ -39,7 +39,7 @@
       "rank": 3,
       "userInfo": {
         "teamName": "The Minutemen",
-        "abbreviation": "MMEN"
+        "abbreviation": "TM"
       }
     },
     {
@@ -52,7 +52,7 @@
       "rank": 4,
       "userInfo": {
         "teamName": "Team Dogecoin",
-        "abbreviation": "DOGE"
+        "abbreviation": "TD"
       }
     },
     {
@@ -64,8 +64,8 @@
       "pointsAgainst": 1379.7,
       "rank": 5,
       "userInfo": {
-        "teamName": "Act More Stupidly",
-        "abbreviation": "AMS"
+        "teamName": "Goat Emoji II",
+        "abbreviation": "GEI"
       }
     },
     {
@@ -78,7 +78,7 @@
       "rank": 6,
       "userInfo": {
         "teamName": "The Stallions",
-        "abbreviation": "STA"
+        "abbreviation": "TS"
       }
     },
     {
@@ -91,7 +91,7 @@
       "rank": 7,
       "userInfo": {
         "teamName": "The Well Done Stakes",
-        "abbreviation": "WDS"
+        "abbreviation": "TWDS"
       }
     },
     {
@@ -116,8 +116,8 @@
       "pointsAgainst": 1420.65,
       "rank": 9,
       "userInfo": {
-        "teamName": "Blood, Sweat, and Beers",
-        "abbreviation": "BEER"
+        "teamName": "Blood, Sweat and Beers",
+        "abbreviation": "BSAB"
       }
     },
     {
@@ -129,8 +129,8 @@
       "pointsAgainst": 1404.65,
       "rank": 10,
       "userInfo": {
-        "teamName": "Team Stark",
-        "abbreviation": "STRK"
+        "teamName": "Stark Direwolves",
+        "abbreviation": "SD"
       }
     },
     {
@@ -143,7 +143,7 @@
       "rank": 11,
       "userInfo": {
         "teamName": "FFUcked Up",
-        "abbreviation": "FFU"
+        "abbreviation": "FU"
       }
     },
     {
@@ -167,8 +167,8 @@
       "placement": 1,
       "placementName": "1st",
       "userInfo": {
-        "teamName": "Fort Wayne Banana Bread",
-        "abbreviation": "FWBB"
+        "teamName": "Wisconsian Banana Bread",
+        "abbreviation": "WBB"
       }
     },
     {
@@ -188,7 +188,7 @@
       "placementName": "3rd",
       "userInfo": {
         "teamName": "The Minutemen",
-        "abbreviation": "MMEN"
+        "abbreviation": "TM"
       }
     },
     {
@@ -198,7 +198,7 @@
       "placementName": "4th",
       "userInfo": {
         "teamName": "Team Dogecoin",
-        "abbreviation": "DOGE"
+        "abbreviation": "TD"
       }
     },
     {
@@ -207,8 +207,8 @@
       "placement": 5,
       "placementName": "5th",
       "userInfo": {
-        "teamName": "Act More Stupidly",
-        "abbreviation": "AMS"
+        "teamName": "Goat Emoji II",
+        "abbreviation": "GEI"
       }
     },
     {
@@ -218,7 +218,7 @@
       "placementName": "6th",
       "userInfo": {
         "teamName": "The Stallions",
-        "abbreviation": "STA"
+        "abbreviation": "TS"
       }
     },
     {
@@ -228,7 +228,7 @@
       "placementName": "7th",
       "userInfo": {
         "teamName": "The Well Done Stakes",
-        "abbreviation": "WDS"
+        "abbreviation": "TWDS"
       }
     },
     {
@@ -247,8 +247,8 @@
       "placement": 9,
       "placementName": "9th",
       "userInfo": {
-        "teamName": "Blood, Sweat, and Beers",
-        "abbreviation": "BEER"
+        "teamName": "Blood, Sweat and Beers",
+        "abbreviation": "BSAB"
       }
     },
     {
@@ -257,8 +257,8 @@
       "placement": 10,
       "placementName": "10th",
       "userInfo": {
-        "teamName": "Team Stark",
-        "abbreviation": "STRK"
+        "teamName": "Stark Direwolves",
+        "abbreviation": "SD"
       }
     },
     {
@@ -268,7 +268,7 @@
       "placementName": "11th",
       "userInfo": {
         "teamName": "FFUcked Up",
-        "abbreviation": "FFU"
+        "abbreviation": "FU"
       }
     },
     {
@@ -941,7 +941,7 @@
           "userId": "84006772809285632",
           "ffuUserId": "ffu-023",
           "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
+          "abbreviation": "TM"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 1
@@ -980,8 +980,8 @@
         "userInfo": {
           "userId": "325766631336714240",
           "ffuUserId": "ffu-024",
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 3
@@ -1000,8 +1000,8 @@
         "userInfo": {
           "userId": "727368657923063808",
           "ffuUserId": "ffu-009",
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 4
@@ -1021,7 +1021,7 @@
           "userId": "331590801261883392",
           "ffuUserId": "ffu-001",
           "teamName": "The Stallions",
-          "abbreviation": "STA"
+          "abbreviation": "TS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 5
@@ -1040,8 +1040,8 @@
         "userInfo": {
           "userId": "398576262546735104",
           "ffuUserId": "ffu-004",
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 6
@@ -1061,7 +1061,7 @@
           "userId": "historical-well-done-stakes",
           "ffuUserId": "ffu-h03",
           "teamName": "The Well Done Stakes",
-          "abbreviation": "WDS"
+          "abbreviation": "TWDS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 7
@@ -1100,8 +1100,8 @@
         "userInfo": {
           "userId": "472876832719368192",
           "ffuUserId": "ffu-042",
-          "teamName": "Team Stark",
-          "abbreviation": "STRK"
+          "teamName": "Stark Direwolves",
+          "abbreviation": "SD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 9
@@ -1141,7 +1141,7 @@
           "userId": "726572095210930176",
           "ffuUserId": "ffu-031",
           "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
+          "abbreviation": "TD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 11
@@ -1161,7 +1161,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-039",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 12
@@ -1181,7 +1181,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-039",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 12
@@ -1201,7 +1201,7 @@
           "userId": "726572095210930176",
           "ffuUserId": "ffu-031",
           "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
+          "abbreviation": "TD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 11
@@ -1240,8 +1240,8 @@
         "userInfo": {
           "userId": "472876832719368192",
           "ffuUserId": "ffu-042",
-          "teamName": "Team Stark",
-          "abbreviation": "STRK"
+          "teamName": "Stark Direwolves",
+          "abbreviation": "SD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 9
@@ -1281,7 +1281,7 @@
           "userId": "historical-well-done-stakes",
           "ffuUserId": "ffu-h03",
           "teamName": "The Well Done Stakes",
-          "abbreviation": "WDS"
+          "abbreviation": "TWDS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 7
@@ -1300,8 +1300,8 @@
         "userInfo": {
           "userId": "398576262546735104",
           "ffuUserId": "ffu-004",
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 6
@@ -1321,7 +1321,7 @@
           "userId": "331590801261883392",
           "ffuUserId": "ffu-001",
           "teamName": "The Stallions",
-          "abbreviation": "STA"
+          "abbreviation": "TS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 5
@@ -1340,8 +1340,8 @@
         "userInfo": {
           "userId": "727368657923063808",
           "ffuUserId": "ffu-009",
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 4
@@ -1360,8 +1360,8 @@
         "userInfo": {
           "userId": "325766631336714240",
           "ffuUserId": "ffu-024",
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 3
@@ -1401,7 +1401,7 @@
           "userId": "84006772809285632",
           "ffuUserId": "ffu-023",
           "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
+          "abbreviation": "TM"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 1
@@ -1421,7 +1421,7 @@
           "userId": "84006772809285632",
           "ffuUserId": "ffu-023",
           "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
+          "abbreviation": "TM"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 1
@@ -1460,8 +1460,8 @@
         "userInfo": {
           "userId": "325766631336714240",
           "ffuUserId": "ffu-024",
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 3
@@ -1480,8 +1480,8 @@
         "userInfo": {
           "userId": "727368657923063808",
           "ffuUserId": "ffu-009",
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 4
@@ -1501,7 +1501,7 @@
           "userId": "331590801261883392",
           "ffuUserId": "ffu-001",
           "teamName": "The Stallions",
-          "abbreviation": "STA"
+          "abbreviation": "TS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 5
@@ -1520,8 +1520,8 @@
         "userInfo": {
           "userId": "398576262546735104",
           "ffuUserId": "ffu-004",
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 6
@@ -1541,7 +1541,7 @@
           "userId": "historical-well-done-stakes",
           "ffuUserId": "ffu-h03",
           "teamName": "The Well Done Stakes",
-          "abbreviation": "WDS"
+          "abbreviation": "TWDS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 7
@@ -1580,8 +1580,8 @@
         "userInfo": {
           "userId": "472876832719368192",
           "ffuUserId": "ffu-042",
-          "teamName": "Team Stark",
-          "abbreviation": "STRK"
+          "teamName": "Stark Direwolves",
+          "abbreviation": "SD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 9
@@ -1621,7 +1621,7 @@
           "userId": "726572095210930176",
           "ffuUserId": "ffu-031",
           "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
+          "abbreviation": "TD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 11
@@ -1641,7 +1641,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-039",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 12
@@ -1661,7 +1661,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-039",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 12
@@ -1681,7 +1681,7 @@
           "userId": "726572095210930176",
           "ffuUserId": "ffu-031",
           "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
+          "abbreviation": "TD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 11
@@ -1720,8 +1720,8 @@
         "userInfo": {
           "userId": "472876832719368192",
           "ffuUserId": "ffu-042",
-          "teamName": "Team Stark",
-          "abbreviation": "STRK"
+          "teamName": "Stark Direwolves",
+          "abbreviation": "SD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 9
@@ -1761,7 +1761,7 @@
           "userId": "historical-well-done-stakes",
           "ffuUserId": "ffu-h03",
           "teamName": "The Well Done Stakes",
-          "abbreviation": "WDS"
+          "abbreviation": "TWDS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 7
@@ -1780,8 +1780,8 @@
         "userInfo": {
           "userId": "398576262546735104",
           "ffuUserId": "ffu-004",
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 6
@@ -1801,7 +1801,7 @@
           "userId": "331590801261883392",
           "ffuUserId": "ffu-001",
           "teamName": "The Stallions",
-          "abbreviation": "STA"
+          "abbreviation": "TS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 5
@@ -1820,8 +1820,8 @@
         "userInfo": {
           "userId": "727368657923063808",
           "ffuUserId": "ffu-009",
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 4
@@ -1840,8 +1840,8 @@
         "userInfo": {
           "userId": "325766631336714240",
           "ffuUserId": "ffu-024",
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 3
@@ -1881,7 +1881,7 @@
           "userId": "84006772809285632",
           "ffuUserId": "ffu-023",
           "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
+          "abbreviation": "TM"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 1
@@ -1901,7 +1901,7 @@
           "userId": "84006772809285632",
           "ffuUserId": "ffu-023",
           "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
+          "abbreviation": "TM"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 1
@@ -1940,8 +1940,8 @@
         "userInfo": {
           "userId": "325766631336714240",
           "ffuUserId": "ffu-024",
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 3
@@ -1960,8 +1960,8 @@
         "userInfo": {
           "userId": "727368657923063808",
           "ffuUserId": "ffu-009",
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 4
@@ -1981,7 +1981,7 @@
           "userId": "331590801261883392",
           "ffuUserId": "ffu-001",
           "teamName": "The Stallions",
-          "abbreviation": "STA"
+          "abbreviation": "TS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 5
@@ -2000,8 +2000,8 @@
         "userInfo": {
           "userId": "398576262546735104",
           "ffuUserId": "ffu-004",
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 6
@@ -2021,7 +2021,7 @@
           "userId": "historical-well-done-stakes",
           "ffuUserId": "ffu-h03",
           "teamName": "The Well Done Stakes",
-          "abbreviation": "WDS"
+          "abbreviation": "TWDS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 7
@@ -2060,8 +2060,8 @@
         "userInfo": {
           "userId": "472876832719368192",
           "ffuUserId": "ffu-042",
-          "teamName": "Team Stark",
-          "abbreviation": "STRK"
+          "teamName": "Stark Direwolves",
+          "abbreviation": "SD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 9
@@ -2101,7 +2101,7 @@
           "userId": "726572095210930176",
           "ffuUserId": "ffu-031",
           "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
+          "abbreviation": "TD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 11
@@ -2121,7 +2121,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-039",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 12
@@ -2141,7 +2141,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-039",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 12
@@ -2161,7 +2161,7 @@
           "userId": "726572095210930176",
           "ffuUserId": "ffu-031",
           "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
+          "abbreviation": "TD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 11
@@ -2200,8 +2200,8 @@
         "userInfo": {
           "userId": "472876832719368192",
           "ffuUserId": "ffu-042",
-          "teamName": "Team Stark",
-          "abbreviation": "STRK"
+          "teamName": "Stark Direwolves",
+          "abbreviation": "SD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 9
@@ -2241,7 +2241,7 @@
           "userId": "historical-well-done-stakes",
           "ffuUserId": "ffu-h03",
           "teamName": "The Well Done Stakes",
-          "abbreviation": "WDS"
+          "abbreviation": "TWDS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 7
@@ -2260,8 +2260,8 @@
         "userInfo": {
           "userId": "398576262546735104",
           "ffuUserId": "ffu-004",
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 6
@@ -2281,7 +2281,7 @@
           "userId": "331590801261883392",
           "ffuUserId": "ffu-001",
           "teamName": "The Stallions",
-          "abbreviation": "STA"
+          "abbreviation": "TS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 5
@@ -2300,8 +2300,8 @@
         "userInfo": {
           "userId": "727368657923063808",
           "ffuUserId": "ffu-009",
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 4
@@ -2320,8 +2320,8 @@
         "userInfo": {
           "userId": "325766631336714240",
           "ffuUserId": "ffu-024",
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 3
@@ -2361,7 +2361,7 @@
           "userId": "84006772809285632",
           "ffuUserId": "ffu-023",
           "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
+          "abbreviation": "TM"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 1
@@ -2381,7 +2381,7 @@
           "userId": "84006772809285632",
           "ffuUserId": "ffu-023",
           "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
+          "abbreviation": "TM"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 1
@@ -2420,8 +2420,8 @@
         "userInfo": {
           "userId": "325766631336714240",
           "ffuUserId": "ffu-024",
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 3
@@ -2440,8 +2440,8 @@
         "userInfo": {
           "userId": "727368657923063808",
           "ffuUserId": "ffu-009",
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 4
@@ -2461,7 +2461,7 @@
           "userId": "331590801261883392",
           "ffuUserId": "ffu-001",
           "teamName": "The Stallions",
-          "abbreviation": "STA"
+          "abbreviation": "TS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 5
@@ -2480,8 +2480,8 @@
         "userInfo": {
           "userId": "398576262546735104",
           "ffuUserId": "ffu-004",
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 6
@@ -2501,7 +2501,7 @@
           "userId": "historical-well-done-stakes",
           "ffuUserId": "ffu-h03",
           "teamName": "The Well Done Stakes",
-          "abbreviation": "WDS"
+          "abbreviation": "TWDS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 7
@@ -2540,8 +2540,8 @@
         "userInfo": {
           "userId": "472876832719368192",
           "ffuUserId": "ffu-042",
-          "teamName": "Team Stark",
-          "abbreviation": "STRK"
+          "teamName": "Stark Direwolves",
+          "abbreviation": "SD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 9
@@ -2581,7 +2581,7 @@
           "userId": "726572095210930176",
           "ffuUserId": "ffu-031",
           "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
+          "abbreviation": "TD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 11
@@ -2601,7 +2601,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-039",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 12
@@ -2621,7 +2621,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-039",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 12
@@ -2641,7 +2641,7 @@
           "userId": "726572095210930176",
           "ffuUserId": "ffu-031",
           "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
+          "abbreviation": "TD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 11
@@ -2680,8 +2680,8 @@
         "userInfo": {
           "userId": "472876832719368192",
           "ffuUserId": "ffu-042",
-          "teamName": "Team Stark",
-          "abbreviation": "STRK"
+          "teamName": "Stark Direwolves",
+          "abbreviation": "SD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 9
@@ -2721,7 +2721,7 @@
           "userId": "historical-well-done-stakes",
           "ffuUserId": "ffu-h03",
           "teamName": "The Well Done Stakes",
-          "abbreviation": "WDS"
+          "abbreviation": "TWDS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 7
@@ -2740,8 +2740,8 @@
         "userInfo": {
           "userId": "398576262546735104",
           "ffuUserId": "ffu-004",
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 6
@@ -2761,7 +2761,7 @@
           "userId": "331590801261883392",
           "ffuUserId": "ffu-001",
           "teamName": "The Stallions",
-          "abbreviation": "STA"
+          "abbreviation": "TS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 5
@@ -2780,8 +2780,8 @@
         "userInfo": {
           "userId": "727368657923063808",
           "ffuUserId": "ffu-009",
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 4
@@ -2800,8 +2800,8 @@
         "userInfo": {
           "userId": "325766631336714240",
           "ffuUserId": "ffu-024",
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 3
@@ -2841,7 +2841,7 @@
           "userId": "84006772809285632",
           "ffuUserId": "ffu-023",
           "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
+          "abbreviation": "TM"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 1
@@ -2861,7 +2861,7 @@
           "userId": "84006772809285632",
           "ffuUserId": "ffu-023",
           "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
+          "abbreviation": "TM"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 1
@@ -2900,8 +2900,8 @@
         "userInfo": {
           "userId": "325766631336714240",
           "ffuUserId": "ffu-024",
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 3
@@ -2920,8 +2920,8 @@
         "userInfo": {
           "userId": "727368657923063808",
           "ffuUserId": "ffu-009",
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 4
@@ -2941,7 +2941,7 @@
           "userId": "331590801261883392",
           "ffuUserId": "ffu-001",
           "teamName": "The Stallions",
-          "abbreviation": "STA"
+          "abbreviation": "TS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 5
@@ -2960,8 +2960,8 @@
         "userInfo": {
           "userId": "398576262546735104",
           "ffuUserId": "ffu-004",
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 6
@@ -2981,7 +2981,7 @@
           "userId": "historical-well-done-stakes",
           "ffuUserId": "ffu-h03",
           "teamName": "The Well Done Stakes",
-          "abbreviation": "WDS"
+          "abbreviation": "TWDS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 7
@@ -3020,8 +3020,8 @@
         "userInfo": {
           "userId": "472876832719368192",
           "ffuUserId": "ffu-042",
-          "teamName": "Team Stark",
-          "abbreviation": "STRK"
+          "teamName": "Stark Direwolves",
+          "abbreviation": "SD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 9
@@ -3061,7 +3061,7 @@
           "userId": "726572095210930176",
           "ffuUserId": "ffu-031",
           "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
+          "abbreviation": "TD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 11
@@ -3081,7 +3081,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-039",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 12
@@ -3101,7 +3101,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-039",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 12
@@ -3121,7 +3121,7 @@
           "userId": "726572095210930176",
           "ffuUserId": "ffu-031",
           "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
+          "abbreviation": "TD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 11
@@ -3160,8 +3160,8 @@
         "userInfo": {
           "userId": "472876832719368192",
           "ffuUserId": "ffu-042",
-          "teamName": "Team Stark",
-          "abbreviation": "STRK"
+          "teamName": "Stark Direwolves",
+          "abbreviation": "SD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 9
@@ -3201,7 +3201,7 @@
           "userId": "historical-well-done-stakes",
           "ffuUserId": "ffu-h03",
           "teamName": "The Well Done Stakes",
-          "abbreviation": "WDS"
+          "abbreviation": "TWDS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 7
@@ -3220,8 +3220,8 @@
         "userInfo": {
           "userId": "398576262546735104",
           "ffuUserId": "ffu-004",
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 6
@@ -3241,7 +3241,7 @@
           "userId": "331590801261883392",
           "ffuUserId": "ffu-001",
           "teamName": "The Stallions",
-          "abbreviation": "STA"
+          "abbreviation": "TS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 5
@@ -3260,8 +3260,8 @@
         "userInfo": {
           "userId": "727368657923063808",
           "ffuUserId": "ffu-009",
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 4
@@ -3280,8 +3280,8 @@
         "userInfo": {
           "userId": "325766631336714240",
           "ffuUserId": "ffu-024",
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 3
@@ -3321,7 +3321,7 @@
           "userId": "84006772809285632",
           "ffuUserId": "ffu-023",
           "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
+          "abbreviation": "TM"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 1
@@ -3341,7 +3341,7 @@
           "userId": "84006772809285632",
           "ffuUserId": "ffu-023",
           "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
+          "abbreviation": "TM"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 1
@@ -3380,8 +3380,8 @@
         "userInfo": {
           "userId": "325766631336714240",
           "ffuUserId": "ffu-024",
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 3
@@ -3400,8 +3400,8 @@
         "userInfo": {
           "userId": "727368657923063808",
           "ffuUserId": "ffu-009",
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 4
@@ -3421,7 +3421,7 @@
           "userId": "331590801261883392",
           "ffuUserId": "ffu-001",
           "teamName": "The Stallions",
-          "abbreviation": "STA"
+          "abbreviation": "TS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 5
@@ -3440,8 +3440,8 @@
         "userInfo": {
           "userId": "398576262546735104",
           "ffuUserId": "ffu-004",
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 6
@@ -3461,7 +3461,7 @@
           "userId": "historical-well-done-stakes",
           "ffuUserId": "ffu-h03",
           "teamName": "The Well Done Stakes",
-          "abbreviation": "WDS"
+          "abbreviation": "TWDS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 7
@@ -3500,8 +3500,8 @@
         "userInfo": {
           "userId": "472876832719368192",
           "ffuUserId": "ffu-042",
-          "teamName": "Team Stark",
-          "abbreviation": "STRK"
+          "teamName": "Stark Direwolves",
+          "abbreviation": "SD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 9
@@ -3541,7 +3541,7 @@
           "userId": "726572095210930176",
           "ffuUserId": "ffu-031",
           "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
+          "abbreviation": "TD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 11
@@ -3561,7 +3561,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-039",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 12
@@ -3581,7 +3581,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-039",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 12
@@ -3601,7 +3601,7 @@
           "userId": "726572095210930176",
           "ffuUserId": "ffu-031",
           "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
+          "abbreviation": "TD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 11
@@ -3640,8 +3640,8 @@
         "userInfo": {
           "userId": "472876832719368192",
           "ffuUserId": "ffu-042",
-          "teamName": "Team Stark",
-          "abbreviation": "STRK"
+          "teamName": "Stark Direwolves",
+          "abbreviation": "SD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 9
@@ -3681,7 +3681,7 @@
           "userId": "historical-well-done-stakes",
           "ffuUserId": "ffu-h03",
           "teamName": "The Well Done Stakes",
-          "abbreviation": "WDS"
+          "abbreviation": "TWDS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 7
@@ -3700,8 +3700,8 @@
         "userInfo": {
           "userId": "398576262546735104",
           "ffuUserId": "ffu-004",
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 6
@@ -3721,7 +3721,7 @@
           "userId": "331590801261883392",
           "ffuUserId": "ffu-001",
           "teamName": "The Stallions",
-          "abbreviation": "STA"
+          "abbreviation": "TS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 5
@@ -3740,8 +3740,8 @@
         "userInfo": {
           "userId": "727368657923063808",
           "ffuUserId": "ffu-009",
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 4
@@ -3760,8 +3760,8 @@
         "userInfo": {
           "userId": "325766631336714240",
           "ffuUserId": "ffu-024",
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 3
@@ -3801,7 +3801,7 @@
           "userId": "84006772809285632",
           "ffuUserId": "ffu-023",
           "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
+          "abbreviation": "TM"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 1
@@ -3821,7 +3821,7 @@
           "userId": "84006772809285632",
           "ffuUserId": "ffu-023",
           "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
+          "abbreviation": "TM"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 1
@@ -3860,8 +3860,8 @@
         "userInfo": {
           "userId": "325766631336714240",
           "ffuUserId": "ffu-024",
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 3
@@ -3880,8 +3880,8 @@
         "userInfo": {
           "userId": "727368657923063808",
           "ffuUserId": "ffu-009",
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 4
@@ -3901,7 +3901,7 @@
           "userId": "331590801261883392",
           "ffuUserId": "ffu-001",
           "teamName": "The Stallions",
-          "abbreviation": "STA"
+          "abbreviation": "TS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 5
@@ -3920,8 +3920,8 @@
         "userInfo": {
           "userId": "398576262546735104",
           "ffuUserId": "ffu-004",
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 6
@@ -3941,7 +3941,7 @@
           "userId": "historical-well-done-stakes",
           "ffuUserId": "ffu-h03",
           "teamName": "The Well Done Stakes",
-          "abbreviation": "WDS"
+          "abbreviation": "TWDS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 7
@@ -3980,8 +3980,8 @@
         "userInfo": {
           "userId": "472876832719368192",
           "ffuUserId": "ffu-042",
-          "teamName": "Team Stark",
-          "abbreviation": "STRK"
+          "teamName": "Stark Direwolves",
+          "abbreviation": "SD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 9
@@ -4021,7 +4021,7 @@
           "userId": "726572095210930176",
           "ffuUserId": "ffu-031",
           "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
+          "abbreviation": "TD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 11
@@ -4041,7 +4041,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-039",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 12
@@ -4061,7 +4061,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-039",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 12
@@ -4081,7 +4081,7 @@
           "userId": "726572095210930176",
           "ffuUserId": "ffu-031",
           "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
+          "abbreviation": "TD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 11
@@ -4120,8 +4120,8 @@
         "userInfo": {
           "userId": "472876832719368192",
           "ffuUserId": "ffu-042",
-          "teamName": "Team Stark",
-          "abbreviation": "STRK"
+          "teamName": "Stark Direwolves",
+          "abbreviation": "SD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 9
@@ -4161,7 +4161,7 @@
           "userId": "historical-well-done-stakes",
           "ffuUserId": "ffu-h03",
           "teamName": "The Well Done Stakes",
-          "abbreviation": "WDS"
+          "abbreviation": "TWDS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 7
@@ -4180,8 +4180,8 @@
         "userInfo": {
           "userId": "398576262546735104",
           "ffuUserId": "ffu-004",
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 6
@@ -4201,7 +4201,7 @@
           "userId": "331590801261883392",
           "ffuUserId": "ffu-001",
           "teamName": "The Stallions",
-          "abbreviation": "STA"
+          "abbreviation": "TS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 5
@@ -4220,8 +4220,8 @@
         "userInfo": {
           "userId": "727368657923063808",
           "ffuUserId": "ffu-009",
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 4
@@ -4240,8 +4240,8 @@
         "userInfo": {
           "userId": "325766631336714240",
           "ffuUserId": "ffu-024",
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 3
@@ -4281,7 +4281,7 @@
           "userId": "84006772809285632",
           "ffuUserId": "ffu-023",
           "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
+          "abbreviation": "TM"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 1
@@ -4301,7 +4301,7 @@
           "userId": "84006772809285632",
           "ffuUserId": "ffu-023",
           "teamName": "The Minutemen",
-          "abbreviation": "MMEN"
+          "abbreviation": "TM"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 1
@@ -4340,8 +4340,8 @@
         "userInfo": {
           "userId": "325766631336714240",
           "ffuUserId": "ffu-024",
-          "teamName": "Act More Stupidly",
-          "abbreviation": "AMS"
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 3
@@ -4360,8 +4360,8 @@
         "userInfo": {
           "userId": "727368657923063808",
           "ffuUserId": "ffu-009",
-          "teamName": "Fort Wayne Banana Bread",
-          "abbreviation": "FWBB"
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 4
@@ -4381,7 +4381,7 @@
           "userId": "331590801261883392",
           "ffuUserId": "ffu-001",
           "teamName": "The Stallions",
-          "abbreviation": "STA"
+          "abbreviation": "TS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 5
@@ -4400,8 +4400,8 @@
         "userInfo": {
           "userId": "398576262546735104",
           "ffuUserId": "ffu-004",
-          "teamName": "Blood, Sweat, and Beers",
-          "abbreviation": "BEER"
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 6
@@ -4421,7 +4421,7 @@
           "userId": "historical-well-done-stakes",
           "ffuUserId": "ffu-h03",
           "teamName": "The Well Done Stakes",
-          "abbreviation": "WDS"
+          "abbreviation": "TWDS"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 7
@@ -4460,8 +4460,8 @@
         "userInfo": {
           "userId": "472876832719368192",
           "ffuUserId": "ffu-042",
-          "teamName": "Team Stark",
-          "abbreviation": "STRK"
+          "teamName": "Stark Direwolves",
+          "abbreviation": "SD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 9
@@ -4501,7 +4501,7 @@
           "userId": "726572095210930176",
           "ffuUserId": "ffu-031",
           "teamName": "Team Dogecoin",
-          "abbreviation": "DOGE"
+          "abbreviation": "TD"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 11
@@ -4521,7 +4521,7 @@
           "userId": "396808818157182976",
           "ffuUserId": "ffu-039",
           "teamName": "FFUcked Up",
-          "abbreviation": "FFU"
+          "abbreviation": "FU"
         },
         "draftId": "espn-2019-premier-draft",
         "draftSlot": 12

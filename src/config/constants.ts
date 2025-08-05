@@ -182,6 +182,29 @@ export const getDefaultUserInfo = (): { teamName: string; abbreviation: string }
   abbreviation: 'UNK'
 });
 
+// Helper function to display historical team name with current name when different
+export const getDisplayTeamName = (userId: string, historicalTeamName: string, year?: string): string => {
+  if (!userId || !historicalTeamName) return historicalTeamName || 'Unknown Team';
+  
+  // Don't add current names for current year data
+  const currentYear = new Date().getFullYear().toString();
+  if (year === currentYear) return historicalTeamName;
+  
+  // Look up current team name
+  const user = USERS.find(u => u.sleeperId === userId);
+  if (!user || !user.teamName) return historicalTeamName;
+  
+  // If historical and current names are the same (or very similar), just show historical
+  const currentName = user.teamName;
+  if (historicalTeamName === currentName || 
+      historicalTeamName.replace(/\s+/g, '').toLowerCase() === currentName.replace(/\s+/g, '').toLowerCase()) {
+    return historicalTeamName;
+  }
+  
+  // Return formatted string with current name in parentheses
+  return `${historicalTeamName} (${currentName})`;
+};
+
 // Abbreviation mapping utilities for URL state management
 export const getSleeperIdByAbbreviation = (abbreviation: string): string | null => {
   if (!abbreviation?.trim()) return null;

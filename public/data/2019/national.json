@@ -12,8 +12,8 @@
       "pointsAgainst": 1393.3,
       "rank": 1,
       "userInfo": {
-        "teamName": "Raging Rhinos",
-        "abbreviation": "RAGE"
+        "teamName": "Currier Island Raging Rhinos",
+        "abbreviation": "CIRR"
       }
     },
     {
@@ -26,7 +26,7 @@
       "rank": 2,
       "userInfo": {
         "teamName": "Indianapolis Aztecs",
-        "abbreviation": "AZTC"
+        "abbreviation": "IA"
       }
     },
     {
@@ -64,8 +64,8 @@
       "pointsAgainst": 1473.85,
       "rank": 5,
       "userInfo": {
-        "teamName": "ChicagoPick6",
-        "abbreviation": "CP6"
+        "teamName": "Team Painter Pick 6",
+        "abbreviation": "TPP6"
       }
     },
     {
@@ -156,7 +156,7 @@
       "rank": 12,
       "userInfo": {
         "teamName": "Team Pancake",
-        "abbreviation": "PCKE"
+        "abbreviation": "TP"
       }
     }
   ],
@@ -167,8 +167,8 @@
       "placement": 1,
       "placementName": "1st",
       "userInfo": {
-        "teamName": "Raging Rhinos",
-        "abbreviation": "RAGE"
+        "teamName": "Currier Island Raging Rhinos",
+        "abbreviation": "CIRR"
       }
     },
     {
@@ -178,7 +178,7 @@
       "placementName": "2nd",
       "userInfo": {
         "teamName": "Indianapolis Aztecs",
-        "abbreviation": "AZTC"
+        "abbreviation": "IA"
       }
     },
     {
@@ -207,8 +207,8 @@
       "placement": 5,
       "placementName": "5th",
       "userInfo": {
-        "teamName": "ChicagoPick6",
-        "abbreviation": "CP6"
+        "teamName": "Team Painter Pick 6",
+        "abbreviation": "TPP6"
       }
     },
     {
@@ -278,7 +278,7 @@
       "placementName": "12th",
       "userInfo": {
         "teamName": "Team Pancake",
-        "abbreviation": "PCKE"
+        "abbreviation": "TP"
       }
     }
   ],
@@ -1021,7 +1021,7 @@
           "userId": "386791325690994688",
           "ffuUserId": "ffu-025",
           "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
+          "abbreviation": "IA"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 5
@@ -1040,8 +1040,8 @@
         "userInfo": {
           "userId": "729741648338210816",
           "ffuUserId": "ffu-010",
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 6
@@ -1080,8 +1080,8 @@
         "userInfo": {
           "userId": "462383465753473024",
           "ffuUserId": "ffu-026",
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 8
@@ -1101,7 +1101,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 9
@@ -1241,7 +1241,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 9
@@ -1260,8 +1260,8 @@
         "userInfo": {
           "userId": "462383465753473024",
           "ffuUserId": "ffu-026",
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 8
@@ -1300,8 +1300,8 @@
         "userInfo": {
           "userId": "729741648338210816",
           "ffuUserId": "ffu-010",
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 6
@@ -1321,7 +1321,7 @@
           "userId": "386791325690994688",
           "ffuUserId": "ffu-025",
           "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
+          "abbreviation": "IA"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 5
@@ -1501,7 +1501,7 @@
           "userId": "386791325690994688",
           "ffuUserId": "ffu-025",
           "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
+          "abbreviation": "IA"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 5
@@ -1520,8 +1520,8 @@
         "userInfo": {
           "userId": "729741648338210816",
           "ffuUserId": "ffu-010",
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 6
@@ -1560,8 +1560,8 @@
         "userInfo": {
           "userId": "462383465753473024",
           "ffuUserId": "ffu-026",
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 8
@@ -1581,7 +1581,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 9
@@ -1721,7 +1721,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 9
@@ -1740,8 +1740,8 @@
         "userInfo": {
           "userId": "462383465753473024",
           "ffuUserId": "ffu-026",
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 8
@@ -1780,8 +1780,8 @@
         "userInfo": {
           "userId": "729741648338210816",
           "ffuUserId": "ffu-010",
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 6
@@ -1801,7 +1801,7 @@
           "userId": "386791325690994688",
           "ffuUserId": "ffu-025",
           "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
+          "abbreviation": "IA"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 5
@@ -1981,7 +1981,7 @@
           "userId": "386791325690994688",
           "ffuUserId": "ffu-025",
           "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
+          "abbreviation": "IA"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 5
@@ -2000,8 +2000,8 @@
         "userInfo": {
           "userId": "729741648338210816",
           "ffuUserId": "ffu-010",
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 6
@@ -2040,8 +2040,8 @@
         "userInfo": {
           "userId": "462383465753473024",
           "ffuUserId": "ffu-026",
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 8
@@ -2061,7 +2061,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 9
@@ -2201,7 +2201,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 9
@@ -2220,8 +2220,8 @@
         "userInfo": {
           "userId": "462383465753473024",
           "ffuUserId": "ffu-026",
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 8
@@ -2260,8 +2260,8 @@
         "userInfo": {
           "userId": "729741648338210816",
           "ffuUserId": "ffu-010",
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 6
@@ -2281,7 +2281,7 @@
           "userId": "386791325690994688",
           "ffuUserId": "ffu-025",
           "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
+          "abbreviation": "IA"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 5
@@ -2461,7 +2461,7 @@
           "userId": "386791325690994688",
           "ffuUserId": "ffu-025",
           "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
+          "abbreviation": "IA"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 5
@@ -2480,8 +2480,8 @@
         "userInfo": {
           "userId": "729741648338210816",
           "ffuUserId": "ffu-010",
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 6
@@ -2520,8 +2520,8 @@
         "userInfo": {
           "userId": "462383465753473024",
           "ffuUserId": "ffu-026",
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 8
@@ -2541,7 +2541,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 9
@@ -2681,7 +2681,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 9
@@ -2700,8 +2700,8 @@
         "userInfo": {
           "userId": "462383465753473024",
           "ffuUserId": "ffu-026",
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 8
@@ -2740,8 +2740,8 @@
         "userInfo": {
           "userId": "729741648338210816",
           "ffuUserId": "ffu-010",
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 6
@@ -2761,7 +2761,7 @@
           "userId": "386791325690994688",
           "ffuUserId": "ffu-025",
           "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
+          "abbreviation": "IA"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 5
@@ -2941,7 +2941,7 @@
           "userId": "386791325690994688",
           "ffuUserId": "ffu-025",
           "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
+          "abbreviation": "IA"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 5
@@ -2960,8 +2960,8 @@
         "userInfo": {
           "userId": "729741648338210816",
           "ffuUserId": "ffu-010",
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 6
@@ -3000,8 +3000,8 @@
         "userInfo": {
           "userId": "462383465753473024",
           "ffuUserId": "ffu-026",
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 8
@@ -3021,7 +3021,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 9
@@ -3161,7 +3161,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 9
@@ -3180,8 +3180,8 @@
         "userInfo": {
           "userId": "462383465753473024",
           "ffuUserId": "ffu-026",
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 8
@@ -3220,8 +3220,8 @@
         "userInfo": {
           "userId": "729741648338210816",
           "ffuUserId": "ffu-010",
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 6
@@ -3241,7 +3241,7 @@
           "userId": "386791325690994688",
           "ffuUserId": "ffu-025",
           "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
+          "abbreviation": "IA"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 5
@@ -3421,7 +3421,7 @@
           "userId": "386791325690994688",
           "ffuUserId": "ffu-025",
           "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
+          "abbreviation": "IA"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 5
@@ -3440,8 +3440,8 @@
         "userInfo": {
           "userId": "729741648338210816",
           "ffuUserId": "ffu-010",
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 6
@@ -3480,8 +3480,8 @@
         "userInfo": {
           "userId": "462383465753473024",
           "ffuUserId": "ffu-026",
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 8
@@ -3501,7 +3501,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 9
@@ -3641,7 +3641,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 9
@@ -3660,8 +3660,8 @@
         "userInfo": {
           "userId": "462383465753473024",
           "ffuUserId": "ffu-026",
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 8
@@ -3700,8 +3700,8 @@
         "userInfo": {
           "userId": "729741648338210816",
           "ffuUserId": "ffu-010",
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 6
@@ -3721,7 +3721,7 @@
           "userId": "386791325690994688",
           "ffuUserId": "ffu-025",
           "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
+          "abbreviation": "IA"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 5
@@ -3901,7 +3901,7 @@
           "userId": "386791325690994688",
           "ffuUserId": "ffu-025",
           "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
+          "abbreviation": "IA"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 5
@@ -3920,8 +3920,8 @@
         "userInfo": {
           "userId": "729741648338210816",
           "ffuUserId": "ffu-010",
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 6
@@ -3960,8 +3960,8 @@
         "userInfo": {
           "userId": "462383465753473024",
           "ffuUserId": "ffu-026",
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 8
@@ -3981,7 +3981,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 9
@@ -4121,7 +4121,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 9
@@ -4140,8 +4140,8 @@
         "userInfo": {
           "userId": "462383465753473024",
           "ffuUserId": "ffu-026",
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 8
@@ -4180,8 +4180,8 @@
         "userInfo": {
           "userId": "729741648338210816",
           "ffuUserId": "ffu-010",
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 6
@@ -4201,7 +4201,7 @@
           "userId": "386791325690994688",
           "ffuUserId": "ffu-025",
           "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
+          "abbreviation": "IA"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 5
@@ -4381,7 +4381,7 @@
           "userId": "386791325690994688",
           "ffuUserId": "ffu-025",
           "teamName": "Indianapolis Aztecs",
-          "abbreviation": "AZTC"
+          "abbreviation": "IA"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 5
@@ -4400,8 +4400,8 @@
         "userInfo": {
           "userId": "729741648338210816",
           "ffuUserId": "ffu-010",
-          "teamName": "ChicagoPick6",
-          "abbreviation": "CP6"
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 6
@@ -4440,8 +4440,8 @@
         "userInfo": {
           "userId": "462383465753473024",
           "ffuUserId": "ffu-026",
-          "teamName": "Raging Rhinos",
-          "abbreviation": "RAGE"
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 8
@@ -4461,7 +4461,7 @@
           "userId": "508719015656099840",
           "ffuUserId": "ffu-029",
           "teamName": "Team Pancake",
-          "abbreviation": "PCKE"
+          "abbreviation": "TP"
         },
         "draftId": "espn-2019-national-draft",
         "draftSlot": 9

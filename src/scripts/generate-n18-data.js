@@ -129,16 +129,12 @@ function getUserByTeamName(teamName) {
     throw new Error(`No user mapping found for ESPN username: ${espnUsername}`);
   }
   
-  // For mapped users, get their CURRENT team name from the USERS configuration
-  const currentUser = userMapping[espnUsername];
-  const currentTeamName = getCurrentTeamNameBySleeperId(currentUser.sleeperId);
-  const currentAbbreviation = getCurrentAbbreviationBySleeperId(currentUser.sleeperId);
-  
+  // For historical consistency, use the original 2018 team name
   return {
     userId: userInfo.sleeperId,
     ffuUserId: userInfo.ffuId,
-    teamName: currentTeamName || teamName, // Use current name, fallback to historical
-    abbreviation: currentAbbreviation || teamName.split(' ').map(w => w[0]).join('').substr(0, 4).toUpperCase(),
+    teamName: teamName, // Use historical 2018 team name
+    abbreviation: teamName.split(' ').map(w => w[0]).join('').substr(0, 4).toUpperCase(),
     isHistorical: false
   };
 }

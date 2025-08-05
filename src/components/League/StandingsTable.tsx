@@ -3,6 +3,7 @@ import { LeagueBadge } from './LeagueBadge';
 import { TeamLogo } from '../Common/TeamLogo';
 import { Trophy, Medal, Award } from 'lucide-react';
 import { getLeagueName } from '../../constants/leagues';
+import { getDisplayTeamName } from '../../config/constants';
 
 
 interface StandingsTableProps {
@@ -87,7 +88,7 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
             </div>
             <div>
               <div className="font-black text-gray-900 dark:text-gray-100 text-xl tracking-wide">
-                {standings[0].userInfo.teamName}
+                {getDisplayTeamName(standings[0].userId, standings[0].userInfo.teamName, year)}
               </div>
               <div className={`text-lg font-bold ${leagueColors.text}`}>
                 {standings[0].wins}-{standings[0].losses} • {standings[0].pointsFor?.toFixed(2)} pts
@@ -137,7 +138,7 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
                     </div>
                     <div>
                       <div className="font-bold text-gray-900 dark:text-gray-100 text-sm">
-                        {standing.userInfo.teamName}
+                        {getDisplayTeamName(standing.userId, standing.userInfo.teamName, year)}
                       </div>
                       <div className="text-xs text-gray-500 dark:text-gray-400 sm:hidden font-mono">{standing.userInfo.abbreviation}</div>
                     </div>
