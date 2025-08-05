@@ -197,11 +197,13 @@ function loadCSVData() {
   const teamsCSV = fs.readFileSync(path.join(dataPath, 'ESPN Fantasy Scrapes - Teams N20.original.csv'), 'utf8');
   const matchupsCSV = fs.readFileSync(path.join(dataPath, 'ESPN Fantasy Scrapes - Matchups N20.original.csv'), 'utf8');
   const draftCSV = fs.readFileSync(path.join(dataPath, 'ESPN Fantasy Scrapes - Draft Results N20.original.csv'), 'utf8');
+  const draftFixCSV = fs.readFileSync(path.join(dataPath, 'ESPN Fantasy Scrapes - Draft Results N20.fix.csv'), 'utf8');
   
   return {
     teams: parseCSV(teamsCSV),
     matchups: parseCSV(matchupsCSV),
-    draft: parseCSV(draftCSV)
+    draft: parseCSV(draftCSV),
+    draftFix: parseCSV(draftFixCSV)
   };
 }
 
@@ -394,20 +396,46 @@ function determineplacementType(team1Name, team2Name, team1Score, team2Score, fi
 }
 
 // Generate draft data
-function generateDraftData(draftData) {
+function generateDraftData(draftData, draftFixData) {
+  // Create a map of corrected picks from the fix data
+  const fixPicksMap = new Map();
+  if (draftFixData && draftFixData.length > 0) {
+    draftFixData.forEach(fixPick => {
+      const pickInfo = fixPick.Pick.match(/(\d+)\.(\d+) \((\d+)\)/);
+      if (pickInfo) {
+        const [, round, pickInRound, overallPick] = pickInfo;
+        fixPicksMap.set(parseInt(overallPick), {
+          pick: fixPick.Pick,
+          player: fixPick.Player
+        });
+      }
+    });
+  }
+
   // First pass: collect all picks and establish team order
   const allPicks = draftData.map((pick, index) => {
     const pickInfo = pick.Pick.match(/(\d+)\.(\d+) \((\d+)\)/);
     if (!pickInfo) return null;
     
     const [, round, pickInRound, overallPick] = pickInfo;
-    const playerInfo = pick.Player.split(' · ');
+    const overallPickNum = parseInt(overallPick);
+    
+    // Check if this pick needs to be corrected
+    const correctedPick = fixPicksMap.get(overallPickNum);
+    const playerData = correctedPick ? correctedPick.player : pick.Player;
+    const pickData = correctedPick ? correctedPick.pick : pick.Pick;
+    
+    // Re-parse in case the pick number changed
+    const finalPickInfo = pickData.match(/(\d+)\.(\d+) \((\d+)\)/);
+    const [, finalRound, finalPickInRound, finalOverallPick] = finalPickInfo;
+    
+    const playerInfo = playerData.split(' · ');
     const userInfo = getUserByTeamName(pick.Team);
     
     return {
-      pickNumber: parseInt(overallPick),
-      round: parseInt(round),
-      pickInRound: parseInt(pickInRound),
+      pickNumber: parseInt(finalOverallPick),
+      round: parseInt(finalRound),
+      pickInRound: parseInt(finalPickInRound),
       playerId: `espn-player-${playerInfo[0].toLowerCase().replace(/\s+/g, '-')}`,
       playerInfo: {
         name: playerInfo[0],
@@ -491,7 +519,7 @@ function generateN20Data() {
   const matchupsByWeek = generateMatchupsByWeek(csvData.matchups, csvData.teams);
   
   console.log('Generating draft data...');
-  const draftData = generateDraftData(csvData.draft);
+  const draftData = generateDraftData(csvData.draft, csvData.draftFix);
   
   const n20Data = {
     league: 'NATIONAL',
