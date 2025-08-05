@@ -122,7 +122,7 @@ export const Draft: React.FC = () => {
               <select
                 value={selectedLeague}
                 onChange={(e) => setSelectedLeague(e.target.value)}
-                className="block w-20 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-1.5 sm:py-3 text-xs sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                className="block w-20 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
                 {availableLeagues.map((league) => (
                   <option key={league} value={league}>{LEAGUE_NAMES[league]}</option>
@@ -140,7 +140,7 @@ export const Draft: React.FC = () => {
               <select
                 value={selectedYear}
                 onChange={(e) => setSelectedYear(e.target.value)}
-                className="block w-16 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-1.5 sm:py-3 text-xs sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                className="block w-16 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
                 {AVAILABLE_YEARS.map((year) => (
                   <option key={year} value={year}>{year}</option>
@@ -156,7 +156,7 @@ export const Draft: React.FC = () => {
             <div className="flex border border-gray-300 dark:border-gray-600 rounded overflow-hidden flex-shrink-0">
               <button
                 onClick={() => setViewMode('board')}
-                className={`px-2 sm:px-4 py-1.5 sm:py-3 text-xs sm:text-base font-medium transition-colors duration-200 ${
+                className={`px-4 sm:px-4 py-2 sm:py-3 text-sm sm:text-base font-medium transition-colors duration-200 ${
                   viewMode === 'board'
                     ? 'bg-ffu-red text-white'
                     : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700'
@@ -167,7 +167,7 @@ export const Draft: React.FC = () => {
               </button>
               <button
                 onClick={() => setViewMode('list')}
-                className={`px-2 sm:px-4 py-1.5 sm:py-3 text-xs sm:text-base font-medium transition-colors duration-200 border-l border-gray-300 dark:border-gray-600 ${
+                className={`px-4 sm:px-4 py-2 sm:py-3 text-sm sm:text-base font-medium transition-colors duration-200 border-l border-gray-300 dark:border-gray-600 ${
                   viewMode === 'list'
                     ? 'bg-ffu-red text-white'
                     : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700'

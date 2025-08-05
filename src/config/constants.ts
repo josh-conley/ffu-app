@@ -53,7 +53,7 @@ export const LEAGUES: LeagueConfig[] = [
 // Master user configuration - single source of truth
 export const USERS: UserConfig[] = [
   { ffuId: 'ffu-001', sleeperId: '331590801261883392', teamName: 'The Stallions', abbreviation: 'STA', joinedYear: 2020, isActive: true, espnUsername: 'stallions', historicalTeamNames: { '2020': 'The Stallions' } },
-  { ffuId: 'ffu-002', sleeperId: '396808818157182976', teamName: 'FFUcked Up', abbreviation: 'FU', joinedYear: 2021, isActive: true },
+  { ffuId: 'ffu-002', sleeperId: '396808818157182976', teamName: 'FFUcked Up', abbreviation: 'FU', joinedYear: 2019, isActive: true },
   { ffuId: 'ffu-003', sleeperId: '398574272387297280', teamName: 'Dmandre161', abbreviation: 'DMAN', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-004', sleeperId: '398576262546735104', teamName: 'Blood, Sweat, and Beers', abbreviation: 'BEER', joinedYear: 2020, isActive: true, espnUsername: 'beers', historicalTeamNames: { '2020': 'Blood, Sweat and Beers' } },
   { ffuId: 'ffu-005', sleeperId: '467404039059927040', teamName: 'Malibu Leopards', abbreviation: 'MLBU', joinedYear: 2021, isActive: true },

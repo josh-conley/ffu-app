@@ -75,7 +75,7 @@ const userMapping = {
   'stallions': { ffuId: 'ffu-001', sleeperId: '331590801261883392' },
   'beers': { ffuId: 'ffu-004', sleeperId: '398576262546735104' },
   'bandits': { ffuId: 'ffu-036', sleeperId: '727366898383122432' },
-  'ffuckedup': { ffuId: 'ffu-039', sleeperId: '396808818157182976' },
+  'ffuckedup': { ffuId: 'ffu-002', sleeperId: '396808818157182976' },
   // Historical users who participated in P19 but didn't continue to Sleeper era
   'stakes': { ffuId: 'ffu-h03', sleeperId: 'historical-well-done-stakes' },
   'devils': { ffuId: 'ffu-h04', sleeperId: 'historical-durham-handsome-devils' },

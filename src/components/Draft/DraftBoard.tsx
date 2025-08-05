@@ -97,14 +97,16 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
     return tradingUserInfo?.abbreviation || tradingUserInfo?.teamName || 'UNK';
   };
 
-  // Format player name to first initial + last name
-  const formatPlayerName = (fullName: string): string => {
+  // Format player name for wrapping - first name on first line, last name on second
+  const formatPlayerName = (fullName: string): { firstName: string; lastName: string } => {
     const nameParts = fullName.trim().split(' ');
-    if (nameParts.length === 1) return fullName;
+    if (nameParts.length === 1) {
+      return { firstName: fullName, lastName: '' };
+    }
     
     const firstName = nameParts[0];
     const lastName = nameParts[nameParts.length - 1];
-    return `${firstName[0]}. ${lastName}`;
+    return { firstName, lastName };
   };
 
   // Format pick number as round.pick (e.g., 1.01, 1.02) accounting for snake draft
@@ -287,11 +289,15 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
                     
                     {pick ? (
                       <div className={`h-full flex flex-col justify-between ${isPickTraded(pick, teamHeaders[teamIndex]?.userId) ? 'pt-4 px-3 pb-4' : 'px-3 py-4'}`}>
-                        <div className="font-semibold text-gray-900 dark:text-white text-sm leading-tight mb-2">
-                          <div className="truncate">
-                            {formatPlayerName(pick.playerInfo.name)}
-                          </div>
-                        </div>
+                        {(() => {
+                          const playerName = formatPlayerName(pick.playerInfo.name);
+                          return (
+                            <div className="font-semibold text-gray-900 dark:text-white text-sm leading-tight mb-2">
+                              <div>{playerName.firstName}</div>
+                              {playerName.lastName && <div>{playerName.lastName}</div>}
+                            </div>
+                          );
+                        })()}
                         <div className="space-y-2">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-1">
