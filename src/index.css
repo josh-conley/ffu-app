@@ -92,7 +92,7 @@
   }
 
   .card {
-    @apply bg-white p-6 transition-colors border border-gray-200 relative;
+    @apply bg-white p-6 transition-colors relative;
     background-color: white;
   }
 
