@@ -57,7 +57,7 @@ export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
 
   // Get current league standings to determine teams
   const leagueStandings = allStandings?.find(s => s.league === league && s.year === year);
-  const maxWeek = year === '2024' ? 17 : (parseInt(year) >= 2021 ? 17 : 16); // Era-aware week count
+  const maxWeek = year === '2024' ? 14 : (parseInt(year) >= 2021 ? 14 : 13); // Era-aware week count
 
   useEffect(() => {
     if (leagueStandings) {
