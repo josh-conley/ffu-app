@@ -1,6 +1,7 @@
 import React from 'react';
 import type { DraftData, DraftPick, UserInfo } from '../../types';
 import { TeamLogo } from '../Common/TeamLogo';
+import { getDisplayTeamName } from '../../config/constants';
 
 interface MobileDraftBoardProps {
   draftData: DraftData;
@@ -43,7 +44,7 @@ export const MobileDraftBoard: React.FC<MobileDraftBoardProps> = ({ draftData, u
     teamHeaders.push({
       slot: team,
       userId: userId,
-      teamName: userInfo?.teamName || `Team ${team}`,
+      teamName: userInfo?.teamName ? getDisplayTeamName(userId || '', userInfo.teamName, draftData.year) : `Team ${team}`,
       abbreviation: userInfo?.abbreviation || `T${team}`
     });
   }
@@ -80,7 +81,9 @@ export const MobileDraftBoard: React.FC<MobileDraftBoardProps> = ({ draftData, u
   // Get the team info for who actually made the pick
   const getTradingTeamInfo = (pick: DraftPick): string => {
     const tradingUserInfo = userMap[pick.pickedBy];
-    return tradingUserInfo?.abbreviation || tradingUserInfo?.teamName || 'UNK';
+    // For trading banners, prefer abbreviation to keep it compact, but fall back to enhanced team name
+    return tradingUserInfo?.abbreviation || 
+           (tradingUserInfo?.teamName ? getDisplayTeamName(pick.pickedBy, tradingUserInfo.teamName, draftData.year) : 'UNK');
   };
 
   // Format player name for wrapping - first name on first line, last name on second
@@ -171,18 +174,18 @@ export const MobileDraftBoard: React.FC<MobileDraftBoardProps> = ({ draftData, u
                   className={`px-1 py-2 text-center text-xs font-bold text-white uppercase tracking-wider ${
                     index < teams - 1 ? 'border-r border-ffu-red-700' : ''
                   }`}
-                  style={{ width: mobileColumnWidth }}
+                  style={{ width: mobileColumnWidth, padding: '4px' }}
                 >
-                  <div className="flex flex-col items-center space-y-0.5">
+                  <div className="flex flex-col items-center">
                     <TeamLogo 
                       teamName={team.teamName} 
                       abbreviation={team.abbreviation}
                       size="sm"
                     />
-                    <div className="text-center break-words text-xs leading-tight" title={team.teamName}>
+                    <div className="text-center break-words text-xs leading-tight" title={team.teamName} style={{ fontSize: '0.6rem' }}>
                       {team.teamName}
                     </div>
-                    <div className="text-xs opacity-75 text-center">{team.abbreviation}</div>
+                    <div className="text-xs opacity-75 text-center" style={{ fontSize: '0.6rem' }}>{team.abbreviation}</div>
                   </div>
                 </th>
               ))}
@@ -207,15 +210,15 @@ export const MobileDraftBoard: React.FC<MobileDraftBoardProps> = ({ draftData, u
                     } ${pick ? getPositionBackgroundColor(pick.playerInfo.position) : ''}`}
                     style={{ 
                       width: mobileColumnWidth,
-                      height: '85px',
-                      minHeight: '85px'
+                      height: mobileColumnWidth,
+                      minHeight: mobileColumnWidth
                     }}
                   >
                     {/* Traded Pick Banner */}
                     {pick && isPickTraded(pick, teamHeaders[teamIndex]?.userId) && (
                       <div className="absolute top-0 left-0 right-0 bg-gray-400 dark:bg-gray-600 text-white text-xs px-1 py-0.5 text-center z-10 flex items-center justify-center gap-1" style={{ height: '12px' }}>
                         <span>→</span>
-                        <span className="text-xs">{getTradingTeamInfo(pick)}</span>
+                        <span className="text-[10px]">{getTradingTeamInfo(pick)}</span>
                       </div>
                     )}
                     
@@ -249,7 +252,7 @@ export const MobileDraftBoard: React.FC<MobileDraftBoardProps> = ({ draftData, u
                         {(() => {
                           const arrow = getNextPickArrow(roundIndex + 1, teamIndex);
                           return arrow ? (
-                            <div className="absolute top-3.5 right-1 text-gray-300 dark:text-gray-600" style={{ fontSize: '10px' }}>
+                            <div className="absolute top-3.5 right-1 text-gray-400" style={{ fontSize: '10px' }}>
                               {arrow}
                             </div>
                           ) : null;

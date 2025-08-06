@@ -1,0 +1,4543 @@
+{
+  "league": "PREMIER",
+  "year": "2020",
+  "leagueId": "espn-2020-premier",
+  "standings": [
+    {
+      "userId": "727368657923063808",
+      "ffuUserId": "ffu-009",
+      "wins": 8,
+      "losses": 5,
+      "pointsFor": 1475.8,
+      "pointsAgainst": 1468.35,
+      "rank": 1,
+      "userInfo": {
+        "teamName": "Wisconsian Banana Bread",
+        "abbreviation": "WBB"
+      }
+    },
+    {
+      "userId": "399379352174768128",
+      "ffuUserId": "ffu-051",
+      "wins": 8,
+      "losses": 5,
+      "pointsFor": 1350.25,
+      "pointsAgainst": 1232.5,
+      "rank": 2,
+      "userInfo": {
+        "teamName": "Stone Cold Steve Irwins",
+        "abbreviation": "SCSI"
+      }
+    },
+    {
+      "userId": "331590801261883392",
+      "ffuUserId": "ffu-001",
+      "wins": 11,
+      "losses": 2,
+      "pointsFor": 1724.9,
+      "pointsAgainst": 1289.2,
+      "rank": 3,
+      "userInfo": {
+        "teamName": "The Stallions",
+        "abbreviation": "TS"
+      }
+    },
+    {
+      "userId": "729741648338210816",
+      "ffuUserId": "ffu-010",
+      "wins": 10,
+      "losses": 3,
+      "pointsFor": 1685.35,
+      "pointsAgainst": 1461.4,
+      "rank": 4,
+      "userInfo": {
+        "teamName": "Chicago Pick 6s",
+        "abbreviation": "CP6"
+      }
+    },
+    {
+      "userId": "historical-naptown-makos",
+      "ffuUserId": "ffu-h01",
+      "wins": 7,
+      "losses": 6,
+      "pointsFor": 1426.4,
+      "pointsAgainst": 1455.75,
+      "rank": 5,
+      "userInfo": {
+        "teamName": "Naptown Makos",
+        "abbreviation": "NM"
+      }
+    },
+    {
+      "userId": "726572095210930176",
+      "ffuUserId": "ffu-031",
+      "wins": 7,
+      "losses": 6,
+      "pointsFor": 1548.3,
+      "pointsAgainst": 1486.3,
+      "rank": 6,
+      "userInfo": {
+        "teamName": "Team Dogecoin",
+        "abbreviation": "TD"
+      }
+    },
+    {
+      "userId": "325766631336714240",
+      "ffuUserId": "ffu-024",
+      "wins": 5,
+      "losses": 8,
+      "pointsFor": 1357.35,
+      "pointsAgainst": 1438.05,
+      "rank": 7,
+      "userInfo": {
+        "teamName": "Goat Emoji II",
+        "abbreviation": "GEI"
+      }
+    },
+    {
+      "userId": "84006772809285632",
+      "ffuUserId": "ffu-023",
+      "wins": 6,
+      "losses": 7,
+      "pointsFor": 1580.3,
+      "pointsAgainst": 1536.05,
+      "rank": 8,
+      "userInfo": {
+        "teamName": "The Minutemen",
+        "abbreviation": "TM"
+      }
+    },
+    {
+      "userId": "historical-speedway-ritual-cog",
+      "ffuUserId": "ffu-h02",
+      "wins": 2,
+      "losses": 11,
+      "pointsFor": 1232.25,
+      "pointsAgainst": 1617.95,
+      "rank": 9,
+      "userInfo": {
+        "teamName": "Speedway Ritual Cog",
+        "abbreviation": "SRC"
+      }
+    },
+    {
+      "userId": "386791325690994688",
+      "ffuUserId": "ffu-025",
+      "wins": 5,
+      "losses": 8,
+      "pointsFor": 1316.15,
+      "pointsAgainst": 1374.05,
+      "rank": 10,
+      "userInfo": {
+        "teamName": "Indianapolis Aztecs",
+        "abbreviation": "IA"
+      }
+    },
+    {
+      "userId": "462383465753473024",
+      "ffuUserId": "ffu-026",
+      "wins": 4,
+      "losses": 9,
+      "pointsFor": 1355.7,
+      "pointsAgainst": 1447.3,
+      "rank": 11,
+      "userInfo": {
+        "teamName": "Currier Island Raging Rhinos",
+        "abbreviation": "CIRR"
+      }
+    },
+    {
+      "userId": "398576262546735104",
+      "ffuUserId": "ffu-004",
+      "wins": 5,
+      "losses": 8,
+      "pointsFor": 1216.25,
+      "pointsAgainst": 1462.1,
+      "rank": 12,
+      "userInfo": {
+        "teamName": "Blood, Sweat and Beers",
+        "abbreviation": "BSAB"
+      }
+    }
+  ],
+  "playoffResults": [
+    {
+      "userId": "727368657923063808",
+      "ffuUserId": "ffu-009",
+      "placement": 1,
+      "placementName": "1st",
+      "userInfo": {
+        "teamName": "Wisconsian Banana Bread",
+        "abbreviation": "WBB"
+      }
+    },
+    {
+      "userId": "399379352174768128",
+      "ffuUserId": "ffu-051",
+      "placement": 2,
+      "placementName": "2nd",
+      "userInfo": {
+        "teamName": "Stone Cold Steve Irwins",
+        "abbreviation": "SCSI"
+      }
+    },
+    {
+      "userId": "331590801261883392",
+      "ffuUserId": "ffu-001",
+      "placement": 3,
+      "placementName": "3rd",
+      "userInfo": {
+        "teamName": "The Stallions",
+        "abbreviation": "TS"
+      }
+    },
+    {
+      "userId": "729741648338210816",
+      "ffuUserId": "ffu-010",
+      "placement": 4,
+      "placementName": "4th",
+      "userInfo": {
+        "teamName": "Chicago Pick 6s",
+        "abbreviation": "CP6"
+      }
+    },
+    {
+      "userId": "historical-naptown-makos",
+      "ffuUserId": "ffu-h01",
+      "placement": 5,
+      "placementName": "5th",
+      "userInfo": {
+        "teamName": "Naptown Makos",
+        "abbreviation": "NM"
+      }
+    },
+    {
+      "userId": "726572095210930176",
+      "ffuUserId": "ffu-031",
+      "placement": 6,
+      "placementName": "6th",
+      "userInfo": {
+        "teamName": "Team Dogecoin",
+        "abbreviation": "TD"
+      }
+    },
+    {
+      "userId": "325766631336714240",
+      "ffuUserId": "ffu-024",
+      "placement": 7,
+      "placementName": "7th",
+      "userInfo": {
+        "teamName": "Goat Emoji II",
+        "abbreviation": "GEI"
+      }
+    },
+    {
+      "userId": "84006772809285632",
+      "ffuUserId": "ffu-023",
+      "placement": 8,
+      "placementName": "8th",
+      "userInfo": {
+        "teamName": "The Minutemen",
+        "abbreviation": "TM"
+      }
+    },
+    {
+      "userId": "historical-speedway-ritual-cog",
+      "ffuUserId": "ffu-h02",
+      "placement": 9,
+      "placementName": "9th",
+      "userInfo": {
+        "teamName": "Speedway Ritual Cog",
+        "abbreviation": "SRC"
+      }
+    },
+    {
+      "userId": "386791325690994688",
+      "ffuUserId": "ffu-025",
+      "placement": 10,
+      "placementName": "10th",
+      "userInfo": {
+        "teamName": "Indianapolis Aztecs",
+        "abbreviation": "IA"
+      }
+    },
+    {
+      "userId": "462383465753473024",
+      "ffuUserId": "ffu-026",
+      "placement": 11,
+      "placementName": "11th",
+      "userInfo": {
+        "teamName": "Currier Island Raging Rhinos",
+        "abbreviation": "CIRR"
+      }
+    },
+    {
+      "userId": "398576262546735104",
+      "ffuUserId": "ffu-004",
+      "placement": 12,
+      "placementName": "12th",
+      "userInfo": {
+        "teamName": "Blood, Sweat and Beers",
+        "abbreviation": "BSAB"
+      }
+    }
+  ],
+  "promotions": [],
+  "relegations": [],
+  "matchupsByWeek": {
+    "1": [
+      {
+        "winner": "727368657923063808",
+        "loser": "462383465753473024",
+        "winnerScore": 134.25,
+        "loserScore": 115.25
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "84006772809285632",
+        "winnerScore": 151.7,
+        "loserScore": 104.1
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "325766631336714240",
+        "winnerScore": 135.25,
+        "loserScore": 93.45
+      },
+      {
+        "winner": "729741648338210816",
+        "loser": "398576262546735104",
+        "winnerScore": 149.3,
+        "loserScore": 110.4
+      },
+      {
+        "winner": "726572095210930176",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 133.5,
+        "loserScore": 96.05
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "386791325690994688",
+        "winnerScore": 102.4,
+        "loserScore": 75.1
+      }
+    ],
+    "2": [
+      {
+        "winner": "398576262546735104",
+        "loser": "386791325690994688",
+        "winnerScore": 115,
+        "loserScore": 109.1
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "462383465753473024",
+        "winnerScore": 140.2,
+        "loserScore": 96.35
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "399379352174768128",
+        "winnerScore": 137.9,
+        "loserScore": 133.8
+      },
+      {
+        "winner": "726572095210930176",
+        "loser": "84006772809285632",
+        "winnerScore": 113.5,
+        "loserScore": 109.15
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "729741648338210816",
+        "winnerScore": 137.25,
+        "loserScore": 132
+      },
+      {
+        "winner": "325766631336714240",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 128,
+        "loserScore": 91.55
+      }
+    ],
+    "3": [
+      {
+        "winner": "331590801261883392",
+        "loser": "398576262546735104",
+        "winnerScore": 174.3,
+        "loserScore": 117.4
+      },
+      {
+        "winner": "729741648338210816",
+        "loser": "462383465753473024",
+        "winnerScore": 130.9,
+        "loserScore": 124.95
+      },
+      {
+        "winner": "325766631336714240",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 142.25,
+        "loserScore": 95.95
+      },
+      {
+        "winner": "84006772809285632",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 141.45,
+        "loserScore": 81.8
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "386791325690994688",
+        "winnerScore": 136.65,
+        "loserScore": 95.15
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "726572095210930176",
+        "winnerScore": 111.85,
+        "loserScore": 79.65
+      }
+    ],
+    "4": [
+      {
+        "winner": "399379352174768128",
+        "loser": "84006772809285632",
+        "winnerScore": 139.65,
+        "loserScore": 99.2
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 139.8,
+        "loserScore": 114.1
+      },
+      {
+        "winner": "325766631336714240",
+        "loser": "726572095210930176",
+        "winnerScore": 126.15,
+        "loserScore": 108.55
+      },
+      {
+        "winner": "729741648338210816",
+        "loser": "386791325690994688",
+        "winnerScore": 147.4,
+        "loserScore": 120.15
+      },
+      {
+        "winner": "462383465753473024",
+        "loser": "398576262546735104",
+        "winnerScore": 124.65,
+        "loserScore": 94.7
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "331590801261883392",
+        "winnerScore": 127.6,
+        "loserScore": 104.55
+      }
+    ],
+    "5": [
+      {
+        "winner": "historical-speedway-ritual-cog",
+        "loser": "462383465753473024",
+        "winnerScore": 100.15,
+        "loserScore": 84.25
+      },
+      {
+        "winner": "84006772809285632",
+        "loser": "729741648338210816",
+        "winnerScore": 132.65,
+        "loserScore": 127.6
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "386791325690994688",
+        "winnerScore": 116.7,
+        "loserScore": 95.25
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "325766631336714240",
+        "winnerScore": 135.2,
+        "loserScore": 115
+      },
+      {
+        "winner": "398576262546735104",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 117.25,
+        "loserScore": 75.65
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "726572095210930176",
+        "winnerScore": 141.25,
+        "loserScore": 119.95
+      }
+    ],
+    "6": [
+      {
+        "winner": "729741648338210816",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 93.65,
+        "loserScore": 81.65
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "727368657923063808",
+        "winnerScore": 112.2,
+        "loserScore": 76.65
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 128.6,
+        "loserScore": 79.45
+      },
+      {
+        "winner": "84006772809285632",
+        "loser": "398576262546735104",
+        "winnerScore": 108.4,
+        "loserScore": 89.65
+      },
+      {
+        "winner": "726572095210930176",
+        "loser": "386791325690994688",
+        "winnerScore": 105.7,
+        "loserScore": 94.65
+      },
+      {
+        "winner": "462383465753473024",
+        "loser": "325766631336714240",
+        "winnerScore": 123.3,
+        "loserScore": 82.05
+      }
+    ],
+    "7": [
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "726572095210930176",
+        "winnerScore": 143.5,
+        "loserScore": 142.35
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 106.65,
+        "loserScore": 88.65
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "729741648338210816",
+        "winnerScore": 166.2,
+        "loserScore": 92.4
+      },
+      {
+        "winner": "84006772809285632",
+        "loser": "325766631336714240",
+        "winnerScore": 130.45,
+        "loserScore": 92.3
+      },
+      {
+        "winner": "398576262546735104",
+        "loser": "727368657923063808",
+        "winnerScore": 96.95,
+        "loserScore": 80.9
+      },
+      {
+        "winner": "386791325690994688",
+        "loser": "462383465753473024",
+        "winnerScore": 147.65,
+        "loserScore": 109.85
+      }
+    ],
+    "8": [
+      {
+        "winner": "84006772809285632",
+        "loser": "386791325690994688",
+        "winnerScore": 96.1,
+        "loserScore": 90.3
+      },
+      {
+        "winner": "729741648338210816",
+        "loser": "325766631336714240",
+        "winnerScore": 129.95,
+        "loserScore": 110.1
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "727368657923063808",
+        "winnerScore": 107.95,
+        "loserScore": 93.25
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "726572095210930176",
+        "winnerScore": 120.35,
+        "loserScore": 73.05
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "462383465753473024",
+        "winnerScore": 73.9,
+        "loserScore": 63.05
+      },
+      {
+        "winner": "398576262546735104",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 107.5,
+        "loserScore": 105.7
+      }
+    ],
+    "9": [
+      {
+        "winner": "729741648338210816",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 136.8,
+        "loserScore": 62.5
+      },
+      {
+        "winner": "386791325690994688",
+        "loser": "325766631336714240",
+        "winnerScore": 108.15,
+        "loserScore": 73.2
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "331590801261883392",
+        "winnerScore": 121.7,
+        "loserScore": 119.05
+      },
+      {
+        "winner": "726572095210930176",
+        "loser": "462383465753473024",
+        "winnerScore": 112.45,
+        "loserScore": 73.45
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "84006772809285632",
+        "winnerScore": 145.2,
+        "loserScore": 122.05
+      },
+      {
+        "winner": "398576262546735104",
+        "loser": "399379352174768128",
+        "winnerScore": 97.5,
+        "loserScore": 56.2
+      }
+    ],
+    "10": [
+      {
+        "winner": "386791325690994688",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 69.4,
+        "loserScore": 59.15
+      },
+      {
+        "winner": "462383465753473024",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 101.05,
+        "loserScore": 96.7
+      },
+      {
+        "winner": "729741648338210816",
+        "loser": "399379352174768128",
+        "winnerScore": 118.55,
+        "loserScore": 86.65
+      },
+      {
+        "winner": "726572095210930176",
+        "loser": "398576262546735104",
+        "winnerScore": 128.15,
+        "loserScore": 75.7
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "325766631336714240",
+        "winnerScore": 101,
+        "loserScore": 73.95
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "84006772809285632",
+        "winnerScore": 135.95,
+        "loserScore": 133.3
+      }
+    ],
+    "11": [
+      {
+        "winner": "399379352174768128",
+        "loser": "325766631336714240",
+        "winnerScore": 105.7,
+        "loserScore": 74.8
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "462383465753473024",
+        "winnerScore": 101,
+        "loserScore": 84.9
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "398576262546735104",
+        "winnerScore": 132.75,
+        "loserScore": 40.7
+      },
+      {
+        "winner": "386791325690994688",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 120.85,
+        "loserScore": 108.85
+      },
+      {
+        "winner": "84006772809285632",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 175,
+        "loserScore": 77.4
+      },
+      {
+        "winner": "729741648338210816",
+        "loser": "726572095210930176",
+        "winnerScore": 153.25,
+        "loserScore": 143.45
+      }
+    ],
+    "12": [
+      {
+        "winner": "729741648338210816",
+        "loser": "727368657923063808",
+        "winnerScore": 151.8,
+        "loserScore": 84.75
+      },
+      {
+        "winner": "462383465753473024",
+        "loser": "84006772809285632",
+        "winnerScore": 153.95,
+        "loserScore": 111.6
+      },
+      {
+        "winner": "726572095210930176",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 150.95,
+        "loserScore": 124.1
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "399379352174768128",
+        "winnerScore": 85.7,
+        "loserScore": 50.35
+      },
+      {
+        "winner": "325766631336714240",
+        "loser": "398576262546735104",
+        "winnerScore": 122.4,
+        "loserScore": 93.65
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "386791325690994688",
+        "winnerScore": 143.2,
+        "loserScore": 95.8
+      }
+    ],
+    "13": [
+      {
+        "winner": "726572095210930176",
+        "loser": "84006772809285632",
+        "winnerScore": 137.05,
+        "loserScore": 116.85
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "399379352174768128",
+        "winnerScore": 122.15,
+        "loserScore": 121.35
+      },
+      {
+        "winner": "325766631336714240",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 123.7,
+        "loserScore": 79.35
+      },
+      {
+        "winner": "historical-speedway-ritual-cog",
+        "loser": "727368657923063808",
+        "winnerScore": 151.65,
+        "loserScore": 116.05
+      },
+      {
+        "winner": "729741648338210816",
+        "loser": "462383465753473024",
+        "winnerScore": 121.75,
+        "loserScore": 100.7
+      },
+      {
+        "winner": "386791325690994688",
+        "loser": "398576262546735104",
+        "winnerScore": 94.6,
+        "loserScore": 59.85
+      }
+    ],
+    "14": [
+      {
+        "winner": "727368657923063808",
+        "loser": "726572095210930176",
+        "winnerScore": 102.65,
+        "loserScore": 99.9,
+        "placementType": "Championship Quarterfinal"
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 144.65,
+        "loserScore": 83.9,
+        "placementType": "Championship Quarterfinal"
+      },
+      {
+        "winner": "84006772809285632",
+        "loser": "325766631336714240",
+        "winnerScore": 145.15,
+        "loserScore": 132.55,
+        "placementType": "Toilet Bowl Quarterfinal"
+      },
+      {
+        "winner": "386791325690994688",
+        "loser": "398576262546735104",
+        "winnerScore": 106.25,
+        "loserScore": 58.7,
+        "placementType": "Toilet Bowl Quarterfinal"
+      },
+      {
+        "winner": "462383465753473024",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 107.4,
+        "loserScore": 67.35,
+        "placementType": "Toilet Bowl Quarterfinal"
+      }
+    ],
+    "15": [
+      {
+        "winner": "325766631336714240",
+        "loser": "462383465753473024",
+        "winnerScore": 157.4,
+        "loserScore": 71.2,
+        "placementType": "Toilet Bowl Semifinal"
+      },
+      {
+        "winner": "historical-speedway-ritual-cog",
+        "loser": "398576262546735104",
+        "winnerScore": 101.05,
+        "loserScore": 89.55,
+        "placementType": "Toilet Bowl Semifinal"
+      },
+      {
+        "winner": "84006772809285632",
+        "loser": "386791325690994688",
+        "winnerScore": 140,
+        "loserScore": 114.05,
+        "placementType": "Toilet Bowl Semifinal"
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "726572095210930176",
+        "winnerScore": 113.25,
+        "loserScore": 110.15,
+        "placementType": "Championship Semifinal"
+      },
+      {
+        "winner": "399379352174768128",
+        "loser": "729741648338210816",
+        "winnerScore": 112.55,
+        "loserScore": 104.6,
+        "placementType": "Championship Semifinal"
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "331590801261883392",
+        "winnerScore": 155.2,
+        "loserScore": 131.4,
+        "placementType": "Championship Semifinal"
+      }
+    ],
+    "16": [
+      {
+        "winner": "462383465753473024",
+        "loser": "398576262546735104",
+        "winnerScore": 135.1,
+        "loserScore": 88.4,
+        "placementType": "Last Place"
+      },
+      {
+        "winner": "historical-speedway-ritual-cog",
+        "loser": "386791325690994688",
+        "winnerScore": 82.6,
+        "loserScore": 82.3,
+        "placementType": "9th Place"
+      },
+      {
+        "winner": "325766631336714240",
+        "loser": "84006772809285632",
+        "winnerScore": 124.6,
+        "loserScore": 109.55,
+        "placementType": "7th Place"
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "726572095210930176",
+        "winnerScore": 101.05,
+        "loserScore": 92.75,
+        "placementType": "5th Place"
+      },
+      {
+        "winner": "331590801261883392",
+        "loser": "729741648338210816",
+        "winnerScore": 194.45,
+        "loserScore": 122.25,
+        "placementType": "3rd Place"
+      },
+      {
+        "winner": "727368657923063808",
+        "loser": "399379352174768128",
+        "winnerScore": 147.9,
+        "loserScore": 122.45,
+        "placementType": "Championship"
+      }
+    ]
+  },
+  "memberGameStats": {},
+  "draftData": {
+    "draftId": "espn-2020-premier-draft",
+    "leagueId": "espn-2020-premier",
+    "year": "2020",
+    "league": "PREMIER",
+    "draftOrder": {
+      "727368657923063808": 1,
+      "399379352174768128": 2,
+      "84006772809285632": 3,
+      "331590801261883392": 4,
+      "398576262546735104": 5,
+      "historical-speedway-ritual-cog": 6,
+      "729741648338210816": 7,
+      "325766631336714240": 8,
+      "historical-naptown-makos": 9,
+      "726572095210930176": 10,
+      "386791325690994688": 11,
+      "462383465753473024": 12
+    },
+    "picks": [
+      {
+        "pickNumber": 1,
+        "round": 1,
+        "pickInRound": 1,
+        "playerId": "espn-player-christian-mccaffrey",
+        "playerInfo": {
+          "name": "Christian McCaffrey",
+          "position": "RB",
+          "team": "CAR"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 2,
+        "round": 1,
+        "pickInRound": 2,
+        "playerId": "espn-player-ezekiel-elliott",
+        "playerInfo": {
+          "name": "Ezekiel Elliott",
+          "position": "RB",
+          "team": "DAL"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 3,
+        "round": 1,
+        "pickInRound": 3,
+        "playerId": "espn-player-saquon-barkley",
+        "playerInfo": {
+          "name": "Saquon Barkley",
+          "position": "RB",
+          "team": "NYG"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "TM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 4,
+        "round": 1,
+        "pickInRound": 4,
+        "playerId": "espn-player-alvin-kamara",
+        "playerInfo": {
+          "name": "Alvin Kamara",
+          "position": "RB",
+          "team": "NO"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "TS"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 5,
+        "round": 1,
+        "pickInRound": 5,
+        "playerId": "espn-player-michael-thomas",
+        "playerInfo": {
+          "name": "Michael Thomas",
+          "position": "WR",
+          "team": "NO"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 6,
+        "round": 1,
+        "pickInRound": 6,
+        "playerId": "espn-player-derrick-henry",
+        "playerInfo": {
+          "name": "Derrick Henry",
+          "position": "RB",
+          "team": "TEN"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 7,
+        "round": 1,
+        "pickInRound": 7,
+        "playerId": "espn-player-dalvin-cook",
+        "playerInfo": {
+          "name": "Dalvin Cook",
+          "position": "RB",
+          "team": "MIN"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Chicago Pick 6s",
+          "abbreviation": "CP6"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 8,
+        "round": 1,
+        "pickInRound": 8,
+        "playerId": "espn-player-clyde-edwards-helaire",
+        "playerInfo": {
+          "name": "Clyde Edwards-Helaire",
+          "position": "RB",
+          "team": "KC"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 9,
+        "round": 1,
+        "pickInRound": 9,
+        "playerId": "espn-player-miles-sanders",
+        "playerInfo": {
+          "name": "Miles Sanders",
+          "position": "RB",
+          "team": "CAR"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 10,
+        "round": 1,
+        "pickInRound": 10,
+        "playerId": "espn-player-josh-jacobs",
+        "playerInfo": {
+          "name": "Josh Jacobs",
+          "position": "RB",
+          "team": "LV"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "TD"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 11,
+        "round": 1,
+        "pickInRound": 11,
+        "playerId": "espn-player-aaron-jones",
+        "playerInfo": {
+          "name": "Aaron Jones",
+          "position": "RB",
+          "team": "GB"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 12,
+        "round": 1,
+        "pickInRound": 12,
+        "playerId": "espn-player-nick-chubb",
+        "playerInfo": {
+          "name": "Nick Chubb",
+          "position": "RB",
+          "team": "CLE"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 13,
+        "round": 2,
+        "pickInRound": 1,
+        "playerId": "espn-player-kenyan-drake",
+        "playerInfo": {
+          "name": "Kenyan Drake",
+          "position": "RB",
+          "team": "ARI"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 14,
+        "round": 2,
+        "pickInRound": 2,
+        "playerId": "espn-player-joe-mixon",
+        "playerInfo": {
+          "name": "Joe Mixon",
+          "position": "RB",
+          "team": "CIN"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 15,
+        "round": 2,
+        "pickInRound": 3,
+        "playerId": "espn-player-deandre-hopkins",
+        "playerInfo": {
+          "name": "DeAndre Hopkins",
+          "position": "WR",
+          "team": "ARI"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "TD"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 16,
+        "round": 2,
+        "pickInRound": 4,
+        "playerId": "espn-player-davante-adams",
+        "playerInfo": {
+          "name": "Davante Adams",
+          "position": "WR",
+          "team": "GB"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 17,
+        "round": 2,
+        "pickInRound": 5,
+        "playerId": "espn-player-austin-ekeler",
+        "playerInfo": {
+          "name": "Austin Ekeler",
+          "position": "RB",
+          "team": "LAC"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 18,
+        "round": 2,
+        "pickInRound": 6,
+        "playerId": "espn-player-tyreek-hill",
+        "playerInfo": {
+          "name": "Tyreek Hill",
+          "position": "WR",
+          "team": "KC"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Chicago Pick 6s",
+          "abbreviation": "CP6"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 19,
+        "round": 2,
+        "pickInRound": 7,
+        "playerId": "espn-player-julio-jones",
+        "playerInfo": {
+          "name": "Julio Jones",
+          "position": "WR",
+          "team": "ATL"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 20,
+        "round": 2,
+        "pickInRound": 8,
+        "playerId": "espn-player-travis-kelce",
+        "playerInfo": {
+          "name": "Travis Kelce",
+          "position": "TE",
+          "team": "KC"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 21,
+        "round": 2,
+        "pickInRound": 9,
+        "playerId": "espn-player-chris-godwin",
+        "playerInfo": {
+          "name": "Chris Godwin",
+          "position": "WR",
+          "team": "TB"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "TS"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 22,
+        "round": 2,
+        "pickInRound": 10,
+        "playerId": "espn-player-kenny-golladay",
+        "playerInfo": {
+          "name": "Kenny Golladay",
+          "position": "WR",
+          "team": "FA"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "TM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 23,
+        "round": 2,
+        "pickInRound": 11,
+        "playerId": "espn-player-george-kittle",
+        "playerInfo": {
+          "name": "George Kittle",
+          "position": "TE",
+          "team": "SF"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 24,
+        "round": 2,
+        "pickInRound": 12,
+        "playerId": "espn-player-mike-evans",
+        "playerInfo": {
+          "name": "Mike Evans",
+          "position": "WR",
+          "team": "TB"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 25,
+        "round": 3,
+        "pickInRound": 1,
+        "playerId": "espn-player-chris-carson",
+        "playerInfo": {
+          "name": "Chris Carson",
+          "position": "RB",
+          "team": "SEA"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 26,
+        "round": 3,
+        "pickInRound": 2,
+        "playerId": "espn-player-lamar-jackson",
+        "playerInfo": {
+          "name": "Lamar Jackson",
+          "position": "QB",
+          "team": "BAL"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 27,
+        "round": 3,
+        "pickInRound": 3,
+        "playerId": "espn-player-todd-gurley",
+        "playerInfo": {
+          "name": "Todd Gurley",
+          "position": "RB",
+          "team": "ATL"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "TM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 28,
+        "round": 3,
+        "pickInRound": 4,
+        "playerId": "espn-player-allen-robinson",
+        "playerInfo": {
+          "name": "Allen Robinson",
+          "position": "WR",
+          "team": "CHI"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "TS"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 29,
+        "round": 3,
+        "pickInRound": 5,
+        "playerId": "espn-player-d.j.-moore",
+        "playerInfo": {
+          "name": "D.J. Moore",
+          "position": "WR",
+          "team": "CAR"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 30,
+        "round": 3,
+        "pickInRound": 6,
+        "playerId": "espn-player-deshaun-watson",
+        "playerInfo": {
+          "name": "Deshaun Watson",
+          "position": "QB",
+          "team": "HOU"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 31,
+        "round": 3,
+        "pickInRound": 7,
+        "playerId": "espn-player-adam-thielen",
+        "playerInfo": {
+          "name": "Adam Thielen",
+          "position": "WR",
+          "team": "MIN"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Chicago Pick 6s",
+          "abbreviation": "CP6"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 32,
+        "round": 3,
+        "pickInRound": 8,
+        "playerId": "espn-player-patrick-mahomes",
+        "playerInfo": {
+          "name": "Patrick Mahomes",
+          "position": "QB",
+          "team": "KC"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 33,
+        "round": 3,
+        "pickInRound": 9,
+        "playerId": "espn-player-courtland-sutton",
+        "playerInfo": {
+          "name": "Courtland Sutton",
+          "position": "WR",
+          "team": "DEN"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 34,
+        "round": 3,
+        "pickInRound": 10,
+        "playerId": "espn-player-le'veon-bell",
+        "playerInfo": {
+          "name": "Le'Veon Bell",
+          "position": "RB",
+          "team": "NYJ"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "TD"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 35,
+        "round": 3,
+        "pickInRound": 11,
+        "playerId": "espn-player-tyler-lockett",
+        "playerInfo": {
+          "name": "Tyler Lockett",
+          "position": "WR",
+          "team": "SEA"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 36,
+        "round": 3,
+        "pickInRound": 12,
+        "playerId": "espn-player-juju-smith-schuster",
+        "playerInfo": {
+          "name": "JuJu Smith-Schuster",
+          "position": "WR",
+          "team": "PIT"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 37,
+        "round": 4,
+        "pickInRound": 1,
+        "playerId": "espn-player-amari-cooper",
+        "playerInfo": {
+          "name": "Amari Cooper",
+          "position": "WR",
+          "team": "DAL"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 38,
+        "round": 4,
+        "pickInRound": 2,
+        "playerId": "espn-player-a.j.-brown",
+        "playerInfo": {
+          "name": "A.J. Brown",
+          "position": "WR",
+          "team": "TEN"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 39,
+        "round": 4,
+        "pickInRound": 3,
+        "playerId": "espn-player-leonard-fournette",
+        "playerInfo": {
+          "name": "Leonard Fournette",
+          "position": "RB",
+          "team": "TB"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "TD"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 40,
+        "round": 4,
+        "pickInRound": 4,
+        "playerId": "espn-player-zach-ertz",
+        "playerInfo": {
+          "name": "Zach Ertz",
+          "position": "TE",
+          "team": "PHI"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 41,
+        "round": 4,
+        "pickInRound": 5,
+        "playerId": "espn-player-cooper-kupp",
+        "playerInfo": {
+          "name": "Cooper Kupp",
+          "position": "WR",
+          "team": "LAR"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 42,
+        "round": 4,
+        "pickInRound": 6,
+        "playerId": "espn-player-david-johnson",
+        "playerInfo": {
+          "name": "David Johnson",
+          "position": "RB",
+          "team": "HOU"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Chicago Pick 6s",
+          "abbreviation": "CP6"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 43,
+        "round": 4,
+        "pickInRound": 7,
+        "playerId": "espn-player-odell-beckham",
+        "playerInfo": {
+          "name": "Odell Beckham",
+          "position": "WR",
+          "team": "CLE"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 44,
+        "round": 4,
+        "pickInRound": 8,
+        "playerId": "espn-player-robert-woods",
+        "playerInfo": {
+          "name": "Robert Woods",
+          "position": "WR",
+          "team": "LAR"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 45,
+        "round": 4,
+        "pickInRound": 9,
+        "playerId": "espn-player-james-conner",
+        "playerInfo": {
+          "name": "James Conner",
+          "position": "RB",
+          "team": "PIT"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "TS"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 46,
+        "round": 4,
+        "pickInRound": 10,
+        "playerId": "espn-player-jonathan-taylor",
+        "playerInfo": {
+          "name": "Jonathan Taylor",
+          "position": "RB",
+          "team": "IND"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "TM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 47,
+        "round": 4,
+        "pickInRound": 11,
+        "playerId": "espn-player-calvin-ridley",
+        "playerInfo": {
+          "name": "Calvin Ridley",
+          "position": "WR",
+          "team": "ATL"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 48,
+        "round": 4,
+        "pickInRound": 12,
+        "playerId": "espn-player-terry-mclaurin",
+        "playerInfo": {
+          "name": "Terry McLaurin",
+          "position": "WR",
+          "team": "WAS"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 49,
+        "round": 5,
+        "pickInRound": 1,
+        "playerId": "espn-player-dk-metcalf",
+        "playerInfo": {
+          "name": "DK Metcalf",
+          "position": "WR",
+          "team": "SEA"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 50,
+        "round": 5,
+        "pickInRound": 2,
+        "playerId": "espn-player-mark-andrews",
+        "playerInfo": {
+          "name": "Mark Andrews",
+          "position": "TE",
+          "team": "BAL"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 51,
+        "round": 5,
+        "pickInRound": 3,
+        "playerId": "espn-player-keenan-allen",
+        "playerInfo": {
+          "name": "Keenan Allen",
+          "position": "WR",
+          "team": "LAC"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "TM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 52,
+        "round": 5,
+        "pickInRound": 4,
+        "playerId": "espn-player-d.j.-chark",
+        "playerInfo": {
+          "name": "D.J. Chark",
+          "position": "WR",
+          "team": "JAX"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "TS"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 53,
+        "round": 5,
+        "pickInRound": 5,
+        "playerId": "espn-player-melvin-gordon",
+        "playerInfo": {
+          "name": "Melvin Gordon",
+          "position": "RB",
+          "team": "DEN"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 54,
+        "round": 5,
+        "pickInRound": 6,
+        "playerId": "espn-player-david-montgomery",
+        "playerInfo": {
+          "name": "David Montgomery",
+          "position": "RB",
+          "team": "CHI"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 55,
+        "round": 5,
+        "pickInRound": 7,
+        "playerId": "espn-player-t.y.-hilton",
+        "playerInfo": {
+          "name": "T.Y. Hilton",
+          "position": "WR",
+          "team": "IND"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Chicago Pick 6s",
+          "abbreviation": "CP6"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 56,
+        "round": 5,
+        "pickInRound": 8,
+        "playerId": "espn-player-stefon-diggs",
+        "playerInfo": {
+          "name": "Stefon Diggs",
+          "position": "WR",
+          "team": "BUF"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 57,
+        "round": 5,
+        "pickInRound": 9,
+        "playerId": "espn-player-d'andre-swift",
+        "playerInfo": {
+          "name": "D'Andre Swift",
+          "position": "RB",
+          "team": "DET"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 58,
+        "round": 5,
+        "pickInRound": 10,
+        "playerId": "espn-player-a.j.-green",
+        "playerInfo": {
+          "name": "A.J. Green",
+          "position": "WR",
+          "team": "CIN"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "TD"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 59,
+        "round": 5,
+        "pickInRound": 11,
+        "playerId": "espn-player-cam-akers",
+        "playerInfo": {
+          "name": "Cam Akers",
+          "position": "RB",
+          "team": "LAR"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 60,
+        "round": 5,
+        "pickInRound": 12,
+        "playerId": "espn-player-devin-singletary",
+        "playerInfo": {
+          "name": "Devin Singletary",
+          "position": "RB",
+          "team": "BUF"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 61,
+        "round": 6,
+        "pickInRound": 1,
+        "playerId": "espn-player-will-fuller",
+        "playerInfo": {
+          "name": "Will Fuller",
+          "position": "WR",
+          "team": "HOU"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 62,
+        "round": 6,
+        "pickInRound": 2,
+        "playerId": "espn-player-marquise-brown",
+        "playerInfo": {
+          "name": "Marquise Brown",
+          "position": "WR",
+          "team": "BAL"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 63,
+        "round": 6,
+        "pickInRound": 3,
+        "playerId": "espn-player-darren-waller",
+        "playerInfo": {
+          "name": "Darren Waller",
+          "position": "TE",
+          "team": "LV"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "TD"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 64,
+        "round": 6,
+        "pickInRound": 4,
+        "playerId": "espn-player-devante-parker",
+        "playerInfo": {
+          "name": "DeVante Parker",
+          "position": "WR",
+          "team": "MIA"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 65,
+        "round": 6,
+        "pickInRound": 5,
+        "playerId": "espn-player-jarvis-landry",
+        "playerInfo": {
+          "name": "Jarvis Landry",
+          "position": "WR",
+          "team": "CLE"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 66,
+        "round": 6,
+        "pickInRound": 6,
+        "playerId": "espn-player-dak-prescott",
+        "playerInfo": {
+          "name": "Dak Prescott",
+          "position": "QB",
+          "team": "DAL"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Chicago Pick 6s",
+          "abbreviation": "CP6"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 67,
+        "round": 6,
+        "pickInRound": 7,
+        "playerId": "espn-player-evan-engram",
+        "playerInfo": {
+          "name": "Evan Engram",
+          "position": "TE",
+          "team": "NYG"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 68,
+        "round": 6,
+        "pickInRound": 8,
+        "playerId": "espn-player-raheem-mostert",
+        "playerInfo": {
+          "name": "Raheem Mostert",
+          "position": "RB",
+          "team": "SF"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 69,
+        "round": 6,
+        "pickInRound": 9,
+        "playerId": "espn-player-mark-ingram",
+        "playerInfo": {
+          "name": "Mark Ingram",
+          "position": "RB",
+          "team": "BAL"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "TS"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 70,
+        "round": 6,
+        "pickInRound": 10,
+        "playerId": "espn-player-brandin-cooks",
+        "playerInfo": {
+          "name": "Brandin Cooks",
+          "position": "WR",
+          "team": "HOU"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "TM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 71,
+        "round": 6,
+        "pickInRound": 11,
+        "playerId": "espn-player-kareem-hunt",
+        "playerInfo": {
+          "name": "Kareem Hunt",
+          "position": "RB",
+          "team": "CLE"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 72,
+        "round": 6,
+        "pickInRound": 12,
+        "playerId": "espn-player-ronald-jones",
+        "playerInfo": {
+          "name": "Ronald Jones",
+          "position": "RB",
+          "team": "TB"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 73,
+        "round": 7,
+        "pickInRound": 1,
+        "playerId": "espn-player-michael-gallup",
+        "playerInfo": {
+          "name": "Michael Gallup",
+          "position": "WR",
+          "team": "DAL"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 74,
+        "round": 7,
+        "pickInRound": 2,
+        "playerId": "espn-player-tyler-boyd",
+        "playerInfo": {
+          "name": "Tyler Boyd",
+          "position": "WR",
+          "team": "CIN"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 75,
+        "round": 7,
+        "pickInRound": 3,
+        "playerId": "espn-player-j.k.-dobbins",
+        "playerInfo": {
+          "name": "J.K. Dobbins",
+          "position": "RB",
+          "team": "BAL"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "TM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 76,
+        "round": 7,
+        "pickInRound": 4,
+        "playerId": "espn-player-kyler-murray",
+        "playerInfo": {
+          "name": "Kyler Murray",
+          "position": "QB",
+          "team": "ARI"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "TS"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 77,
+        "round": 7,
+        "pickInRound": 5,
+        "playerId": "espn-player-jordan-howard",
+        "playerInfo": {
+          "name": "Jordan Howard",
+          "position": "RB",
+          "team": "MIA"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 78,
+        "round": 7,
+        "pickInRound": 6,
+        "playerId": "espn-player-jared-cook",
+        "playerInfo": {
+          "name": "Jared Cook",
+          "position": "TE",
+          "team": "NO"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 79,
+        "round": 7,
+        "pickInRound": 7,
+        "playerId": "espn-player-tyler-higbee",
+        "playerInfo": {
+          "name": "Tyler Higbee",
+          "position": "TE",
+          "team": "LAR"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Chicago Pick 6s",
+          "abbreviation": "CP6"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 80,
+        "round": 7,
+        "pickInRound": 8,
+        "playerId": "espn-player-deebo-samuel",
+        "playerInfo": {
+          "name": "Deebo Samuel",
+          "position": "WR",
+          "team": "SF"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 81,
+        "round": 7,
+        "pickInRound": 9,
+        "playerId": "espn-player-russell-wilson",
+        "playerInfo": {
+          "name": "Russell Wilson",
+          "position": "QB",
+          "team": "SEA"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 82,
+        "round": 7,
+        "pickInRound": 10,
+        "playerId": "espn-player-tarik-cohen",
+        "playerInfo": {
+          "name": "Tarik Cohen",
+          "position": "RB",
+          "team": "CHI"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "TD"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 83,
+        "round": 7,
+        "pickInRound": 11,
+        "playerId": "espn-player-julian-edelman",
+        "playerInfo": {
+          "name": "Julian Edelman",
+          "position": "WR",
+          "team": "NE"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 84,
+        "round": 7,
+        "pickInRound": 12,
+        "playerId": "espn-player-jamison-crowder",
+        "playerInfo": {
+          "name": "Jamison Crowder",
+          "position": "WR",
+          "team": "NYJ"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 85,
+        "round": 8,
+        "pickInRound": 1,
+        "playerId": "espn-player-tom-brady",
+        "playerInfo": {
+          "name": "Tom Brady",
+          "position": "QB",
+          "team": "TB"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 86,
+        "round": 8,
+        "pickInRound": 2,
+        "playerId": "espn-player-marvin-jones",
+        "playerInfo": {
+          "name": "Marvin Jones",
+          "position": "WR",
+          "team": "DET"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 87,
+        "round": 8,
+        "pickInRound": 3,
+        "playerId": "espn-player-john-brown",
+        "playerInfo": {
+          "name": "John Brown",
+          "position": "WR",
+          "team": "BUF"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "TD"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 88,
+        "round": 8,
+        "pickInRound": 4,
+        "playerId": "espn-player-diontae-johnson",
+        "playerInfo": {
+          "name": "Diontae Johnson",
+          "position": "WR",
+          "team": "PIT"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 89,
+        "round": 8,
+        "pickInRound": 5,
+        "playerId": "espn-player-henry-ruggs",
+        "playerInfo": {
+          "name": "Henry Ruggs",
+          "position": "WR",
+          "team": "LV"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 90,
+        "round": 8,
+        "pickInRound": 6,
+        "playerId": "espn-player-matt-ryan",
+        "playerInfo": {
+          "name": "Matt Ryan",
+          "position": "QB",
+          "team": "ATL"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Chicago Pick 6s",
+          "abbreviation": "CP6"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 91,
+        "round": 8,
+        "pickInRound": 7,
+        "playerId": "espn-player-latavius-murray",
+        "playerInfo": {
+          "name": "Latavius Murray",
+          "position": "RB",
+          "team": "NO"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 92,
+        "round": 8,
+        "pickInRound": 8,
+        "playerId": "espn-player-zack-moss",
+        "playerInfo": {
+          "name": "Zack Moss",
+          "position": "RB",
+          "team": "BUF"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 93,
+        "round": 8,
+        "pickInRound": 9,
+        "playerId": "espn-player-james-white",
+        "playerInfo": {
+          "name": "James White",
+          "position": "RB",
+          "team": "NE"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "TS"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 94,
+        "round": 8,
+        "pickInRound": 10,
+        "playerId": "espn-player-phillip-lindsay",
+        "playerInfo": {
+          "name": "Phillip Lindsay",
+          "position": "RB",
+          "team": "DEN"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "TM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 95,
+        "round": 8,
+        "pickInRound": 11,
+        "playerId": "espn-player-kerryon-johnson",
+        "playerInfo": {
+          "name": "Kerryon Johnson",
+          "position": "RB",
+          "team": "DET"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 96,
+        "round": 8,
+        "pickInRound": 12,
+        "playerId": "espn-player-tevin-coleman",
+        "playerInfo": {
+          "name": "Tevin Coleman",
+          "position": "RB",
+          "team": "SF"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 97,
+        "round": 9,
+        "pickInRound": 1,
+        "playerId": "espn-player-christian-kirk",
+        "playerInfo": {
+          "name": "Christian Kirk",
+          "position": "WR",
+          "team": "ARI"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 98,
+        "round": 9,
+        "pickInRound": 2,
+        "playerId": "espn-player-mecole-hardman",
+        "playerInfo": {
+          "name": "Mecole Hardman",
+          "position": "WR",
+          "team": "KC"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 99,
+        "round": 9,
+        "pickInRound": 3,
+        "playerId": "espn-player-noah-fant",
+        "playerInfo": {
+          "name": "Noah Fant",
+          "position": "TE",
+          "team": "DEN"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "TM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 100,
+        "round": 9,
+        "pickInRound": 4,
+        "playerId": "espn-player-antonio-gibson",
+        "playerInfo": {
+          "name": "Antonio Gibson",
+          "position": "RB",
+          "team": "WAS"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "TS"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 101,
+        "round": 9,
+        "pickInRound": 5,
+        "playerId": "espn-player-sterling-shepard",
+        "playerInfo": {
+          "name": "Sterling Shepard",
+          "position": "WR",
+          "team": "NYG"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 102,
+        "round": 9,
+        "pickInRound": 6,
+        "playerId": "espn-player-darrell-henderson",
+        "playerInfo": {
+          "name": "Darrell Henderson",
+          "position": "RB",
+          "team": "LAR"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 103,
+        "round": 9,
+        "pickInRound": 7,
+        "playerId": "espn-player-robbie-chosen",
+        "playerInfo": {
+          "name": "Robbie Chosen",
+          "position": "WR",
+          "team": "CAR"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Chicago Pick 6s",
+          "abbreviation": "CP6"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 104,
+        "round": 9,
+        "pickInRound": 8,
+        "playerId": "espn-player-rob-gronkowski",
+        "playerInfo": {
+          "name": "Rob Gronkowski",
+          "position": "TE",
+          "team": "TB"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 105,
+        "round": 9,
+        "pickInRound": 9,
+        "playerId": "espn-player-matt-breida",
+        "playerInfo": {
+          "name": "Matt Breida",
+          "position": "RB",
+          "team": "MIA"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 106,
+        "round": 9,
+        "pickInRound": 10,
+        "playerId": "espn-player-emmanuel-sanders",
+        "playerInfo": {
+          "name": "Emmanuel Sanders",
+          "position": "WR",
+          "team": "NO"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "TD"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 107,
+        "round": 9,
+        "pickInRound": 11,
+        "playerId": "espn-player-marlon-mack",
+        "playerInfo": {
+          "name": "Marlon Mack",
+          "position": "RB",
+          "team": "IND"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 108,
+        "round": 9,
+        "pickInRound": 12,
+        "playerId": "espn-player-hunter-henry",
+        "playerInfo": {
+          "name": "Hunter Henry",
+          "position": "TE",
+          "team": "LAC"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 109,
+        "round": 10,
+        "pickInRound": 1,
+        "playerId": "espn-player-preston-williams",
+        "playerInfo": {
+          "name": "Preston Williams",
+          "position": "WR",
+          "team": "MIA"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 110,
+        "round": 10,
+        "pickInRound": 2,
+        "playerId": "espn-player-boston-scott",
+        "playerInfo": {
+          "name": "Boston Scott",
+          "position": "RB",
+          "team": "PHI"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 111,
+        "round": 10,
+        "pickInRound": 3,
+        "playerId": "espn-player-ceedee-lamb",
+        "playerInfo": {
+          "name": "CeeDee Lamb",
+          "position": "WR",
+          "team": "DAL"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "TD"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 112,
+        "round": 10,
+        "pickInRound": 4,
+        "playerId": "espn-player-hayden-hurst",
+        "playerInfo": {
+          "name": "Hayden Hurst",
+          "position": "TE",
+          "team": "ATL"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 113,
+        "round": 10,
+        "pickInRound": 5,
+        "playerId": "espn-player-alexander-mattison",
+        "playerInfo": {
+          "name": "Alexander Mattison",
+          "position": "RB",
+          "team": "MIN"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 114,
+        "round": 10,
+        "pickInRound": 6,
+        "playerId": "espn-player-pittsburgh-steelers",
+        "playerInfo": {
+          "name": "Pittsburgh Steelers",
+          "position": "DEF",
+          "team": "PIT"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Chicago Pick 6s",
+          "abbreviation": "CP6"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 115,
+        "round": 10,
+        "pickInRound": 7,
+        "playerId": "espn-player-jack-doyle",
+        "playerInfo": {
+          "name": "Jack Doyle",
+          "position": "TE",
+          "team": "IND"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 116,
+        "round": 10,
+        "pickInRound": 8,
+        "playerId": "espn-player-jerry-jeudy",
+        "playerInfo": {
+          "name": "Jerry Jeudy",
+          "position": "WR",
+          "team": "DEN"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 117,
+        "round": 10,
+        "pickInRound": 9,
+        "playerId": "espn-player-sony-michel",
+        "playerInfo": {
+          "name": "Sony Michel",
+          "position": "RB",
+          "team": "NE"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "TS"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 118,
+        "round": 10,
+        "pickInRound": 10,
+        "playerId": "espn-player-darius-slayton",
+        "playerInfo": {
+          "name": "Darius Slayton",
+          "position": "WR",
+          "team": "NYG"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "TM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 119,
+        "round": 10,
+        "pickInRound": 11,
+        "playerId": "espn-player-breshad-perriman",
+        "playerInfo": {
+          "name": "Breshad Perriman",
+          "position": "WR",
+          "team": "NYJ"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 120,
+        "round": 10,
+        "pickInRound": 12,
+        "playerId": "espn-player-ke'shawn-vaughn",
+        "playerInfo": {
+          "name": "Ke'Shawn Vaughn",
+          "position": "RB",
+          "team": "FA"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 121,
+        "round": 11,
+        "pickInRound": 1,
+        "playerId": "espn-player-mike-gesicki",
+        "playerInfo": {
+          "name": "Mike Gesicki",
+          "position": "TE",
+          "team": "MIA"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 122,
+        "round": 11,
+        "pickInRound": 2,
+        "playerId": "espn-player-indianapolis-colts",
+        "playerInfo": {
+          "name": "Indianapolis Colts",
+          "position": "DEF",
+          "team": "IND"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 123,
+        "round": 11,
+        "pickInRound": 3,
+        "playerId": "espn-player-josh-allen",
+        "playerInfo": {
+          "name": "Josh Allen",
+          "position": "QB",
+          "team": "BUF"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "TM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 124,
+        "round": 11,
+        "pickInRound": 4,
+        "playerId": "espn-player-jalen-reagor",
+        "playerInfo": {
+          "name": "Jalen Reagor",
+          "position": "WR",
+          "team": "PHI"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "TS"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 125,
+        "round": 11,
+        "pickInRound": 5,
+        "playerId": "espn-player-drew-brees",
+        "playerInfo": {
+          "name": "Drew Brees",
+          "position": "QB",
+          "team": "NO"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 126,
+        "round": 11,
+        "pickInRound": 6,
+        "playerId": "espn-player-golden-tate",
+        "playerInfo": {
+          "name": "Golden Tate",
+          "position": "WR",
+          "team": "FA"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 127,
+        "round": 11,
+        "pickInRound": 7,
+        "playerId": "espn-player-curtis-samuel",
+        "playerInfo": {
+          "name": "Curtis Samuel",
+          "position": "WR",
+          "team": "CAR"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Chicago Pick 6s",
+          "abbreviation": "CP6"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 128,
+        "round": 11,
+        "pickInRound": 8,
+        "playerId": "espn-player-justin-jefferson",
+        "playerInfo": {
+          "name": "Justin Jefferson",
+          "position": "WR",
+          "team": "MIN"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 129,
+        "round": 11,
+        "pickInRound": 9,
+        "playerId": "espn-player-buffalo-bills",
+        "playerInfo": {
+          "name": "Buffalo Bills",
+          "position": "DEF",
+          "team": "BUF"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 130,
+        "round": 11,
+        "pickInRound": 10,
+        "playerId": "espn-player-chicago-bears",
+        "playerInfo": {
+          "name": "Chicago Bears",
+          "position": "DEF",
+          "team": "CHI"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "TD"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 131,
+        "round": 11,
+        "pickInRound": 11,
+        "playerId": "espn-player-brandon-aiyuk",
+        "playerInfo": {
+          "name": "Brandon Aiyuk",
+          "position": "WR",
+          "team": "SF"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 132,
+        "round": 11,
+        "pickInRound": 12,
+        "playerId": "espn-player-san-francisco-49ers",
+        "playerInfo": {
+          "name": "San Francisco 49ers",
+          "position": "DEF",
+          "team": "SF"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 133,
+        "round": 12,
+        "pickInRound": 1,
+        "playerId": "espn-player-tua-tagovailoa",
+        "playerInfo": {
+          "name": "Tua Tagovailoa",
+          "position": "QB",
+          "team": "MIA"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 134,
+        "round": 12,
+        "pickInRound": 2,
+        "playerId": "espn-player-steven-sims",
+        "playerInfo": {
+          "name": "Steven Sims",
+          "position": "WR",
+          "team": "WAS"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 135,
+        "round": 12,
+        "pickInRound": 3,
+        "playerId": "espn-player-aaron-rodgers",
+        "playerInfo": {
+          "name": "Aaron Rodgers",
+          "position": "QB",
+          "team": "GB"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "TD"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 136,
+        "round": 12,
+        "pickInRound": 4,
+        "playerId": "espn-player-cam-newton",
+        "playerInfo": {
+          "name": "Cam Newton",
+          "position": "QB",
+          "team": "NE"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 137,
+        "round": 12,
+        "pickInRound": 5,
+        "playerId": "espn-player-adrian-peterson",
+        "playerInfo": {
+          "name": "Adrian Peterson",
+          "position": "RB",
+          "team": "DET"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 138,
+        "round": 12,
+        "pickInRound": 6,
+        "playerId": "espn-player-mike-williams",
+        "playerInfo": {
+          "name": "Mike Williams",
+          "position": "WR",
+          "team": "LAC"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Chicago Pick 6s",
+          "abbreviation": "CP6"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 139,
+        "round": 12,
+        "pickInRound": 7,
+        "playerId": "espn-player-new-england-patriots",
+        "playerInfo": {
+          "name": "New England Patriots",
+          "position": "DEF",
+          "team": "NE"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 140,
+        "round": 12,
+        "pickInRound": 8,
+        "playerId": "espn-player-tony-pollard",
+        "playerInfo": {
+          "name": "Tony Pollard",
+          "position": "RB",
+          "team": "DAL"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 141,
+        "round": 12,
+        "pickInRound": 9,
+        "playerId": "espn-player-eric-ebron",
+        "playerInfo": {
+          "name": "Eric Ebron",
+          "position": "TE",
+          "team": "PIT"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "TS"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 142,
+        "round": 12,
+        "pickInRound": 10,
+        "playerId": "espn-player-damien-harris",
+        "playerInfo": {
+          "name": "Damien Harris",
+          "position": "RB",
+          "team": "FA"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "TM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 143,
+        "round": 12,
+        "pickInRound": 11,
+        "playerId": "espn-player-parris-campbell",
+        "playerInfo": {
+          "name": "Parris Campbell",
+          "position": "WR",
+          "team": "IND"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 144,
+        "round": 12,
+        "pickInRound": 12,
+        "playerId": "espn-player-matthew-stafford",
+        "playerInfo": {
+          "name": "Matthew Stafford",
+          "position": "QB",
+          "team": "DET"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 145,
+        "round": 13,
+        "pickInRound": 1,
+        "playerId": "espn-player-baltimore-ravens",
+        "playerInfo": {
+          "name": "Baltimore Ravens",
+          "position": "DEF",
+          "team": "BAL"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 146,
+        "round": 13,
+        "pickInRound": 2,
+        "playerId": "espn-player-sammy-watkins",
+        "playerInfo": {
+          "name": "Sammy Watkins",
+          "position": "WR",
+          "team": "KC"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 147,
+        "round": 13,
+        "pickInRound": 3,
+        "playerId": "espn-player-anthony-miller",
+        "playerInfo": {
+          "name": "Anthony Miller",
+          "position": "WR",
+          "team": "CHI"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "TM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 148,
+        "round": 13,
+        "pickInRound": 4,
+        "playerId": "espn-player-los-angeles-chargers",
+        "playerInfo": {
+          "name": "Los Angeles Chargers",
+          "position": "DEF",
+          "team": "LAC"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "TS"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 149,
+        "round": 13,
+        "pickInRound": 5,
+        "playerId": "espn-player-allen-lazard",
+        "playerInfo": {
+          "name": "Allen Lazard",
+          "position": "WR",
+          "team": "GB"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 150,
+        "round": 13,
+        "pickInRound": 6,
+        "playerId": "espn-player-desean-jackson",
+        "playerInfo": {
+          "name": "DeSean Jackson",
+          "position": "WR",
+          "team": "PHI"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 151,
+        "round": 13,
+        "pickInRound": 7,
+        "playerId": "espn-player-duke-johnson",
+        "playerInfo": {
+          "name": "Duke Johnson",
+          "position": "RB",
+          "team": "HOU"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Chicago Pick 6s",
+          "abbreviation": "CP6"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 152,
+        "round": 13,
+        "pickInRound": 8,
+        "playerId": "espn-player-michael-pittman",
+        "playerInfo": {
+          "name": "Michael Pittman",
+          "position": "WR",
+          "team": "IND"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 153,
+        "round": 13,
+        "pickInRound": 9,
+        "playerId": "espn-player-nyheim-hines",
+        "playerInfo": {
+          "name": "Nyheim Hines",
+          "position": "RB",
+          "team": "IND"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 154,
+        "round": 13,
+        "pickInRound": 10,
+        "playerId": "espn-player-t.j.-hockenson",
+        "playerInfo": {
+          "name": "T.J. Hockenson",
+          "position": "TE",
+          "team": "DET"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "TD"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 155,
+        "round": 13,
+        "pickInRound": 11,
+        "playerId": "espn-player-carson-wentz",
+        "playerInfo": {
+          "name": "Carson Wentz",
+          "position": "QB",
+          "team": "PHI"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 156,
+        "round": 13,
+        "pickInRound": 12,
+        "playerId": "espn-player-justin-jackson",
+        "playerInfo": {
+          "name": "Justin Jackson",
+          "position": "RB",
+          "team": "LAC"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 157,
+        "round": 14,
+        "pickInRound": 1,
+        "playerId": "espn-player-denzel-mims",
+        "playerInfo": {
+          "name": "Denzel Mims",
+          "position": "WR",
+          "team": "FA"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 158,
+        "round": 14,
+        "pickInRound": 2,
+        "playerId": "espn-player-blake-jarwin",
+        "playerInfo": {
+          "name": "Blake Jarwin",
+          "position": "TE",
+          "team": "DAL"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 159,
+        "round": 14,
+        "pickInRound": 3,
+        "playerId": "espn-player-james-washington",
+        "playerInfo": {
+          "name": "James Washington",
+          "position": "WR",
+          "team": "PIT"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "TD"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 160,
+        "round": 14,
+        "pickInRound": 4,
+        "playerId": "espn-player-chris-herndon",
+        "playerInfo": {
+          "name": "Chris Herndon",
+          "position": "TE",
+          "team": "NYJ"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 161,
+        "round": 14,
+        "pickInRound": 5,
+        "playerId": "espn-player-philadelphia-eagles",
+        "playerInfo": {
+          "name": "Philadelphia Eagles",
+          "position": "DEF",
+          "team": "PHI"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 162,
+        "round": 14,
+        "pickInRound": 6,
+        "playerId": "espn-player-new-orleans-saints",
+        "playerInfo": {
+          "name": "New Orleans Saints",
+          "position": "DEF",
+          "team": "NO"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Chicago Pick 6s",
+          "abbreviation": "CP6"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 163,
+        "round": 14,
+        "pickInRound": 7,
+        "playerId": "espn-player-daniel-jones",
+        "playerInfo": {
+          "name": "Daniel Jones",
+          "position": "QB",
+          "team": "NYG"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 164,
+        "round": 14,
+        "pickInRound": 8,
+        "playerId": "espn-player-kansas-city-chiefs",
+        "playerInfo": {
+          "name": "Kansas City Chiefs",
+          "position": "DEF",
+          "team": "KC"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 165,
+        "round": 14,
+        "pickInRound": 9,
+        "playerId": "espn-player-bryce-love",
+        "playerInfo": {
+          "name": "Bryce Love",
+          "position": "RB",
+          "team": "FA"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "TS"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 166,
+        "round": 14,
+        "pickInRound": 10,
+        "playerId": "espn-player-chase-edmonds",
+        "playerInfo": {
+          "name": "Chase Edmonds",
+          "position": "RB",
+          "team": "ARI"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "TM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 167,
+        "round": 14,
+        "pickInRound": 11,
+        "playerId": "espn-player-ryquell-armstead",
+        "playerInfo": {
+          "name": "Ryquell Armstead",
+          "position": "RB",
+          "team": "FA"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 168,
+        "round": 14,
+        "pickInRound": 12,
+        "playerId": "espn-player-austin-hooper",
+        "playerInfo": {
+          "name": "Austin Hooper",
+          "position": "TE",
+          "team": "CLE"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 169,
+        "round": 15,
+        "pickInRound": 1,
+        "playerId": "espn-player-joe-burrow",
+        "playerInfo": {
+          "name": "Joe Burrow",
+          "position": "QB",
+          "team": "CIN"
+        },
+        "pickedBy": "727368657923063808",
+        "userInfo": {
+          "userId": "727368657923063808",
+          "ffuUserId": "ffu-009",
+          "teamName": "Wisconsian Banana Bread",
+          "abbreviation": "WBB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 170,
+        "round": 15,
+        "pickInRound": 2,
+        "playerId": "espn-player-joshua-kelley",
+        "playerInfo": {
+          "name": "Joshua Kelley",
+          "position": "RB",
+          "team": "LAC"
+        },
+        "pickedBy": "399379352174768128",
+        "userInfo": {
+          "userId": "399379352174768128",
+          "ffuUserId": "ffu-051",
+          "teamName": "Stone Cold Steve Irwins",
+          "abbreviation": "SCSI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 171,
+        "round": 15,
+        "pickInRound": 3,
+        "playerId": "espn-player-minnesota-vikings",
+        "playerInfo": {
+          "name": "Minnesota Vikings",
+          "position": "DEF",
+          "team": "MIN"
+        },
+        "pickedBy": "84006772809285632",
+        "userInfo": {
+          "userId": "84006772809285632",
+          "ffuUserId": "ffu-023",
+          "teamName": "The Minutemen",
+          "abbreviation": "TM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 172,
+        "round": 15,
+        "pickInRound": 4,
+        "playerId": "espn-player-jerick-mckinnon",
+        "playerInfo": {
+          "name": "Jerick McKinnon",
+          "position": "RB",
+          "team": "SF"
+        },
+        "pickedBy": "331590801261883392",
+        "userInfo": {
+          "userId": "331590801261883392",
+          "ffuUserId": "ffu-001",
+          "teamName": "The Stallions",
+          "abbreviation": "TS"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 173,
+        "round": 15,
+        "pickInRound": 5,
+        "playerId": "espn-player-jamaal-williams",
+        "playerInfo": {
+          "name": "Jamaal Williams",
+          "position": "RB",
+          "team": "GB"
+        },
+        "pickedBy": "398576262546735104",
+        "userInfo": {
+          "userId": "398576262546735104",
+          "ffuUserId": "ffu-004",
+          "teamName": "Blood, Sweat and Beers",
+          "abbreviation": "BSAB"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 174,
+        "round": 15,
+        "pickInRound": 6,
+        "playerId": "espn-player-larry-fitzgerald",
+        "playerInfo": {
+          "name": "Larry Fitzgerald",
+          "position": "WR",
+          "team": "ARI"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 175,
+        "round": 15,
+        "pickInRound": 7,
+        "playerId": "espn-player-dallas-goedert",
+        "playerInfo": {
+          "name": "Dallas Goedert",
+          "position": "TE",
+          "team": "PHI"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Chicago Pick 6s",
+          "abbreviation": "CP6"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 176,
+        "round": 15,
+        "pickInRound": 8,
+        "playerId": "espn-player-robert-griffin-iii",
+        "playerInfo": {
+          "name": "Robert Griffin III",
+          "position": "QB",
+          "team": "BAL"
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "ffuUserId": "ffu-024",
+          "teamName": "Goat Emoji II",
+          "abbreviation": "GEI"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 177,
+        "round": 15,
+        "pickInRound": 9,
+        "playerId": "espn-player-randall-cobb",
+        "playerInfo": {
+          "name": "Randall Cobb",
+          "position": "WR",
+          "team": "HOU"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 178,
+        "round": 15,
+        "pickInRound": 10,
+        "playerId": "espn-player-n'keal-harry",
+        "playerInfo": {
+          "name": "N'Keal Harry",
+          "position": "WR",
+          "team": "NE"
+        },
+        "pickedBy": "726572095210930176",
+        "userInfo": {
+          "userId": "726572095210930176",
+          "ffuUserId": "ffu-031",
+          "teamName": "Team Dogecoin",
+          "abbreviation": "TD"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 179,
+        "round": 15,
+        "pickInRound": 11,
+        "playerId": "espn-player-chris-thompson",
+        "playerInfo": {
+          "name": "Chris Thompson",
+          "position": "RB",
+          "team": "JAX"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 180,
+        "round": 15,
+        "pickInRound": 12,
+        "playerId": "espn-player-aj-dillon",
+        "playerInfo": {
+          "name": "AJ Dillon",
+          "position": "RB",
+          "team": "GB"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2020-premier-draft",
+        "draftSlot": 12
+      }
+    ],
+    "settings": {
+      "teams": 12,
+      "rounds": 15,
+      "draftType": "snake"
+    },
+    "metadata": {
+      "name": "ESPN 2020 Premier Draft",
+      "description": "Premier League Draft for 2020 season",
+      "scoringType": "standard"
+    },
+    "startTime": 1597449600000,
+    "status": "complete"
+  }
+}

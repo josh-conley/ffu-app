@@ -2,11 +2,12 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout/Layout';
 import { Overview } from './pages/Overview';
 import { Standings } from './pages/Standings';
-import { PlayerStats } from './pages/PlayerStats';
+import { Members } from './pages/Members';
 import { Matchups } from './pages/Matchups';
 import { Draft } from './pages/Draft';
 import { Records } from './pages/Records';
 import { DraftTrendsAnalysis } from './components/DraftAnalysis/DraftTrendsAnalysis';
+import { AllTimeStats } from './pages/AllTimeStats';
 import { SecretDak } from './pages/SecretDak';
 import { ThemeProvider } from './contexts/ThemeContext';
 
@@ -19,11 +20,12 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route index element={<Overview />} />
               <Route path="standings" element={<Standings />} />
-              <Route path="players" element={<PlayerStats />} />
+              <Route path="members" element={<Members />} />
               <Route path="matchups" element={<Matchups />} />
               <Route path="drafts" element={<Draft />} />
               <Route path="draft-trends" element={<DraftTrendsAnalysis />} />
               <Route path="records" element={<Records />} />
+              <Route path="stats" element={<AllTimeStats />} />
               <Route path="secret-dak" element={<SecretDak />} />
             </Route>
           </Routes>

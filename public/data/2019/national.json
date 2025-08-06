@@ -1,0 +1,4543 @@
+{
+  "league": "NATIONAL",
+  "year": "2019",
+  "leagueId": "espn-2019-national",
+  "standings": [
+    {
+      "userId": "462383465753473024",
+      "ffuUserId": "ffu-026",
+      "wins": 9,
+      "losses": 4,
+      "pointsFor": 1561.15,
+      "pointsAgainst": 1393.3,
+      "rank": 1,
+      "userInfo": {
+        "teamName": "Currier Island Raging Rhinos",
+        "abbreviation": "CIRR"
+      }
+    },
+    {
+      "userId": "386791325690994688",
+      "ffuUserId": "ffu-025",
+      "wins": 10,
+      "losses": 3,
+      "pointsFor": 1441.7,
+      "pointsAgainst": 1353.85,
+      "rank": 2,
+      "userInfo": {
+        "teamName": "Indianapolis Aztecs",
+        "abbreviation": "IA"
+      }
+    },
+    {
+      "userId": "historical-naptown-makos",
+      "ffuUserId": "ffu-h01",
+      "wins": 10,
+      "losses": 3,
+      "pointsFor": 1463.8,
+      "pointsAgainst": 1168.95,
+      "rank": 3,
+      "userInfo": {
+        "teamName": "Naptown Makos",
+        "abbreviation": "NM"
+      }
+    },
+    {
+      "userId": "historical-speedway-ritual-cog",
+      "ffuUserId": "ffu-h02",
+      "wins": 7,
+      "losses": 6,
+      "pointsFor": 1315.4,
+      "pointsAgainst": 1394.75,
+      "rank": 4,
+      "userInfo": {
+        "teamName": "Speedway's Ritual Cog",
+        "abbreviation": "SRC"
+      }
+    },
+    {
+      "userId": "729741648338210816",
+      "ffuUserId": "ffu-010",
+      "wins": 7,
+      "losses": 6,
+      "pointsFor": 1499.75,
+      "pointsAgainst": 1473.85,
+      "rank": 5,
+      "userInfo": {
+        "teamName": "Team Painter Pick 6",
+        "abbreviation": "TPP6"
+      }
+    },
+    {
+      "userId": "599711204499312640",
+      "ffuUserId": "ffu-045",
+      "wins": 7,
+      "losses": 6,
+      "pointsFor": 1605.5,
+      "pointsAgainst": 1451.9,
+      "rank": 6,
+      "userInfo": {
+        "teamName": "Team Black Death",
+        "abbreviation": "TBD"
+      }
+    },
+    {
+      "userId": "399322397750124544",
+      "ffuUserId": "ffu-041",
+      "wins": 6,
+      "losses": 7,
+      "pointsFor": 1494.3,
+      "pointsAgainst": 1461.95,
+      "rank": 7,
+      "userInfo": {
+        "teamName": "Great Team Name",
+        "abbreviation": "GTN"
+      }
+    },
+    {
+      "userId": "historical-the-losers",
+      "ffuUserId": "ffu-h05",
+      "wins": 5,
+      "losses": 8,
+      "pointsFor": 1541.7,
+      "pointsAgainst": 1382.85,
+      "rank": 8,
+      "userInfo": {
+        "teamName": "The Losers",
+        "abbreviation": "TL"
+      }
+    },
+    {
+      "userId": "historical-gingy-flame",
+      "ffuUserId": "ffu-h06",
+      "wins": 4,
+      "losses": 9,
+      "pointsFor": 1321.85,
+      "pointsAgainst": 1722.65,
+      "rank": 9,
+      "userInfo": {
+        "teamName": "Gingy Flame",
+        "abbreviation": "GF"
+      }
+    },
+    {
+      "userId": "399297882890440704",
+      "ffuUserId": "ffu-043",
+      "wins": 7,
+      "losses": 6,
+      "pointsFor": 1415.2,
+      "pointsAgainst": 1389.3,
+      "rank": 10,
+      "userInfo": {
+        "teamName": "Elm Street Skywalkers",
+        "abbreviation": "ESS"
+      }
+    },
+    {
+      "userId": "507633950666584064",
+      "ffuUserId": "ffu-028",
+      "wins": 2,
+      "losses": 11,
+      "pointsFor": 1161.15,
+      "pointsAgainst": 1394.5,
+      "rank": 11,
+      "userInfo": {
+        "teamName": "El Guapo Puto",
+        "abbreviation": "EGP"
+      }
+    },
+    {
+      "userId": "508719015656099840",
+      "ffuUserId": "ffu-029",
+      "wins": 4,
+      "losses": 9,
+      "pointsFor": 1272.35,
+      "pointsAgainst": 1506,
+      "rank": 12,
+      "userInfo": {
+        "teamName": "Team Pancake",
+        "abbreviation": "TP"
+      }
+    }
+  ],
+  "playoffResults": [
+    {
+      "userId": "462383465753473024",
+      "ffuUserId": "ffu-026",
+      "placement": 1,
+      "placementName": "1st",
+      "userInfo": {
+        "teamName": "Currier Island Raging Rhinos",
+        "abbreviation": "CIRR"
+      }
+    },
+    {
+      "userId": "386791325690994688",
+      "ffuUserId": "ffu-025",
+      "placement": 2,
+      "placementName": "2nd",
+      "userInfo": {
+        "teamName": "Indianapolis Aztecs",
+        "abbreviation": "IA"
+      }
+    },
+    {
+      "userId": "historical-naptown-makos",
+      "ffuUserId": "ffu-h01",
+      "placement": 3,
+      "placementName": "3rd",
+      "userInfo": {
+        "teamName": "Naptown Makos",
+        "abbreviation": "NM"
+      }
+    },
+    {
+      "userId": "historical-speedway-ritual-cog",
+      "ffuUserId": "ffu-h02",
+      "placement": 4,
+      "placementName": "4th",
+      "userInfo": {
+        "teamName": "Speedway's Ritual Cog",
+        "abbreviation": "SRC"
+      }
+    },
+    {
+      "userId": "729741648338210816",
+      "ffuUserId": "ffu-010",
+      "placement": 5,
+      "placementName": "5th",
+      "userInfo": {
+        "teamName": "Team Painter Pick 6",
+        "abbreviation": "TPP6"
+      }
+    },
+    {
+      "userId": "599711204499312640",
+      "ffuUserId": "ffu-045",
+      "placement": 6,
+      "placementName": "6th",
+      "userInfo": {
+        "teamName": "Team Black Death",
+        "abbreviation": "TBD"
+      }
+    },
+    {
+      "userId": "399322397750124544",
+      "ffuUserId": "ffu-041",
+      "placement": 7,
+      "placementName": "7th",
+      "userInfo": {
+        "teamName": "Great Team Name",
+        "abbreviation": "GTN"
+      }
+    },
+    {
+      "userId": "historical-the-losers",
+      "ffuUserId": "ffu-h05",
+      "placement": 8,
+      "placementName": "8th",
+      "userInfo": {
+        "teamName": "The Losers",
+        "abbreviation": "TL"
+      }
+    },
+    {
+      "userId": "historical-gingy-flame",
+      "ffuUserId": "ffu-h06",
+      "placement": 9,
+      "placementName": "9th",
+      "userInfo": {
+        "teamName": "Gingy Flame",
+        "abbreviation": "GF"
+      }
+    },
+    {
+      "userId": "399297882890440704",
+      "ffuUserId": "ffu-043",
+      "placement": 10,
+      "placementName": "10th",
+      "userInfo": {
+        "teamName": "Elm Street Skywalkers",
+        "abbreviation": "ESS"
+      }
+    },
+    {
+      "userId": "507633950666584064",
+      "ffuUserId": "ffu-028",
+      "placement": 11,
+      "placementName": "11th",
+      "userInfo": {
+        "teamName": "El Guapo Puto",
+        "abbreviation": "EGP"
+      }
+    },
+    {
+      "userId": "508719015656099840",
+      "ffuUserId": "ffu-029",
+      "placement": 12,
+      "placementName": "12th",
+      "userInfo": {
+        "teamName": "Team Pancake",
+        "abbreviation": "TP"
+      }
+    }
+  ],
+  "promotions": [],
+  "relegations": [],
+  "matchupsByWeek": {
+    "1": [
+      {
+        "winner": "729741648338210816",
+        "loser": "historical-gingy-flame",
+        "winnerScore": 168.2,
+        "loserScore": 139.95
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "historical-the-losers",
+        "winnerScore": 115,
+        "loserScore": 91.25
+      },
+      {
+        "winner": "599711204499312640",
+        "loser": "507633950666584064",
+        "winnerScore": 132.9,
+        "loserScore": 90.55
+      },
+      {
+        "winner": "399322397750124544",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 126,
+        "loserScore": 70.8
+      },
+      {
+        "winner": "386791325690994688",
+        "loser": "399297882890440704",
+        "winnerScore": 100.8,
+        "loserScore": 95.35
+      },
+      {
+        "winner": "462383465753473024",
+        "loser": "508719015656099840",
+        "winnerScore": 165.2,
+        "loserScore": 135.6
+      }
+    ],
+    "2": [
+      {
+        "winner": "599711204499312640",
+        "loser": "508719015656099840",
+        "winnerScore": 127.75,
+        "loserScore": 94.75
+      },
+      {
+        "winner": "386791325690994688",
+        "loser": "507633950666584064",
+        "winnerScore": 99.05,
+        "loserScore": 97.5
+      },
+      {
+        "winner": "historical-the-losers",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 114,
+        "loserScore": 85.05
+      },
+      {
+        "winner": "399322397750124544",
+        "loser": "729741648338210816",
+        "winnerScore": 125.1,
+        "loserScore": 104.2
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "historical-gingy-flame",
+        "winnerScore": 147.65,
+        "loserScore": 93.75
+      },
+      {
+        "winner": "399297882890440704",
+        "loser": "462383465753473024",
+        "winnerScore": 116.35,
+        "loserScore": 109.8
+      }
+    ],
+    "3": [
+      {
+        "winner": "729741648338210816",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 176,
+        "loserScore": 80.3
+      },
+      {
+        "winner": "386791325690994688",
+        "loser": "508719015656099840",
+        "winnerScore": 121.45,
+        "loserScore": 84.95
+      },
+      {
+        "winner": "historical-gingy-flame",
+        "loser": "historical-the-losers",
+        "winnerScore": 140.65,
+        "loserScore": 130.5
+      },
+      {
+        "winner": "462383465753473024",
+        "loser": "599711204499312640",
+        "winnerScore": 149.95,
+        "loserScore": 119.8
+      },
+      {
+        "winner": "399297882890440704",
+        "loser": "507633950666584064",
+        "winnerScore": 98.55,
+        "loserScore": 89.1
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "399322397750124544",
+        "winnerScore": 98.3,
+        "loserScore": 93.75
+      }
+    ],
+    "4": [
+      {
+        "winner": "386791325690994688",
+        "loser": "599711204499312640",
+        "winnerScore": 126.35,
+        "loserScore": 118.45
+      },
+      {
+        "winner": "399322397750124544",
+        "loser": "historical-gingy-flame",
+        "winnerScore": 130.15,
+        "loserScore": 77.2
+      },
+      {
+        "winner": "historical-speedway-ritual-cog",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 89.25,
+        "loserScore": 77.35
+      },
+      {
+        "winner": "729741648338210816",
+        "loser": "historical-the-losers",
+        "winnerScore": 135.35,
+        "loserScore": 124
+      },
+      {
+        "winner": "399297882890440704",
+        "loser": "508719015656099840",
+        "winnerScore": 125.2,
+        "loserScore": 103.85
+      },
+      {
+        "winner": "462383465753473024",
+        "loser": "507633950666584064",
+        "winnerScore": 113.2,
+        "loserScore": 66.4
+      }
+    ],
+    "5": [
+      {
+        "winner": "599711204499312640",
+        "loser": "historical-gingy-flame",
+        "winnerScore": 198.4,
+        "loserScore": 92.55
+      },
+      {
+        "winner": "386791325690994688",
+        "loser": "399322397750124544",
+        "winnerScore": 121.5,
+        "loserScore": 102.7
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "508719015656099840",
+        "winnerScore": 118.85,
+        "loserScore": 85.4
+      },
+      {
+        "winner": "historical-the-losers",
+        "loser": "462383465753473024",
+        "winnerScore": 190.9,
+        "loserScore": 98.6
+      },
+      {
+        "winner": "729741648338210816",
+        "loser": "507633950666584064",
+        "winnerScore": 120.2,
+        "loserScore": 92.75
+      },
+      {
+        "winner": "historical-speedway-ritual-cog",
+        "loser": "399297882890440704",
+        "winnerScore": 156.75,
+        "loserScore": 93.25
+      }
+    ],
+    "6": [
+      {
+        "winner": "399297882890440704",
+        "loser": "historical-the-losers",
+        "winnerScore": 130.6,
+        "loserScore": 106.65
+      },
+      {
+        "winner": "historical-gingy-flame",
+        "loser": "507633950666584064",
+        "winnerScore": 107,
+        "loserScore": 99.7
+      },
+      {
+        "winner": "462383465753473024",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 114.35,
+        "loserScore": 63.3
+      },
+      {
+        "winner": "399322397750124544",
+        "loser": "508719015656099840",
+        "winnerScore": 132,
+        "loserScore": 77.05
+      },
+      {
+        "winner": "386791325690994688",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 112.9,
+        "loserScore": 94.75
+      },
+      {
+        "winner": "729741648338210816",
+        "loser": "599711204499312640",
+        "winnerScore": 126.8,
+        "loserScore": 112.6
+      }
+    ],
+    "7": [
+      {
+        "winner": "462383465753473024",
+        "loser": "386791325690994688",
+        "winnerScore": 140.35,
+        "loserScore": 90.3
+      },
+      {
+        "winner": "historical-the-losers",
+        "loser": "399322397750124544",
+        "winnerScore": 154.25,
+        "loserScore": 87.75
+      },
+      {
+        "winner": "599711204499312640",
+        "loser": "399297882890440704",
+        "winnerScore": 96.9,
+        "loserScore": 89.3
+      },
+      {
+        "winner": "508719015656099840",
+        "loser": "507633950666584064",
+        "winnerScore": 81.95,
+        "loserScore": 76.55
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "729741648338210816",
+        "winnerScore": 104,
+        "loserScore": 54.45
+      },
+      {
+        "winner": "historical-speedway-ritual-cog",
+        "loser": "historical-gingy-flame",
+        "winnerScore": 117.1,
+        "loserScore": 75.05
+      }
+    ],
+    "8": [
+      {
+        "winner": "386791325690994688",
+        "loser": "historical-gingy-flame",
+        "winnerScore": 138.25,
+        "loserScore": 107.2
+      },
+      {
+        "winner": "729741648338210816",
+        "loser": "508719015656099840",
+        "winnerScore": 120.85,
+        "loserScore": 107.6
+      },
+      {
+        "winner": "historical-speedway-ritual-cog",
+        "loser": "599711204499312640",
+        "winnerScore": 116.6,
+        "loserScore": 99.95
+      },
+      {
+        "winner": "historical-the-losers",
+        "loser": "507633950666584064",
+        "winnerScore": 147.8,
+        "loserScore": 91.25
+      },
+      {
+        "winner": "462383465753473024",
+        "loser": "399322397750124544",
+        "winnerScore": 124.45,
+        "loserScore": 94.65
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "399297882890440704",
+        "winnerScore": 102.95,
+        "loserScore": 98.9
+      }
+    ],
+    "9": [
+      {
+        "winner": "599711204499312640",
+        "loser": "historical-the-losers",
+        "winnerScore": 122.75,
+        "loserScore": 103.1
+      },
+      {
+        "winner": "729741648338210816",
+        "loser": "399297882890440704",
+        "winnerScore": 137.8,
+        "loserScore": 124.2
+      },
+      {
+        "winner": "historical-gingy-flame",
+        "loser": "508719015656099840",
+        "winnerScore": 119.35,
+        "loserScore": 111.2
+      },
+      {
+        "winner": "399322397750124544",
+        "loser": "507633950666584064",
+        "winnerScore": 91.85,
+        "loserScore": 74.85
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "462383465753473024",
+        "winnerScore": 156.05,
+        "loserScore": 93.75
+      },
+      {
+        "winner": "386791325690994688",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 107,
+        "loserScore": 94.45
+      }
+    ],
+    "10": [
+      {
+        "winner": "462383465753473024",
+        "loser": "729741648338210816",
+        "winnerScore": 102.75,
+        "loserScore": 87.15
+      },
+      {
+        "winner": "507633950666584064",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 116.3,
+        "loserScore": 114.3
+      },
+      {
+        "winner": "508719015656099840",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 106.3,
+        "loserScore": 93.6
+      },
+      {
+        "winner": "399297882890440704",
+        "loser": "historical-gingy-flame",
+        "winnerScore": 108,
+        "loserScore": 89.6
+      },
+      {
+        "winner": "599711204499312640",
+        "loser": "399322397750124544",
+        "winnerScore": 174.45,
+        "loserScore": 159.25
+      },
+      {
+        "winner": "historical-the-losers",
+        "loser": "386791325690994688",
+        "winnerScore": 137.7,
+        "loserScore": 79.6
+      }
+    ],
+    "11": [
+      {
+        "winner": "399297882890440704",
+        "loser": "507633950666584064",
+        "winnerScore": 88.7,
+        "loserScore": 53.3
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "599711204499312640",
+        "winnerScore": 115.7,
+        "loserScore": 78.15
+      },
+      {
+        "winner": "historical-gingy-flame",
+        "loser": "historical-the-losers",
+        "winnerScore": 109.9,
+        "loserScore": 103.75
+      },
+      {
+        "winner": "386791325690994688",
+        "loser": "729741648338210816",
+        "winnerScore": 119.2,
+        "loserScore": 87
+      },
+      {
+        "winner": "508719015656099840",
+        "loser": "462383465753473024",
+        "winnerScore": 110.25,
+        "loserScore": 98
+      },
+      {
+        "winner": "historical-speedway-ritual-cog",
+        "loser": "399322397750124544",
+        "winnerScore": 130,
+        "loserScore": 112.4
+      }
+    ],
+    "12": [
+      {
+        "winner": "386791325690994688",
+        "loser": "399297882890440704",
+        "winnerScore": 139.25,
+        "loserScore": 85.45
+      },
+      {
+        "winner": "599711204499312640",
+        "loser": "508719015656099840",
+        "winnerScore": 131.6,
+        "loserScore": 74.95
+      },
+      {
+        "winner": "399322397750124544",
+        "loser": "729741648338210816",
+        "winnerScore": 136.15,
+        "loserScore": 93.55
+      },
+      {
+        "winner": "historical-speedway-ritual-cog",
+        "loser": "507633950666584064",
+        "winnerScore": 112.95,
+        "loserScore": 104.9
+      },
+      {
+        "winner": "462383465753473024",
+        "loser": "historical-gingy-flame",
+        "winnerScore": 138.7,
+        "loserScore": 70.75
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "historical-the-losers",
+        "winnerScore": 87.85,
+        "loserScore": 62.2
+      }
+    ],
+    "13": [
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "historical-gingy-flame",
+        "winnerScore": 131.05,
+        "loserScore": 98.9
+      },
+      {
+        "winner": "399297882890440704",
+        "loser": "399322397750124544",
+        "winnerScore": 161.35,
+        "loserScore": 102.55
+      },
+      {
+        "winner": "508719015656099840",
+        "loser": "historical-the-losers",
+        "winnerScore": 98.5,
+        "loserScore": 75.6
+      },
+      {
+        "winner": "462383465753473024",
+        "loser": "599711204499312640",
+        "winnerScore": 112.05,
+        "loserScore": 91.8
+      },
+      {
+        "winner": "historical-speedway-ritual-cog",
+        "loser": "729741648338210816",
+        "winnerScore": 105.25,
+        "loserScore": 88.2
+      },
+      {
+        "winner": "507633950666584064",
+        "loser": "386791325690994688",
+        "winnerScore": 108,
+        "loserScore": 86.05
+      }
+    ],
+    "14": [
+      {
+        "winner": "historical-speedway-ritual-cog",
+        "loser": "729741648338210816",
+        "winnerScore": 154.55,
+        "loserScore": 135.55,
+        "placementType": "Championship Quarterfinal"
+      },
+      {
+        "winner": "462383465753473024",
+        "loser": "599711204499312640",
+        "winnerScore": 126.25,
+        "loserScore": 111,
+        "placementType": "Championship Quarterfinal"
+      },
+      {
+        "winner": "399297882890440704",
+        "loser": "399322397750124544",
+        "winnerScore": 140.05,
+        "loserScore": 83.55,
+        "placementType": "Toilet Bowl Quarterfinal"
+      },
+      {
+        "winner": "historical-the-losers",
+        "loser": "historical-gingy-flame",
+        "winnerScore": 119.25,
+        "loserScore": 91.85,
+        "placementType": "Toilet Bowl Quarterfinal"
+      },
+      {
+        "winner": "508719015656099840",
+        "loser": "507633950666584064",
+        "winnerScore": 93.75,
+        "loserScore": 74.55,
+        "placementType": "Toilet Bowl Quarterfinal"
+      }
+    ],
+    "15": [
+      {
+        "winner": "399322397750124544",
+        "loser": "508719015656099840",
+        "winnerScore": 142.6,
+        "loserScore": 86.2,
+        "placementType": "Toilet Bowl Semifinal"
+      },
+      {
+        "winner": "historical-gingy-flame",
+        "loser": "507633950666584064",
+        "winnerScore": 126,
+        "loserScore": 97.7,
+        "placementType": "Toilet Bowl Semifinal"
+      },
+      {
+        "winner": "historical-the-losers",
+        "loser": "399297882890440704",
+        "winnerScore": 173.2,
+        "loserScore": 97.45,
+        "placementType": "Toilet Bowl Semifinal"
+      },
+      {
+        "winner": "729741648338210816",
+        "loser": "599711204499312640",
+        "winnerScore": 116.85,
+        "loserScore": 111.15,
+        "placementType": "Championship Semifinal"
+      },
+      {
+        "winner": "462383465753473024",
+        "loser": "historical-naptown-makos",
+        "winnerScore": 140.45,
+        "loserScore": 103.1,
+        "placementType": "Championship Semifinal"
+      },
+      {
+        "winner": "386791325690994688",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 137.65,
+        "loserScore": 92.5,
+        "placementType": "Championship Semifinal"
+      }
+    ],
+    "16": [
+      {
+        "winner": "507633950666584064",
+        "loser": "508719015656099840",
+        "winnerScore": 129.65,
+        "loserScore": 71.3,
+        "placementType": "Last Place"
+      },
+      {
+        "winner": "historical-gingy-flame",
+        "loser": "399297882890440704",
+        "winnerScore": 125.95,
+        "loserScore": 102.3,
+        "placementType": "9th Place"
+      },
+      {
+        "winner": "399322397750124544",
+        "loser": "historical-the-losers",
+        "winnerScore": 145.1,
+        "loserScore": 133.75,
+        "placementType": "7th Place"
+      },
+      {
+        "winner": "729741648338210816",
+        "loser": "599711204499312640",
+        "winnerScore": 116.75,
+        "loserScore": 90.4,
+        "placementType": "5th Place"
+      },
+      {
+        "winner": "historical-naptown-makos",
+        "loser": "historical-speedway-ritual-cog",
+        "winnerScore": 82.75,
+        "loserScore": 79.5,
+        "placementType": "3rd Place"
+      },
+      {
+        "winner": "462383465753473024",
+        "loser": "386791325690994688",
+        "winnerScore": 110.1,
+        "loserScore": 83.6,
+        "placementType": "Championship"
+      }
+    ]
+  },
+  "memberGameStats": {},
+  "draftData": {
+    "draftId": "espn-2019-national-draft",
+    "leagueId": "espn-2019-national",
+    "year": "2019",
+    "league": "NATIONAL",
+    "draftOrder": {
+      "historical-gingy-flame": 1,
+      "599711204499312640": 2,
+      "399322397750124544": 3,
+      "399297882890440704": 4,
+      "386791325690994688": 5,
+      "729741648338210816": 6,
+      "historical-the-losers": 7,
+      "462383465753473024": 8,
+      "508719015656099840": 9,
+      "historical-speedway-ritual-cog": 10,
+      "507633950666584064": 11,
+      "historical-naptown-makos": 12
+    },
+    "picks": [
+      {
+        "pickNumber": 1,
+        "round": 1,
+        "pickInRound": 1,
+        "playerId": "espn-player-saquon-barkley",
+        "playerInfo": {
+          "name": "Saquon Barkley",
+          "position": "RB",
+          "team": "NYG"
+        },
+        "pickedBy": "historical-gingy-flame",
+        "userInfo": {
+          "userId": "historical-gingy-flame",
+          "ffuUserId": "ffu-h06",
+          "teamName": "Gingy Flame",
+          "abbreviation": "GF"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 2,
+        "round": 1,
+        "pickInRound": 2,
+        "playerId": "espn-player-christian-mccaffrey",
+        "playerInfo": {
+          "name": "Christian McCaffrey",
+          "position": "RB",
+          "team": "CAR"
+        },
+        "pickedBy": "599711204499312640",
+        "userInfo": {
+          "userId": "599711204499312640",
+          "ffuUserId": "ffu-045",
+          "teamName": "Team Black Death",
+          "abbreviation": "TBD"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 3,
+        "round": 1,
+        "pickInRound": 3,
+        "playerId": "espn-player-alvin-kamara",
+        "playerInfo": {
+          "name": "Alvin Kamara",
+          "position": "RB",
+          "team": "NO"
+        },
+        "pickedBy": "399322397750124544",
+        "userInfo": {
+          "userId": "399322397750124544",
+          "ffuUserId": "ffu-041",
+          "teamName": "Great Team Name",
+          "abbreviation": "GTN"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 4,
+        "round": 1,
+        "pickInRound": 4,
+        "playerId": "espn-player-ezekiel-elliott",
+        "playerInfo": {
+          "name": "Ezekiel Elliott",
+          "position": "RB",
+          "team": "DAL"
+        },
+        "pickedBy": "399297882890440704",
+        "userInfo": {
+          "userId": "399297882890440704",
+          "ffuUserId": "ffu-043",
+          "teamName": "Elm Street Skywalkers",
+          "abbreviation": "ESS"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 5,
+        "round": 1,
+        "pickInRound": 5,
+        "playerId": "espn-player-deandre-hopkins",
+        "playerInfo": {
+          "name": "DeAndre Hopkins",
+          "position": "WR",
+          "team": "HOU"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 6,
+        "round": 1,
+        "pickInRound": 6,
+        "playerId": "espn-player-david-johnson",
+        "playerInfo": {
+          "name": "David Johnson",
+          "position": "RB",
+          "team": "ARI"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 7,
+        "round": 1,
+        "pickInRound": 7,
+        "playerId": "espn-player-michael-thomas",
+        "playerInfo": {
+          "name": "Michael Thomas",
+          "position": "WR",
+          "team": "NO"
+        },
+        "pickedBy": "historical-the-losers",
+        "userInfo": {
+          "userId": "historical-the-losers",
+          "ffuUserId": "ffu-h05",
+          "teamName": "The Losers",
+          "abbreviation": "TL"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 8,
+        "round": 1,
+        "pickInRound": 8,
+        "playerId": "espn-player-julio-jones",
+        "playerInfo": {
+          "name": "Julio Jones",
+          "position": "WR",
+          "team": "ATL"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 9,
+        "round": 1,
+        "pickInRound": 9,
+        "playerId": "espn-player-le'veon-bell",
+        "playerInfo": {
+          "name": "Le'Veon Bell",
+          "position": "RB",
+          "team": "NYJ"
+        },
+        "pickedBy": "508719015656099840",
+        "userInfo": {
+          "userId": "508719015656099840",
+          "ffuUserId": "ffu-029",
+          "teamName": "Team Pancake",
+          "abbreviation": "TP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 10,
+        "round": 1,
+        "pickInRound": 10,
+        "playerId": "espn-player-todd-gurley",
+        "playerInfo": {
+          "name": "Todd Gurley",
+          "position": "RB",
+          "team": "LAR"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway's Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 11,
+        "round": 1,
+        "pickInRound": 11,
+        "playerId": "espn-player-odell-beckham",
+        "playerInfo": {
+          "name": "Odell Beckham",
+          "position": "WR",
+          "team": "CLE"
+        },
+        "pickedBy": "507633950666584064",
+        "userInfo": {
+          "userId": "507633950666584064",
+          "ffuUserId": "ffu-028",
+          "teamName": "El Guapo Puto",
+          "abbreviation": "EGP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 12,
+        "round": 1,
+        "pickInRound": 12,
+        "playerId": "espn-player-dalvin-cook",
+        "playerInfo": {
+          "name": "Dalvin Cook",
+          "position": "RB",
+          "team": "MIN"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 13,
+        "round": 2,
+        "pickInRound": 1,
+        "playerId": "espn-player-patrick-mahomes",
+        "playerInfo": {
+          "name": "Patrick Mahomes",
+          "position": "QB",
+          "team": "KC"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 14,
+        "round": 2,
+        "pickInRound": 2,
+        "playerId": "espn-player-james-conner",
+        "playerInfo": {
+          "name": "James Conner",
+          "position": "RB",
+          "team": "PIT"
+        },
+        "pickedBy": "507633950666584064",
+        "userInfo": {
+          "userId": "507633950666584064",
+          "ffuUserId": "ffu-028",
+          "teamName": "El Guapo Puto",
+          "abbreviation": "EGP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 15,
+        "round": 2,
+        "pickInRound": 3,
+        "playerId": "espn-player-joe-mixon",
+        "playerInfo": {
+          "name": "Joe Mixon",
+          "position": "RB",
+          "team": "CIN"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway's Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 16,
+        "round": 2,
+        "pickInRound": 4,
+        "playerId": "espn-player-davante-adams",
+        "playerInfo": {
+          "name": "Davante Adams",
+          "position": "WR",
+          "team": "GB"
+        },
+        "pickedBy": "508719015656099840",
+        "userInfo": {
+          "userId": "508719015656099840",
+          "ffuUserId": "ffu-029",
+          "teamName": "Team Pancake",
+          "abbreviation": "TP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 17,
+        "round": 2,
+        "pickInRound": 5,
+        "playerId": "espn-player-juju-smith-schuster",
+        "playerInfo": {
+          "name": "JuJu Smith-Schuster",
+          "position": "WR",
+          "team": "PIT"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 18,
+        "round": 2,
+        "pickInRound": 6,
+        "playerId": "espn-player-tyreek-hill",
+        "playerInfo": {
+          "name": "Tyreek Hill",
+          "position": "WR",
+          "team": "KC"
+        },
+        "pickedBy": "historical-the-losers",
+        "userInfo": {
+          "userId": "historical-the-losers",
+          "ffuUserId": "ffu-h05",
+          "teamName": "The Losers",
+          "abbreviation": "TL"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 19,
+        "round": 2,
+        "pickInRound": 7,
+        "playerId": "espn-player-travis-kelce",
+        "playerInfo": {
+          "name": "Travis Kelce",
+          "position": "TE",
+          "team": "KC"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 20,
+        "round": 2,
+        "pickInRound": 8,
+        "playerId": "espn-player-nick-chubb",
+        "playerInfo": {
+          "name": "Nick Chubb",
+          "position": "RB",
+          "team": "CLE"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 21,
+        "round": 2,
+        "pickInRound": 9,
+        "playerId": "espn-player-mike-evans",
+        "playerInfo": {
+          "name": "Mike Evans",
+          "position": "WR",
+          "team": "TB"
+        },
+        "pickedBy": "399297882890440704",
+        "userInfo": {
+          "userId": "399297882890440704",
+          "ffuUserId": "ffu-043",
+          "teamName": "Elm Street Skywalkers",
+          "abbreviation": "ESS"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 22,
+        "round": 2,
+        "pickInRound": 10,
+        "playerId": "espn-player-antonio-brown",
+        "playerInfo": {
+          "name": "Antonio Brown",
+          "position": "WR",
+          "team": "FA"
+        },
+        "pickedBy": "399322397750124544",
+        "userInfo": {
+          "userId": "399322397750124544",
+          "ffuUserId": "ffu-041",
+          "teamName": "Great Team Name",
+          "abbreviation": "GTN"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 23,
+        "round": 2,
+        "pickInRound": 11,
+        "playerId": "espn-player-kerryon-johnson",
+        "playerInfo": {
+          "name": "Kerryon Johnson",
+          "position": "RB",
+          "team": "DET"
+        },
+        "pickedBy": "599711204499312640",
+        "userInfo": {
+          "userId": "599711204499312640",
+          "ffuUserId": "ffu-045",
+          "teamName": "Team Black Death",
+          "abbreviation": "TBD"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 24,
+        "round": 2,
+        "pickInRound": 12,
+        "playerId": "espn-player-devonta-freeman",
+        "playerInfo": {
+          "name": "Devonta Freeman",
+          "position": "RB",
+          "team": "ATL"
+        },
+        "pickedBy": "historical-gingy-flame",
+        "userInfo": {
+          "userId": "historical-gingy-flame",
+          "ffuUserId": "ffu-h06",
+          "teamName": "Gingy Flame",
+          "abbreviation": "GF"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 25,
+        "round": 3,
+        "pickInRound": 1,
+        "playerId": "espn-player-keenan-allen",
+        "playerInfo": {
+          "name": "Keenan Allen",
+          "position": "WR",
+          "team": "LAC"
+        },
+        "pickedBy": "historical-gingy-flame",
+        "userInfo": {
+          "userId": "historical-gingy-flame",
+          "ffuUserId": "ffu-h06",
+          "teamName": "Gingy Flame",
+          "abbreviation": "GF"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 26,
+        "round": 3,
+        "pickInRound": 2,
+        "playerId": "espn-player-amari-cooper",
+        "playerInfo": {
+          "name": "Amari Cooper",
+          "position": "WR",
+          "team": "DAL"
+        },
+        "pickedBy": "599711204499312640",
+        "userInfo": {
+          "userId": "599711204499312640",
+          "ffuUserId": "ffu-045",
+          "teamName": "Team Black Death",
+          "abbreviation": "TBD"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 27,
+        "round": 3,
+        "pickInRound": 3,
+        "playerId": "espn-player-chris-carson",
+        "playerInfo": {
+          "name": "Chris Carson",
+          "position": "RB",
+          "team": "SEA"
+        },
+        "pickedBy": "399322397750124544",
+        "userInfo": {
+          "userId": "399322397750124544",
+          "ffuUserId": "ffu-041",
+          "teamName": "Great Team Name",
+          "abbreviation": "GTN"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 28,
+        "round": 3,
+        "pickInRound": 4,
+        "playerId": "espn-player-josh-jacobs",
+        "playerInfo": {
+          "name": "Josh Jacobs",
+          "position": "RB",
+          "team": "LV"
+        },
+        "pickedBy": "399297882890440704",
+        "userInfo": {
+          "userId": "399297882890440704",
+          "ffuUserId": "ffu-043",
+          "teamName": "Elm Street Skywalkers",
+          "abbreviation": "ESS"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 29,
+        "round": 3,
+        "pickInRound": 5,
+        "playerId": "espn-player-george-kittle",
+        "playerInfo": {
+          "name": "George Kittle",
+          "position": "TE",
+          "team": "SF"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 30,
+        "round": 3,
+        "pickInRound": 6,
+        "playerId": "espn-player-leonard-fournette",
+        "playerInfo": {
+          "name": "Leonard Fournette",
+          "position": "RB",
+          "team": "JAX"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 31,
+        "round": 3,
+        "pickInRound": 7,
+        "playerId": "espn-player-aaron-jones",
+        "playerInfo": {
+          "name": "Aaron Jones",
+          "position": "RB",
+          "team": "GB"
+        },
+        "pickedBy": "historical-the-losers",
+        "userInfo": {
+          "userId": "historical-the-losers",
+          "ffuUserId": "ffu-h05",
+          "teamName": "The Losers",
+          "abbreviation": "TL"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 32,
+        "round": 3,
+        "pickInRound": 8,
+        "playerId": "espn-player-derrick-henry",
+        "playerInfo": {
+          "name": "Derrick Henry",
+          "position": "RB",
+          "team": "TEN"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 33,
+        "round": 3,
+        "pickInRound": 9,
+        "playerId": "espn-player-adam-thielen",
+        "playerInfo": {
+          "name": "Adam Thielen",
+          "position": "WR",
+          "team": "MIN"
+        },
+        "pickedBy": "508719015656099840",
+        "userInfo": {
+          "userId": "508719015656099840",
+          "ffuUserId": "ffu-029",
+          "teamName": "Team Pancake",
+          "abbreviation": "TP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 34,
+        "round": 3,
+        "pickInRound": 10,
+        "playerId": "espn-player-julian-edelman",
+        "playerInfo": {
+          "name": "Julian Edelman",
+          "position": "WR",
+          "team": "NE"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway's Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 35,
+        "round": 3,
+        "pickInRound": 11,
+        "playerId": "espn-player-damien-williams",
+        "playerInfo": {
+          "name": "Damien Williams",
+          "position": "RB",
+          "team": "KC"
+        },
+        "pickedBy": "507633950666584064",
+        "userInfo": {
+          "userId": "507633950666584064",
+          "ffuUserId": "ffu-028",
+          "teamName": "El Guapo Puto",
+          "abbreviation": "EGP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 36,
+        "round": 3,
+        "pickInRound": 12,
+        "playerId": "espn-player-zach-ertz",
+        "playerInfo": {
+          "name": "Zach Ertz",
+          "position": "TE",
+          "team": "PHI"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 37,
+        "round": 4,
+        "pickInRound": 1,
+        "playerId": "espn-player-brandin-cooks",
+        "playerInfo": {
+          "name": "Brandin Cooks",
+          "position": "WR",
+          "team": "LAR"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 38,
+        "round": 4,
+        "pickInRound": 2,
+        "playerId": "espn-player-robert-woods",
+        "playerInfo": {
+          "name": "Robert Woods",
+          "position": "WR",
+          "team": "LAR"
+        },
+        "pickedBy": "507633950666584064",
+        "userInfo": {
+          "userId": "507633950666584064",
+          "ffuUserId": "ffu-028",
+          "teamName": "El Guapo Puto",
+          "abbreviation": "EGP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 39,
+        "round": 4,
+        "pickInRound": 3,
+        "playerId": "espn-player-jared-cook",
+        "playerInfo": {
+          "name": "Jared Cook",
+          "position": "TE",
+          "team": "NO"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway's Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 40,
+        "round": 4,
+        "pickInRound": 4,
+        "playerId": "espn-player-melvin-gordon",
+        "playerInfo": {
+          "name": "Melvin Gordon",
+          "position": "RB",
+          "team": "FA"
+        },
+        "pickedBy": "508719015656099840",
+        "userInfo": {
+          "userId": "508719015656099840",
+          "ffuUserId": "ffu-029",
+          "teamName": "Team Pancake",
+          "abbreviation": "TP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 41,
+        "round": 4,
+        "pickInRound": 5,
+        "playerId": "espn-player-mark-ingram",
+        "playerInfo": {
+          "name": "Mark Ingram",
+          "position": "RB",
+          "team": "BAL"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 42,
+        "round": 4,
+        "pickInRound": 6,
+        "playerId": "espn-player-stefon-diggs",
+        "playerInfo": {
+          "name": "Stefon Diggs",
+          "position": "WR",
+          "team": "MIN"
+        },
+        "pickedBy": "historical-the-losers",
+        "userInfo": {
+          "userId": "historical-the-losers",
+          "ffuUserId": "ffu-h05",
+          "teamName": "The Losers",
+          "abbreviation": "TL"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 43,
+        "round": 4,
+        "pickInRound": 7,
+        "playerId": "espn-player-james-white",
+        "playerInfo": {
+          "name": "James White",
+          "position": "RB",
+          "team": "NE"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 44,
+        "round": 4,
+        "pickInRound": 8,
+        "playerId": "espn-player-cooper-kupp",
+        "playerInfo": {
+          "name": "Cooper Kupp",
+          "position": "WR",
+          "team": "LAR"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 45,
+        "round": 4,
+        "pickInRound": 9,
+        "playerId": "espn-player-kenny-golladay",
+        "playerInfo": {
+          "name": "Kenny Golladay",
+          "position": "WR",
+          "team": "DET"
+        },
+        "pickedBy": "399297882890440704",
+        "userInfo": {
+          "userId": "399297882890440704",
+          "ffuUserId": "ffu-043",
+          "teamName": "Elm Street Skywalkers",
+          "abbreviation": "ESS"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 46,
+        "round": 4,
+        "pickInRound": 10,
+        "playerId": "espn-player-sony-michel",
+        "playerInfo": {
+          "name": "Sony Michel",
+          "position": "RB",
+          "team": "NE"
+        },
+        "pickedBy": "399322397750124544",
+        "userInfo": {
+          "userId": "399322397750124544",
+          "ffuUserId": "ffu-041",
+          "teamName": "Great Team Name",
+          "abbreviation": "GTN"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 47,
+        "round": 4,
+        "pickInRound": 11,
+        "playerId": "espn-player-deshaun-watson",
+        "playerInfo": {
+          "name": "Deshaun Watson",
+          "position": "QB",
+          "team": "HOU"
+        },
+        "pickedBy": "599711204499312640",
+        "userInfo": {
+          "userId": "599711204499312640",
+          "ffuUserId": "ffu-045",
+          "teamName": "Team Black Death",
+          "abbreviation": "TBD"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 48,
+        "round": 4,
+        "pickInRound": 12,
+        "playerId": "espn-player-marlon-mack",
+        "playerInfo": {
+          "name": "Marlon Mack",
+          "position": "RB",
+          "team": "IND"
+        },
+        "pickedBy": "historical-gingy-flame",
+        "userInfo": {
+          "userId": "historical-gingy-flame",
+          "ffuUserId": "ffu-h06",
+          "teamName": "Gingy Flame",
+          "abbreviation": "GF"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 49,
+        "round": 5,
+        "pickInRound": 1,
+        "playerId": "espn-player-tyler-lockett",
+        "playerInfo": {
+          "name": "Tyler Lockett",
+          "position": "WR",
+          "team": "SEA"
+        },
+        "pickedBy": "historical-gingy-flame",
+        "userInfo": {
+          "userId": "historical-gingy-flame",
+          "ffuUserId": "ffu-h06",
+          "teamName": "Gingy Flame",
+          "abbreviation": "GF"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 50,
+        "round": 5,
+        "pickInRound": 2,
+        "playerId": "espn-player-chris-godwin",
+        "playerInfo": {
+          "name": "Chris Godwin",
+          "position": "WR",
+          "team": "TB"
+        },
+        "pickedBy": "599711204499312640",
+        "userInfo": {
+          "userId": "599711204499312640",
+          "ffuUserId": "ffu-045",
+          "teamName": "Team Black Death",
+          "abbreviation": "TBD"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 51,
+        "round": 5,
+        "pickInRound": 3,
+        "playerId": "espn-player-mike-williams",
+        "playerInfo": {
+          "name": "Mike Williams",
+          "position": "WR",
+          "team": "LAC"
+        },
+        "pickedBy": "399322397750124544",
+        "userInfo": {
+          "userId": "399322397750124544",
+          "ffuUserId": "ffu-041",
+          "teamName": "Great Team Name",
+          "abbreviation": "GTN"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 52,
+        "round": 5,
+        "pickInRound": 4,
+        "playerId": "espn-player-tyler-boyd",
+        "playerInfo": {
+          "name": "Tyler Boyd",
+          "position": "WR",
+          "team": "CIN"
+        },
+        "pickedBy": "399297882890440704",
+        "userInfo": {
+          "userId": "399297882890440704",
+          "ffuUserId": "ffu-043",
+          "teamName": "Elm Street Skywalkers",
+          "abbreviation": "ESS"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 53,
+        "round": 5,
+        "pickInRound": 5,
+        "playerId": "espn-player-david-montgomery",
+        "playerInfo": {
+          "name": "David Montgomery",
+          "position": "RB",
+          "team": "CHI"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 54,
+        "round": 5,
+        "pickInRound": 6,
+        "playerId": "espn-player-t.y.-hilton",
+        "playerInfo": {
+          "name": "T.Y. Hilton",
+          "position": "WR",
+          "team": "IND"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 55,
+        "round": 5,
+        "pickInRound": 7,
+        "playerId": "espn-player-derrius-guice",
+        "playerInfo": {
+          "name": "Derrius Guice",
+          "position": "RB",
+          "team": "WAS"
+        },
+        "pickedBy": "historical-the-losers",
+        "userInfo": {
+          "userId": "historical-the-losers",
+          "ffuUserId": "ffu-h05",
+          "teamName": "The Losers",
+          "abbreviation": "TL"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 56,
+        "round": 5,
+        "pickInRound": 8,
+        "playerId": "espn-player-alshon-jeffery",
+        "playerInfo": {
+          "name": "Alshon Jeffery",
+          "position": "WR",
+          "team": "PHI"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 57,
+        "round": 5,
+        "pickInRound": 9,
+        "playerId": "espn-player-a.j.-green",
+        "playerInfo": {
+          "name": "A.J. Green",
+          "position": "WR",
+          "team": "FA"
+        },
+        "pickedBy": "508719015656099840",
+        "userInfo": {
+          "userId": "508719015656099840",
+          "ffuUserId": "ffu-029",
+          "teamName": "Team Pancake",
+          "abbreviation": "TP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 58,
+        "round": 5,
+        "pickInRound": 10,
+        "playerId": "espn-player-d.j.-moore",
+        "playerInfo": {
+          "name": "D.J. Moore",
+          "position": "WR",
+          "team": "CAR"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway's Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 59,
+        "round": 5,
+        "pickInRound": 11,
+        "playerId": "espn-player-josh-gordon",
+        "playerInfo": {
+          "name": "Josh Gordon",
+          "position": "WR",
+          "team": "NE"
+        },
+        "pickedBy": "507633950666584064",
+        "userInfo": {
+          "userId": "507633950666584064",
+          "ffuUserId": "ffu-028",
+          "teamName": "El Guapo Puto",
+          "abbreviation": "EGP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 60,
+        "round": 5,
+        "pickInRound": 12,
+        "playerId": "espn-player-calvin-ridley",
+        "playerInfo": {
+          "name": "Calvin Ridley",
+          "position": "WR",
+          "team": "ATL"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 61,
+        "round": 6,
+        "pickInRound": 1,
+        "playerId": "espn-player-kenyan-drake",
+        "playerInfo": {
+          "name": "Kenyan Drake",
+          "position": "RB",
+          "team": "MIA"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 62,
+        "round": 6,
+        "pickInRound": 2,
+        "playerId": "espn-player-trey-burton",
+        "playerInfo": {
+          "name": "Trey Burton",
+          "position": "TE",
+          "team": "FA"
+        },
+        "pickedBy": "507633950666584064",
+        "userInfo": {
+          "userId": "507633950666584064",
+          "ffuUserId": "ffu-028",
+          "teamName": "El Guapo Puto",
+          "abbreviation": "EGP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 63,
+        "round": 6,
+        "pickInRound": 3,
+        "playerId": "espn-player-allen-robinson",
+        "playerInfo": {
+          "name": "Allen Robinson",
+          "position": "WR",
+          "team": "CHI"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway's Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 64,
+        "round": 6,
+        "pickInRound": 4,
+        "playerId": "espn-player-austin-ekeler",
+        "playerInfo": {
+          "name": "Austin Ekeler",
+          "position": "RB",
+          "team": "LAC"
+        },
+        "pickedBy": "508719015656099840",
+        "userInfo": {
+          "userId": "508719015656099840",
+          "ffuUserId": "ffu-029",
+          "teamName": "Team Pancake",
+          "abbreviation": "TP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 65,
+        "round": 6,
+        "pickInRound": 5,
+        "playerId": "espn-player-evan-engram",
+        "playerInfo": {
+          "name": "Evan Engram",
+          "position": "TE",
+          "team": "NYG"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 66,
+        "round": 6,
+        "pickInRound": 6,
+        "playerId": "espn-player-duke-johnson",
+        "playerInfo": {
+          "name": "Duke Johnson",
+          "position": "RB",
+          "team": "HOU"
+        },
+        "pickedBy": "historical-the-losers",
+        "userInfo": {
+          "userId": "historical-the-losers",
+          "ffuUserId": "ffu-h05",
+          "teamName": "The Losers",
+          "abbreviation": "TL"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 67,
+        "round": 6,
+        "pickInRound": 7,
+        "playerId": "espn-player-matt-ryan",
+        "playerInfo": {
+          "name": "Matt Ryan",
+          "position": "QB",
+          "team": "ATL"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 68,
+        "round": 6,
+        "pickInRound": 8,
+        "playerId": "espn-player-dede-westbrook",
+        "playerInfo": {
+          "name": "Dede Westbrook",
+          "position": "WR",
+          "team": "JAX"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 69,
+        "round": 6,
+        "pickInRound": 9,
+        "playerId": "espn-player-phillip-lindsay",
+        "playerInfo": {
+          "name": "Phillip Lindsay",
+          "position": "RB",
+          "team": "DEN"
+        },
+        "pickedBy": "399297882890440704",
+        "userInfo": {
+          "userId": "399297882890440704",
+          "ffuUserId": "ffu-043",
+          "teamName": "Elm Street Skywalkers",
+          "abbreviation": "ESS"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 70,
+        "round": 6,
+        "pickInRound": 10,
+        "playerId": "espn-player-tarik-cohen",
+        "playerInfo": {
+          "name": "Tarik Cohen",
+          "position": "RB",
+          "team": "CHI"
+        },
+        "pickedBy": "399322397750124544",
+        "userInfo": {
+          "userId": "399322397750124544",
+          "ffuUserId": "ffu-041",
+          "teamName": "Great Team Name",
+          "abbreviation": "GTN"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 71,
+        "round": 6,
+        "pickInRound": 11,
+        "playerId": "espn-player-miles-sanders",
+        "playerInfo": {
+          "name": "Miles Sanders",
+          "position": "RB",
+          "team": "PHI"
+        },
+        "pickedBy": "599711204499312640",
+        "userInfo": {
+          "userId": "599711204499312640",
+          "ffuUserId": "ffu-045",
+          "teamName": "Team Black Death",
+          "abbreviation": "TBD"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 72,
+        "round": 6,
+        "pickInRound": 12,
+        "playerId": "espn-player-o.j.-howard",
+        "playerInfo": {
+          "name": "O.J. Howard",
+          "position": "TE",
+          "team": "TB"
+        },
+        "pickedBy": "historical-gingy-flame",
+        "userInfo": {
+          "userId": "historical-gingy-flame",
+          "ffuUserId": "ffu-h06",
+          "teamName": "Gingy Flame",
+          "abbreviation": "GF"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 73,
+        "round": 7,
+        "pickInRound": 1,
+        "playerId": "espn-player-robbie-chosen",
+        "playerInfo": {
+          "name": "Robbie Chosen",
+          "position": "WR",
+          "team": "NYJ"
+        },
+        "pickedBy": "historical-gingy-flame",
+        "userInfo": {
+          "userId": "historical-gingy-flame",
+          "ffuUserId": "ffu-h06",
+          "teamName": "Gingy Flame",
+          "abbreviation": "GF"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 74,
+        "round": 7,
+        "pickInRound": 2,
+        "playerId": "espn-player-vance-mcdonald",
+        "playerInfo": {
+          "name": "Vance McDonald",
+          "position": "TE",
+          "team": "PIT"
+        },
+        "pickedBy": "599711204499312640",
+        "userInfo": {
+          "userId": "599711204499312640",
+          "ffuUserId": "ffu-045",
+          "teamName": "Team Black Death",
+          "abbreviation": "TBD"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 75,
+        "round": 7,
+        "pickInRound": 3,
+        "playerId": "espn-player-jarvis-landry",
+        "playerInfo": {
+          "name": "Jarvis Landry",
+          "position": "WR",
+          "team": "CLE"
+        },
+        "pickedBy": "399322397750124544",
+        "userInfo": {
+          "userId": "399322397750124544",
+          "ffuUserId": "ffu-041",
+          "teamName": "Great Team Name",
+          "abbreviation": "GTN"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 76,
+        "round": 7,
+        "pickInRound": 4,
+        "playerId": "espn-player-baker-mayfield",
+        "playerInfo": {
+          "name": "Baker Mayfield",
+          "position": "QB",
+          "team": "CLE"
+        },
+        "pickedBy": "399297882890440704",
+        "userInfo": {
+          "userId": "399297882890440704",
+          "ffuUserId": "ffu-043",
+          "teamName": "Elm Street Skywalkers",
+          "abbreviation": "ESS"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 77,
+        "round": 7,
+        "pickInRound": 5,
+        "playerId": "espn-player-tevin-coleman",
+        "playerInfo": {
+          "name": "Tevin Coleman",
+          "position": "RB",
+          "team": "SF"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 78,
+        "round": 7,
+        "pickInRound": 6,
+        "playerId": "espn-player-sammy-watkins",
+        "playerInfo": {
+          "name": "Sammy Watkins",
+          "position": "WR",
+          "team": "KC"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 79,
+        "round": 7,
+        "pickInRound": 7,
+        "playerId": "espn-player-will-fuller",
+        "playerInfo": {
+          "name": "Will Fuller",
+          "position": "WR",
+          "team": "HOU"
+        },
+        "pickedBy": "historical-the-losers",
+        "userInfo": {
+          "userId": "historical-the-losers",
+          "ffuUserId": "ffu-h05",
+          "teamName": "The Losers",
+          "abbreviation": "TL"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 80,
+        "round": 7,
+        "pickInRound": 8,
+        "playerId": "espn-player-aaron-rodgers",
+        "playerInfo": {
+          "name": "Aaron Rodgers",
+          "position": "QB",
+          "team": "GB"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 81,
+        "round": 7,
+        "pickInRound": 9,
+        "playerId": "espn-player-hunter-henry",
+        "playerInfo": {
+          "name": "Hunter Henry",
+          "position": "TE",
+          "team": "LAC"
+        },
+        "pickedBy": "508719015656099840",
+        "userInfo": {
+          "userId": "508719015656099840",
+          "ffuUserId": "ffu-029",
+          "teamName": "Team Pancake",
+          "abbreviation": "TP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 82,
+        "round": 7,
+        "pickInRound": 10,
+        "playerId": "espn-player-royce-freeman",
+        "playerInfo": {
+          "name": "Royce Freeman",
+          "position": "RB",
+          "team": "DEN"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway's Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 83,
+        "round": 7,
+        "pickInRound": 11,
+        "playerId": "espn-player-sterling-shepard",
+        "playerInfo": {
+          "name": "Sterling Shepard",
+          "position": "WR",
+          "team": "NYG"
+        },
+        "pickedBy": "507633950666584064",
+        "userInfo": {
+          "userId": "507633950666584064",
+          "ffuUserId": "ffu-028",
+          "teamName": "El Guapo Puto",
+          "abbreviation": "EGP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 84,
+        "round": 7,
+        "pickInRound": 12,
+        "playerId": "espn-player-marvin-jones",
+        "playerInfo": {
+          "name": "Marvin Jones",
+          "position": "WR",
+          "team": "DET"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 85,
+        "round": 8,
+        "pickInRound": 1,
+        "playerId": "espn-player-cam-newton",
+        "playerInfo": {
+          "name": "Cam Newton",
+          "position": "QB",
+          "team": "CAR"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 86,
+        "round": 8,
+        "pickInRound": 2,
+        "playerId": "espn-player-tom-brady",
+        "playerInfo": {
+          "name": "Tom Brady",
+          "position": "QB",
+          "team": "NE"
+        },
+        "pickedBy": "507633950666584064",
+        "userInfo": {
+          "userId": "507633950666584064",
+          "ffuUserId": "ffu-028",
+          "teamName": "El Guapo Puto",
+          "abbreviation": "EGP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 87,
+        "round": 8,
+        "pickInRound": 3,
+        "playerId": "espn-player-corey-davis",
+        "playerInfo": {
+          "name": "Corey Davis",
+          "position": "WR",
+          "team": "TEN"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway's Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 88,
+        "round": 8,
+        "pickInRound": 4,
+        "playerId": "espn-player-emmanuel-sanders",
+        "playerInfo": {
+          "name": "Emmanuel Sanders",
+          "position": "WR",
+          "team": "DEN"
+        },
+        "pickedBy": "508719015656099840",
+        "userInfo": {
+          "userId": "508719015656099840",
+          "ffuUserId": "ffu-029",
+          "teamName": "Team Pancake",
+          "abbreviation": "TP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 89,
+        "round": 8,
+        "pickInRound": 5,
+        "playerId": "espn-player-peyton-barber",
+        "playerInfo": {
+          "name": "Peyton Barber",
+          "position": "RB",
+          "team": "TB"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 90,
+        "round": 8,
+        "pickInRound": 6,
+        "playerId": "espn-player-latavius-murray",
+        "playerInfo": {
+          "name": "Latavius Murray",
+          "position": "RB",
+          "team": "NO"
+        },
+        "pickedBy": "historical-the-losers",
+        "userInfo": {
+          "userId": "historical-the-losers",
+          "ffuUserId": "ffu-h05",
+          "teamName": "The Losers",
+          "abbreviation": "TL"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 91,
+        "round": 8,
+        "pickInRound": 7,
+        "playerId": "espn-player-larry-fitzgerald",
+        "playerInfo": {
+          "name": "Larry Fitzgerald",
+          "position": "WR",
+          "team": "ARI"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 92,
+        "round": 8,
+        "pickInRound": 8,
+        "playerId": "espn-player-curtis-samuel",
+        "playerInfo": {
+          "name": "Curtis Samuel",
+          "position": "WR",
+          "team": "CAR"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 93,
+        "round": 8,
+        "pickInRound": 9,
+        "playerId": "espn-player-austin-hooper",
+        "playerInfo": {
+          "name": "Austin Hooper",
+          "position": "TE",
+          "team": "ATL"
+        },
+        "pickedBy": "399297882890440704",
+        "userInfo": {
+          "userId": "399297882890440704",
+          "ffuUserId": "ffu-043",
+          "teamName": "Elm Street Skywalkers",
+          "abbreviation": "ESS"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 94,
+        "round": 8,
+        "pickInRound": 10,
+        "playerId": "espn-player-rashaad-penny",
+        "playerInfo": {
+          "name": "Rashaad Penny",
+          "position": "RB",
+          "team": "SEA"
+        },
+        "pickedBy": "399322397750124544",
+        "userInfo": {
+          "userId": "399322397750124544",
+          "ffuUserId": "ffu-041",
+          "teamName": "Great Team Name",
+          "abbreviation": "GTN"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 95,
+        "round": 8,
+        "pickInRound": 11,
+        "playerId": "espn-player-christian-kirk",
+        "playerInfo": {
+          "name": "Christian Kirk",
+          "position": "WR",
+          "team": "ARI"
+        },
+        "pickedBy": "599711204499312640",
+        "userInfo": {
+          "userId": "599711204499312640",
+          "ffuUserId": "ffu-045",
+          "teamName": "Team Black Death",
+          "abbreviation": "TBD"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 96,
+        "round": 8,
+        "pickInRound": 12,
+        "playerId": "espn-player-carson-wentz",
+        "playerInfo": {
+          "name": "Carson Wentz",
+          "position": "QB",
+          "team": "PHI"
+        },
+        "pickedBy": "historical-gingy-flame",
+        "userInfo": {
+          "userId": "historical-gingy-flame",
+          "ffuUserId": "ffu-h06",
+          "teamName": "Gingy Flame",
+          "abbreviation": "GF"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 97,
+        "round": 9,
+        "pickInRound": 1,
+        "playerId": "espn-player-marquez-valdes-scantling",
+        "playerInfo": {
+          "name": "Marquez Valdes-Scantling",
+          "position": "WR",
+          "team": "GB"
+        },
+        "pickedBy": "historical-gingy-flame",
+        "userInfo": {
+          "userId": "historical-gingy-flame",
+          "ffuUserId": "ffu-h06",
+          "teamName": "Gingy Flame",
+          "abbreviation": "GF"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 98,
+        "round": 9,
+        "pickInRound": 2,
+        "playerId": "espn-player-jordan-howard",
+        "playerInfo": {
+          "name": "Jordan Howard",
+          "position": "RB",
+          "team": "PHI"
+        },
+        "pickedBy": "599711204499312640",
+        "userInfo": {
+          "userId": "599711204499312640",
+          "ffuUserId": "ffu-045",
+          "teamName": "Team Black Death",
+          "abbreviation": "TBD"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 99,
+        "round": 9,
+        "pickInRound": 3,
+        "playerId": "espn-player-matt-breida",
+        "playerInfo": {
+          "name": "Matt Breida",
+          "position": "RB",
+          "team": "SF"
+        },
+        "pickedBy": "399322397750124544",
+        "userInfo": {
+          "userId": "399322397750124544",
+          "ffuUserId": "ffu-041",
+          "teamName": "Great Team Name",
+          "abbreviation": "GTN"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 100,
+        "round": 9,
+        "pickInRound": 4,
+        "playerId": "espn-player-james-washington",
+        "playerInfo": {
+          "name": "James Washington",
+          "position": "WR",
+          "team": "PIT"
+        },
+        "pickedBy": "399297882890440704",
+        "userInfo": {
+          "userId": "399297882890440704",
+          "ffuUserId": "ffu-043",
+          "teamName": "Elm Street Skywalkers",
+          "abbreviation": "ESS"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 101,
+        "round": 9,
+        "pickInRound": 5,
+        "playerId": "espn-player-courtland-sutton",
+        "playerInfo": {
+          "name": "Courtland Sutton",
+          "position": "WR",
+          "team": "DEN"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 102,
+        "round": 9,
+        "pickInRound": 6,
+        "playerId": "espn-player-chicago-bears",
+        "playerInfo": {
+          "name": "Chicago Bears",
+          "position": "DEF",
+          "team": "CHI"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 103,
+        "round": 9,
+        "pickInRound": 7,
+        "playerId": "espn-player-darwin-thompson",
+        "playerInfo": {
+          "name": "Darwin Thompson",
+          "position": "RB",
+          "team": "KC"
+        },
+        "pickedBy": "historical-the-losers",
+        "userInfo": {
+          "userId": "historical-the-losers",
+          "ffuUserId": "ffu-h05",
+          "teamName": "The Losers",
+          "abbreviation": "TL"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 104,
+        "round": 9,
+        "pickInRound": 8,
+        "playerId": "espn-player-david-njoku",
+        "playerInfo": {
+          "name": "David Njoku",
+          "position": "TE",
+          "team": "CLE"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 105,
+        "round": 9,
+        "pickInRound": 9,
+        "playerId": "espn-player-jamison-crowder",
+        "playerInfo": {
+          "name": "Jamison Crowder",
+          "position": "WR",
+          "team": "NYJ"
+        },
+        "pickedBy": "508719015656099840",
+        "userInfo": {
+          "userId": "508719015656099840",
+          "ffuUserId": "ffu-029",
+          "teamName": "Team Pancake",
+          "abbreviation": "TP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 106,
+        "round": 9,
+        "pickInRound": 10,
+        "playerId": "espn-player-greg-olsen",
+        "playerInfo": {
+          "name": "Greg Olsen",
+          "position": "TE",
+          "team": "CAR"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway's Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 107,
+        "round": 9,
+        "pickInRound": 11,
+        "playerId": "espn-player-ronald-jones",
+        "playerInfo": {
+          "name": "Ronald Jones",
+          "position": "RB",
+          "team": "TB"
+        },
+        "pickedBy": "507633950666584064",
+        "userInfo": {
+          "userId": "507633950666584064",
+          "ffuUserId": "ffu-028",
+          "teamName": "El Guapo Puto",
+          "abbreviation": "EGP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 108,
+        "round": 9,
+        "pickInRound": 12,
+        "playerId": "espn-player-los-angeles-rams",
+        "playerInfo": {
+          "name": "Los Angeles Rams",
+          "position": "DEF",
+          "team": "LAR"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 109,
+        "round": 10,
+        "pickInRound": 1,
+        "playerId": "espn-player-donte-moncrief",
+        "playerInfo": {
+          "name": "Donte Moncrief",
+          "position": "WR",
+          "team": "PIT"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 110,
+        "round": 10,
+        "pickInRound": 2,
+        "playerId": "espn-player-dante-pettis",
+        "playerInfo": {
+          "name": "Dante Pettis",
+          "position": "WR",
+          "team": "SF"
+        },
+        "pickedBy": "507633950666584064",
+        "userInfo": {
+          "userId": "507633950666584064",
+          "ffuUserId": "ffu-028",
+          "teamName": "El Guapo Puto",
+          "abbreviation": "EGP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 111,
+        "round": 10,
+        "pickInRound": 3,
+        "playerId": "espn-player-michael-gallup",
+        "playerInfo": {
+          "name": "Michael Gallup",
+          "position": "WR",
+          "team": "DAL"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway's Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 112,
+        "round": 10,
+        "pickInRound": 4,
+        "playerId": "espn-player-geronimo-allison",
+        "playerInfo": {
+          "name": "Geronimo Allison",
+          "position": "WR",
+          "team": "FA"
+        },
+        "pickedBy": "508719015656099840",
+        "userInfo": {
+          "userId": "508719015656099840",
+          "ffuUserId": "ffu-029",
+          "teamName": "Team Pancake",
+          "abbreviation": "TP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 113,
+        "round": 10,
+        "pickInRound": 5,
+        "playerId": "espn-player-drew-brees",
+        "playerInfo": {
+          "name": "Drew Brees",
+          "position": "QB",
+          "team": "NO"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 114,
+        "round": 10,
+        "pickInRound": 6,
+        "playerId": "espn-player-russell-wilson",
+        "playerInfo": {
+          "name": "Russell Wilson",
+          "position": "QB",
+          "team": "SEA"
+        },
+        "pickedBy": "historical-the-losers",
+        "userInfo": {
+          "userId": "historical-the-losers",
+          "ffuUserId": "ffu-h05",
+          "teamName": "The Losers",
+          "abbreviation": "TL"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 115,
+        "round": 10,
+        "pickInRound": 7,
+        "playerId": "espn-player-delanie-walker",
+        "playerInfo": {
+          "name": "Delanie Walker",
+          "position": "TE",
+          "team": "TEN"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 116,
+        "round": 10,
+        "pickInRound": 8,
+        "playerId": "espn-player-tony-pollard",
+        "playerInfo": {
+          "name": "Tony Pollard",
+          "position": "RB",
+          "team": "DAL"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 117,
+        "round": 10,
+        "pickInRound": 9,
+        "playerId": "espn-player-lesean-mccoy",
+        "playerInfo": {
+          "name": "LeSean McCoy",
+          "position": "RB",
+          "team": "KC"
+        },
+        "pickedBy": "399297882890440704",
+        "userInfo": {
+          "userId": "399297882890440704",
+          "ffuUserId": "ffu-043",
+          "teamName": "Elm Street Skywalkers",
+          "abbreviation": "ESS"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 118,
+        "round": 10,
+        "pickInRound": 10,
+        "playerId": "espn-player-anthony-miller",
+        "playerInfo": {
+          "name": "Anthony Miller",
+          "position": "WR",
+          "team": "CHI"
+        },
+        "pickedBy": "399322397750124544",
+        "userInfo": {
+          "userId": "399322397750124544",
+          "ffuUserId": "ffu-041",
+          "teamName": "Great Team Name",
+          "abbreviation": "GTN"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 119,
+        "round": 10,
+        "pickInRound": 11,
+        "playerId": "espn-player-jacksonville-jaguars",
+        "playerInfo": {
+          "name": "Jacksonville Jaguars",
+          "position": "DEF",
+          "team": "JAX"
+        },
+        "pickedBy": "599711204499312640",
+        "userInfo": {
+          "userId": "599711204499312640",
+          "ffuUserId": "ffu-045",
+          "teamName": "Team Black Death",
+          "abbreviation": "TBD"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 120,
+        "round": 10,
+        "pickInRound": 12,
+        "playerId": "espn-player-darrell-henderson",
+        "playerInfo": {
+          "name": "Darrell Henderson",
+          "position": "RB",
+          "team": "LAR"
+        },
+        "pickedBy": "historical-gingy-flame",
+        "userInfo": {
+          "userId": "historical-gingy-flame",
+          "ffuUserId": "ffu-h06",
+          "teamName": "Gingy Flame",
+          "abbreviation": "GF"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 121,
+        "round": 11,
+        "pickInRound": 1,
+        "playerId": "espn-player-dion-lewis",
+        "playerInfo": {
+          "name": "Dion Lewis",
+          "position": "RB",
+          "team": "TEN"
+        },
+        "pickedBy": "historical-gingy-flame",
+        "userInfo": {
+          "userId": "historical-gingy-flame",
+          "ffuUserId": "ffu-h06",
+          "teamName": "Gingy Flame",
+          "abbreviation": "GF"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 122,
+        "round": 11,
+        "pickInRound": 2,
+        "playerId": "espn-player-desean-jackson",
+        "playerInfo": {
+          "name": "DeSean Jackson",
+          "position": "WR",
+          "team": "PHI"
+        },
+        "pickedBy": "599711204499312640",
+        "userInfo": {
+          "userId": "599711204499312640",
+          "ffuUserId": "ffu-045",
+          "teamName": "Team Black Death",
+          "abbreviation": "TBD"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 123,
+        "round": 11,
+        "pickInRound": 3,
+        "playerId": "espn-player-lamar-jackson",
+        "playerInfo": {
+          "name": "Lamar Jackson",
+          "position": "QB",
+          "team": "BAL"
+        },
+        "pickedBy": "399322397750124544",
+        "userInfo": {
+          "userId": "399322397750124544",
+          "ffuUserId": "ffu-041",
+          "teamName": "Great Team Name",
+          "abbreviation": "GTN"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 124,
+        "round": 11,
+        "pickInRound": 4,
+        "playerId": "espn-player-t.j.-hockenson",
+        "playerInfo": {
+          "name": "T.J. Hockenson",
+          "position": "TE",
+          "team": "DET"
+        },
+        "pickedBy": "399297882890440704",
+        "userInfo": {
+          "userId": "399297882890440704",
+          "ffuUserId": "ffu-043",
+          "teamName": "Elm Street Skywalkers",
+          "abbreviation": "ESS"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 125,
+        "round": 11,
+        "pickInRound": 5,
+        "playerId": "espn-player-adrian-peterson",
+        "playerInfo": {
+          "name": "Adrian Peterson",
+          "position": "RB",
+          "team": "FA"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 126,
+        "round": 11,
+        "pickInRound": 6,
+        "playerId": "espn-player-dk-metcalf",
+        "playerInfo": {
+          "name": "DK Metcalf",
+          "position": "WR",
+          "team": "SEA"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 127,
+        "round": 11,
+        "pickInRound": 7,
+        "playerId": "espn-player-tyrell-williams",
+        "playerInfo": {
+          "name": "Tyrell Williams",
+          "position": "WR",
+          "team": "LV"
+        },
+        "pickedBy": "historical-the-losers",
+        "userInfo": {
+          "userId": "historical-the-losers",
+          "ffuUserId": "ffu-h05",
+          "teamName": "The Losers",
+          "abbreviation": "TL"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 128,
+        "round": 11,
+        "pickInRound": 8,
+        "playerId": "espn-player-kenny-stills",
+        "playerInfo": {
+          "name": "Kenny Stills",
+          "position": "WR",
+          "team": "HOU"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 129,
+        "round": 11,
+        "pickInRound": 9,
+        "playerId": "espn-player-ben-roethlisberger",
+        "playerInfo": {
+          "name": "Ben Roethlisberger",
+          "position": "QB",
+          "team": "PIT"
+        },
+        "pickedBy": "508719015656099840",
+        "userInfo": {
+          "userId": "508719015656099840",
+          "ffuUserId": "ffu-029",
+          "teamName": "Team Pancake",
+          "abbreviation": "TP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 130,
+        "round": 11,
+        "pickInRound": 10,
+        "playerId": "espn-player-adam-humphries",
+        "playerInfo": {
+          "name": "Adam Humphries",
+          "position": "WR",
+          "team": "TEN"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway's Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 131,
+        "round": 11,
+        "pickInRound": 11,
+        "playerId": "espn-player-kyler-murray",
+        "playerInfo": {
+          "name": "Kyler Murray",
+          "position": "QB",
+          "team": "ARI"
+        },
+        "pickedBy": "507633950666584064",
+        "userInfo": {
+          "userId": "507633950666584064",
+          "ffuUserId": "ffu-028",
+          "teamName": "El Guapo Puto",
+          "abbreviation": "EGP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 132,
+        "round": 11,
+        "pickInRound": 12,
+        "playerId": "espn-player-justin-tucker",
+        "playerInfo": {
+          "name": "Justin Tucker",
+          "position": "K",
+          "team": "BAL"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 133,
+        "round": 12,
+        "pickInRound": 1,
+        "playerId": "espn-player-devin-singletary",
+        "playerInfo": {
+          "name": "Devin Singletary",
+          "position": "RB",
+          "team": "BUF"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 134,
+        "round": 12,
+        "pickInRound": 2,
+        "playerId": "espn-player-albert-wilson",
+        "playerInfo": {
+          "name": "Albert Wilson",
+          "position": "WR",
+          "team": "MIA"
+        },
+        "pickedBy": "507633950666584064",
+        "userInfo": {
+          "userId": "507633950666584064",
+          "ffuUserId": "ffu-028",
+          "teamName": "El Guapo Puto",
+          "abbreviation": "EGP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 135,
+        "round": 12,
+        "pickInRound": 3,
+        "playerId": "espn-player-jared-goff",
+        "playerInfo": {
+          "name": "Jared Goff",
+          "position": "QB",
+          "team": "LAR"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway's Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 136,
+        "round": 12,
+        "pickInRound": 4,
+        "playerId": "espn-player-minnesota-vikings",
+        "playerInfo": {
+          "name": "Minnesota Vikings",
+          "position": "DEF",
+          "team": "MIN"
+        },
+        "pickedBy": "508719015656099840",
+        "userInfo": {
+          "userId": "508719015656099840",
+          "ffuUserId": "ffu-029",
+          "teamName": "Team Pancake",
+          "abbreviation": "TP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 137,
+        "round": 12,
+        "pickInRound": 5,
+        "playerId": "espn-player-new-england-patriots",
+        "playerInfo": {
+          "name": "New England Patriots",
+          "position": "DEF",
+          "team": "NE"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 138,
+        "round": 12,
+        "pickInRound": 6,
+        "playerId": "espn-player-mitchell-trubisky",
+        "playerInfo": {
+          "name": "Mitchell Trubisky",
+          "position": "QB",
+          "team": "CHI"
+        },
+        "pickedBy": "historical-the-losers",
+        "userInfo": {
+          "userId": "historical-the-losers",
+          "ffuUserId": "ffu-h05",
+          "teamName": "The Losers",
+          "abbreviation": "TL"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 139,
+        "round": 12,
+        "pickInRound": 7,
+        "playerId": "espn-player-greg-zuerlein",
+        "playerInfo": {
+          "name": "Greg Zuerlein",
+          "position": "K",
+          "team": "LAR"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 140,
+        "round": 12,
+        "pickInRound": 8,
+        "playerId": "espn-player-jameis-winston",
+        "playerInfo": {
+          "name": "Jameis Winston",
+          "position": "QB",
+          "team": "TB"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 141,
+        "round": 12,
+        "pickInRound": 9,
+        "playerId": "espn-player-los-angeles-chargers",
+        "playerInfo": {
+          "name": "Los Angeles Chargers",
+          "position": "DEF",
+          "team": "LAC"
+        },
+        "pickedBy": "399297882890440704",
+        "userInfo": {
+          "userId": "399297882890440704",
+          "ffuUserId": "ffu-043",
+          "teamName": "Elm Street Skywalkers",
+          "abbreviation": "ESS"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 142,
+        "round": 12,
+        "pickInRound": 10,
+        "playerId": "espn-player-mark-andrews",
+        "playerInfo": {
+          "name": "Mark Andrews",
+          "position": "TE",
+          "team": "BAL"
+        },
+        "pickedBy": "399322397750124544",
+        "userInfo": {
+          "userId": "399322397750124544",
+          "ffuUserId": "ffu-041",
+          "teamName": "Great Team Name",
+          "abbreviation": "GTN"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 143,
+        "round": 12,
+        "pickInRound": 11,
+        "playerId": "espn-player-wil-lutz",
+        "playerInfo": {
+          "name": "Wil Lutz",
+          "position": "K",
+          "team": "NO"
+        },
+        "pickedBy": "599711204499312640",
+        "userInfo": {
+          "userId": "599711204499312640",
+          "ffuUserId": "ffu-045",
+          "teamName": "Team Black Death",
+          "abbreviation": "TBD"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 144,
+        "round": 12,
+        "pickInRound": 12,
+        "playerId": "espn-player-eric-ebron",
+        "playerInfo": {
+          "name": "Eric Ebron",
+          "position": "TE",
+          "team": "IND"
+        },
+        "pickedBy": "historical-gingy-flame",
+        "userInfo": {
+          "userId": "historical-gingy-flame",
+          "ffuUserId": "ffu-h06",
+          "teamName": "Gingy Flame",
+          "abbreviation": "GF"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 145,
+        "round": 13,
+        "pickInRound": 1,
+        "playerId": "espn-player-stephen-gostkowski",
+        "playerInfo": {
+          "name": "Stephen Gostkowski",
+          "position": "K",
+          "team": "NE"
+        },
+        "pickedBy": "historical-gingy-flame",
+        "userInfo": {
+          "userId": "historical-gingy-flame",
+          "ffuUserId": "ffu-h06",
+          "teamName": "Gingy Flame",
+          "abbreviation": "GF"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 146,
+        "round": 13,
+        "pickInRound": 2,
+        "playerId": "espn-player-kyle-rudolph",
+        "playerInfo": {
+          "name": "Kyle Rudolph",
+          "position": "TE",
+          "team": "MIN"
+        },
+        "pickedBy": "599711204499312640",
+        "userInfo": {
+          "userId": "599711204499312640",
+          "ffuUserId": "ffu-045",
+          "teamName": "Team Black Death",
+          "abbreviation": "TBD"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 147,
+        "round": 13,
+        "pickInRound": 3,
+        "playerId": "espn-player-keke-coutee",
+        "playerInfo": {
+          "name": "Keke Coutee",
+          "position": "WR",
+          "team": "FA"
+        },
+        "pickedBy": "399322397750124544",
+        "userInfo": {
+          "userId": "399322397750124544",
+          "ffuUserId": "ffu-041",
+          "teamName": "Great Team Name",
+          "abbreviation": "GTN"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 148,
+        "round": 13,
+        "pickInRound": 4,
+        "playerId": "espn-player-golden-tate",
+        "playerInfo": {
+          "name": "Golden Tate",
+          "position": "WR",
+          "team": "FA"
+        },
+        "pickedBy": "399297882890440704",
+        "userInfo": {
+          "userId": "399297882890440704",
+          "ffuUserId": "ffu-043",
+          "teamName": "Elm Street Skywalkers",
+          "abbreviation": "ESS"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 149,
+        "round": 13,
+        "pickInRound": 5,
+        "playerId": "espn-player-kalen-ballage",
+        "playerInfo": {
+          "name": "Kalen Ballage",
+          "position": "RB",
+          "team": "MIA"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 150,
+        "round": 13,
+        "pickInRound": 6,
+        "playerId": "espn-player-mohamed-sanu",
+        "playerInfo": {
+          "name": "Mohamed Sanu",
+          "position": "WR",
+          "team": "ATL"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 151,
+        "round": 13,
+        "pickInRound": 7,
+        "playerId": "espn-player-jimmy-graham",
+        "playerInfo": {
+          "name": "Jimmy Graham",
+          "position": "TE",
+          "team": "GB"
+        },
+        "pickedBy": "historical-the-losers",
+        "userInfo": {
+          "userId": "historical-the-losers",
+          "ffuUserId": "ffu-h05",
+          "teamName": "The Losers",
+          "abbreviation": "TL"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 152,
+        "round": 13,
+        "pickInRound": 8,
+        "playerId": "espn-player-harrison-butker",
+        "playerInfo": {
+          "name": "Harrison Butker",
+          "position": "K",
+          "team": "KC"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 153,
+        "round": 13,
+        "pickInRound": 9,
+        "playerId": "espn-player-nyheim-hines",
+        "playerInfo": {
+          "name": "Nyheim Hines",
+          "position": "RB",
+          "team": "IND"
+        },
+        "pickedBy": "508719015656099840",
+        "userInfo": {
+          "userId": "508719015656099840",
+          "ffuUserId": "ffu-029",
+          "teamName": "Team Pancake",
+          "abbreviation": "TP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 154,
+        "round": 13,
+        "pickInRound": 10,
+        "playerId": "espn-player-philadelphia-eagles",
+        "playerInfo": {
+          "name": "Philadelphia Eagles",
+          "position": "DEF",
+          "team": "PHI"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway's Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 155,
+        "round": 13,
+        "pickInRound": 11,
+        "playerId": "espn-player-n'keal-harry",
+        "playerInfo": {
+          "name": "N'Keal Harry",
+          "position": "WR",
+          "team": "MIN"
+        },
+        "pickedBy": "507633950666584064",
+        "userInfo": {
+          "userId": "507633950666584064",
+          "ffuUserId": "ffu-028",
+          "teamName": "El Guapo Puto",
+          "abbreviation": "EGP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 156,
+        "round": 13,
+        "pickInRound": 12,
+        "playerId": "espn-player-giovani-bernard",
+        "playerInfo": {
+          "name": "Giovani Bernard",
+          "position": "RB",
+          "team": "CIN"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 157,
+        "round": 14,
+        "pickInRound": 1,
+        "playerId": "espn-player-jack-doyle",
+        "playerInfo": {
+          "name": "Jack Doyle",
+          "position": "TE",
+          "team": "IND"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 12
+      },
+      {
+        "pickNumber": 158,
+        "round": 14,
+        "pickInRound": 2,
+        "playerId": "espn-player-indianapolis-colts",
+        "playerInfo": {
+          "name": "Indianapolis Colts",
+          "position": "DEF",
+          "team": "IND"
+        },
+        "pickedBy": "507633950666584064",
+        "userInfo": {
+          "userId": "507633950666584064",
+          "ffuUserId": "ffu-028",
+          "teamName": "El Guapo Puto",
+          "abbreviation": "EGP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 159,
+        "round": 14,
+        "pickInRound": 3,
+        "playerId": "espn-player-ka'imi-fairbairn",
+        "playerInfo": {
+          "name": "Ka'imi Fairbairn",
+          "position": "K",
+          "team": "HOU"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway's Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 160,
+        "round": 14,
+        "pickInRound": 4,
+        "playerId": "espn-player-josh-allen",
+        "playerInfo": {
+          "name": "Josh Allen",
+          "position": "QB",
+          "team": "BUF"
+        },
+        "pickedBy": "508719015656099840",
+        "userInfo": {
+          "userId": "508719015656099840",
+          "ffuUserId": "ffu-029",
+          "teamName": "Team Pancake",
+          "abbreviation": "TP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 161,
+        "round": 14,
+        "pickInRound": 5,
+        "playerId": "espn-player-jalen-richard",
+        "playerInfo": {
+          "name": "Jalen Richard",
+          "position": "RB",
+          "team": "LV"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 162,
+        "round": 14,
+        "pickInRound": 6,
+        "playerId": "espn-player-seattle-seahawks",
+        "playerInfo": {
+          "name": "Seattle Seahawks",
+          "position": "DEF",
+          "team": "SEA"
+        },
+        "pickedBy": "historical-the-losers",
+        "userInfo": {
+          "userId": "historical-the-losers",
+          "ffuUserId": "ffu-h05",
+          "teamName": "The Losers",
+          "abbreviation": "TL"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 163,
+        "round": 14,
+        "pickInRound": 7,
+        "playerId": "espn-player-c.j.-anderson",
+        "playerInfo": {
+          "name": "C.J. Anderson",
+          "position": "RB",
+          "team": "DET"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 164,
+        "round": 14,
+        "pickInRound": 8,
+        "playerId": "espn-player-roberto-aguayo",
+        "playerInfo": {
+          "name": "Roberto Aguayo",
+          "position": "K",
+          "team": "FA"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 165,
+        "round": 14,
+        "pickInRound": 9,
+        "playerId": "espn-player-jake-elliott",
+        "playerInfo": {
+          "name": "Jake Elliott",
+          "position": "K",
+          "team": "PHI"
+        },
+        "pickedBy": "399297882890440704",
+        "userInfo": {
+          "userId": "399297882890440704",
+          "ffuUserId": "ffu-043",
+          "teamName": "Elm Street Skywalkers",
+          "abbreviation": "ESS"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 166,
+        "round": 14,
+        "pickInRound": 10,
+        "playerId": "espn-player-denver-broncos",
+        "playerInfo": {
+          "name": "Denver Broncos",
+          "position": "DEF",
+          "team": "DEN"
+        },
+        "pickedBy": "399322397750124544",
+        "userInfo": {
+          "userId": "399322397750124544",
+          "ffuUserId": "ffu-041",
+          "teamName": "Great Team Name",
+          "abbreviation": "GTN"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 167,
+        "round": 14,
+        "pickInRound": 11,
+        "playerId": "espn-player-dak-prescott",
+        "playerInfo": {
+          "name": "Dak Prescott",
+          "position": "QB",
+          "team": "DAL"
+        },
+        "pickedBy": "599711204499312640",
+        "userInfo": {
+          "userId": "599711204499312640",
+          "ffuUserId": "ffu-045",
+          "teamName": "Team Black Death",
+          "abbreviation": "TBD"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 168,
+        "round": 14,
+        "pickInRound": 12,
+        "playerId": "espn-player-baltimore-ravens",
+        "playerInfo": {
+          "name": "Baltimore Ravens",
+          "position": "DEF",
+          "team": "BAL"
+        },
+        "pickedBy": "historical-gingy-flame",
+        "userInfo": {
+          "userId": "historical-gingy-flame",
+          "ffuUserId": "ffu-h06",
+          "teamName": "Gingy Flame",
+          "abbreviation": "GF"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 169,
+        "round": 15,
+        "pickInRound": 1,
+        "playerId": "espn-player-philip-rivers",
+        "playerInfo": {
+          "name": "Philip Rivers",
+          "position": "QB",
+          "team": "LAC"
+        },
+        "pickedBy": "historical-gingy-flame",
+        "userInfo": {
+          "userId": "historical-gingy-flame",
+          "ffuUserId": "ffu-h06",
+          "teamName": "Gingy Flame",
+          "abbreviation": "GF"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 1
+      },
+      {
+        "pickNumber": 170,
+        "round": 15,
+        "pickInRound": 2,
+        "playerId": "espn-player-kareem-hunt",
+        "playerInfo": {
+          "name": "Kareem Hunt",
+          "position": "RB",
+          "team": "KC"
+        },
+        "pickedBy": "599711204499312640",
+        "userInfo": {
+          "userId": "599711204499312640",
+          "ffuUserId": "ffu-045",
+          "teamName": "Team Black Death",
+          "abbreviation": "TBD"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 2
+      },
+      {
+        "pickNumber": 171,
+        "round": 15,
+        "pickInRound": 3,
+        "playerId": "espn-player-robbie-gould",
+        "playerInfo": {
+          "name": "Robbie Gould",
+          "position": "K",
+          "team": "SF"
+        },
+        "pickedBy": "399322397750124544",
+        "userInfo": {
+          "userId": "399322397750124544",
+          "ffuUserId": "ffu-041",
+          "teamName": "Great Team Name",
+          "abbreviation": "GTN"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 3
+      },
+      {
+        "pickNumber": 172,
+        "round": 15,
+        "pickInRound": 4,
+        "playerId": "espn-player-kirk-cousins",
+        "playerInfo": {
+          "name": "Kirk Cousins",
+          "position": "QB",
+          "team": "MIN"
+        },
+        "pickedBy": "399297882890440704",
+        "userInfo": {
+          "userId": "399297882890440704",
+          "ffuUserId": "ffu-043",
+          "teamName": "Elm Street Skywalkers",
+          "abbreviation": "ESS"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 4
+      },
+      {
+        "pickNumber": 173,
+        "round": 15,
+        "pickInRound": 5,
+        "playerId": "espn-player-arizona-cardinals",
+        "playerInfo": {
+          "name": "Arizona Cardinals",
+          "position": "DEF",
+          "team": "ARI"
+        },
+        "pickedBy": "386791325690994688",
+        "userInfo": {
+          "userId": "386791325690994688",
+          "ffuUserId": "ffu-025",
+          "teamName": "Indianapolis Aztecs",
+          "abbreviation": "IA"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 5
+      },
+      {
+        "pickNumber": 174,
+        "round": 15,
+        "pickInRound": 6,
+        "playerId": "espn-player-carlos-hyde",
+        "playerInfo": {
+          "name": "Carlos Hyde",
+          "position": "RB",
+          "team": "HOU"
+        },
+        "pickedBy": "729741648338210816",
+        "userInfo": {
+          "userId": "729741648338210816",
+          "ffuUserId": "ffu-010",
+          "teamName": "Team Painter Pick 6",
+          "abbreviation": "TPP6"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 6
+      },
+      {
+        "pickNumber": 175,
+        "round": 15,
+        "pickInRound": 7,
+        "playerId": "espn-player-jason-myers",
+        "playerInfo": {
+          "name": "Jason Myers",
+          "position": "K",
+          "team": "SEA"
+        },
+        "pickedBy": "historical-the-losers",
+        "userInfo": {
+          "userId": "historical-the-losers",
+          "ffuUserId": "ffu-h05",
+          "teamName": "The Losers",
+          "abbreviation": "TL"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 7
+      },
+      {
+        "pickNumber": 176,
+        "round": 15,
+        "pickInRound": 8,
+        "playerId": "espn-player-new-orleans-saints",
+        "playerInfo": {
+          "name": "New Orleans Saints",
+          "position": "DEF",
+          "team": "NO"
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "ffuUserId": "ffu-026",
+          "teamName": "Currier Island Raging Rhinos",
+          "abbreviation": "CIRR"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 8
+      },
+      {
+        "pickNumber": 177,
+        "round": 15,
+        "pickInRound": 9,
+        "playerId": "espn-player-aldrick-rosas",
+        "playerInfo": {
+          "name": "Aldrick Rosas",
+          "position": "K",
+          "team": "NYG"
+        },
+        "pickedBy": "508719015656099840",
+        "userInfo": {
+          "userId": "508719015656099840",
+          "ffuUserId": "ffu-029",
+          "teamName": "Team Pancake",
+          "abbreviation": "TP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 9
+      },
+      {
+        "pickNumber": 178,
+        "round": 15,
+        "pickInRound": 10,
+        "playerId": "espn-player-jaylen-samuels",
+        "playerInfo": {
+          "name": "Jaylen Samuels",
+          "position": "RB",
+          "team": "PIT"
+        },
+        "pickedBy": "historical-speedway-ritual-cog",
+        "userInfo": {
+          "userId": "historical-speedway-ritual-cog",
+          "ffuUserId": "ffu-h02",
+          "teamName": "Speedway's Ritual Cog",
+          "abbreviation": "SRC"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 10
+      },
+      {
+        "pickNumber": 179,
+        "round": 15,
+        "pickInRound": 11,
+        "playerId": "espn-player-mike-nugent",
+        "playerInfo": {
+          "name": "Mike Nugent",
+          "position": "K",
+          "team": "FA"
+        },
+        "pickedBy": "507633950666584064",
+        "userInfo": {
+          "userId": "507633950666584064",
+          "ffuUserId": "ffu-028",
+          "teamName": "El Guapo Puto",
+          "abbreviation": "EGP"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 11
+      },
+      {
+        "pickNumber": 180,
+        "round": 15,
+        "pickInRound": 12,
+        "playerId": "espn-player-michael-crabtree",
+        "playerInfo": {
+          "name": "Michael Crabtree",
+          "position": "WR",
+          "team": "FA"
+        },
+        "pickedBy": "historical-naptown-makos",
+        "userInfo": {
+          "userId": "historical-naptown-makos",
+          "ffuUserId": "ffu-h01",
+          "teamName": "Naptown Makos",
+          "abbreviation": "NM"
+        },
+        "draftId": "espn-2019-national-draft",
+        "draftSlot": 12
+      }
+    ],
+    "settings": {
+      "teams": 12,
+      "rounds": 15,
+      "draftType": "snake"
+    },
+    "metadata": {
+      "name": "ESPN 2019 National Draft",
+      "description": "National League Draft for 2019 season",
+      "scoringType": "standard"
+    },
+    "startTime": 1565827200000,
+    "status": "complete"
+  }
+}

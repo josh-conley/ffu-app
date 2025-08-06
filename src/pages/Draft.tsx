@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 // import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { DraftBoard } from '../components/Draft/DraftBoard';
@@ -6,8 +6,8 @@ import { MobileDraftBoard } from '../components/Draft/MobileDraftBoard';
 import { DraftList } from '../components/Draft/DraftList';
 import type { DraftData, UserInfo, LeagueTier } from '../types';
 import { dataService } from '../services/data.service';
-import { LEAGUE_NAMES, AVAILABLE_YEARS } from '../constants/leagues';
-import { getUserInfoBySleeperId } from '../config/constants';
+import { LEAGUE_NAMES, AVAILABLE_YEARS, getAvailableLeaguesForYear } from '../constants/leagues';
+import { getUserInfoBySleeperId, getFFUIdBySleeperId } from '../config/constants';
 import { ChevronDown } from 'lucide-react';
 
 type ViewMode = 'board' | 'list';
@@ -20,6 +20,15 @@ export const Draft: React.FC = () => {
   const [, setError] = useState<string | undefined>();
   const [selectedLeague, setSelectedLeague] = useState<string>('PREMIER');
   const [selectedYear, setSelectedYear] = useState<string>('2024');
+  
+  // Era-aware available leagues and years
+  const availableLeagues = useMemo(() => getAvailableLeaguesForYear(selectedYear), [selectedYear]);
+  
+  // Filter years to only show those where the selected league exists
+  const availableYears = useMemo(() => {
+    return AVAILABLE_YEARS.filter(year => getAvailableLeaguesForYear(year).includes(selectedLeague as LeagueTier));
+  }, [selectedLeague]);
+  
 
   const loadDraftData = async (league: string, year: string) => {
     try {
@@ -50,24 +59,30 @@ export const Draft: React.FC = () => {
       const uniqueUserIds = [...new Set(historicalData.draftData.picks.map(pick => pick.userInfo.userId))];
       
       uniqueUserIds.forEach(userId => {
-        // Try to get user info from constants first
-        const userInfo = getUserInfoBySleeperId(userId);
+        // Prioritize historical team names from draft data over current constants
+        const pickWithUser = historicalData.draftData?.picks.find(pick => pick.userInfo.userId === userId);
         
-        if (userInfo) {
-          userMapping[userId] = {
-            userId,
-            teamName: userInfo.teamName,
-            abbreviation: userInfo.abbreviation
-          };
+        if (pickWithUser && pickWithUser.userInfo.teamName) {
+          // Use historical team name from draft data
+          userMapping[userId] = pickWithUser.userInfo;
         } else {
-          // Fallback to draft pick user info if available
-          const pickWithUser = historicalData.draftData?.picks.find(pick => pick.userInfo.userId === userId);
-          if (pickWithUser) {
-            userMapping[userId] = pickWithUser.userInfo;
-          } else {
-            // Last fallback
+          // Fallback to constants if historical data not available
+          const userInfo = getUserInfoBySleeperId(userId);
+          
+          if (userInfo) {
+            const ffuUserId = getFFUIdBySleeperId(userId) || 'unknown';
             userMapping[userId] = {
               userId,
+              ffuUserId,
+              teamName: userInfo.teamName,
+              abbreviation: userInfo.abbreviation
+            };
+          } else {
+            // Last fallback
+            const ffuUserId = getFFUIdBySleeperId(userId) || 'unknown';
+            userMapping[userId] = {
+              userId,
+              ffuUserId,
               teamName: `User ${userId}`,
               abbreviation: 'UNK'
             };
@@ -91,7 +106,7 @@ export const Draft: React.FC = () => {
   }, [selectedLeague, selectedYear]);
 
   return (
-    <div className="max-w-5xl mx-auto px-4">
+    <div className="max-w-5xl mx-auto">
       {/* Header with Filters */}
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div className="mb-3 sm:mb-0">
@@ -99,17 +114,16 @@ export const Draft: React.FC = () => {
           <p className="mt-1 sm:mt-2 text-xs sm:text-base text-gray-600 dark:text-gray-300">View past draft results and selections</p>
         </div>
         
-        <div className="flex flex-row gap-2 sm:gap-4 items-end">
+        <div className="flex flex-row gap-2 sm:gap-4 justify-between items-center w-full sm:w-auto">
           <div className="space-y-1 sm:space-y-2 min-w-0 flex-shrink">
-            <label className="block text-xs sm:text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">League</label>
             <div className="relative">
               <select
                 value={selectedLeague}
                 onChange={(e) => setSelectedLeague(e.target.value)}
-                className="block w-20 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-1.5 sm:py-3 text-xs sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                className="block w-24 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
-                {Object.entries(LEAGUE_NAMES).map(([key, name]) => (
-                  <option key={key} value={key}>{name}</option>
+                {availableLeagues.map((league) => (
+                  <option key={league} value={league}>{LEAGUE_NAMES[league]}</option>
                 ))}
               </select>
               <div className="absolute inset-y-0 right-0 flex items-center pr-1 sm:pr-3 pointer-events-none">
@@ -119,14 +133,13 @@ export const Draft: React.FC = () => {
           </div>
 
           <div className="space-y-1 sm:space-y-2 min-w-0 flex-shrink">
-            <label className="block text-xs sm:text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Year</label>
             <div className="relative">
               <select
                 value={selectedYear}
                 onChange={(e) => setSelectedYear(e.target.value)}
-                className="block w-16 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-1.5 sm:py-3 text-xs sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                className="block w-20 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
-                {AVAILABLE_YEARS.map((year) => (
+                {availableYears.map((year) => (
                   <option key={year} value={year}>{year}</option>
                 ))}
               </select>
@@ -140,7 +153,7 @@ export const Draft: React.FC = () => {
             <div className="flex border border-gray-300 dark:border-gray-600 rounded overflow-hidden flex-shrink-0">
               <button
                 onClick={() => setViewMode('board')}
-                className={`px-2 sm:px-4 py-1.5 sm:py-3 text-xs sm:text-base font-medium transition-colors duration-200 ${
+                className={`px-4 sm:px-4 py-2 sm:py-3 text-sm sm:text-base font-medium transition-colors duration-200 ${
                   viewMode === 'board'
                     ? 'bg-ffu-red text-white'
                     : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700'
@@ -151,7 +164,7 @@ export const Draft: React.FC = () => {
               </button>
               <button
                 onClick={() => setViewMode('list')}
-                className={`px-2 sm:px-4 py-1.5 sm:py-3 text-xs sm:text-base font-medium transition-colors duration-200 border-l border-gray-300 dark:border-gray-600 ${
+                className={`px-4 sm:px-4 py-2 sm:py-3 text-sm sm:text-base font-medium transition-colors duration-200 border-l border-gray-300 dark:border-gray-600 ${
                   viewMode === 'list'
                     ? 'bg-ffu-red text-white'
                     : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700'

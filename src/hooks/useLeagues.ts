@@ -1,5 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { leagueApi } from '../services/api';
+import { getSeasonLength } from '../utils/era-detection';
+import { useMatchupCache } from './useMatchupCache';
+import { getHeadToHeadMatchups, calculateHeadToHeadStats } from '../utils/matchup-indexer';
 import type { 
   EnhancedLeagueSeasonData, 
   LeagueTier, 
@@ -7,7 +10,10 @@ import type {
   UseLeagueStandingsReturn,
   UseWeekMatchupsReturn,
   WeekMatchupsResponse,
-  AllTimeRecords
+  AllTimeRecords,
+  UseHeadToHeadReturn,
+  HeadToHeadStats,
+  HeadToHeadMatchup
 } from '../types';
 
 export const useAllStandings = (): UseAllStandingsReturn => {
@@ -103,8 +109,11 @@ export const useWeekMatchups = (league: LeagueTier, year: string, week: number):
   const [error, setError] = useState<string>();
 
   const fetchData = useCallback(async () => {
-    if (!league || !year || !week || week < 1 || week > 18) {
-      setError('Valid league, year, and week (1-18) are required');
+    // Get era-aware season length for validation
+    const seasonLength = getSeasonLength(year);
+    
+    if (!league || !year || !week || week < 1 || week > seasonLength) {
+      setError(`Valid league, year, and week (1-${seasonLength}) are required`);
       setIsLoading(false);
       return;
     }
@@ -188,4 +197,69 @@ export const useAllTimeRecords = (league?: LeagueTier, year?: string) => {
   }, [fetchData]);
 
   return { data, isLoading, error };
+};
+
+export const useHeadToHeadMatchups = (player1Id: string, player2Id: string): UseHeadToHeadReturn => {
+  const [data, setData] = useState<HeadToHeadStats | null>(null);
+  const [error, setError] = useState<string>();
+  const { index, isLoading: cacheLoading, error: cacheError } = useMatchupCache();
+
+  const calculateHeadToHead = useCallback(() => {
+    if (!player1Id || !player2Id || player1Id === player2Id) {
+      setData(null);
+      setError(undefined);
+      return;
+    }
+
+    if (!index) {
+      // Cache not loaded yet
+      setData(null);
+      setError(cacheError || undefined);
+      return;
+    }
+
+    try {
+      setError(undefined);
+      
+      // Get head-to-head matchups from index (instant lookup!)
+      const matchups = getHeadToHeadMatchups(index, player1Id, player2Id);
+      
+      // Calculate stats using the utility function
+      const stats = calculateHeadToHeadStats(matchups, player1Id, player2Id);
+      
+      // Convert indexed matchups to the expected format
+      const headToHeadMatchups: HeadToHeadMatchup[] = matchups.map(matchup => ({
+        year: matchup.year,
+        league: matchup.league,
+        week: matchup.week,
+        winner: matchup.winner,
+        loser: matchup.loser,
+        winnerScore: matchup.winnerScore,
+        loserScore: matchup.loserScore,
+        winnerInfo: matchup.winnerInfo,
+        loserInfo: matchup.loserInfo,
+        isPlayoff: matchup.isPlayoff,
+        placementType: matchup.placementType
+      }));
+
+      setData({
+        ...stats,
+        matchups: headToHeadMatchups
+      });
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to calculate head-to-head matchups';
+      setError(errorMessage);
+      console.error('Error calculating head-to-head matchups:', err);
+    }
+  }, [player1Id, player2Id, index, cacheError]);
+
+  useEffect(() => {
+    calculateHeadToHead();
+  }, [calculateHeadToHead]);
+
+  return { 
+    data, 
+    isLoading: cacheLoading, 
+    error: error || cacheError || undefined
+  };
 };

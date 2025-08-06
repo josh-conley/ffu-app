@@ -38,7 +38,7 @@ const TEAM_LOGO_MAP: Record<string, string> = {
   "The Minutemen": "The Minutemen.png",
   "The Riveters": "The Riveters.png",
   "The Sha Dynasty": "The Sha_Dynasty.png",
-  "Sha'Dynasty": "The Sha_Dynasty.png",
+  "The Sha'Dynasty": "The Sha_Dynasty.png",
   "Sha Dynasty": "The Sha_Dynasty.png",
   "The Stallions": "The Stallions.png",
   "The Tooth Tuggers": "The Tooth Tuggers.png",

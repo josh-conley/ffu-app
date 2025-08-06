@@ -1,11 +1,13 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useUrlParams } from '../hooks/useUrlParams';
 import { useWeekMatchups, useAllSeasonMatchups } from '../hooks/useLeagues';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import type { LeagueTier } from '../types';
-import { USERS } from '../config/constants';
+import { USERS, getAllYears, getAvailableLeagues } from '../config/constants';
+import { getSeasonLength } from '../utils/era-detection';
 import { ChevronDown, Filter } from 'lucide-react';
 
 // Placement Tag Component
@@ -41,11 +43,28 @@ const PlacementTag = ({ placementType }: { placementType: string }) => {
 };
 
 export const Matchups = () => {
+  const { getParam, updateParams } = useUrlParams();
   const [selectedLeague, setSelectedLeague] = useState<LeagueTier>('PREMIER');
   const [selectedYear, setSelectedYear] = useState<string>('2024');
   const [selectedWeek, setSelectedWeek] = useState<number | 'ALL'>(0); // 0 represents "All Weeks"
   const [selectedTeam, setSelectedTeam] = useState<string>('ALL'); // Team filter
   const [isFilterMenuOpen, setIsFilterMenuOpen] = useState<boolean>(false);
+
+  // Initialize from URL params on mount
+  useEffect(() => {
+    const league = getParam('league', 'PREMIER');
+    if (['PREMIER', 'MASTERS', 'NATIONAL'].includes(league)) {
+      setSelectedLeague(league as LeagueTier);
+    }
+
+    setSelectedYear(getParam('year', '2024'));
+
+    const week = getParam('week', '0');
+    const weekNum = week === 'ALL' ? 0 : parseInt(week);
+    setSelectedWeek(isNaN(weekNum) ? 0 : weekNum);
+
+    setSelectedTeam(getParam('team', 'ALL'));
+  }, []); // Empty dependency array - only run on mount
 
   const { data: weekMatchupsData, isLoading: weekLoading, error: weekError } = useWeekMatchups(
     selectedLeague,
@@ -64,7 +83,9 @@ export const Matchups = () => {
   const isLoading = isShowingAllWeeks ? seasonLoading : weekLoading;
   const error = isShowingAllWeeks ? seasonError : weekError;
 
-  const leagues: LeagueTier[] = ['PREMIER', 'MASTERS', 'NATIONAL'];
+  // Era-aware leagues - filter based on selected year
+  const leagues = useMemo(() => getAvailableLeagues(selectedYear), [selectedYear]);
+  
 
   const getLeagueName = (league: LeagueTier): string => {
     switch (league) {
@@ -73,8 +94,16 @@ export const Matchups = () => {
       case 'NATIONAL': return 'National';
     }
   };
-  const years = ['2024', '2023', '2022', '2021'];
-  const weeks = Array.from({ length: 17 }, (_, i) => i + 1);
+  // Era-aware years - filter based on league availability
+  const allYears = getAllYears();
+  const years = useMemo(() => {
+    // Filter years to only show those where the selected league exists
+    return allYears.filter(year => getAvailableLeagues(year).includes(selectedLeague));
+  }, [allYears, selectedLeague]);
+  const weeks = useMemo(() => {
+    const totalWeeks = getSeasonLength(selectedYear);
+    return Array.from({ length: totalWeeks }, (_, i) => i + 1);
+  }, [selectedYear]);
 
   // Get sorted list of active team members
   const teamOptions = useMemo(() => {
@@ -121,7 +150,11 @@ export const Matchups = () => {
             <div className="relative">
               <select
                 value={selectedLeague}
-                onChange={(e) => setSelectedLeague(e.target.value as LeagueTier)}
+                onChange={(e) => {
+                  const league = e.target.value as LeagueTier;
+                  setSelectedLeague(league);
+                  updateParams({ league });
+                }}
                 className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
                 {leagues.map(league => (
@@ -139,7 +172,11 @@ export const Matchups = () => {
             <div className="relative">
               <select
                 value={selectedYear}
-                onChange={(e) => setSelectedYear(e.target.value)}
+                onChange={(e) => {
+                  const year = e.target.value;
+                  setSelectedYear(year);
+                  updateParams({ year });
+                }}
                 className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
                 {years.map(year => (
@@ -157,7 +194,11 @@ export const Matchups = () => {
             <div className="relative">
               <select
                 value={selectedWeek}
-                onChange={(e) => setSelectedWeek(e.target.value === '0' ? 0 : parseInt(e.target.value))}
+                onChange={(e) => {
+                  const week = e.target.value === '0' ? 0 : parseInt(e.target.value);
+                  setSelectedWeek(week);
+                  updateParams({ week: week === 0 ? '0' : week.toString() });
+                }}
                 className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
                 <option value={0}>All Weeks</option>
@@ -176,7 +217,11 @@ export const Matchups = () => {
             <div className="relative">
               <select
                 value={selectedTeam}
-                onChange={(e) => setSelectedTeam(e.target.value)}
+                onChange={(e) => {
+                  const team = e.target.value;
+                  setSelectedTeam(team);
+                  updateParams({ team: team === 'ALL' ? null : team });
+                }}
                 className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
                 {teamOptions.map(team => (
@@ -240,7 +285,7 @@ export const Matchups = () => {
                 {placementInfo && placementInfo.tag}
                 
                 {/* Mobile Stacked Layout */}
-                <div className={`sm:hidden space-y-0.5 border border-gray-100 dark:border-gray-800 ${placementInfo ? placementInfo.borderColor : ''}`}>
+                <div className={`sm:hidden space-y-0.5 border-gray-100 dark:border-gray-800 ${placementInfo ? placementInfo.borderColor : ''}`}>
                   {/* Winner Row */}
                   <div className="flex items-center space-x-2 py-1 px-2 bg-green-50 dark:bg-green-900/25 rounded">
                     <div className="flex-shrink-0">
@@ -290,7 +335,7 @@ export const Matchups = () => {
                 </div>
 
                 {/* Desktop Horizontal Layout */}
-                <div className={`hidden sm:flex items-center justify-between gap-4 border border-gray-100 dark:border-gray-800 p-2 ${placementInfo ? placementInfo.borderColor : ''}`}>
+                <div className={`hidden sm:flex items-center justify-between gap-4 border-gray-100 dark:border-gray-800 p-2 ${placementInfo ? placementInfo.borderColor : ''}`}>
                   {/* Winner Side */}
                   <div className="flex items-center space-x-3 flex-1 min-w-0">
                     <div className="flex-shrink-0">
@@ -386,7 +431,7 @@ export const Matchups = () => {
                       {placementInfo && placementInfo.tag}
                       
                       {/* Mobile Stacked Layout */}
-                      <div className={`sm:hidden space-y-0.5 border border-gray-100 dark:border-gray-800 ${placementInfo ? placementInfo.borderColor : ''}`}>
+                      <div className={`sm:hidden space-y-0.5 border-gray-100 dark:border-gray-800 ${placementInfo ? placementInfo.borderColor : ''}`}>
                         {/* Winner Row */}
                         <div className="flex items-center space-x-2 py-1 px-2 bg-green-50 dark:bg-green-900/25 rounded">
                           <div className="flex-shrink-0">
@@ -436,7 +481,7 @@ export const Matchups = () => {
                       </div>
 
                       {/* Desktop Horizontal Layout */}
-                      <div className={`hidden sm:flex items-center justify-between gap-4 border border-gray-100 dark:border-gray-800 p-2 ${placementInfo ? placementInfo.borderColor : ''}`}>
+                      <div className={`hidden sm:flex items-center justify-between gap-4 border-gray-100 dark:border-gray-800 p-2 ${placementInfo ? placementInfo.borderColor : ''}`}>
                         {/* Winner Side */}
                         <div className="flex items-center space-x-3 flex-1 min-w-0">
                           <div className="flex-shrink-0">

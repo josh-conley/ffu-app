@@ -3,6 +3,7 @@ import { LeagueBadge } from './LeagueBadge';
 import { TeamLogo } from '../Common/TeamLogo';
 import { Trophy, Medal, Award } from 'lucide-react';
 import { getLeagueName } from '../../constants/leagues';
+import { getDisplayTeamName } from '../../config/constants';
 
 
 interface StandingsTableProps {
@@ -12,6 +13,7 @@ interface StandingsTableProps {
 }
 
 export const StandingsTable = ({ standings, league, year }: StandingsTableProps) => {
+
   const getLeagueColors = (leagueType: string) => {
     const colorMap = {
       PREMIER: {
@@ -86,7 +88,7 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
             </div>
             <div>
               <div className="font-black text-gray-900 dark:text-gray-100 text-xl tracking-wide">
-                {standings[0].userInfo.teamName}
+                {getDisplayTeamName(standings[0].userId, standings[0].userInfo.teamName, year)}
               </div>
               <div className={`text-lg font-bold ${leagueColors.text}`}>
                 {standings[0].wins}-{standings[0].losses} • {standings[0].pointsFor?.toFixed(2)} pts
@@ -112,6 +114,7 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
               <th className="text-center">Record</th>
               <th className="text-center">Points For</th>
               <th className="text-center">Points Against</th>
+              <th className="text-center">UPR</th>
             </tr>
           </thead>
           <tbody>
@@ -135,7 +138,9 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
                       />
                     </div>
                     <div>
-                      <div className="font-bold text-gray-900 dark:text-gray-100 text-sm">{standing.userInfo.teamName}</div>
+                      <div className="font-bold text-gray-900 dark:text-gray-100 text-sm">
+                        {getDisplayTeamName(standing.userId, standing.userInfo.teamName, year)}
+                      </div>
                       <div className="text-xs text-gray-500 dark:text-gray-400 sm:hidden font-mono">{standing.userInfo.abbreviation}</div>
                     </div>
                   </div>
@@ -153,6 +158,11 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
                 <td className="text-center">
                   <span className="font-bold text-gray-900 dark:text-gray-100 font-mono">
                     {standing.pointsAgainst?.toFixed(2) || '0.00'}
+                  </span>
+                </td>
+                <td className="text-center">
+                  <span className="font-bold text-gray-900 dark:text-gray-100 font-mono">
+                    {standing.unionPowerRating?.toFixed(2) || '0.00'}
                   </span>
                 </td>
               </tr>

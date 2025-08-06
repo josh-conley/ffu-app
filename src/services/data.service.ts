@@ -1,5 +1,6 @@
 import type { LeagueTier, EnhancedLeagueSeasonData, WeekMatchupsResponse } from '../types';
-import { isHistoricalYear, isCurrentYear } from '../config/constants';
+import { isHistoricalYear, isCurrentYear, getAvailableLeagues, isEspnEra } from '../config/constants';
+import { calculateUPR, getRegularSeasonUPRData, calculateRegularSeasonRecord } from '../utils/upr-calculator';
 
 export interface HistoricalLeagueData {
   league: LeagueTier;
@@ -21,21 +22,32 @@ export class DataService {
    * Load historical league data from JSON file
    */
   async loadHistoricalLeagueData(league: LeagueTier, year: string): Promise<HistoricalLeagueData | null> {
+    console.log(`📊 DataService: Loading historical data for ${league} ${year}`);
+    
     if (!isHistoricalYear(year)) {
+      console.log(`📊 DataService: ${year} is not a historical year, skipping`);
+      return null;
+    }
+
+    // Check if league existed in the given year (ESPN era had no Masters)
+    if (!this.isLeagueAvailableInYear(league, year)) {
+      console.warn(`📊 DataService: ${league} league did not exist in ${year}`);
       return null;
     }
 
     try {
       const url = `${this.baseUrl}/data/${year}/${league.toLowerCase()}.json`;
+      console.log(`📊 DataService: Fetching ${url}`);
       const response = await fetch(url);
       if (!response.ok) {
-        console.warn(`No historical data found for ${league} ${year}`);
+        console.warn(`📊 DataService: HTTP ${response.status} - No historical data found for ${league} ${year}`);
         return null;
       }
       const data = await response.json();
+      console.log(`📊 DataService: Successfully loaded ${league} ${year} with ${data.standings?.length || 0} teams`);
       return data;
     } catch (error) {
-      console.error(`Failed to load historical data for ${league} ${year}:`, error);
+      console.error(`📊 DataService: Failed to load historical data for ${league} ${year}:`, error);
       return null;
     }
   }
@@ -83,11 +95,67 @@ export class DataService {
    * Convert historical data to the format expected by the application
    */
   convertHistoricalToEnhanced(historicalData: HistoricalLeagueData): EnhancedLeagueSeasonData {
+    // Calculate UPR for each team using historical matchup data
+    const standingsWithUPR = historicalData.standings.map(standing => {
+      const userId = standing.userId || standing.ffuUserId;
+      
+      // If we have matchup data, calculate regular season stats and UPR
+      if (historicalData.matchupsByWeek) {
+        // Get regular season record from matchup data (more accurate)
+        const regularSeasonRecord = calculateRegularSeasonRecord(
+          userId,
+          historicalData.matchupsByWeek,
+          historicalData.year
+        );
+        
+        // Get high/low games from regular season only
+        const uprGameData = getRegularSeasonUPRData(
+          userId,
+          historicalData.matchupsByWeek,
+          historicalData.year
+        );
+        
+        // Calculate UPR using regular season data
+        const unionPowerRating = calculateUPR({
+          wins: regularSeasonRecord.wins,
+          losses: regularSeasonRecord.losses,
+          averageScore: uprGameData.averageScore,
+          highGame: uprGameData.highGame,
+          lowGame: uprGameData.lowGame
+        });
+        
+        return {
+          ...standing,
+          unionPowerRating,
+          highGame: uprGameData.highGame,
+          lowGame: uprGameData.lowGame
+        };
+      } else {
+        // Fallback: use standing data if no matchup data available
+        // Calculate average from total points and games played
+        const totalGames = (standing.wins || 0) + (standing.losses || 0);
+        const averageScore = totalGames > 0 ? (standing.pointsFor || 0) / totalGames : 0;
+        
+        const unionPowerRating = calculateUPR({
+          wins: standing.wins || 0,
+          losses: standing.losses || 0,
+          averageScore,
+          highGame: standing.highGame || 0,
+          lowGame: standing.lowGame || 0
+        });
+        
+        return {
+          ...standing,
+          unionPowerRating
+        };
+      }
+    });
+
     return {
       league: historicalData.league,
       year: historicalData.year,
       leagueId: historicalData.leagueId,
-      standings: historicalData.standings,
+      standings: standingsWithUPR,
       playoffResults: historicalData.playoffResults,
       promotions: historicalData.promotions,
       relegations: historicalData.relegations
@@ -205,6 +273,119 @@ export class DataService {
    */
   hasDraftData(historicalData: HistoricalLeagueData): boolean {
     return !!(historicalData.draftData && historicalData.draftData.picks.length > 0);
+  }
+
+  /**
+   * Era-specific helper methods
+   */
+
+  /**
+   * Check if a league was available in a given year
+   */
+  isLeagueAvailableInYear(league: LeagueTier, year: string): boolean {
+    const availableLeagues = getAvailableLeagues(year);
+    return availableLeagues.includes(league);
+  }
+
+  /**
+   * Get all available leagues for a given year
+   */
+  getAvailableLeaguesForYear(year: string): LeagueTier[] {
+    return getAvailableLeagues(year);
+  }
+
+  /**
+   * Check if year is from ESPN era
+   */
+  isEspnEraYear(year: string): boolean {
+    return isEspnEra(year);
+  }
+
+  /**
+   * Check if year is from Sleeper era
+   */
+  isSleeperEraYear(year: string): boolean {
+    return !isEspnEra(year) && isHistoricalYear(year);
+  }
+
+  /**
+   * Get era information for a year
+   */
+  getEraInfo(year: string): {
+    era: 'ESPN' | 'Sleeper' | 'Current';
+    totalWeeks: number;
+    playoffWeeks: number[];
+    availableLeagues: LeagueTier[];
+  } {
+    if (isEspnEra(year)) {
+      return {
+        era: 'ESPN',
+        totalWeeks: 16,
+        playoffWeeks: [14, 15, 16],
+        availableLeagues: ['PREMIER', 'NATIONAL']
+      };
+    } else if (isHistoricalYear(year)) {
+      return {
+        era: 'Sleeper',
+        totalWeeks: 17,
+        playoffWeeks: [15, 16, 17],
+        availableLeagues: ['PREMIER', 'MASTERS', 'NATIONAL']
+      };
+    } else {
+      return {
+        era: 'Current',
+        totalWeeks: 17,
+        playoffWeeks: [15, 16, 17],
+        availableLeagues: ['PREMIER', 'MASTERS', 'NATIONAL']
+      };
+    }
+  }
+
+  /**
+   * Validate historical data structure based on era
+   */
+  validateHistoricalData(data: HistoricalLeagueData): {
+    isValid: boolean;
+    warnings: string[];
+    errors: string[];
+  } {
+    const warnings: string[] = [];
+    const errors: string[] = [];
+
+    // Basic structure validation
+    if (!data.league || !data.year || !data.leagueId) {
+      errors.push('Missing required fields: league, year, or leagueId');
+    }
+
+    // Era-specific validation
+    const eraInfo = this.getEraInfo(data.year);
+    
+    // Check if league should exist in this era
+    if (!eraInfo.availableLeagues.includes(data.league)) {
+      errors.push(`${data.league} league did not exist in ${data.year} (${eraInfo.era} era)`);
+    }
+
+    // Check playoff weeks
+    const playoffWeeks = Object.keys(data.matchupsByWeek || {})
+      .map(Number)
+      .filter(week => eraInfo.playoffWeeks.includes(week));
+
+    if (playoffWeeks.length === 0 && Object.keys(data.matchupsByWeek || {}).length > 0) {
+      warnings.push(`No playoff weeks found for ${eraInfo.era} era`);
+    }
+
+    // Check week range
+    const weeks = Object.keys(data.matchupsByWeek || {}).map(Number);
+    const maxWeek = Math.max(...weeks);
+    if (maxWeek > eraInfo.totalWeeks) {
+      warnings.push(`Week ${maxWeek} exceeds expected ${eraInfo.totalWeeks} for ${eraInfo.era} era`);
+    }
+
+    return {
+      isValid: errors.length === 0,
+      warnings,
+      errors
+    };
   }
 }
 

@@ -1,6 +1,8 @@
 import { SleeperService } from './sleeper.service';
 import { dataService } from './data.service';
-import { getLeagueId, getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId, isHistoricalYear } from '../config/constants';
+import { getLeagueId, getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId, getUserInfoByFFUId, getFFUIdBySleeperId, isHistoricalYear } from '../config/constants';
+import { calculateUPR } from '../utils/upr-calculator';
+import { isRegularSeasonWeek } from '../utils/era-detection';
 import type { 
   LeagueSeasonData, 
   SeasonStandings, 
@@ -45,26 +47,50 @@ export class LeagueService {
       this.sleeperService.getLeagueRosters(leagueId)
     ]);
 
-    // Calculate high/low games from live matchup data
-    let memberGameStats: Record<string, { highGame: number; lowGame: number }> = {};
+    // Calculate regular season stats from live matchup data
+    let memberRegularSeasonStats: Record<string, { wins: number; losses: number; averageScore: number; highGame: number; lowGame: number }> = {};
     try {
       const allWeekData = await this.sleeperService.getAllSeasonMatchups(leagueId);
-      memberGameStats = this.calculateMemberGameStatsFromLive(allWeekData, rosters);
+      memberRegularSeasonStats = this.calculateMemberRegularSeasonStatsFromLive(allWeekData, rosters, year);
     } catch (error) {
-      console.warn(`Could not fetch season matchups for high/low game calculation:`, error);
+      console.warn(`Could not fetch season matchups for regular season stats calculation:`, error);
     }
     
     let standings: SeasonStandings[] = rosters
-      .map(roster => ({
-        userId: roster.owner_id,
-        wins: roster.settings?.wins || 0,
-        losses: roster.settings?.losses || 0,
-        pointsFor: (roster.settings?.fpts || 0) + (roster.settings?.fpts_decimal || 0) / 100,
-        pointsAgainst: (roster.settings?.fpts_against || 0) + (roster.settings?.fpts_against_decimal || 0) / 100,
-        rank: 0, // Will be calculated after sorting
-        highGame: memberGameStats[roster.owner_id]?.highGame || 0,
-        lowGame: memberGameStats[roster.owner_id]?.lowGame || 0
-      }));
+      .map(roster => {
+        const sleeperId = roster.owner_id;
+        const ffuUserId = getFFUIdBySleeperId(sleeperId) || 'unknown';
+        
+        // Use regular season stats if available, otherwise fall back to total season
+        const regSeasonStats = memberRegularSeasonStats[sleeperId];
+        const wins = regSeasonStats?.wins ?? (roster.settings?.wins || 0);
+        const losses = regSeasonStats?.losses ?? (roster.settings?.losses || 0);
+        const averageScore = regSeasonStats?.averageScore ?? 0;
+        const highGame = regSeasonStats?.highGame ?? 0;
+        const lowGame = regSeasonStats?.lowGame ?? 0;
+        
+        // Calculate UPR using regular season data
+        const unionPowerRating = calculateUPR({
+          wins,
+          losses,
+          averageScore,
+          highGame,
+          lowGame
+        });
+        
+        return {
+          userId: sleeperId, // Legacy Sleeper ID
+          ffuUserId, // New FFU ID
+          wins,
+          losses,
+          pointsFor: (roster.settings?.fpts || 0) + (roster.settings?.fpts_decimal || 0) / 100,
+          pointsAgainst: (roster.settings?.fpts_against || 0) + (roster.settings?.fpts_against_decimal || 0) / 100,
+          rank: 0, // Will be calculated after sorting
+          highGame,
+          lowGame,
+          unionPowerRating
+        };
+      });
 
     // Get playoff results if available
     let playoffResults: PlayoffResult[] = [];
@@ -156,7 +182,10 @@ export class LeagueService {
       const historicalData = await dataService.loadHistoricalLeagueData(league, year);
       if (historicalData) {
         const weekMatchups = historicalData.matchupsByWeek[week];
-        return weekMatchups || [];
+        if (weekMatchups) {
+          // Both ESPN era (2018-2020) and Sleeper era (2021+) data are already in WeekMatchup[] format
+          return weekMatchups;
+        }
       }
       // Fall back to API if historical data not available
       console.warn(`Historical matchup data not found for ${league} ${year} week ${week}, falling back to API`);
@@ -253,21 +282,48 @@ export class LeagueService {
       ...leagueData,
       standings: leagueData.standings.map(standing => ({
         ...standing,
-        userInfo: this.getUserInfo(standing.userId)
+        userInfo: (standing as any).userInfo || this.getUserInfo(standing.userId)
       })),
       playoffResults: leagueData.playoffResults.map(result => ({
         ...result,
-        userInfo: this.getUserInfo(result.userId)
+        userInfo: (result as any).userInfo || this.getUserInfo(result.userId)
       }))
     }));
   }
 
   private getUserInfo(userId: string): UserInfo {
+    // Try to get user info by Sleeper ID first (backward compatibility)
     const userInfo = getUserInfoBySleeperId(userId);
-    return userInfo 
-      ? { userId, teamName: userInfo.teamName, abbreviation: userInfo.abbreviation }
-      : { userId, teamName: 'Unknown Team', abbreviation: 'UNK' };
+    if (userInfo) {
+      const ffuUserId = getFFUIdBySleeperId(userId) || 'unknown';
+      return { 
+        userId, // Legacy Sleeper ID
+        ffuUserId, // New FFU ID
+        teamName: userInfo.teamName, 
+        abbreviation: userInfo.abbreviation 
+      };
+    }
+    
+    // Try to get user info by FFU ID (new system)
+    const ffuUserInfo = getUserInfoByFFUId(userId);
+    if (ffuUserInfo) {
+      return { 
+        userId: 'legacy-unknown', // No legacy ID available
+        ffuUserId: userId, // This IS the FFU ID
+        teamName: ffuUserInfo.teamName, 
+        abbreviation: ffuUserInfo.abbreviation 
+      };
+    }
+    
+    // Fallback for unknown users
+    return { 
+      userId, 
+      ffuUserId: 'unknown', 
+      teamName: 'Unknown Team', 
+      abbreviation: 'UNK' 
+    };
   }
+
 
   private processRawMatchups(matchups: any[], rosters: any[]): WeekMatchup[] {
     const rosterOwnerMap = this.sleeperService.createRosterOwnerMap(rosters);
@@ -419,16 +475,20 @@ export class LeagueService {
 
     // STEP 3: Combine results
     playoffPlacements.forEach((placement, userId) => {
+      const ffuUserId = getFFUIdBySleeperId(userId) || 'unknown';
       results.push({
-        userId,
+        userId, // Legacy Sleeper ID
+        ffuUserId, // New FFU ID
         placement,
         placementName: this.getPlacementName(placement)
       });
     });
 
     toiletBowlPlacements.forEach((placement, userId) => {
+      const ffuUserId = getFFUIdBySleeperId(userId) || 'unknown';
       results.push({
-        userId,
+        userId, // Legacy Sleeper ID
+        ffuUserId, // New FFU ID
         placement,
         placementName: this.getPlacementName(placement)
       });
@@ -718,53 +778,118 @@ export class LeagueService {
     };
   }
 
-  private calculateMemberGameStatsFromLive(
+  private calculateMemberRegularSeasonStatsFromLive(
     allWeekData: { week: number; matchups: any[] }[], 
-    rosters: any[]
-  ): Record<string, { highGame: number; lowGame: number }> {
-    const memberStats: Record<string, { highGame: number; lowGame: number; games: number[] }> = {};
+    rosters: any[],
+    year: string
+  ): Record<string, { wins: number; losses: number; averageScore: number; highGame: number; lowGame: number }> {
+    const memberStats: Record<string, { wins: number; losses: number; scores: number[] }> = {};
 
-    allWeekData.forEach(({ matchups }) => {
+    allWeekData.forEach(({ week, matchups }) => {
+      // Skip if not a regular season week
+      if (!isRegularSeasonWeek(week, year)) {
+        return;
+      }
+
       const weekMatchups = this.processRawMatchups(matchups, rosters);
       
       weekMatchups.forEach(matchup => {
-        // Track winner's score
+        // Track winner's stats
         if (!memberStats[matchup.winner]) {
-          memberStats[matchup.winner] = {
-            highGame: matchup.winnerScore,
-            lowGame: matchup.winnerScore,
-            games: []
-          };
+          memberStats[matchup.winner] = { wins: 0, losses: 0, scores: [] };
         }
-        const winnerStats = memberStats[matchup.winner];
-        winnerStats.games.push(matchup.winnerScore);
-        winnerStats.highGame = Math.max(winnerStats.highGame, matchup.winnerScore);
-        winnerStats.lowGame = Math.min(winnerStats.lowGame, matchup.winnerScore);
+        memberStats[matchup.winner].wins++;
+        memberStats[matchup.winner].scores.push(matchup.winnerScore);
 
-        // Track loser's score
+        // Track loser's stats
         if (!memberStats[matchup.loser]) {
-          memberStats[matchup.loser] = {
-            highGame: matchup.loserScore,
-            lowGame: matchup.loserScore,
-            games: []
-          };
+          memberStats[matchup.loser] = { wins: 0, losses: 0, scores: [] };
         }
-        const loserStats = memberStats[matchup.loser];
-        loserStats.games.push(matchup.loserScore);
-        loserStats.highGame = Math.max(loserStats.highGame, matchup.loserScore);
-        loserStats.lowGame = Math.min(loserStats.lowGame, matchup.loserScore);
+        memberStats[matchup.loser].losses++;
+        memberStats[matchup.loser].scores.push(matchup.loserScore);
       });
     });
 
-    // Return simplified format without games array
-    const result: Record<string, { highGame: number; lowGame: number }> = {};
+    // Convert to final format with calculated averages and high/low
+    const result: Record<string, { wins: number; losses: number; averageScore: number; highGame: number; lowGame: number }> = {};
     Object.entries(memberStats).forEach(([userId, stats]) => {
+      const averageScore = stats.scores.length > 0 
+        ? stats.scores.reduce((sum, score) => sum + score, 0) / stats.scores.length 
+        : 0;
+      const highGame = stats.scores.length > 0 ? Math.max(...stats.scores) : 0;
+      const lowGame = stats.scores.length > 0 ? Math.min(...stats.scores) : 0;
+
       result[userId] = {
-        highGame: stats.highGame,
-        lowGame: stats.lowGame
+        wins: stats.wins,
+        losses: stats.losses,
+        averageScore,
+        highGame,
+        lowGame
       };
     });
 
     return result;
+  }
+
+
+  /**
+   * Bulk load all matchup data for head-to-head comparisons
+   * This is much more efficient than loading week-by-week
+   */
+  async getAllMatchupsForComparison(): Promise<{
+    year: string;
+    league: LeagueTier;
+    week: number;
+    matchups: any[];
+  }[]> {
+    const allLeagues = getAllLeagueConfigs();
+    const allMatchupData: {
+      year: string;
+      league: LeagueTier;
+      week: number;
+      matchups: any[];
+    }[] = [];
+
+    // Load all historical data in parallel for better performance
+    const dataLoadPromises = allLeagues.map(async (leagueConfig) => {
+      try {
+        if (isHistoricalYear(leagueConfig.year)) {
+          // Load historical data from JSON files
+          const historicalData = await dataService.loadHistoricalLeagueData(leagueConfig.tier, leagueConfig.year);
+          if (historicalData) {
+            const allWeekData = dataService.getAllHistoricalMatchups(historicalData);
+            
+            return allWeekData.map(({ week, matchups }) => ({
+              year: leagueConfig.year,
+              league: leagueConfig.tier,
+              week,
+              matchups: matchups.map(matchup => ({
+                ...matchup,
+                winnerInfo: this.getUserInfo(matchup.winner),
+                loserInfo: this.getUserInfo(matchup.loser)
+              }))
+            }));
+          }
+        } else {
+          // For current year, skip for now (can be added later if needed)
+          // Most head-to-head comparisons will be historical data anyway
+          console.log(`Skipping current year data for ${leagueConfig.tier} ${leagueConfig.year} - using historical data only for now`);
+        }
+        return [];
+      } catch (error) {
+        console.warn(`Failed to load matchups for ${leagueConfig.tier} ${leagueConfig.year}:`, error);
+        return [];
+      }
+    });
+
+    // Wait for all data to load and flatten results
+    const results = await Promise.all(dataLoadPromises);
+    results.forEach(leagueMatchups => {
+      if (leagueMatchups) {
+        allMatchupData.push(...leagueMatchups);
+      }
+    });
+
+    return allMatchupData;
   }
 }

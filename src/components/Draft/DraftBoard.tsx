@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { DraftData, DraftPick, UserInfo } from '../../types';
 import { TeamLogo } from '../Common/TeamLogo';
+import { getDisplayTeamName } from '../../config/constants';
 
 interface DraftBoardProps {
   draftData: DraftData;
@@ -40,12 +41,23 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
   
   for (let team = 1; team <= teams; team++) {
     // Find the userId that was assigned to this draft slot
-    const userId = Object.keys(draftOrder).find(uid => draftOrder[uid] === team);
-    const userInfo = userId ? userMap[userId] : null;
+    let userId = Object.keys(draftOrder).find(uid => draftOrder[uid] === team);
+    let userInfo = userId ? userMap[userId] : null;
+    
+    // Handle missing draftOrder entries (e.g., mid-season replacements)
+    // If no user found in draftOrder for this slot, look for picks with this draftSlot
+    if (!userId) {
+      const pickForSlot = picks.find(pick => pick.draftSlot === team);
+      if (pickForSlot) {
+        userId = pickForSlot.pickedBy;
+        userInfo = userMap[userId];
+      }
+    }
+    
     teamHeaders.push({
       slot: team,
       userId: userId,
-      teamName: userInfo?.teamName || `Team ${team}`,
+      teamName: userInfo?.teamName ? getDisplayTeamName(userId || '', userInfo.teamName, draftData.year) : `Team ${team}`,
       abbreviation: userInfo?.abbreviation || `T${team}`
     });
   }
@@ -85,14 +97,16 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
     return tradingUserInfo?.abbreviation || tradingUserInfo?.teamName || 'UNK';
   };
 
-  // Format player name to first initial + last name
-  const formatPlayerName = (fullName: string): string => {
+  // Format player name for wrapping - first name on first line, last name on second
+  const formatPlayerName = (fullName: string): { firstName: string; lastName: string } => {
     const nameParts = fullName.trim().split(' ');
-    if (nameParts.length === 1) return fullName;
+    if (nameParts.length === 1) {
+      return { firstName: fullName, lastName: '' };
+    }
     
     const firstName = nameParts[0];
     const lastName = nameParts[nameParts.length - 1];
-    return `${firstName[0]}. ${lastName}`;
+    return { firstName, lastName };
   };
 
   // Format pick number as round.pick (e.g., 1.01, 1.02) accounting for snake draft
@@ -259,7 +273,7 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
                         height: '100px',
                         minHeight: '100px'
                       }}
-                      title={pick ? `${pick.playerInfo.name}${isPickTraded(pick, teamHeaders[teamIndex]?.userId) ? `\nDrafted by: ${userMap[pick.pickedBy]?.teamName || userMap[pick.pickedBy]?.abbreviation || 'Unknown'}` : ''}` : ''}
+                      title={pick ? `${pick.playerInfo.name}${isPickTraded(pick, teamHeaders[teamIndex]?.userId) ? `\nDrafted by: ${userMap[pick.pickedBy]?.teamName ? getDisplayTeamName(pick.pickedBy, userMap[pick.pickedBy].teamName, draftData.year) : userMap[pick.pickedBy]?.abbreviation || 'Unknown'}` : ''}` : ''}
                       onClick={pick ? (e) => {
                         e.stopPropagation();
                         setSelectedTeamUserId(selectedTeamUserId === pick.pickedBy ? null : pick.pickedBy);
@@ -275,11 +289,15 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
                     
                     {pick ? (
                       <div className={`h-full flex flex-col justify-between ${isPickTraded(pick, teamHeaders[teamIndex]?.userId) ? 'pt-4 px-3 pb-4' : 'px-3 py-4'}`}>
-                        <div className="font-semibold text-gray-900 dark:text-white text-sm leading-tight mb-2">
-                          <div className="truncate">
-                            {formatPlayerName(pick.playerInfo.name)}
-                          </div>
-                        </div>
+                        {(() => {
+                          const playerName = formatPlayerName(pick.playerInfo.name);
+                          return (
+                            <div className="font-semibold text-gray-900 dark:text-white text-sm leading-tight mb-2">
+                              <div>{playerName.firstName}</div>
+                              {playerName.lastName && <div>{playerName.lastName}</div>}
+                            </div>
+                          );
+                        })()}
                         <div className="space-y-2">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-1">
@@ -301,7 +319,7 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
                         {(() => {
                           const arrow = getNextPickArrow(roundIndex + 1, teamIndex);
                           return arrow ? (
-                            <div className="absolute top-4 right-1 text-gray-300 dark:text-gray-600" style={{ fontSize: '10px' }}>
+                            <div className="absolute top-4 right-1 text-gray-400" style={{ fontSize: '10px' }}>
                               {arrow}
                             </div>
                           ) : null;

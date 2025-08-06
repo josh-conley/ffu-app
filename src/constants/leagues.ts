@@ -1,4 +1,6 @@
 import type { LeagueTier } from '../types';
+import { getAllYears, getAvailableLeagues } from '../config/constants';
+import { getSeasonLength, getPlayoffWeeks, isPlayoffWeek as isPlayoffWeekUtil } from '../utils/era-detection';
 
 // League configuration constants
 export const LEAGUE_NAMES: Record<LeagueTier, string> = {
@@ -9,16 +11,27 @@ export const LEAGUE_NAMES: Record<LeagueTier, string> = {
 
 export const LEAGUE_HIERARCHY: LeagueTier[] = ['PREMIER', 'MASTERS', 'NATIONAL'] as const;
 
-// Season and week configuration
-export const AVAILABLE_YEARS = ['2024', '2023', '2022', '2021'] as const;
-export const WEEKS_PER_SEASON = 18;
-export const PLAYOFF_WEEKS = [15, 16, 17, 18];
+// Era-aware season and week configuration
+export const AVAILABLE_YEARS = getAllYears();
 
 // Utility functions
 export const getLeagueName = (league: LeagueTier): string => {
   return LEAGUE_NAMES[league];
 };
 
-export const isPlayoffWeek = (week: number): boolean => {
-  return PLAYOFF_WEEKS.includes(week);
+// Era-aware utility functions
+export const getAvailableLeaguesForYear = (year: string): LeagueTier[] => {
+  return getAvailableLeagues(year);
+};
+
+export const getWeeksPerSeason = (year: string): number => {
+  return getSeasonLength(year);
+};
+
+export const getPlayoffWeeksForYear = (year: string): number[] => {
+  return getPlayoffWeeks(year);
+};
+
+export const isPlayoffWeek = (week: number, year: string): boolean => {
+  return isPlayoffWeekUtil(week, year);
 };
