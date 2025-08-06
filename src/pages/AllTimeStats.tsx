@@ -4,6 +4,7 @@ import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
+import { UPRHorserace } from '../components/League/UPRHorserace';
 import { getFFUIdBySleeperId } from '../config/constants';
 import type { UserInfo, LeagueTier } from '../types';
 import { Trophy, Medal, Award, TrendingDown, ChevronDown, ChevronUp } from 'lucide-react';
@@ -66,7 +67,7 @@ export const AllTimeStats = () => {
   const { data: standings, isLoading, error } = useAllStandings();
 
   // View toggle state
-  const [activeView, setActiveView] = useState<'career' | 'season'>('career');
+  const [activeView, setActiveView] = useState<'career' | 'season' | 'horserace'>('career');
   
   // Career stats filtering
   const [showMinThreeSeasons, setShowMinThreeSeasons] = useState(false);
@@ -80,6 +81,10 @@ export const AllTimeStats = () => {
   const [selectedYear, setSelectedYear] = useState<string>('ALL');
   const [seasonSortKey, setSeasonSortKey] = useState<SeasonHistorySortKey>('year');
   const [seasonSortOrder, setSeasonSortOrder] = useState<SortOrder>('desc');
+
+  // UPR Horserace filtering state
+  const [horseraceLeague, setHorseraceLeague] = useState<LeagueTier>('PREMIER');
+  const [horseraceYear, setHorseraceYear] = useState<string>('2024');
 
   // Mobile touch state for showing full team names
   const [touchedTeamCell, setTouchedTeamCell] = useState<string | null>(null);
@@ -409,7 +414,7 @@ export const AllTimeStats = () => {
         <div className="flex border border-gray-300 dark:border-gray-600 rounded overflow-hidden mb-6 w-fit">
           <button
             onClick={() => setActiveView('career')}
-            className={`px-4 sm:px-4 py-2 sm:py-3 text-sm sm:text-base font-medium transition-colors duration-200 ${
+            className={`px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-base font-medium transition-colors duration-200 ${
               activeView === 'career'
                 ? 'bg-ffu-red text-white'
                 : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700'
@@ -419,13 +424,23 @@ export const AllTimeStats = () => {
           </button>
           <button
             onClick={() => setActiveView('season')}
-            className={`px-4 sm:px-4 py-2 sm:py-3 text-sm sm:text-base font-medium transition-colors duration-200 border-l border-gray-300 dark:border-gray-600 ${
+            className={`px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-base font-medium transition-colors duration-200 border-l border-gray-300 dark:border-gray-600 ${
               activeView === 'season'
                 ? 'bg-ffu-red text-white'
                 : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700'
             }`}
           >
             Season History
+          </button>
+          <button
+            onClick={() => setActiveView('horserace')}
+            className={`px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-base font-medium transition-colors duration-200 border-l border-gray-300 dark:border-gray-600 ${
+              activeView === 'horserace'
+                ? 'bg-ffu-red text-white'
+                : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700'
+            }`}
+          >
+            UPR Horserace
           </button>
         </div>
       </div>
@@ -1137,6 +1152,61 @@ export const AllTimeStats = () => {
               </div>
             </>
           </div>
+        </div>
+      )}
+
+      {/* UPR Horserace View */}
+      {activeView === 'horserace' && (
+        <div className="space-y-6">
+          <div className="card">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                UPR Horserace Visualization
+              </h2>
+              
+              {/* Filters */}
+              <div className="flex flex-row gap-2 sm:gap-4 items-center">
+                <div className="space-y-1 sm:space-y-2 min-w-0 flex-shrink">
+                  <div className="relative">
+                    <select
+                      value={horseraceLeague}
+                      onChange={(e) => setHorseraceLeague(e.target.value as LeagueTier)}
+                      className="block w-28 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                    >
+                      <option value="PREMIER">Premier</option>
+                      <option value="MASTERS">Masters</option>
+                      <option value="NATIONAL">National</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-1 sm:pr-3 pointer-events-none">
+                      <ChevronDown className="h-3 w-3 sm:h-5 sm:w-5 text-gray-400" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-1 sm:space-y-2 min-w-0 flex-shrink">
+                  <div className="relative">
+                    <select
+                      value={horseraceYear}
+                      onChange={(e) => setHorseraceYear(e.target.value)}
+                      className="block w-20 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                    >
+                      {['2024', '2023', '2022', '2021', '2020', '2019', '2018'].map(year => (
+                        <option key={year} value={year}>{year}</option>
+                      ))}
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-1 sm:pr-3 pointer-events-none">
+                      <ChevronDown className="h-3 w-3 sm:h-5 sm:w-5 text-gray-400" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <UPRHorserace 
+            league={horseraceLeague} 
+            year={horseraceYear} 
+          />
         </div>
       )}
     </div>
