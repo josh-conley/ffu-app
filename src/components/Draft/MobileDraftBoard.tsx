@@ -252,7 +252,7 @@ export const MobileDraftBoard: React.FC<MobileDraftBoardProps> = ({ draftData, u
                         {(() => {
                           const arrow = getNextPickArrow(roundIndex + 1, teamIndex);
                           return arrow ? (
-                            <div className="absolute top-3.5 right-1 text-gray-300 dark:text-gray-600" style={{ fontSize: '10px' }}>
+                            <div className="absolute top-3.5 right-1 text-gray-400" style={{ fontSize: '10px' }}>
                               {arrow}
                             </div>
                           ) : null;
