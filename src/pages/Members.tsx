@@ -538,7 +538,7 @@ export const Members = () => {
           {/* Achievements */}
           <div className="card">
             <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-3">Achievements</h3>
-            <div className="grid grid-cols-7 gap-3">
+            <div className="grid grid-cols-4 gap-4">
               <div className="text-center">
                 <Trophy className="h-5 w-5 text-yellow-600 mx-auto mb-1" />
                 <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.firstPlaceFinishes}</div>
