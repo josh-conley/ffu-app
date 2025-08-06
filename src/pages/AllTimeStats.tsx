@@ -81,6 +81,16 @@ export const AllTimeStats = () => {
   const [seasonSortKey, setSeasonSortKey] = useState<SeasonHistorySortKey>('year');
   const [seasonSortOrder, setSeasonSortOrder] = useState<SortOrder>('desc');
 
+  // Mobile touch state for showing full team names
+  const [touchedTeamCell, setTouchedTeamCell] = useState<string | null>(null);
+
+  // Touch handlers for mobile team name display
+  const handleTeamCellTouch = (teamId: string, teamName: string) => {
+    setTouchedTeamCell(`${teamId}-${teamName}`);
+    // Auto-hide after 2 seconds
+    setTimeout(() => setTouchedTeamCell(null), 2000);
+  };
+
   const leagues: (LeagueTier | 'ALL')[] = ['ALL', 'PREMIER', 'MASTERS', 'NATIONAL'];
   const years = ['ALL', '2024', '2023', '2022', '2021', '2020', '2019', '2018'];
   const validYearsByLeague: Record<string, string[]> = {
@@ -717,8 +727,12 @@ export const AllTimeStats = () => {
                   {sortedAllTimeStats.map((player) => (
                     <tr key={player.ffuUserId} className="table-row h-16">
                       <td className="align-middle sticky left-0 z-10 bg-white dark:bg-[#121212] w-20 sm:w-auto pl-4">
-                        <div className="flex sm:hidden items-center justify-center h-full">
-                          <div className="text-center">
+                        <div className="flex sm:hidden items-center justify-center h-full relative">
+                          <div 
+                            className="text-center cursor-pointer select-none"
+                            onTouchStart={() => handleTeamCellTouch(player.ffuUserId, player.userInfo.teamName)}
+                            onClick={() => handleTeamCellTouch(player.ffuUserId, player.userInfo.teamName)}
+                          >
                             <TeamLogo
                               teamName={player.userInfo.teamName}
                               size="sm"
@@ -728,6 +742,13 @@ export const AllTimeStats = () => {
                               {player.userInfo.abbreviation}
                             </div>
                           </div>
+                          {/* Mobile tooltip for full team name */}
+                          {touchedTeamCell === `${player.ffuUserId}-${player.userInfo.teamName}` && (
+                            <div className="absolute bottom-full left-0 mb-2 px-2 py-1 bg-gray-900 dark:bg-gray-700 text-white text-xs rounded whitespace-nowrap z-50 shadow-lg">
+                              {player.userInfo.teamName}
+                              <div className="absolute top-full left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
+                            </div>
+                          )}
                         </div>
                         <div className="hidden sm:flex items-center space-x-2 h-full">
                           <TeamLogo
@@ -1014,8 +1035,12 @@ export const AllTimeStats = () => {
                     {filteredSeasonHistory.map((season) => (
                       <tr key={`${season.userId}-${season.year}-${season.league}`} className="table-row h-16">
                         <td className="align-middle sticky left-0 z-10 bg-white dark:bg-[#121212] w-20 sm:w-auto pl-4">
-                          <div className="flex sm:hidden items-center justify-center h-full">
-                            <div className="text-center">
+                          <div className="flex sm:hidden items-center justify-center h-full relative">
+                            <div 
+                              className="text-center cursor-pointer select-none"
+                              onTouchStart={() => handleTeamCellTouch(season.userId, season.userInfo.teamName)}
+                              onClick={() => handleTeamCellTouch(season.userId, season.userInfo.teamName)}
+                            >
                               <TeamLogo
                                 teamName={season.userInfo.teamName}
                                 size="sm"
@@ -1025,6 +1050,13 @@ export const AllTimeStats = () => {
                                 {season.userInfo.abbreviation}
                               </div>
                             </div>
+                            {/* Mobile tooltip for full team name */}
+                            {touchedTeamCell === `${season.userId}-${season.userInfo.teamName}` && (
+                              <div className="absolute bottom-full left-0 mb-2 px-2 py-1 bg-gray-900 dark:bg-gray-700 text-white text-xs rounded whitespace-nowrap z-50 shadow-lg">
+                                {season.userInfo.teamName}
+                                <div className="absolute top-full left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
+                              </div>
+                            )}
                           </div>
                           <div className="hidden sm:flex items-center space-x-2 h-full">
                             <TeamLogo
