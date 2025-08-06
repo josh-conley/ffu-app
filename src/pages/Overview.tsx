@@ -1,13 +1,32 @@
-import { Users, Calendar, BarChart3, Award } from 'lucide-react';
-import { useState } from 'react';
+import { Users, Calendar, BarChart3, Award, UserPlus, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const Overview = () => {
-  const [showMessage, setShowMessage] = useState(false);
-
-  const handleLeagueClick = () => {
-    setShowMessage(true);
-    setTimeout(() => setShowMessage(false), 2000); // Hide after 2 seconds
+  const colorMap = {
+    PREMIER: {
+      bg: 'bg-yellow-50 dark:bg-yellow-900/20',
+      border: 'border-yellow-300 dark:border-yellow-700',
+      borderHeavy: 'border-yellow-500',
+      text: 'text-yellow-800 dark:text-yellow-300',
+      iconBg: 'bg-yellow-500',
+      highlight: 'bg-yellow-100 dark:bg-yellow-900/30'
+    },
+    MASTERS: {
+      bg: 'bg-purple-50 dark:bg-purple-900/20',
+      border: 'border-purple-300 dark:border-purple-700',
+      borderHeavy: 'border-purple-500',
+      text: 'text-purple-800 dark:text-purple-300',
+      iconBg: 'bg-purple-500',
+      highlight: 'bg-purple-100 dark:bg-purple-900/30'
+    },
+    NATIONAL: {
+      bg: 'bg-red-50 dark:bg-red-900/20',
+      border: 'border-red-300 dark:border-red-700',
+      borderHeavy: 'border-red-500',
+      text: 'text-red-800 dark:text-red-300',
+      iconBg: 'bg-red-500',
+      highlight: 'bg-red-100 dark:bg-red-900/30'
+    }
   };
 
   return (
@@ -19,7 +38,7 @@ export const Overview = () => {
             <p className="text-base sm:text-lg lg:text-xl text-red-100 mb-8">
               Explore stats, standings, and records across all leagues.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-xlg mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 max-w-xlg mx-auto">
               <Link
                 to="/standings"
                 className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
@@ -42,70 +61,53 @@ export const Overview = () => {
                 <div className="font-semibold text-sm sm:text-base">Matchups</div>
               </Link>
               <Link
+                to="/drafts"
+                className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
+              >
+                <UserPlus className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
+                <div className="font-semibold text-sm sm:text-base">Drafts</div>
+              </Link>
+              <Link
                 to="/records"
                 className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
               >
                 <Award className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
                 <div className="font-semibold text-sm sm:text-base">Records</div>
               </Link>
+              <Link
+                to="/stats"
+                className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
+              >
+                <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
+                <div className="font-semibold text-sm sm:text-base">Stats</div>
+              </Link>
             </div>
           </div>
         </div>
       </div>
-
-
-      {/* League Overview */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        <div className="card text-center cursor-pointer" onClick={handleLeagueClick}>
-          <div className="mx-auto mb-4 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24">
-            <img
-              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/PremierLogo.png`}
-              alt="Premier League Logo"
-              className="w-full h-full object-contain"
-            />
+      <div className='card'>
+        <h1 className="py-4 text-3xl font-bold text-gray-900 dark:text-gray-100">Upcoming 2025 Drafts</h1>
+        <div>
+          <div className={`champion-highlight angular-cut p-6 mb-6 relative overflow-hidden border-l4 ${colorMap.PREMIER.highlight}`}>
+            <span className={`text-lg font-black ${colorMap.PREMIER.text} tracking-wide`}>
+              Premier League
+            </span>
+            <p>Wednesday 9/3 8:30pm ET</p>
           </div>
-          <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Premier League</h3>
-          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
-            {/* Premier League description */}
-          </p>
-        </div>
-
-        <div className="card text-center cursor-pointer" onClick={handleLeagueClick}>
-          <div className="mx-auto mb-4 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24">
-            <img
-              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/MastersLogo.png`}
-              alt="Masters League Logo"
-              className="w-full h-full object-contain"
-            />
+          <div className={`champion-highlight angular-cut p-6 mb-6 relative overflow-hidden border-l4 ${colorMap.MASTERS.highlight}`}>
+            <span className={`text-lg font-black ${colorMap.MASTERS.text} tracking-wide`}>
+              Masters League
+            </span>
+            <p>Thursday 8/28 9:00pm ET</p>
           </div>
-          <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Masters League</h3>
-          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
-            {/* Masters League description */}
-          </p>
-        </div>
-
-        <div className="card text-center cursor-pointer" onClick={handleLeagueClick}>
-          <div className="mx-auto mb-4 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24">
-            <img
-              src={`${import.meta.env.MODE === 'production' ? '/ffu-app' : ''}/league-logos/NationalLogo.png`}
-              alt="National League Logo"
-              className="w-full h-full object-contain"
-            />
+          <div className={`champion-highlight angular-cut p-6 mb-6 relative overflow-hidden border-l4 ${colorMap.NATIONAL.highlight}`}>
+            <span className={`text-lg font-black ${colorMap.NATIONAL.text} tracking-wide`}>
+              National League
+            </span>
+            <p>Sunday 8/24 10:00pm ET</p>
           </div>
-          <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">National League</h3>
-          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
-            {/* National League description */}
-          </p>
         </div>
       </div>
-
-      {showMessage && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-gray-900 text-white px-6 py-4 rounded shadow-lg">
-            More coming soon!
-          </div>
-        </div>
-      )}
     </div>
   );
 };
