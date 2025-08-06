@@ -60,6 +60,7 @@ export interface SeasonStandings {
   rank: number;
   highGame?: number;
   lowGame?: number;
+  unionPowerRating?: number;
 }
 
 export interface PlayoffResult {

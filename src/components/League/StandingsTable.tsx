@@ -114,6 +114,7 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
               <th className="text-center">Record</th>
               <th className="text-center">Points For</th>
               <th className="text-center">Points Against</th>
+              <th className="text-center">UPR</th>
             </tr>
           </thead>
           <tbody>
@@ -157,6 +158,11 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
                 <td className="text-center">
                   <span className="font-bold text-gray-900 dark:text-gray-100 font-mono">
                     {standing.pointsAgainst?.toFixed(2) || '0.00'}
+                  </span>
+                </td>
+                <td className="text-center">
+                  <span className="font-bold text-gray-900 dark:text-gray-100 font-mono">
+                    {standing.unionPowerRating?.toFixed(2) || '0.00'}
                   </span>
                 </td>
               </tr>

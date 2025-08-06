@@ -1,6 +1,8 @@
 import { SleeperService } from './sleeper.service';
 import { dataService } from './data.service';
 import { getLeagueId, getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId, getUserInfoByFFUId, getFFUIdBySleeperId, isHistoricalYear } from '../config/constants';
+import { calculateUPR } from '../utils/upr-calculator';
+import { isRegularSeasonWeek } from '../utils/era-detection';
 import type { 
   LeagueSeasonData, 
   SeasonStandings, 
@@ -45,29 +47,48 @@ export class LeagueService {
       this.sleeperService.getLeagueRosters(leagueId)
     ]);
 
-    // Calculate high/low games from live matchup data
-    let memberGameStats: Record<string, { highGame: number; lowGame: number }> = {};
+    // Calculate regular season stats from live matchup data
+    let memberRegularSeasonStats: Record<string, { wins: number; losses: number; averageScore: number; highGame: number; lowGame: number }> = {};
     try {
       const allWeekData = await this.sleeperService.getAllSeasonMatchups(leagueId);
-      memberGameStats = this.calculateMemberGameStatsFromLive(allWeekData, rosters);
+      memberRegularSeasonStats = this.calculateMemberRegularSeasonStatsFromLive(allWeekData, rosters, year);
     } catch (error) {
-      console.warn(`Could not fetch season matchups for high/low game calculation:`, error);
+      console.warn(`Could not fetch season matchups for regular season stats calculation:`, error);
     }
     
     let standings: SeasonStandings[] = rosters
       .map(roster => {
         const sleeperId = roster.owner_id;
         const ffuUserId = getFFUIdBySleeperId(sleeperId) || 'unknown';
+        
+        // Use regular season stats if available, otherwise fall back to total season
+        const regSeasonStats = memberRegularSeasonStats[sleeperId];
+        const wins = regSeasonStats?.wins ?? (roster.settings?.wins || 0);
+        const losses = regSeasonStats?.losses ?? (roster.settings?.losses || 0);
+        const averageScore = regSeasonStats?.averageScore ?? 0;
+        const highGame = regSeasonStats?.highGame ?? 0;
+        const lowGame = regSeasonStats?.lowGame ?? 0;
+        
+        // Calculate UPR using regular season data
+        const unionPowerRating = calculateUPR({
+          wins,
+          losses,
+          averageScore,
+          highGame,
+          lowGame
+        });
+        
         return {
           userId: sleeperId, // Legacy Sleeper ID
           ffuUserId, // New FFU ID
-          wins: roster.settings?.wins || 0,
-          losses: roster.settings?.losses || 0,
+          wins,
+          losses,
           pointsFor: (roster.settings?.fpts || 0) + (roster.settings?.fpts_decimal || 0) / 100,
           pointsAgainst: (roster.settings?.fpts_against || 0) + (roster.settings?.fpts_against_decimal || 0) / 100,
           rank: 0, // Will be calculated after sorting
-          highGame: memberGameStats[sleeperId]?.highGame || 0,
-          lowGame: memberGameStats[sleeperId]?.lowGame || 0
+          highGame,
+          lowGame,
+          unionPowerRating
         };
       });
 
@@ -757,55 +778,59 @@ export class LeagueService {
     };
   }
 
-  private calculateMemberGameStatsFromLive(
+  private calculateMemberRegularSeasonStatsFromLive(
     allWeekData: { week: number; matchups: any[] }[], 
-    rosters: any[]
-  ): Record<string, { highGame: number; lowGame: number }> {
-    const memberStats: Record<string, { highGame: number; lowGame: number; games: number[] }> = {};
+    rosters: any[],
+    year: string
+  ): Record<string, { wins: number; losses: number; averageScore: number; highGame: number; lowGame: number }> {
+    const memberStats: Record<string, { wins: number; losses: number; scores: number[] }> = {};
 
-    allWeekData.forEach(({ matchups }) => {
+    allWeekData.forEach(({ week, matchups }) => {
+      // Skip if not a regular season week
+      if (!isRegularSeasonWeek(week, year)) {
+        return;
+      }
+
       const weekMatchups = this.processRawMatchups(matchups, rosters);
       
       weekMatchups.forEach(matchup => {
-        // Track winner's score
+        // Track winner's stats
         if (!memberStats[matchup.winner]) {
-          memberStats[matchup.winner] = {
-            highGame: matchup.winnerScore,
-            lowGame: matchup.winnerScore,
-            games: []
-          };
+          memberStats[matchup.winner] = { wins: 0, losses: 0, scores: [] };
         }
-        const winnerStats = memberStats[matchup.winner];
-        winnerStats.games.push(matchup.winnerScore);
-        winnerStats.highGame = Math.max(winnerStats.highGame, matchup.winnerScore);
-        winnerStats.lowGame = Math.min(winnerStats.lowGame, matchup.winnerScore);
+        memberStats[matchup.winner].wins++;
+        memberStats[matchup.winner].scores.push(matchup.winnerScore);
 
-        // Track loser's score
+        // Track loser's stats
         if (!memberStats[matchup.loser]) {
-          memberStats[matchup.loser] = {
-            highGame: matchup.loserScore,
-            lowGame: matchup.loserScore,
-            games: []
-          };
+          memberStats[matchup.loser] = { wins: 0, losses: 0, scores: [] };
         }
-        const loserStats = memberStats[matchup.loser];
-        loserStats.games.push(matchup.loserScore);
-        loserStats.highGame = Math.max(loserStats.highGame, matchup.loserScore);
-        loserStats.lowGame = Math.min(loserStats.lowGame, matchup.loserScore);
+        memberStats[matchup.loser].losses++;
+        memberStats[matchup.loser].scores.push(matchup.loserScore);
       });
     });
 
-    // Return simplified format without games array
-    const result: Record<string, { highGame: number; lowGame: number }> = {};
+    // Convert to final format with calculated averages and high/low
+    const result: Record<string, { wins: number; losses: number; averageScore: number; highGame: number; lowGame: number }> = {};
     Object.entries(memberStats).forEach(([userId, stats]) => {
+      const averageScore = stats.scores.length > 0 
+        ? stats.scores.reduce((sum, score) => sum + score, 0) / stats.scores.length 
+        : 0;
+      const highGame = stats.scores.length > 0 ? Math.max(...stats.scores) : 0;
+      const lowGame = stats.scores.length > 0 ? Math.min(...stats.scores) : 0;
+
       result[userId] = {
-        highGame: stats.highGame,
-        lowGame: stats.lowGame
+        wins: stats.wins,
+        losses: stats.losses,
+        averageScore,
+        highGame,
+        lowGame
       };
     });
 
     return result;
   }
+
 
   /**
    * Bulk load all matchup data for head-to-head comparisons

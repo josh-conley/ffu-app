@@ -8,8 +8,8 @@ import { getFFUIdBySleeperId } from '../config/constants';
 import type { UserInfo, LeagueTier } from '../types';
 import { Trophy, Medal, Award, TrendingDown, ChevronDown, ChevronUp } from 'lucide-react';
 
-type AllTimeSortKey = 'teamName' | 'totalWins' | 'totalLosses' | 'winPercentage' | 'playoffWins' | 'playoffLosses' | 'totalPointsFor' | 'totalPointsAgainst' | 'pointDifferential' | 'averagePointsPerGame' | 'firstPlaceFinishes' | 'secondPlaceFinishes' | 'thirdPlaceFinishes' | 'lastPlaceFinishes' | 'seasonsPlayed' | 'premierSeasons' | 'mastersSeasons' | 'nationalSeasons' | 'averageSeasonRank';
-type SeasonHistorySortKey = 'team' | 'year' | 'league' | 'record' | 'pointsFor' | 'avgPPG' | 'pointsAgainst' | 'placement';
+type AllTimeSortKey = 'teamName' | 'totalWins' | 'totalLosses' | 'winPercentage' | 'playoffWins' | 'playoffLosses' | 'totalPointsFor' | 'totalPointsAgainst' | 'pointDifferential' | 'averagePointsPerGame' | 'firstPlaceFinishes' | 'secondPlaceFinishes' | 'thirdPlaceFinishes' | 'lastPlaceFinishes' | 'seasonsPlayed' | 'premierSeasons' | 'mastersSeasons' | 'nationalSeasons' | 'averageSeasonRank' | 'averageUPR';
+type SeasonHistorySortKey = 'team' | 'year' | 'league' | 'record' | 'pointsFor' | 'avgPPG' | 'pointsAgainst' | 'placement' | 'upr';
 type SortOrder = 'asc' | 'desc';
 
 // Helper function to calculate playoff wins/losses based on placement
@@ -48,6 +48,7 @@ interface AllTimePlayerStats {
   premierSeasons: number;
   mastersSeasons: number;
   nationalSeasons: number;
+  averageUPR: number;
   seasonHistory: {
     year: string;
     league: string;
@@ -57,6 +58,7 @@ interface AllTimePlayerStats {
     pointsAgainst: number;
     rank: number;
     playoffFinish?: number;
+    unionPowerRating?: number;
   }[];
 }
 
@@ -152,6 +154,8 @@ export const AllTimeStats = () => {
         return season.pointsAgainst;
       case 'placement':
         return season.playoffFinish || season.rank;
+      case 'upr':
+        return season.unionPowerRating || 0;
       default:
         return 0;
     }
@@ -197,6 +201,7 @@ export const AllTimeStats = () => {
             premierSeasons: 0,
             mastersSeasons: 0,
             nationalSeasons: 0,
+            averageUPR: 0,
             seasonHistory: []
           };
         }
@@ -251,7 +256,8 @@ export const AllTimeStats = () => {
           pointsFor: standing.pointsFor || 0,
           pointsAgainst: standing.pointsAgainst || 0,
           rank: standing.rank,
-          playoffFinish: standing.rank <= 6 ? (playoffFinish?.placement || standing.rank) : undefined
+          playoffFinish: standing.rank <= 6 ? (playoffFinish?.placement || standing.rank) : undefined,
+          unionPowerRating: standing.unionPowerRating
         });
       });
     });
@@ -275,6 +281,13 @@ export const AllTimeStats = () => {
       if (player.seasonHistory.length > 0) {
         const totalRank = player.seasonHistory.reduce((sum, season) => sum + season.rank, 0);
         player.averageSeasonRank = totalRank / player.seasonHistory.length;
+        
+        // Calculate average UPR
+        const validUPRSeasons = player.seasonHistory.filter(season => season.unionPowerRating !== undefined);
+        if (validUPRSeasons.length > 0) {
+          const totalUPR = validUPRSeasons.reduce((sum, season) => sum + (season.unionPowerRating || 0), 0);
+          player.averageUPR = totalUPR / validUPRSeasons.length;
+        }
       }
     });
 
@@ -323,6 +336,7 @@ export const AllTimeStats = () => {
           pointsAgainst: standing.pointsAgainst || 0,
           rank: standing.rank,
           avgPointsPerGame: avgScore,
+          unionPowerRating: standing.unionPowerRating,
           playoffFinish: leagueData.playoffResults?.find(p => p.userId === standing.userId)?.placement
         };
       })
@@ -408,20 +422,22 @@ export const AllTimeStats = () => {
             </div>
 
             <div className="overflow-x-auto table-container">
-              <table className="table md:table-fixed w-full min-w-[1400px]">
+              <table className="table md:table-fixed w-full min-w-[1500px]">
                 <colgroup className="hidden md:table-column-group">
-                  <col className="w-[20%]" />
+                  <col className="w-[18%]" />
                   <col className="w-[6%]" />
                   <col className="w-[5%]" />
+                  <col className="w-[6%]" />
                   <col className="w-[7%]" />
-                  <col className="w-[7%]" />
-                  <col className="w-[8%]" />
                   <col className="w-[7%]" />
                   <col className="w-[6%]" />
+                  <col className="w-[6%]" />
+                  <col className="w-[5%]" />
                   <col className="w-[4%]" />
                   <col className="w-[4%]" />
                   <col className="w-[4%]" />
                   <col className="w-[4%]" />
+                  <col className="w-[6%]" />
                   <col className="w-[6%]" />
                   <col className="w-[6%]" />
                 </colgroup>
@@ -607,6 +623,18 @@ export const AllTimeStats = () => {
                         </div>
                       </div>
                     </th>
+                    <th
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      onClick={() => handleAllTimeSort('averageUPR')}
+                    >
+                      <div className="flex items-center justify-center text-xs">
+                        Avg UPR
+                        <div className="flex flex-col ml-1">
+                          <ChevronUp className={`h-3 w-3 ${allTimeSortKey === 'averageUPR' && allTimeSortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          <ChevronDown className={`h-3 w-3 -mt-1 ${allTimeSortKey === 'averageUPR' && allTimeSortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                        </div>
+                      </div>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -718,6 +746,11 @@ export const AllTimeStats = () => {
                       <td className="text-center align-middle">
                         <span className="text-sm font-medium">#{player.averageSeasonRank.toFixed(1)}</span>
                       </td>
+                      <td className="text-center align-middle">
+                        <span className="text-sm font-medium font-mono">
+                          {player.averageUPR ? player.averageUPR.toFixed(2) : 'N/A'}
+                        </span>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -777,16 +810,17 @@ export const AllTimeStats = () => {
               </div>
 
               <div className="overflow-x-auto table-container">
-                <table className="table md:table-fixed w-full min-w-[800px]">
+                <table className="table md:table-fixed w-full min-w-[900px]">
                   <colgroup className="hidden md:table-column-group">
-                    <col className="w-[28%]" />
+                    <col className="w-[24%]" />
+                    <col className="w-[7%]" />
+                    <col className="w-[8%]" />
+                    <col className="w-[8%]" />
+                    <col className="w-[10%]" />
                     <col className="w-[8%]" />
                     <col className="w-[9%]" />
-                    <col className="w-[9%]" />
-                    <col className="w-[11%]" />
-                    <col className="w-[9%]" />
-                    <col className="w-[11%]" />
-                    <col className="w-[15%]" />
+                    <col className="w-[8%]" />
+                    <col className="w-[13%]" />
                   </colgroup>
                   <thead className="table-header">
                     <tr>
@@ -876,6 +910,18 @@ export const AllTimeStats = () => {
                       </th>
                       <th
                         className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        onClick={() => handleSeasonSort('upr')}
+                      >
+                        <div className="flex items-center justify-center text-xs">
+                          UPR
+                          <div className="flex flex-col ml-1">
+                            <ChevronUp className={`h-3 w-3 ${seasonSortKey === 'upr' && seasonSortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                            <ChevronDown className={`h-3 w-3 -mt-1 ${seasonSortKey === 'upr' && seasonSortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          </div>
+                        </div>
+                      </th>
+                      <th
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
                         onClick={() => handleSeasonSort('placement')}
                       >
                         <div className="flex items-center justify-center text-xs">
@@ -939,6 +985,11 @@ export const AllTimeStats = () => {
                         </td>
                         <td className="text-center align-middle">
                           <span className="text-sm font-medium font-mono">{season.pointsAgainst.toFixed(2)}</span>
+                        </td>
+                        <td className="text-center align-middle">
+                          <span className="text-sm font-medium font-mono">
+                            {season.unionPowerRating ? season.unionPowerRating.toFixed(2) : 'N/A'}
+                          </span>
                         </td>
                         <td className="text-center align-middle">
                           {season.playoffFinish ? (

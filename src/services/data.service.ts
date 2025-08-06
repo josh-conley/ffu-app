@@ -1,5 +1,6 @@
 import type { LeagueTier, EnhancedLeagueSeasonData, WeekMatchupsResponse } from '../types';
 import { isHistoricalYear, isCurrentYear, getAvailableLeagues, isEspnEra } from '../config/constants';
+import { calculateUPR, getRegularSeasonUPRData, calculateRegularSeasonRecord } from '../utils/upr-calculator';
 
 export interface HistoricalLeagueData {
   league: LeagueTier;
@@ -94,11 +95,65 @@ export class DataService {
    * Convert historical data to the format expected by the application
    */
   convertHistoricalToEnhanced(historicalData: HistoricalLeagueData): EnhancedLeagueSeasonData {
+    // Calculate UPR for each team using historical matchup data
+    const standingsWithUPR = historicalData.standings.map(standing => {
+      const userId = standing.userId || standing.ffuUserId;
+      
+      // If we have matchup data, calculate regular season stats and UPR
+      if (historicalData.matchupsByWeek) {
+        // Get regular season record from matchup data (more accurate)
+        const regularSeasonRecord = calculateRegularSeasonRecord(
+          userId,
+          historicalData.matchupsByWeek,
+          historicalData.year
+        );
+        
+        // Get high/low games from regular season only
+        const uprGameData = getRegularSeasonUPRData(
+          userId,
+          historicalData.matchupsByWeek,
+          historicalData.year
+        );
+        
+        // Calculate UPR using regular season data
+        const unionPowerRating = calculateUPR({
+          wins: regularSeasonRecord.wins,
+          losses: regularSeasonRecord.losses,
+          averageScore: uprGameData.averageScore,
+          highGame: uprGameData.highGame,
+          lowGame: uprGameData.lowGame
+        });
+        
+        return {
+          ...standing,
+          unionPowerRating
+        };
+      } else {
+        // Fallback: use standing data if no matchup data available
+        // Calculate average from total points and games played
+        const totalGames = (standing.wins || 0) + (standing.losses || 0);
+        const averageScore = totalGames > 0 ? (standing.pointsFor || 0) / totalGames : 0;
+        
+        const unionPowerRating = calculateUPR({
+          wins: standing.wins || 0,
+          losses: standing.losses || 0,
+          averageScore,
+          highGame: standing.highGame || 0,
+          lowGame: standing.lowGame || 0
+        });
+        
+        return {
+          ...standing,
+          unionPowerRating
+        };
+      }
+    });
+
     return {
       league: historicalData.league,
       year: historicalData.year,
       leagueId: historicalData.leagueId,
-      standings: historicalData.standings,
+      standings: standingsWithUPR,
       playoffResults: historicalData.playoffResults,
       promotions: historicalData.promotions,
       relegations: historicalData.relegations

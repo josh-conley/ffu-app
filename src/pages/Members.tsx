@@ -7,9 +7,9 @@ import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import { getFFUIdBySleeperId } from '../config/constants';
 import type { LeagueTier, UserInfo } from '../types';
-import { Trophy, Medal, Award, TrendingDown, Calendar, Target, BarChart3, ChevronDown, ChevronUp, Percent, TrendingUp, Share2, Check, Zap } from 'lucide-react';
+import { Trophy, Medal, Award, TrendingDown, Calendar, Target, BarChart3, ChevronDown, ChevronUp, Percent, TrendingUp, Share2, Check, Zap, Star } from 'lucide-react';
 
-type SeasonSortKey = 'year' | 'league' | 'wins' | 'winPct' | 'pointsFor' | 'pointsAgainst' | 'placement';
+type SeasonSortKey = 'year' | 'league' | 'wins' | 'winPct' | 'pointsFor' | 'pointsAgainst' | 'placement' | 'upr';
 type SortOrder = 'asc' | 'desc';
 
 // Helper function to calculate playoff wins/losses based on placement
@@ -82,6 +82,7 @@ interface PlayerCareerStats {
   winPercentage: number;
   averageSeasonRank: number;
   pointDifferential: number;
+  averageUPR: number;
   seasonHistory: {
     year: string;
     league: LeagueTier;
@@ -91,6 +92,7 @@ interface PlayerCareerStats {
     pointsAgainst: number;
     rank: number;
     playoffFinish?: number;
+    unionPowerRating?: number;
   }[];
 }
 
@@ -146,6 +148,7 @@ export const Members = () => {
             winPercentage: 0,
             averageSeasonRank: 0,
             pointDifferential: 0,
+            averageUPR: 0,
             seasonHistory: []
           };
         }
@@ -195,7 +198,8 @@ export const Members = () => {
           pointsFor: standing.pointsFor || 0,
           pointsAgainst: standing.pointsAgainst || 0,
           rank: standing.rank,
-          playoffFinish: standing.rank <= 6 ? (playoffFinish?.placement || standing.rank) : undefined
+          playoffFinish: standing.rank <= 6 ? (playoffFinish?.placement || standing.rank) : undefined,
+          unionPowerRating: standing.unionPowerRating
         });
       });
     });
@@ -216,6 +220,13 @@ export const Members = () => {
       
       // Calculate point differential
       player.pointDifferential = player.totalPointsFor - player.totalPointsAgainst;
+      
+      // Calculate average UPR
+      const seasonsWithUPR = player.seasonHistory.filter(season => season.unionPowerRating !== undefined && season.unionPowerRating !== null);
+      if (seasonsWithUPR.length > 0) {
+        const totalUPR = seasonsWithUPR.reduce((sum, season) => sum + (season.unionPowerRating || 0), 0);
+        player.averageUPR = totalUPR / seasonsWithUPR.length;
+      }
     });
 
     return Object.values(playerMap).sort((a, b) => 
@@ -264,6 +275,8 @@ export const Members = () => {
         return season.pointsAgainst;
       case 'placement':
         return season.playoffFinish || season.rank;
+      case 'upr':
+        return season.unionPowerRating || 0;
       default:
         return 0;
     }
@@ -455,7 +468,7 @@ export const Members = () => {
           </div>
 
           {/* Career Overview Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
             <div className="card text-center py-3">
               <BarChart3 className="h-6 w-6 text-green-600 mx-auto mb-1" />
               <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.totalWins}-{selectedPlayer.totalLosses}</div>
@@ -491,6 +504,13 @@ export const Members = () => {
               <Award className="h-6 w-6 text-amber-600 mx-auto mb-1" />
               <div className="text-lg font-bold text-gray-900 dark:text-gray-100">#{selectedPlayer.averageSeasonRank.toFixed(1)}</div>
               <div className="text-xs text-gray-500 dark:text-gray-400">Avg Rank</div>
+            </div>
+            <div className="card text-center py-3">
+              <Star className="h-6 w-6 text-yellow-500 mx-auto mb-1" />
+              <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                {selectedPlayer.averageUPR > 0 ? selectedPlayer.averageUPR.toFixed(2) : '—'}
+              </div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">Avg UPR</div>
             </div>
             <div className="card text-center py-3">
               <Calendar className="h-6 w-6 text-gray-600 mx-auto mb-1" />
@@ -587,7 +607,7 @@ export const Members = () => {
                       </div>
                     </th>
                     <th 
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none hidden sm:table-cell"
                       onClick={() => handleSort('pointsFor')}
                     >
                       <div className="flex items-center justify-center text-xs">
@@ -599,7 +619,7 @@ export const Members = () => {
                       </div>
                     </th>
                     <th 
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none hidden sm:table-cell"
                       onClick={() => handleSort('pointsAgainst')}
                     >
                       <div className="flex items-center justify-center text-xs">
@@ -612,10 +632,22 @@ export const Members = () => {
                     </th>
                     <th 
                       className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      onClick={() => handleSort('upr')}
+                    >
+                      <div className="flex items-center justify-center text-xs">
+                        UPR
+                        <div className="flex flex-col ml-1">
+                          <ChevronUp className={`h-3 w-3 ${sortKey === 'upr' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'upr' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                        </div>
+                      </div>
+                    </th>
+                    <th 
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
                       onClick={() => handleSort('placement')}
                     >
                       <div className="flex items-center justify-center text-xs">
-                        Final Placement
+                        Rank
                         <div className="flex flex-col ml-1">
                           <ChevronUp className={`h-3 w-3 ${sortKey === 'placement' && sortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
                           <ChevronDown className={`h-3 w-3 -mt-1 ${sortKey === 'placement' && sortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
@@ -658,11 +690,16 @@ export const Members = () => {
                             '0.0')}%
                         </span>
                       </td>
-                      <td>
+                      <td className="hidden sm:table-cell">
                         <span className="font-mono">{season.pointsFor.toFixed(2)}</span>
                       </td>
-                      <td>
+                      <td className="hidden sm:table-cell">
                         <span className="font-mono">{season.pointsAgainst.toFixed(2)}</span>
+                      </td>
+                      <td>
+                        <span className="font-mono">
+                          {season.unionPowerRating ? season.unionPowerRating.toFixed(2) : '—'}
+                        </span>
                       </td>
                       <td>
                         {season.playoffFinish ? (
@@ -883,7 +920,7 @@ export const Members = () => {
               </div>
 
               {/* Average Rank */}
-              <div className="grid grid-cols-3 gap-4 py-3">
+              <div className="grid grid-cols-3 gap-4 py-3 border-b border-gray-200 dark:border-gray-700">
                 <div className="text-right">
                   <span className={`text-lg font-bold ${selectedPlayer.averageSeasonRank < selectedPlayer2.averageSeasonRank ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'}`}>
                     #{selectedPlayer.averageSeasonRank.toFixed(1)}
@@ -895,6 +932,23 @@ export const Members = () => {
                 <div className="text-left">
                   <span className={`text-lg font-bold ${selectedPlayer2.averageSeasonRank < selectedPlayer.averageSeasonRank ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'}`}>
                     #{selectedPlayer2.averageSeasonRank.toFixed(1)}
+                  </span>
+                </div>
+              </div>
+
+              {/* Average UPR */}
+              <div className="grid grid-cols-3 gap-4 py-3">
+                <div className="text-right">
+                  <span className={`text-lg font-bold ${selectedPlayer.averageUPR > selectedPlayer2.averageUPR ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'}`}>
+                    {selectedPlayer.averageUPR > 0 ? selectedPlayer.averageUPR.toFixed(2) : '—'}
+                  </span>
+                </div>
+                <div className="text-center">
+                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg UPR</span>
+                </div>
+                <div className="text-left">
+                  <span className={`text-lg font-bold ${selectedPlayer2.averageUPR > selectedPlayer.averageUPR ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'}`}>
+                    {selectedPlayer2.averageUPR > 0 ? selectedPlayer2.averageUPR.toFixed(2) : '—'}
                   </span>
                 </div>
               </div>
