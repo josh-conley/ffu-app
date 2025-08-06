@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useUrlParams } from '../hooks/useUrlParams';
 import { useWeekMatchups, useAllSeasonMatchups } from '../hooks/useLeagues';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { ErrorMessage } from '../components/Common/ErrorMessage';
@@ -42,11 +43,28 @@ const PlacementTag = ({ placementType }: { placementType: string }) => {
 };
 
 export const Matchups = () => {
+  const { getParam, updateParams } = useUrlParams();
   const [selectedLeague, setSelectedLeague] = useState<LeagueTier>('PREMIER');
   const [selectedYear, setSelectedYear] = useState<string>('2024');
   const [selectedWeek, setSelectedWeek] = useState<number | 'ALL'>(0); // 0 represents "All Weeks"
   const [selectedTeam, setSelectedTeam] = useState<string>('ALL'); // Team filter
   const [isFilterMenuOpen, setIsFilterMenuOpen] = useState<boolean>(false);
+
+  // Initialize from URL params on mount
+  useEffect(() => {
+    const league = getParam('league', 'PREMIER');
+    if (['PREMIER', 'MASTERS', 'NATIONAL'].includes(league)) {
+      setSelectedLeague(league as LeagueTier);
+    }
+
+    setSelectedYear(getParam('year', '2024'));
+
+    const week = getParam('week', '0');
+    const weekNum = week === 'ALL' ? 0 : parseInt(week);
+    setSelectedWeek(isNaN(weekNum) ? 0 : weekNum);
+
+    setSelectedTeam(getParam('team', 'ALL'));
+  }, []); // Empty dependency array - only run on mount
 
   const { data: weekMatchupsData, isLoading: weekLoading, error: weekError } = useWeekMatchups(
     selectedLeague,
@@ -132,7 +150,11 @@ export const Matchups = () => {
             <div className="relative">
               <select
                 value={selectedLeague}
-                onChange={(e) => setSelectedLeague(e.target.value as LeagueTier)}
+                onChange={(e) => {
+                  const league = e.target.value as LeagueTier;
+                  setSelectedLeague(league);
+                  updateParams({ league });
+                }}
                 className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
                 {leagues.map(league => (
@@ -150,7 +172,11 @@ export const Matchups = () => {
             <div className="relative">
               <select
                 value={selectedYear}
-                onChange={(e) => setSelectedYear(e.target.value)}
+                onChange={(e) => {
+                  const year = e.target.value;
+                  setSelectedYear(year);
+                  updateParams({ year });
+                }}
                 className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
                 {years.map(year => (
@@ -168,7 +194,11 @@ export const Matchups = () => {
             <div className="relative">
               <select
                 value={selectedWeek}
-                onChange={(e) => setSelectedWeek(e.target.value === '0' ? 0 : parseInt(e.target.value))}
+                onChange={(e) => {
+                  const week = e.target.value === '0' ? 0 : parseInt(e.target.value);
+                  setSelectedWeek(week);
+                  updateParams({ week: week === 0 ? '0' : week.toString() });
+                }}
                 className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
                 <option value={0}>All Weeks</option>
@@ -187,7 +217,11 @@ export const Matchups = () => {
             <div className="relative">
               <select
                 value={selectedTeam}
-                onChange={(e) => setSelectedTeam(e.target.value)}
+                onChange={(e) => {
+                  const team = e.target.value;
+                  setSelectedTeam(team);
+                  updateParams({ team: team === 'ALL' ? null : team });
+                }}
                 className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
                 {teamOptions.map(team => (

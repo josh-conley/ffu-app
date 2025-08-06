@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useUrlParams } from '../hooks/useUrlParams';
 import { Link } from 'react-router-dom';
 import { useAllTimeRecords } from '../hooks/useLeagues';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
@@ -9,6 +10,7 @@ import type { LeagueTier } from '../types';
 import { Target, TrendingDown, TrendingUp, Calendar, ChevronDown, Crown, Sparkles, Gauge, Zap, Skull, Laugh, Swords, Angry, Bomb} from 'lucide-react';
 
 export const Records = () => {
+  const { getParam, updateParams } = useUrlParams();
   const [selectedLeague, setSelectedLeague] = useState<LeagueTier | 'ALL'>('ALL');
   const [selectedYear, setSelectedYear] = useState<string>('ALL');
   const [, setImageError] = useState(false);
@@ -19,6 +21,16 @@ export const Records = () => {
     selectedLeague === 'ALL' ? undefined : selectedLeague,
     selectedYear === 'ALL' ? undefined : selectedYear
   );
+
+  // Initialize from URL params on mount
+  useEffect(() => {
+    const league = getParam('league', 'ALL');
+    if (['ALL', 'PREMIER', 'MASTERS', 'NATIONAL'].includes(league)) {
+      setSelectedLeague(league as LeagueTier | 'ALL');
+    }
+
+    setSelectedYear(getParam('year', 'ALL'));
+  }, []); // Empty dependency array - only run on mount
 
   const leagues: (LeagueTier | 'ALL')[] = ['ALL', 'PREMIER', 'MASTERS', 'NATIONAL'];
   const years = ['ALL', '2024', '2023', '2022', '2021', '2020', '2019', '2018'];
@@ -36,8 +48,9 @@ export const Records = () => {
   useEffect(() => {
     if (!filteredYears.includes(selectedYear)) {
       setSelectedYear('ALL');
+      updateParams({ year: null });
     }
-  }, [selectedLeague, filteredYears, selectedYear]);
+  }, [selectedLeague, filteredYears, selectedYear, updateParams]);
 
   const getLeagueName = (league: LeagueTier | 'ALL'): string => {
     switch (league) {
@@ -134,7 +147,11 @@ export const Records = () => {
           <div className="relative">
             <select
               value={selectedLeague}
-              onChange={(e) => setSelectedLeague(e.target.value as LeagueTier | 'ALL')}
+              onChange={(e) => {
+                const league = e.target.value as LeagueTier | 'ALL';
+                setSelectedLeague(league);
+                updateParams({ league: league === 'ALL' ? null : league });
+              }}
               className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
             >
               {leagues.map(league => (
@@ -152,7 +169,11 @@ export const Records = () => {
           <div className="relative">
             <select
               value={selectedYear}
-              onChange={(e) => setSelectedYear(e.target.value)}
+              onChange={(e) => {
+                const year = e.target.value;
+                setSelectedYear(year);
+                updateParams({ year: year === 'ALL' ? null : year });
+              }}
               className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
             >
               {filteredYears.map(year => (

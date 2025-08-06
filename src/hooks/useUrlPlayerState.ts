@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { getSleeperIdByAbbreviation, getAbbreviationBySleeperId } from '../config/constants';
+import { getSleeperIdByFFUId, getFFUIdBySleeperId } from '../config/constants';
 
 interface UseUrlPlayerStateReturn {
   selectedPlayerId: string;
@@ -15,20 +15,20 @@ interface UseUrlPlayerStateReturn {
 export const useUrlPlayerState = (): UseUrlPlayerStateReturn => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // Parse URL parameters and convert abbreviations to sleeper IDs
+  // Parse URL parameters and convert FFU IDs to sleeper IDs
   const parseStateFromUrl = useCallback(() => {
     try {
-      const playerAbbr = searchParams.get('player');
-      const player1Abbr = searchParams.get('player1');
-      const player2Abbr = searchParams.get('player2');
+      const playerFFUId = searchParams.get('player');
+      const player1FFUId = searchParams.get('player1');
+      const player2FFUId = searchParams.get('player2');
       const compareParam = searchParams.get('compare');
 
       const isCompareMode = compareParam === 'true';
 
       if (isCompareMode) {
         // Compare mode: use player1 and player2 params
-        const selectedPlayerId = getSleeperIdByAbbreviation(player1Abbr || '') || '';
-        const selectedPlayer2Id = getSleeperIdByAbbreviation(player2Abbr || '') || '';
+        const selectedPlayerId = getSleeperIdByFFUId(player1FFUId || '') || '';
+        const selectedPlayer2Id = getSleeperIdByFFUId(player2FFUId || '') || '';
         
         // Edge case: if only player2 is provided, move it to player1
         if (!selectedPlayerId && selectedPlayer2Id) {
@@ -38,7 +38,7 @@ export const useUrlPlayerState = (): UseUrlPlayerStateReturn => {
         return { selectedPlayerId, selectedPlayer2Id, isCompareMode };
       } else {
         // Single player mode: use player param
-        const selectedPlayerId = getSleeperIdByAbbreviation(playerAbbr || '') || '';
+        const selectedPlayerId = getSleeperIdByFFUId(playerFFUId || '') || '';
         return { selectedPlayerId, selectedPlayer2Id: '', isCompareMode };
       }
     } catch (error) {
@@ -50,24 +50,24 @@ export const useUrlPlayerState = (): UseUrlPlayerStateReturn => {
 
   const { selectedPlayerId, selectedPlayer2Id, isCompareMode } = parseStateFromUrl();
 
-  // Update URL with current state, converting sleeper IDs back to abbreviations
+  // Update URL with current state, converting sleeper IDs back to FFU IDs
   const updateUrl = useCallback((playerId: string, player2Id: string, compareMode: boolean) => {
     const params = new URLSearchParams();
 
     if (compareMode) {
       params.set('compare', 'true');
       if (playerId) {
-        const abbr = getAbbreviationBySleeperId(playerId);
-        if (abbr) params.set('player1', abbr);
+        const ffuId = getFFUIdBySleeperId(playerId);
+        if (ffuId) params.set('player1', ffuId);
       }
       if (player2Id) {
-        const abbr = getAbbreviationBySleeperId(player2Id);
-        if (abbr) params.set('player2', abbr);
+        const ffuId = getFFUIdBySleeperId(player2Id);
+        if (ffuId) params.set('player2', ffuId);
       }
     } else {
       if (playerId) {
-        const abbr = getAbbreviationBySleeperId(playerId);
-        if (abbr) params.set('player', abbr);
+        const ffuId = getFFUIdBySleeperId(playerId);
+        if (ffuId) params.set('player', ffuId);
       }
     }
 

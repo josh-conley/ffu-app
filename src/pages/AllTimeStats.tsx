@@ -5,6 +5,7 @@ import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import { UPRHorserace } from '../components/League/UPRHorserace';
+import { useUrlParams } from '../hooks/useUrlParams';
 import { getFFUIdBySleeperId } from '../config/constants';
 import type { UserInfo, LeagueTier } from '../types';
 import { Trophy, Medal, Award, TrendingDown, ChevronDown, ChevronUp } from 'lucide-react';
@@ -68,25 +69,61 @@ interface AllTimePlayerStats {
 export const AllTimeStats = () => {
   const { data: standings, isLoading, error } = useAllStandings();
 
-  // View toggle state
-  const [activeView, setActiveView] = useState<'career' | 'season' | 'horserace'>('career');
-  
-  // Career stats filtering
-  const [showMinThreeSeasons, setShowMinThreeSeasons] = useState(false);
+  const { getParam, getBooleanParam, updateParams } = useUrlParams();
 
-  // All Time Stats table state
+  // Initialize state with defaults
+  const [activeView, setActiveView] = useState<'career' | 'season' | 'horserace'>('career');
+  const [showMinThreeSeasons, setShowMinThreeSeasons] = useState(false);
   const [allTimeSortKey, setAllTimeSortKey] = useState<AllTimeSortKey>('winPercentage');
   const [allTimeSortOrder, setAllTimeSortOrder] = useState<SortOrder>('desc');
-
-  // Season History table state
   const [selectedLeague, setSelectedLeague] = useState<LeagueTier | 'ALL'>('ALL');
   const [selectedYear, setSelectedYear] = useState<string>('ALL');
   const [seasonSortKey, setSeasonSortKey] = useState<SeasonHistorySortKey>('year');
   const [seasonSortOrder, setSeasonSortOrder] = useState<SortOrder>('desc');
-
-  // UPR Horserace filtering state
   const [horseraceLeague, setHorseraceLeague] = useState<LeagueTier>('PREMIER');
   const [horseraceYear, setHorseraceYear] = useState<string>('2024');
+
+  // Initialize from URL params on mount
+  useEffect(() => {
+    const view = getParam('view', 'career');
+    if (['career', 'season', 'horserace'].includes(view)) {
+      setActiveView(view as 'career' | 'season' | 'horserace');
+    }
+
+    setShowMinThreeSeasons(getBooleanParam('minThreeSeasons', false));
+
+    const sortKey = getParam('sortKey', 'winPercentage');
+    const validKeys: AllTimeSortKey[] = ['teamName', 'totalWins', 'totalLosses', 'winPercentage', 'playoffWins', 'playoffLosses', 'totalPointsFor', 'totalPointsAgainst', 'pointDifferential', 'averagePointsPerGame', 'careerHighGame', 'careerLowGame', 'firstPlaceFinishes', 'secondPlaceFinishes', 'thirdPlaceFinishes', 'lastPlaceFinishes', 'seasonsPlayed', 'premierSeasons', 'mastersSeasons', 'nationalSeasons', 'averageSeasonRank', 'averageUPR'];
+    if (validKeys.includes(sortKey as AllTimeSortKey)) {
+      setAllTimeSortKey(sortKey as AllTimeSortKey);
+    }
+
+    const order = getParam('sortOrder', 'desc');
+    setAllTimeSortOrder(order === 'asc' ? 'asc' : 'desc');
+
+    const league = getParam('league', 'ALL');
+    if (['ALL', 'PREMIER', 'MASTERS', 'NATIONAL'].includes(league)) {
+      setSelectedLeague(league as LeagueTier | 'ALL');
+    }
+
+    setSelectedYear(getParam('year', 'ALL'));
+
+    const seasonSortKey = getParam('seasonSortKey', 'year');
+    const validSeasonKeys: SeasonHistorySortKey[] = ['team', 'year', 'league', 'record', 'pointsFor', 'avgPPG', 'pointsAgainst', 'placement', 'upr'];
+    if (validSeasonKeys.includes(seasonSortKey as SeasonHistorySortKey)) {
+      setSeasonSortKey(seasonSortKey as SeasonHistorySortKey);
+    }
+
+    const seasonOrder = getParam('seasonSortOrder', 'desc');
+    setSeasonSortOrder(seasonOrder === 'asc' ? 'asc' : 'desc');
+
+    const horseLeague = getParam('horseraceLeague', 'PREMIER');
+    if (['PREMIER', 'MASTERS', 'NATIONAL'].includes(horseLeague)) {
+      setHorseraceLeague(horseLeague as LeagueTier);
+    }
+
+    setHorseraceYear(getParam('horseraceYear', '2024'));
+  }, []); // Empty dependency array - only run on mount
 
   // Mobile touch state for showing full team names
   const [touchedTeamCell, setTouchedTeamCell] = useState<string | null>(null);
@@ -128,12 +165,16 @@ export const AllTimeStats = () => {
 
   // All Time Stats handlers
   const handleAllTimeSort = (key: AllTimeSortKey) => {
+    let newOrder: SortOrder;
     if (allTimeSortKey === key) {
-      setAllTimeSortOrder(allTimeSortOrder === 'asc' ? 'desc' : 'asc');
+      newOrder = allTimeSortOrder === 'asc' ? 'desc' : 'asc';
+      setAllTimeSortOrder(newOrder);
     } else {
       setAllTimeSortKey(key);
+      newOrder = 'desc';
       setAllTimeSortOrder('desc');
     }
+    updateParams({ sortKey: key, sortOrder: newOrder });
   };
 
   const getAllTimeSortValue = (player: AllTimePlayerStats, key: AllTimeSortKey) => {
@@ -147,12 +188,16 @@ export const AllTimeStats = () => {
 
   // Season History handlers
   const handleSeasonSort = (key: SeasonHistorySortKey) => {
+    let newOrder: SortOrder;
     if (seasonSortKey === key) {
-      setSeasonSortOrder(seasonSortOrder === 'asc' ? 'desc' : 'asc');
+      newOrder = seasonSortOrder === 'asc' ? 'desc' : 'asc';
+      setSeasonSortOrder(newOrder);
     } else {
       setSeasonSortKey(key);
+      newOrder = 'desc';
       setSeasonSortOrder('desc');
     }
+    updateParams({ seasonSortKey: key, seasonSortOrder: newOrder });
   };
 
   const getSeasonSortValue = (season: any, key: SeasonHistorySortKey) => {
@@ -432,7 +477,10 @@ export const AllTimeStats = () => {
           <div className="border-b border-gray-200 dark:border-gray-700">
             <nav className="-mb-px flex space-x-8" aria-label="Tabs">
               <button
-                onClick={() => setActiveView('career')}
+                onClick={() => {
+                  setActiveView('career');
+                  updateParams({ view: 'career' });
+                }}
                 className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
                   activeView === 'career'
                     ? 'border-ffu-red text-ffu-red dark:text-ffu-red'
@@ -442,7 +490,10 @@ export const AllTimeStats = () => {
                 Career Stats
               </button>
               <button
-                onClick={() => setActiveView('season')}
+                onClick={() => {
+                  setActiveView('season');
+                  updateParams({ view: 'season' });
+                }}
                 className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
                   activeView === 'season'
                     ? 'border-ffu-red text-ffu-red dark:text-ffu-red'
@@ -452,7 +503,10 @@ export const AllTimeStats = () => {
                 Season History
               </button>
               <button
-                onClick={() => setActiveView('horserace')}
+                onClick={() => {
+                  setActiveView('horserace');
+                  updateParams({ view: 'horserace' });
+                }}
                 className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
                   activeView === 'horserace'
                     ? 'border-ffu-red text-ffu-red dark:text-ffu-red'
@@ -488,7 +542,11 @@ export const AllTimeStats = () => {
                     <input
                       type="checkbox"
                       checked={showMinThreeSeasons}
-                      onChange={(e) => setShowMinThreeSeasons(e.target.checked)}
+                      onChange={(e) => {
+                        const checked = e.target.checked;
+                        setShowMinThreeSeasons(checked);
+                        updateParams({ minThreeSeasons: checked ? 'true' : null });
+                      }}
                       className="sr-only"
                     />
                     <div className={`w-5 h-5 border-2 rounded transition-all duration-200 ${
@@ -521,7 +579,11 @@ export const AllTimeStats = () => {
                     <input
                       type="checkbox"
                       checked={showMinThreeSeasons}
-                      onChange={(e) => setShowMinThreeSeasons(e.target.checked)}
+                      onChange={(e) => {
+                        const checked = e.target.checked;
+                        setShowMinThreeSeasons(checked);
+                        updateParams({ minThreeSeasons: checked ? 'true' : null });
+                      }}
                       className="sr-only"
                     />
                     <div className={`w-4 h-4 border-2 rounded transition-all duration-200 ${
@@ -925,7 +987,11 @@ export const AllTimeStats = () => {
                   <div className="relative">
                     <select
                       value={selectedLeague}
-                      onChange={(e) => setSelectedLeague(e.target.value as LeagueTier | 'ALL')}
+                      onChange={(e) => {
+                        const league = e.target.value as LeagueTier | 'ALL';
+                        setSelectedLeague(league);
+                        updateParams({ league: league === 'ALL' ? null : league });
+                      }}
                       className="block w-28 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-[#121212] border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
                     >
                       {leagues.map(league => (
@@ -942,7 +1008,11 @@ export const AllTimeStats = () => {
                   <div className="relative">
                     <select
                       value={selectedYear}
-                      onChange={(e) => setSelectedYear(e.target.value)}
+                      onChange={(e) => {
+                        const year = e.target.value;
+                        setSelectedYear(year);
+                        updateParams({ year: year === 'ALL' ? null : year });
+                      }}
                       className="block w-20 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-[#121212] border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
                     >
                       {filteredYears.map(year => (
@@ -1196,8 +1266,14 @@ export const AllTimeStats = () => {
           <UPRHorserace 
             league={horseraceLeague} 
             year={horseraceYear}
-            onLeagueChange={setHorseraceLeague}
-            onYearChange={setHorseraceYear}
+            onLeagueChange={(league) => {
+              setHorseraceLeague(league);
+              updateParams({ horseraceLeague: league });
+            }}
+            onYearChange={(year) => {
+              setHorseraceYear(year);
+              updateParams({ horseraceYear: year });
+            }}
           />
         </div>
       )}
