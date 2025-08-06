@@ -544,9 +544,9 @@ export const AllTimeStats = () => {
             </div>
 
             <div className="overflow-x-auto table-container">
-              <table className="table md:table-fixed w-full min-w-[1700px]">
+              <table className="table md:table-fixed w-full min-w-[1400px]">
                 <colgroup className="hidden md:table-column-group">
-                  <col className="w-[15%]" />
+                  <col className="w-[12%]" />
                   <col className="w-[5%]" />
                   <col className="w-[4%]" />
                   <col className="w-[5%]" />
@@ -566,7 +566,7 @@ export const AllTimeStats = () => {
                 <thead className="table-header">
                   <tr>
                     <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none sticky left-0 z-10 bg-ffu-red dark:bg-ffu-red-800 pl-4"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none sticky left-0 z-10 bg-ffu-red dark:bg-ffu-red-800 pl-2"
                       onClick={() => handleAllTimeSort('teamName')}
                     >
                       <div className="flex items-center justify-between text-xs">
@@ -761,8 +761,8 @@ export const AllTimeStats = () => {
                 </thead>
                 <tbody>
                   {sortedAllTimeStats.map((player) => (
-                    <tr key={player.ffuUserId} className="table-row h-16">
-                      <td className="align-middle sticky left-0 z-10 bg-white dark:bg-[#121212] w-20 sm:w-auto pl-4">
+                    <tr key={player.ffuUserId} className="table-row h-12">
+                      <td className="align-middle sticky left-0 z-10 bg-white dark:bg-[#121212] w-16 sm:w-auto pl-2">
                         <div className="flex sm:hidden items-center justify-center h-full relative">
                           <div 
                             className="text-center cursor-pointer select-none"
@@ -786,14 +786,14 @@ export const AllTimeStats = () => {
                             </div>
                           )}
                         </div>
-                        <div className="hidden sm:flex items-center space-x-2 h-full">
+                        <div className="hidden sm:flex items-center space-x-1 h-full">
                           <TeamLogo
                             teamName={player.userInfo.teamName}
                             size="sm"
-                            className="flex-shrink-0"
+                            className="flex-shrink-0 !w-6 !h-6"
                           />
                           <div className="min-w-0 flex-1">
-                            <div className="font-medium text-gray-900 dark:text-gray-100 text-sm leading-tight break-words">
+                            <div className="font-medium text-gray-900 dark:text-gray-100 text-xs leading-tight break-words">
                               {player.userInfo.teamName}
                             </div>
                             <div className="text-xs text-gray-500 dark:text-gray-400 font-mono uppercase">
@@ -957,9 +957,9 @@ export const AllTimeStats = () => {
               </div>
 
               <div className="overflow-x-auto table-container">
-                <table className="table md:table-fixed w-full min-w-[900px]">
+                <table className="table md:table-fixed w-full min-w-[800px]">
                   <colgroup className="hidden md:table-column-group">
-                    <col className="w-[24%]" />
+                    <col className="w-[18%]" />
                     <col className="w-[7%]" />
                     <col className="w-[8%]" />
                     <col className="w-[8%]" />
@@ -972,7 +972,7 @@ export const AllTimeStats = () => {
                   <thead className="table-header">
                     <tr>
                       <th
-                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none sticky left-0 z-10 bg-ffu-red dark:bg-ffu-red-800 pl-4"
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none sticky left-0 z-10 bg-ffu-red dark:bg-ffu-red-800 pl-2"
                         onClick={() => handleSeasonSort('team')}
                       >
                         <div className="flex items-center justify-between text-xs">
@@ -1083,8 +1083,8 @@ export const AllTimeStats = () => {
                   </thead>
                   <tbody>
                     {filteredSeasonHistory.map((season) => (
-                      <tr key={`${season.userId}-${season.year}-${season.league}`} className="table-row h-16">
-                        <td className="align-middle sticky left-0 z-10 bg-white dark:bg-[#121212] w-20 sm:w-auto pl-4">
+                      <tr key={`${season.userId}-${season.year}-${season.league}`} className="table-row h-12">
+                        <td className="align-middle sticky left-0 z-10 bg-white dark:bg-[#121212] w-16 sm:w-auto pl-2">
                           <div className="flex sm:hidden items-center justify-center h-full relative">
                             <div 
                               className="text-center cursor-pointer select-none"
@@ -1108,14 +1108,14 @@ export const AllTimeStats = () => {
                               </div>
                             )}
                           </div>
-                          <div className="hidden sm:flex items-center space-x-2 h-full">
+                          <div className="hidden sm:flex items-center space-x-1 h-full">
                             <TeamLogo
                               teamName={season.userInfo.teamName}
                               size="sm"
-                              className="flex-shrink-0"
+                              className="flex-shrink-0 !w-6 !h-6"
                             />
                             <div className="min-w-0 flex-1">
-                              <div className="font-medium text-gray-900 dark:text-gray-100 text-sm leading-tight break-words">
+                              <div className="font-medium text-gray-900 dark:text-gray-100 text-xs leading-tight break-words">
                                 {season.userInfo.teamName}
                               </div>
                               <div className="text-xs text-gray-500 dark:text-gray-400 font-mono uppercase">
