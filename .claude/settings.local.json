@@ -19,7 +19,9 @@
       "Bash(grep:*)",
       "Bash(find:*)",
       "Bash(cp:*)",
-      "Bash(npm start)"
+      "Bash(npm start)",
+      "Bash(tsc:*)",
+      "Bash(npx tsc:*)"
     ],
     "deny": []
   }

@@ -67,6 +67,9 @@ export const AllTimeStats = () => {
 
   // View toggle state
   const [activeView, setActiveView] = useState<'career' | 'season'>('career');
+  
+  // Career stats filtering
+  const [showMinThreeSeasons, setShowMinThreeSeasons] = useState(false);
 
   // All Time Stats table state
   const [allTimeSortKey, setAllTimeSortKey] = useState<AllTimeSortKey>('winPercentage');
@@ -295,7 +298,14 @@ export const AllTimeStats = () => {
   }, [standings]);
 
   const sortedAllTimeStats = useMemo(() => {
-    return [...allTimeStats].sort((a, b) => {
+    let filteredStats = allTimeStats;
+    
+    // Filter by minimum seasons if checkbox is checked
+    if (showMinThreeSeasons) {
+      filteredStats = allTimeStats.filter(player => player.seasonsPlayed >= 3);
+    }
+    
+    return [...filteredStats].sort((a, b) => {
       const aValue = getAllTimeSortValue(a, allTimeSortKey);
       const bValue = getAllTimeSortValue(b, allTimeSortKey);
 
@@ -309,7 +319,7 @@ export const AllTimeStats = () => {
         ? (aValue as number) - (bValue as number)
         : (bValue as number) - (aValue as number);
     });
-  }, [allTimeStats, allTimeSortKey, allTimeSortOrder]);
+  }, [allTimeStats, allTimeSortKey, allTimeSortOrder, showMinThreeSeasons]);
 
   const filteredSeasonHistory = useMemo(() => {
     if (!standings.length) return [];
@@ -386,39 +396,105 @@ export const AllTimeStats = () => {
         </h1>
 
         {/* View Toggle Buttons */}
-        <div className="flex items-center space-x-2 mb-6">
+        <div className="flex border border-gray-300 dark:border-gray-600 rounded overflow-hidden mb-6 w-fit">
           <button
             onClick={() => setActiveView('career')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${activeView === 'career'
+            className={`px-4 sm:px-4 py-2 sm:py-3 text-sm sm:text-base font-medium transition-colors duration-200 ${
+              activeView === 'career'
                 ? 'bg-ffu-red text-white'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-              }`}
+                : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700'
+            }`}
           >
             Career Stats
           </button>
           <button
             onClick={() => setActiveView('season')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${activeView === 'season'
+            className={`px-4 sm:px-4 py-2 sm:py-3 text-sm sm:text-base font-medium transition-colors duration-200 border-l border-gray-300 dark:border-gray-600 ${
+              activeView === 'season'
                 ? 'bg-ffu-red text-white'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-              }`}
+                : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700'
+            }`}
           >
             Season History
           </button>
         </div>
       </div>
 
+
       {/* Cumulative Career Stats Table */}
       {activeView === 'career' && (
         <div style={{ marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }} className="px-4 sm:px-6 lg:px-8">
           <div className="card">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 flex items-center">
-                Career Statistics
-                <span className="ml-3 text-lg font-bold text-gray-500 dark:text-gray-400">
-                  ({allTimeStats.length} members)
-                </span>
-              </h2>
+            <div className="mb-4">
+              {/* Desktop Layout */}
+              <div className="hidden sm:flex items-center justify-between">
+                <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 flex items-center">
+                  Career Statistics
+                  <span className="ml-3 text-lg font-bold text-gray-500 dark:text-gray-400">
+                    ({sortedAllTimeStats.length} members)
+                  </span>
+                </h2>
+                <label className="flex items-center space-x-3 cursor-pointer group">
+                  <span className="text-sm font-medium text-gray-900 dark:text-gray-100 group-hover:text-ffu-red transition-colors duration-200">
+                    Show only members with 3+ seasons
+                  </span>
+                  <div className="relative">
+                    <input
+                      type="checkbox"
+                      checked={showMinThreeSeasons}
+                      onChange={(e) => setShowMinThreeSeasons(e.target.checked)}
+                      className="sr-only"
+                    />
+                    <div className={`w-5 h-5 border-2 rounded transition-all duration-200 ${
+                      showMinThreeSeasons 
+                        ? 'bg-ffu-red border-ffu-red' 
+                        : 'border-gray-300 dark:border-gray-600 hover:border-ffu-red dark:hover:border-ffu-red'
+                    }`}>
+                      {showMinThreeSeasons && (
+                        <svg className="w-3 h-3 text-white ml-0.5 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                </label>
+              </div>
+              
+              {/* Mobile Layout */}
+              <div className="sm:hidden space-y-3">
+                <div>
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                    Career Statistics
+                  </h2>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    {sortedAllTimeStats.length} members
+                  </p>
+                </div>
+                <label className="flex items-center space-x-2 cursor-pointer group">
+                  <div className="relative">
+                    <input
+                      type="checkbox"
+                      checked={showMinThreeSeasons}
+                      onChange={(e) => setShowMinThreeSeasons(e.target.checked)}
+                      className="sr-only"
+                    />
+                    <div className={`w-4 h-4 border-2 rounded transition-all duration-200 ${
+                      showMinThreeSeasons 
+                        ? 'bg-ffu-red border-ffu-red' 
+                        : 'border-gray-300 dark:border-gray-600 hover:border-ffu-red dark:hover:border-ffu-red'
+                    }`}>
+                      {showMinThreeSeasons && (
+                        <svg className="w-2.5 h-2.5 text-white ml-0.5 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                  <span className="text-xs font-medium text-gray-900 dark:text-gray-100 group-hover:text-ffu-red transition-colors duration-200">
+                    3+ seasons only
+                  </span>
+                </label>
+              </div>
             </div>
 
             <div className="overflow-x-auto table-container">
@@ -444,7 +520,7 @@ export const AllTimeStats = () => {
                 <thead className="table-header">
                   <tr>
                     <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none sticky left-0 z-10 bg-ffu-red dark:bg-ffu-red-800"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none sticky left-0 z-10 bg-ffu-red dark:bg-ffu-red-800 pl-4"
                       onClick={() => handleAllTimeSort('teamName')}
                     >
                       <div className="flex items-center justify-between text-xs">
@@ -640,7 +716,7 @@ export const AllTimeStats = () => {
                 <tbody>
                   {sortedAllTimeStats.map((player) => (
                     <tr key={player.ffuUserId} className="table-row h-16">
-                      <td className="align-middle sticky left-0 z-10 bg-white dark:bg-[#121212] w-20 sm:w-auto">
+                      <td className="align-middle sticky left-0 z-10 bg-white dark:bg-[#121212] w-20 sm:w-auto pl-4">
                         <div className="flex sm:hidden items-center justify-center h-full">
                           <div className="text-center">
                             <TeamLogo
@@ -825,7 +901,7 @@ export const AllTimeStats = () => {
                   <thead className="table-header">
                     <tr>
                       <th
-                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none sticky left-0 z-10 bg-ffu-red dark:bg-ffu-red-800"
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none sticky left-0 z-10 bg-ffu-red dark:bg-ffu-red-800 pl-4"
                         onClick={() => handleSeasonSort('team')}
                       >
                         <div className="flex items-center justify-between text-xs">
@@ -937,7 +1013,7 @@ export const AllTimeStats = () => {
                   <tbody>
                     {filteredSeasonHistory.map((season) => (
                       <tr key={`${season.userId}-${season.year}-${season.league}`} className="table-row h-16">
-                        <td className="align-middle sticky left-0 z-10 bg-white dark:bg-[#121212] w-20 sm:w-auto">
+                        <td className="align-middle sticky left-0 z-10 bg-white dark:bg-[#121212] w-20 sm:w-auto pl-4">
                           <div className="flex sm:hidden items-center justify-center h-full">
                             <div className="text-center">
                               <TeamLogo
