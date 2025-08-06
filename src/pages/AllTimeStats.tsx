@@ -226,6 +226,20 @@ export const AllTimeStats = () => {
     }
   };
 
+  const getPlacements = (player: AllTimePlayerStats) => {
+    let text = '';
+    if (player.firstPlaceFinishes > 0) {
+      text += `${player.firstPlaceFinishes}x 1st place\n`;
+    }
+    if (player.secondPlaceFinishes > 0) {
+      text += `${player.secondPlaceFinishes}x 2nd place\n`;
+    }
+    if (player.thirdPlaceFinishes > 0) {
+      text += `${player.thirdPlaceFinishes}x 3rd place`;
+    }
+    return text || 'No placements';
+  }
+
   const allTimeStats = useMemo(() => {
     if (!standings.length) return [];
 
@@ -899,7 +913,7 @@ export const AllTimeStats = () => {
                           {player.careerLowGame.toFixed(2)}
                         </span>
                       </td>
-                      <td className="text-center align-middle">
+                      <td title={getPlacements(player)} className="text-center align-middle">
                         <div className="text-xs space-y-0.5">
                           {player.firstPlaceFinishes > 0 && (
                             <div className="flex items-center justify-center space-x-1">
