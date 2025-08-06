@@ -21,15 +21,14 @@ export const Draft: React.FC = () => {
   const [selectedLeague, setSelectedLeague] = useState<string>('PREMIER');
   const [selectedYear, setSelectedYear] = useState<string>('2024');
   
-  // Era-aware available leagues
+  // Era-aware available leagues and years
   const availableLeagues = useMemo(() => getAvailableLeaguesForYear(selectedYear), [selectedYear]);
   
-  // Reset league selection if current league is not available in selected year
-  useMemo(() => {
-    if (!availableLeagues.includes(selectedLeague as LeagueTier)) {
-      setSelectedLeague(availableLeagues[0]); // Default to first available league
-    }
-  }, [availableLeagues, selectedLeague]);
+  // Filter years to only show those where the selected league exists
+  const availableYears = useMemo(() => {
+    return AVAILABLE_YEARS.filter(year => getAvailableLeaguesForYear(year).includes(selectedLeague as LeagueTier));
+  }, [selectedLeague]);
+  
 
   const loadDraftData = async (league: string, year: string) => {
     try {
@@ -140,7 +139,7 @@ export const Draft: React.FC = () => {
                 onChange={(e) => setSelectedYear(e.target.value)}
                 className="block w-20 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
-                {AVAILABLE_YEARS.map((year) => (
+                {availableYears.map((year) => (
                   <option key={year} value={year}>{year}</option>
                 ))}
               </select>

@@ -30,9 +30,20 @@ export const getRegularSeasonWeeks = (year: string): number[] => {
   return Array.from({ length: regularSeasonLength }, (_, i) => i + 1);
 };
 
-// Get available leagues for year (ESPN era had no Masters league)
+// Get available leagues for year (ESPN era had no Masters league, Masters started in 2022)
 export const getAvailableLeagues = (year: string): LeagueTier[] => {
-  return isEspnEra(year) ? ['PREMIER', 'NATIONAL'] : ['PREMIER', 'MASTERS', 'NATIONAL'];
+  const yearNum = parseInt(year);
+  
+  if (isEspnEra(year)) {
+    // ESPN era: only Premier and National
+    return ['PREMIER', 'NATIONAL'];
+  } else if (yearNum === 2021) {
+    // 2021: Sleeper era but Masters not yet introduced
+    return ['PREMIER', 'NATIONAL'];
+  } else {
+    // 2022+: All three leagues
+    return ['PREMIER', 'MASTERS', 'NATIONAL'];
+  }
 };
 
 // Check if a specific league existed in a given year

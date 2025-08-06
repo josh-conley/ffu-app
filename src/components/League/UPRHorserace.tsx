@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useAllStandings } from '../../hooks/useLeagues';
 import { LoadingSpinner } from '../Common/LoadingSpinner';
 import { ErrorMessage } from '../Common/ErrorMessage';
-import { Play, Pause, RotateCcw } from 'lucide-react';
+import { Play, Pause, RotateCcw, ChevronDown } from 'lucide-react';
 import { getDisplayTeamName } from '../../config/constants';
 import { TeamLogo } from '../Common/TeamLogo';
 import { isRegularSeasonWeek } from '../../utils/era-detection';
@@ -28,6 +28,8 @@ interface TeamUPRProgress {
 interface UPRHorseraceProps {
   league: LeagueTier;
   year: string;
+  onLeagueChange: (league: LeagueTier) => void;
+  onYearChange: (year: string) => void;
 }
 
 const TEAM_COLORS = [
@@ -45,19 +47,30 @@ const TEAM_COLORS = [
   '#F43F5E', // rose-500
 ];
 
-export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
+export const UPRHorserace = ({ league, year, onLeagueChange, onYearChange }: UPRHorseraceProps) => {
+  // Valid years by league - matches the logic from AllTimeStats
+  const validYearsByLeague: Record<string, string[]> = {
+    PREMIER: ['2024', '2023', '2022', '2021', '2020', '2019', '2018'],
+    NATIONAL: ['2024', '2023', '2022', '2021', '2020', '2019', '2018'],
+    MASTERS: ['2024', '2023', '2022'], // Masters started in 2022
+  };
   const { data: allStandings, isLoading: standingsLoading, error: standingsError } = useAllStandings();
   const [teamData, setTeamData] = useState<TeamUPRProgress[]>([]);
-  const [currentWeek, setCurrentWeek] = useState(1);
+  const [currentWeek, setCurrentWeek] = useState(4);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 800);
+  const [hoveredTeam, setHoveredTeam] = useState<string | null>(null);
   const intervalRef = useRef<number | null>(null);
 
+  // Get valid years for current league
+  const validYears = validYearsByLeague[league] || [];
+  
   // Get current league standings to determine teams
   const leagueStandings = allStandings?.find(s => s.league === league && s.year === year);
   const maxWeek = year === '2024' ? 14 : (parseInt(year) >= 2021 ? 14 : 13); // Era-aware week count
+  
 
   useEffect(() => {
     if (leagueStandings) {
@@ -187,7 +200,7 @@ export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
 
   const handlePlay = () => {
     if (currentWeek >= maxWeek) {
-      setCurrentWeek(1);
+      setCurrentWeek(4);
     }
     setIsPlaying(true);
   };
@@ -198,7 +211,7 @@ export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
 
   const handleReset = () => {
     setIsPlaying(false);
-    setCurrentWeek(1);
+    setCurrentWeek(4);
   };
 
   if (standingsLoading || isLoading) {
@@ -229,7 +242,7 @@ export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
 
   // Calculate chart dimensions and scales - make responsive
   const chartWidth = Math.min(800, windowWidth - 100);
-  const chartHeight = 400;
+  const chartHeight = 500; // Fixed height to match rankings
   const padding = { 
     top: 20, 
     right: chartWidth > 600 ? 80 : 40, 
@@ -239,13 +252,13 @@ export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
   const innerWidth = chartWidth - padding.left - padding.right;
   const innerHeight = chartHeight - padding.top - padding.bottom;
 
-  const maxUPR = Math.max(...teamData.flatMap(team => team.weeklyData.slice(0, currentWeek).map(d => d.upr)));
-  const minUPR = Math.min(...teamData.flatMap(team => team.weeklyData.slice(0, currentWeek).map(d => d.upr)));
+  // Fixed UPR scale from 80 to 200
+  const minUPR = 80;
+  const maxUPR = 200;
   const uprRange = maxUPR - minUPR;
-  const uprPadding = uprRange * 0.1;
 
-  const xScale = (week: number) => (week - 1) / (maxWeek - 1) * innerWidth;
-  const yScale = (upr: number) => innerHeight - ((upr - (minUPR - uprPadding)) / (uprRange + 2 * uprPadding)) * innerHeight;
+  const xScale = (week: number) => (week - 4) / (maxWeek - 4) * innerWidth;
+  const yScale = (upr: number) => innerHeight - ((upr - minUPR) / uprRange) * innerHeight;
 
   // Get current week data for rankings
   const currentWeekData = teamData
@@ -257,14 +270,49 @@ export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
 
   return (
     <div className="card">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h3 className="text-xl font-black text-gray-900 dark:text-gray-100 tracking-wide uppercase">
-            UPR Horserace - {league} {year}
-          </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-            Progressive UPR calculation throughout the regular season
-          </p>
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div>
+            <h3 className="text-xl font-black text-gray-900 dark:text-gray-100 tracking-wide">
+              UPR Horserace
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+              Progressive UPR calculation throughout the regular season
+            </p>
+          </div>
+          
+          {/* Filters */}
+          <div className="flex flex-row gap-2 items-center">
+            <div className="relative">
+              <select
+                value={league}
+                onChange={(e) => onLeagueChange(e.target.value as LeagueTier)}
+                className="block w-28 pl-2 pr-6 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+              >
+                <option value="PREMIER">Premier</option>
+                <option value="MASTERS">Masters</option>
+                <option value="NATIONAL">National</option>
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-1 pointer-events-none">
+                <ChevronDown className="h-3 w-3 text-gray-400" />
+              </div>
+            </div>
+
+            <div className="relative">
+              <select
+                value={year}
+                onChange={(e) => onYearChange(e.target.value)}
+                className="block w-20 pl-2 pr-6 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+              >
+                {validYears.map(yearOption => (
+                  <option key={yearOption} value={yearOption}>{yearOption}</option>
+                ))}
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-1 pointer-events-none">
+                <ChevronDown className="h-3 w-3 text-gray-400" />
+              </div>
+            </div>
+          </div>
         </div>
         
         <div className="flex items-center space-x-3">
@@ -272,7 +320,7 @@ export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
             onClick={handleReset}
             className="btn-secondary p-2"
             disabled={isLoading}
-            title="Reset to Week 1"
+            title="Reset to Week 4"
           >
             <RotateCcw className="h-4 w-4" />
           </button>
@@ -292,9 +340,9 @@ export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="flex flex-col lg:flex-row gap-6 items-start">
         {/* Chart */}
-        <div className="lg:col-span-3">
+        <div className="flex-1 lg:flex-[3]">
           <div className="bg-gray-50 dark:bg-gray-800 p-2 sm:p-4 rounded-lg overflow-hidden">
             <svg 
               width={chartWidth} 
@@ -314,7 +362,7 @@ export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
               {/* Y-axis */}
               <g>
                 {Array.from({ length: 6 }, (_, i) => {
-                  const value = minUPR - uprPadding + (uprRange + 2 * uprPadding) * i / 5;
+                  const value = minUPR + uprRange * i / 5;
                   const y = padding.top + yScale(value);
                   return (
                     <g key={i}>
@@ -333,7 +381,7 @@ export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
                         className={`${chartWidth > 600 ? 'text-xs' : 'text-[10px]'} fill-gray-600 dark:fill-gray-300`}
                         fontSize={chartWidth > 600 ? 12 : 10}
                       >
-                        {value.toFixed(1)}
+                        {value.toFixed(0)}
                       </text>
                     </g>
                   );
@@ -342,11 +390,13 @@ export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
 
               {/* X-axis */}
               <g>
-                {Array.from({ length: Math.min(currentWeek, maxWeek) }, (_, i) => {
-                  const week = i + 1;
+                {Array.from({ length: Math.min(currentWeek, maxWeek) - 3 }, (_, i) => {
+                  const week = i + 4;
+                  if (week > currentWeek) return null;
+                  
                   const shouldShow = chartWidth > 600 ? 
-                    (week % 2 === 1 || week === currentWeek) : 
-                    (week % 4 === 1 || week === currentWeek || week === maxWeek);
+                    (week % 2 === 0 || week === currentWeek) : 
+                    (week % 4 === 0 || week === currentWeek || week === maxWeek);
                   
                   if (shouldShow) {
                     const x = padding.left + xScale(week);
@@ -369,7 +419,7 @@ export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
 
               {/* Team lines */}
               {teamData.map(team => {
-                const dataPoints = team.weeklyData.slice(0, currentWeek);
+                const dataPoints = team.weeklyData.slice(0, currentWeek).filter(d => d.week >= 4);
                 if (dataPoints.length < 2) return null;
 
                 const pathData = dataPoints.map((d, i) => {
@@ -378,16 +428,37 @@ export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
                   return `${i === 0 ? 'M' : 'L'} ${x} ${y}`;
                 }).join(' ');
 
+                const isHovered = hoveredTeam === team.userId;
+
                 return (
                   <g key={team.userId}>
-                    {/* Line */}
+                    {/* Invisible wider line for easier hovering */}
+                    <path
+                      d={pathData}
+                      fill="none"
+                      stroke="transparent"
+                      strokeWidth="12"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      style={{ cursor: 'pointer' }}
+                      onMouseEnter={() => setHoveredTeam(team.userId)}
+                      onMouseLeave={() => setHoveredTeam(null)}
+                    />
+                    
+                    {/* Visible line */}
                     <path
                       d={pathData}
                       fill="none"
                       stroke={team.color}
-                      strokeWidth="3"
+                      strokeWidth={isHovered ? "4" : "3"}
                       strokeLinecap="round"
                       strokeLinejoin="round"
+                      style={{ 
+                        cursor: 'pointer',
+                        opacity: hoveredTeam && !isHovered ? 0.3 : 1
+                      }}
+                      onMouseEnter={() => setHoveredTeam(team.userId)}
+                      onMouseLeave={() => setHoveredTeam(null)}
                     />
                     
                     {/* Current point */}
@@ -395,12 +466,59 @@ export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
                       <circle
                         cx={padding.left + xScale(dataPoints[dataPoints.length - 1].week)}
                         cy={padding.top + yScale(dataPoints[dataPoints.length - 1].upr)}
-                        r="5"
+                        r={isHovered ? "6" : "5"}
                         fill={team.color}
                         stroke="white"
                         strokeWidth="2"
+                        style={{ 
+                          cursor: 'pointer',
+                          opacity: hoveredTeam && !isHovered ? 0.3 : 1
+                        }}
+                        onMouseEnter={() => setHoveredTeam(team.userId)}
+                        onMouseLeave={() => setHoveredTeam(null)}
                       />
                     )}
+                    
+                    {/* Hover tooltip */}
+                    {isHovered && dataPoints.length > 0 && (() => {
+                      const pointX = padding.left + xScale(dataPoints[dataPoints.length - 1].week);
+                      const pointY = padding.top + yScale(dataPoints[dataPoints.length - 1].upr);
+                      const teamName = getDisplayTeamName(team.userId, team.userInfo.teamName, year);
+                      const tooltipWidth = teamName.length * 7 + 16;
+                      const tooltipHeight = 30;
+                      
+                      // Check if tooltip would go beyond right edge of chart
+                      const wouldOverflow = pointX + 10 + tooltipWidth > padding.left + innerWidth;
+                      
+                      // Position tooltip to the left if it would overflow
+                      const tooltipX = wouldOverflow ? pointX - 10 - tooltipWidth : pointX + 10;
+                      const textX = wouldOverflow ? pointX - 10 - tooltipWidth + 8 : pointX + 18;
+                      
+                      return (
+                        <g>
+                          <rect
+                            x={tooltipX}
+                            y={pointY - 25}
+                            width={tooltipWidth}
+                            height={tooltipHeight}
+                            fill="rgba(0, 0, 0, 0.8)"
+                            stroke="rgba(255, 255, 255, 0.2)"
+                            strokeWidth="1"
+                            rx="4"
+                            ry="4"
+                          />
+                          <text
+                            x={textX}
+                            y={pointY - 8}
+                            fill="white"
+                            fontSize="12"
+                            fontWeight="medium"
+                          >
+                            {teamName}
+                          </text>
+                        </g>
+                      );
+                    })()}
                   </g>
                 );
               })}
@@ -431,8 +549,8 @@ export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
         </div>
 
         {/* Current Rankings */}
-        <div className="space-y-3">
-          <h4 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100">
+        <div className="flex-1 lg:flex-[1] lg:min-w-80">
+          <h4 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-3">
             Week {currentWeek} Rankings
           </h4>
           
@@ -494,7 +612,7 @@ export const UPRHorserace = ({ league, year }: UPRHorseraceProps) => {
           </label>
           <input
             type="range"
-            min="1"
+            min="4"
             max={maxWeek}
             value={currentWeek}
             onChange={(e) => {

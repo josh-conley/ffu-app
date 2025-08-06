@@ -68,12 +68,6 @@ export const Matchups = () => {
   // Era-aware leagues - filter based on selected year
   const leagues = useMemo(() => getAvailableLeagues(selectedYear), [selectedYear]);
   
-  // Reset league selection if current league is not available in selected year
-  useMemo(() => {
-    if (!leagues.includes(selectedLeague)) {
-      setSelectedLeague(leagues[0]); // Default to first available league
-    }
-  }, [leagues, selectedLeague]);
 
   const getLeagueName = (league: LeagueTier): string => {
     switch (league) {
@@ -82,8 +76,12 @@ export const Matchups = () => {
       case 'NATIONAL': return 'National';
     }
   };
-  // Era-aware years and weeks
-  const years = getAllYears();
+  // Era-aware years - filter based on league availability
+  const allYears = getAllYears();
+  const years = useMemo(() => {
+    // Filter years to only show those where the selected league exists
+    return allYears.filter(year => getAvailableLeagues(year).includes(selectedLeague));
+  }, [allYears, selectedLeague]);
   const weeks = useMemo(() => {
     const totalWeeks = getSeasonLength(selectedYear);
     return Array.from({ length: totalWeeks }, (_, i) => i + 1);

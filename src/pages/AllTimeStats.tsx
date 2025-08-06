@@ -9,7 +9,7 @@ import { getFFUIdBySleeperId } from '../config/constants';
 import type { UserInfo, LeagueTier } from '../types';
 import { Trophy, Medal, Award, TrendingDown, ChevronDown, ChevronUp } from 'lucide-react';
 
-type AllTimeSortKey = 'teamName' | 'totalWins' | 'totalLosses' | 'winPercentage' | 'playoffWins' | 'playoffLosses' | 'totalPointsFor' | 'totalPointsAgainst' | 'pointDifferential' | 'averagePointsPerGame' | 'firstPlaceFinishes' | 'secondPlaceFinishes' | 'thirdPlaceFinishes' | 'lastPlaceFinishes' | 'seasonsPlayed' | 'premierSeasons' | 'mastersSeasons' | 'nationalSeasons' | 'averageSeasonRank' | 'averageUPR';
+type AllTimeSortKey = 'teamName' | 'totalWins' | 'totalLosses' | 'winPercentage' | 'playoffWins' | 'playoffLosses' | 'totalPointsFor' | 'totalPointsAgainst' | 'pointDifferential' | 'averagePointsPerGame' | 'careerHighGame' | 'careerLowGame' | 'firstPlaceFinishes' | 'secondPlaceFinishes' | 'thirdPlaceFinishes' | 'lastPlaceFinishes' | 'seasonsPlayed' | 'premierSeasons' | 'mastersSeasons' | 'nationalSeasons' | 'averageSeasonRank' | 'averageUPR';
 type SeasonHistorySortKey = 'team' | 'year' | 'league' | 'record' | 'pointsFor' | 'avgPPG' | 'pointsAgainst' | 'placement' | 'upr';
 type SortOrder = 'asc' | 'desc';
 
@@ -45,6 +45,8 @@ interface AllTimePlayerStats {
   averageSeasonRank: number;
   pointDifferential: number;
   averagePointsPerGame: number;
+  careerHighGame: number;
+  careerLowGame: number;
   seasonsPlayed: number;
   premierSeasons: number;
   mastersSeasons: number;
@@ -215,6 +217,8 @@ export const AllTimeStats = () => {
             averageSeasonRank: 0,
             pointDifferential: 0,
             averagePointsPerGame: 0,
+            careerHighGame: 0,
+            careerLowGame: Number.MAX_VALUE,
             seasonsPlayed: 0,
             premierSeasons: 0,
             mastersSeasons: 0,
@@ -232,6 +236,14 @@ export const AllTimeStats = () => {
         player.totalPointsFor += standing.pointsFor || 0;
         player.totalPointsAgainst += standing.pointsAgainst || 0;
         player.seasonsPlayed += 1;
+
+        // Track career high and low games
+        if (standing.highGame && standing.highGame > player.careerHighGame) {
+          player.careerHighGame = standing.highGame;
+        }
+        if (standing.lowGame && standing.lowGame < player.careerLowGame) {
+          player.careerLowGame = standing.lowGame;
+        }
 
         // Count league tier appearances
         if (leagueData.league === 'PREMIER') player.premierSeasons++;
@@ -294,6 +306,11 @@ export const AllTimeStats = () => {
 
       // Calculate point differential
       player.pointDifferential = player.totalPointsFor - player.totalPointsAgainst;
+
+      // Handle case where no low game was found
+      if (player.careerLowGame === Number.MAX_VALUE) {
+        player.careerLowGame = 0;
+      }
 
       // Calculate average season rank (same as PlayerStats component)
       if (player.seasonHistory.length > 0) {
@@ -410,38 +427,42 @@ export const AllTimeStats = () => {
           Statistics
         </h1>
 
-        {/* View Toggle Buttons */}
-        <div className="flex border border-gray-300 dark:border-gray-600 rounded overflow-hidden mb-6 w-fit">
-          <button
-            onClick={() => setActiveView('career')}
-            className={`px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-base font-medium transition-colors duration-200 ${
-              activeView === 'career'
-                ? 'bg-ffu-red text-white'
-                : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700'
-            }`}
-          >
-            Career Stats
-          </button>
-          <button
-            onClick={() => setActiveView('season')}
-            className={`px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-base font-medium transition-colors duration-200 border-l border-gray-300 dark:border-gray-600 ${
-              activeView === 'season'
-                ? 'bg-ffu-red text-white'
-                : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700'
-            }`}
-          >
-            Season History
-          </button>
-          <button
-            onClick={() => setActiveView('horserace')}
-            className={`px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-base font-medium transition-colors duration-200 border-l border-gray-300 dark:border-gray-600 ${
-              activeView === 'horserace'
-                ? 'bg-ffu-red text-white'
-                : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700'
-            }`}
-          >
-            UPR Horserace
-          </button>
+        {/* View Toggle Tabs */}
+        <div className="mb-6">
+          <div className="border-b border-gray-200 dark:border-gray-700">
+            <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+              <button
+                onClick={() => setActiveView('career')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
+                  activeView === 'career'
+                    ? 'border-ffu-red text-ffu-red dark:text-ffu-red'
+                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
+                }`}
+              >
+                Career Stats
+              </button>
+              <button
+                onClick={() => setActiveView('season')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
+                  activeView === 'season'
+                    ? 'border-ffu-red text-ffu-red dark:text-ffu-red'
+                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
+                }`}
+              >
+                Season History
+              </button>
+              <button
+                onClick={() => setActiveView('horserace')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
+                  activeView === 'horserace'
+                    ? 'border-ffu-red text-ffu-red dark:text-ffu-red'
+                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
+                }`}
+              >
+                UPR Horserace
+              </button>
+            </nav>
+          </div>
         </div>
       </div>
 
@@ -523,24 +544,24 @@ export const AllTimeStats = () => {
             </div>
 
             <div className="overflow-x-auto table-container">
-              <table className="table md:table-fixed w-full min-w-[1500px]">
+              <table className="table md:table-fixed w-full min-w-[1700px]">
                 <colgroup className="hidden md:table-column-group">
-                  <col className="w-[18%]" />
-                  <col className="w-[6%]" />
-                  <col className="w-[5%]" />
-                  <col className="w-[6%]" />
-                  <col className="w-[7%]" />
-                  <col className="w-[7%]" />
-                  <col className="w-[6%]" />
-                  <col className="w-[6%]" />
+                  <col className="w-[15%]" />
                   <col className="w-[5%]" />
                   <col className="w-[4%]" />
+                  <col className="w-[5%]" />
+                  <col className="w-[5%]" />
+                  <col className="w-[5%]" />
+                  <col className="w-[5%]" />
+                  <col className="w-[5%]" />
+                  <col className="w-[5%]" />
+                  <col className="w-[5%]" />
+                  <col className="w-[6%]" />
                   <col className="w-[4%]" />
                   <col className="w-[4%]" />
+                  <col className="w-[5%]" />
                   <col className="w-[4%]" />
-                  <col className="w-[6%]" />
-                  <col className="w-[6%]" />
-                  <col className="w-[6%]" />
+                  <col className="w-[4%]" />
                 </colgroup>
                 <thead className="table-header">
                   <tr>
@@ -557,7 +578,7 @@ export const AllTimeStats = () => {
                       </div>
                     </th>
                     <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                       onClick={() => handleAllTimeSort('totalWins')}
                     >
                       <div className="flex items-center justify-center text-xs">
@@ -569,7 +590,7 @@ export const AllTimeStats = () => {
                       </div>
                     </th>
                     <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                       onClick={() => handleAllTimeSort('winPercentage')}
                     >
                       <div className="flex items-center justify-center text-xs">
@@ -581,7 +602,7 @@ export const AllTimeStats = () => {
                       </div>
                     </th>
                     <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                       onClick={() => handleAllTimeSort('playoffWins')}
                     >
                       <div className="flex items-center justify-center text-xs">
@@ -593,7 +614,7 @@ export const AllTimeStats = () => {
                       </div>
                     </th>
                     <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                       onClick={() => handleAllTimeSort('totalPointsFor')}
                     >
                       <div className="flex items-center justify-center text-xs">
@@ -605,11 +626,11 @@ export const AllTimeStats = () => {
                       </div>
                     </th>
                     <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                       onClick={() => handleAllTimeSort('totalPointsAgainst')}
                     >
                       <div className="flex items-center justify-center text-xs">
-                        Points Against
+                        Points Agst
                         <div className="flex flex-col ml-1">
                           <ChevronUp className={`h-3 w-3 ${allTimeSortKey === 'totalPointsAgainst' && allTimeSortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
                           <ChevronDown className={`h-3 w-3 -mt-1 ${allTimeSortKey === 'totalPointsAgainst' && allTimeSortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
@@ -617,7 +638,7 @@ export const AllTimeStats = () => {
                       </div>
                     </th>
                     <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                       onClick={() => handleAllTimeSort('pointDifferential')}
                     >
                       <div className="flex items-center justify-center text-xs">
@@ -629,7 +650,7 @@ export const AllTimeStats = () => {
                       </div>
                     </th>
                     <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                       onClick={() => handleAllTimeSort('averagePointsPerGame')}
                     >
                       <div className="flex items-center justify-center text-xs">
@@ -641,11 +662,35 @@ export const AllTimeStats = () => {
                       </div>
                     </th>
                     <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
+                      onClick={() => handleAllTimeSort('careerHighGame')}
+                    >
+                      <div className="flex items-center justify-center text-xs">
+                        High Game
+                        <div className="flex flex-col ml-1">
+                          <ChevronUp className={`h-3 w-3 ${allTimeSortKey === 'careerHighGame' && allTimeSortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          <ChevronDown className={`h-3 w-3 -mt-1 ${allTimeSortKey === 'careerHighGame' && allTimeSortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                        </div>
+                      </div>
+                    </th>
+                    <th
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
+                      onClick={() => handleAllTimeSort('careerLowGame')}
+                    >
+                      <div className="flex items-center justify-center text-xs">
+                        Low Game
+                        <div className="flex flex-col ml-1">
+                          <ChevronUp className={`h-3 w-3 ${allTimeSortKey === 'careerLowGame' && allTimeSortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          <ChevronDown className={`h-3 w-3 -mt-1 ${allTimeSortKey === 'careerLowGame' && allTimeSortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                        </div>
+                      </div>
+                    </th>
+                    <th
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                       onClick={() => handleAllTimeSort('firstPlaceFinishes')}
                     >
                       <div className="flex items-center justify-center text-xs">
-                        1st
+                        Podium
                         <div className="flex flex-col ml-1">
                           <ChevronUp className={`h-3 w-3 ${allTimeSortKey === 'firstPlaceFinishes' && allTimeSortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
                           <ChevronDown className={`h-3 w-3 -mt-1 ${allTimeSortKey === 'firstPlaceFinishes' && allTimeSortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
@@ -653,31 +698,7 @@ export const AllTimeStats = () => {
                       </div>
                     </th>
                     <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
-                      onClick={() => handleAllTimeSort('secondPlaceFinishes')}
-                    >
-                      <div className="flex items-center justify-center text-xs">
-                        2nd
-                        <div className="flex flex-col ml-1">
-                          <ChevronUp className={`h-3 w-3 ${allTimeSortKey === 'secondPlaceFinishes' && allTimeSortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
-                          <ChevronDown className={`h-3 w-3 -mt-1 ${allTimeSortKey === 'secondPlaceFinishes' && allTimeSortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
-                        </div>
-                      </div>
-                    </th>
-                    <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
-                      onClick={() => handleAllTimeSort('thirdPlaceFinishes')}
-                    >
-                      <div className="flex items-center justify-center text-xs">
-                        3rd
-                        <div className="flex flex-col ml-1">
-                          <ChevronUp className={`h-3 w-3 ${allTimeSortKey === 'thirdPlaceFinishes' && allTimeSortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
-                          <ChevronDown className={`h-3 w-3 -mt-1 ${allTimeSortKey === 'thirdPlaceFinishes' && allTimeSortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
-                        </div>
-                      </div>
-                    </th>
-                    <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                       onClick={() => handleAllTimeSort('lastPlaceFinishes')}
                     >
                       <div className="flex items-center justify-center text-xs">
@@ -689,7 +710,7 @@ export const AllTimeStats = () => {
                       </div>
                     </th>
                     <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                       onClick={() => handleAllTimeSort('seasonsPlayed')}
                     >
                       <div className="flex items-center justify-center text-xs">
@@ -701,11 +722,11 @@ export const AllTimeStats = () => {
                       </div>
                     </th>
                     <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                       onClick={() => handleAllTimeSort('premierSeasons')}
                     >
                       <div className="flex items-center justify-center text-xs">
-                        League Tiers
+                        Tiers
                         <div className="flex flex-col ml-1">
                           <ChevronUp className={`h-3 w-3 ${allTimeSortKey === 'premierSeasons' && allTimeSortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
                           <ChevronDown className={`h-3 w-3 -mt-1 ${allTimeSortKey === 'premierSeasons' && allTimeSortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
@@ -713,7 +734,7 @@ export const AllTimeStats = () => {
                       </div>
                     </th>
                     <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                       onClick={() => handleAllTimeSort('averageSeasonRank')}
                     >
                       <div className="flex items-center justify-center text-xs">
@@ -725,7 +746,7 @@ export const AllTimeStats = () => {
                       </div>
                     </th>
                     <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                       onClick={() => handleAllTimeSort('averageUPR')}
                     >
                       <div className="flex items-center justify-center text-xs">
@@ -807,21 +828,35 @@ export const AllTimeStats = () => {
                         </span>
                       </td>
                       <td className="text-center align-middle">
-                        <div className="flex items-center justify-center space-x-1">
-                          {player.firstPlaceFinishes > 0 && <Trophy className="h-3 w-3 text-yellow-600" />}
-                          <span className="text-sm font-medium">{player.firstPlaceFinishes}</span>
-                        </div>
+                        <span className="text-sm font-medium font-mono text-green-600 dark:text-green-400">
+                          {player.careerHighGame.toFixed(2)}
+                        </span>
                       </td>
                       <td className="text-center align-middle">
-                        <div className="flex items-center justify-center space-x-1">
-                          {player.secondPlaceFinishes > 0 && <Medal className="h-3 w-3 text-gray-500" />}
-                          <span className="text-sm font-medium">{player.secondPlaceFinishes}</span>
-                        </div>
+                        <span className="text-sm font-medium font-mono text-red-600 dark:text-red-400">
+                          {player.careerLowGame.toFixed(2)}
+                        </span>
                       </td>
                       <td className="text-center align-middle">
-                        <div className="flex items-center justify-center space-x-1">
-                          {player.thirdPlaceFinishes > 0 && <Award className="h-3 w-3 text-amber-600" />}
-                          <span className="text-sm font-medium">{player.thirdPlaceFinishes}</span>
+                        <div className="text-xs space-y-0.5">
+                          {player.firstPlaceFinishes > 0 && (
+                            <div className="flex items-center justify-center space-x-1">
+                              <Trophy className="h-3 w-3 text-yellow-600" />
+                              <span className="font-medium">{player.firstPlaceFinishes}</span>
+                            </div>
+                          )}
+                          {player.secondPlaceFinishes > 0 && (
+                            <div className="flex items-center justify-center space-x-1">
+                              <Medal className="h-3 w-3 text-gray-500" />
+                              <span className="font-medium">{player.secondPlaceFinishes}</span>
+                            </div>
+                          )}
+                          {player.thirdPlaceFinishes > 0 && (
+                            <div className="flex items-center justify-center space-x-1">
+                              <Award className="h-3 w-3 text-amber-600" />
+                              <span className="font-medium">{player.thirdPlaceFinishes}</span>
+                            </div>
+                          )}
                         </div>
                       </td>
                       <td className="text-center align-middle">
@@ -949,7 +984,7 @@ export const AllTimeStats = () => {
                         </div>
                       </th>
                       <th
-                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                         onClick={() => handleSeasonSort('year')}
                       >
                         <div className="flex items-center justify-center text-xs">
@@ -961,7 +996,7 @@ export const AllTimeStats = () => {
                         </div>
                       </th>
                       <th
-                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                         onClick={() => handleSeasonSort('league')}
                       >
                         <div className="flex items-center justify-center text-xs">
@@ -973,7 +1008,7 @@ export const AllTimeStats = () => {
                         </div>
                       </th>
                       <th
-                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                         onClick={() => handleSeasonSort('record')}
                       >
                         <div className="flex items-center justify-center text-xs">
@@ -985,7 +1020,7 @@ export const AllTimeStats = () => {
                         </div>
                       </th>
                       <th
-                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                         onClick={() => handleSeasonSort('pointsFor')}
                       >
                         <div className="flex items-center justify-center text-xs">
@@ -997,7 +1032,7 @@ export const AllTimeStats = () => {
                         </div>
                       </th>
                       <th
-                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                         onClick={() => handleSeasonSort('avgPPG')}
                       >
                         <div className="flex items-center justify-center text-xs">
@@ -1009,7 +1044,7 @@ export const AllTimeStats = () => {
                         </div>
                       </th>
                       <th
-                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                         onClick={() => handleSeasonSort('pointsAgainst')}
                       >
                         <div className="flex items-center justify-center text-xs">
@@ -1021,7 +1056,7 @@ export const AllTimeStats = () => {
                         </div>
                       </th>
                       <th
-                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                         onClick={() => handleSeasonSort('upr')}
                       >
                         <div className="flex items-center justify-center text-xs">
@@ -1033,7 +1068,7 @@ export const AllTimeStats = () => {
                         </div>
                       </th>
                       <th
-                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none px-1"
                         onClick={() => handleSeasonSort('placement')}
                       >
                         <div className="flex items-center justify-center text-xs">
@@ -1157,55 +1192,12 @@ export const AllTimeStats = () => {
 
       {/* UPR Horserace View */}
       {activeView === 'horserace' && (
-        <div className="space-y-6">
-          <div className="card">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                UPR Horserace Visualization
-              </h2>
-              
-              {/* Filters */}
-              <div className="flex flex-row gap-2 sm:gap-4 items-center">
-                <div className="space-y-1 sm:space-y-2 min-w-0 flex-shrink">
-                  <div className="relative">
-                    <select
-                      value={horseraceLeague}
-                      onChange={(e) => setHorseraceLeague(e.target.value as LeagueTier)}
-                      className="block w-28 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
-                    >
-                      <option value="PREMIER">Premier</option>
-                      <option value="MASTERS">Masters</option>
-                      <option value="NATIONAL">National</option>
-                    </select>
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-1 sm:pr-3 pointer-events-none">
-                      <ChevronDown className="h-3 w-3 sm:h-5 sm:w-5 text-gray-400" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-1 sm:space-y-2 min-w-0 flex-shrink">
-                  <div className="relative">
-                    <select
-                      value={horseraceYear}
-                      onChange={(e) => setHorseraceYear(e.target.value)}
-                      className="block w-20 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
-                    >
-                      {['2024', '2023', '2022', '2021', '2020', '2019', '2018'].map(year => (
-                        <option key={year} value={year}>{year}</option>
-                      ))}
-                    </select>
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-1 sm:pr-3 pointer-events-none">
-                      <ChevronDown className="h-3 w-3 sm:h-5 sm:w-5 text-gray-400" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+        <div style={{ marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }} className="px-4 sm:px-6 lg:px-8">
           <UPRHorserace 
             league={horseraceLeague} 
-            year={horseraceYear} 
+            year={horseraceYear}
+            onLeagueChange={setHorseraceLeague}
+            onYearChange={setHorseraceYear}
           />
         </div>
       )}

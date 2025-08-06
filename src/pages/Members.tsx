@@ -83,6 +83,8 @@ interface PlayerCareerStats {
   averageSeasonRank: number;
   pointDifferential: number;
   averageUPR: number;
+  careerHighGame?: number;
+  careerLowGame?: number;
   seasonHistory: {
     year: string;
     league: LeagueTier;
@@ -149,6 +151,8 @@ export const Members = () => {
             averageSeasonRank: 0,
             pointDifferential: 0,
             averageUPR: 0,
+            careerHighGame: undefined,
+            careerLowGame: undefined,
             seasonHistory: []
           };
         }
@@ -160,6 +164,18 @@ export const Members = () => {
         player.totalLosses += standing.losses;
         player.totalPointsFor += standing.pointsFor || 0;
         player.totalPointsAgainst += standing.pointsAgainst || 0;
+
+        // Track career high and low games
+        if (standing.highGame !== undefined) {
+          if (player.careerHighGame === undefined || standing.highGame > player.careerHighGame) {
+            player.careerHighGame = standing.highGame;
+          }
+        }
+        if (standing.lowGame !== undefined) {
+          if (player.careerLowGame === undefined || standing.lowGame < player.careerLowGame) {
+            player.careerLowGame = standing.lowGame;
+          }
+        }
 
         // Count finishes
         if (standing.rank === 1) player.firstPlaceFinishes++;
@@ -522,7 +538,7 @@ export const Members = () => {
           {/* Achievements */}
           <div className="card">
             <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-3">Achievements</h3>
-            <div className="grid grid-cols-5 gap-3">
+            <div className="grid grid-cols-7 gap-3">
               <div className="text-center">
                 <Trophy className="h-5 w-5 text-yellow-600 mx-auto mb-1" />
                 <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.firstPlaceFinishes}</div>
@@ -547,6 +563,20 @@ export const Members = () => {
                 <Calendar className="h-5 w-5 text-green-600 mx-auto mb-1" />
                 <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.playoffAppearances}</div>
                 <div className="text-xs text-gray-500 dark:text-gray-400">Playoffs</div>
+              </div>
+              <div className="text-center">
+                <TrendingUp className="h-5 w-5 text-green-500 mx-auto mb-1" />
+                <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                  {selectedPlayer.careerHighGame ? selectedPlayer.careerHighGame.toFixed(1) : '—'}
+                </div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">High Game</div>
+              </div>
+              <div className="text-center">
+                <TrendingDown className="h-5 w-5 text-red-500 mx-auto mb-1" />
+                <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                  {selectedPlayer.careerLowGame ? selectedPlayer.careerLowGame.toFixed(1) : '—'}
+                </div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">Low Game</div>
               </div>
             </div>
           </div>

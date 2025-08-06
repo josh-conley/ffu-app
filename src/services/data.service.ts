@@ -126,7 +126,9 @@ export class DataService {
         
         return {
           ...standing,
-          unionPowerRating
+          unionPowerRating,
+          highGame: uprGameData.highGame,
+          lowGame: uprGameData.lowGame
         };
       } else {
         // Fallback: use standing data if no matchup data available
