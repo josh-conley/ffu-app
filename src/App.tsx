@@ -19,11 +19,11 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route index element={<Overview />} />
               <Route path="standings" element={<Standings />} />
-              <Route path="players" element={<Members />} />
+              <Route path="members" element={<Members />} />
               <Route path="matchups" element={<Matchups />} />
               <Route path="drafts" element={<Draft />} />
               <Route path="records" element={<Records />} />
-              <Route path="all-time-stats" element={<AllTimeStats />} />
+              <Route path="stats" element={<AllTimeStats />} />
               <Route path="secret-dak" element={<SecretDak />} />
             </Route>
           </Routes>

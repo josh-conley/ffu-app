@@ -9,11 +9,11 @@ export const Header = () => {
 
   const navItems = [
     { path: '/standings', label: 'Standings', icon: Users },
-    { path: '/players', label: 'Members', icon: BarChart3 },
+    { path: '/members', label: 'Members', icon: BarChart3 },
     { path: '/matchups', label: 'Matchups', icon: Calendar },
     { path: '/drafts', label: 'Drafts', icon: UserPlus },
     { path: '/records', label: 'Records', icon: Award },
-    { path: '/all-time-stats', label: 'Stats', icon: TrendingUp },
+    { path: '/stats', label: 'Stats', icon: TrendingUp },
   ];
 
   return (
