@@ -55,16 +55,14 @@ export const useUrlPlayerState = (): UseUrlPlayerStateReturn => {
     const params = new URLSearchParams();
 
     if (compareMode) {
-      if (playerId || player2Id) {
-        params.set('compare', 'true');
-        if (playerId) {
-          const abbr = getAbbreviationBySleeperId(playerId);
-          if (abbr) params.set('player1', abbr);
-        }
-        if (player2Id) {
-          const abbr = getAbbreviationBySleeperId(player2Id);
-          if (abbr) params.set('player2', abbr);
-        }
+      params.set('compare', 'true');
+      if (playerId) {
+        const abbr = getAbbreviationBySleeperId(playerId);
+        if (abbr) params.set('player1', abbr);
+      }
+      if (player2Id) {
+        const abbr = getAbbreviationBySleeperId(player2Id);
+        if (abbr) params.set('player2', abbr);
       }
     } else {
       if (playerId) {

@@ -95,7 +95,7 @@ interface PlayerCareerStats {
 }
 
 
-export const PlayerStats = () => {
+export const Members = () => {
   const { data: standings, isLoading, error } = useAllStandings();
   const [shareSuccess, setShareSuccess] = useState(false);
   const [sortKey, setSortKey] = useState<SeasonSortKey>('year');
@@ -282,7 +282,7 @@ export const PlayerStats = () => {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">League Members</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Members</h1>
           <p className="mt-2 text-gray-600 dark:text-gray-400">View career statistics for any FFU league member</p>
         </div>
 
@@ -323,7 +323,7 @@ export const PlayerStats = () => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-            {isCompareMode ? 'Compare Members' : 'League Members'}
+            {isCompareMode ? 'Compare Members' : 'Members'}
           </h1>
           <p className="mt-2 text-gray-600 dark:text-gray-400">
             {isCompareMode 
@@ -358,10 +358,10 @@ export const PlayerStats = () => {
             className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
               isCompareMode
                 ? 'bg-ffu-red text-white hover:bg-red-700'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                : 'bg-blue-600 text-white dark:bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-700'
             }`}
           >
-            {isCompareMode ? 'Exit Compare' : 'Compare Mode'}
+            {isCompareMode ? 'View Single Member' : 'Compare Members'}
           </button>
         </div>
       </div>
@@ -981,9 +981,14 @@ export const PlayerStats = () => {
       )}
       
       {isCompareMode && (!selectedPlayer || !selectedPlayer2) && (
-        <div className="text-center py-12">
-          <div className="text-gray-500 dark:text-gray-400">
-            Select two members above to compare their career statistics
+        <div className="card">
+          <div className="text-center py-12">
+            <div className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+              Compare Members
+            </div>
+            <div className="text-gray-600 dark:text-gray-400">
+              Select two members above to compare their career statistics and head-to-head matchups
+            </div>
           </div>
         </div>
       )}

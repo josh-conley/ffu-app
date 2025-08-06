@@ -377,4 +377,44 @@
     background-color: rgb(var(--pos-def-cell-bg-dark) / 0.20);
   }
 
+  /* Sticky column styles for mobile */
+  @media (max-width: 1024px) {
+    .table-row:hover .sticky {
+      background-color: rgb(249 250 251) !important;
+    }
+    
+    .dark .table-row:hover .sticky {
+      background-color: rgb(var(--ffu-gray)) !important;
+    }
+    
+    /* Add shadow to sticky column for better separation */
+    .sticky {
+      box-shadow: 2px 0 4px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dark .sticky {
+      box-shadow: 2px 0 4px -1px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  /* Mobile-specific narrow sticky column */
+  @media (max-width: 640px) {
+    .sticky {
+      min-width: 80px !important;
+      max-width: 80px !important;
+      padding-left: 0.125rem !important;
+      padding-right: 0.125rem !important;
+      padding-top: 0.25rem !important;
+      padding-bottom: 0.25rem !important;
+    }
+    
+    /* Reduce all table cell padding on mobile */
+    .table-row td {
+      padding-left: 0.25rem !important;
+      padding-right: 0.25rem !important;
+      padding-top: 0.25rem !important;
+      padding-bottom: 0.25rem !important;
+    }
+  }
+
 }

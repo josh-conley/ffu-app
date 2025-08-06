@@ -68,12 +68,10 @@ export const Standings = () => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">League Standings</h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-300">View current standings across all FFU leagues</p>
         </div>
         
         <div className="mt-4 sm:mt-0">
           <div className="space-y-2">
-            <label className="block text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Season</label>
             <div className="relative">
               <select
                 value={currentYear}

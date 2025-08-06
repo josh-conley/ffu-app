@@ -107,7 +107,7 @@ export const Draft: React.FC = () => {
   }, [selectedLeague, selectedYear]);
 
   return (
-    <div className="max-w-5xl mx-auto px-4">
+    <div className="max-w-5xl mx-auto">
       {/* Header with Filters */}
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div className="mb-3 sm:mb-0">
@@ -115,14 +115,13 @@ export const Draft: React.FC = () => {
           <p className="mt-1 sm:mt-2 text-xs sm:text-base text-gray-600 dark:text-gray-300">View past draft results and selections</p>
         </div>
         
-        <div className="flex flex-row gap-2 sm:gap-4 items-end">
+        <div className="flex flex-row gap-2 sm:gap-4 justify-between items-center w-full sm:w-auto">
           <div className="space-y-1 sm:space-y-2 min-w-0 flex-shrink">
-            <label className="block text-xs sm:text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">League</label>
             <div className="relative">
               <select
                 value={selectedLeague}
                 onChange={(e) => setSelectedLeague(e.target.value)}
-                className="block w-20 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                className="block w-24 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
                 {availableLeagues.map((league) => (
                   <option key={league} value={league}>{LEAGUE_NAMES[league]}</option>
@@ -135,12 +134,11 @@ export const Draft: React.FC = () => {
           </div>
 
           <div className="space-y-1 sm:space-y-2 min-w-0 flex-shrink">
-            <label className="block text-xs sm:text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Year</label>
             <div className="relative">
               <select
                 value={selectedYear}
                 onChange={(e) => setSelectedYear(e.target.value)}
-                className="block w-16 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                className="block w-20 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
                 {AVAILABLE_YEARS.map((year) => (
                   <option key={year} value={year}>{year}</option>

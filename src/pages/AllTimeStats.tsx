@@ -8,7 +8,7 @@ import { getFFUIdBySleeperId } from '../config/constants';
 import type { UserInfo, LeagueTier } from '../types';
 import { Trophy, Medal, Award, TrendingDown, ChevronDown, ChevronUp } from 'lucide-react';
 
-type AllTimeSortKey = 'teamName' | 'totalWins' | 'totalLosses' | 'winPercentage' | 'playoffWins' | 'playoffLosses' | 'totalPointsFor' | 'totalPointsAgainst' | 'pointDifferential' | 'averagePointsPerGame' | 'firstPlaceFinishes' | 'secondPlaceFinishes' | 'thirdPlaceFinishes' | 'lastPlaceFinishes' | 'seasonsPlayed' | 'averageSeasonRank';
+type AllTimeSortKey = 'teamName' | 'totalWins' | 'totalLosses' | 'winPercentage' | 'playoffWins' | 'playoffLosses' | 'totalPointsFor' | 'totalPointsAgainst' | 'pointDifferential' | 'averagePointsPerGame' | 'firstPlaceFinishes' | 'secondPlaceFinishes' | 'thirdPlaceFinishes' | 'lastPlaceFinishes' | 'seasonsPlayed' | 'premierSeasons' | 'mastersSeasons' | 'nationalSeasons' | 'averageSeasonRank';
 type SeasonHistorySortKey = 'team' | 'year' | 'league' | 'record' | 'pointsFor' | 'avgPPG' | 'pointsAgainst' | 'placement';
 type SortOrder = 'asc' | 'desc';
 
@@ -45,6 +45,9 @@ interface AllTimePlayerStats {
   pointDifferential: number;
   averagePointsPerGame: number;
   seasonsPlayed: number;
+  premierSeasons: number;
+  mastersSeasons: number;
+  nationalSeasons: number;
   seasonHistory: {
     year: string;
     league: string;
@@ -191,6 +194,9 @@ export const AllTimeStats = () => {
             pointDifferential: 0,
             averagePointsPerGame: 0,
             seasonsPlayed: 0,
+            premierSeasons: 0,
+            mastersSeasons: 0,
+            nationalSeasons: 0,
             seasonHistory: []
           };
         }
@@ -203,6 +209,11 @@ export const AllTimeStats = () => {
         player.totalPointsFor += standing.pointsFor || 0;
         player.totalPointsAgainst += standing.pointsAgainst || 0;
         player.seasonsPlayed += 1;
+
+        // Count league tier appearances
+        if (leagueData.league === 'PREMIER') player.premierSeasons++;
+        else if (leagueData.league === 'MASTERS') player.mastersSeasons++;
+        else if (leagueData.league === 'NATIONAL') player.nationalSeasons++;
 
         // Count finishes
         if (standing.rank === 1) player.firstPlaceFinishes++;
@@ -417,7 +428,7 @@ export const AllTimeStats = () => {
                 <thead className="table-header">
                   <tr>
                     <th
-                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none sticky left-0 z-10 bg-ffu-red dark:bg-ffu-red-800"
                       onClick={() => handleAllTimeSort('teamName')}
                     >
                       <div className="flex items-center justify-between text-xs">
@@ -574,6 +585,18 @@ export const AllTimeStats = () => {
                     </th>
                     <th
                       className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                      onClick={() => handleAllTimeSort('premierSeasons')}
+                    >
+                      <div className="flex items-center justify-center text-xs">
+                        League Tiers
+                        <div className="flex flex-col ml-1">
+                          <ChevronUp className={`h-3 w-3 ${allTimeSortKey === 'premierSeasons' && allTimeSortOrder === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          <ChevronDown className={`h-3 w-3 -mt-1 ${allTimeSortKey === 'premierSeasons' && allTimeSortOrder === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                        </div>
+                      </div>
+                    </th>
+                    <th
+                      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
                       onClick={() => handleAllTimeSort('averageSeasonRank')}
                     >
                       <div className="flex items-center justify-center text-xs">
@@ -589,8 +612,20 @@ export const AllTimeStats = () => {
                 <tbody>
                   {sortedAllTimeStats.map((player) => (
                     <tr key={player.ffuUserId} className="table-row h-16">
-                      <td className="align-middle">
-                        <div className="flex items-center space-x-2 h-full">
+                      <td className="align-middle sticky left-0 z-10 bg-white dark:bg-[#121212] w-20 sm:w-auto">
+                        <div className="flex sm:hidden items-center justify-center h-full">
+                          <div className="text-center">
+                            <TeamLogo
+                              teamName={player.userInfo.teamName}
+                              size="sm"
+                              className="mx-auto mb-1 !w-8 !h-8"
+                            />
+                            <div className="text-xs text-gray-900 dark:text-gray-100 font-mono uppercase font-medium">
+                              {player.userInfo.abbreviation}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="hidden sm:flex items-center space-x-2 h-full">
                           <TeamLogo
                             teamName={player.userInfo.teamName}
                             size="sm"
@@ -659,6 +694,28 @@ export const AllTimeStats = () => {
                         <span className="text-sm font-medium">{player.seasonsPlayed}</span>
                       </td>
                       <td className="text-center align-middle">
+                        <div className="text-xs space-y-0.5">
+                          {player.premierSeasons > 0 && (
+                            <div className="flex items-center justify-center space-x-1">
+                              <span className="premier-colors px-1 py-0.5 rounded text-xs font-bold">P</span>
+                              <span className="font-medium">{player.premierSeasons}</span>
+                            </div>
+                          )}
+                          {player.mastersSeasons > 0 && (
+                            <div className="flex items-center justify-center space-x-1">
+                              <span className="masters-colors px-1 py-0.5 rounded text-xs font-bold">M</span>
+                              <span className="font-medium">{player.mastersSeasons}</span>
+                            </div>
+                          )}
+                          {player.nationalSeasons > 0 && (
+                            <div className="flex items-center justify-center space-x-1">
+                              <span className="national-colors px-1 py-0.5 rounded text-xs font-bold">N</span>
+                              <span className="font-medium">{player.nationalSeasons}</span>
+                            </div>
+                          )}
+                        </div>
+                      </td>
+                      <td className="text-center align-middle">
                         <span className="text-sm font-medium">#{player.averageSeasonRank.toFixed(1)}</span>
                       </td>
                     </tr>
@@ -683,39 +740,37 @@ export const AllTimeStats = () => {
             </div>
             <>
               {/* Filters */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div className="space-y-2">
-                  <label className="block text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">League</label>
+              <div className="flex flex-row gap-2 sm:gap-4 items-center w-full mb-6">
+                <div className="space-y-1 sm:space-y-2 min-w-0 flex-shrink">
                   <div className="relative">
                     <select
                       value={selectedLeague}
                       onChange={(e) => setSelectedLeague(e.target.value as LeagueTier | 'ALL')}
-                      className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                      className="block w-28 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-[#121212] border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
                     >
                       {leagues.map(league => (
                         <option key={league} value={league}>{getLeagueName(league)}</option>
                       ))}
                     </select>
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                      <ChevronDown className="h-5 w-5 text-gray-400" />
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-1 sm:pr-3 pointer-events-none">
+                      <ChevronDown className="h-3 w-3 sm:h-5 sm:w-5 text-gray-400" />
                     </div>
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="block text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Year</label>
+                <div className="space-y-1 sm:space-y-2 min-w-0 flex-shrink">
                   <div className="relative">
                     <select
                       value={selectedYear}
                       onChange={(e) => setSelectedYear(e.target.value)}
-                      className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                      className="block w-20 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-[#121212] border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
                     >
                       {filteredYears.map(year => (
                         <option key={year} value={year}>{year === 'ALL' ? 'All Years' : year}</option>
                       ))}
                     </select>
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                      <ChevronDown className="h-5 w-5 text-gray-400" />
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-1 sm:pr-3 pointer-events-none">
+                      <ChevronDown className="h-3 w-3 sm:h-5 sm:w-5 text-gray-400" />
                     </div>
                   </div>
                 </div>
@@ -736,7 +791,7 @@ export const AllTimeStats = () => {
                   <thead className="table-header">
                     <tr>
                       <th
-                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
+                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none sticky left-0 z-10 bg-ffu-red dark:bg-ffu-red-800"
                         onClick={() => handleSeasonSort('team')}
                       >
                         <div className="flex items-center justify-between text-xs">
@@ -836,8 +891,20 @@ export const AllTimeStats = () => {
                   <tbody>
                     {filteredSeasonHistory.map((season) => (
                       <tr key={`${season.userId}-${season.year}-${season.league}`} className="table-row h-16">
-                        <td className="align-middle">
-                          <div className="flex items-center space-x-2 h-full">
+                        <td className="align-middle sticky left-0 z-10 bg-white dark:bg-[#121212] w-20 sm:w-auto">
+                          <div className="flex sm:hidden items-center justify-center h-full">
+                            <div className="text-center">
+                              <TeamLogo
+                                teamName={season.userInfo.teamName}
+                                size="sm"
+                                className="mx-auto mb-1 !w-8 !h-8"
+                              />
+                              <div className="text-xs text-gray-900 dark:text-gray-100 font-mono uppercase font-medium">
+                                {season.userInfo.abbreviation}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="hidden sm:flex items-center space-x-2 h-full">
                             <TeamLogo
                               teamName={season.userInfo.teamName}
                               size="sm"
