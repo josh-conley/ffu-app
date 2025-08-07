@@ -3,7 +3,7 @@ import { LeagueBadge } from './LeagueBadge';
 import { TeamLogo } from '../Common/TeamLogo';
 import { Trophy, Medal, Award } from 'lucide-react';
 import { getLeagueName } from '../../constants/leagues';
-import { getDisplayTeamName } from '../../config/constants';
+import { getDisplayTeamName, isActiveYear } from '../../config/constants';
 
 
 interface StandingsTableProps {
@@ -13,6 +13,7 @@ interface StandingsTableProps {
 }
 
 export const StandingsTable = ({ standings, league, year }: StandingsTableProps) => {
+  const isActiveSeason = isActiveYear(year);
 
   const getLeagueColors = (leagueType: string) => {
     const colorMap = {
@@ -122,10 +123,17 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
               <tr key={standing.userId} className={getRowClasses(standing.rank)}>
                 <td className="text-center">
                   <div className="flex items-center justify-center space-x-2">
-                    {getRankIcon(standing.rank)}
-                    <span className={`font-black text-lg ${standing.rank === 1 ? leagueColors.text : 'text-gray-900 dark:text-gray-100'}`}>
-                      #{standing.rank}
-                    </span>
+                    {!isActiveSeason && getRankIcon(standing.rank)}
+                    {!isActiveSeason && (
+                      <span className={`font-black text-lg ${standing.rank === 1 ? leagueColors.text : 'text-gray-900 dark:text-gray-100'}`}>
+                        #{standing.rank}
+                      </span>
+                    )}
+                    {isActiveSeason && (
+                      <span className="text-sm text-gray-500 dark:text-gray-400 italic">
+                        TBD
+                      </span>
+                    )}
                   </div>
                 </td>
                 <td>

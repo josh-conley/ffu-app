@@ -206,6 +206,151 @@
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0% 50%);
   }
 
+  /* Player Dashboard Card Styles */
+  .player-dashboard-card-wrap {
+    filter: drop-shadow(16px 16px 0px black);
+    padding-right: 8px;
+  }
+
+  .player-dashboard-card {
+    @apply angular-cut bg-white dark:bg-gray-800 overflow-hidden transition-colors relative;
+  }
+
+  .dashboard-header {
+    @apply bg-ffu-red dark:bg-ffu-red-800 text-white p-6;
+  }
+
+  .dashboard-stats-primary {
+    @apply grid grid-cols-3 gap-4 text-center;
+  }
+
+  .dashboard-stat-large {
+    @apply flex flex-col items-center;
+  }
+
+  .dashboard-stat-number {
+    @apply text-2xl md:text-3xl font-bold text-white;
+  }
+
+  .dashboard-stat-label {
+    @apply text-sm text-white/80 uppercase tracking-wide font-medium;
+  }
+
+  .dashboard-metrics {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4 p-6 bg-gray-50 dark:bg-gray-700/50;
+  }
+
+  .dashboard-metric-item {
+    @apply flex items-center space-x-3 p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm;
+  }
+
+  .dashboard-achievements {
+    @apply p-6 space-y-4;
+  }
+
+  .dashboard-achievement-grid {
+    @apply grid grid-cols-2 md:grid-cols-4 gap-3;
+  }
+
+  .dashboard-achievement-item {
+    @apply flex items-center space-x-2 p-2 bg-gray-50 dark:bg-gray-700 rounded-lg;
+  }
+
+  .team-aka {
+    @apply text-sm text-white/70 italic;
+  }
+
+  /* Compare Mode Card Styles */
+  .compare-card-wrap {
+    filter: drop-shadow(12px 12px 0px black);
+    padding-right: 6px;
+  }
+
+  .compare-card {
+    @apply angular-cut-small bg-white dark:bg-gray-800 overflow-hidden transition-colors relative;
+  }
+
+  .compare-header {
+    @apply bg-ffu-red dark:bg-ffu-red-800 text-white p-4;
+  }
+
+  .compare-vs-card-wrap {
+    filter: drop-shadow(16px 16px 0px black);
+    padding-right: 8px;
+  }
+
+  .compare-vs-card {
+    @apply angular-cut bg-white dark:bg-gray-800 overflow-hidden transition-colors relative;
+  }
+
+  .compare-vs-header {
+    @apply bg-ffu-red dark:bg-ffu-red-800 text-white p-6;
+  }
+
+  .progress-bar {
+    @apply w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2;
+  }
+
+  .progress-fill {
+    @apply h-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-full transition-all duration-300;
+  }
+
+  /* Responsive adjustments for dashboard */
+  @media (max-width: 640px) {
+    .player-dashboard-card {
+      @apply angular-cut-medium;
+    }
+
+    .player-dashboard-card-wrap {
+      filter: drop-shadow(8px 8px 0px black);
+      padding-right: 4px;
+    }
+
+    .compare-card {
+      @apply angular-cut-medium;
+    }
+
+    .compare-card-wrap {
+      filter: drop-shadow(6px 6px 0px black);
+      padding-right: 3px;
+    }
+
+    .compare-vs-card {
+      @apply angular-cut-medium;
+    }
+
+    .compare-vs-card-wrap {
+      filter: drop-shadow(8px 8px 0px black);
+      padding-right: 4px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-header {
+      @apply p-4;
+    }
+
+    .dashboard-stats-primary {
+      @apply grid-cols-1 gap-2;
+    }
+
+    .dashboard-stat-number {
+      @apply text-xl;
+    }
+
+    .dashboard-metrics {
+      @apply grid-cols-1 gap-3 p-4;
+    }
+
+    .dashboard-achievements {
+      @apply p-4;
+    }
+
+    .dashboard-achievement-grid {
+      @apply grid-cols-1;
+    }
+  }
+
   @media (max-width: 640px) {
     .welcome-card {
       @apply angular-cut-medium bg-ffu-red shadow-lg p-6 sm:p-8 lg:p-12 text-white text-center shadow-lg;
