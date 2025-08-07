@@ -1,4 +1,3 @@
-import { TeamLogo } from '../Common/TeamLogo';
 import { ChevronDown } from 'lucide-react';
 
 interface PlayerOption {
@@ -36,8 +35,6 @@ export function PlayerSelector({
   placeholder = "Choose a member...",
   label = "Select Member"
 }: PlayerSelectorProps) {
-  const selectedPlayer = players.find(p => p.sleeperId === selectedPlayerId);
-  const selectedPlayer2 = players.find(p => p.sleeperId === selectedPlayer2Id);
 
   const handlePlayer1Change = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onSelectPlayer(e.target.value);

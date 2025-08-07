@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { TeamLogo } from '../Common/TeamLogo';
 import { LeagueBadge } from '../League/LeagueBadge';
-import { Trophy, Medal, Award, TrendingDown, Target, Zap, BarChart3, Calendar, Users } from 'lucide-react';
+import { Trophy, Medal, Award, TrendingDown, Calendar, Users } from 'lucide-react';
 import type { UserInfo, HeadToHeadStats } from '../../types';
 
 interface PlayerStats {
