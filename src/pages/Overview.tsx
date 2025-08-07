@@ -47,7 +47,7 @@ export const Overview = () => {
                 <div className="font-semibold text-sm sm:text-base">Standings</div>
               </Link>
               <Link
-                to="/players"
+                to="/members"
                 className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
               >
                 <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
