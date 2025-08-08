@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 // import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { DraftBoard } from '../components/Draft/DraftBoard';
@@ -14,13 +15,22 @@ import { historicalTeamResolver } from '../utils/historical-team-resolver';
 type ViewMode = 'board' | 'list';
 
 export const Draft: React.FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [draftData, setDraftData] = useState<DraftData | null>(null);
   const [userMap, setUserMap] = useState<Record<string, UserInfo>>({});
-  const [viewMode, setViewMode] = useState<ViewMode>('board');
   const [isLoading, setIsLoading] = useState(false);
   const [, setError] = useState<string | undefined>();
-  const [selectedLeague, setSelectedLeague] = useState<string>('PREMIER');
-  const [selectedYear, setSelectedYear] = useState<string>('2024');
+  
+  // Get initial values from URL params
+  const [selectedLeague, setSelectedLeague] = useState<string>(
+    searchParams.get('league') || 'PREMIER'
+  );
+  const [selectedYear, setSelectedYear] = useState<string>(
+    searchParams.get('year') || '2024'
+  );
+  const [viewMode, setViewMode] = useState<ViewMode>(
+    (searchParams.get('view') as ViewMode) || 'board'
+  );
   
   // Era-aware available leagues and years
   const availableLeagues = useMemo(() => getAvailableLeaguesForYear(selectedYear), [selectedYear]);
@@ -29,6 +39,32 @@ export const Draft: React.FC = () => {
   const availableYears = useMemo(() => {
     return AVAILABLE_YEARS.filter(year => getAvailableLeaguesForYear(year).includes(selectedLeague as LeagueTier));
   }, [selectedLeague]);
+
+  // Update URL when filters change
+  const updateUrl = (updates: { league?: string; year?: string; view?: ViewMode }) => {
+    const newParams = new URLSearchParams(searchParams);
+    
+    if (updates.league !== undefined) newParams.set('league', updates.league);
+    if (updates.year !== undefined) newParams.set('year', updates.year);
+    if (updates.view !== undefined) newParams.set('view', updates.view);
+    
+    setSearchParams(newParams);
+  };
+
+  const handleLeagueChange = (league: string) => {
+    setSelectedLeague(league);
+    updateUrl({ league });
+  };
+
+  const handleYearChange = (year: string) => {
+    setSelectedYear(year);
+    updateUrl({ year });
+  };
+
+  const handleViewModeChange = (view: ViewMode) => {
+    setViewMode(view);
+    updateUrl({ view });
+  };
   
 
   const loadDraftData = async (league: string, year: string) => {
@@ -131,6 +167,23 @@ export const Draft: React.FC = () => {
     }
   };
 
+  // Handle URL parameter changes (back/forward navigation)
+  useEffect(() => {
+    const urlLeague = searchParams.get('league');
+    const urlYear = searchParams.get('year'); 
+    const urlView = searchParams.get('view') as ViewMode;
+
+    if (urlLeague && urlLeague !== selectedLeague) {
+      setSelectedLeague(urlLeague);
+    }
+    if (urlYear && urlYear !== selectedYear) {
+      setSelectedYear(urlYear);
+    }
+    if (urlView && ['board', 'list'].includes(urlView) && urlView !== viewMode) {
+      setViewMode(urlView);
+    }
+  }, [searchParams]);
+
   useEffect(() => {
     loadDraftData(selectedLeague, selectedYear);
   }, [selectedLeague, selectedYear]);
@@ -149,7 +202,7 @@ export const Draft: React.FC = () => {
             <div className="relative">
               <select
                 value={selectedLeague}
-                onChange={(e) => setSelectedLeague(e.target.value)}
+                onChange={(e) => handleLeagueChange(e.target.value)}
                 className="block w-24 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
                 {availableLeagues.map((league) => (
@@ -166,7 +219,7 @@ export const Draft: React.FC = () => {
             <div className="relative">
               <select
                 value={selectedYear}
-                onChange={(e) => setSelectedYear(e.target.value)}
+                onChange={(e) => handleYearChange(e.target.value)}
                 className="block w-20 sm:w-full pl-2 sm:pl-4 pr-6 sm:pr-12 py-2 sm:py-3 text-sm sm:text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
                 {availableYears.map((year) => (
@@ -182,7 +235,7 @@ export const Draft: React.FC = () => {
           {draftData && !isLoading && (
             <div className="flex border border-gray-300 dark:border-gray-600 rounded overflow-hidden flex-shrink-0">
               <button
-                onClick={() => setViewMode('board')}
+                onClick={() => handleViewModeChange('board')}
                 className={`px-4 sm:px-4 py-2 sm:py-3 text-sm sm:text-base font-medium transition-colors duration-200 ${
                   viewMode === 'board'
                     ? 'bg-ffu-red text-white'
@@ -193,7 +246,7 @@ export const Draft: React.FC = () => {
                 <span className="sm:hidden">Board</span>
               </button>
               <button
-                onClick={() => setViewMode('list')}
+                onClick={() => handleViewModeChange('list')}
                 className={`px-4 sm:px-4 py-2 sm:py-3 text-sm sm:text-base font-medium transition-colors duration-200 border-l border-gray-300 dark:border-gray-600 ${
                   viewMode === 'list'
                     ? 'bg-ffu-red text-white'
