@@ -385,20 +385,18 @@ export const Members = () => {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-start justify-between">
-        <div>
-          {isCompareMode ? (
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Compare Members</h1>
-          ) : (
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Members</h1>
-          )}
-          <p className="mt-2 text-gray-600 dark:text-gray-400">View career statistics for any FFU league member</p>
-        </div>
+      <div>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+          {isCompareMode ? 'Compare Members' : 'Members'}
+        </h1>
+        <p className="mt-2 text-gray-600 dark:text-gray-400">View career statistics for any FFU league member</p>
+      </div>
 
-        <div className="flex flex-wrap gap-2">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
           <button
             onClick={() => setCompareMode(!isCompareMode)}
-            className={`px-4 py-2 rounded border transition-colors ${
+            className={`px-3 py-1.5 text-sm rounded border transition-colors ${
               isCompareMode
                 ? 'bg-ffu-red text-white border-ffu-red hover:bg-red-700'
                 : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600'
@@ -406,25 +404,25 @@ export const Members = () => {
           >
             {isCompareMode ? 'Single View' : 'Compare'}
           </button>
-          {hasSelectionToShare && (
-            <button
-              onClick={handleShare}
-              className="px-4 py-2 rounded border bg-blue-600 text-white border-blue-600 hover:bg-blue-700 flex items-center space-x-2"
-            >
-              {shareSuccess ? (
-                <>
-                  <Check className="h-4 w-4" />
-                  <span>Copied!</span>
-                </>
-              ) : (
-                <>
-                  <Share2 className="h-4 w-4" />
-                  <span>Share</span>
-                </>
-              )}
-            </button>
-          )}
         </div>
+        {hasSelectionToShare && (
+          <button
+            onClick={handleShare}
+            className="px-3 py-1.5 text-sm rounded border bg-blue-600 text-white border-blue-600 hover:bg-blue-700 flex items-center space-x-1.5"
+          >
+            {shareSuccess ? (
+              <>
+                <Check className="h-3.5 w-3.5" />
+                <span>Copied!</span>
+              </>
+            ) : (
+              <>
+                <Share2 className="h-3.5 w-3.5" />
+                <span>Share</span>
+              </>
+            )}
+          </button>
+        )}
       </div>
 
       {/* Player Selection */}
@@ -474,17 +472,19 @@ export const Members = () => {
                 className="w-16 h-16"
               />
               <div className="flex-1">
-                <div className="flex items-baseline space-x-3">
+                <div>
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                     {selectedPlayer.userInfo.teamName}
                   </h2>
-                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                </div>
+                <div className="flex items-center space-x-2">
+                  <p className="text-gray-600 dark:text-gray-400">
+                    {selectedPlayer.userInfo.abbreviation}
+                  </p>
+                  <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-300 whitespace-nowrap">
                     {selectedPlayer.seasonHistory.length} seasons
                   </span>
                 </div>
-                <p className="text-gray-600 dark:text-gray-400">
-                  {selectedPlayer.userInfo.abbreviation}
-                </p>
                 {selectedPlayer.pastTeamNames.length > 0 && (
                   <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                     Previously: {selectedPlayer.pastTeamNames.join(', ')}
@@ -493,107 +493,108 @@ export const Members = () => {
               </div>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               {/* Primary Stats */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-gray-50 dark:bg-gray-700">
-                  <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="text-center p-3 bg-gray-50 dark:bg-gray-700">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                     {selectedPlayer.totalWins}-{selectedPlayer.totalLosses}
                   </div>
-                  <div className="text-sm font-medium text-gray-600 dark:text-gray-400">Career Record</div>
+                  <div className="text-xs font-medium text-gray-600 dark:text-gray-400">Record</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 dark:bg-gray-700">
-                  <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                <div className="text-center p-3 bg-gray-50 dark:bg-gray-700">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                     {selectedPlayer.winPercentage.toFixed(1)}%
                   </div>
-                  <div className="text-sm font-medium text-gray-600 dark:text-gray-400">Win Percentage</div>
+                  <div className="text-xs font-medium text-gray-600 dark:text-gray-400">Win %</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 dark:bg-gray-700">
-                  <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                <div className="text-center p-3 bg-gray-50 dark:bg-gray-700">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                     {((selectedPlayer.totalWins + selectedPlayer.totalLosses) > 0 ?
                       (selectedPlayer.totalPointsFor / (selectedPlayer.totalWins + selectedPlayer.totalLosses)).toFixed(1) :
                       '0.0')}
                   </div>
-                  <div className="text-sm font-medium text-gray-600 dark:text-gray-400">Points Per Game</div>
+                  <div className="text-xs font-medium text-gray-600 dark:text-gray-400">PPG</div>
                 </div>
-              </div>
-
-              {/* Performance Stats */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div className="text-center p-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600">
-                  <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                    {selectedPlayer.playoffWins}-{selectedPlayer.playoffLosses}
-                  </div>
-                  <div className="text-xs font-medium text-gray-600 dark:text-gray-400">Playoff Record</div>
-                </div>
-                <div className="text-center p-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600">
-                  <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                <div className="text-center p-3 bg-gray-50 dark:bg-gray-700">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                     {selectedPlayer.averageUPR ? selectedPlayer.averageUPR.toFixed(1) : '—'}
                   </div>
-                  <div className="text-xs font-medium text-gray-600 dark:text-gray-400">Average UPR</div>
+                  <div className="text-xs font-medium text-gray-600 dark:text-gray-400">Avg UPR</div>
                 </div>
               </div>
 
-              {/* Achievements */}
-              <div className="bg-gray-50 dark:bg-gray-700 p-4">
-                <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide mb-3 text-center">Career Finishes</h3>
-                <div className="flex justify-center items-end space-x-6">
+              {/* All Other Stats */}
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 p-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-3">
                   <div className="text-center">
-                    <Trophy className="h-8 w-8 text-yellow-600 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.firstPlaceFinishes}</div>
-                    <div className="text-xs font-medium text-gray-600 dark:text-gray-400">1st Place</div>
-                  </div>
-                  <div className="text-center">
-                    <Medal className="h-8 w-8 text-gray-500 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.secondPlaceFinishes}</div>
-                    <div className="text-xs font-medium text-gray-600 dark:text-gray-400">2nd Place</div>
-                  </div>
-                  <div className="text-center">
-                    <Award className="h-8 w-8 text-amber-600 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.thirdPlaceFinishes}</div>
-                    <div className="text-xs font-medium text-gray-600 dark:text-gray-400">3rd Place</div>
-                  </div>
-                  <div className="text-center">
-                    <TrendingDown className="h-8 w-8 text-red-600 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.lastPlaceFinishes}</div>
-                    <div className="text-xs font-medium text-gray-600 dark:text-gray-400">Last Place</div>
-                  </div>
-                  <div className="text-center border-l border-gray-300 dark:border-gray-600 pl-6 ml-6">
-                    <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                      #{selectedPlayer.averageSeasonRank.toFixed(1)}
+                    <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                      {selectedPlayer.playoffWins}-{selectedPlayer.playoffLosses}
                     </div>
-                    <div className="text-xs font-medium text-gray-600 dark:text-gray-400">Average Rank</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">Playoff</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.totalPointsFor.toFixed(0)}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">Points For</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.totalPointsAgainst.toFixed(0)}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">Points Against</div>
+                  </div>
+                  <div className="text-center">
+                    <div className={`text-lg font-bold ${selectedPlayer.pointDifferential >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                      {selectedPlayer.pointDifferential > 0 ? '+' : ''}{selectedPlayer.pointDifferential.toFixed(1)}
+                    </div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">Diff</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-green-600">{selectedPlayer.careerHighGame ? selectedPlayer.careerHighGame.toFixed(1) : '—'}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">High</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-red-600">{selectedPlayer.careerLowGame ? selectedPlayer.careerLowGame.toFixed(1) : '—'}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">Low</div>
                   </div>
                 </div>
-              </div>
-
-              {/* Additional Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
-                <div className="text-center p-2">
-                  <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">{selectedPlayer.totalPointsFor.toFixed(0)}</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">Points For</div>
-                </div>
-                <div className="text-center p-2">
-                  <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">{selectedPlayer.totalPointsAgainst.toFixed(0)}</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">Points Against</div>
-                </div>
-                <div className="text-center p-2">
-                  <div className={`text-lg font-semibold ${selectedPlayer.pointDifferential >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                    {selectedPlayer.pointDifferential > 0 ? '+' : ''}{selectedPlayer.pointDifferential.toFixed(1)}
+                <div className="border-t border-gray-200 dark:border-gray-600 pt-3">
+                  <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+                    <div className="text-center">
+                      <div className="flex items-center justify-center space-x-1 mb-1">
+                        <Trophy className="h-4 w-4 text-yellow-600" />
+                        <span className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.firstPlaceFinishes}</span>
+                      </div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">1st</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center space-x-1 mb-1">
+                        <Medal className="h-4 w-4 text-gray-500" />
+                        <span className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.secondPlaceFinishes}</span>
+                      </div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">2nd</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center space-x-1 mb-1">
+                        <Award className="h-4 w-4 text-amber-600" />
+                        <span className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.thirdPlaceFinishes}</span>
+                      </div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">3rd</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center space-x-1 mb-1">
+                        <TrendingDown className="h-4 w-4 text-red-600" />
+                        <span className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.lastPlaceFinishes}</span>
+                      </div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">Last</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center space-x-1 mb-1">
+                        <span className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                          #{selectedPlayer.averageSeasonRank.toFixed(1)}
+                        </span>
+                      </div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">Avg Rank</div>
+                    </div>
                   </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">Point Differential</div>
-                </div>
-              </div>
-              
-              {/* Career High/Low */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="text-center p-2">
-                  <div className="text-lg font-semibold text-green-600">{selectedPlayer.careerHighGame ? selectedPlayer.careerHighGame.toFixed(1) : '—'}</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">Career High</div>
-                </div>
-                <div className="text-center p-2">
-                  <div className="text-lg font-semibold text-red-600">{selectedPlayer.careerLowGame ? selectedPlayer.careerLowGame.toFixed(1) : '—'}</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">Career Low</div>
                 </div>
               </div>
             </div>
@@ -602,8 +603,9 @@ export const Members = () => {
           {/* Season History */}
           <div className="card">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Season History</h3>
-            <div className="table-container">
-              <table className="table">
+            <div className="overflow-x-auto -mx-4 sm:mx-0">
+              <div className="inline-block min-w-full align-middle">
+                <table className="min-w-full table">
                 <thead className="table-header">
                   <tr>
                     <th
@@ -781,7 +783,8 @@ export const Members = () => {
                       </tr>
                     ))}
                 </tbody>
-              </table>
+                </table>
+              </div>
             </div>
           </div>
         </div>

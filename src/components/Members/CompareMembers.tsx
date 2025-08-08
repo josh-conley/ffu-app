@@ -67,22 +67,27 @@ export function CompareMembers({ selectedPlayer, selectedPlayer2, headToHeadData
           <p className="text-gray-600 dark:text-gray-400">Career Statistics Comparison</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-2 gap-6 mb-6">
           {/* Player 1 Header */}
-          <div className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700">
+          <div className="flex flex-col items-center text-center p-4 bg-gray-50 dark:bg-gray-700">
             <TeamLogo
               teamName={selectedPlayer.userInfo.teamName}
               abbreviation={selectedPlayer.userInfo.abbreviation}
               size="lg"
-              className="w-12 h-12"
+              className="w-16 h-16 mb-3"
             />
-            <div className="flex-1">
+            <div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
                 {selectedPlayer.userInfo.teamName}
               </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                {selectedPlayer.userInfo.abbreviation}
-              </p>
+              <div className="flex items-center justify-center space-x-2 mt-1">
+                <p className="text-gray-600 dark:text-gray-400">
+                  {selectedPlayer.userInfo.abbreviation}
+                </p>
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-300 whitespace-nowrap">
+                  {selectedPlayer.seasonHistory?.length || 0} seasons
+                </span>
+              </div>
               {selectedPlayer.pastTeamNames.length > 0 && (
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                   Previously: {selectedPlayer.pastTeamNames.join(', ')}
@@ -92,20 +97,25 @@ export function CompareMembers({ selectedPlayer, selectedPlayer2, headToHeadData
           </div>
 
           {/* Player 2 Header */}
-          <div className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700">
+          <div className="flex flex-col items-center text-center p-4 bg-gray-50 dark:bg-gray-700">
             <TeamLogo
               teamName={selectedPlayer2.userInfo.teamName}
               abbreviation={selectedPlayer2.userInfo.abbreviation}
               size="lg"
-              className="w-12 h-12"
+              className="w-16 h-16 mb-3"
             />
-            <div className="flex-1">
+            <div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
                 {selectedPlayer2.userInfo.teamName}
               </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                {selectedPlayer2.userInfo.abbreviation}
-              </p>
+              <div className="flex items-center justify-center space-x-2 mt-1">
+                <p className="text-gray-600 dark:text-gray-400">
+                  {selectedPlayer2.userInfo.abbreviation}
+                </p>
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-300 whitespace-nowrap">
+                  {selectedPlayer2.seasonHistory?.length || 0} seasons
+                </span>
+              </div>
               {selectedPlayer2.pastTeamNames.length > 0 && (
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                   Previously: {selectedPlayer2.pastTeamNames.join(', ')}
@@ -239,7 +249,7 @@ export function CompareMembers({ selectedPlayer, selectedPlayer2, headToHeadData
               <div className="text-center text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
                 {selectedPlayer.userInfo.abbreviation}
               </div>
-              <div className="flex justify-center space-x-3">
+              <div className="grid grid-cols-2 gap-3">
                 <div className="text-center">
                   <Trophy className="h-8 w-8 text-yellow-600 mx-auto mb-1" />
                   <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
@@ -276,7 +286,7 @@ export function CompareMembers({ selectedPlayer, selectedPlayer2, headToHeadData
               <div className="text-center text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
                 {selectedPlayer2.userInfo.abbreviation}
               </div>
-              <div className="flex justify-center space-x-3">
+              <div className="grid grid-cols-2 gap-3">
                 <div className="text-center">
                   <Trophy className="h-8 w-8 text-yellow-600 mx-auto mb-1" />
                   <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
@@ -364,17 +374,6 @@ export function CompareMembers({ selectedPlayer, selectedPlayer2, headToHeadData
               </div>
             </div>
           </div>
-
-          {headToHeadData.player1Wins !== headToHeadData.player2Wins && (
-            <div className="text-center p-4 bg-gray-50 dark:bg-gray-700">
-              <div className="text-sm text-gray-600 dark:text-gray-400">
-                {headToHeadData.player1Wins > headToHeadData.player2Wins 
-                  ? `${selectedPlayer.userInfo.abbreviation} leads ${headToHeadData.player1Wins}-${headToHeadData.player2Wins}`
-                  : `${selectedPlayer2.userInfo.abbreviation} leads ${headToHeadData.player2Wins}-${headToHeadData.player1Wins}`
-                }
-              </div>
-            </div>
-          )}
         </div>
       ) : (
         <div className="card text-center py-8">
@@ -413,14 +412,14 @@ export function CompareMembers({ selectedPlayer, selectedPlayer2, headToHeadData
                       )}
                     </div>
 
-                    <div className="flex items-center justify-between lg:justify-end space-x-6">
-                      <div className="flex items-center space-x-3">
+                    <div className="flex items-center justify-between lg:justify-end space-x-3">
+                      <div className="flex items-center space-x-2">
                         <TeamLogo
                           teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
                           abbreviation={matchup.winnerInfo?.abbreviation || 'UNK'}
                           size="sm"
                         />
-                        <span className="font-semibold text-gray-900 dark:text-gray-100">
+                        <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                           {matchup.winnerInfo?.abbreviation || 'UNK'}
                         </span>
                       </div>
@@ -433,8 +432,8 @@ export function CompareMembers({ selectedPlayer, selectedPlayer2, headToHeadData
                         </div>
                       </div>
 
-                      <div className="flex items-center space-x-3">
-                        <span className="font-semibold text-gray-900 dark:text-gray-100">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                           {matchup.loserInfo?.abbreviation || 'UNK'}
                         </span>
                         <TeamLogo
