@@ -23,6 +23,7 @@ export class HistoricalTeamResolver {
   private historicalTeamData: HistoricalTeamData | null = null;
   private playerMappings: Map<string, PlayerTeamMapping> = new Map();
   private dataLoaded = false;
+  private baseUrl = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
 
   // Sleeper era years (when historical team data is needed)
   private readonly SLEEPER_ERA_START = 2021;
@@ -63,7 +64,7 @@ export class HistoricalTeamResolver {
 
     try {
       // Load historical team data
-      const historicalResponse = await fetch('/data/historical-teams/historical-teams.json');
+      const historicalResponse = await fetch(`${this.baseUrl}/data/historical-teams/historical-teams.json`);
       if (historicalResponse.ok) {
         const historicalCache: HistoricalTeamCache = await historicalResponse.json();
         this.historicalTeamData = historicalCache.historicalTeams;
@@ -73,7 +74,7 @@ export class HistoricalTeamResolver {
       }
 
       // Load player mappings
-      const mappingsResponse = await fetch('/data/historical-teams/player-mappings.json');
+      const mappingsResponse = await fetch(`${this.baseUrl}/data/historical-teams/player-mappings.json`);
       if (mappingsResponse.ok) {
         const mappingsCache: PlayerMappingsCache = await mappingsResponse.json();
         mappingsCache.mappings.forEach(mapping => {
