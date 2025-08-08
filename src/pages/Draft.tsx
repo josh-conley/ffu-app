@@ -20,6 +20,8 @@ export const Draft: React.FC = () => {
   const [userMap, setUserMap] = useState<Record<string, UserInfo>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [, setError] = useState<string | undefined>();
+
+  const baseUrl = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
   
   // Get initial values from URL params
   const [selectedLeague, setSelectedLeague] = useState<string>(
@@ -132,7 +134,7 @@ export const Draft: React.FC = () => {
       
       try {
         // Load player data for team resolution
-        const playerResponse = await fetch('/data/players/nfl-players.json');
+        const playerResponse = await fetch(`${baseUrl}/data/players/nfl-players.json`);
         if (playerResponse.ok) {
           const playerData = await playerResponse.json();
           const draftYear = parseInt(year, 10);
