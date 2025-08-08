@@ -2,7 +2,7 @@ import { Users, Calendar, BarChart3, Award, UserPlus, TrendingUp, Crown } from '
 import { Link } from 'react-router-dom';
 import { useAllStandings } from '../hooks/useLeagues';
 import { TeamLogo } from '../components/Common/TeamLogo';
-import { getDisplayTeamName, isActiveYear } from '../config/constants';
+import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../config/constants';
 import { getLeagueName } from '../constants/leagues';
 import type { LeagueTier } from '../types';
 
@@ -185,8 +185,8 @@ export const Overview = () => {
                         </span>
                         <div className="hidden sm:block">
                           <TeamLogo 
-                            teamName={champion.userInfo.teamName}
-                            abbreviation={champion.userInfo.abbreviation}
+                            teamName={getCurrentTeamName(champion.userId, champion.userInfo.teamName)}
+                            abbreviation={getCurrentAbbreviation(champion.userId, champion.userInfo.abbreviation)}
                             size="sm"
                           />
                         </div>

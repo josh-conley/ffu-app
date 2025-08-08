@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { DraftData, DraftPick, UserInfo } from '../../types';
 import { TeamLogo } from '../Common/TeamLogo';
-import { getDisplayTeamName } from '../../config/constants';
+import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation } from '../../config/constants';
 import { historicalTeamResolver } from '../../utils/historical-team-resolver';
 
 interface DraftBoardProps {
@@ -229,14 +229,14 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
                 >
                   <div className="flex flex-col items-center space-y-2">
                     <TeamLogo 
-                      teamName={team.teamName} 
-                      abbreviation={team.abbreviation}
+                      teamName={getCurrentTeamName(team.userId || '', team.teamName)} 
+                      abbreviation={getCurrentAbbreviation(team.userId || '', team.abbreviation)}
                       size="sm"
                     />
-                    <div className="text-center break-words text-sm" title={team.teamName}>
-                      {team.teamName}
+                    <div className="text-center break-words text-sm" title={getCurrentTeamName(team.userId || '', team.teamName)}>
+                      {getCurrentTeamName(team.userId || '', team.teamName)}
                     </div>
-                    <div className="text-xs opacity-75 text-center">{team.abbreviation}</div>
+                    <div className="text-xs opacity-75 text-center">{getCurrentAbbreviation(team.userId || '', team.abbreviation)}</div>
                   </div>
                 </th>
               ))}

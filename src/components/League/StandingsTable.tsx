@@ -2,7 +2,7 @@ import type { EnhancedSeasonStandings, LeagueTier } from '../../types';
 import { TeamLogo } from '../Common/TeamLogo';
 import { Trophy, Medal, Award } from 'lucide-react';
 import { getLeagueName } from '../../constants/leagues';
-import { getDisplayTeamName, isActiveYear } from '../../config/constants';
+import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../../config/constants';
 
 
 interface StandingsTableProps {
@@ -83,8 +83,8 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
           <div className="flex items-center space-x-4">
             <div className="relative">
               <TeamLogo 
-                teamName={standings[0].userInfo.teamName}
-                abbreviation={standings[0].userInfo.abbreviation}
+                teamName={getCurrentTeamName(standings[0].userId, standings[0].userInfo.teamName)}
+                abbreviation={getCurrentAbbreviation(standings[0].userId, standings[0].userInfo.abbreviation)}
                 size="lg"
               />
             </div>
@@ -141,8 +141,8 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
                   <div className="flex items-center space-x-3">
                     <div className="hidden sm:block">
                       <TeamLogo 
-                        teamName={standing.userInfo.teamName}
-                        abbreviation={standing.userInfo.abbreviation}
+                        teamName={getCurrentTeamName(standing.userId, standing.userInfo.teamName)}
+                        abbreviation={getCurrentAbbreviation(standing.userId, standing.userInfo.abbreviation)}
                         size="sm"
                       />
                     </div>
@@ -150,7 +150,7 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
                       <div className="font-bold text-gray-900 dark:text-gray-100 text-sm">
                         {getDisplayTeamName(standing.userId, standing.userInfo.teamName, year)}
                       </div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400 sm:hidden font-mono">{standing.userInfo.abbreviation}</div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400 sm:hidden font-mono">{getCurrentAbbreviation(standing.userId, standing.userInfo.abbreviation)}</div>
                     </div>
                   </div>
                 </td>

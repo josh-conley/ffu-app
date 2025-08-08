@@ -5,7 +5,7 @@ import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { StandingsTable } from '../components/League/StandingsTable';
 import { TeamLogo } from '../components/Common/TeamLogo';
-import { getDisplayTeamName, isActiveYear } from '../config/constants';
+import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../config/constants';
 import { getLeagueName } from '../constants/leagues';
 import { ChevronDown, Crown } from 'lucide-react';
 import type { LeagueTier } from '../types';
@@ -185,8 +185,8 @@ export const Standings = () => {
                           </span>
                           <div className="hidden sm:block">
                             <TeamLogo 
-                              teamName={standing.userInfo.teamName}
-                              abbreviation={standing.userInfo.abbreviation}
+                              teamName={getCurrentTeamName(standing.userId, standing.userInfo.teamName)}
+                              abbreviation={getCurrentAbbreviation(standing.userId, standing.userInfo.abbreviation)}
                               size="sm"
                             />
                           </div>

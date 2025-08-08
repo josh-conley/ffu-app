@@ -183,27 +183,32 @@ export const getDefaultUserInfo = (): { teamName: string; abbreviation: string }
   abbreviation: 'UNK'
 });
 
-// Helper function to display historical team name with current name when different
-export const getDisplayTeamName = (userId: string, historicalTeamName: string, year?: string): string => {
+// Helper function to get current team name for a user
+export const getCurrentTeamName = (userId: string, historicalTeamName: string): string => {
   if (!userId || !historicalTeamName) return historicalTeamName || 'Unknown Team';
-  
-  // Don't add current names for current year data
-  const currentYear = new Date().getFullYear().toString();
-  if (year === currentYear) return historicalTeamName;
   
   // Look up current team name
   const user = USERS.find(u => u.sleeperId === userId);
   if (!user || !user.teamName) return historicalTeamName;
   
-  // If historical and current names are the same (or very similar), just show historical
-  const currentName = user.teamName;
-  if (historicalTeamName === currentName || 
-      historicalTeamName.replace(/\s+/g, '').toLowerCase() === currentName.replace(/\s+/g, '').toLowerCase()) {
-    return historicalTeamName;
-  }
+  return user.teamName;
+};
+
+// Helper function to get current abbreviation for a user
+export const getCurrentAbbreviation = (userId: string, historicalAbbreviation: string): string => {
+  if (!userId || !historicalAbbreviation) return historicalAbbreviation || 'UNK';
   
-  // Return formatted string with current name in parentheses
-  return `${historicalTeamName} (${currentName})`;
+  // Look up current abbreviation
+  const user = USERS.find(u => u.sleeperId === userId);
+  if (!user || !user.abbreviation) return historicalAbbreviation;
+  
+  return user.abbreviation;
+};
+
+// Helper function to display current team name (changed behavior - always shows current)
+export const getDisplayTeamName = (userId: string, historicalTeamName: string, _year?: string): string => {
+  // Always return current team name now
+  return getCurrentTeamName(userId, historicalTeamName);
 };
 
 // Abbreviation mapping utilities for URL state management
