@@ -8,6 +8,7 @@ interface DraftListProps {
 
 export const DraftList: React.FC<DraftListProps> = ({ draftData, userMap }) => {
   const [selectedTeam, setSelectedTeam] = useState<string | 'all'>('all');
+  const [tooltipVisible, setTooltipVisible] = useState<string | null>(null);
 
   const { picks } = draftData;
   // const { teams, rounds } = settings;
@@ -85,14 +86,14 @@ export const DraftList: React.FC<DraftListProps> = ({ draftData, userMap }) => {
 
       {/* Draft List */}
       <div className="table-container">
-        <table className="table">
+        <table className="table min-w-full">
           <thead className="table-header">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Pick</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Player</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Position</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Team</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Drafted By</th>
+              <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider min-w-[50px]">Pick</th>
+              <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider min-w-[140px]">Player</th>
+              <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider min-w-[60px]">Pos</th>
+              <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider min-w-[50px]">NFL</th>
+              <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider min-w-[80px]">Drafted By</th>
             </tr>
           </thead>
           <tbody>
@@ -105,19 +106,37 @@ export const DraftList: React.FC<DraftListProps> = ({ draftData, userMap }) => {
               
               return (
                 <tr key={pick.pickNumber} className={`border-b border-gray-200 dark:border-gray-600 ${rowBackgroundClass}`}>
-                  <td className="px-4 py-3 text-sm font-mono">{formatPickNumber(pick)}</td>
-                  <td className="px-4 py-3">
-                    <div className="text-sm font-medium text-gray-900 dark:text-white">
+                  <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-mono">{formatPickNumber(pick)}</td>
+                  <td className="px-2 sm:px-4 py-2 sm:py-3">
+                    <div className="text-xs sm:text-sm font-medium text-gray-900 dark:text-white">
                       {pick.playerInfo.name}
                     </div>
                   </td>
-                  <td className="px-4 py-3">
-                    <span className={`px-2 py-1 text-xs font-bold uppercase tracking-wider angular-cut-small ${getPositionColor(pick.playerInfo.position)}`}>
+                  <td className="px-2 sm:px-4 py-2 sm:py-3">
+                    <span className={`px-1.5 py-0.5 text-xs font-bold uppercase tracking-wider angular-cut-small ${getPositionColor(pick.playerInfo.position)}`}>
                       {pick.playerInfo.position}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-sm text-gray-900 dark:text-white">{pick.playerInfo.team || '-'}</td>
-                  <td className="px-4 py-3 text-sm text-gray-900 dark:text-white">{userInfo?.teamName || userInfo?.abbreviation || `User ${pick.userInfo.userId}`}</td>
+                  <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 dark:text-white">{pick.playerInfo.team || '-'}</td>
+                  <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 dark:text-white relative">
+                    <div 
+                      className="cursor-pointer touch-manipulation transition-all duration-200 active:scale-95 active:brightness-90 select-none"
+                      onTouchStart={() => setTooltipVisible(pick.userInfo.userId)}
+                      onTouchEnd={() => setTimeout(() => setTooltipVisible(null), 2000)}
+                      onMouseEnter={() => setTooltipVisible(pick.userInfo.userId)}
+                      onMouseLeave={() => setTooltipVisible(null)}
+                    >
+                      {userInfo?.abbreviation || userInfo?.teamName || `User ${pick.userInfo.userId}`}
+                      
+                      {/* Tooltip */}
+                      {tooltipVisible === pick.userInfo.userId && userInfo?.teamName && userInfo?.abbreviation !== userInfo?.teamName && (
+                        <div className="absolute bottom-full right-0 mb-1 px-2 py-1 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-xs rounded shadow-lg whitespace-nowrap z-10">
+                          {userInfo.teamName}
+                          <div className="absolute top-full right-2 w-0 h-0 border-l-2 border-r-2 border-t-2 border-transparent border-t-gray-900 dark:border-t-gray-100"></div>
+                        </div>
+                      )}
+                    </div>
+                  </td>
                 </tr>
               );
             })}
