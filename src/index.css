@@ -206,6 +206,27 @@
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0% 50%);
   }
 
+  /* Angular button classes */
+  .btn-angular {
+    @apply relative px-6 py-3 font-medium transition-colors;
+  }
+  
+  .btn-angular-overlay {
+    @apply absolute inset-0 angular-cut-16;
+  }
+  
+  .btn-angular-text {
+    @apply relative z-10;
+  }
+
+  .btn-angular-rank {
+    @apply relative w-10 h-8 flex items-center justify-center text-sm font-bold text-white;
+  }
+
+  .btn-angular-rank-overlay {
+    @apply absolute inset-0 angular-cut-small;
+  }
+
   /* Player Dashboard Card Styles */
   .player-dashboard-card-wrap {
     filter: drop-shadow(16px 16px 0px black);

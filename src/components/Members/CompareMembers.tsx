@@ -1,7 +1,7 @@
 import { TeamLogo } from '../Common/TeamLogo';
 import { LeagueBadge } from '../League/LeagueBadge';
 import { Trophy, Medal, Award, TrendingDown, Calendar, Users } from 'lucide-react';
-import type { UserInfo, HeadToHeadStats } from '../../types';
+import type { UserInfo, HeadToHeadStats, LeagueTier } from '../../types';
 
 interface PlayerStats {
   userInfo: UserInfo;
@@ -22,6 +22,17 @@ interface PlayerStats {
   secondPlaceFinishes?: number;
   thirdPlaceFinishes?: number;
   lastPlaceFinishes?: number;
+  seasonHistory: {
+    year: string;
+    league: LeagueTier;
+    wins: number;
+    losses: number;
+    pointsFor: number;
+    pointsAgainst: number;
+    rank: number;
+    playoffFinish?: number;
+    unionPowerRating?: number;
+  }[];
 }
 
 interface CompareMembersProps {

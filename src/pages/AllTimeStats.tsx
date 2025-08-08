@@ -421,6 +421,7 @@ export const AllTimeStats = () => {
     const filtered = standings.filter(leagueData => {
       if (selectedLeague !== 'ALL' && leagueData.league !== selectedLeague) return false;
       if (selectedYear !== 'ALL' && leagueData.year !== selectedYear) return false;
+      if (isActiveYear(leagueData.year)) return false; // Filter out current/active seasons
       return true;
     });
 
