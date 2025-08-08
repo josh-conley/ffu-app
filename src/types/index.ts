@@ -437,6 +437,7 @@ export interface DraftPick {
     name: string;
     position: string;
     team: string | null;
+    historicalTeam?: string | null; // Team the player was on during the draft year
     college?: string;
     age?: number;
   };
@@ -489,5 +490,54 @@ export interface UseDraftDataReturn {
   data: DraftData | null;
   isLoading: boolean;
   error?: string;
+}
+
+// NFLverse historical data types
+export interface NFLverseRosterEntry {
+  season: number;
+  team: string;
+  position: string;
+  depth_chart_position?: string;
+  jersey_number?: number;
+  status: string;
+  full_name: string;
+  first_name: string;
+  last_name: string;
+  birth_date?: string;
+  height?: string;
+  weight?: string;
+  college?: string;
+  gsis_id?: string;
+  espn_id?: number;
+  sportradar_id?: string;
+  yahoo_id?: number;
+  rotowire_id?: number;
+  pff_id?: number;
+  pfr_id?: string;
+  fantasy_data_id?: number;
+  sleeper_id?: string;
+  years: number;
+  games: number;
+  starts: number;
+  av: number;
+}
+
+export interface HistoricalTeamData {
+  [playerKey: string]: {
+    [season: number]: {
+      team: string;
+      full_name: string;
+      position: string;
+      games: number;
+      starts: number;
+    };
+  };
+}
+
+export interface PlayerTeamMapping {
+  sleeperId: string;
+  nflverseKey: string;
+  confidence: 'high' | 'medium' | 'low';
+  matchedOn: 'exact_name' | 'fuzzy_name' | 'manual';
 }
 

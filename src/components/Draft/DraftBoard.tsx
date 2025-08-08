@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import type { DraftData, DraftPick, UserInfo } from '../../types';
 import { TeamLogo } from '../Common/TeamLogo';
 import { getDisplayTeamName } from '../../config/constants';
+import { historicalTeamResolver } from '../../utils/historical-team-resolver';
 
 interface DraftBoardProps {
   draftData: DraftData;
@@ -304,11 +305,15 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
                               <span className={`px-1.5 py-0.5 text-xs font-bold uppercase tracking-wider angular-cut-small ${getPositionColor(pick.playerInfo.position)}`} style={{ fontSize: '11px' }}>
                                 {pick.playerInfo.position}
                               </span>
-                              {pick.playerInfo.team && (
-                                <span className="text-gray-600 dark:text-gray-400 text-xs font-medium">
-                                  {pick.playerInfo.team}
-                                </span>
-                              )}
+                              {(() => {
+                                const displayTeam = historicalTeamResolver.getDisplayTeam(pick, parseInt(draftData.year, 10));
+                                
+                                return displayTeam && (
+                                  <span className="text-gray-600 dark:text-gray-400 text-xs font-medium">
+                                    {displayTeam}
+                                  </span>
+                                );
+                              })()}
                             </div>
                             <span className="text-gray-500 dark:text-gray-400 text-xs font-mono">
                               {formatPickNumber(roundIndex + 1, teamIndex)}

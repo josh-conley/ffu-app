@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import type { DraftData, UserInfo } from '../../types';
+import { historicalTeamResolver } from '../../utils/historical-team-resolver';
 
 interface DraftListProps {
   draftData: DraftData;
@@ -117,7 +118,7 @@ export const DraftList: React.FC<DraftListProps> = ({ draftData, userMap }) => {
                       {pick.playerInfo.position}
                     </span>
                   </td>
-                  <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 dark:text-white">{pick.playerInfo.team || '-'}</td>
+                  <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 dark:text-white">{historicalTeamResolver.getDisplayTeam(pick, parseInt(draftData.year, 10)) || '-'}</td>
                   <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 dark:text-white relative">
                     <div 
                       className="cursor-pointer touch-manipulation transition-all duration-200 active:scale-95 active:brightness-90 select-none"

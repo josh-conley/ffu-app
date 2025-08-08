@@ -9,6 +9,7 @@ import { dataService } from '../services/data.service';
 import { LEAGUE_NAMES, AVAILABLE_YEARS, getAvailableLeaguesForYear } from '../constants/leagues';
 import { getUserInfoBySleeperId, getFFUIdBySleeperId } from '../config/constants';
 import { ChevronDown } from 'lucide-react';
+import { historicalTeamResolver } from '../utils/historical-team-resolver';
 
 type ViewMode = 'board' | 'list';
 
@@ -90,7 +91,36 @@ export const Draft: React.FC = () => {
         }
       });
 
-      setDraftData(historicalData.draftData);
+      // Enhance draft picks with historical team data
+      let enhancedDraftData = historicalData.draftData;
+      
+      try {
+        // Load player data for team resolution
+        const playerResponse = await fetch('/data/players/nfl-players.json');
+        if (playerResponse.ok) {
+          const playerData = await playerResponse.json();
+          const draftYear = parseInt(year, 10);
+          
+          // Enhance draft picks with historical team information
+          const enhancedPicks = await historicalTeamResolver.enhanceDraftData(
+            historicalData.draftData.picks, 
+            playerData.players, 
+            draftYear
+          );
+          
+          enhancedDraftData = {
+            ...historicalData.draftData,
+            picks: enhancedPicks
+          };
+        } else {
+          console.warn('Could not load player data for historical team resolution');
+        }
+      } catch (playerError) {
+        console.warn('Failed to enhance draft data with historical teams:', playerError);
+        // Continue with original data
+      }
+
+      setDraftData(enhancedDraftData);
       setUserMap(userMapping);
 
     } catch (err) {
