@@ -13,19 +13,24 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// League configurations - update these with your actual league IDs
+// League configurations - only completed seasons (active seasons use live API)
 const LEAGUES = [
-  // 2024 Leagues
-  { id: '1124841088360660992', year: '2024', tier: 'PREMIER' },
-  { id: '1124833010697379840', year: '2024', tier: 'MASTERS' },
-  { id: '1124834889196134400', year: '2024', tier: 'NATIONAL' },
+  // 2024 Leagues (completed seasons only)
+  { id: '1124841088360660992', year: '2024', tier: 'PREMIER', status: 'completed' },
+  { id: '1124833010697379840', year: '2024', tier: 'MASTERS', status: 'completed' },
+  { id: '1124834889196134400', year: '2024', tier: 'NATIONAL', status: 'completed' },
   
   // 2023 Leagues  
-  { id: '989237166217723904', year: '2023', tier: 'PREMIER' },
-  { id: '989238596353794048', year: '2023', tier: 'MASTERS' },
-  { id: '989240797381951488', year: '2023', tier: 'NATIONAL' },
+  { id: '989237166217723904', year: '2023', tier: 'PREMIER', status: 'completed' },
+  { id: '989238596353794048', year: '2023', tier: 'MASTERS', status: 'completed' },
+  { id: '989240797381951488', year: '2023', tier: 'NATIONAL', status: 'completed' },
   
-  // Add more years as needed
+  // 2022 Leagues
+  { id: '856271024054996992', year: '2022', tier: 'PREMIER', status: 'completed' },
+  { id: '856271401471029248', year: '2022', tier: 'MASTERS', status: 'completed' },
+  { id: '856271753788403712', year: '2022', tier: 'NATIONAL', status: 'completed' },
+  
+  // Note: 2025 active seasons are excluded - they use live API
 ];
 
 const SLEEPER_API_BASE = 'https://api.sleeper.app/v1';

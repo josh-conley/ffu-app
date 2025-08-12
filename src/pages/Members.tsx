@@ -5,9 +5,11 @@ import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
-import { getFFUIdBySleeperId } from '../config/constants';
+import { CompareMembers } from '../components/Members/CompareMembers';
+import { PlayerSelector } from '../components/Members/PlayerSelector';
+import { getFFUIdBySleeperId, isActiveYear } from '../config/constants';
 import type { LeagueTier, UserInfo } from '../types';
-import { Trophy, Medal, Award, TrendingDown, Calendar, Target, BarChart3, ChevronDown, ChevronUp, Percent, TrendingUp, Share2, Check, Zap, Star } from 'lucide-react';
+import { Trophy, Medal, Award, TrendingDown, ChevronDown, ChevronUp, Share2, Check } from 'lucide-react';
 
 type SeasonSortKey = 'year' | 'league' | 'wins' | 'winPct' | 'pointsFor' | 'pointsAgainst' | 'placement' | 'upr';
 type SortOrder = 'asc' | 'desc';
@@ -19,7 +21,7 @@ const calculatePlayoffRecord = (placement: number): { wins: number; losses: numb
   // - Top 2 seeds get byes to semifinals
   // - Seeds 3-6 play in quarterfinals 
   // - Championship and 3rd place games in final week
-  
+
   switch (placement) {
     case 1: {
       // Champion - Analysis of typical paths:
@@ -64,6 +66,27 @@ const calculatePlayoffRecord = (placement: number): { wins: number; losses: numb
   }
 };
 
+
+// Utility function to extract past team names from season history
+const getPastTeamNames = (standings: any[], currentTeamName: string, ffuUserId: string): string[] => {
+  const teamNames = new Set<string>();
+
+  standings.forEach(leagueData => {
+    leagueData.standings.forEach((standing: any) => {
+      // Match by FFU ID (primary) or fall back to legacy user ID
+      if ((standing.ffuUserId && standing.ffuUserId === ffuUserId) ||
+        (standing.userId === ffuUserId)) {
+        const teamName = standing.userInfo?.teamName;
+        if (teamName && teamName !== currentTeamName) {
+          teamNames.add(teamName);
+        }
+      }
+    });
+  });
+
+  return Array.from(teamNames);
+};
+
 interface PlayerCareerStats {
   userId: string; // Deprecated: use ffuUserId instead
   ffuUserId: string; // Primary identifier
@@ -85,6 +108,7 @@ interface PlayerCareerStats {
   averageUPR: number;
   careerHighGame?: number;
   careerLowGame?: number;
+  pastTeamNames: string[];
   seasonHistory: {
     year: string;
     league: LeagueTier;
@@ -104,7 +128,7 @@ export const Members = () => {
   const [shareSuccess, setShareSuccess] = useState(false);
   const [sortKey, setSortKey] = useState<SeasonSortKey>('year');
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
-  
+
   // URL-based state management
   const {
     selectedPlayerId,
@@ -126,7 +150,7 @@ export const Members = () => {
       leagueData.standings.forEach(standing => {
         // Use FFU ID as primary key, with robust fallback logic
         let playerId = standing.ffuUserId;
-        
+
         // If no FFU ID, try to convert from legacy user ID
         if (!playerId || playerId === 'unknown') {
           playerId = getFFUIdBySleeperId(standing.userId) || standing.userId;
@@ -153,47 +177,50 @@ export const Members = () => {
             averageUPR: 0,
             careerHighGame: undefined,
             careerLowGame: undefined,
+            pastTeamNames: [],
             seasonHistory: []
           };
         }
 
         const player = playerMap[playerId];
-        
+
         // Accumulate totals
         player.totalWins += standing.wins;
         player.totalLosses += standing.losses;
         player.totalPointsFor += standing.pointsFor || 0;
         player.totalPointsAgainst += standing.pointsAgainst || 0;
 
-        // Track career high and low games
-        if (standing.highGame !== undefined) {
+        // Track career high and low games (only use actual scores, not undefined/null values)
+        if (standing.highGame !== undefined && standing.highGame !== null && standing.highGame > 0) {
           if (player.careerHighGame === undefined || standing.highGame > player.careerHighGame) {
             player.careerHighGame = standing.highGame;
           }
         }
-        if (standing.lowGame !== undefined) {
+        if (standing.lowGame !== undefined && standing.lowGame !== null && standing.lowGame > 0) {
           if (player.careerLowGame === undefined || standing.lowGame < player.careerLowGame) {
             player.careerLowGame = standing.lowGame;
           }
         }
 
-        // Count finishes
-        if (standing.rank === 1) player.firstPlaceFinishes++;
-        else if (standing.rank === 2) player.secondPlaceFinishes++;
-        else if (standing.rank === 3) player.thirdPlaceFinishes++;
-        else if (standing.rank === leagueData.standings.length) player.lastPlaceFinishes++;
+        // Count finishes (exclude active seasons)
+        if (!isActiveYear(leagueData.year)) {
+          if (standing.rank === 1) player.firstPlaceFinishes++;
+          else if (standing.rank === 2) player.secondPlaceFinishes++;
+          else if (standing.rank === 3) player.thirdPlaceFinishes++;
+          else if (standing.rank === leagueData.standings.length) player.lastPlaceFinishes++;
+        }
 
-        // Check for playoff appearance (rank 6 or better = playoff berth)
+        // Check for playoff appearance (rank 6 or better = playoff berth, exclude active seasons)
         // In FFU, top 6 teams make playoffs regardless of league size
-        if (standing.rank <= 6) {
+        if (standing.rank <= 6 && !isActiveYear(leagueData.year)) {
           player.playoffAppearances++;
-          
+
           // Use playoff results if available, otherwise use regular season rank
-          const playoffFinish = leagueData.playoffResults?.find(p => 
-            (p.ffuUserId && p.ffuUserId === standing.ffuUserId) || 
+          const playoffFinish = leagueData.playoffResults?.find(p =>
+            (p.ffuUserId && p.ffuUserId === standing.ffuUserId) ||
             (p.userId === standing.userId)
           );
-          
+
           const finalPlacement = playoffFinish ? playoffFinish.placement : standing.rank;
           const { wins, losses } = calculatePlayoffRecord(finalPlacement);
           player.playoffWins += wins;
@@ -201,11 +228,11 @@ export const Members = () => {
         }
 
         // Add to season history
-        const playoffFinish = leagueData.playoffResults?.find(p => 
-          (p.ffuUserId && p.ffuUserId === standing.ffuUserId) || 
+        const playoffFinish = leagueData.playoffResults?.find(p =>
+          (p.ffuUserId && p.ffuUserId === standing.ffuUserId) ||
           (p.userId === standing.userId)
         );
-        
+
         player.seasonHistory.push({
           year: leagueData.year,
           league: leagueData.league as LeagueTier,
@@ -220,39 +247,48 @@ export const Members = () => {
       });
     });
 
-    // Sort season history by year (newest first) and calculate derived stats
+    // Calculate past team names and other derived stats
     Object.values(playerMap).forEach(player => {
+      // Extract past team names
+      player.pastTeamNames = getPastTeamNames(standings, player.userInfo.teamName, player.ffuUserId);
+
+      // Sort season history by year (newest first)
       player.seasonHistory.sort((a, b) => b.year.localeCompare(a.year));
-      
+
       // Calculate win percentage
       const totalGames = player.totalWins + player.totalLosses;
       player.winPercentage = totalGames > 0 ? (player.totalWins / totalGames) * 100 : 0;
-      
-      // Calculate average season rank
+
+      // Calculate average season rank (exclude active seasons)
       if (player.seasonHistory.length > 0) {
-        const totalRank = player.seasonHistory.reduce((sum, season) => sum + season.rank, 0);
-        player.averageSeasonRank = totalRank / player.seasonHistory.length;
+        const completedSeasons = player.seasonHistory.filter(season => !isActiveYear(season.year));
+        if (completedSeasons.length > 0) {
+          const totalRank = completedSeasons.reduce((sum, season) => sum + season.rank, 0);
+          player.averageSeasonRank = totalRank / completedSeasons.length;
+        }
       }
-      
+
       // Calculate point differential
       player.pointDifferential = player.totalPointsFor - player.totalPointsAgainst;
-      
-      // Calculate average UPR
-      const seasonsWithUPR = player.seasonHistory.filter(season => season.unionPowerRating !== undefined && season.unionPowerRating !== null);
+
+      // Calculate average UPR (exclude active seasons)
+      const seasonsWithUPR = player.seasonHistory.filter(season =>
+        !isActiveYear(season.year) && season.unionPowerRating !== undefined && season.unionPowerRating !== null
+      );
       if (seasonsWithUPR.length > 0) {
         const totalUPR = seasonsWithUPR.reduce((sum, season) => sum + (season.unionPowerRating || 0), 0);
         player.averageUPR = totalUPR / seasonsWithUPR.length;
       }
     });
 
-    return Object.values(playerMap).sort((a, b) => 
+    return Object.values(playerMap).sort((a, b) =>
       a.userInfo.teamName.localeCompare(b.userInfo.teamName)
     );
   }, [standings]);
 
   const selectedPlayer = playerStats.find(p => p.userId === selectedPlayerId);
   const selectedPlayer2 = playerStats.find(p => p.userId === selectedPlayer2Id);
-  
+
   // Share functionality
   const handleShare = async () => {
     try {
@@ -300,7 +336,7 @@ export const Members = () => {
 
   // Check if we have something worth sharing
   const hasSelectionToShare = selectedPlayerId && (!isCompareMode || selectedPlayer2Id);
-  
+
   // Fetch head-to-head data when in compare mode
   const { data: headToHeadData } = useHeadToHeadMatchups(
     isCompareMode ? selectedPlayerId : '',
@@ -348,235 +384,218 @@ export const Members = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-            {isCompareMode ? 'Compare Members' : 'Members'}
-          </h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">
-            {isCompareMode 
-              ? 'Compare career statistics and head-to-head record between two FFU league members'
-              : 'View career statistics for any FFU league member'
-            }
-          </p>
-        </div>
-        <div className="mt-4 sm:mt-0 flex space-x-3">
-          {hasSelectionToShare && (
-            <button
-              onClick={handleShare}
-              className="px-4 py-2 rounded-lg font-medium transition-colors duration-200 bg-green-600 text-white hover:bg-green-700 flex items-center space-x-2"
-            >
-              {shareSuccess ? (
-                <>
-                  <Check className="h-4 w-4" />
-                  <span>Copied!</span>
-                </>
-              ) : (
-                <>
-                  <Share2 className="h-4 w-4" />
-                  <span>Share</span>
-                </>
-              )}
-            </button>
-          )}
-          <button
-            onClick={() => {
-              setCompareMode(!isCompareMode);
-            }}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-              isCompareMode
-                ? 'bg-ffu-red text-white hover:bg-red-700'
-                : 'bg-blue-600 text-white dark:bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-700'
-            }`}
-          >
-            {isCompareMode ? 'View Single Member' : 'Compare Members'}
-          </button>
-        </div>
+    <div className="space-y-8">
+      <div>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+          {isCompareMode ? 'Compare Members' : 'Members'}
+        </h1>
+        <p className="mt-2 text-gray-600 dark:text-gray-400">View career statistics for any FFU league member</p>
       </div>
 
-      {/* Player Selection */}
-      <div className="card">
-        {!isCompareMode ? (
-          <div className="space-y-2">
-            <label className="block text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Select a Member</label>
-            <div className="relative">
-              <select
-                value={selectedPlayerId}
-                onChange={(e) => setSelectedPlayer(e.target.value)}
-                className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
-              >
-                <option value="">Choose a member...</option>
-                {playerStats.map(player => (
-                  <option key={player.userId} value={player.userId}>
-                    {player.userInfo.teamName}
-                  </option>
-                ))}
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <ChevronDown className="h-5 w-5 text-gray-400" />
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label className="block text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Player 1</label>
-              <div className="relative">
-                <select
-                  value={selectedPlayerId}
-                  onChange={(e) => setSelectedPlayer(e.target.value)}
-                  className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
-                >
-                  <option value="">Choose first player...</option>
-                  {playerStats.map(player => (
-                    <option key={player.userId} value={player.userId} disabled={player.userId === selectedPlayer2Id}>
-                      {player.userInfo.teamName}
-                    </option>
-                  ))}
-                </select>
-                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                  <ChevronDown className="h-5 w-5 text-gray-400" />
-                </div>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Player 2</label>
-              <div className="relative">
-                <select
-                  value={selectedPlayer2Id}
-                  onChange={(e) => setSelectedPlayer2(e.target.value)}
-                  className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
-                >
-                  <option value="">Choose second player...</option>
-                  {playerStats.map(player => (
-                    <option key={player.userId} value={player.userId} disabled={player.userId === selectedPlayerId}>
-                      {player.userInfo.teamName}
-                    </option>
-                  ))}
-                </select>
-                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                  <ChevronDown className="h-5 w-5 text-gray-400" />
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setCompareMode(!isCompareMode)}
+            className={`px-3 py-1.5 text-sm rounded border transition-colors ${
+              isCompareMode
+                ? 'bg-ffu-red text-white border-ffu-red hover:bg-red-700'
+                : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600'
+            }`}
+          >
+            {isCompareMode ? 'Single View' : 'Compare'}
+          </button>
+        </div>
+        {hasSelectionToShare && (
+          <button
+            onClick={handleShare}
+            className="px-3 py-1.5 text-sm rounded border bg-blue-600 text-white border-blue-600 hover:bg-blue-700 flex items-center space-x-1.5"
+          >
+            {shareSuccess ? (
+              <>
+                <Check className="h-3.5 w-3.5" />
+                <span>Copied!</span>
+              </>
+            ) : (
+              <>
+                <Share2 className="h-3.5 w-3.5" />
+                <span>Share</span>
+              </>
+            )}
+          </button>
         )}
       </div>
 
-      {/* Player Stats Display */}
-      {!isCompareMode && selectedPlayer && (
+      {/* Player Selection */}
+      <PlayerSelector
+        players={playerStats.map(player => ({
+          sleeperId: player.userId,
+          userInfo: player.userInfo,
+          totalWins: player.totalWins,
+          totalLosses: player.totalLosses,
+          winPercentage: player.winPercentage,
+          championships: player.firstPlaceFinishes
+        }))}
+        selectedPlayerId={selectedPlayerId}
+        selectedPlayer2Id={selectedPlayer2Id}
+        onSelectPlayer={setSelectedPlayer}
+        onSelectPlayer2={setSelectedPlayer2}
+        isCompareMode={isCompareMode}
+      />
+
+      {/* Compare Mode Display */}
+      {isCompareMode ? (
+        <CompareMembers
+          selectedPlayer={selectedPlayer ? {
+            ...selectedPlayer,
+            championships: selectedPlayer.firstPlaceFinishes,
+            playoffAppearances: selectedPlayer.playoffAppearances
+          } : null}
+          selectedPlayer2={selectedPlayer2 ? {
+            ...selectedPlayer2,
+            championships: selectedPlayer2.firstPlaceFinishes,
+            playoffAppearances: selectedPlayer2.playoffAppearances
+          } : null}
+          headToHeadData={headToHeadData}
+        />
+      ) : (
+        /* Single Player View */
+        selectedPlayer && (
         <div className="space-y-6">
-          {/* Player Header */}
+          {/* Player Overview Card */}
           <div className="card">
-            <div className="flex items-center space-x-4">
-              <TeamLogo 
+            {/* Header */}
+            <div className="flex items-center space-x-4 mb-6">
+              <TeamLogo
                 teamName={selectedPlayer.userInfo.teamName}
                 abbreviation={selectedPlayer.userInfo.abbreviation}
                 size="lg"
-                className="w-16 h-16 text-xl"
+                className="w-16 h-16"
               />
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.userInfo.teamName}</h2>
-                <p className="text-gray-600 dark:text-gray-400">{selectedPlayer.userInfo.abbreviation}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Career Overview Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
-            <div className="card text-center py-3">
-              <BarChart3 className="h-6 w-6 text-green-600 mx-auto mb-1" />
-              <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.totalWins}-{selectedPlayer.totalLosses}</div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">Record</div>
-            </div>
-            <div className="card text-center py-3">
-              <Zap className="h-6 w-6 text-indigo-600 mx-auto mb-1" />
-              <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.playoffWins}-{selectedPlayer.playoffLosses}</div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">Playoff Record</div>
-            </div>
-            <div className="card text-center py-3">
-              <Percent className="h-6 w-6 text-blue-600 mx-auto mb-1" />
-              <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.winPercentage.toFixed(1)}%</div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">Win Rate</div>
-            </div>
-            <div className="card text-center py-3">
-              <Target className="h-6 w-6 text-purple-600 mx-auto mb-1" />
-              <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
-                {((selectedPlayer.totalWins + selectedPlayer.totalLosses) > 0 ? 
-                  (selectedPlayer.totalPointsFor / (selectedPlayer.totalWins + selectedPlayer.totalLosses)).toFixed(1) : 
-                  '0.0')}
-              </div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">PPG</div>
-            </div>
-            <div className="card text-center py-3">
-              <TrendingUp className="h-6 w-6 text-orange-600 mx-auto mb-1" />
-              <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
-                {selectedPlayer.pointDifferential > 0 ? '+' : ''}{selectedPlayer.pointDifferential.toFixed(1)}
-              </div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">Point Diff</div>
-            </div>
-            <div className="card text-center py-3">
-              <Award className="h-6 w-6 text-amber-600 mx-auto mb-1" />
-              <div className="text-lg font-bold text-gray-900 dark:text-gray-100">#{selectedPlayer.averageSeasonRank.toFixed(1)}</div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">Avg Rank</div>
-            </div>
-            <div className="card text-center py-3">
-              <Star className="h-6 w-6 text-yellow-500 mx-auto mb-1" />
-              <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
-                {selectedPlayer.averageUPR > 0 ? selectedPlayer.averageUPR.toFixed(2) : '—'}
-              </div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">Avg UPR</div>
-            </div>
-            <div className="card text-center py-3">
-              <Calendar className="h-6 w-6 text-gray-600 mx-auto mb-1" />
-              <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.seasonHistory.length}</div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">Seasons</div>
-            </div>
-          </div>
-
-          {/* Achievements */}
-          <div className="card">
-            <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-3">Achievements</h3>
-            <div className="grid grid-cols-4 gap-4">
-              <div className="text-center">
-                <Trophy className="h-5 w-5 text-yellow-600 mx-auto mb-1" />
-                <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.firstPlaceFinishes}</div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">1st</div>
-              </div>
-              <div className="text-center">
-                <Medal className="h-5 w-5 text-gray-500 mx-auto mb-1" />
-                <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.secondPlaceFinishes}</div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">2nd</div>
-              </div>
-              <div className="text-center">
-                <Award className="h-5 w-5 text-amber-600 mx-auto mb-1" />
-                <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.thirdPlaceFinishes}</div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">3rd</div>
-              </div>
-              <div className="text-center">
-                <TrendingDown className="h-5 w-5 text-gray-400 mx-auto mb-1" />
-                <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.lastPlaceFinishes}</div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">Last</div>
-              </div>
-              <div className="text-center">
-                <Calendar className="h-5 w-5 text-green-600 mx-auto mb-1" />
-                <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.playoffAppearances}</div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">Playoffs</div>
-              </div>
-              <div className="text-center">
-                <TrendingUp className="h-5 w-5 text-green-500 mx-auto mb-1" />
-                <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
-                  {selectedPlayer.careerHighGame ? selectedPlayer.careerHighGame.toFixed(1) : '—'}
+              <div className="flex-1">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    {selectedPlayer.userInfo.teamName}
+                  </h2>
                 </div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">High Game</div>
-              </div>
-              <div className="text-center">
-                <TrendingDown className="h-5 w-5 text-red-500 mx-auto mb-1" />
-                <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
-                  {selectedPlayer.careerLowGame ? selectedPlayer.careerLowGame.toFixed(1) : '—'}
+                <div className="flex items-center space-x-2">
+                  <p className="text-gray-600 dark:text-gray-400">
+                    {selectedPlayer.userInfo.abbreviation}
+                  </p>
+                  <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-300 whitespace-nowrap">
+                    {selectedPlayer.seasonHistory.length} seasons
+                  </span>
                 </div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">Low Game</div>
+                {selectedPlayer.pastTeamNames.length > 0 && (
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    Previously: {selectedPlayer.pastTeamNames.join(', ')}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              {/* Primary Stats */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="text-center p-3 bg-gray-50 dark:bg-gray-700">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    {selectedPlayer.totalWins}-{selectedPlayer.totalLosses}
+                  </div>
+                  <div className="text-xs font-medium text-gray-600 dark:text-gray-400">Record</div>
+                </div>
+                <div className="text-center p-3 bg-gray-50 dark:bg-gray-700">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    {selectedPlayer.winPercentage.toFixed(1)}%
+                  </div>
+                  <div className="text-xs font-medium text-gray-600 dark:text-gray-400">Win %</div>
+                </div>
+                <div className="text-center p-3 bg-gray-50 dark:bg-gray-700">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    {((selectedPlayer.totalWins + selectedPlayer.totalLosses) > 0 ?
+                      (selectedPlayer.totalPointsFor / (selectedPlayer.totalWins + selectedPlayer.totalLosses)).toFixed(1) :
+                      '0.0')}
+                  </div>
+                  <div className="text-xs font-medium text-gray-600 dark:text-gray-400">PPG</div>
+                </div>
+                <div className="text-center p-3 bg-gray-50 dark:bg-gray-700">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    {selectedPlayer.averageUPR ? selectedPlayer.averageUPR.toFixed(1) : '—'}
+                  </div>
+                  <div className="text-xs font-medium text-gray-600 dark:text-gray-400">Avg UPR</div>
+                </div>
+              </div>
+
+              {/* All Other Stats */}
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 p-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-3">
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                      {selectedPlayer.playoffWins}-{selectedPlayer.playoffLosses}
+                    </div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">Playoff</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.totalPointsFor.toFixed(0)}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">Points For</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.totalPointsAgainst.toFixed(0)}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">Points Against</div>
+                  </div>
+                  <div className="text-center">
+                    <div className={`text-lg font-bold ${selectedPlayer.pointDifferential >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                      {selectedPlayer.pointDifferential > 0 ? '+' : ''}{selectedPlayer.pointDifferential.toFixed(1)}
+                    </div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">Diff</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-green-600">{selectedPlayer.careerHighGame ? selectedPlayer.careerHighGame.toFixed(1) : '—'}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">High</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-red-600">{selectedPlayer.careerLowGame ? selectedPlayer.careerLowGame.toFixed(1) : '—'}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">Low</div>
+                  </div>
+                </div>
+                <div className="border-t border-gray-200 dark:border-gray-600 pt-3">
+                  <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+                    <div className="text-center">
+                      <div className="flex items-center justify-center space-x-1 mb-1">
+                        <Trophy className="h-4 w-4 text-yellow-600" />
+                        <span className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.firstPlaceFinishes}</span>
+                      </div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">1st</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center space-x-1 mb-1">
+                        <Medal className="h-4 w-4 text-gray-500" />
+                        <span className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.secondPlaceFinishes}</span>
+                      </div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">2nd</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center space-x-1 mb-1">
+                        <Award className="h-4 w-4 text-amber-600" />
+                        <span className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.thirdPlaceFinishes}</span>
+                      </div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">3rd</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center space-x-1 mb-1">
+                        <TrendingDown className="h-4 w-4 text-red-600" />
+                        <span className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.lastPlaceFinishes}</span>
+                      </div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">Last</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center space-x-1 mb-1">
+                        <span className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                          #{selectedPlayer.averageSeasonRank.toFixed(1)}
+                        </span>
+                      </div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">Avg Rank</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -584,11 +603,12 @@ export const Members = () => {
           {/* Season History */}
           <div className="card">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Season History</h3>
-            <div className="table-container">
-              <table className="table">
+            <div className="overflow-x-auto -mx-4 sm:mx-0">
+              <div className="inline-block min-w-full align-middle">
+                <table className="min-w-full table">
                 <thead className="table-header">
                   <tr>
-                    <th 
+                    <th
                       className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
                       onClick={() => handleSort('year')}
                     >
@@ -600,7 +620,7 @@ export const Members = () => {
                         </div>
                       </div>
                     </th>
-                    <th 
+                    <th
                       className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
                       onClick={() => handleSort('league')}
                     >
@@ -612,7 +632,7 @@ export const Members = () => {
                         </div>
                       </div>
                     </th>
-                    <th 
+                    <th
                       className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
                       onClick={() => handleSort('wins')}
                     >
@@ -624,7 +644,7 @@ export const Members = () => {
                         </div>
                       </div>
                     </th>
-                    <th 
+                    <th
                       className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
                       onClick={() => handleSort('winPct')}
                     >
@@ -636,7 +656,7 @@ export const Members = () => {
                         </div>
                       </div>
                     </th>
-                    <th 
+                    <th
                       className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none hidden sm:table-cell"
                       onClick={() => handleSort('pointsFor')}
                     >
@@ -648,7 +668,7 @@ export const Members = () => {
                         </div>
                       </div>
                     </th>
-                    <th 
+                    <th
                       className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none hidden sm:table-cell"
                       onClick={() => handleSort('pointsAgainst')}
                     >
@@ -660,7 +680,7 @@ export const Members = () => {
                         </div>
                       </div>
                     </th>
-                    <th 
+                    <th
                       className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
                       onClick={() => handleSort('upr')}
                     >
@@ -672,7 +692,7 @@ export const Members = () => {
                         </div>
                       </div>
                     </th>
-                    <th 
+                    <th
                       className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none"
                       onClick={() => handleSort('placement')}
                     >
@@ -691,368 +711,84 @@ export const Members = () => {
                     .sort((a, b) => {
                       const aValue = getSortValue(a, sortKey);
                       const bValue = getSortValue(b, sortKey);
-                      
+
                       if (typeof aValue === 'string' && typeof bValue === 'string') {
-                        return sortOrder === 'asc' 
+                        return sortOrder === 'asc'
                           ? aValue.localeCompare(bValue)
                           : bValue.localeCompare(aValue);
                       }
-                      
-                      return sortOrder === 'asc' 
+
+                      return sortOrder === 'asc'
                         ? (aValue as number) - (bValue as number)
                         : (bValue as number) - (aValue as number);
                     })
                     .map((season) => (
-                    <tr key={`${season.year}-${season.league}`} className="table-row">
-                      <td>
-                        <span className="font-medium">{season.year}</span>
-                      </td>
-                      <td>
-                        <LeagueBadge league={season.league} />
-                      </td>
-                      <td>
-                        <span className="font-mono">{season.wins}-{season.losses}</span>
-                      </td>
-                      <td>
-                        <span className="font-mono">
-                          {((season.wins + season.losses) > 0 ? 
-                            ((season.wins / (season.wins + season.losses)) * 100).toFixed(1) : 
-                            '0.0')}%
-                        </span>
-                      </td>
-                      <td className="hidden sm:table-cell">
-                        <span className="font-mono">{season.pointsFor.toFixed(2)}</span>
-                      </td>
-                      <td className="hidden sm:table-cell">
-                        <span className="font-mono">{season.pointsAgainst.toFixed(2)}</span>
-                      </td>
-                      <td>
-                        <span className="font-mono">
-                          {season.unionPowerRating ? season.unionPowerRating.toFixed(2) : '—'}
-                        </span>
-                      </td>
-                      <td>
-                        {season.playoffFinish ? (
-                          <div className="flex items-center space-x-1">
-                            {season.playoffFinish === 1 && <Trophy className="h-4 w-4 text-yellow-600" />}
-                            {season.playoffFinish === 2 && <Medal className="h-4 w-4 text-gray-500" />}
-                            {season.playoffFinish === 3 && <Award className="h-4 w-4 text-amber-600" />}
-                            <span className="font-medium">
-                              {season.playoffFinish === 1 ? '1st' :
-                               season.playoffFinish === 2 ? '2nd' :
-                               season.playoffFinish === 3 ? '3rd' :
-                               `${season.playoffFinish}th`}
-                            </span>
-                          </div>
-                        ) : (
-                          <div className="flex items-center space-x-1">
-                            {season.rank === 1 && <Trophy className="h-4 w-4 text-yellow-600" />}
-                            {season.rank === 2 && <Medal className="h-4 w-4 text-gray-500" />}
-                            {season.rank === 3 && <Award className="h-4 w-4 text-amber-600" />}
-                            <span className="font-medium">
-                              {season.rank === 1 ? '1st' :
-                               season.rank === 2 ? '2nd' :
-                               season.rank === 3 ? '3rd' :
-                               `${season.rank}th`}
-                            </span>
-                          </div>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
+                      <tr key={`${season.year}-${season.league}`} className="table-row">
+                        <td>
+                          <span className="font-medium">{season.year}</span>
+                        </td>
+                        <td>
+                          <LeagueBadge league={season.league} />
+                        </td>
+                        <td>
+                          <span className="font-mono">{season.wins}-{season.losses}</span>
+                        </td>
+                        <td>
+                          <span className="font-mono">
+                            {((season.wins + season.losses) > 0 ?
+                              ((season.wins / (season.wins + season.losses)) * 100).toFixed(1) :
+                              '0.0')}%
+                          </span>
+                        </td>
+                        <td className="hidden sm:table-cell">
+                          <span className="font-mono">{season.pointsFor.toFixed(2)}</span>
+                        </td>
+                        <td className="hidden sm:table-cell">
+                          <span className="font-mono">{season.pointsAgainst.toFixed(2)}</span>
+                        </td>
+                        <td>
+                          <span className="font-mono">
+                            {isActiveYear(season.year) ? 'TBD' : (season.unionPowerRating ? season.unionPowerRating.toFixed(2) : '—')}
+                          </span>
+                        </td>
+                        <td>
+                          {isActiveYear(season.year) ? (
+                            <span className="text-sm text-gray-500 dark:text-gray-400 italic">TBD</span>
+                          ) : season.playoffFinish ? (
+                            <div className="flex items-center space-x-1">
+                              {season.playoffFinish === 1 && <Trophy className="h-4 w-4 text-yellow-600" />}
+                              {season.playoffFinish === 2 && <Medal className="h-4 w-4 text-gray-500" />}
+                              {season.playoffFinish === 3 && <Award className="h-4 w-4 text-amber-600" />}
+                              <span className="font-medium">
+                                {season.playoffFinish === 1 ? '1st' :
+                                  season.playoffFinish === 2 ? '2nd' :
+                                    season.playoffFinish === 3 ? '3rd' :
+                                      `${season.playoffFinish}th`}
+                              </span>
+                            </div>
+                          ) : (
+                            <div className="flex items-center space-x-1">
+                              {season.rank === 1 && <Trophy className="h-4 w-4 text-yellow-600" />}
+                              {season.rank === 2 && <Medal className="h-4 w-4 text-gray-500" />}
+                              {season.rank === 3 && <Award className="h-4 w-4 text-amber-600" />}
+                              <span className="font-medium">
+                                {season.rank === 1 ? '1st' :
+                                  season.rank === 2 ? '2nd' :
+                                    season.rank === 3 ? '3rd' :
+                                      `${season.rank}th`}
+                              </span>
+                            </div>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
-              </table>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-      )}
-
-      {/* Compare Mode Display */}
-      {isCompareMode && selectedPlayer && selectedPlayer2 && (
-        <div className="space-y-6">
-          {/* Player Headers */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="card">
-              <div className="flex items-center space-x-4">
-                <TeamLogo 
-                  teamName={selectedPlayer.userInfo.teamName}
-                  abbreviation={selectedPlayer.userInfo.abbreviation}
-                  size="lg"
-                  className="w-16 h-16 text-xl"
-                />
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer.userInfo.teamName}</h2>
-                  <p className="text-gray-600 dark:text-gray-400">{selectedPlayer.userInfo.abbreviation}</p>
-                </div>
-              </div>
-            </div>
-            <div className="card">
-              <div className="flex items-center space-x-4">
-                <TeamLogo 
-                  teamName={selectedPlayer2.userInfo.teamName}
-                  abbreviation={selectedPlayer2.userInfo.abbreviation}
-                  size="lg"
-                  className="w-16 h-16 text-xl"
-                />
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{selectedPlayer2.userInfo.teamName}</h2>
-                  <p className="text-gray-600 dark:text-gray-400">{selectedPlayer2.userInfo.abbreviation}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Head-to-Head Summary */}
-          {headToHeadData && headToHeadData.totalGames > 0 && (
-            <div className="card">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">Head-to-Head Record</h3>
-              <div className="flex items-center justify-center space-x-8 mb-6">
-                <div className="text-center">
-                  <div className={`text-4xl font-bold ${headToHeadData.player1Wins > headToHeadData.player2Wins ? 'text-green-600' : headToHeadData.player1Wins < headToHeadData.player2Wins ? 'text-red-600' : 'text-gray-900 dark:text-gray-100'}`}>
-                    {headToHeadData.player1Wins}
-                  </div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400 font-medium">
-                    {selectedPlayer.userInfo.abbreviation}
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-400 dark:text-gray-500">-</div>
-                </div>
-                <div className="text-center">
-                  <div className={`text-4xl font-bold ${headToHeadData.player2Wins > headToHeadData.player1Wins ? 'text-green-600' : headToHeadData.player2Wins < headToHeadData.player1Wins ? 'text-red-600' : 'text-gray-900 dark:text-gray-100'}`}>
-                    {headToHeadData.player2Wins}
-                  </div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400 font-medium">
-                    {selectedPlayer2.userInfo.abbreviation}
-                  </div>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-6 pt-4 border-t border-gray-200 dark:border-gray-700">
-                <div className="text-center">
-                  <div className="text-xl font-bold text-gray-900 dark:text-gray-100">{headToHeadData.player1AvgScore.toFixed(1)}</div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400">Avg Score vs {selectedPlayer2.userInfo.abbreviation}</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-xl font-bold text-gray-900 dark:text-gray-100">{headToHeadData.player2AvgScore.toFixed(1)}</div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400">Avg Score vs {selectedPlayer.userInfo.abbreviation}</div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Comparison Stats */}
-          <div className="card">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Career Comparison</h3>
-            <div className="space-y-4">
-              {/* Win-Loss Record */}
-              <div className="grid grid-cols-3 gap-4 py-3 border-b border-gray-200 dark:border-gray-700">
-                <div className="text-right">
-                  <span className="text-lg font-bold text-gray-900 dark:text-gray-100">
-                    {selectedPlayer.totalWins}-{selectedPlayer.totalLosses}
-                  </span>
-                </div>
-                <div className="text-center">
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Record</span>
-                </div>
-                <div className="text-left">
-                  <span className="text-lg font-bold text-gray-900 dark:text-gray-100">
-                    {selectedPlayer2.totalWins}-{selectedPlayer2.totalLosses}
-                  </span>
-                </div>
-              </div>
-
-              {/* Playoff Record */}
-              <div className="grid grid-cols-3 gap-4 py-3 border-b border-gray-200 dark:border-gray-700">
-                <div className="text-right">
-                  <span className={`text-lg font-bold ${
-                    selectedPlayer.playoffWins > selectedPlayer2.playoffWins ||
-                    (selectedPlayer.playoffWins === selectedPlayer2.playoffWins && selectedPlayer.playoffLosses < selectedPlayer2.playoffLosses)
-                    ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'
-                  }`}>
-                    {selectedPlayer.playoffWins}-{selectedPlayer.playoffLosses}
-                  </span>
-                </div>
-                <div className="text-center">
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Playoff Record</span>
-                </div>
-                <div className="text-left">
-                  <span className={`text-lg font-bold ${
-                    selectedPlayer2.playoffWins > selectedPlayer.playoffWins ||
-                    (selectedPlayer2.playoffWins === selectedPlayer.playoffWins && selectedPlayer2.playoffLosses < selectedPlayer.playoffLosses)
-                    ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'
-                  }`}>
-                    {selectedPlayer2.playoffWins}-{selectedPlayer2.playoffLosses}
-                  </span>
-                </div>
-              </div>
-
-              {/* Win Percentage */}
-              <div className="grid grid-cols-3 gap-4 py-3 border-b border-gray-200 dark:border-gray-700">
-                <div className="text-right">
-                  <span className={`text-lg font-bold ${selectedPlayer.winPercentage > selectedPlayer2.winPercentage ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'}`}>
-                    {selectedPlayer.winPercentage.toFixed(1)}%
-                  </span>
-                </div>
-                <div className="text-center">
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Win Rate</span>
-                </div>
-                <div className="text-left">
-                  <span className={`text-lg font-bold ${selectedPlayer2.winPercentage > selectedPlayer.winPercentage ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'}`}>
-                    {selectedPlayer2.winPercentage.toFixed(1)}%
-                  </span>
-                </div>
-              </div>
-
-              {/* Points Per Game */}
-              <div className="grid grid-cols-3 gap-4 py-3 border-b border-gray-200 dark:border-gray-700">
-                <div className="text-right">
-                  <span className={`text-lg font-bold ${
-                    ((selectedPlayer.totalWins + selectedPlayer.totalLosses) > 0 ? (selectedPlayer.totalPointsFor / (selectedPlayer.totalWins + selectedPlayer.totalLosses)) : 0) >
-                    ((selectedPlayer2.totalWins + selectedPlayer2.totalLosses) > 0 ? (selectedPlayer2.totalPointsFor / (selectedPlayer2.totalWins + selectedPlayer2.totalLosses)) : 0)
-                    ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'
-                  }`}>
-                    {((selectedPlayer.totalWins + selectedPlayer.totalLosses) > 0 ? 
-                      (selectedPlayer.totalPointsFor / (selectedPlayer.totalWins + selectedPlayer.totalLosses)).toFixed(1) : 
-                      '0.0')}
-                  </span>
-                </div>
-                <div className="text-center">
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">PPG</span>
-                </div>
-                <div className="text-left">
-                  <span className={`text-lg font-bold ${
-                    ((selectedPlayer2.totalWins + selectedPlayer2.totalLosses) > 0 ? (selectedPlayer2.totalPointsFor / (selectedPlayer2.totalWins + selectedPlayer2.totalLosses)) : 0) >
-                    ((selectedPlayer.totalWins + selectedPlayer.totalLosses) > 0 ? (selectedPlayer.totalPointsFor / (selectedPlayer.totalWins + selectedPlayer.totalLosses)) : 0)
-                    ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'
-                  }`}>
-                    {((selectedPlayer2.totalWins + selectedPlayer2.totalLosses) > 0 ? 
-                      (selectedPlayer2.totalPointsFor / (selectedPlayer2.totalWins + selectedPlayer2.totalLosses)).toFixed(1) : 
-                      '0.0')}
-                  </span>
-                </div>
-              </div>
-
-              {/* Point Differential */}
-              <div className="grid grid-cols-3 gap-4 py-3 border-b border-gray-200 dark:border-gray-700">
-                <div className="text-right">
-                  <span className={`text-lg font-bold ${selectedPlayer.pointDifferential > selectedPlayer2.pointDifferential ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'}`}>
-                    {selectedPlayer.pointDifferential > 0 ? '+' : ''}{selectedPlayer.pointDifferential.toFixed(1)}
-                  </span>
-                </div>
-                <div className="text-center">
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Point Diff</span>
-                </div>
-                <div className="text-left">
-                  <span className={`text-lg font-bold ${selectedPlayer2.pointDifferential > selectedPlayer.pointDifferential ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'}`}>
-                    {selectedPlayer2.pointDifferential > 0 ? '+' : ''}{selectedPlayer2.pointDifferential.toFixed(1)}
-                  </span>
-                </div>
-              </div>
-
-              {/* Average Rank */}
-              <div className="grid grid-cols-3 gap-4 py-3 border-b border-gray-200 dark:border-gray-700">
-                <div className="text-right">
-                  <span className={`text-lg font-bold ${selectedPlayer.averageSeasonRank < selectedPlayer2.averageSeasonRank ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'}`}>
-                    #{selectedPlayer.averageSeasonRank.toFixed(1)}
-                  </span>
-                </div>
-                <div className="text-center">
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg Rank</span>
-                </div>
-                <div className="text-left">
-                  <span className={`text-lg font-bold ${selectedPlayer2.averageSeasonRank < selectedPlayer.averageSeasonRank ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'}`}>
-                    #{selectedPlayer2.averageSeasonRank.toFixed(1)}
-                  </span>
-                </div>
-              </div>
-
-              {/* Average UPR */}
-              <div className="grid grid-cols-3 gap-4 py-3">
-                <div className="text-right">
-                  <span className={`text-lg font-bold ${selectedPlayer.averageUPR > selectedPlayer2.averageUPR ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'}`}>
-                    {selectedPlayer.averageUPR > 0 ? selectedPlayer.averageUPR.toFixed(2) : '—'}
-                  </span>
-                </div>
-                <div className="text-center">
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg UPR</span>
-                </div>
-                <div className="text-left">
-                  <span className={`text-lg font-bold ${selectedPlayer2.averageUPR > selectedPlayer.averageUPR ? 'text-green-600' : 'text-gray-900 dark:text-gray-100'}`}>
-                    {selectedPlayer2.averageUPR > 0 ? selectedPlayer2.averageUPR.toFixed(2) : '—'}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Head-to-Head Matchup History */}
-          {headToHeadData && headToHeadData.matchups.length > 0 && (
-            <div className="card">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Matchup History</h3>
-              <div className="space-y-3">
-                {headToHeadData.matchups.map((matchup, index) => (
-                  <div key={index} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                      <div className="flex items-center space-x-3">
-                        <LeagueBadge league={matchup.league} />
-                        <span className="text-sm text-gray-600 dark:text-gray-400">
-                          {matchup.year} • Week {matchup.week}
-                        </span>
-                        {matchup.placementType && (
-                          <span className="text-xs bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 px-2 py-1 rounded">
-                            {matchup.placementType}
-                          </span>
-                        )}
-                      </div>
-                      
-                      <div className="flex items-center justify-between sm:justify-end space-x-4">
-                        <div className="flex items-center space-x-2 min-w-0">
-                          <TeamLogo
-                            teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
-                            abbreviation={matchup.winnerInfo?.abbreviation || 'UNK'}
-                            size="sm"
-                          />
-                          <span className="font-medium text-gray-900 dark:text-gray-100 truncate">
-                            {matchup.winnerInfo?.abbreviation || 'UNK'}
-                          </span>
-                        </div>
-                        
-                        <div className="text-center flex-shrink-0">
-                          <div className="font-bold text-base sm:text-lg">
-                            <span className="text-green-600">{matchup.winnerScore.toFixed(1)}</span>
-                            <span className="text-gray-500 dark:text-gray-400 mx-1 sm:mx-2">-</span>
-                            <span className="text-red-600">{matchup.loserScore.toFixed(1)}</span>
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center space-x-2 min-w-0">
-                          <span className="font-medium text-gray-900 dark:text-gray-100 truncate">
-                            {matchup.loserInfo?.abbreviation || 'UNK'}
-                          </span>
-                          <TeamLogo
-                            teamName={matchup.loserInfo?.teamName || 'Unknown Team'}
-                            abbreviation={matchup.loserInfo?.abbreviation || 'UNK'}
-                            size="sm"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {headToHeadData && headToHeadData.totalGames === 0 && (
-            <div className="card">
-              <div className="text-center py-8">
-                <div className="text-gray-500 dark:text-gray-400">
-                  These players have never faced each other in league play.
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
+        )
       )}
 
       {/* Empty States */}
@@ -1063,20 +799,7 @@ export const Members = () => {
           </div>
         </div>
       )}
-      
-      {isCompareMode && (!selectedPlayer || !selectedPlayer2) && (
-        <div className="card">
-          <div className="text-center py-12">
-            <div className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-              Compare Members
-            </div>
-            <div className="text-gray-600 dark:text-gray-400">
-              Select two members above to compare their career statistics and head-to-head matchups
-            </div>
-          </div>
-        </div>
-      )}
 
     </div>
   );
-};
+}

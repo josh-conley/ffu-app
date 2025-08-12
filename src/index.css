@@ -114,6 +114,14 @@
   @media (max-width: 640px) {
     .table-container {
       @apply -mx-4 rounded-none shadow-none border-t border-b border-gray-200 dark:border-gray-600;
+      /* Ensure horizontal scrolling works smoothly */
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    
+    /* Make sure table doesn't collapse on mobile */
+    .table {
+      min-width: 500px; /* Ensure all columns stay visible */
     }
   }
 
@@ -204,6 +212,172 @@
 
   .angular-cut-medium {
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0% 50%);
+  }
+
+  /* Angular button classes */
+  .btn-angular {
+    @apply relative px-6 py-3 font-medium transition-colors;
+  }
+  
+  .btn-angular-overlay {
+    @apply absolute inset-0 angular-cut-16;
+  }
+  
+  .btn-angular-text {
+    @apply relative z-10;
+  }
+
+  .btn-angular-rank {
+    @apply relative w-10 h-8 flex items-center justify-center text-sm font-bold text-white;
+  }
+
+  .btn-angular-rank-overlay {
+    @apply absolute inset-0 angular-cut-small;
+  }
+
+  /* Player Dashboard Card Styles */
+  .player-dashboard-card-wrap {
+    filter: drop-shadow(16px 16px 0px black);
+    padding-right: 8px;
+  }
+
+  .player-dashboard-card {
+    @apply angular-cut bg-white dark:bg-gray-800 overflow-hidden transition-colors relative;
+  }
+
+  .dashboard-header {
+    @apply bg-ffu-red dark:bg-ffu-red-800 text-white p-6;
+  }
+
+  .dashboard-stats-primary {
+    @apply grid grid-cols-3 gap-4 text-center;
+  }
+
+  .dashboard-stat-large {
+    @apply flex flex-col items-center;
+  }
+
+  .dashboard-stat-number {
+    @apply text-2xl md:text-3xl font-bold text-white;
+  }
+
+  .dashboard-stat-label {
+    @apply text-sm text-white/80 uppercase tracking-wide font-medium;
+  }
+
+  .dashboard-metrics {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4 p-6 bg-gray-50 dark:bg-gray-700/50;
+  }
+
+  .dashboard-metric-item {
+    @apply flex items-center space-x-3 p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm;
+  }
+
+  .dashboard-achievements {
+    @apply p-6 space-y-4;
+  }
+
+  .dashboard-achievement-grid {
+    @apply grid grid-cols-2 md:grid-cols-4 gap-3;
+  }
+
+  .dashboard-achievement-item {
+    @apply flex items-center space-x-2 p-2 bg-gray-50 dark:bg-gray-700 rounded-lg;
+  }
+
+  .team-aka {
+    @apply text-sm text-white/70 italic;
+  }
+
+  /* Compare Mode Card Styles */
+  .compare-card-wrap {
+    filter: drop-shadow(12px 12px 0px black);
+    padding-right: 6px;
+  }
+
+  .compare-card {
+    @apply angular-cut-small bg-white dark:bg-gray-800 overflow-hidden transition-colors relative;
+  }
+
+  .compare-header {
+    @apply bg-ffu-red dark:bg-ffu-red-800 text-white p-4;
+  }
+
+  .compare-vs-card-wrap {
+    filter: drop-shadow(16px 16px 0px black);
+    padding-right: 8px;
+  }
+
+  .compare-vs-card {
+    @apply angular-cut bg-white dark:bg-gray-800 overflow-hidden transition-colors relative;
+  }
+
+  .compare-vs-header {
+    @apply bg-ffu-red dark:bg-ffu-red-800 text-white p-6;
+  }
+
+  .progress-bar {
+    @apply w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2;
+  }
+
+  .progress-fill {
+    @apply h-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-full transition-all duration-300;
+  }
+
+  /* Responsive adjustments for dashboard */
+  @media (max-width: 640px) {
+    .player-dashboard-card {
+      @apply angular-cut-medium;
+    }
+
+    .player-dashboard-card-wrap {
+      filter: drop-shadow(8px 8px 0px black);
+      padding-right: 4px;
+    }
+
+    .compare-card {
+      @apply angular-cut-medium;
+    }
+
+    .compare-card-wrap {
+      filter: drop-shadow(6px 6px 0px black);
+      padding-right: 3px;
+    }
+
+    .compare-vs-card {
+      @apply angular-cut-medium;
+    }
+
+    .compare-vs-card-wrap {
+      filter: drop-shadow(8px 8px 0px black);
+      padding-right: 4px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-header {
+      @apply p-4;
+    }
+
+    .dashboard-stats-primary {
+      @apply grid-cols-1 gap-2;
+    }
+
+    .dashboard-stat-number {
+      @apply text-xl;
+    }
+
+    .dashboard-metrics {
+      @apply grid-cols-1 gap-3 p-4;
+    }
+
+    .dashboard-achievements {
+      @apply p-4;
+    }
+
+    .dashboard-achievement-grid {
+      @apply grid-cols-1;
+    }
   }
 
   @media (max-width: 640px) {
@@ -414,6 +588,161 @@
       padding-right: 0.25rem !important;
       padding-top: 0.25rem !important;
       padding-bottom: 0.25rem !important;
+    }
+  }
+
+  /* Draft Board Specific Styling */
+  .draft-cell {
+    @apply relative overflow-hidden transition-all duration-300;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  }
+  
+  .draft-cell-mobile {
+    @apply relative overflow-hidden transition-all duration-300;
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+  }
+  
+  .draft-cell:hover {
+    @apply brightness-105 shadow-md;
+    transform: translateY(-1px);
+  }
+  
+  .draft-cell-selected {
+    @apply ring-2 ring-ffu-red ring-opacity-50 brightness-110;
+  }
+  
+  .draft-header-angular {
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  }
+  
+  .draft-trade-banner {
+    @apply bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs px-2 py-1 font-bold;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  }
+  
+  .draft-empty-cell {
+    @apply bg-gray-50 dark:bg-gray-800 text-gray-400 dark:text-gray-500 italic;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 8px,
+      rgba(0,0,0,0.03) 8px,
+      rgba(0,0,0,0.03) 16px
+    );
+  }
+  
+  .dark .draft-empty-cell {
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 8px,
+      rgba(255,255,255,0.03) 8px,
+      rgba(255,255,255,0.03) 16px
+    );
+  }
+  
+  .position-badge-enhanced {
+    @apply px-2 py-1 text-xs font-black uppercase tracking-wider shadow-sm;
+    clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 0 100%);
+  }
+  
+  /* Enhanced position cell backgrounds with gradients */
+  .pos-qb-cell-enhanced {
+    background: linear-gradient(135deg, rgb(var(--pos-qb-cell-bg)) 0%, rgb(var(--pos-qb-bg)) 100%);
+  }
+  
+  .dark .pos-qb-cell-enhanced {
+    background: linear-gradient(135deg, rgb(var(--pos-qb-cell-bg-dark) / 0.4) 0%, rgb(var(--pos-qb-bg-dark) / 0.3) 100%);
+  }
+  
+  .pos-rb-cell-enhanced {
+    background: linear-gradient(135deg, rgb(var(--pos-rb-cell-bg)) 0%, rgb(var(--pos-rb-bg)) 100%);
+  }
+  
+  .dark .pos-rb-cell-enhanced {
+    background: linear-gradient(135deg, rgb(var(--pos-rb-cell-bg-dark) / 0.3) 0%, rgb(var(--pos-rb-bg-dark) / 0.25) 100%);
+  }
+  
+  .pos-wr-cell-enhanced {
+    background: linear-gradient(135deg, rgb(var(--pos-wr-cell-bg)) 0%, rgb(var(--pos-wr-bg)) 100%);
+  }
+  
+  .dark .pos-wr-cell-enhanced {
+    background: linear-gradient(135deg, rgb(var(--pos-wr-cell-bg-dark) / 0.3) 0%, rgb(var(--pos-wr-bg-dark) / 0.25) 100%);
+  }
+  
+  .pos-te-cell-enhanced {
+    background: linear-gradient(135deg, rgb(var(--pos-te-cell-bg)) 0%, rgb(var(--pos-te-bg)) 100%);
+  }
+  
+  .dark .pos-te-cell-enhanced {
+    background: linear-gradient(135deg, rgb(var(--pos-te-cell-bg-dark) / 0.5) 0%, rgb(var(--pos-te-bg-dark) / 0.4) 100%);
+  }
+  
+  .pos-k-cell-enhanced {
+    background: linear-gradient(135deg, rgb(var(--pos-k-cell-bg)) 0%, rgb(var(--pos-k-bg)) 100%);
+  }
+  
+  .dark .pos-k-cell-enhanced {
+    background: linear-gradient(135deg, rgb(var(--pos-k-cell-bg-dark) / 0.3) 0%, rgb(var(--pos-k-bg-dark) / 0.25) 100%);
+  }
+  
+  .pos-def-cell-enhanced {
+    background: linear-gradient(135deg, rgb(var(--pos-def-cell-bg)) 0%, rgb(var(--pos-def-bg)) 100%);
+  }
+  
+  .dark .pos-def-cell-enhanced {
+    background: linear-gradient(135deg, rgb(var(--pos-def-cell-bg-dark) / 0.2) 0%, rgb(var(--pos-def-bg-dark) / 0.15) 100%);
+  }
+  
+  /* Team selection styling */
+  .draft-team-column-selected {
+    @apply ring-2 ring-ffu-red ring-opacity-70;
+    background: linear-gradient(180deg, rgba(220, 38, 38, 0.05) 0%, rgba(220, 38, 38, 0.02) 100%);
+  }
+  
+  .dark .draft-team-column-selected {
+    background: linear-gradient(180deg, rgba(220, 38, 38, 0.08) 0%, rgba(220, 38, 38, 0.03) 100%);
+  }
+  
+  /* Round separators */
+  .draft-round-separator {
+    @apply border-b-2 border-gray-300 dark:border-gray-600 relative;
+  }
+  
+  .draft-round-separator::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-ffu-red to-transparent opacity-30;
+  }
+  
+  /* Snake draft flow indicators */
+  .draft-flow-arrow {
+    @apply text-gray-400 dark:text-gray-500 transition-all duration-300;
+  }
+  
+  .draft-cell:hover .draft-flow-arrow {
+    @apply text-ffu-red scale-110;
+  }
+  
+  /* Pick number styling */
+  .draft-pick-number {
+    @apply text-gray-500 dark:text-gray-400 font-mono text-xs bg-white dark:bg-gray-800 px-1 py-0.5 rounded shadow-sm;
+  }
+  
+  /* Mobile touch improvements */
+  @media (max-width: 768px) {
+    .draft-cell-mobile:active {
+      @apply brightness-90;
+      transform: scale(0.98);
+    }
+    
+    .draft-cell-mobile {
+      touch-action: manipulation;
+    }
+    
+    /* Bigger touch targets on mobile */
+    .position-badge-enhanced {
+      @apply px-1.5 py-1 min-w-[2rem] text-center;
     }
   }
 

@@ -26,7 +26,8 @@ interface UserConfig {
 // Master league configuration - single source of truth
 export const LEAGUES: LeagueConfig[] = [
   // PREMIER LEAGUE
-  { sleeperId: '1124841088360660992', year: '2024', tier: 'PREMIER', status: 'active', startYear: 2024 },
+  { sleeperId: '1256010768692805632', year: '2025', tier: 'PREMIER', status: 'active', startYear: 2025 },
+  { sleeperId: '1124841088360660992', year: '2024', tier: 'PREMIER', status: 'completed', startYear: 2024 },
   { sleeperId: '989237166217723904', year: '2023', tier: 'PREMIER', status: 'completed', startYear: 2023 },
   { sleeperId: '856271024054996992', year: '2022', tier: 'PREMIER', status: 'completed', startYear: 2022 },
   { sleeperId: '710961812656455680', year: '2021', tier: 'PREMIER', status: 'completed', startYear: 2021 },
@@ -35,13 +36,13 @@ export const LEAGUES: LeagueConfig[] = [
   { sleeperId: 'espn-2018-premier', year: '2018', tier: 'PREMIER', status: 'completed', startYear: 2018 },
   
   // MASTERS LEAGUE  
-  { sleeperId: '1124833010697379840', year: '2024', tier: 'MASTERS', status: 'active', startYear: 2024 },
+  { sleeperId: '1124833010697379840', year: '2024', tier: 'MASTERS', status: 'completed', startYear: 2024 },
   { sleeperId: '989238596353794048', year: '2023', tier: 'MASTERS', status: 'completed', startYear: 2023 },
   { sleeperId: '856271401471029248', year: '2022', tier: 'MASTERS', status: 'completed', startYear: 2022 },
   // Note: No Masters league in ESPN era (2018-2020)
   
   // NATIONAL LEAGUE
-  { sleeperId: '1124834889196134400', year: '2024', tier: 'NATIONAL', status: 'active', startYear: 2024 },
+  { sleeperId: '1124834889196134400', year: '2024', tier: 'NATIONAL', status: 'completed', startYear: 2024 },
   { sleeperId: '989240797381951488', year: '2023', tier: 'NATIONAL', status: 'completed', startYear: 2023 },
   { sleeperId: '856271753788403712', year: '2022', tier: 'NATIONAL', status: 'completed', startYear: 2022 },
   { sleeperId: '726573082608775168', year: '2021', tier: 'NATIONAL', status: 'completed', startYear: 2021 },
@@ -182,27 +183,32 @@ export const getDefaultUserInfo = (): { teamName: string; abbreviation: string }
   abbreviation: 'UNK'
 });
 
-// Helper function to display historical team name with current name when different
-export const getDisplayTeamName = (userId: string, historicalTeamName: string, year?: string): string => {
+// Helper function to get current team name for a user
+export const getCurrentTeamName = (userId: string, historicalTeamName: string): string => {
   if (!userId || !historicalTeamName) return historicalTeamName || 'Unknown Team';
-  
-  // Don't add current names for current year data
-  const currentYear = new Date().getFullYear().toString();
-  if (year === currentYear) return historicalTeamName;
   
   // Look up current team name
   const user = USERS.find(u => u.sleeperId === userId);
   if (!user || !user.teamName) return historicalTeamName;
   
-  // If historical and current names are the same (or very similar), just show historical
-  const currentName = user.teamName;
-  if (historicalTeamName === currentName || 
-      historicalTeamName.replace(/\s+/g, '').toLowerCase() === currentName.replace(/\s+/g, '').toLowerCase()) {
-    return historicalTeamName;
-  }
+  return user.teamName;
+};
+
+// Helper function to get current abbreviation for a user
+export const getCurrentAbbreviation = (userId: string, historicalAbbreviation: string): string => {
+  if (!userId || !historicalAbbreviation) return historicalAbbreviation || 'UNK';
   
-  // Return formatted string with current name in parentheses
-  return `${historicalTeamName} (${currentName})`;
+  // Look up current abbreviation
+  const user = USERS.find(u => u.sleeperId === userId);
+  if (!user || !user.abbreviation) return historicalAbbreviation;
+  
+  return user.abbreviation;
+};
+
+// Helper function to display current team name (changed behavior - always shows current)
+export const getDisplayTeamName = (userId: string, historicalTeamName: string, _year?: string): string => {
+  // Always return current team name now
+  return getCurrentTeamName(userId, historicalTeamName);
 };
 
 // Abbreviation mapping utilities for URL state management
@@ -249,6 +255,11 @@ export const isHistoricalYear = (year: string): boolean => {
 
 export const isCurrentYear = (year: string): boolean => {
   return year === CURRENT_YEAR;
+};
+
+// Helper function to check if any league is active for a given year
+export const isActiveYear = (year: string): boolean => {
+  return LEAGUES.some(league => league.year === year && league.status === 'active');
 };
 
 // Era-specific helper functions

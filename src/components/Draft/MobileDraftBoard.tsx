@@ -1,7 +1,8 @@
 import React from 'react';
 import type { DraftData, DraftPick, UserInfo } from '../../types';
 import { TeamLogo } from '../Common/TeamLogo';
-import { getDisplayTeamName } from '../../config/constants';
+import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation } from '../../config/constants';
+import { historicalTeamResolver } from '../../utils/historical-team-resolver';
 
 interface MobileDraftBoardProps {
   draftData: DraftData;
@@ -178,14 +179,14 @@ export const MobileDraftBoard: React.FC<MobileDraftBoardProps> = ({ draftData, u
                 >
                   <div className="flex flex-col items-center">
                     <TeamLogo 
-                      teamName={team.teamName} 
-                      abbreviation={team.abbreviation}
+                      teamName={getCurrentTeamName(team.userId || '', team.teamName)} 
+                      abbreviation={getCurrentAbbreviation(team.userId || '', team.abbreviation)}
                       size="sm"
                     />
-                    <div className="text-center break-words text-xs leading-tight" title={team.teamName} style={{ fontSize: '0.6rem' }}>
-                      {team.teamName}
+                    <div className="text-center break-words text-xs leading-tight" title={getCurrentTeamName(team.userId || '', team.teamName)} style={{ fontSize: '0.6rem' }}>
+                      {getCurrentTeamName(team.userId || '', team.teamName)}
                     </div>
-                    <div className="text-xs opacity-75 text-center" style={{ fontSize: '0.6rem' }}>{team.abbreviation}</div>
+                    <div className="text-xs opacity-75 text-center" style={{ fontSize: '0.6rem' }}>{getCurrentAbbreviation(team.userId || '', team.abbreviation)}</div>
                   </div>
                 </th>
               ))}
@@ -238,11 +239,14 @@ export const MobileDraftBoard: React.FC<MobileDraftBoardProps> = ({ draftData, u
                             <span className={`px-1 py-0.5 text-xs font-bold uppercase tracking-wider angular-cut-small ${getPositionColor(pick.playerInfo.position)}`} style={{ fontSize: '10px' }}>
                               {pick.playerInfo.position}
                             </span>
-                            {pick.playerInfo.team && (
-                              <span className="text-gray-600 dark:text-gray-400 font-medium" style={{ fontSize: '10px' }}>
-                                {pick.playerInfo.team}
-                              </span>
-                            )}
+                            {(() => {
+                              const displayTeam = historicalTeamResolver.getDisplayTeam(pick, parseInt(draftData.year, 10));
+                              return displayTeam && (
+                                <span className="text-gray-600 dark:text-gray-400 font-medium" style={{ fontSize: '10px' }}>
+                                  {displayTeam}
+                                </span>
+                              );
+                            })()}
                           </div>
                           <span className="text-gray-500 dark:text-gray-400 font-mono" style={{ fontSize: '9px' }}>
                             {formatPickNumber(roundIndex + 1, teamIndex)}

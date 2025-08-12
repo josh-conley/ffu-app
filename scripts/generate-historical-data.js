@@ -12,27 +12,37 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Import constants (we'll need to adapt this for Node.js)
+// We'll load the league constants from the main config file
+// For now, keep local constants but will filter by completion status
 const LEAGUES = [
   // PREMIER LEAGUE
-  { sleeperId: '1124841088360660992', year: '2024', tier: 'PREMIER', status: 'active', startYear: 2024 },
+  { sleeperId: '1256010768692805632', year: '2025', tier: 'PREMIER', status: 'active', startYear: 2025 },
+  { sleeperId: '1124841088360660992', year: '2024', tier: 'PREMIER', status: 'completed', startYear: 2024 },
   { sleeperId: '989237166217723904', year: '2023', tier: 'PREMIER', status: 'completed', startYear: 2023 },
   { sleeperId: '856271024054996992', year: '2022', tier: 'PREMIER', status: 'completed', startYear: 2022 },
   { sleeperId: '710961812656455680', year: '2021', tier: 'PREMIER', status: 'completed', startYear: 2021 },
+  { sleeperId: 'espn-2020-premier', year: '2020', tier: 'PREMIER', status: 'completed', startYear: 2020 },
+  { sleeperId: 'espn-2019-premier', year: '2019', tier: 'PREMIER', status: 'completed', startYear: 2019 },
+  { sleeperId: 'espn-2018-premier', year: '2018', tier: 'PREMIER', status: 'completed', startYear: 2018 },
   
   // MASTERS LEAGUE  
-  { sleeperId: '1124833010697379840', year: '2024', tier: 'MASTERS', status: 'active', startYear: 2024 },
+  { sleeperId: '1124833010697379840', year: '2024', tier: 'MASTERS', status: 'completed', startYear: 2024 },
   { sleeperId: '989238596353794048', year: '2023', tier: 'MASTERS', status: 'completed', startYear: 2023 },
   { sleeperId: '856271401471029248', year: '2022', tier: 'MASTERS', status: 'completed', startYear: 2022 },
+  // Note: No Masters league in ESPN era (2018-2020)
   
   // NATIONAL LEAGUE
-  { sleeperId: '1124834889196134400', year: '2024', tier: 'NATIONAL', status: 'active', startYear: 2024 },
+  { sleeperId: '1124834889196134400', year: '2024', tier: 'NATIONAL', status: 'completed', startYear: 2024 },
   { sleeperId: '989240797381951488', year: '2023', tier: 'NATIONAL', status: 'completed', startYear: 2023 },
   { sleeperId: '856271753788403712', year: '2022', tier: 'NATIONAL', status: 'completed', startYear: 2022 },
   { sleeperId: '726573082608775168', year: '2021', tier: 'NATIONAL', status: 'completed', startYear: 2021 },
+  { sleeperId: 'espn-2020-national', year: '2020', tier: 'NATIONAL', status: 'completed', startYear: 2020 },
+  { sleeperId: 'espn-2019-national', year: '2019', tier: 'NATIONAL', status: 'completed', startYear: 2019 },
+  { sleeperId: 'espn-2018-national', year: '2018', tier: 'NATIONAL', status: 'completed', startYear: 2018 },
 ];
 
-const HISTORICAL_YEARS = ['2021', '2022', '2023', '2024'];
+// Only process completed seasons - active seasons will use live API
+const SLEEPER_HISTORICAL_YEARS = ['2021', '2022', '2023', '2024'];
 
 class SleeperAPIService {
   constructor() {
@@ -785,17 +795,24 @@ class HistoricalDataGenerator {
   async generateAllHistoricalData() {
     console.log('🚀 Starting historical data generation...');
 
+    // Filter to only include completed seasons from Sleeper era
     const historicalLeagues = LEAGUES.filter(league => 
-      HISTORICAL_YEARS.includes(league.year)
+      SLEEPER_HISTORICAL_YEARS.includes(league.year) && 
+      league.status === 'completed' &&
+      !league.sleeperId.startsWith('espn-') // Only Sleeper leagues, not ESPN era
     );
 
+    console.log(`📊 Processing ${historicalLeagues.length} completed Sleeper leagues...`);
+    
     for (const league of historicalLeagues) {
+      console.log(`📈 Processing ${league.tier} ${league.year} (Status: ${league.status})`);
       await this.generateLeagueData(league);
       // Add delay to be respectful to Sleeper API
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
 
     console.log('✅ Historical data generation complete!');
+    console.log('💡 Active seasons will be handled by the live API');
   }
 }
 

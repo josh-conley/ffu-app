@@ -6,7 +6,7 @@ import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import { UPRHorserace } from '../components/League/UPRHorserace';
 import { useUrlParams } from '../hooks/useUrlParams';
-import { getFFUIdBySleeperId } from '../config/constants';
+import { getFFUIdBySleeperId, isActiveYear } from '../config/constants';
 import type { UserInfo, LeagueTier } from '../types';
 import { Trophy, Medal, Award, TrendingDown, ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -47,7 +47,7 @@ interface AllTimePlayerStats {
   pointDifferential: number;
   averagePointsPerGame: number;
   careerHighGame: number;
-  careerLowGame: number;
+  careerLowGame: number | undefined;
   seasonsPlayed: number;
   premierSeasons: number;
   mastersSeasons: number;
@@ -277,7 +277,7 @@ export const AllTimeStats = () => {
             pointDifferential: 0,
             averagePointsPerGame: 0,
             careerHighGame: 0,
-            careerLowGame: Number.MAX_VALUE,
+            careerLowGame: undefined,
             seasonsPlayed: 0,
             premierSeasons: 0,
             mastersSeasons: 0,
@@ -296,11 +296,11 @@ export const AllTimeStats = () => {
         player.totalPointsAgainst += standing.pointsAgainst || 0;
         player.seasonsPlayed += 1;
 
-        // Track career high and low games
-        if (standing.highGame && standing.highGame > player.careerHighGame) {
+        // Track career high and low games (only use actual scores, not undefined/null values)
+        if (standing.highGame && standing.highGame > 0 && standing.highGame > player.careerHighGame) {
           player.careerHighGame = standing.highGame;
         }
-        if (standing.lowGame && standing.lowGame < player.careerLowGame) {
+        if (standing.lowGame && standing.lowGame > 0 && (player.careerLowGame === undefined || standing.lowGame < player.careerLowGame)) {
           player.careerLowGame = standing.lowGame;
         }
 
@@ -309,11 +309,13 @@ export const AllTimeStats = () => {
         else if (leagueData.league === 'MASTERS') player.mastersSeasons++;
         else if (leagueData.league === 'NATIONAL') player.nationalSeasons++;
 
-        // Count finishes
-        if (standing.rank === 1) player.firstPlaceFinishes++;
-        else if (standing.rank === 2) player.secondPlaceFinishes++;
-        else if (standing.rank === 3) player.thirdPlaceFinishes++;
-        else if (standing.rank === leagueData.standings.length) player.lastPlaceFinishes++;
+        // Count finishes (exclude active seasons)
+        if (!isActiveYear(leagueData.year)) {
+          if (standing.rank === 1) player.firstPlaceFinishes++;
+          else if (standing.rank === 2) player.secondPlaceFinishes++;
+          else if (standing.rank === 3) player.thirdPlaceFinishes++;
+          else if (standing.rank === leagueData.standings.length) player.lastPlaceFinishes++;
+        }
 
         // Check for playoff appearance (rank 6 or better = playoff berth)
         if (standing.rank <= 6) {
@@ -366,18 +368,19 @@ export const AllTimeStats = () => {
       // Calculate point differential
       player.pointDifferential = player.totalPointsFor - player.totalPointsAgainst;
 
-      // Handle case where no low game was found
-      if (player.careerLowGame === Number.MAX_VALUE) {
-        player.careerLowGame = 0;
-      }
 
-      // Calculate average season rank (same as PlayerStats component)
+      // Calculate average season rank (exclude active seasons)
       if (player.seasonHistory.length > 0) {
-        const totalRank = player.seasonHistory.reduce((sum, season) => sum + season.rank, 0);
-        player.averageSeasonRank = totalRank / player.seasonHistory.length;
+        const completedSeasons = player.seasonHistory.filter(season => !isActiveYear(season.year));
+        if (completedSeasons.length > 0) {
+          const totalRank = completedSeasons.reduce((sum, season) => sum + season.rank, 0);
+          player.averageSeasonRank = totalRank / completedSeasons.length;
+        }
         
-        // Calculate average UPR
-        const validUPRSeasons = player.seasonHistory.filter(season => season.unionPowerRating !== undefined);
+        // Calculate average UPR (exclude active seasons)
+        const validUPRSeasons = player.seasonHistory.filter(season => 
+          !isActiveYear(season.year) && season.unionPowerRating !== undefined
+        );
         if (validUPRSeasons.length > 0) {
           const totalUPR = validUPRSeasons.reduce((sum, season) => sum + (season.unionPowerRating || 0), 0);
           player.averageUPR = totalUPR / validUPRSeasons.length;
@@ -418,6 +421,7 @@ export const AllTimeStats = () => {
     const filtered = standings.filter(leagueData => {
       if (selectedLeague !== 'ALL' && leagueData.league !== selectedLeague) return false;
       if (selectedYear !== 'ALL' && leagueData.year !== selectedYear) return false;
+      if (isActiveYear(leagueData.year)) return false; // Filter out current/active seasons
       return true;
     });
 
@@ -910,7 +914,7 @@ export const AllTimeStats = () => {
                       </td>
                       <td className="text-center align-middle">
                         <span className="text-sm font-medium font-mono text-red-600 dark:text-red-400">
-                          {player.careerLowGame.toFixed(2)}
+                          {player.careerLowGame ? player.careerLowGame.toFixed(2) : '—'}
                         </span>
                       </td>
                       <td title={getPlacements(player)} className="text-center align-middle">
@@ -1234,7 +1238,11 @@ export const AllTimeStats = () => {
                           </span>
                         </td>
                         <td className="text-center align-middle">
-                          {season.playoffFinish ? (
+                          {isActiveYear(season.year) ? (
+                            <span className="text-sm text-gray-500 dark:text-gray-400 italic">
+                              TBD
+                            </span>
+                          ) : season.playoffFinish ? (
                             <div className="flex items-center justify-center space-x-1">
                               {season.playoffFinish === 1 && <Trophy className="h-3 w-3 text-yellow-600" />}
                               {season.playoffFinish === 2 && <Award className="h-3 w-3 text-gray-500" />}
