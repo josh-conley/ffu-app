@@ -88,7 +88,12 @@ export const MobileDraftBoard: React.FC<MobileDraftBoardProps> = ({ draftData, u
   };
 
   // Format player name for wrapping - first name on first line, last name on second
-  const formatPlayerName = (fullName: string): { firstName: string; lastName: string } => {
+  const formatPlayerName = (fullName: string, position?: string): { firstName: string; lastName: string } => {
+    // For defenses, don't split the name - show the full team name
+    if (position === 'DEF') {
+      return { firstName: fullName, lastName: '' };
+    }
+    
     const nameParts = fullName.trim().split(' ');
     if (nameParts.length === 1) {
       return { firstName: fullName, lastName: '' };
@@ -226,7 +231,7 @@ export const MobileDraftBoard: React.FC<MobileDraftBoardProps> = ({ draftData, u
                     {pick ? (
                       <div className="h-full flex flex-col justify-between relative pt-3 px-2 pb-2">
                         {(() => {
-                          const playerName = formatPlayerName(pick.playerInfo.name);
+                          const playerName = formatPlayerName(pick.playerInfo.name, pick.playerInfo.position);
                           return (
                             <div className="font-semibold text-gray-900 dark:text-white text-sm leading-tight mb-1 text-left">
                               <div>{playerName.firstName}</div>
@@ -236,21 +241,22 @@ export const MobileDraftBoard: React.FC<MobileDraftBoardProps> = ({ draftData, u
                         })()}
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-1">
-                            <span className={`px-1 py-0.5 text-xs font-bold uppercase tracking-wider angular-cut-small ${getPositionColor(pick.playerInfo.position)}`} style={{ fontSize: '10px' }}>
+                            <span className={`px-1 py-0.5 text-xs font-bold uppercase tracking-wider rounded-sm ${getPositionColor(pick.playerInfo.position)}`} style={{ fontSize: '9px' }}>
                               {pick.playerInfo.position}
                             </span>
                             {(() => {
                               const displayTeam = historicalTeamResolver.getDisplayTeam(pick, parseInt(draftData.year, 10));
                               return displayTeam && (
-                                <span className="text-gray-600 dark:text-gray-400 font-medium" style={{ fontSize: '10px' }}>
+                                <span className="text-gray-600 dark:text-gray-400 font-medium" style={{ fontSize: '9px' }}>
                                   {displayTeam}
                                 </span>
                               );
                             })()}
                           </div>
-                          <span className="text-gray-500 dark:text-gray-400 font-mono" style={{ fontSize: '9px' }}>
-                            {formatPickNumber(roundIndex + 1, teamIndex)}
-                          </span>
+                          <div className="text-gray-500 dark:text-gray-400 font-mono text-right" style={{ fontSize: '9px' }}>
+                            <div>{formatPickNumber(roundIndex + 1, teamIndex)}</div>
+                            <div>#{pick.pickNumber}</div>
+                          </div>
                         </div>
                         {/* Subtle arrow positioned at bottom right */}
                         {(() => {

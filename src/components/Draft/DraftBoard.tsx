@@ -99,7 +99,12 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
   };
 
   // Format player name for wrapping - first name on first line, last name on second
-  const formatPlayerName = (fullName: string): { firstName: string; lastName: string } => {
+  const formatPlayerName = (fullName: string, position?: string): { firstName: string; lastName: string } => {
+    // For defenses, don't split the name - show the full team name
+    if (position === 'DEF') {
+      return { firstName: fullName, lastName: '' };
+    }
+    
     const nameParts = fullName.trim().split(' ');
     if (nameParts.length === 1) {
       return { firstName: fullName, lastName: '' };
@@ -205,22 +210,19 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
       </div>
 
       {/* Draft Table - Full Width */}
-      <div className="w-full overflow-x-auto bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600">
-        <table className="w-full min-w-full table-fixed">
+      <div className="w-full overflow-x-auto bg-white dark:bg-gray-800">
+        <table className="w-full min-w-full table-fixed border border-gray-200 dark:border-gray-600">
           {/* Table Header */}
           <thead className="table-header">
             <tr 
               className="relative"
-              style={{
-                clipPath: 'polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%)'
-              }}
             >
               {teamHeaders.map((team, index) => (
                 <th 
                   key={team.slot}
-                  className={`px-2 py-4 text-center text-xs font-bold text-white uppercase tracking-wider cursor-pointer hover:bg-ffu-red-600 transition-colors duration-200 ${
-                    index < teams - 1 ? 'border-r border-ffu-red-700' : ''
-                  } ${selectedTeamUserId === team.userId ? 'bg-ffu-red-600' : ''}`}
+                  className={`px-2 py-4 text-center text-xs font-bold text-white uppercase tracking-wider cursor-pointer hover:bg-ffu-red-600 transition-colors duration-200 border-r border-ffu-red-700 ${
+                    selectedTeamUserId === team.userId ? 'bg-ffu-red-600' : ''
+                  } ${index === teamHeaders.length - 1 ? 'border-r-0' : ''}`}
                   style={{ width: columnWidth }}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -248,9 +250,7 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
             {draftGrid.map((round, roundIndex) => (
               <tr 
                 key={roundIndex}
-                className={`${
-                  roundIndex < rounds - 1 ? 'border-b border-gray-200 dark:border-gray-600' : ''
-                }`}
+                className={`${roundIndex < draftGrid.length - 1 ? 'border-b border-gray-200 dark:border-gray-600' : ''}`}
               >
                 
                 {/* Picks for this round */}
@@ -262,13 +262,13 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
                   return (
                     <td 
                       key={teamIndex}
-                      className={`align-top relative overflow-hidden group transition-all duration-300 ${
-                        teamIndex < teams - 1 ? 'border-r border-gray-200 dark:border-gray-600' : ''
-                      } ${pick ? getPositionBackgroundColor(pick.playerInfo.position) : ''} ${
+                      className={`align-top relative overflow-hidden group transition-all duration-300 border-r border-gray-200 dark:border-gray-600 ${
+                        pick ? getPositionBackgroundColor(pick.playerInfo.position) : 'bg-gray-100 dark:bg-gray-700'
+                      } ${
                         shouldDim ? 'opacity-40' : ''
                       } ${isSelectedTeamPick ? 'ring-2 ring-gray-400 ring-inset brightness-110' : ''} ${
                         pick ? 'cursor-pointer' : ''
-                      }`}
+                      } ${teamIndex === round.length - 1 ? 'border-r-0' : ''}`}
                       style={{ 
                         width: columnWidth,
                         height: '100px',
@@ -289,9 +289,9 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
                     )}
                     
                     {pick ? (
-                      <div className={`h-full flex flex-col justify-between ${isPickTraded(pick, teamHeaders[teamIndex]?.userId) ? 'pt-4 px-3 pb-4' : 'px-3 py-4'}`}>
+                      <div className={`h-full flex flex-col justify-between ${isPickTraded(pick, teamHeaders[teamIndex]?.userId) ? 'pt-4 px-2 pb-2' : 'pt-2 px-2 pb-2'}`}>
                         {(() => {
-                          const playerName = formatPlayerName(pick.playerInfo.name);
+                          const playerName = formatPlayerName(pick.playerInfo.name, pick.playerInfo.position);
                           return (
                             <div className="font-semibold text-gray-900 dark:text-white text-sm leading-tight mb-2">
                               <div>{playerName.firstName}</div>
@@ -302,22 +302,23 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({ draftData, userMap }) =>
                         <div className="space-y-2">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-1">
-                              <span className={`px-1.5 py-0.5 text-xs font-bold uppercase tracking-wider angular-cut-small ${getPositionColor(pick.playerInfo.position)}`} style={{ fontSize: '11px' }}>
+                              <span className={`px-1 py-0.5 text-xs font-bold uppercase tracking-wider rounded-sm ${getPositionColor(pick.playerInfo.position)}`} style={{ fontSize: '10px' }}>
                                 {pick.playerInfo.position}
                               </span>
                               {(() => {
                                 const displayTeam = historicalTeamResolver.getDisplayTeam(pick, parseInt(draftData.year, 10));
                                 
                                 return displayTeam && (
-                                  <span className="text-gray-600 dark:text-gray-400 text-xs font-medium">
+                                  <span className="text-gray-600 dark:text-gray-400 text-[10px] font-medium">
                                     {displayTeam}
                                   </span>
                                 );
                               })()}
                             </div>
-                            <span className="text-gray-500 dark:text-gray-400 text-xs font-mono">
-                              {formatPickNumber(roundIndex + 1, teamIndex)}
-                            </span>
+                            <div className="text-gray-500 dark:text-gray-400 text-[10px] font-mono text-right">
+                              <div>{formatPickNumber(roundIndex + 1, teamIndex)}</div>
+                              <div className="mt-0.5">#{pick.pickNumber}</div>
+                            </div>
                           </div>
                         </div>
                         {/* Subtle arrow positioned at top right below trade banner */}

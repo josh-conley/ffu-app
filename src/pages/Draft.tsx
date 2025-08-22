@@ -8,8 +8,8 @@ import { DraftList } from '../components/Draft/DraftList';
 import type { DraftData, UserInfo, LeagueTier } from '../types';
 import { dataService } from '../services/data.service';
 import { LEAGUE_NAMES, AVAILABLE_YEARS, getAvailableLeaguesForYear } from '../constants/leagues';
-import { getUserInfoBySleeperId, getFFUIdBySleeperId } from '../config/constants';
-import { ChevronDown } from 'lucide-react';
+import { getUserInfoBySleeperId, getFFUIdBySleeperId, getDraftDate, isActiveYear } from '../config/constants';
+import { ChevronDown, Calendar } from 'lucide-react';
 import { historicalTeamResolver } from '../utils/historical-team-resolver';
 
 type ViewMode = 'board' | 'list';
@@ -55,12 +55,20 @@ export const Draft: React.FC = () => {
 
   const handleLeagueChange = (league: string) => {
     setSelectedLeague(league);
-    updateUrl({ league });
+    // Clear team filter when switching leagues
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set('league', league);
+    newParams.delete('team'); // Clear team filter
+    setSearchParams(newParams);
   };
 
   const handleYearChange = (year: string) => {
     setSelectedYear(year);
-    updateUrl({ year });
+    // Clear team filter when switching years
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set('year', year);
+    newParams.delete('team'); // Clear team filter
+    setSearchParams(newParams);
   };
 
   const handleViewModeChange = (view: ViewMode) => {
@@ -278,26 +286,57 @@ export const Draft: React.FC = () => {
       )} */}
 
       {/* Draft Content */}
-      {draftData && !isLoading && (
-        <>
-          {/* Draft Board/List */}
-          {viewMode === 'board' ? (
-            <>
-              {/* Desktop Draft Board */}
-              <div className="hidden lg:block w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4">
-                <DraftBoard draftData={draftData} userMap={userMap} />
-              </div>
-              {/* Mobile Draft Board */}
-              <div className="lg:hidden w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-1 pb-8">
-                <MobileDraftBoard draftData={draftData} userMap={userMap} />
-              </div>
-            </>
-          ) : (
-            <div className="pb-8">
-              <DraftList draftData={draftData} userMap={userMap} />
+      {isActiveYear(selectedYear) ? (
+        /* Show upcoming draft information for active leagues */
+        <div className="card text-center py-16">
+          <div className="max-w-2xl mx-auto">
+            <Calendar className="h-16 w-16 text-ffu-red mx-auto mb-6" />
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Upcoming Draft
+            </h2>
+            <div className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              {LEAGUE_NAMES[selectedLeague as LeagueTier]} {selectedYear}
             </div>
-          )}
-        </>
+            {(() => {
+              const draftDate = getDraftDate(selectedLeague as LeagueTier, selectedYear);
+              return draftDate ? (
+                <div className="text-2xl font-bold text-ffu-red mb-6">
+                  {draftDate}
+                </div>
+              ) : (
+                <div className="text-lg text-gray-500 dark:text-gray-400 mb-6">
+                  Draft date TBA
+                </div>
+              );
+            })()}
+            <p className="text-gray-600 dark:text-gray-400">
+              Draft results will appear here after the draft is completed.
+            </p>
+          </div>
+        </div>
+      ) : (
+        /* Show historical draft data */
+        draftData && !isLoading && (
+          <>
+            {/* Draft Board/List */}
+            {viewMode === 'board' ? (
+              <>
+                {/* Desktop Draft Board */}
+                <div className="hidden lg:block w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4">
+                  <DraftBoard draftData={draftData} userMap={userMap} />
+                </div>
+                {/* Mobile Draft Board */}
+                <div className="lg:hidden w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-1 pb-8">
+                  <MobileDraftBoard draftData={draftData} userMap={userMap} />
+                </div>
+              </>
+            ) : (
+              <div className="pb-8">
+                <DraftList draftData={draftData} userMap={userMap} />
+              </div>
+            )}
+          </>
+        )
       )}
     </div>
   );

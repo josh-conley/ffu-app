@@ -266,6 +266,19 @@ export const isCurrentYear = (year: string): boolean => {
   return year === CURRENT_YEAR;
 };
 
+// Draft dates for active leagues
+export const DRAFT_DATES: Record<string, Record<LeagueTier, string>> = {
+  '2025': {
+    PREMIER: 'Wednesday 9/3 8:30pm ET',
+    MASTERS: 'Thursday 8/28 9:00pm ET',
+    NATIONAL: 'Sunday 8/24 10:00pm ET'
+  }
+};
+
+export const getDraftDate = (league: LeagueTier, year: string): string | null => {
+  return DRAFT_DATES[year]?.[league] || null;
+};
+
 // Helper function to check if any league is active for a given year
 export const isActiveYear = (year: string): boolean => {
   return LEAGUES.some(league => league.year === year && league.status === 'active');

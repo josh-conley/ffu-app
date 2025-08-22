@@ -36,7 +36,7 @@
     --pos-wr-cell-bg-dark: 30 58 138;
     
     --pos-te-bg: 255 165 0;
-    --pos-te-text: 255 255 255;
+    --pos-te-text: 146 64 14;
     --pos-te-bg-dark: 255 165 0;
     --pos-te-text-dark: 255 255 255;
     --pos-te-cell-bg: 255 237 213;
@@ -49,8 +49,8 @@
     --pos-k-cell-bg: 254 240 138;
     --pos-k-cell-bg-dark: 133 77 14;
     
-    --pos-def-bg: 110 60 30;
-    --pos-def-text: 255 255 255;
+    --pos-def-bg: 160 120 90;
+    --pos-def-text: 78 35 9;
     --pos-def-bg-dark: 101 67 33;
     --pos-def-text-dark: 255 255 255;
     --pos-def-cell-bg: 237, 209, 199;
