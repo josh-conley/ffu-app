@@ -105,7 +105,7 @@ export const DraftList: React.FC<DraftListProps> = ({ draftData, userMap }) => {
     })
     .sort((a, b) => a.name.localeCompare(b.name));
 
-  const positions = ['RB', 'WR', 'TE', 'QB', 'DEF'];
+  const positions = Array.from(new Set((picks || []).map(p => p.playerInfo.position).sort()))
 
   const teams = Array.from(new Set((picks || []).map(p => p.playerInfo.team).sort()))
 
