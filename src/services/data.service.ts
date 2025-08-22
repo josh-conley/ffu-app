@@ -19,15 +19,10 @@ export class DataService {
   private baseUrl = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
 
   /**
-   * Load historical league data from JSON file
+   * Load league data from static JSON file (works for all years - no live API calls)
    */
   async loadHistoricalLeagueData(league: LeagueTier, year: string): Promise<HistoricalLeagueData | null> {
-    console.log(`📊 DataService: Loading historical data for ${league} ${year}`);
-    
-    if (!isHistoricalYear(year)) {
-      console.log(`📊 DataService: ${year} is not a historical year, skipping`);
-      return null;
-    }
+    console.log(`📊 DataService: Loading data for ${league} ${year}`);
 
     // Check if league existed in the given year (ESPN era had no Masters)
     if (!this.isLeagueAvailableInYear(league, year)) {
@@ -40,14 +35,14 @@ export class DataService {
       console.log(`📊 DataService: Fetching ${url}`);
       const response = await fetch(url);
       if (!response.ok) {
-        console.warn(`📊 DataService: HTTP ${response.status} - No historical data found for ${league} ${year}`);
+        console.warn(`📊 DataService: HTTP ${response.status} - No data found for ${league} ${year}`);
         return null;
       }
       const data = await response.json();
       console.log(`📊 DataService: Successfully loaded ${league} ${year} with ${data.standings?.length || 0} teams`);
       return data;
     } catch (error) {
-      console.error(`📊 DataService: Failed to load historical data for ${league} ${year}:`, error);
+      console.error(`📊 DataService: Failed to load data for ${league} ${year}:`, error);
       return null;
     }
   }
@@ -77,19 +72,6 @@ export class DataService {
     };
   }
 
-  /**
-   * Check if data should come from historical cache or live API
-   */
-  shouldUseHistoricalData(year: string): boolean {
-    return isHistoricalYear(year);
-  }
-
-  /**
-   * Check if data should come from live API
-   */
-  shouldUseLiveData(year: string): boolean {
-    return isCurrentYear(year) || !isHistoricalYear(year);
-  }
 
   /**
    * Convert historical data to the format expected by the application
@@ -299,6 +281,20 @@ export class DataService {
    */
   isEspnEraYear(year: string): boolean {
     return isEspnEra(year);
+  }
+
+  /**
+   * Check if data should come from historical cache or live API
+   */
+  shouldUseHistoricalData(year: string): boolean {
+    return isHistoricalYear(year);
+  }
+
+  /**
+   * Check if data should come from live API
+   */
+  shouldUseLiveData(year: string): boolean {
+    return isCurrentYear(year) || !isHistoricalYear(year);
   }
 
   /**

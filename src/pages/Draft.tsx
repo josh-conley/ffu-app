@@ -84,7 +84,7 @@ export const Draft: React.FC = () => {
       setDraftData(null);
       setUserMap({});
 
-      // Load historical league data
+      // Load league data from static files (no live API calls)
       const historicalData = await dataService.loadHistoricalLeagueData(league.toUpperCase() as LeagueTier, year);
       
       if (!historicalData) {
@@ -286,8 +286,8 @@ export const Draft: React.FC = () => {
       )} */}
 
       {/* Draft Content */}
-      {isActiveYear(selectedYear) ? (
-        /* Show upcoming draft information for active leagues */
+      {isActiveYear(selectedYear) && (!draftData || !draftData.picks || draftData.picks.length === 0) && !isLoading ? (
+        /* Show upcoming draft information for active leagues without data */
         <div className="card text-center py-16">
           <div className="max-w-2xl mx-auto">
             <Calendar className="h-16 w-16 text-ffu-red mx-auto mb-6" />
@@ -310,32 +310,48 @@ export const Draft: React.FC = () => {
               );
             })()}
             <p className="text-gray-600 dark:text-gray-400">
-              Draft results will appear here after the draft is completed.
+              Draft results will appear here after the draft is completed and data is generated.
             </p>
           </div>
         </div>
-      ) : (
-        /* Show historical draft data */
-        draftData && !isLoading && (
-          <>
-            {/* Draft Board/List */}
-            {viewMode === 'board' ? (
-              <>
-                {/* Desktop Draft Board */}
-                <div className="hidden lg:block w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4">
-                  <DraftBoard draftData={draftData} userMap={userMap} />
-                </div>
-                {/* Mobile Draft Board */}
-                <div className="lg:hidden w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-1 pb-8">
-                  <MobileDraftBoard draftData={draftData} userMap={userMap} />
-                </div>
-              </>
-            ) : (
-              <div className="pb-8">
-                <DraftList draftData={draftData} userMap={userMap} />
+      ) : draftData && draftData.picks && draftData.picks.length > 0 && !isLoading ? (
+        /* Show draft data */
+        <>
+          {/* Draft Board/List */}
+          {viewMode === 'board' ? (
+            <>
+              {/* Desktop Draft Board */}
+              <div className="hidden lg:block w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4">
+                <DraftBoard draftData={draftData} userMap={userMap} />
               </div>
-            )}
-          </>
+              {/* Mobile Draft Board */}
+              <div className="lg:hidden w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-1 pb-8">
+                <MobileDraftBoard draftData={draftData} userMap={userMap} />
+              </div>
+            </>
+          ) : (
+            <div className="pb-8">
+              <DraftList draftData={draftData} userMap={userMap} />
+            </div>
+          )}
+        </>
+      ) : (
+        /* Show placeholder when no draft data for historical years */
+        !isLoading && !isActiveYear(selectedYear) && (
+          <div className="card text-center py-16">
+            <div className="max-w-2xl mx-auto">
+              <Calendar className="h-16 w-16 text-ffu-red mx-auto mb-6" />
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                No Draft Data Available
+              </h2>
+              <div className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                {LEAGUE_NAMES[selectedLeague as LeagueTier]} {selectedYear}
+              </div>
+              <p className="text-gray-600 dark:text-gray-400">
+                Draft data has not been generated for this league and year yet.
+              </p>
+            </div>
+          </div>
         )
       )}
     </div>

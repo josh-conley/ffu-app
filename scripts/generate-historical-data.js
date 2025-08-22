@@ -825,6 +825,29 @@ class HistoricalDataGenerator {
     console.log('✅ Data generation complete!');
     console.log(`💡 Processed ${historicalLeagues.length} historical seasons and ${activeLeagues.length} active seasons`);
   }
+
+  async generateCurrentSeasonData() {
+    console.log('🚀 Starting current season data generation...');
+
+    // Filter to only include active seasons from current year
+    const activeLeagues = LEAGUES.filter(league => 
+      SLEEPER_ACTIVE_YEARS.includes(league.year) && 
+      league.status === 'active' &&
+      !league.sleeperId.startsWith('espn-') // Only Sleeper leagues, not ESPN era
+    );
+
+    console.log(`📊 Processing ${activeLeagues.length} active leagues for current season...`);
+    
+    for (const league of activeLeagues) {
+      console.log(`📈 Processing ${league.tier} ${league.year} (Status: ${league.status})`);
+      await this.generateLeagueData(league);
+      // Add delay to be respectful to Sleeper API
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+
+    console.log('✅ Current season data generation complete!');
+    console.log(`💡 Processed ${activeLeagues.length} active leagues`);
+  }
 }
 
 // Run the script

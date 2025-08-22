@@ -11,7 +11,6 @@ interface DraftListProps {
 
 export const DraftList: React.FC<DraftListProps> = ({ draftData, userMap }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [tooltipVisible, setTooltipVisible] = useState<string | null>(null);
   
   // Get team filter from URL
   const [selectedTeam, setSelectedTeam] = useState<string | 'all'>(

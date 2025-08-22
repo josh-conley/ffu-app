@@ -19,6 +19,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "generate-data": "node scripts/generate-historical-data.js",
+    "generate-current-season": "node scripts/generate-current-season.js",
     "generate-espn-data": "node scripts/generate-espn-data.js",
     "fetch-players": "node scripts/fetch-player-data.js"
   },
