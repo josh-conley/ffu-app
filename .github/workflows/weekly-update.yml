@@ -23,7 +23,7 @@ jobs:
       run: npm install 
 
     - name: Run Node.js script
-      run: node run generate-current-season
+      run: npm run generate-current-season
 
     - name: Commit and push changes
       uses: stefanzweifel/git-auto-commit-action@v5
