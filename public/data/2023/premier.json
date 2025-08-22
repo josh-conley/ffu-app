@@ -1804,7 +1804,7 @@
           "position": "QB",
           "team": "PHI",
           "college": "Oklahoma",
-          "age": 26
+          "age": 27
         },
         "pickedBy": "465884883869233152",
         "userInfo": {
@@ -2164,7 +2164,7 @@
           "position": "WR",
           "team": "LAC",
           "college": "California",
-          "age": 32
+          "age": 33
         },
         "pickedBy": "386791325690994688",
         "userInfo": {
@@ -2684,7 +2684,7 @@
           "position": "WR",
           "team": "TB",
           "college": "Texas A&M",
-          "age": 31
+          "age": 32
         },
         "pickedBy": "467553389673181184",
         "userInfo": {
@@ -3640,7 +3640,7 @@
         "playerInfo": {
           "name": "Skyy Moore",
           "position": "WR",
-          "team": "KC",
+          "team": "SF",
           "college": "Western Michigan",
           "age": 24
         },
@@ -3662,7 +3662,7 @@
           "position": "QB",
           "team": "ATL",
           "college": "Michigan State",
-          "age": 36
+          "age": 37
         },
         "pickedBy": "508719015656099840",
         "userInfo": {
@@ -3880,7 +3880,7 @@
           "position": "WR",
           "team": "CAR",
           "college": "Minnesota State",
-          "age": 34
+          "age": 35
         },
         "pickedBy": "472876832719368192",
         "userInfo": {
@@ -4370,7 +4370,7 @@
         "playerInfo": {
           "name": "Zack Moss",
           "position": "RB",
-          "team": "CIN",
+          "team": "IND",
           "college": "Utah",
           "age": 27
         },
@@ -4738,9 +4738,9 @@
         "playerInfo": {
           "name": "Deon Jackson",
           "position": "RB",
-          "team": "IND",
+          "team": "DET",
           "college": "Duke",
-          "age": 25
+          "age": 26
         },
         "pickedBy": "507633950666584064",
         "userInfo": {
@@ -4798,7 +4798,7 @@
         "playerInfo": {
           "name": "DJ Chark",
           "position": "WR",
-          "team": "ATL",
+          "team": "CAR",
           "college": "LSU",
           "age": 28
         },
@@ -4818,7 +4818,7 @@
         "playerInfo": {
           "name": "Jeff Wilson",
           "position": "RB",
-          "team": "MIA",
+          "team": "SF",
           "college": "North Texas",
           "age": 29
         },

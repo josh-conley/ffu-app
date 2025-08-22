@@ -1825,7 +1825,7 @@
           "position": "WR",
           "team": "LAC",
           "college": "California",
-          "age": 32
+          "age": 33
         },
         "pickedBy": "465884883869233152",
         "userInfo": {
@@ -2045,7 +2045,7 @@
           "position": "WR",
           "team": "TB",
           "college": "Texas A&M",
-          "age": 31
+          "age": 32
         },
         "pickedBy": "462383465753473024",
         "userInfo": {
@@ -2123,9 +2123,9 @@
         "playerInfo": {
           "name": "Myles Gaskin",
           "position": "RB",
-          "team": "MIA",
+          "team": "BAL",
           "college": "Washington",
-          "age": 27
+          "age": 28
         },
         "pickedBy": "396808818157182976",
         "userInfo": {
@@ -2265,7 +2265,7 @@
           "position": "QB",
           "team": "ARI",
           "college": "Oklahoma",
-          "age": 27
+          "age": 28
         },
         "pickedBy": "527884868880531456",
         "userInfo": {
@@ -2465,7 +2465,7 @@
           "position": "RB",
           "team": "KC",
           "college": "Toledo",
-          "age": 29
+          "age": 30
         },
         "pickedBy": "467553389673181184",
         "userInfo": {
@@ -2525,7 +2525,7 @@
           "position": "WR",
           "team": "CAR",
           "college": "Minnesota State",
-          "age": 34
+          "age": 35
         },
         "pickedBy": "462383465753473024",
         "userInfo": {
@@ -2683,7 +2683,7 @@
         "playerInfo": {
           "name": "Noah Fant",
           "position": "TE",
-          "team": "DEN",
+          "team": "CIN",
           "college": "Iowa",
           "age": 27
         },
@@ -2923,9 +2923,9 @@
         "playerInfo": {
           "name": "Robbie Chosen",
           "position": "WR",
-          "team": "CAR",
+          "team": "SF",
           "college": "Temple",
-          "age": 31
+          "age": 32
         },
         "pickedBy": "705642514408886272",
         "userInfo": {
@@ -2943,7 +2943,7 @@
         "playerInfo": {
           "name": "Zack Moss",
           "position": "RB",
-          "team": "CIN",
+          "team": "BUF",
           "college": "Utah",
           "age": 27
         },
@@ -3163,7 +3163,7 @@
         "playerInfo": {
           "name": "DJ Chark",
           "position": "WR",
-          "team": "ATL",
+          "team": "JAX",
           "college": "LSU",
           "age": 28
         },
@@ -3385,7 +3385,7 @@
           "position": "QB",
           "team": "PHI",
           "college": "Oklahoma",
-          "age": 26
+          "age": 27
         },
         "pickedBy": "396808818157182976",
         "userInfo": {
@@ -3543,7 +3543,7 @@
           "position": "WR",
           "team": "BUF",
           "college": "Ohio State",
-          "age": 28
+          "age": 29
         },
         "pickedBy": "705642514408886272",
         "userInfo": {
@@ -3659,7 +3659,7 @@
         "playerInfo": {
           "name": "Marquez Callaway",
           "position": "WR",
-          "team": "NO",
+          "team": "LV",
           "college": "Tennessee",
           "age": 27
         },
@@ -3721,7 +3721,7 @@
           "position": "TE",
           "team": "PIT",
           "college": "Florida International",
-          "age": 29
+          "age": 30
         },
         "pickedBy": "527884868880531456",
         "userInfo": {
@@ -4483,7 +4483,7 @@
         "playerInfo": {
           "name": "Equanimeous St. Brown",
           "position": "WR",
-          "team": "SF",
+          "team": "GB",
           "college": "Notre Dame",
           "age": 28
         },
@@ -4625,7 +4625,7 @@
           "position": "QB",
           "team": "ATL",
           "college": "Michigan State",
-          "age": 36
+          "age": 37
         },
         "pickedBy": "465884883869233152",
         "userInfo": {

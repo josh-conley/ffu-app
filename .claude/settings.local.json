@@ -23,7 +23,9 @@
       "Bash(tsc:*)",
       "Bash(npx tsc:*)",
       "WebFetch(domain:github.com)",
-      "Bash(timeout 30 curl -s \"https://github.com/nflverse/nflverse-data/releases/download/weekly_rosters/roster_weekly_2022.csv\")"
+      "Bash(timeout 30 curl -s \"https://github.com/nflverse/nflverse-data/releases/download/weekly_rosters/roster_weekly_2022.csv\")",
+      "Bash(npm run fetch-players:*)",
+      "Bash(npm run generate-data:*)"
     ],
     "deny": []
   }

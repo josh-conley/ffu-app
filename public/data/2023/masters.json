@@ -1847,7 +1847,7 @@
           "position": "QB",
           "team": "PHI",
           "college": "Oklahoma",
-          "age": 26
+          "age": 27
         },
         "pickedBy": "727368657923063808",
         "userInfo": {
@@ -1987,7 +1987,7 @@
           "position": "WR",
           "team": "LAC",
           "college": "California",
-          "age": 32
+          "age": 33
         },
         "pickedBy": "396808818157182976",
         "userInfo": {
@@ -2567,7 +2567,7 @@
           "position": "WR",
           "team": "TB",
           "college": "Texas A&M",
-          "age": 31
+          "age": 32
         },
         "pickedBy": "396808818157182976",
         "userInfo": {
@@ -3605,7 +3605,7 @@
         "playerInfo": {
           "name": "Skyy Moore",
           "position": "WR",
-          "team": "KC",
+          "team": "SF",
           "college": "Western Michigan",
           "age": 24
         },
@@ -3647,7 +3647,7 @@
           "position": "WR",
           "team": "CAR",
           "college": "Minnesota State",
-          "age": 34
+          "age": 35
         },
         "pickedBy": "467404039059927040",
         "userInfo": {
@@ -4277,7 +4277,7 @@
           "position": "QB",
           "team": "ATL",
           "college": "Michigan State",
-          "age": 36
+          "age": 37
         },
         "pickedBy": "729741648338210816",
         "userInfo": {
@@ -4549,7 +4549,7 @@
         "playerInfo": {
           "name": "Jeff Wilson",
           "position": "RB",
-          "team": "MIA",
+          "team": "SF",
           "college": "North Texas",
           "age": 29
         },
@@ -4611,7 +4611,7 @@
           "position": "WR",
           "team": "IND",
           "college": "North Carolina",
-          "age": 23
+          "age": 24
         },
         "pickedBy": "727368657923063808",
         "userInfo": {
@@ -4783,7 +4783,7 @@
         "playerInfo": {
           "name": "Parris Campbell",
           "position": "WR",
-          "team": "DAL",
+          "team": "NYG",
           "college": "Ohio State",
           "age": 28
         },

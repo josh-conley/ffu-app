@@ -26,12 +26,14 @@ const LEAGUES = [
   { sleeperId: 'espn-2018-premier', year: '2018', tier: 'PREMIER', status: 'completed', startYear: 2018 },
   
   // MASTERS LEAGUE  
+  { sleeperId: '1256011253583708161', year: '2025', tier: 'MASTERS', status: 'active', startYear: 2025 },
   { sleeperId: '1124833010697379840', year: '2024', tier: 'MASTERS', status: 'completed', startYear: 2024 },
   { sleeperId: '989238596353794048', year: '2023', tier: 'MASTERS', status: 'completed', startYear: 2023 },
   { sleeperId: '856271401471029248', year: '2022', tier: 'MASTERS', status: 'completed', startYear: 2022 },
   // Note: No Masters league in ESPN era (2018-2020)
   
   // NATIONAL LEAGUE
+  { sleeperId: '1256012193275576320', year: '2025', tier: 'NATIONAL', status: 'active', startYear: 2025 },
   { sleeperId: '1124834889196134400', year: '2024', tier: 'NATIONAL', status: 'completed', startYear: 2024 },
   { sleeperId: '989240797381951488', year: '2023', tier: 'NATIONAL', status: 'completed', startYear: 2023 },
   { sleeperId: '856271753788403712', year: '2022', tier: 'NATIONAL', status: 'completed', startYear: 2022 },
@@ -41,8 +43,9 @@ const LEAGUES = [
   { sleeperId: 'espn-2018-national', year: '2018', tier: 'NATIONAL', status: 'completed', startYear: 2018 },
 ];
 
-// Only process completed seasons - active seasons will use live API
+// Process completed seasons for historical data and active seasons for current data
 const SLEEPER_HISTORICAL_YEARS = ['2021', '2022', '2023', '2024'];
+const SLEEPER_ACTIVE_YEARS = ['2025'];
 
 class SleeperAPIService {
   constructor() {
@@ -793,26 +796,34 @@ class HistoricalDataGenerator {
   }
 
   async generateAllHistoricalData() {
-    console.log('🚀 Starting historical data generation...');
+    console.log('🚀 Starting data generation...');
 
-    // Filter to only include completed seasons from Sleeper era
+    // Filter to include completed seasons and active seasons from Sleeper era
     const historicalLeagues = LEAGUES.filter(league => 
       SLEEPER_HISTORICAL_YEARS.includes(league.year) && 
       league.status === 'completed' &&
       !league.sleeperId.startsWith('espn-') // Only Sleeper leagues, not ESPN era
     );
 
-    console.log(`📊 Processing ${historicalLeagues.length} completed Sleeper leagues...`);
+    const activeLeagues = LEAGUES.filter(league => 
+      SLEEPER_ACTIVE_YEARS.includes(league.year) && 
+      league.status === 'active' &&
+      !league.sleeperId.startsWith('espn-') // Only Sleeper leagues, not ESPN era
+    );
+
+    const allLeagues = [...historicalLeagues, ...activeLeagues];
+
+    console.log(`📊 Processing ${historicalLeagues.length} completed Sleeper leagues and ${activeLeagues.length} active leagues...`);
     
-    for (const league of historicalLeagues) {
+    for (const league of allLeagues) {
       console.log(`📈 Processing ${league.tier} ${league.year} (Status: ${league.status})`);
       await this.generateLeagueData(league);
       // Add delay to be respectful to Sleeper API
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
 
-    console.log('✅ Historical data generation complete!');
-    console.log('💡 Active seasons will be handled by the live API');
+    console.log('✅ Data generation complete!');
+    console.log(`💡 Processed ${historicalLeagues.length} historical seasons and ${activeLeagues.length} active seasons`);
   }
 }
 

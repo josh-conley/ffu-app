@@ -36,12 +36,14 @@ export const LEAGUES: LeagueConfig[] = [
   { sleeperId: 'espn-2018-premier', year: '2018', tier: 'PREMIER', status: 'completed', startYear: 2018 },
   
   // MASTERS LEAGUE  
+  { sleeperId: '1256011253583708161', year: '2025', tier: 'MASTERS', status: 'active', startYear: 2025 },
   { sleeperId: '1124833010697379840', year: '2024', tier: 'MASTERS', status: 'completed', startYear: 2024 },
   { sleeperId: '989238596353794048', year: '2023', tier: 'MASTERS', status: 'completed', startYear: 2023 },
   { sleeperId: '856271401471029248', year: '2022', tier: 'MASTERS', status: 'completed', startYear: 2022 },
   // Note: No Masters league in ESPN era (2018-2020)
   
   // NATIONAL LEAGUE
+  { sleeperId: '1256012193275576320', year: '2025', tier: 'NATIONAL', status: 'active', startYear: 2025 },
   { sleeperId: '1124834889196134400', year: '2024', tier: 'NATIONAL', status: 'completed', startYear: 2024 },
   { sleeperId: '989240797381951488', year: '2023', tier: 'NATIONAL', status: 'completed', startYear: 2023 },
   { sleeperId: '856271753788403712', year: '2022', tier: 'NATIONAL', status: 'completed', startYear: 2022 },
@@ -104,6 +106,13 @@ export const USERS: UserConfig[] = [
   { ffuId: 'ffu-049', sleeperId: '726584695151734784', teamName: 'The Ducklings', abbreviation: 'DUCK', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-050', sleeperId: '729571025750208512', teamName: 'chetmaynard', abbreviation: 'CHET', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-051', sleeperId: '399379352174768128', teamName: 'Stone Cold Steve Irwins', abbreviation: 'SCSI', joinedYear: 2020, isActive: true, espnUsername: 'scsi', historicalTeamNames: { '2020': 'Stone Cold Steve Irwins' } },
+  
+  // New members joining for 2025 season
+  { ffuId: 'ffu-052', sleeperId: '1132015239492591616', teamName: 'The Steel Tigers', abbreviation: 'STEEL', joinedYear: 2025, isActive: true },
+  { ffuId: 'ffu-053', sleeperId: '1256013880681832448', teamName: 'Jawn of Arc', abbreviation: 'JAWN', joinedYear: 2025, isActive: true },
+  { ffuId: 'ffu-054', sleeperId: '1259227854642622464', teamName: 'The Underdogs', abbreviation: 'UDOGS', joinedYear: 2025, isActive: true },
+  { ffuId: 'ffu-055', sleeperId: '797222154151247872', teamName: 'Dawn Island Straw Hats', abbreviation: 'STRAW', joinedYear: 2025, isActive: true },
+  { ffuId: 'ffu-056', sleeperId: '866063012375719936', teamName: 'The Inferno Swarm', abbreviation: 'SWARM', joinedYear: 2025, isActive: true },
   
   // Historical users who participated in ESPN era but didn't continue to Sleeper era
   { ffuId: 'ffu-h01', sleeperId: 'historical-naptown-makos', teamName: 'Naptown Makos', abbreviation: 'NM', joinedYear: 2019, isActive: false, espnUsername: 'makos', historicalTeamNames: { '2019': 'Naptown Makos' } },

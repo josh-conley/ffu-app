@@ -522,10 +522,13 @@ export class LeagueService {
   async getAllTimeRecords(league?: LeagueTier, year?: string): Promise<AllTimeRecords> {
     const allLeagues = getAllLeagueConfigs();
     
-    // Filter leagues based on parameters
+    // Filter leagues based on parameters, excluding active seasons for meaningful records
     const filteredLeagues = allLeagues.filter(config => {
       if (league && league !== config.tier) return false;
       if (year && year !== config.year) return false;
+      // Exclude active seasons (status: 'active') for records calculation
+      // as they have no meaningful scores yet
+      if (config.status === 'active') return false;
       return true;
     });
 
@@ -693,24 +696,36 @@ export class LeagueService {
   }
 
   private findHighestScore(gameRecords: GameRecord[]): GameRecord {
+    if (gameRecords.length === 0) {
+      throw new Error('No game records available for highest score calculation');
+    }
     return gameRecords.reduce((highest, current) => 
       current.score > highest.score ? current : highest
     );
   }
 
   private findLowestScore(gameRecords: GameRecord[]): GameRecord {
+    if (gameRecords.length === 0) {
+      throw new Error('No game records available for lowest score calculation');
+    }
     return gameRecords.reduce((lowest, current) => 
       current.score < lowest.score ? current : lowest
     );
   }
 
   private findMostPointsSeason(seasonRecords: SeasonRecord[]): SeasonRecord {
+    if (seasonRecords.length === 0) {
+      throw new Error('No season records available for most points calculation');
+    }
     return seasonRecords.reduce((highest, current) => 
       current.points > highest.points ? current : highest
     );
   }
 
   private findLeastPointsSeason(seasonRecords: SeasonRecord[]): SeasonRecord {
+    if (seasonRecords.length === 0) {
+      throw new Error('No season records available for least points calculation');
+    }
     return seasonRecords.reduce((lowest, current) => 
       current.points < lowest.points ? current : lowest
     );
@@ -718,6 +733,9 @@ export class LeagueService {
 
   private findMostPointsInLoss(gameRecords: (GameRecord & { isLoss: boolean })[]): GameRecord {
     const losses = gameRecords.filter(record => record.isLoss);
+    if (losses.length === 0) {
+      throw new Error('No loss records available for most points in loss calculation');
+    }
     return losses.reduce((highest, current) => 
       current.score > highest.score ? current : highest
     );
@@ -725,6 +743,9 @@ export class LeagueService {
 
   private findFewestPointsInWin(gameRecords: (GameRecord & { isWin: boolean })[]): GameRecord {
     const wins = gameRecords.filter(record => record.isWin);
+    if (wins.length === 0) {
+      throw new Error('No win records available for fewest points in win calculation');
+    }
     return wins.reduce((lowest, current) => 
       current.score < lowest.score ? current : lowest
     );
@@ -738,6 +759,9 @@ export class LeagueService {
     winnerInfo: UserInfo,
     loserInfo: UserInfo 
   })[]): AllTimeRecords['closestGame'] {
+    if (matchups.length === 0) {
+      throw new Error('No matchup records available for closest game calculation');
+    }
     const closest = matchups.reduce((closest, current) => 
       current.margin < closest.margin ? current : closest
     );
@@ -762,6 +786,9 @@ export class LeagueService {
     winnerInfo: UserInfo,
     loserInfo: UserInfo 
   })[]): AllTimeRecords['biggestBlowout'] {
+    if (matchups.length === 0) {
+      throw new Error('No matchup records available for biggest blowout calculation');
+    }
     const biggest = matchups.reduce((biggest, current) => 
       current.margin > biggest.margin ? current : biggest
     );

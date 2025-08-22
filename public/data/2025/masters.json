@@ -1,0 +1,171 @@
+{
+  "league": "MASTERS",
+  "year": "2025",
+  "leagueId": "1256011253583708161",
+  "standings": [
+    {
+      "userId": "472876832719368192",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 1,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "396808818157182976",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 2,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "462383465753473024",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 3,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "864966364937461760",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 4,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "860973514839199744",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 5,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "325766631336714240",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 6,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "1124071986805829632",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 7,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "1133491276038426624",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 8,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "856248808915480576",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 9,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "865323291064291328",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 10,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "639877229681147904",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 11,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "1133492104077946880",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 12,
+      "highGame": 0,
+      "lowGame": 0
+    }
+  ],
+  "playoffResults": [],
+  "promotions": [
+    "472876832719368192",
+    "396808818157182976"
+  ],
+  "relegations": [
+    "639877229681147904",
+    "1133492104077946880"
+  ],
+  "matchupsByWeek": {},
+  "memberGameStats": {},
+  "draftData": {
+    "draftId": "1256011253592104960",
+    "leagueId": "1256011253583708161",
+    "year": "2025",
+    "league": "MASTERS",
+    "draftOrder": {
+      "1124071986805829632": 9,
+      "1133491276038426624": 3,
+      "1133492104077946880": 2,
+      "325766631336714240": 10,
+      "396808818157182976": 11,
+      "462383465753473024": 1,
+      "472876832719368192": 12,
+      "639877229681147904": 7,
+      "856248808915480576": 6,
+      "860973514839199744": 5,
+      "864966364937461760": 4,
+      "865323291064291328": 8
+    },
+    "picks": [],
+    "settings": {
+      "teams": 12,
+      "rounds": 15,
+      "draftType": "Unknown"
+    },
+    "metadata": {
+      "name": "FFU Masters League",
+      "description": "",
+      "scoringType": "half_ppr"
+    },
+    "startTime": 1756429227000,
+    "status": "pre_draft"
+  }
+}

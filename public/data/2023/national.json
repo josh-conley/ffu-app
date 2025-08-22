@@ -1525,7 +1525,7 @@
           "position": "QB",
           "team": "PHI",
           "college": "Oklahoma",
-          "age": 26
+          "age": 27
         },
         "pickedBy": "856248808915480576",
         "userInfo": {
@@ -2125,7 +2125,7 @@
           "position": "WR",
           "team": "LAC",
           "college": "California",
-          "age": 32
+          "age": 33
         },
         "pickedBy": "865078270985629696",
         "userInfo": {
@@ -2845,7 +2845,7 @@
           "position": "WR",
           "team": "TB",
           "college": "Texas A&M",
-          "age": 31
+          "age": 32
         },
         "pickedBy": "821067488811909120",
         "userInfo": {
@@ -3561,7 +3561,7 @@
         "playerInfo": {
           "name": "Skyy Moore",
           "position": "WR",
-          "team": "KC",
+          "team": "SF",
           "college": "Western Michigan",
           "age": 24
         },
@@ -3661,7 +3661,7 @@
           "position": "WR",
           "team": "CAR",
           "college": "Minnesota State",
-          "age": 34
+          "age": 35
         },
         "pickedBy": "602712418325442560",
         "userInfo": {
@@ -4081,7 +4081,7 @@
           "position": "QB",
           "team": "ATL",
           "college": "Michigan State",
-          "age": 36
+          "age": 37
         },
         "pickedBy": "639877229681147904",
         "userInfo": {
@@ -4353,9 +4353,9 @@
         "playerInfo": {
           "name": "Deon Jackson",
           "position": "RB",
-          "team": "IND",
+          "team": "DET",
           "college": "Duke",
-          "age": 25
+          "age": 26
         },
         "pickedBy": "664739261735591936",
         "userInfo": {
@@ -4395,7 +4395,7 @@
           "position": "RB",
           "team": "KC",
           "college": "Toledo",
-          "age": 29
+          "age": 30
         },
         "pickedBy": "856248808915480576",
         "userInfo": {
@@ -4433,7 +4433,7 @@
         "playerInfo": {
           "name": "Zack Moss",
           "position": "RB",
-          "team": "CIN",
+          "team": "IND",
           "college": "Utah",
           "age": 27
         },
@@ -4489,7 +4489,7 @@
         "playerInfo": {
           "name": "Cordarrelle Patterson",
           "position": "RB",
-          "team": "PIT",
+          "team": "ATL",
           "college": "Tennessee",
           "age": 34
         },
@@ -4625,9 +4625,9 @@
         "playerInfo": {
           "name": "Nate Sudfeld",
           "position": "QB",
-          "team": "DET",
+          "team": "SF",
           "college": "Indiana",
-          "age": 30
+          "age": 31
         },
         "pickedBy": "84604928349585408",
         "userInfo": {
@@ -4743,7 +4743,7 @@
         "playerInfo": {
           "name": "Jeff Wilson",
           "position": "RB",
-          "team": "MIA",
+          "team": "SF",
           "college": "North Texas",
           "age": 29
         },
@@ -4861,7 +4861,7 @@
         "playerInfo": {
           "name": "DJ Chark",
           "position": "WR",
-          "team": "ATL",
+          "team": "CAR",
           "college": "LSU",
           "age": 28
         },

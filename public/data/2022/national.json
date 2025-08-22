@@ -1765,7 +1765,7 @@
           "position": "WR",
           "team": "TB",
           "college": "Texas A&M",
-          "age": 31
+          "age": 32
         },
         "pickedBy": "398552306884345856",
         "userInfo": {
@@ -1945,7 +1945,7 @@
           "position": "WR",
           "team": "LAC",
           "college": "California",
-          "age": 32
+          "age": 33
         },
         "pickedBy": "804551335088361472",
         "userInfo": {
@@ -2405,7 +2405,7 @@
           "position": "WR",
           "team": "CAR",
           "college": "Minnesota State",
-          "age": 34
+          "age": 35
         },
         "pickedBy": "821067488811909120",
         "userInfo": {
@@ -2425,7 +2425,7 @@
           "position": "QB",
           "team": "ARI",
           "college": "Oklahoma",
-          "age": 27
+          "age": 28
         },
         "pickedBy": "804551335088361472",
         "userInfo": {
@@ -2983,7 +2983,7 @@
         "playerInfo": {
           "name": "Cordarrelle Patterson",
           "position": "RB",
-          "team": "PIT",
+          "team": "ATL",
           "college": "Tennessee",
           "age": 34
         },
@@ -3005,7 +3005,7 @@
           "position": "RB",
           "team": "KC",
           "college": "Toledo",
-          "age": 29
+          "age": 30
         },
         "pickedBy": "865078270985629696",
         "userInfo": {
@@ -3065,7 +3065,7 @@
           "position": "QB",
           "team": "PHI",
           "college": "Oklahoma",
-          "age": 26
+          "age": 27
         },
         "pickedBy": "860973514839199744",
         "userInfo": {
@@ -3661,7 +3661,7 @@
         "playerInfo": {
           "name": "Skyy Moore",
           "position": "WR",
-          "team": "KC",
+          "team": "SF",
           "college": "Western Michigan",
           "age": 24
         },
@@ -3783,7 +3783,7 @@
           "position": "QB",
           "team": "ATL",
           "college": "Michigan State",
-          "age": 36
+          "age": 37
         },
         "pickedBy": "578691097983754240",
         "userInfo": {
@@ -4061,7 +4061,7 @@
         "playerInfo": {
           "name": "DJ Chark",
           "position": "WR",
-          "team": "ATL",
+          "team": "DET",
           "college": "LSU",
           "age": 28
         },
@@ -4237,7 +4237,7 @@
         "playerInfo": {
           "name": "Albert Okwuegbunam",
           "position": "TE",
-          "team": "IND",
+          "team": "LV",
           "college": "Missouri",
           "age": 27
         },
@@ -4435,7 +4435,7 @@
         "playerInfo": {
           "name": "Tyrion Davis-Price",
           "position": "RB",
-          "team": "SF",
+          "team": "GB",
           "college": "LSU",
           "age": 24
         },
@@ -4687,7 +4687,7 @@
           "position": "WR",
           "team": "BUF",
           "college": "Ohio State",
-          "age": 28
+          "age": 29
         },
         "pickedBy": "398552306884345856",
         "userInfo": {
@@ -4727,7 +4727,7 @@
           "position": "TE",
           "team": "HOU",
           "college": "Alabama",
-          "age": 26
+          "age": 27
         },
         "pickedBy": "578691097983754240",
         "userInfo": {
@@ -4861,7 +4861,7 @@
         "playerInfo": {
           "name": "Parris Campbell",
           "position": "WR",
-          "team": "DAL",
+          "team": "IND",
           "college": "Ohio State",
           "age": 28
         },

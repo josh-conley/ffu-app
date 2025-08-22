@@ -1,0 +1,168 @@
+{
+  "league": "PREMIER",
+  "year": "2025",
+  "leagueId": "1256010768692805632",
+  "standings": [
+    {
+      "userId": "399297882890440704",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 1,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "331590801261883392",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 2,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "84006772809285632",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 3,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "710981985102802944",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 4,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "467553389673181184",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 5,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "470715135581745152",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 6,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "507633950666584064",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 7,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "508719015656099840",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 8,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "399322397750124544",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 9,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "527884868880531456",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 10,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "727368657923063808",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 11,
+      "highGame": 0,
+      "lowGame": 0
+    },
+    {
+      "userId": "465884883869233152",
+      "wins": 0,
+      "losses": 0,
+      "pointsFor": 0,
+      "pointsAgainst": 0,
+      "rank": 12,
+      "highGame": 0,
+      "lowGame": 0
+    }
+  ],
+  "playoffResults": [],
+  "promotions": [],
+  "relegations": [
+    "727368657923063808",
+    "465884883869233152"
+  ],
+  "matchupsByWeek": {},
+  "memberGameStats": {},
+  "draftData": {
+    "draftId": "1256010768709586944",
+    "leagueId": "1256010768692805632",
+    "year": "2025",
+    "league": "PREMIER",
+    "draftOrder": {
+      "331590801261883392": 5,
+      "399297882890440704": 3,
+      "399322397750124544": 4,
+      "465884883869233152": 6,
+      "467553389673181184": 2,
+      "470715135581745152": 8,
+      "507633950666584064": 10,
+      "508719015656099840": 7,
+      "527884868880531456": 11,
+      "710981985102802944": 9,
+      "727368657923063808": 1,
+      "84006772809285632": 12
+    },
+    "picks": [],
+    "settings": {
+      "teams": 12,
+      "rounds": 15,
+      "draftType": "Unknown"
+    },
+    "metadata": {
+      "name": "FFU Premier League",
+      "description": "",
+      "scoringType": "half_ppr"
+    },
+    "startTime": 1756945809000,
+    "status": "pre_draft"
+  }
+}
