@@ -23,7 +23,10 @@
       "Bash(tsc:*)",
       "Bash(npx tsc:*)",
       "WebFetch(domain:github.com)",
-      "Bash(timeout 30 curl -s \"https://github.com/nflverse/nflverse-data/releases/download/weekly_rosters/roster_weekly_2022.csv\")"
+      "Bash(timeout 30 curl -s \"https://github.com/nflverse/nflverse-data/releases/download/weekly_rosters/roster_weekly_2022.csv\")",
+      "WebFetch(domain:underdogfantasy.com)",
+      "WebFetch(domain:www.rotowire.com)",
+      "WebFetch(domain:www.fantasypros.com)"
     ],
     "deny": []
   }

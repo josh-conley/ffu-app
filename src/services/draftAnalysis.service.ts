@@ -176,6 +176,7 @@ export class DraftAnalysisService {
         userId,
         userInfo: {
           userId,
+          ffuUserId: userId, // Use userId as ffuUserId for now
           teamName: userInfo.teamName,
           abbreviation: userInfo.abbreviation
         },

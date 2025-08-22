@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { LoadingSpinner } from '../Common/LoadingSpinner';
-import { LeagueTrendsCharts } from './LeagueTrendsCharts';
 import { DrafterComparison } from './DrafterComparison';
 import { DraftPreparationInsights } from './DraftPreparationInsights';
-import { draftAnalysisService, type DrafterProfile, type ComprehensiveLeagueTrends } from '../../services/draftAnalysis.service';
-import { ChevronDown, TrendingUp, Target, Calendar, Users, Lightbulb } from 'lucide-react';
+import { MockDraftBoard } from './MockDraftBoard';
+import { draftAnalysisService, type DrafterProfile } from '../../services/draftAnalysis.service';
+import { ChevronDown, Target, Calendar, Users, Lightbulb, Gamepad2 } from 'lucide-react';
 
-type AnalysisView = 'individual' | 'trends' | 'comparison' | 'preparation';
+type AnalysisView = 'individual' | 'comparison' | 'preparation' | 'mockdraft';
 
 export const DraftTrendsAnalysis: React.FC = () => {
   const [drafterProfiles, setDrafterProfiles] = useState<DrafterProfile[]>([]);
-  const [leagueTrends, setLeagueTrends] = useState<ComprehensiveLeagueTrends[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | undefined>();
   
   const [activeView, setActiveView] = useState<AnalysisView>('individual');
   const [selectedDrafter, setSelectedDrafter] = useState<string>('');
-  const [selectedYear, setSelectedYear] = useState<string>('all');
-  const [selectedLeague, setSelectedLeague] = useState<string>('all');
 
   useEffect(() => {
     loadAnalysisData();
@@ -28,13 +25,9 @@ export const DraftTrendsAnalysis: React.FC = () => {
       setIsLoading(true);
       setError(undefined);
       
-      const [profiles, trends] = await Promise.all([
-        draftAnalysisService.generateDrafterProfiles(),
-        draftAnalysisService.generateLeagueTrends()
-      ]);
+      const profiles = await draftAnalysisService.generateDrafterProfiles();
       
       setDrafterProfiles(profiles);
-      setLeagueTrends(trends);
       
       // Set default selected drafter to first one with data
       if (profiles.length > 0 && !selectedDrafter) {
@@ -52,29 +45,6 @@ export const DraftTrendsAnalysis: React.FC = () => {
     return drafterProfiles.find(profile => profile.userId === selectedDrafter);
   };
 
-  const getFilteredTrends = (): ComprehensiveLeagueTrends[] => {
-    return leagueTrends.filter(trend => {
-      const yearMatch = selectedYear === 'all' || trend.year === selectedYear;
-      const leagueMatch = selectedLeague === 'all' || trend.league === selectedLeague;
-      return yearMatch && leagueMatch;
-    });
-  };
-
-  const getYearsFromProfiles = (): string[] => {
-    const years = new Set<string>();
-    drafterProfiles.forEach(profile => {
-      profile.drafts.forEach(draft => years.add(draft.year));
-    });
-    return Array.from(years).sort((a, b) => b.localeCompare(a));
-  };
-
-  const getLeaguesFromProfiles = (): string[] => {
-    const leagues = new Set<string>();
-    drafterProfiles.forEach(profile => {
-      profile.drafts.forEach(draft => leagues.add(draft.league));
-    });
-    return Array.from(leagues).sort();
-  };
 
 
   const getConsistencyColor = (score: number): string => {
@@ -127,11 +97,10 @@ export const DraftTrendsAnalysis: React.FC = () => {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-          FFU Draft Trends Analysis
+          FFU Draft Analysis
         </h1>
         <p className="text-gray-600 dark:text-gray-300">
-          Comprehensive analysis of drafting patterns and habits across all FFU leagues and years.
-          Discover trends, predict behavior, and prepare for the 2025 draft.
+          Analyze individual member drafting patterns, consistency, and tendencies to understand league mates better.
         </p>
       </div>
 
@@ -151,17 +120,6 @@ export const DraftTrendsAnalysis: React.FC = () => {
               Individual Analysis
             </button>
             <button
-              onClick={() => setActiveView('trends')}
-              className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
-                activeView === 'trends'
-                  ? 'border-ffu-red text-ffu-red'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
-              }`}
-            >
-              <TrendingUp className="w-4 h-4 inline mr-2" />
-              League Trends
-            </button>
-            <button
               onClick={() => setActiveView('comparison')}
               className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
                 activeView === 'comparison'
@@ -170,7 +128,7 @@ export const DraftTrendsAnalysis: React.FC = () => {
               }`}
             >
               <Users className="w-4 h-4 inline mr-2" />
-              Drafter Comparison
+              Member Comparison
             </button>
             <button
               onClick={() => setActiveView('preparation')}
@@ -181,7 +139,18 @@ export const DraftTrendsAnalysis: React.FC = () => {
               }`}
             >
               <Lightbulb className="w-4 h-4 inline mr-2" />
-              2025 Prep
+              Predictability
+            </button>
+            <button
+              onClick={() => setActiveView('mockdraft')}
+              className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
+                activeView === 'mockdraft'
+                  ? 'border-ffu-red text-ffu-red'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
+              }`}
+            >
+              <Gamepad2 className="w-4 h-4 inline mr-2" />
+              Mock Draft
             </button>
           </nav>
         </div>
@@ -455,65 +424,22 @@ export const DraftTrendsAnalysis: React.FC = () => {
         </div>
       )}
 
-      {/* League Trends View */}
-      {activeView === 'trends' && (
-        <div className="space-y-8">
-          {/* Filters */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Filter League Trends
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  Year
-                </label>
-                <select
-                  value={selectedYear}
-                  onChange={(e) => setSelectedYear(e.target.value)}
-                  className="block w-full pl-3 pr-10 py-2 text-base bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-ffu-red focus:border-ffu-red rounded-md"
-                >
-                  <option value="all">All Years</option>
-                  {getYearsFromProfiles().map(year => (
-                    <option key={year} value={year}>{year}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  League
-                </label>
-                <select
-                  value={selectedLeague}
-                  onChange={(e) => setSelectedLeague(e.target.value)}
-                  className="block w-full pl-3 pr-10 py-2 text-base bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-ffu-red focus:border-ffu-red rounded-md"
-                >
-                  <option value="all">All Leagues</option>
-                  {getLeaguesFromProfiles().map(league => (
-                    <option key={league} value={league}>{league}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
-
-          {/* Trends Visualization */}
-          <LeagueTrendsCharts trends={getFilteredTrends()} />
-        </div>
-      )}
 
       {/* Comparison View */}
       {activeView === 'comparison' && (
         <DrafterComparison drafterProfiles={drafterProfiles} />
       )}
 
-      {/* 2025 Preparation View */}
+      {/* Predictability View */}
       {activeView === 'preparation' && (
         <DraftPreparationInsights 
           drafterProfiles={drafterProfiles}
-          leagueTrends={leagueTrends}
-          selectedLeague={selectedLeague}
         />
+      )}
+
+      {/* Mock Draft View */}
+      {activeView === 'mockdraft' && (
+        <MockDraftBoard />
       )}
     </div>
   );
