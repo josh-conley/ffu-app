@@ -43,7 +43,7 @@ export const TeamLogo = ({
   }
 
   return (
-    <div className={baseClasses} title={teamName}>
+    <div className={`${baseClasses} bg-white dark:bg-gray-800`} title={teamName}>
       <img
         src={logoUrl}
         alt={`${teamName} logo`}

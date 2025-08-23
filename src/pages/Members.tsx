@@ -464,29 +464,27 @@ export const Members = () => {
           {/* Player Overview Card */}
           <div className="card">
             {/* Header */}
-            <div className="flex items-center space-x-4 mb-6">
+            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-8">
               <TeamLogo
                 teamName={selectedPlayer.userInfo.teamName}
                 abbreviation={selectedPlayer.userInfo.abbreviation}
                 size="lg"
-                className="w-16 h-16"
+                className="w-36 h-36"
               />
-              <div className="flex-1">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                    {selectedPlayer.userInfo.teamName}
-                  </h2>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <p className="text-gray-600 dark:text-gray-400">
+              <div className="text-center">
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                  {selectedPlayer.userInfo.teamName}
+                </h2>
+                <div className="flex items-center justify-center space-x-3 mb-2">
+                  <p className="text-lg text-gray-600 dark:text-gray-400">
                     {selectedPlayer.userInfo.abbreviation}
                   </p>
-                  <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-300 whitespace-nowrap">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-300">
                     {selectedPlayer.seasonHistory.length} seasons
                   </span>
                 </div>
                 {selectedPlayer.pastTeamNames.length > 0 && (
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
                     Previously: {selectedPlayer.pastTeamNames.join(', ')}
                   </p>
                 )}

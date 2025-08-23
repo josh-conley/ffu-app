@@ -18,7 +18,7 @@ const TEAM_LOGO_MAP: Record<string, string> = {
   "Indianapolis Aztecs": "Indianapolis Aztecs.jpg",
   "Johnkshire Cats": "Johnkshire Cats.jpg",
   "LegendsRise": "LegendsRise.png",
-  "Malibu Leopards": "Malibu Leopards.png",
+  "Malibu Leopards": "Malibu Leopards.jpg",
   "Nighthawks": "Nighthawks.png",
   "Odin's Herr": "Odin_s Herr.jpg",
   "Odins Herr": "Odin_s Herr.jpg",
@@ -42,7 +42,11 @@ const TEAM_LOGO_MAP: Record<string, string> = {
   "Sha Dynasty": "The Sha_Dynasty.jpg",
   "The Stallions": "The Stallions.png",
   "The Tooth Tuggers": "The Tooth Tuggers.png",
-  "Jawn of Arc": "Jawn of Arc.png"
+  "Jawn of Arc": "Jawn of Arc.png",
+  "The Inferno Swarm": "The Inferno Swarm.jpg",
+  "The Steel Tigers": "The Steel Tigers.png",
+  "Dawn Island Straw Hats": "Dawn Island Straw Hats.jpg",
+  "The Underdogs": "The Underdogs.jpg"
 };
 
 /**
