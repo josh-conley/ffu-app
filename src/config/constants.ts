@@ -61,7 +61,7 @@ export const USERS: UserConfig[] = [
   { ffuId: 'ffu-004', sleeperId: '398576262546735104', teamName: 'Blood, Sweat, and Beers', abbreviation: 'BEER', joinedYear: 2020, isActive: true, espnUsername: 'beers', historicalTeamNames: { '2020': 'Blood, Sweat and Beers' } },
   { ffuId: 'ffu-005', sleeperId: '467404039059927040', teamName: 'Malibu Leopards', abbreviation: 'MLBU', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-006', sleeperId: '470715135581745152', teamName: 'Pottsville Maroons', abbreviation: 'POTT', joinedYear: 2021, isActive: true },
-  { ffuId: 'ffu-007', sleeperId: '705642514408886272', teamName: 'The Dark Knights', abbreviation: 'BATS', joinedYear: 2021, isActive: true, historicalTeamNames: { '2020': 'Purple Parade' }  },
+  { ffuId: 'ffu-007', sleeperId: '705642514408886272', teamName: 'Dark Knights', abbreviation: 'BATS', joinedYear: 2021, isActive: true, historicalTeamNames: { '2020': 'Purple Parade' }  },
   { ffuId: 'ffu-008', sleeperId: '710981985102802944', teamName: 'Frank\'s Little Beauties', abbreviation: 'FLB', joinedYear: 2021, isActive: true },
   { ffuId: 'ffu-009', sleeperId: '727368657923063808', teamName: 'Fort Wayne Banana Bread', abbreviation: 'FWBB', joinedYear: 2020, isActive: true, espnUsername: 'bread', historicalTeamNames: { '2020': 'Wisconsian Banana Bread' } },
   { ffuId: 'ffu-010', sleeperId: '729741648338210816', teamName: 'ChicagoPick6', abbreviation: 'CP6', joinedYear: 2020, isActive: true, espnUsername: 'picks', historicalTeamNames: { '2020': 'Chicago Pick 6s' } },
@@ -108,11 +108,11 @@ export const USERS: UserConfig[] = [
   { ffuId: 'ffu-051', sleeperId: '399379352174768128', teamName: 'Stone Cold Steve Irwins', abbreviation: 'SCSI', joinedYear: 2020, isActive: true, espnUsername: 'scsi', historicalTeamNames: { '2020': 'Stone Cold Steve Irwins' } },
   
   // New members joining for 2025 season
-  { ffuId: 'ffu-052', sleeperId: '1132015239492591616', teamName: 'The Steel Tigers', abbreviation: 'STEEL', joinedYear: 2025, isActive: true },
+  { ffuId: 'ffu-052', sleeperId: '1132015239492591616', teamName: 'The Steel Tigers', abbreviation: 'TGRS', joinedYear: 2025, isActive: true },
   { ffuId: 'ffu-053', sleeperId: '1256013880681832448', teamName: 'Jawn of Arc', abbreviation: 'JAWN', joinedYear: 2025, isActive: true },
-  { ffuId: 'ffu-054', sleeperId: '1259227854642622464', teamName: 'The Underdogs', abbreviation: 'UDOGS', joinedYear: 2025, isActive: true },
-  { ffuId: 'ffu-055', sleeperId: '797222154151247872', teamName: 'Dawn Island Straw Hats', abbreviation: 'STRAW', joinedYear: 2025, isActive: true },
-  { ffuId: 'ffu-056', sleeperId: '866063012375719936', teamName: 'The Inferno Swarm', abbreviation: 'SWARM', joinedYear: 2025, isActive: true },
+  { ffuId: 'ffu-054', sleeperId: '1259227854642622464', teamName: 'The Underdogs', abbreviation: 'DOGS', joinedYear: 2025, isActive: true },
+  { ffuId: 'ffu-055', sleeperId: '797222154151247872', teamName: 'Dawn Island Straw Hats', abbreviation: 'STRW', joinedYear: 2025, isActive: true },
+  { ffuId: 'ffu-056', sleeperId: '866063012375719936', teamName: 'The Inferno Swarm', abbreviation: 'SWRM', joinedYear: 2025, isActive: true },
   
   // Historical users who participated in ESPN era but didn't continue to Sleeper era
   { ffuId: 'ffu-h01', sleeperId: 'historical-naptown-makos', teamName: 'Naptown Makos', abbreviation: 'NM', joinedYear: 2019, isActive: false, espnUsername: 'makos', historicalTeamNames: { '2019': 'Naptown Makos' } },
