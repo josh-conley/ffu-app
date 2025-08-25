@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "description": "Fantasy Football Union - League History, Stats, and Records Site (Static)",
-  "homepage": "https://josh-conley.github.io/ffu-app",
+  "homepage": "https://ffu-app.pages.dev",
   "keywords": [
     "fantasy-football",
     "sleeper",
@@ -16,6 +16,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:github": "tsc -b && DEPLOY_TARGET=github vite build",
+    "build:cloudflare": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "generate-data": "node scripts/generate-historical-data.js",
@@ -32,6 +34,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
+    "@types/node": "^24.3.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.6.0",

@@ -62,7 +62,7 @@ export const UPRHorserace = ({ league, year, onLeagueChange, onYearChange }: UPR
   const [error, setError] = useState<string | undefined>();
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 800);
   const [hoveredTeam, setHoveredTeam] = useState<string | null>(null);
-  const intervalRef = useRef<number | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Get valid years for current league
   const validYears = validYearsByLeague[league] || [];
