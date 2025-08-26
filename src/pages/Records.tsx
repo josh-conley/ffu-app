@@ -6,6 +6,7 @@ import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
+import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 import type { LeagueTier } from '../types';
 import { Target, TrendingDown, TrendingUp, Calendar, ChevronDown, Crown, Sparkles, Gauge, Zap, Skull, Laugh, Swords, Angry, Bomb} from 'lucide-react';
 
@@ -16,6 +17,7 @@ export const Records = () => {
   const [, setImageError] = useState(false);
   const basePath = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
   const dakUrl = `${basePath}/dak-head.png`;
+  const { openTeamProfile } = useTeamProfileModal();
 
   const { data: records, isLoading, error } = useAllTimeRecords(
     selectedLeague === 'ALL' ? undefined : selectedLeague,
@@ -207,6 +209,8 @@ export const Records = () => {
                   <TeamLogo
                     teamName={records.highestSingleGame.userInfo.teamName}
                     size="md"
+                    clickable
+                    onClick={() => openTeamProfile(records.highestSingleGame.userInfo.userId, records.highestSingleGame.userInfo.teamName)}
                   />
                   <div className="flex-1">
                     <div className="font-heading font-bold text-gray-900 dark:text-gray-100 text-lg">
@@ -236,6 +240,8 @@ export const Records = () => {
                   <TeamLogo
                     teamName={records.lowestSingleGame.userInfo.teamName}
                     size="md"
+                    clickable
+                    onClick={() => openTeamProfile(records.lowestSingleGame.userInfo.userId, records.lowestSingleGame.userInfo.teamName)}
                   />
                   <div className="flex-1">
                     <div className="font-heading font-bold text-gray-900 dark:text-gray-100 text-lg">
@@ -274,6 +280,8 @@ export const Records = () => {
                   <TeamLogo
                     teamName={records.mostPointsSeason.userInfo.teamName}
                     size="md"
+                    clickable
+                    onClick={() => openTeamProfile(records.mostPointsSeason.userInfo.userId, records.mostPointsSeason.userInfo.teamName)}
                   />
                   <div className="flex-1">
                     <div className="font-heading font-bold text-gray-900 dark:text-gray-100 text-lg">
@@ -303,6 +311,8 @@ export const Records = () => {
                   <TeamLogo
                     teamName={records.leastPointsSeason.userInfo.teamName}
                     size="md"
+                    clickable
+                    onClick={() => openTeamProfile(records.leastPointsSeason.userInfo.userId, records.leastPointsSeason.userInfo.teamName)}
                   />
                   <div className="flex-1">
                     <div className="font-heading font-bold text-gray-900 dark:text-gray-100 text-lg">
@@ -341,6 +351,8 @@ export const Records = () => {
                   <TeamLogo
                     teamName={records.mostPointsInLoss.userInfo.teamName}
                     size="md"
+                    clickable
+                    onClick={() => openTeamProfile(records.mostPointsInLoss.userInfo.userId, records.mostPointsInLoss.userInfo.teamName)}
                   />
                   <div className="flex-1">
                     <div className="font-heading font-bold text-gray-900 dark:text-gray-100 text-lg">
@@ -365,6 +377,8 @@ export const Records = () => {
                       <TeamLogo
                         teamName={records.mostPointsInLoss.opponent.teamName}
                         size="sm"
+                        clickable
+                        onClick={() => openTeamProfile(records.mostPointsInLoss.opponent.userId, records.mostPointsInLoss.opponent.teamName)}
                       />
                       <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                         {records.mostPointsInLoss.opponent.teamName}
@@ -387,6 +401,8 @@ export const Records = () => {
                   <TeamLogo
                     teamName={records.fewestPointsInWin.userInfo.teamName}
                     size="md"
+                    clickable
+                    onClick={() => openTeamProfile(records.fewestPointsInWin.userInfo.userId, records.fewestPointsInWin.userInfo.teamName)}
                   />
                   <div className="flex-1">
                     <div className="font-heading font-bold text-gray-900 dark:text-gray-100 text-lg">
@@ -411,6 +427,8 @@ export const Records = () => {
                       <TeamLogo
                         teamName={records.fewestPointsInWin.opponent.teamName}
                         size="sm"
+                        clickable
+                        onClick={() => openTeamProfile(records.fewestPointsInWin.opponent.userId, records.fewestPointsInWin.opponent.teamName)}
                       />
                       <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                         {records.fewestPointsInWin.opponent.teamName}
@@ -442,6 +460,8 @@ export const Records = () => {
                       <TeamLogo
                         teamName={records.closestGame.winner.teamName}
                         size="md"
+                        clickable
+                        onClick={() => openTeamProfile(records.closestGame.winner.userId, records.closestGame.winner.teamName)}
                       />
                       <div className="text-sm font-semibold text-center text-gray-900 dark:text-gray-100">
                         {records.closestGame.winner.teamName}
@@ -457,6 +477,8 @@ export const Records = () => {
                       <TeamLogo
                         teamName={records.closestGame.loser.teamName}
                         size="md"
+                        clickable
+                        onClick={() => openTeamProfile(records.closestGame.loser.userId, records.closestGame.loser.teamName)}
                       />
                       <div className="text-sm font-semibold text-center text-gray-900 dark:text-gray-100">
                         {records.closestGame.loser.teamName}
@@ -494,6 +516,8 @@ export const Records = () => {
                       <TeamLogo
                         teamName={records.biggestBlowout.winner.teamName}
                         size="md"
+                        clickable
+                        onClick={() => openTeamProfile(records.biggestBlowout.winner.userId, records.biggestBlowout.winner.teamName)}
                       />
                       <div className="text-sm font-semibold text-center text-gray-900 dark:text-gray-100">
                         {records.biggestBlowout.winner.teamName}
@@ -509,6 +533,8 @@ export const Records = () => {
                       <TeamLogo
                         teamName={records.biggestBlowout.loser.teamName}
                         size="md"
+                        clickable
+                        onClick={() => openTeamProfile(records.biggestBlowout.loser.userId, records.biggestBlowout.loser.teamName)}
                       />
                       <div className="text-sm font-semibold text-center text-gray-900 dark:text-gray-100">
                         {records.biggestBlowout.loser.teamName}

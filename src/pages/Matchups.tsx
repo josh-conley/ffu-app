@@ -9,6 +9,7 @@ import type { LeagueTier } from '../types';
 import { USERS, getAllYears, getAvailableLeagues } from '../config/constants';
 import { getSeasonLength } from '../utils/era-detection';
 import { ChevronDown, Filter } from 'lucide-react';
+import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 
 // Placement Tag Component
 const PlacementTag = ({ placementType }: { placementType: string }) => {
@@ -49,6 +50,7 @@ export const Matchups = () => {
   const [selectedWeek, setSelectedWeek] = useState<number | 'ALL'>(0); // 0 represents "All Weeks"
   const [selectedTeam, setSelectedTeam] = useState<string>('ALL'); // Team filter
   const [isFilterMenuOpen, setIsFilterMenuOpen] = useState<boolean>(false);
+  const { openTeamProfile } = useTeamProfileModal();
 
   // Initialize from URL params on mount
   useEffect(() => {
@@ -293,6 +295,8 @@ export const Matchups = () => {
                         teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
                         abbreviation={matchup.winnerInfo?.abbreviation}
                         size="sm"
+                        clickable
+                        onClick={() => matchup.winner && matchup.winnerInfo?.teamName && openTeamProfile(matchup.winner, matchup.winnerInfo.teamName)}
                       />
                     </div>
                     <div className="font-medium text-gray-900 dark:text-gray-100 text-sm">
@@ -329,6 +333,8 @@ export const Matchups = () => {
                         teamName={matchup.loserInfo?.teamName || 'Unknown Team'}
                         abbreviation={matchup.loserInfo?.abbreviation}
                         size="sm"
+                        clickable
+                        onClick={() => matchup.loser && matchup.loserInfo?.teamName && openTeamProfile(matchup.loser, matchup.loserInfo.teamName)}
                       />
                     </div>
                   </div>
@@ -343,6 +349,8 @@ export const Matchups = () => {
                         teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
                         abbreviation={matchup.winnerInfo?.abbreviation}
                         size="md"
+                        clickable
+                        onClick={() => matchup.winner && matchup.winnerInfo?.teamName && openTeamProfile(matchup.winner, matchup.winnerInfo.teamName)}
                       />
                     </div>
                     <div className="font-medium text-gray-900 dark:text-gray-100 text-sm">
@@ -379,6 +387,8 @@ export const Matchups = () => {
                         teamName={matchup.loserInfo?.teamName || 'Unknown Team'}
                         abbreviation={matchup.loserInfo?.abbreviation}
                         size="md"
+                        clickable
+                        onClick={() => matchup.loser && matchup.loserInfo?.teamName && openTeamProfile(matchup.loser, matchup.loserInfo.teamName)}
                       />
                     </div>
                   </div>
@@ -439,6 +449,8 @@ export const Matchups = () => {
                               teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
                               abbreviation={matchup.winnerInfo?.abbreviation}
                               size="sm"
+                              clickable
+                              onClick={() => matchup.winner && matchup.winnerInfo?.teamName && openTeamProfile(matchup.winner, matchup.winnerInfo.teamName)}
                             />
                           </div>
                           <div className="font-medium text-gray-900 dark:text-gray-100 text-sm">
@@ -475,6 +487,8 @@ export const Matchups = () => {
                               teamName={matchup.loserInfo?.teamName || 'Unknown Team'}
                               abbreviation={matchup.loserInfo?.abbreviation}
                               size="sm"
+                              clickable
+                              onClick={() => matchup.loser && matchup.loserInfo?.teamName && openTeamProfile(matchup.loser, matchup.loserInfo.teamName)}
                             />
                           </div>
                         </div>
@@ -489,6 +503,8 @@ export const Matchups = () => {
                               teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
                               abbreviation={matchup.winnerInfo?.abbreviation}
                               size="md"
+                              clickable
+                              onClick={() => matchup.winner && matchup.winnerInfo?.teamName && openTeamProfile(matchup.winner, matchup.winnerInfo.teamName)}
                             />
                           </div>
                           <div className="font-medium text-gray-900 dark:text-gray-100 text-sm">
@@ -525,6 +541,8 @@ export const Matchups = () => {
                               teamName={matchup.loserInfo?.teamName || 'Unknown Team'}
                               abbreviation={matchup.loserInfo?.abbreviation}
                               size="md"
+                              clickable
+                              onClick={() => matchup.loser && matchup.loserInfo?.teamName && openTeamProfile(matchup.loser, matchup.loserInfo.teamName)}
                             />
                           </div>
                         </div>

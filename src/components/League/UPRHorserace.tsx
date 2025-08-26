@@ -9,6 +9,7 @@ import { isRegularSeasonWeek } from '../../utils/era-detection';
 import { leagueApi } from '../../services/api';
 import { calculateUPR } from '../../utils/upr-calculator';
 import type { LeagueTier, UserInfo } from '../../types';
+import { useTeamProfileModal } from '../../contexts/TeamProfileModalContext';
 
 interface WeeklyUPRData {
   week: number;
@@ -56,13 +57,14 @@ export const UPRHorserace = ({ league, year, onLeagueChange, onYearChange }: UPR
   };
   const { data: allStandings, isLoading: standingsLoading, error: standingsError } = useAllStandings();
   const [teamData, setTeamData] = useState<TeamUPRProgress[]>([]);
+  const { openTeamProfile } = useTeamProfileModal();
   const [currentWeek, setCurrentWeek] = useState(4);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 800);
   const [hoveredTeam, setHoveredTeam] = useState<string | null>(null);
-  const intervalRef = useRef<number | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Get valid years for current league
   const validYears = validYearsByLeague[league] || [];
@@ -574,6 +576,8 @@ export const UPRHorserace = ({ league, year, onLeagueChange, onYearChange }: UPR
                         teamName={team.userInfo.teamName}
                         abbreviation={team.userInfo.abbreviation}
                         size="sm"
+                        clickable
+                        onClick={() => openTeamProfile(team.userId, team.userInfo.teamName)}
                       />
                     </div>
                     

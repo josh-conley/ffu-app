@@ -9,6 +9,7 @@ import { useUrlParams } from '../hooks/useUrlParams';
 import { getFFUIdBySleeperId, isActiveYear } from '../config/constants';
 import type { UserInfo, LeagueTier } from '../types';
 import { Trophy, Medal, Award, TrendingDown, ChevronDown, ChevronUp } from 'lucide-react';
+import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 
 type AllTimeSortKey = 'teamName' | 'totalWins' | 'totalLosses' | 'winPercentage' | 'playoffWins' | 'playoffLosses' | 'totalPointsFor' | 'totalPointsAgainst' | 'pointDifferential' | 'averagePointsPerGame' | 'careerHighGame' | 'careerLowGame' | 'firstPlaceFinishes' | 'secondPlaceFinishes' | 'thirdPlaceFinishes' | 'lastPlaceFinishes' | 'seasonsPlayed' | 'premierSeasons' | 'mastersSeasons' | 'nationalSeasons' | 'averageSeasonRank' | 'averageUPR';
 type SeasonHistorySortKey = 'team' | 'year' | 'league' | 'record' | 'pointsFor' | 'avgPPG' | 'pointsAgainst' | 'placement' | 'upr';
@@ -68,6 +69,7 @@ interface AllTimePlayerStats {
 
 export const AllTimeStats = () => {
   const { data: standings, isLoading, error } = useAllStandings();
+  const { openTeamProfile } = useTeamProfileModal();
 
   const { getParam, getBooleanParam, updateParams } = useUrlParams();
 
@@ -125,14 +127,12 @@ export const AllTimeStats = () => {
     setHorseraceYear(getParam('horseraceYear', '2024'));
   }, []); // Empty dependency array - only run on mount
 
-  // Mobile touch state for showing full team names
-  const [touchedTeamCell, setTouchedTeamCell] = useState<string | null>(null);
+  // Mobile touch state for showing full team names (now unused since we use modal)
+  const [touchedTeamCell] = useState<string | null>(null);
 
   // Touch handlers for mobile team name display
   const handleTeamCellTouch = (teamId: string, teamName: string) => {
-    setTouchedTeamCell(`${teamId}-${teamName}`);
-    // Auto-hide after 2 seconds
-    setTimeout(() => setTouchedTeamCell(null), 2000);
+    openTeamProfile(teamId, teamName);
   };
 
   const leagues: (LeagueTier | 'ALL')[] = ['ALL', 'PREMIER', 'MASTERS', 'NATIONAL'];
@@ -871,6 +871,8 @@ export const AllTimeStats = () => {
                             teamName={player.userInfo.teamName}
                             size="sm"
                             className="flex-shrink-0 !w-6 !h-6"
+                            clickable
+                            onClick={() => openTeamProfile(player.ffuUserId, player.userInfo.teamName)}
                           />
                           <div className="min-w-0 flex-1">
                             <div className="font-medium text-gray-900 dark:text-gray-100 text-xs leading-tight break-words">
@@ -1201,6 +1203,8 @@ export const AllTimeStats = () => {
                               teamName={season.userInfo.teamName}
                               size="sm"
                               className="flex-shrink-0 !w-6 !h-6"
+                              clickable
+                              onClick={() => openTeamProfile(season.userId, season.userInfo.teamName)}
                             />
                             <div className="min-w-0 flex-1">
                               <div className="font-medium text-gray-900 dark:text-gray-100 text-xs leading-tight break-words">

@@ -3,6 +3,7 @@ import { TeamLogo } from '../Common/TeamLogo';
 import { Trophy, Medal, Award } from 'lucide-react';
 import { getLeagueName } from '../../constants/leagues';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../../config/constants';
+import { useTeamProfileModal } from '../../contexts/TeamProfileModalContext';
 
 
 interface StandingsTableProps {
@@ -13,6 +14,7 @@ interface StandingsTableProps {
 
 export const StandingsTable = ({ standings, league, year }: StandingsTableProps) => {
   const isActiveSeason = isActiveYear(year);
+  const { openTeamProfile } = useTeamProfileModal();
 
   const getLeagueColors = (leagueType: string) => {
     const colorMap = {
@@ -86,6 +88,8 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
                 teamName={getCurrentTeamName(standings[0].userId, standings[0].userInfo.teamName)}
                 abbreviation={getCurrentAbbreviation(standings[0].userId, standings[0].userInfo.abbreviation)}
                 size="lg"
+                clickable
+                onClick={() => openTeamProfile(standings[0].userId, standings[0].userInfo.teamName)}
               />
             </div>
             <div>
@@ -139,13 +143,13 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
                 </td>
                 <td>
                   <div className="flex items-center space-x-3">
-                    <div className="hidden sm:block">
-                      <TeamLogo 
-                        teamName={getCurrentTeamName(standing.userId, standing.userInfo.teamName)}
-                        abbreviation={getCurrentAbbreviation(standing.userId, standing.userInfo.abbreviation)}
-                        size="sm"
-                      />
-                    </div>
+                    <TeamLogo 
+                      teamName={getCurrentTeamName(standing.userId, standing.userInfo.teamName)}
+                      abbreviation={getCurrentAbbreviation(standing.userId, standing.userInfo.abbreviation)}
+                      size="sm"
+                      clickable
+                      onClick={() => openTeamProfile(standing.userId, standing.userInfo.teamName)}
+                    />
                     <div>
                       <div className="font-bold text-gray-900 dark:text-gray-100 text-sm">
                         {getDisplayTeamName(standing.userId, standing.userInfo.teamName, year)}
@@ -170,9 +174,15 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
                   </span>
                 </td>
                 <td className="text-center">
-                  <span className="font-bold text-gray-900 dark:text-gray-100 font-mono">
-                    {standing.unionPowerRating?.toFixed(2) || '0.00'}
-                  </span>
+                  {isActiveSeason ? (
+                    <span className="text-sm text-gray-500 dark:text-gray-400 italic">
+                      TBD
+                    </span>
+                  ) : (
+                    <span className="font-bold text-gray-900 dark:text-gray-100 font-mono">
+                      {standing.unionPowerRating?.toFixed(2) || '0.00'}
+                    </span>
+                  )}
                 </td>
               </tr>
             ))}

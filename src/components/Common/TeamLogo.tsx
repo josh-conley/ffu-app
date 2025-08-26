@@ -6,6 +6,8 @@ interface TeamLogoProps {
   abbreviation?: string;
   size?: 'sm' | 'md' | 'lg';
   className?: string;
+  onClick?: () => void;
+  clickable?: boolean;
 }
 
 const sizeClasses = {
@@ -18,7 +20,9 @@ export const TeamLogo = ({
   teamName, 
   abbreviation, 
   size = 'md', 
-  className = '' 
+  className = '',
+  onClick,
+  clickable = false
 }: TeamLogoProps) => {
   const [imageError, setImageError] = useState(false);
   const logoFilename = getTeamLogoFilename(teamName);
@@ -29,13 +33,23 @@ export const TeamLogo = ({
   const displayAbbreviation = abbreviation || generateTeamAbbreviation(teamName);
   
   const baseClasses = `${sizeClasses[size]} rounded-full flex items-center justify-center flex-shrink-0 ${className}`;
+  const interactiveClasses = (clickable || onClick) ? 'cursor-pointer hover:opacity-80 transition-opacity' : '';
+  
+  const handleClick = (e: React.MouseEvent) => {
+    if (onClick) {
+      e.preventDefault();
+      e.stopPropagation();
+      onClick();
+    }
+  };
 
   // If no logo available or image failed to load, show abbreviation
   if (!logoUrl || imageError) {
     return (
       <div 
-        className={`${baseClasses} bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-bold border-2 border-gray-300 dark:border-gray-600 transition-colors`}
+        className={`${baseClasses} ${interactiveClasses} bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-bold border-2 border-gray-300 dark:border-gray-600 transition-colors`}
         title={teamName}
+        onClick={handleClick}
       >
         {displayAbbreviation}
       </div>
@@ -43,7 +57,11 @@ export const TeamLogo = ({
   }
 
   return (
-    <div className={`${baseClasses} bg-white dark:bg-gray-800`} title={teamName}>
+    <div 
+      className={`${baseClasses} ${interactiveClasses} bg-white dark:bg-gray-800`} 
+      title={teamName}
+      onClick={handleClick}
+    >
       <img
         src={logoUrl}
         alt={`${teamName} logo`}

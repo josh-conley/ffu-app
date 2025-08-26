@@ -3,6 +3,7 @@ import type { DraftData, DraftPick, UserInfo } from '../../types';
 import { TeamLogo } from '../Common/TeamLogo';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation } from '../../config/constants';
 import { historicalTeamResolver } from '../../utils/historical-team-resolver';
+import { useTeamProfileModal } from '../../contexts/TeamProfileModalContext';
 
 interface MobileDraftBoardProps {
   draftData: DraftData;
@@ -12,6 +13,7 @@ interface MobileDraftBoardProps {
 export const MobileDraftBoard: React.FC<MobileDraftBoardProps> = ({ draftData, userMap }) => {
   const { picks, settings } = draftData;
   const { teams, rounds } = settings;
+  const { openTeamProfile } = useTeamProfileModal();
 
   // Create a grid of picks organized by round and team
   const draftGrid: (DraftPick | null)[][] = [];
@@ -187,6 +189,12 @@ export const MobileDraftBoard: React.FC<MobileDraftBoardProps> = ({ draftData, u
                       teamName={getCurrentTeamName(team.userId || '', team.teamName)} 
                       abbreviation={getCurrentAbbreviation(team.userId || '', team.abbreviation)}
                       size="sm"
+                      clickable
+                      onClick={() => {
+                        if (team.userId) {
+                          openTeamProfile(team.userId, team.teamName);
+                        }
+                      }}
                     />
                     <div className="text-center break-words text-xs leading-tight" title={getCurrentTeamName(team.userId || '', team.teamName)} style={{ fontSize: '0.6rem' }}>
                       {getCurrentTeamName(team.userId || '', team.teamName)}

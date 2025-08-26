@@ -9,12 +9,14 @@ import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiv
 import { getLeagueName } from '../constants/leagues';
 import { ChevronDown, Crown } from 'lucide-react';
 import type { LeagueTier } from '../types';
+import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 
 export const Standings = () => {
   const { getParam, updateParams } = useUrlParams();
   const { data: standings, isLoading, error } = useAllStandings();
   const [selectedYear, setSelectedYear] = useState<string>('');
   const [selectedLeague, setSelectedLeague] = useState<string | null>(null);
+  const { openTeamProfile } = useTeamProfileModal();
 
   // Get available years (safe even when standings is empty)
   const availableYears = standings ? [...new Set(standings.map(s => s.year))].sort((a, b) => b.localeCompare(a)) : [];
@@ -188,6 +190,8 @@ export const Standings = () => {
                               teamName={getCurrentTeamName(standing.userId, standing.userInfo.teamName)}
                               abbreviation={getCurrentAbbreviation(standing.userId, standing.userInfo.abbreviation)}
                               size="sm"
+                              clickable
+                              onClick={() => openTeamProfile(standing.userId, standing.userInfo.teamName)}
                             />
                           </div>
                           <div className="flex-1 min-w-0">

@@ -5,9 +5,11 @@ import { TeamLogo } from '../components/Common/TeamLogo';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../config/constants';
 import { getLeagueName } from '../constants/leagues';
 import type { LeagueTier } from '../types';
+import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 
 export const Overview = () => {
   const { data: standings, isLoading, error } = useAllStandings();
+  const { openTeamProfile } = useTeamProfileModal();
   
   const colorMap = {
     PREMIER: {
@@ -188,6 +190,8 @@ export const Overview = () => {
                             teamName={getCurrentTeamName(champion.userId, champion.userInfo.teamName)}
                             abbreviation={getCurrentAbbreviation(champion.userId, champion.userInfo.abbreviation)}
                             size="sm"
+                            clickable
+                            onClick={() => openTeamProfile(champion.userId, champion.userInfo.teamName)}
                           />
                         </div>
                         <div className="flex-1 min-w-0">
