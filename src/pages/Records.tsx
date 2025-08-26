@@ -378,7 +378,7 @@ export const Records = () => {
                         teamName={records.mostPointsInLoss.opponent.teamName}
                         size="sm"
                         clickable
-                        onClick={() => openTeamProfile(records.mostPointsInLoss.opponent.userId, records.mostPointsInLoss.opponent.teamName)}
+                        onClick={() => records.mostPointsInLoss.opponent && openTeamProfile(records.mostPointsInLoss.opponent.userId, records.mostPointsInLoss.opponent.teamName)}
                       />
                       <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                         {records.mostPointsInLoss.opponent.teamName}
@@ -428,7 +428,7 @@ export const Records = () => {
                         teamName={records.fewestPointsInWin.opponent.teamName}
                         size="sm"
                         clickable
-                        onClick={() => openTeamProfile(records.fewestPointsInWin.opponent.userId, records.fewestPointsInWin.opponent.teamName)}
+                        onClick={() => records.fewestPointsInWin.opponent && openTeamProfile(records.fewestPointsInWin.opponent.userId, records.fewestPointsInWin.opponent.teamName)}
                       />
                       <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                         {records.fewestPointsInWin.opponent.teamName}
