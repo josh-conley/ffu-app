@@ -257,12 +257,6 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
       if (player) return player;
     }
     
-    // Debug logging if no match found
-    if (process.env.NODE_ENV === 'development') {
-      console.log('TeamProfileModal: No player found for ID:', teamUserId);
-      console.log('Available player IDs:', allPlayers.map(p => ({ userId: p.userId, ffuUserId: p.ffuUserId, teamName: p.userInfo.teamName })));
-    }
-    
     return undefined;
   }, [teamUserId, allPlayers]);
 
