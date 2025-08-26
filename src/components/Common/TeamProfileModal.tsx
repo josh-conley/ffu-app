@@ -4,7 +4,7 @@ import { LoadingSpinner } from './LoadingSpinner';
 import { ErrorMessage } from './ErrorMessage';
 import { TeamLogo } from './TeamLogo';
 import { LeagueBadge } from '../League/LeagueBadge';
-import { getFFUIdBySleeperId, isActiveYear } from '../../config/constants';
+import { getFFUIdBySleeperId, getSleeperIdByFFUId, isActiveYear } from '../../config/constants';
 import type { LeagueTier, UserInfo } from '../../types';
 import { Trophy, Medal, Award, TrendingDown, ChevronDown, ChevronUp, X } from 'lucide-react';
 
@@ -231,7 +231,40 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
   }, [standings]);
 
   // Find the specific player we want to show
-  const selectedPlayer = allPlayers.find(p => p.userId === teamUserId);
+  // Try to match by multiple ID types for maximum compatibility
+  const selectedPlayer = useMemo(() => {
+    if (!teamUserId || !allPlayers.length) return undefined;
+    
+    // Try exact matches first
+    let player = allPlayers.find(p => p.userId === teamUserId);
+    if (player) return player;
+    
+    // Try FFU ID match
+    player = allPlayers.find(p => p.ffuUserId === teamUserId);
+    if (player) return player;
+    
+    // Try converting Sleeper ID to FFU ID and matching
+    const ffuId = getFFUIdBySleeperId(teamUserId);
+    if (ffuId) {
+      player = allPlayers.find(p => p.ffuUserId === ffuId);
+      if (player) return player;
+    }
+    
+    // Try converting FFU ID to Sleeper ID and matching  
+    const sleeperId = getSleeperIdByFFUId(teamUserId);
+    if (sleeperId) {
+      player = allPlayers.find(p => p.userId === sleeperId);
+      if (player) return player;
+    }
+    
+    // Debug logging if no match found
+    if (process.env.NODE_ENV === 'development') {
+      console.log('TeamProfileModal: No player found for ID:', teamUserId);
+      console.log('Available player IDs:', allPlayers.map(p => ({ userId: p.userId, ffuUserId: p.ffuUserId, teamName: p.userInfo.teamName })));
+    }
+    
+    return undefined;
+  }, [teamUserId, allPlayers]);
 
   // Sort handling functions
   const handleSort = (key: SeasonSortKey) => {
