@@ -1281,26 +1281,6 @@
     },
     "picks": [
       {
-        "pickNumber": 1,
-        "round": 1,
-        "draftSlot": 1,
-        "playerId": "7564",
-        "playerInfo": {
-          "name": "Ja'Marr Chase",
-          "position": "WR",
-          "team": "CIN",
-          "college": "LSU",
-          "age": 25
-        },
-        "pickedBy": "386791325690994688",
-        "userInfo": {
-          "userId": "386791325690994688",
-          "teamName": "",
-          "abbreviation": ""
-        },
-        "draftId": "1256012193283973120"
-      },
-      {
         "pickNumber": 2,
         "round": 1,
         "draftSlot": 2,

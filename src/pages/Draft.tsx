@@ -25,10 +25,10 @@ export const Draft: React.FC = () => {
   
   // Get initial values from URL params
   const [selectedLeague, setSelectedLeague] = useState<string>(
-    searchParams.get('league') || 'PREMIER'
+    searchParams.get('league') || 'NATIONAL'
   );
   const [selectedYear, setSelectedYear] = useState<string>(
-    searchParams.get('year') || '2024'
+    searchParams.get('year') || '2025'
   );
   const [viewMode, setViewMode] = useState<ViewMode>(
     (searchParams.get('view') as ViewMode) || 'board'
