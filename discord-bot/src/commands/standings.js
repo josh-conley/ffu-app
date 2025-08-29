@@ -22,11 +22,15 @@ export const data = new SlashCommandBuilder()
       .setRequired(false));
 
 export async function execute(interaction, ffuService) {
+  const startTime = Date.now();
+  console.log(`[STANDINGS] Command started, Memory: ${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)}MB`);
+  
   const league = interaction.options.getString('league');
   const year = interaction.options.getString('year') || new Date().getFullYear().toString();
 
   try {
     await interaction.deferReply();
+    console.log(`[STANDINGS] Reply deferred after ${Date.now() - startTime}ms`);
 
     // Validate league and year
     if (!ffuService.isValidLeagueYear(league, year)) {
@@ -56,9 +60,10 @@ export async function execute(interaction, ffuService) {
     // Sort standings by rank
     const sortedStandings = standings.sort((a, b) => a.rank - b.rank);
 
-    // Create standings text
+    // Create standings text (limit to prevent embed size issues)
     let standingsText = '';
-    sortedStandings.slice(0, 12).forEach((team, index) => {
+    const teamsToShow = Math.min(sortedStandings.length, 10); // Limit to 10 teams max
+    sortedStandings.slice(0, teamsToShow).forEach((team, index) => {
       const rank = team.rank || (index + 1);
       const teamName = getTeamDisplayName(team, ffuService);
       const record = `${team.wins}-${team.losses}`;
@@ -67,7 +72,15 @@ export async function execute(interaction, ffuService) {
       const rankEmoji = getRankEmoji(rank);
       standingsText += `${rankEmoji} **${rank}.** ${teamName}\n`;
       standingsText += `     ${record} • ${points} pts\n\n`;
+      
+      // Prevent Discord embed size limits (2000 char description limit)
+      if (standingsText.length > 1800) {
+        standingsText += '... (truncated)';
+        break;
+      }
     });
+    
+    console.log(`[STANDINGS] Generated standings text: ${standingsText.length} characters`);
 
     embed.setDescription(standingsText.trim());
 
@@ -81,7 +94,9 @@ export async function execute(interaction, ffuService) {
       });
     }
 
+    console.log(`[STANDINGS] Sending response after ${Date.now() - startTime}ms, Memory: ${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)}MB`);
     await interaction.editReply({ embeds: [embed] });
+    console.log(`[STANDINGS] Response sent successfully after ${Date.now() - startTime}ms`);
 
   } catch (error) {
     console.error('Error in standings command:', error);
