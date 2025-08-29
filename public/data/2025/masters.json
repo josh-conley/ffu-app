@@ -934,6 +934,806 @@
           "abbreviation": ""
         },
         "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 40,
+        "round": 4,
+        "draftSlot": 9,
+        "playerId": "6770",
+        "playerInfo": {
+          "name": "Joe Burrow",
+          "position": "QB",
+          "team": "CIN",
+          "college": "LSU",
+          "age": 28
+        },
+        "pickedBy": "1124071986805829632",
+        "userInfo": {
+          "userId": "1124071986805829632",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 41,
+        "round": 4,
+        "draftSlot": 8,
+        "playerId": "2133",
+        "playerInfo": {
+          "name": "Davante Adams",
+          "position": "WR",
+          "team": "LAR",
+          "college": "Fresno State",
+          "age": 32
+        },
+        "pickedBy": "865323291064291328",
+        "userInfo": {
+          "userId": "865323291064291328",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 42,
+        "round": 4,
+        "draftSlot": 7,
+        "playerId": "8155",
+        "playerInfo": {
+          "name": "Breece Hall",
+          "position": "RB",
+          "team": "NYJ",
+          "college": "Iowa State",
+          "age": 24
+        },
+        "pickedBy": "639877229681147904",
+        "userInfo": {
+          "userId": "639877229681147904",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 43,
+        "round": 4,
+        "draftSlot": 6,
+        "playerId": "8151",
+        "playerInfo": {
+          "name": "Kenneth Walker",
+          "position": "RB",
+          "team": "SEA",
+          "college": "Michigan State",
+          "age": 24
+        },
+        "pickedBy": "856248808915480576",
+        "userInfo": {
+          "userId": "856248808915480576",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 44,
+        "round": 4,
+        "draftSlot": 5,
+        "playerId": "4217",
+        "playerInfo": {
+          "name": "George Kittle",
+          "position": "TE",
+          "team": "SF",
+          "college": "Iowa",
+          "age": 31
+        },
+        "pickedBy": "860973514839199744",
+        "userInfo": {
+          "userId": "860973514839199744",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 45,
+        "round": 4,
+        "draftSlot": 4,
+        "playerId": "7594",
+        "playerInfo": {
+          "name": "Chuba Hubbard",
+          "position": "RB",
+          "team": "CAR",
+          "college": "Oklahoma State",
+          "age": 26
+        },
+        "pickedBy": "864966364937461760",
+        "userInfo": {
+          "userId": "864966364937461760",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 46,
+        "round": 4,
+        "draftSlot": 3,
+        "playerId": "5846",
+        "playerInfo": {
+          "name": "DK Metcalf",
+          "position": "WR",
+          "team": "PIT",
+          "college": "Ole Miss",
+          "age": 27
+        },
+        "pickedBy": "1133491276038426624",
+        "userInfo": {
+          "userId": "1133491276038426624",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 47,
+        "round": 4,
+        "draftSlot": 2,
+        "playerId": "4983",
+        "playerInfo": {
+          "name": "DJ Moore",
+          "position": "WR",
+          "team": "CHI",
+          "college": "Maryland",
+          "age": 28
+        },
+        "pickedBy": "1133492104077946880",
+        "userInfo": {
+          "userId": "1133492104077946880",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 48,
+        "round": 4,
+        "draftSlot": 1,
+        "playerId": "4046",
+        "playerInfo": {
+          "name": "Patrick Mahomes",
+          "position": "QB",
+          "team": "KC",
+          "college": "Texas Tech",
+          "age": 29
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 49,
+        "round": 5,
+        "draftSlot": 1,
+        "playerId": "8146",
+        "playerInfo": {
+          "name": "Garrett Wilson",
+          "position": "WR",
+          "team": "NYJ",
+          "college": "Ohio State",
+          "age": 25
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 50,
+        "round": 5,
+        "draftSlot": 2,
+        "playerId": "4137",
+        "playerInfo": {
+          "name": "James Conner",
+          "position": "RB",
+          "team": "ARI",
+          "college": "Pittsburgh",
+          "age": 30
+        },
+        "pickedBy": "1133492104077946880",
+        "userInfo": {
+          "userId": "1133492104077946880",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 51,
+        "round": 5,
+        "draftSlot": 3,
+        "playerId": "10859",
+        "playerInfo": {
+          "name": "Sam LaPorta",
+          "position": "TE",
+          "team": "DET",
+          "college": "Iowa",
+          "age": 24
+        },
+        "pickedBy": "1133491276038426624",
+        "userInfo": {
+          "userId": "1133491276038426624",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 52,
+        "round": 5,
+        "draftSlot": 4,
+        "playerId": "5045",
+        "playerInfo": {
+          "name": "Courtland Sutton",
+          "position": "WR",
+          "team": "DEN",
+          "college": "SMU",
+          "age": 29
+        },
+        "pickedBy": "864966364937461760",
+        "userInfo": {
+          "userId": "864966364937461760",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 53,
+        "round": 5,
+        "draftSlot": 5,
+        "playerId": "12526",
+        "playerInfo": {
+          "name": "Tetairoa McMillan",
+          "position": "WR",
+          "team": "CAR",
+          "college": "Arizona",
+          "age": 22
+        },
+        "pickedBy": "860973514839199744",
+        "userInfo": {
+          "userId": "860973514839199744",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 54,
+        "round": 5,
+        "draftSlot": 6,
+        "playerId": "8137",
+        "playerInfo": {
+          "name": "George Pickens",
+          "position": "WR",
+          "team": "DAL",
+          "college": "Georgia",
+          "age": 24
+        },
+        "pickedBy": "856248808915480576",
+        "userInfo": {
+          "userId": "856248808915480576",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 55,
+        "round": 5,
+        "draftSlot": 7,
+        "playerId": "11624",
+        "playerInfo": {
+          "name": "Xavier Worthy",
+          "position": "WR",
+          "team": "KC",
+          "college": "Texas",
+          "age": 22
+        },
+        "pickedBy": "639877229681147904",
+        "userInfo": {
+          "userId": "639877229681147904",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 56,
+        "round": 5,
+        "draftSlot": 8,
+        "playerId": "4981",
+        "playerInfo": {
+          "name": "Calvin Ridley",
+          "position": "WR",
+          "team": "TEN",
+          "college": "Alabama",
+          "age": 30
+        },
+        "pickedBy": "865323291064291328",
+        "userInfo": {
+          "userId": "865323291064291328",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 57,
+        "round": 5,
+        "draftSlot": 9,
+        "playerId": "5892",
+        "playerInfo": {
+          "name": "David Montgomery",
+          "position": "RB",
+          "team": "DET",
+          "college": "Iowa State",
+          "age": 28
+        },
+        "pickedBy": "1124071986805829632",
+        "userInfo": {
+          "userId": "1124071986805829632",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 58,
+        "round": 5,
+        "draftSlot": 10,
+        "playerId": "12489",
+        "playerInfo": {
+          "name": "RJ Harvey",
+          "position": "RB",
+          "team": "DEN",
+          "college": "UCF",
+          "age": 24
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 59,
+        "round": 5,
+        "draftSlot": 11,
+        "playerId": "8148",
+        "playerInfo": {
+          "name": "Jameson Williams",
+          "position": "WR",
+          "team": "DET",
+          "college": "Alabama",
+          "age": 24
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 60,
+        "round": 5,
+        "draftSlot": 12,
+        "playerId": "5967",
+        "playerInfo": {
+          "name": "Tony Pollard",
+          "position": "RB",
+          "team": "TEN",
+          "college": "Memphis",
+          "age": 28
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 61,
+        "round": 6,
+        "draftSlot": 12,
+        "playerId": "9997",
+        "playerInfo": {
+          "name": "Zay Flowers",
+          "position": "WR",
+          "team": "BAL",
+          "college": "Boston College",
+          "age": 24
+        },
+        "pickedBy": "472876832719368192",
+        "userInfo": {
+          "userId": "472876832719368192",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 62,
+        "round": 6,
+        "draftSlot": 11,
+        "playerId": "4199",
+        "playerInfo": {
+          "name": "Aaron Jones",
+          "position": "RB",
+          "team": "MIN",
+          "college": "UTEP",
+          "age": 30
+        },
+        "pickedBy": "396808818157182976",
+        "userInfo": {
+          "userId": "396808818157182976",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 63,
+        "round": 6,
+        "draftSlot": 10,
+        "playerId": "1466",
+        "playerInfo": {
+          "name": "Travis Kelce",
+          "position": "TE",
+          "team": "KC",
+          "college": "Cincinnati",
+          "age": 35
+        },
+        "pickedBy": "325766631336714240",
+        "userInfo": {
+          "userId": "325766631336714240",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 64,
+        "round": 6,
+        "draftSlot": 9,
+        "playerId": "6790",
+        "playerInfo": {
+          "name": "D'Andre Swift",
+          "position": "RB",
+          "team": "CHI",
+          "college": "Georgia",
+          "age": 26
+        },
+        "pickedBy": "1124071986805829632",
+        "userInfo": {
+          "userId": "1124071986805829632",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 65,
+        "round": 6,
+        "draftSlot": 8,
+        "playerId": "6783",
+        "playerInfo": {
+          "name": "Jerry Jeudy",
+          "position": "WR",
+          "team": "CLE",
+          "college": "Alabama",
+          "age": 26
+        },
+        "pickedBy": "865323291064291328",
+        "userInfo": {
+          "userId": "865323291064291328",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 66,
+        "round": 6,
+        "draftSlot": 7,
+        "playerId": "7525",
+        "playerInfo": {
+          "name": "DeVonta Smith",
+          "position": "WR",
+          "team": "PHI",
+          "college": "Alabama",
+          "age": 26
+        },
+        "pickedBy": "639877229681147904",
+        "userInfo": {
+          "userId": "639877229681147904",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 67,
+        "round": 6,
+        "draftSlot": 6,
+        "playerId": "12530",
+        "playerInfo": {
+          "name": "Travis Hunter",
+          "position": "WR",
+          "team": "JAX",
+          "college": "Colorado",
+          "age": 22
+        },
+        "pickedBy": "856248808915480576",
+        "userInfo": {
+          "userId": "856248808915480576",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 68,
+        "round": 6,
+        "draftSlot": 5,
+        "playerId": "11655",
+        "playerInfo": {
+          "name": "Tyrone Tracy",
+          "position": "RB",
+          "team": "NYG",
+          "college": "Purdue",
+          "age": 25
+        },
+        "pickedBy": "865323291064291328",
+        "userInfo": {
+          "userId": "865323291064291328",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 69,
+        "round": 6,
+        "draftSlot": 4,
+        "playerId": "5844",
+        "playerInfo": {
+          "name": "T.J. Hockenson",
+          "position": "TE",
+          "team": "MIN",
+          "college": "Iowa",
+          "age": 28
+        },
+        "pickedBy": "864966364937461760",
+        "userInfo": {
+          "userId": "864966364937461760",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 70,
+        "round": 6,
+        "draftSlot": 3,
+        "playerId": "7526",
+        "playerInfo": {
+          "name": "Jaylen Waddle",
+          "position": "WR",
+          "team": "MIA",
+          "college": "Alabama",
+          "age": 26
+        },
+        "pickedBy": "1133491276038426624",
+        "userInfo": {
+          "userId": "1133491276038426624",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 71,
+        "round": 6,
+        "draftSlot": 2,
+        "playerId": "8205",
+        "playerInfo": {
+          "name": "Isiah Pacheco",
+          "position": "RB",
+          "team": "KC",
+          "college": "Rutgers",
+          "age": 26
+        },
+        "pickedBy": "1133492104077946880",
+        "userInfo": {
+          "userId": "1133492104077946880",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 72,
+        "round": 6,
+        "draftSlot": 1,
+        "playerId": "5012",
+        "playerInfo": {
+          "name": "Mark Andrews",
+          "position": "TE",
+          "team": "BAL",
+          "college": "Oklahoma",
+          "age": 29
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 73,
+        "round": 7,
+        "draftSlot": 1,
+        "playerId": "4892",
+        "playerInfo": {
+          "name": "Baker Mayfield",
+          "position": "QB",
+          "team": "TB",
+          "college": "Oklahoma",
+          "age": 30
+        },
+        "pickedBy": "462383465753473024",
+        "userInfo": {
+          "userId": "462383465753473024",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 74,
+        "round": 7,
+        "draftSlot": 2,
+        "playerId": "11563",
+        "playerInfo": {
+          "name": "Bo Nix",
+          "position": "QB",
+          "team": "DEN",
+          "college": "Oregon",
+          "age": 25
+        },
+        "pickedBy": "1133492104077946880",
+        "userInfo": {
+          "userId": "1133492104077946880",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 75,
+        "round": 7,
+        "draftSlot": 3,
+        "playerId": "8144",
+        "playerInfo": {
+          "name": "Chris Olave",
+          "position": "WR",
+          "team": "NO",
+          "college": "Ohio State",
+          "age": 25
+        },
+        "pickedBy": "1133491276038426624",
+        "userInfo": {
+          "userId": "1133491276038426624",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 76,
+        "round": 7,
+        "draftSlot": 4,
+        "playerId": "5849",
+        "playerInfo": {
+          "name": "Kyler Murray",
+          "position": "QB",
+          "team": "ARI",
+          "college": "Oklahoma",
+          "age": 28
+        },
+        "pickedBy": "864966364937461760",
+        "userInfo": {
+          "userId": "864966364937461760",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 77,
+        "round": 7,
+        "draftSlot": 5,
+        "playerId": "10229",
+        "playerInfo": {
+          "name": "Rashee Rice",
+          "position": "WR",
+          "team": "KC",
+          "college": "SMU",
+          "age": 25
+        },
+        "pickedBy": "860973514839199744",
+        "userInfo": {
+          "userId": "860973514839199744",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 78,
+        "round": 7,
+        "draftSlot": 6,
+        "playerId": "11638",
+        "playerInfo": {
+          "name": "Ricky Pearsall",
+          "position": "WR",
+          "team": "SF",
+          "college": "Florida",
+          "age": 24
+        },
+        "pickedBy": "856248808915480576",
+        "userInfo": {
+          "userId": "856248808915480576",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
+      },
+      {
+        "pickNumber": 79,
+        "round": 7,
+        "draftSlot": 7,
+        "playerId": "8228",
+        "playerInfo": {
+          "name": "Jaylen Warren",
+          "position": "RB",
+          "team": "PIT",
+          "college": "Oklahoma State",
+          "age": 26
+        },
+        "pickedBy": "639877229681147904",
+        "userInfo": {
+          "userId": "639877229681147904",
+          "teamName": "",
+          "abbreviation": ""
+        },
+        "draftId": "1256011253592104960"
       }
     ],
     "settings": {
