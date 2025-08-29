@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: ffu-discord-bot
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: FFU_DATA_BASE_URL
+        value: https://josh-conley.github.io/ffu-app/data
+      # Add your Discord credentials in Render dashboard:
+      # - key: DISCORD_TOKEN
+      #   sync: false  # Set manually in dashboard
+      # - key: DISCORD_CLIENT_ID  
+      #   sync: false  # Set manually in dashboard

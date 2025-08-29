@@ -7,6 +7,7 @@ import { config } from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { readdir } from 'fs/promises';
+import http from 'http';
 import { FFUDataService } from './src/services/ffuDataService.js';
 
 // Load environment variables
@@ -143,6 +144,30 @@ async function testFFUService() {
   }
 }
 
+// Create a simple health check server for Render
+const createHealthServer = () => {
+  const server = http.createServer((req, res) => {
+    if (req.url === '/health') {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ 
+        status: 'healthy', 
+        bot: client.user ? 'connected' : 'disconnected',
+        uptime: process.uptime(),
+        timestamp: new Date().toISOString()
+      }));
+    } else {
+      res.writeHead(404);
+      res.end('Not found');
+    }
+  });
+  
+  const port = process.env.PORT || 3000;
+  server.listen(port, () => {
+    console.log(`🏥 Health server running on port ${port}`);
+  });
+};
+
 // Initialize everything
 testFFUService();
+createHealthServer();
 startBot();
