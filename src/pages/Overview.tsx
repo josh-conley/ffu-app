@@ -141,12 +141,20 @@ export const Overview = () => {
             </span>
             <p>Wednesday 9/3 8:30pm ET</p>
           </div>
-          <div className={`champion-highlight angular-cut p-6 mb-6 relative overflow-hidden border-l4 ${colorMap.MASTERS.highlight}`}>
-            <span className={`text-lg font-black ${colorMap.MASTERS.text} tracking-wide`}>
+          <Link 
+            to="/drafts?league=MASTERS&year=2025"
+            className={`champion-highlight angular-cut p-6 mb-6 relative overflow-hidden border-l4 ${colorMap.MASTERS.highlight} block hover:opacity-90 transition-opacity`}
+          >
+            <span className={`text-lg font-black ${colorMap.MASTERS.text} tracking-wide block mb-2`}>
               Masters League
             </span>
-            <p>Thursday 8/28 9:00pm ET</p>
-          </div>
+            <span className={`${colorMap.MASTERS.text} font-semibold flex items-center`}>
+              View Draft Board
+              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
+          </Link>
           <Link 
             to="/drafts?league=NATIONAL&year=2025"
             className={`champion-highlight angular-cut p-6 mb-6 relative overflow-hidden border-l4 ${colorMap.NATIONAL.highlight} block hover:opacity-90 transition-opacity`}

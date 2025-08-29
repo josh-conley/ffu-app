@@ -286,8 +286,8 @@ export const Draft: React.FC = () => {
       )} */}
 
       {/* Draft Content */}
-      {isActiveYear(selectedYear) && (!draftData || !draftData.picks || draftData.picks.length === 0) && !isLoading ? (
-        /* Show upcoming draft information for active leagues without data */
+      {isActiveYear(selectedYear) && (!draftData || !draftData.picks || draftData.picks.length === 0) && selectedLeague !== 'MASTERS' && !isLoading ? (
+        /* Show upcoming draft information for active leagues without data (except Masters) */
         <div className="card text-center py-16">
           <div className="max-w-2xl mx-auto">
             <Calendar className="h-16 w-16 text-ffu-red mx-auto mb-6" />
@@ -314,7 +314,7 @@ export const Draft: React.FC = () => {
             </p>
           </div>
         </div>
-      ) : draftData && draftData.picks && draftData.picks.length > 0 && !isLoading ? (
+      ) : draftData && (draftData.picks.length > 0 || selectedLeague === 'MASTERS') && !isLoading ? (
         /* Show draft data */
         <>
           {/* Draft Board/List */}
