@@ -1,0 +1,22 @@
+{
+  "name": "ffu-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for Fantasy Football Union data",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "keywords": [
+    "discord",
+    "fantasy-football",
+    "ffu"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1"
+  }
+}
