@@ -44,15 +44,24 @@ export async function execute(interaction, ffuService) {
       });
     }
 
+    console.log('Fetching draft data...');
     const draftData = await ffuService.getDraftData(league, year);
+    console.log('Draft data received:', {
+      hasDraftData: !!draftData,
+      hasPicks: !!draftData?.picks,
+      picksLength: draftData?.picks?.length,
+      status: draftData?.status
+    });
     
     if (!draftData || !draftData.picks || draftData.picks.length === 0) {
+      console.log('No draft data available, sending error response');
       return await interaction.editReply({
         content: `❌ No draft data found for ${ffuService.getLeagueDisplayName(league)} ${year}.\n${draftData?.status === 'pre_draft' ? 'Draft has not started yet.' : 'Draft data may not be available.'}`,
         ephemeral: true
       });
     }
 
+    console.log('Creating embed...');
     // Create embed
     const embed = new EmbedBuilder()
       .setTitle(`🏈 ${ffuService.getLeagueDisplayName(league)} Draft - ${year}`)
@@ -60,7 +69,9 @@ export async function execute(interaction, ffuService) {
       .setTimestamp()
       .setFooter({ text: 'FFU Bot - Fantasy Football Union' });
 
+    console.log('Sorting picks...');
     const picks = draftData.picks.sort((a, b) => a.pickNumber - b.pickNumber);
+    console.log(`Sorted ${picks.length} picks`);
 
     if (round) {
       // Show specific round
