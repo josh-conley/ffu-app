@@ -87,12 +87,26 @@ export class FFUDataService {
       const url = `${this.baseUrl}/${year}/${league.toLowerCase()}.json`;
       console.log(`Fetching data from: ${url}`);
       
-      const response = await fetch(url);
+      // Add timeout to fetch request
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+      
+      const response = await fetch(url, { 
+        signal: controller.signal,
+        headers: {
+          'User-Agent': 'FFU-Discord-Bot/1.0'
+        }
+      });
+      clearTimeout(timeoutId);
+      
+      console.log(`Response status: ${response.status}, Content-Type: ${response.headers.get('content-type')}`);
+      
       if (!response.ok) {
-        throw new Error(`Failed to fetch ${league} ${year}: ${response.status}`);
+        throw new Error(`Failed to fetch ${league} ${year}: ${response.status} ${response.statusText}`);
       }
       
       const data = await response.json();
+      console.log(`Successfully fetched data for ${league} ${year}, ${data.standings?.length || 0} teams found`);
       
       // Cache the result
       this.cache.set(cacheKey, {
@@ -102,7 +116,10 @@ export class FFUDataService {
       
       return data;
     } catch (error) {
-      console.error(`Error fetching league data:`, error);
+      console.error(`Error fetching league data for ${league} ${year}:`, error);
+      if (error.name === 'AbortError') {
+        throw new Error(`Request timeout: ${url} took longer than 10 seconds`);
+      }
       throw error;
     }
   }

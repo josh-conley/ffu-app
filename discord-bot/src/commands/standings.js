@@ -85,10 +85,26 @@ export async function execute(interaction, ffuService) {
 
   } catch (error) {
     console.error('Error in standings command:', error);
-    await interaction.editReply({
-      content: `❌ Failed to fetch standings: ${error.message}`,
-      ephemeral: true
-    });
+    console.error('Error stack:', error.stack);
+    
+    try {
+      await interaction.editReply({
+        content: `❌ Failed to fetch standings: ${error.message}`,
+        ephemeral: true
+      });
+    } catch (replyError) {
+      console.error('Failed to send error reply:', replyError);
+      
+      // Last resort - try followUp if editReply fails
+      try {
+        await interaction.followUp({
+          content: `❌ Failed to fetch standings: ${error.message}`,
+          ephemeral: true
+        });
+      } catch (followUpError) {
+        console.error('Failed to send followUp error:', followUpError);
+      }
+    }
   }
 }
 
