@@ -201,7 +201,7 @@ export const Overview = () => {
                         <span className={`w-12 h-8 flex items-center justify-center text-sm font-bold text-white ${colors.iconBg}`}>
                           {champion.year}
                         </span>
-                        <div className="hidden sm:block">
+                        <div>
                           <TeamLogo 
                             teamName={getCurrentTeamName(champion.userId, champion.userInfo.teamName)}
                             abbreviation={getCurrentAbbreviation(champion.userId, champion.userInfo.abbreviation)}
