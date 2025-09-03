@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 // import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { DraftBoard } from '../components/Draft/DraftBoard';
@@ -9,7 +9,7 @@ import type { DraftData, UserInfo, LeagueTier } from '../types';
 import { dataService } from '../services/data.service';
 import { LEAGUE_NAMES, AVAILABLE_YEARS, getAvailableLeaguesForYear } from '../constants/leagues';
 import { getUserInfoBySleeperId, getFFUIdBySleeperId, getDraftDate, isActiveYear } from '../config/constants';
-import { ChevronDown, Calendar } from 'lucide-react';
+import { ChevronDown, Calendar, BarChart3 } from 'lucide-react';
 import { historicalTeamResolver } from '../utils/historical-team-resolver';
 
 type ViewMode = 'board' | 'list';
@@ -203,8 +203,19 @@ export const Draft: React.FC = () => {
       {/* Header with Filters */}
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div className="mb-3 sm:mb-0">
-          <h1 className="text-xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">Draft History</h1>
-          <p className="mt-1 sm:mt-2 text-xs sm:text-base text-gray-600 dark:text-gray-300">View past draft results and selections</p>
+          <div className="flex items-center gap-4">
+            <div>
+              <h1 className="text-xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">Draft History</h1>
+              <p className="mt-1 sm:mt-2 text-xs sm:text-base text-gray-600 dark:text-gray-300">View past draft results and selections</p>
+            </div>
+            <Link
+              to="/draft-fun-facts"
+              className="flex items-center gap-2 px-4 py-2 bg-ffu-red text-white rounded hover:bg-red-700 transition-colors duration-200 text-sm font-medium"
+            >
+              <BarChart3 className="h-4 w-4" />
+              <span className="hidden sm:inline">Fun Facts</span>
+            </Link>
+          </div>
         </div>
         
         <div className="flex flex-row gap-2 sm:gap-4 justify-between items-center w-full sm:w-auto">

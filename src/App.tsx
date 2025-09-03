@@ -5,6 +5,7 @@ import { Standings } from './pages/Standings';
 import { Members } from './pages/Members';
 import { Matchups } from './pages/Matchups';
 import { Draft } from './pages/Draft';
+import { DraftFunFacts } from './pages/DraftFunFacts';
 import { Records } from './pages/Records';
 import { AllTimeStats } from './pages/AllTimeStats';
 import { SecretDak } from './pages/SecretDak';
@@ -25,6 +26,7 @@ const AppContent = () => {
             <Route path="members" element={<Members />} />
             <Route path="matchups" element={<Matchups />} />
             <Route path="drafts" element={<Draft />} />
+            <Route path="draft-fun-facts" element={<DraftFunFacts />} />
             <Route path="records" element={<Records />} />
             <Route path="stats" element={<AllTimeStats />} />
             <Route path="secret-dak" element={<SecretDak />} />
