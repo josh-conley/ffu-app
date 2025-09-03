@@ -46,7 +46,7 @@ const PlacementTag = ({ placementType }: { placementType: string }) => {
 export const Matchups = () => {
   const { getParam, updateParams } = useUrlParams();
   const [selectedLeague, setSelectedLeague] = useState<LeagueTier>('PREMIER');
-  const [selectedYear, setSelectedYear] = useState<string>('2024');
+  const [selectedYear, setSelectedYear] = useState<string>('2025');
   const [selectedWeek, setSelectedWeek] = useState<number | 'ALL'>(0); // 0 represents "All Weeks"
   const [selectedTeam, setSelectedTeam] = useState<string>('ALL'); // Team filter
   const [isFilterMenuOpen, setIsFilterMenuOpen] = useState<boolean>(false);
@@ -59,7 +59,7 @@ export const Matchups = () => {
       setSelectedLeague(league as LeagueTier);
     }
 
-    setSelectedYear(getParam('year', '2024'));
+    setSelectedYear(getParam('year', '2025'));
 
     const week = getParam('week', '0');
     const weekNum = week === 'ALL' ? 0 : parseInt(week);

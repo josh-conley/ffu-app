@@ -520,9 +520,12 @@ class HistoricalDataGenerator {
           userRecords[matchup.loser] = { wins: 0, losses: 0 };
         }
         
-        // Update records AFTER this game (inclusive)
-        userRecords[matchup.winner].wins++;
-        userRecords[matchup.loser].losses++;
+        // Only update records if the matchup has actual scores (skip games with 0-0 scores)
+        if (matchup.winnerScore > 0 || matchup.loserScore > 0) {
+          // Update records AFTER this game (inclusive)
+          userRecords[matchup.winner].wins++;
+          userRecords[matchup.loser].losses++;
+        }
         
         // Add updated records to the matchup (AFTER updating for this game)
         const winnerRecord = userRecords[matchup.winner];

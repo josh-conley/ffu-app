@@ -27,7 +27,10 @@
       "Bash(npm run fetch-players:*)",
       "Bash(npm run generate-data:*)",
       "Bash(timeout 10 npm run dev)",
-      "Bash(npx eslint:*)"
+      "Bash(npx eslint:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ],
     "deny": []
   }
