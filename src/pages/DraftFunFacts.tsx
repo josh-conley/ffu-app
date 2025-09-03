@@ -40,6 +40,7 @@ export const DraftFunFacts: React.FC = () => {
   const [selectedPlayer, setSelectedPlayer] = useState<PlayerDraftInfo | null>(null);
   const [activeTab, setActiveTab] = useState<'players' | 'teams'>('players');
   const [selectedTeamMember, setSelectedTeamMember] = useState<string>('');
+  const [sortByDraftCount, setSortByDraftCount] = useState(false);
 
   const loadAllDraftData = async () => {
     try {
@@ -212,21 +213,39 @@ export const DraftFunFacts: React.FC = () => {
           draftedBy: draftedBy.sort((a, b) => b.count - a.count) // Sort by most drafts first
         };
       })
-      .sort((a, b) => a.adp - b.adp); // Sort by ADP ascending
+      .sort((a, b) => a.adp - b.adp); // Default sort by ADP ascending
 
     stats.totalPlayers = stats.playerStats.length;
 
     return stats;
   }, [draftData, userMaps]);
 
-  // Filter players based on search query
+  // Filter and sort players based on search query and sort preference
   const filteredPlayerStats = useMemo(() => {
-    if (!searchQuery.trim()) return draftStats.playerStats;
-    return draftStats.playerStats.filter(player => 
-      player.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      player.position.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [draftStats.playerStats, searchQuery]);
+    let players = draftStats.playerStats;
+    
+    // Filter by search query
+    if (searchQuery.trim()) {
+      players = players.filter(player => 
+        player.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        player.position.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+    
+    // Apply sorting based on checkbox state
+    if (sortByDraftCount) {
+      return [...players].sort((a, b) => {
+        // First sort by draft count (descending)
+        if (a.totalDrafts !== b.totalDrafts) {
+          return b.totalDrafts - a.totalDrafts;
+        }
+        // Then by ADP (ascending)
+        return a.adp - b.adp;
+      });
+    }
+    
+    return players;
+  }, [draftStats.playerStats, searchQuery, sortByDraftCount]);
 
   // Get team member stats for the "By Team Member" tab
   const teamMemberStats = useMemo(() => {
@@ -450,8 +469,8 @@ export const DraftFunFacts: React.FC = () => {
           </div>
         </div>
 
-        {/* Search Bar */}
-        <div className="mb-4">
+        {/* Search Bar and Sort Options */}
+        <div className="mb-4 space-y-4">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <Search className="h-5 w-5 text-gray-400" />
@@ -463,6 +482,22 @@ export const DraftFunFacts: React.FC = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red"
             />
+          </div>
+          
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="sortByDraftCount"
+              checked={sortByDraftCount}
+              onChange={(e) => setSortByDraftCount(e.target.checked)}
+              className="h-4 w-4 text-ffu-red focus:ring-ffu-red border-gray-300 rounded"
+            />
+            <label 
+              htmlFor="sortByDraftCount"
+              className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer"
+            >
+              Sort by draft count first, then ADP
+            </label>
           </div>
         </div>
 
