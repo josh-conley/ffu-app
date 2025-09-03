@@ -42,6 +42,14 @@ export function createHeadToHeadIndex(allMatchupData: {
       
       if (!winner || !loser) return; // Skip invalid matchups
       
+      // Skip unplayed scheduled games (0-0 with valid winner/loser assignment suggests future game)
+      // Only filter these if they appear to be from current season scheduling
+      if (winnerScore === 0 && loserScore === 0 && 
+          (parseInt(year) >= new Date().getFullYear() || 
+           (parseInt(year) === new Date().getFullYear() - 1 && week > 17))) {
+        return;
+      }
+      
       const indexedMatchup: IndexedMatchup = {
         year,
         league,

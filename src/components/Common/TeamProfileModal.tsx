@@ -4,6 +4,7 @@ import { LoadingSpinner } from './LoadingSpinner';
 import { ErrorMessage } from './ErrorMessage';
 import { TeamLogo } from './TeamLogo';
 import { LeagueBadge } from '../League/LeagueBadge';
+import { LeagueProgressionChart } from '../Members/LeagueProgressionChart';
 import { getFFUIdBySleeperId, getSleeperIdByFFUId, isActiveYear } from '../../config/constants';
 import type { LeagueTier, UserInfo } from '../../types';
 import { Trophy, Medal, Award, TrendingDown, ChevronDown, ChevronUp, X } from 'lucide-react';
@@ -471,6 +472,9 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
                     </div>
                   </div>
                 </div>
+
+                {/* League Tier Progression Chart */}
+                <LeagueProgressionChart seasonHistory={selectedPlayer.seasonHistory} />
 
                 {/* Season History */}
                 <div>

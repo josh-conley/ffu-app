@@ -1,5 +1,6 @@
 import { TeamLogo } from '../Common/TeamLogo';
 import { LeagueBadge } from '../League/LeagueBadge';
+import { ComparisonLeagueProgressionChart } from './ComparisonLeagueProgressionChart';
 import { Trophy, Medal, Award, TrendingDown, Calendar, Users } from 'lucide-react';
 import type { UserInfo, HeadToHeadStats, LeagueTier } from '../../types';
 
@@ -135,6 +136,60 @@ export function CompareMembers({ selectedPlayer, selectedPlayer2, headToHeadData
             </div>
           </div>
         </div>
+
+        {/* Head-to-Head Record */}
+        {headToHeadData && (
+          <div className="text-center mb-6 bg-gray-50 dark:bg-gray-700 p-4">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+              Head-to-Head Record
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
+              {headToHeadData.totalGames} game{headToHeadData.totalGames !== 1 ? 's' : ''} played
+            </p>
+
+            <div className="grid grid-cols-3 gap-8 items-center">
+              <div className="text-center">
+                <div className={`text-4xl font-bold mb-2 ${
+                  headToHeadData.player1Wins > headToHeadData.player2Wins 
+                    ? 'text-green-600' 
+                    : headToHeadData.player1Wins === headToHeadData.player2Wins 
+                    ? 'text-gray-600' 
+                    : 'text-gray-400'
+                }`}>
+                  {headToHeadData.player1Wins}
+                </div>
+                <div className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  {selectedPlayer.userInfo.abbreviation}
+                </div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {headToHeadData.player1AvgScore.toFixed(1)} avg
+                </div>
+              </div>
+
+              <div className="text-center">
+                <div className="text-2xl font-bold text-gray-400 mb-2">vs</div>
+              </div>
+
+              <div className="text-center">
+                <div className={`text-4xl font-bold mb-2 ${
+                  headToHeadData.player2Wins > headToHeadData.player1Wins 
+                    ? 'text-green-600' 
+                    : headToHeadData.player2Wins === headToHeadData.player1Wins 
+                    ? 'text-gray-600' 
+                    : 'text-gray-400'
+                }`}>
+                  {headToHeadData.player2Wins}
+                </div>
+                <div className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  {selectedPlayer2.userInfo.abbreviation}
+                </div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {headToHeadData.player2AvgScore.toFixed(1)} avg
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Stats Comparison */}
         <div className="space-y-3">
@@ -332,71 +387,12 @@ export function CompareMembers({ selectedPlayer, selectedPlayer2, headToHeadData
         </div>
       </div>
 
-      {/* Head-to-Head Record */}
-      {headToHeadData && headToHeadData.totalGames > 0 ? (
-        <div className="card">
-          <div className="text-center mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-              Head-to-Head Record
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400">
-              {headToHeadData.totalGames} game{headToHeadData.totalGames !== 1 ? 's' : ''} played
-            </p>
-          </div>
+      {/* League Tier Progression Comparison */}
+      <ComparisonLeagueProgressionChart
+        player1={selectedPlayer}
+        player2={selectedPlayer2}
+      />
 
-          <div className="grid grid-cols-3 gap-8 items-center mb-6">
-            <div className="text-center">
-              <div className={`text-4xl font-bold mb-2 ${
-                headToHeadData.player1Wins > headToHeadData.player2Wins 
-                  ? 'text-green-600' 
-                  : headToHeadData.player1Wins === headToHeadData.player2Wins 
-                  ? 'text-gray-600' 
-                  : 'text-gray-400'
-              }`}>
-                {headToHeadData.player1Wins}
-              </div>
-              <div className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                {selectedPlayer.userInfo.abbreviation}
-              </div>
-              <div className="text-xs text-gray-500 mt-1">
-                {headToHeadData.player1AvgScore.toFixed(1)} avg
-              </div>
-            </div>
-
-            <div className="text-center">
-              <div className="text-2xl font-bold text-gray-400 mb-2">vs</div>
-            </div>
-
-            <div className="text-center">
-              <div className={`text-4xl font-bold mb-2 ${
-                headToHeadData.player2Wins > headToHeadData.player1Wins 
-                  ? 'text-green-600' 
-                  : headToHeadData.player2Wins === headToHeadData.player1Wins 
-                  ? 'text-gray-600' 
-                  : 'text-gray-400'
-              }`}>
-                {headToHeadData.player2Wins}
-              </div>
-              <div className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                {selectedPlayer2.userInfo.abbreviation}
-              </div>
-              <div className="text-xs text-gray-500 mt-1">
-                {headToHeadData.player2AvgScore.toFixed(1)} avg
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div className="card text-center py-8">
-          <Users className="w-12 h-12 mx-auto text-gray-400 mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-            No Head-to-Head Games
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400">
-            These members have not played against each other yet.
-          </p>
-        </div>
-      )}
 
       {/* Matchup History */}
       {headToHeadData && headToHeadData.matchups.length > 0 && (

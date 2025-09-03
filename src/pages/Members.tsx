@@ -7,6 +7,7 @@ import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import { CompareMembers } from '../components/Members/CompareMembers';
 import { PlayerSelector } from '../components/Members/PlayerSelector';
+import { LeagueProgressionChart } from '../components/Members/LeagueProgressionChart';
 import { getFFUIdBySleeperId, isActiveYear } from '../config/constants';
 import type { LeagueTier, UserInfo } from '../types';
 import { Trophy, Medal, Award, TrendingDown, ChevronDown, ChevronUp, Share2, Check } from 'lucide-react';
@@ -597,6 +598,9 @@ export const Members = () => {
               </div>
             </div>
           </div>
+
+          {/* League Tier Progression Chart */}
+          <LeagueProgressionChart seasonHistory={selectedPlayer.seasonHistory} />
 
           {/* Season History */}
           <div className="card">
