@@ -120,6 +120,8 @@ export interface SleeperRoster {
   roster_id: number;
   owner_id: string;
   league_id: string;
+  players?: string[]; // All rostered player IDs
+  starters?: string[]; // Starting lineup player IDs (may not be set for roster endpoint)
   settings?: {
     wins?: number;
     losses?: number;
@@ -136,6 +138,8 @@ export interface SleeperMatchup {
   matchup_id: number;
   points: number;
   players_points: Record<string, number>;
+  starters?: string[]; // Starting lineup player IDs for this matchup
+  players?: string[]; // All players on roster for this matchup
 }
 
 export interface SleeperDraft {

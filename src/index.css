@@ -551,6 +551,21 @@
     background-color: rgb(var(--pos-def-cell-bg-dark) / 0.20);
   }
 
+  .pos-flex-badge {
+    background: linear-gradient(to right, 
+      rgb(134 239 172) 0% 33.33%, 
+      rgb(147 197 253) 33.33% 66.66%, 
+      rgb(255 165 0) 66.66% 100%);
+    color: white;
+  }
+  .dark .pos-flex-badge {
+    background: linear-gradient(to right, 
+      rgb(34 197 94 / 0.3) 0% 33.33%, 
+      rgb(59 130 246 / 0.4) 33.33% 66.66%, 
+      rgb(255 165 0 / 0.4) 66.66% 100%);
+    color: white;
+  }
+
   /* Sticky column styles for mobile */
   @media (max-width: 1024px) {
     .table-row:hover .sticky {

@@ -5,9 +5,10 @@ import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
+import { RosterModal } from '../components/Common/RosterModal';
 import type { LeagueTier } from '../types';
-import { USERS, getAllYears, getAvailableLeagues } from '../config/constants';
-import { getSeasonLength } from '../utils/era-detection';
+import { USERS, getAllYears, getAvailableLeagues, getLeagueId } from '../config/constants';
+import { getSeasonLength, isSleeperEra } from '../utils/era-detection';
 import { ChevronDown, Filter } from 'lucide-react';
 import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 
@@ -50,6 +51,28 @@ export const Matchups = () => {
   const [selectedWeek, setSelectedWeek] = useState<number | 'ALL'>(0); // 0 represents "All Weeks"
   const [selectedTeam, setSelectedTeam] = useState<string>('ALL'); // Team filter
   const [isFilterMenuOpen, setIsFilterMenuOpen] = useState<boolean>(false);
+  const [showUnavailablePopup, setShowUnavailablePopup] = useState<boolean>(false);
+  const [rosterModal, setRosterModal] = useState<{
+    isOpen: boolean;
+    leagueId: string;
+    winnerUserId: string;
+    loserUserId: string;
+    week: number;
+    winnerTeamName: string;
+    loserTeamName: string;
+    winnerAbbreviation: string;
+    loserAbbreviation: string;
+  }>({
+    isOpen: false,
+    leagueId: '',
+    winnerUserId: '',
+    loserUserId: '',
+    week: 0,
+    winnerTeamName: '',
+    loserTeamName: '',
+    winnerAbbreviation: '',
+    loserAbbreviation: ''
+  });
   const { openTeamProfile } = useTeamProfileModal();
 
   // Initialize from URL params on mount
@@ -123,6 +146,47 @@ export const Matchups = () => {
     return matchups.filter(matchup => 
       matchup.winner === selectedTeam || matchup.loser === selectedTeam
     );
+  };
+
+  // Auto-hide popup after 2 seconds
+  useEffect(() => {
+    if (showUnavailablePopup) {
+      const timer = setTimeout(() => {
+        setShowUnavailablePopup(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [showUnavailablePopup]);
+
+  // Helper function to open roster modal for matchup
+  const openMatchupRosterModal = (matchup: any, week: number) => {
+    // For ESPN era data, show unavailable message
+    if (!isSleeperEra(selectedYear)) {
+      setShowUnavailablePopup(true);
+      return;
+    }
+
+    const leagueId = getLeagueId(selectedLeague, selectedYear);
+    if (!leagueId) {
+      console.warn('League ID not found for selected league/year');
+      return;
+    }
+
+    setRosterModal({
+      isOpen: true,
+      leagueId,
+      winnerUserId: matchup.winner,
+      loserUserId: matchup.loser,
+      week,
+      winnerTeamName: matchup.winnerInfo?.teamName || 'Unknown Team',
+      loserTeamName: matchup.loserInfo?.teamName || 'Unknown Team',
+      winnerAbbreviation: matchup.winnerInfo?.abbreviation || 'WIN',
+      loserAbbreviation: matchup.loserInfo?.abbreviation || 'LOS'
+    });
+  };
+
+  const closeRosterModal = () => {
+    setRosterModal(prev => ({ ...prev, isOpen: false }));
   };
 
   return (
@@ -287,7 +351,10 @@ export const Matchups = () => {
                 {placementInfo && placementInfo.tag}
                 
                 {/* Mobile Stacked Layout */}
-                <div className={`sm:hidden space-y-0.5 border-gray-100 dark:border-gray-800 ${placementInfo ? placementInfo.borderColor : ''}`}>
+                <div 
+                  className={`sm:hidden space-y-0.5 border-gray-100 dark:border-gray-800 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors p-2 rounded ${placementInfo ? placementInfo.borderColor : ''}`}
+                  onClick={() => openMatchupRosterModal(matchup, matchupsData.week)}
+                >
                   {/* Winner Row */}
                   <div className="flex items-center space-x-2 py-1 px-2 bg-green-50 dark:bg-green-900/25 rounded">
                     <div className="flex-shrink-0">
@@ -341,7 +408,10 @@ export const Matchups = () => {
                 </div>
 
                 {/* Desktop Horizontal Layout */}
-                <div className={`hidden sm:flex items-center justify-between gap-4 border-gray-100 dark:border-gray-800 p-2 ${placementInfo ? placementInfo.borderColor : ''}`}>
+                <div 
+                  className={`hidden sm:flex items-center justify-between gap-4 border-gray-100 dark:border-gray-800 p-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors rounded ${placementInfo ? placementInfo.borderColor : ''}`}
+                  onClick={() => openMatchupRosterModal(matchup, matchupsData.week)}
+                >
                   {/* Winner Side */}
                   <div className="flex items-center space-x-3 flex-1 min-w-0">
                     <div className="flex-shrink-0">
@@ -441,7 +511,10 @@ export const Matchups = () => {
                       {placementInfo && placementInfo.tag}
                       
                       {/* Mobile Stacked Layout */}
-                      <div className={`sm:hidden space-y-0.5 border-gray-100 dark:border-gray-800 ${placementInfo ? placementInfo.borderColor : ''}`}>
+                      <div 
+                        className={`sm:hidden space-y-0.5 border-gray-100 dark:border-gray-800 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors p-2 rounded ${placementInfo ? placementInfo.borderColor : ''}`}
+                        onClick={() => openMatchupRosterModal(matchup, weekData.week)}
+                      >
                         {/* Winner Row */}
                         <div className="flex items-center space-x-2 py-1 px-2 bg-green-50 dark:bg-green-900/25 rounded">
                           <div className="flex-shrink-0">
@@ -495,7 +568,10 @@ export const Matchups = () => {
                       </div>
 
                       {/* Desktop Horizontal Layout */}
-                      <div className={`hidden sm:flex items-center justify-between gap-4 border-gray-100 dark:border-gray-800 p-2 ${placementInfo ? placementInfo.borderColor : ''}`}>
+                      <div 
+                        className={`hidden sm:flex items-center justify-between gap-4 border-gray-100 dark:border-gray-800 p-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors rounded ${placementInfo ? placementInfo.borderColor : ''}`}
+                        onClick={() => openMatchupRosterModal(matchup, weekData.week)}
+                      >
                         {/* Winner Side */}
                         <div className="flex items-center space-x-3 flex-1 min-w-0">
                           <div className="flex-shrink-0">
@@ -561,6 +637,40 @@ export const Matchups = () => {
               {selectedTeam === 'ALL' ? 'No matchups found for this season' : 'No matchups found for the selected team this season'}
             </div>
           )}
+        </div>
+      )}
+
+      {/* Roster Modal */}
+      <RosterModal
+        isOpen={rosterModal.isOpen}
+        onClose={closeRosterModal}
+        leagueId={rosterModal.leagueId}
+        winnerUserId={rosterModal.winnerUserId}
+        loserUserId={rosterModal.loserUserId}
+        week={rosterModal.week}
+        winnerTeamName={rosterModal.winnerTeamName}
+        loserTeamName={rosterModal.loserTeamName}
+        winnerAbbreviation={rosterModal.winnerAbbreviation}
+        loserAbbreviation={rosterModal.loserAbbreviation}
+      />
+
+      {/* Toast Notification */}
+      {showUnavailablePopup && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 animate-in slide-in-from-top duration-300">
+          <div className="bg-yellow-50 dark:bg-yellow-900/90 border border-yellow-200 dark:border-yellow-700 rounded-lg shadow-lg px-4 py-3 mx-4 max-w-md">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <svg className="h-5 w-5 text-yellow-600 dark:text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                </svg>
+              </div>
+              <div className="ml-3">
+                <p className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
+                  Matchup data not available for ESPN era seasons (2018-2020)
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
