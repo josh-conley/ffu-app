@@ -41,6 +41,7 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
   const [error, setError] = useState<string | null>(null);
 
   const sleeperService = useMemo(() => new SleeperService(), []);
+  const baseUrl = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
 
   // Check if matchup is complete (both teams have points > 0)
   const isMatchupComplete = useMemo(() => {
@@ -62,7 +63,7 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
           sleeperService.getLeagueRosters(leagueId),
           sleeperService.getLeagueUsers(leagueId),
           sleeperService.getMatchupsForWeek(leagueId, week),
-          fetch('/data/players/nfl-players-compressed.json').then(res => res.json())
+          fetch(`${baseUrl}/data/players/nfl-players-compressed.json`).then(res => res.json())
         ]);
 
         const players = playersResponse.players || playersResponse;
