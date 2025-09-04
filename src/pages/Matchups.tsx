@@ -100,7 +100,7 @@ export const Matchups = () => {
 
   // Reset week selection if it becomes invalid when year changes
   useEffect(() => {
-    if (selectedYear === '2025' && selectedWeek >= 15 && selectedWeek !== 0) {
+    if (selectedYear === '2025' && typeof selectedWeek === 'number' && selectedWeek >= 15 && selectedWeek !== 0) {
       setSelectedWeek(0); // Reset to All Weeks
       updateParams({ week: '0' });
     }

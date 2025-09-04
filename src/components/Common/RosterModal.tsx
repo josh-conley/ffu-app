@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { X, Users, TrendingUp, TrendingDown } from 'lucide-react';
+import { X } from 'lucide-react';
 import { SleeperService } from '../../services/sleeper.service';
 import { LoadingSpinner } from './LoadingSpinner';
 import { ErrorMessage } from './ErrorMessage';
@@ -226,7 +226,7 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
                         <TeamLogo
                           teamName={winnerTeamName}
                           abbreviation={getUserInfoBySleeperId(winnerUserId)?.abbreviation || winnerAbbreviation}
-                          size="xs"
+                          size="sm"
                         />
                         <h4 className={`font-bold text-xs sm:text-sm leading-tight ${isMatchupComplete ? 'text-green-700 dark:text-green-300' : 'text-gray-700 dark:text-gray-300'}`}>
                           {winnerTeamName}
@@ -251,7 +251,7 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
                         <TeamLogo
                           teamName={loserTeamName}
                           abbreviation={getUserInfoBySleeperId(loserUserId)?.abbreviation || loserAbbreviation}
-                          size="xs"
+                          size="sm"
                         />
                         <h4 className={`font-bold text-xs sm:text-sm leading-tight ${isMatchupComplete ? 'text-red-700 dark:text-red-300' : 'text-gray-700 dark:text-gray-300'}`}>
                           {loserTeamName}

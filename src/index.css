@@ -556,7 +556,7 @@
       rgb(134 239 172) 0% 33.33%, 
       rgb(147 197 253) 33.33% 66.66%, 
       rgb(255 165 0) 66.66% 100%);
-    color: white;
+    color: #3f405a;
   }
   .dark .pos-flex-badge {
     background: linear-gradient(to right, 
