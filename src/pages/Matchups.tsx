@@ -148,6 +148,11 @@ export const Matchups = () => {
     );
   };
 
+  // Check if matchup is complete (both teams have points > 0)
+  const isMatchupComplete = (matchup: any) => {
+    return matchup.winnerScore > 0 && matchup.loserScore > 0;
+  };
+
   // Auto-hide popup after 2 seconds
   useEffect(() => {
     if (showUnavailablePopup) {
@@ -345,6 +350,7 @@ export const Matchups = () => {
           <div className="space-y-3 sm:space-y-4">
             {filterMatchupsByTeam(matchupsData.matchups || []).map((matchup, index: number) => {
               const placementInfo = matchup.placementType ? PlacementTag({ placementType: matchup.placementType }) : null;
+              const isComplete = isMatchupComplete(matchup);
               return (
               <div key={index} className="transition-colors relative">
                 {/* Placement Tag */}
@@ -356,7 +362,7 @@ export const Matchups = () => {
                   onClick={() => openMatchupRosterModal(matchup, matchupsData.week)}
                 >
                   {/* Winner Row */}
-                  <div className="flex items-center space-x-2 py-1 px-2 bg-green-50 dark:bg-green-900/25 rounded">
+                  <div className={`flex items-center space-x-2 py-1 px-2 rounded ${isComplete ? 'bg-green-50 dark:bg-green-900/25' : 'bg-gray-50 dark:bg-gray-700/25'}`}>
                     <div className="flex-shrink-0">
                       <TeamLogo
                         teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
@@ -379,14 +385,14 @@ export const Matchups = () => {
                   {/* Score Row */}
                   <div className="text-center py-1 border-gray-200/50 dark:border-gray-600/50">
                     <div className="text-base font-bold">
-                      <span className="text-green-600 dark:text-green-400 font-mono">{matchup.winnerScore?.toFixed(2)}</span>
+                      <span className={`font-mono ${isComplete ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'}`}>{matchup.winnerScore?.toFixed(2)}</span>
                       <span className="text-gray-500 dark:text-gray-400 mx-2">-</span>
-                      <span className="text-red-600 dark:text-red-400 font-mono">{matchup.loserScore?.toFixed(2)}</span>
+                      <span className={`font-mono ${isComplete ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>{matchup.loserScore?.toFixed(2)}</span>
                     </div>
                   </div>
 
                   {/* Loser Row */}
-                  <div className="flex items-center justify-end space-x-2 py-1 px-2 bg-red-50 dark:bg-red-900/25 rounded">
+                  <div className={`flex items-center justify-end space-x-2 py-1 px-2 rounded ${isComplete ? 'bg-red-50 dark:bg-red-900/25' : 'bg-gray-50 dark:bg-gray-700/25'}`}>
                     {matchup.loserRecord && (
                       <span className="text-xs text-gray-500 dark:text-gray-400 font-mono">
                         ({matchup.loserRecord})
@@ -436,9 +442,9 @@ export const Matchups = () => {
                   {/* Score */}
                   <div className="text-center flex-shrink-0 px-4">
                     <div className="text-lg font-bold whitespace-nowrap">
-                      <span className="text-green-600 dark:text-green-400 font-mono">{matchup.winnerScore?.toFixed(2)}</span>
+                      <span className={`font-mono ${isComplete ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'}`}>{matchup.winnerScore?.toFixed(2)}</span>
                       <span className="text-gray-500 dark:text-gray-400 mx-2">-</span>
-                      <span className="text-red-600 dark:text-red-400 font-mono">{matchup.loserScore?.toFixed(2)}</span>
+                      <span className={`font-mono ${isComplete ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>{matchup.loserScore?.toFixed(2)}</span>
                     </div>
                   </div>
 
@@ -505,6 +511,7 @@ export const Matchups = () => {
                 <div className="space-y-3 sm:space-y-2">
                   {filteredMatchups.map((matchup, index: number) => {
                     const placementInfo = matchup.placementType ? PlacementTag({ placementType: matchup.placementType }) : null;
+                    const isComplete = isMatchupComplete(matchup);
                     return (
                     <div key={index} className="transition-colors relative">
                       {/* Placement Tag */}
@@ -516,7 +523,7 @@ export const Matchups = () => {
                         onClick={() => openMatchupRosterModal(matchup, weekData.week)}
                       >
                         {/* Winner Row */}
-                        <div className="flex items-center space-x-2 py-1 px-2 bg-green-50 dark:bg-green-900/25 rounded">
+                        <div className={`flex items-center space-x-2 py-1 px-2 rounded ${isComplete ? 'bg-green-50 dark:bg-green-900/25' : 'bg-gray-50 dark:bg-gray-700/25'}`}>
                           <div className="flex-shrink-0">
                             <TeamLogo
                               teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
@@ -539,14 +546,14 @@ export const Matchups = () => {
                         {/* Score Row */}
                         <div className="text-center py-1 border-gray-200/50 dark:border-gray-600/50">
                           <div className="text-base font-bold">
-                            <span className="text-green-600 dark:text-green-400 font-mono">{matchup.winnerScore?.toFixed(2)}</span>
+                            <span className={`font-mono ${isComplete ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'}`}>{matchup.winnerScore?.toFixed(2)}</span>
                             <span className="text-gray-500 dark:text-gray-400 mx-2">-</span>
-                            <span className="text-red-600 dark:text-red-400 font-mono">{matchup.loserScore?.toFixed(2)}</span>
+                            <span className={`font-mono ${isComplete ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>{matchup.loserScore?.toFixed(2)}</span>
                           </div>
                         </div>
 
                         {/* Loser Row */}
-                        <div className="flex items-center justify-end space-x-2 py-1 px-2 bg-red-50 dark:bg-red-900/25 rounded">
+                        <div className={`flex items-center justify-end space-x-2 py-1 px-2 rounded ${isComplete ? 'bg-red-50 dark:bg-red-900/25' : 'bg-gray-50 dark:bg-gray-700/25'}`}>
                           {matchup.loserRecord && (
                             <span className="text-xs text-gray-500 dark:text-gray-400 font-mono">
                               ({matchup.loserRecord})
@@ -596,9 +603,9 @@ export const Matchups = () => {
                         {/* Score */}
                         <div className="text-center flex-shrink-0 px-4">
                           <div className="text-lg font-bold whitespace-nowrap">
-                            <span className="text-green-600 dark:text-green-400 font-mono">{matchup.winnerScore?.toFixed(2)}</span>
+                            <span className={`font-mono ${isComplete ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'}`}>{matchup.winnerScore?.toFixed(2)}</span>
                             <span className="text-gray-500 dark:text-gray-400 mx-2">-</span>
-                            <span className="text-red-600 dark:text-red-400 font-mono">{matchup.loserScore?.toFixed(2)}</span>
+                            <span className={`font-mono ${isComplete ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>{matchup.loserScore?.toFixed(2)}</span>
                           </div>
                         </div>
 
