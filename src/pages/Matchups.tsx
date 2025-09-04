@@ -82,14 +82,29 @@ export const Matchups = () => {
       setSelectedLeague(league as LeagueTier);
     }
 
-    setSelectedYear(getParam('year', '2025'));
+    const year = getParam('year', '2025');
+    setSelectedYear(year);
 
     const week = getParam('week', '0');
     const weekNum = week === 'ALL' ? 0 : parseInt(week);
-    setSelectedWeek(isNaN(weekNum) ? 0 : weekNum);
-
+    let validWeekNum = isNaN(weekNum) ? 0 : weekNum;
+    
+    // For 2025 season, if selected week is playoff week (15-17), reset to All Weeks
+    if (year === '2025' && validWeekNum >= 15) {
+      validWeekNum = 0;
+    }
+    
+    setSelectedWeek(validWeekNum);
     setSelectedTeam(getParam('team', 'ALL'));
   }, []); // Empty dependency array - only run on mount
+
+  // Reset week selection if it becomes invalid when year changes
+  useEffect(() => {
+    if (selectedYear === '2025' && selectedWeek >= 15 && selectedWeek !== 0) {
+      setSelectedWeek(0); // Reset to All Weeks
+      updateParams({ week: '0' });
+    }
+  }, [selectedYear, selectedWeek, updateParams]);
 
   const { data: weekMatchupsData, isLoading: weekLoading, error: weekError } = useWeekMatchups(
     selectedLeague,
@@ -127,7 +142,14 @@ export const Matchups = () => {
   }, [allYears, selectedLeague]);
   const weeks = useMemo(() => {
     const totalWeeks = getSeasonLength(selectedYear);
-    return Array.from({ length: totalWeeks }, (_, i) => i + 1);
+    const allWeeks = Array.from({ length: totalWeeks }, (_, i) => i + 1);
+    
+    // For active season (2025), exclude playoff weeks 15-17 since they're TBD
+    if (selectedYear === '2025') {
+      return allWeeks.filter(week => week < 15);
+    }
+    
+    return allWeeks;
   }, [selectedYear]);
 
   // Get sorted list of active team members
