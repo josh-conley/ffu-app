@@ -10,7 +10,7 @@ import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 export const Overview = () => {
   const { data: standings, isLoading, error } = useAllStandings();
   const { openTeamProfile } = useTeamProfileModal();
-  
+
   const colorMap = {
     PREMIER: {
       bg: 'bg-yellow-50 dark:bg-yellow-900/20',
@@ -45,7 +45,7 @@ export const Overview = () => {
       MASTERS: [],
       NATIONAL: []
     };
-    
+
     const championsByLeague: Record<LeagueTier, any[]> = {
       PREMIER: [],
       MASTERS: [],
@@ -54,7 +54,7 @@ export const Overview = () => {
 
     // Group by league and year, then get champions (first place finishers)
     const completedSeasons = standings.filter(s => !isActiveYear(s.year));
-    
+
     completedSeasons.forEach(season => {
       const champion = season.standings.find(standing => standing.rank === 1);
       if (champion && season.league in championsByLeague) {
@@ -135,13 +135,21 @@ export const Overview = () => {
       <div className='card'>
         <h1 className="py-4 text-3xl font-bold text-gray-900 dark:text-gray-100">Upcoming 2025 Drafts</h1>
         <div>
-          <div className={`champion-highlight angular-cut p-6 mb-6 relative overflow-hidden border-l4 ${colorMap.PREMIER.highlight}`}>
-            <span className={`text-lg font-black ${colorMap.PREMIER.text} tracking-wide`}>
+          <Link
+            to="/drafts?league=PREMIER&year=2025"
+            className={`champion-highlight angular-cut p-6 mb-6 relative overflow-hidden border-l4 ${colorMap.PREMIER.highlight} block hover:opacity-90 transition-opacity`}
+          >
+            <span className={`text-lg font-black ${colorMap.PREMIER.text} tracking-wide block mb-2`}>
               Premier League
             </span>
-            <p>Wednesday 9/3 8:30pm ET</p>
-          </div>
-          <Link 
+            <span className={`${colorMap.PREMIER.text} font-semibold flex items-center`}>
+              View Draft Results
+              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
+          </Link>
+          <Link
             to="/drafts?league=MASTERS&year=2025"
             className={`champion-highlight angular-cut p-6 mb-6 relative overflow-hidden border-l4 ${colorMap.MASTERS.highlight} block hover:opacity-90 transition-opacity`}
           >
@@ -155,7 +163,7 @@ export const Overview = () => {
               </svg>
             </span>
           </Link>
-          <Link 
+          <Link
             to="/drafts?league=NATIONAL&year=2025"
             className={`champion-highlight angular-cut p-6 mb-6 relative overflow-hidden border-l4 ${colorMap.NATIONAL.highlight} block hover:opacity-90 transition-opacity`}
           >
@@ -179,12 +187,12 @@ export const Overview = () => {
             <Crown className="h-8 w-8 text-yellow-500" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">League Champions</h2>
           </div>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {(['PREMIER', 'MASTERS', 'NATIONAL'] as LeagueTier[]).map(league => {
               const champions = leagueChampions[league] || [];
               const colors = colorMap[league];
-              
+
               if (champions.length === 0) return null;
 
               return (
@@ -194,7 +202,7 @@ export const Overview = () => {
                       {getLeagueName(league)} Champions
                     </h3>
                   </div>
-                  
+
                   <div className="space-y-4">
                     {champions.map((champion) => (
                       <div key={`${champion.year}-${champion.userId}`} className="flex items-center space-x-3">
@@ -202,7 +210,7 @@ export const Overview = () => {
                           {champion.year}
                         </span>
                         <div>
-                          <TeamLogo 
+                          <TeamLogo
                             teamName={getCurrentTeamName(champion.userId, champion.userInfo.teamName)}
                             abbreviation={getCurrentAbbreviation(champion.userId, champion.userInfo.abbreviation)}
                             size="sm"
@@ -221,7 +229,7 @@ export const Overview = () => {
                       </div>
                     ))}
                   </div>
-                  
+
                 </div>
               );
             })}
