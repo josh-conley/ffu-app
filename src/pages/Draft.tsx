@@ -25,7 +25,7 @@ export const Draft: React.FC = () => {
   
   // Get initial values from URL params
   const [selectedLeague, setSelectedLeague] = useState<string>(
-    searchParams.get('league') || 'NATIONAL'
+    searchParams.get('league') || 'PREMIER'
   );
   const [selectedYear, setSelectedYear] = useState<string>(
     searchParams.get('year') || '2025'
