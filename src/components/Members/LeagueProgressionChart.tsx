@@ -218,9 +218,9 @@ export const LeagueProgressionChart: React.FC<LeagueProgressionChartProps> = ({ 
                   {/* Label */}
                   <text
                     x={lineX}
-                    y={padding - (isMobile ? 4 : 8)}
+                    y={padding - (isMobile ? 8 : 12)}
                     textAnchor="middle"
-                    className={`fill-purple-600 dark:fill-purple-400 font-medium ${isMobile ? 'text-xs' : 'text-sm'}`}
+                    className={`fill-purple-600 dark:fill-purple-400 font-medium ${isMobile ? 'text-sm' : 'text-2xl'}`}
                   >
                     Masters Introduced
                   </text>
@@ -238,7 +238,7 @@ export const LeagueProgressionChart: React.FC<LeagueProgressionChartProps> = ({ 
               x={xScale(index)}
               y={chartHeight - (isMobile ? 8 : 12)}
               textAnchor="middle"
-              className={`font-medium fill-gray-700 dark:fill-gray-300 ${isMobile ? 'text-sm' : 'text-base'}`}
+              className={`font-medium fill-gray-700 dark:fill-gray-300 ${isMobile ? 'text-base' : 'text-2xl'}`}
             >
               {isMobile ? `'${year.slice(-2)}` : year}
             </text>
