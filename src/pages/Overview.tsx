@@ -1,4 +1,4 @@
-import { Users, Calendar, BarChart3, Award, TrendingUp, Crown } from 'lucide-react';
+import { Users, BarChart3, Award, TrendingUp, Crown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAllStandings } from '../hooks/useLeagues';
 import { TeamLogo } from '../components/Common/TeamLogo';
@@ -86,7 +86,7 @@ export const Overview = () => {
             <p className="text-base sm:text-lg lg:text-xl text-red-100 mb-8">
               Explore stats, standings, and records across all leagues.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 max-w-xlg mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-xlg mx-auto">
               <Link
                 to="/standings"
                 className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
@@ -95,25 +95,11 @@ export const Overview = () => {
                 <div className="font-semibold text-sm sm:text-base">Standings</div>
               </Link>
               <Link
-                to="/members"
+                to="/drafts"
                 className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
               >
                 <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
-                <div className="font-semibold text-sm sm:text-base">Members</div>
-              </Link>
-              <Link
-                to="/matchups"
-                className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
-              >
-                <Calendar className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
-                <div className="font-semibold text-sm sm:text-base">Matchups</div>
-              </Link>
-              <Link
-                to="/matchups?year=2025"
-                className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
-              >
-                <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
-                <div className="font-semibold text-sm sm:text-base">Active Week</div>
+                <div className="font-semibold text-sm sm:text-base">Drafts</div>
               </Link>
               <Link
                 to="/records"

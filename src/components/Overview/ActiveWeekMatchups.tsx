@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Calendar, ExternalLink } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { TeamLogo } from '../Common/TeamLogo';
 import { LoadingSpinner } from '../Common/LoadingSpinner';
 import { RosterModal } from '../Common/RosterModal';
@@ -188,17 +187,10 @@ export const ActiveWeekMatchups = () => {
 
   return (
     <div className="card">
-      <div className="flex items-center justify-between py-4">
+      <div className="py-4">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
           Week {currentNFLWeek} Matchups
         </h1>
-        <Link
-          to="/matchups"
-          className="flex items-center text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
-        >
-          View All
-          <ExternalLink className="h-4 w-4 ml-1" />
-        </Link>
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
@@ -210,16 +202,10 @@ export const ActiveWeekMatchups = () => {
               key={leagueData.league}
               className={`champion-highlight p-4 lg:p-6 relative overflow-hidden border-l4 ${colors.highlight}`}
             >
-              <div className="flex items-center justify-between mb-3 lg:mb-4">
+              <div className="mb-3 lg:mb-4">
                 <span className={`text-base lg:text-lg font-black ${colors.text} tracking-wide`}>
                   {getLeagueName(leagueData.league)}
                 </span>
-                <Link
-                  to={`/matchups?league=${leagueData.league}&year=2025&week=${currentNFLWeek}`}
-                  className={`${colors.text} hover:opacity-70 transition-opacity`}
-                >
-                  <ExternalLink className="h-4 w-4" />
-                </Link>
               </div>
 
               {leagueData.isLoading && (
@@ -272,7 +258,7 @@ export const ActiveWeekMatchups = () => {
                               )}
                             </div>
                           </div>
-                          <div className="text-sm lg:text-base font-mono font-bold text-gray-600 dark:text-gray-400">
+                          <div className="text-xs lg:text-sm font-mono font-bold text-gray-800 dark:text-gray-200">
                             {matchup.winnerScore?.toFixed(2)}
                           </div>
                         </div>
@@ -302,7 +288,7 @@ export const ActiveWeekMatchups = () => {
                               )}
                             </div>
                           </div>
-                          <div className="text-sm lg:text-base font-mono font-bold text-gray-600 dark:text-gray-400">
+                          <div className="text-xs lg:text-sm font-mono font-bold text-gray-800 dark:text-gray-200">
                             {matchup.loserScore?.toFixed(2)}
                           </div>
                         </div>
