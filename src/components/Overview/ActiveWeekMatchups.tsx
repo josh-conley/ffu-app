@@ -242,14 +242,14 @@ export const ActiveWeekMatchups = () => {
                   {leagueData.data.matchups.map((matchup, index) => (
                     <div
                       key={index}
-                      className={`${colors.matchupBg} rounded-lg p-2 lg:p-3 transition-colors cursor-pointer`}
+                      className={`${colors.matchupBg} rounded-lg p-1.5 lg:p-2 transition-colors cursor-pointer`}
                       onClick={() => openMatchupRosterModal(matchup, currentNFLWeek, leagueData.league)}
                     >
                       {/* Compact Layout for Horizontal Display */}
-                      <div className="space-y-2">
+                      <div className="space-y-1.5">
                         {/* Winner */}
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center space-x-1.5">
                             <TeamLogo
                               teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
                               abbreviation={matchup.winnerInfo?.abbreviation}
@@ -279,7 +279,7 @@ export const ActiveWeekMatchups = () => {
                         
                         {/* Loser */}
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center space-x-1.5">
                             <TeamLogo
                               teamName={matchup.loserInfo?.teamName || 'Unknown Team'}
                               abbreviation={matchup.loserInfo?.abbreviation}
