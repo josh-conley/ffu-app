@@ -1,7 +1,7 @@
 import { SleeperService } from './sleeper.service';
 import { dataService } from './data.service';
 import { getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId, getUserInfoByFFUId, getFFUIdBySleeperId, getLeagueConfig } from '../config/constants';
-import { getCurrentNFLWeek, getNFLScheduleDebugInfo } from '../utils/nfl-schedule';
+import { getCurrentNFLWeek, getNFLScheduleDebugInfo, isNFLWeekComplete } from '../utils/nfl-schedule';
 import type { 
   LeagueSeasonData, 
   WeekMatchup,
@@ -68,6 +68,36 @@ export class LeagueService {
 
     // If no static data available, throw error instead of using live API
     throw new Error(`No static matchup data found for ${league} ${year} week ${week}. Please run the data generation script.`);
+  }
+
+  // Method to neutralize winner/loser roles for active weeks
+  private neutralizeActiveWeekMatchups(matchups: WeekMatchup[], year: string, week: number): WeekMatchup[] {
+    // Only neutralize for 2025 season during incomplete weeks
+    if (year !== '2025' || isNFLWeekComplete(week)) {
+      return matchups;
+    }
+
+    return matchups.map(matchup => {
+      const neutralizedMatchup = { ...matchup };
+      
+      // For active weeks, clear the records so they don't show premature win/loss records
+      neutralizedMatchup.winnerRecord = undefined;
+      neutralizedMatchup.loserRecord = undefined;
+      
+      // Ensure teams are ordered by higher score first
+      const shouldSwap = matchup.loserScore > matchup.winnerScore;
+      
+      if (shouldSwap) {
+        // Swap the teams so higher scoring team is listed first
+        neutralizedMatchup.winner = matchup.loser;
+        neutralizedMatchup.loser = matchup.winner;
+        neutralizedMatchup.winnerScore = matchup.loserScore;
+        neutralizedMatchup.loserScore = matchup.winnerScore;
+        // Records are already cleared above
+      }
+      
+      return neutralizedMatchup;
+    });
   }
 
   // Method to update static matchups with live Sleeper API data for active week
@@ -154,6 +184,9 @@ export class LeagueService {
     
     // Update with live data if this is the active week of 2025 season
     matchups = await this.updateWithLiveData(matchups, league, year, week);
+    
+    // Neutralize winner/loser assignments for active weeks
+    matchups = this.neutralizeActiveWeekMatchups(matchups, year, week);
     
     return {
       league,

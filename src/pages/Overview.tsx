@@ -1,7 +1,8 @@
-import { Users, Calendar, BarChart3, Award, UserPlus, TrendingUp, Crown } from 'lucide-react';
+import { Users, Calendar, BarChart3, Award, TrendingUp, Crown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAllStandings } from '../hooks/useLeagues';
 import { TeamLogo } from '../components/Common/TeamLogo';
+import { ActiveWeekMatchups } from '../components/Overview/ActiveWeekMatchups';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../config/constants';
 import { getLeagueName } from '../constants/leagues';
 import type { LeagueTier } from '../types';
@@ -108,11 +109,11 @@ export const Overview = () => {
                 <div className="font-semibold text-sm sm:text-base">Matchups</div>
               </Link>
               <Link
-                to="/drafts"
+                to="/matchups?year=2025"
                 className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
               >
-                <UserPlus className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
-                <div className="font-semibold text-sm sm:text-base">Drafts</div>
+                <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
+                <div className="font-semibold text-sm sm:text-base">Active Week</div>
               </Link>
               <Link
                 to="/records"
@@ -132,53 +133,7 @@ export const Overview = () => {
           </div>
         </div>
       </div>
-      <div className='card'>
-        <h1 className="py-4 text-3xl font-bold text-gray-900 dark:text-gray-100">Upcoming 2025 Drafts</h1>
-        <div>
-          <Link
-            to="/drafts?league=PREMIER&year=2025"
-            className={`champion-highlight angular-cut p-6 mb-6 relative overflow-hidden border-l4 ${colorMap.PREMIER.highlight} block hover:opacity-90 transition-opacity`}
-          >
-            <span className={`text-lg font-black ${colorMap.PREMIER.text} tracking-wide block mb-2`}>
-              Premier League
-            </span>
-            <span className={`${colorMap.PREMIER.text} font-semibold flex items-center`}>
-              View Draft Results
-              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </span>
-          </Link>
-          <Link
-            to="/drafts?league=MASTERS&year=2025"
-            className={`champion-highlight angular-cut p-6 mb-6 relative overflow-hidden border-l4 ${colorMap.MASTERS.highlight} block hover:opacity-90 transition-opacity`}
-          >
-            <span className={`text-lg font-black ${colorMap.MASTERS.text} tracking-wide block mb-2`}>
-              Masters League
-            </span>
-            <span className={`${colorMap.MASTERS.text} font-semibold flex items-center`}>
-              View Draft Results
-              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </span>
-          </Link>
-          <Link
-            to="/drafts?league=NATIONAL&year=2025"
-            className={`champion-highlight angular-cut p-6 mb-6 relative overflow-hidden border-l4 ${colorMap.NATIONAL.highlight} block hover:opacity-90 transition-opacity`}
-          >
-            <span className={`text-lg font-black ${colorMap.NATIONAL.text} tracking-wide block mb-2`}>
-              National League
-            </span>
-            <span className={`${colorMap.NATIONAL.text} font-semibold flex items-center`}>
-              View Draft Results
-              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </span>
-          </Link>
-        </div>
-      </div>
+      <ActiveWeekMatchups />
 
       {/* League Champions Section */}
       {!isLoading && !error && standings && (
