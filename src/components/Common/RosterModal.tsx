@@ -151,14 +151,14 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
     const player = matchupData?.players[playerId];
     if (!player) {
       return {
-        name: 'Unknown Player',
+        name: '--',
         position: 'N/A',
         team: 'N/A'
       };
     }
 
     return {
-      name: `${player.first_name || ''} ${player.last_name || ''}`.trim() || 'Unknown Player',
+      name: `${player.first_name || ''} ${player.last_name || ''}`.trim() || '--',
       position: player.position || 'N/A',
       team: player.team || 'N/A'
     };
@@ -181,6 +181,11 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
     }
   };
 
+  const formatScore = (score: number) => {
+    const rounded = Math.round(score * 100) / 100;
+    return rounded % 0.1 === 0 ? rounded.toFixed(1) : rounded.toFixed(2);
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -191,7 +196,7 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
           onClick={onClose}
         />
 
-        <div className="relative inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+        <div className="relative inline-block align-bottom bg-white dark:bg-[rgb(20,20,22)] text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
           <button
             onClick={onClose}
             className="absolute top-4 right-4 z-10 p-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
@@ -199,7 +204,7 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
             <X className="h-5 w-5 text-gray-500 dark:text-gray-400" />
           </button>
 
-          <div className="bg-white dark:bg-gray-800 px-4 sm:px-6 pt-4 sm:pt-6 pb-4 sm:pb-6 max-h-[85vh] sm:max-h-[80vh] overflow-y-auto">
+          <div className="bg-white dark:bg-[rgb(20,20,22)] px-4 sm:px-6 pt-4 sm:pt-6 pb-4 sm:pb-6 max-h-[85vh] sm:max-h-[80vh] overflow-y-auto">
             {isLoading ? (
               <div className="text-center py-12">
                 <LoadingSpinner size="lg" />
@@ -232,49 +237,55 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
                     </h3>
                   </div>
 
-                  {/* Team Headers */}
-                  <div className="grid grid-cols-5 gap-2 sm:gap-4 mb-3 sm:mb-4 items-center">
-                    <div className={`text-center p-2 sm:p-3 rounded-lg ${shouldShowColors ? 'bg-green-50 dark:bg-green-900/20' : 'bg-gray-50 dark:bg-gray-700/20'}`}>
-                      <div className="flex flex-col items-center space-y-1 sm:space-y-2">
+                  {/* Team Headers - Compact Layout */}
+                  <div className="flex items-center justify-center gap-8 mb-3">
+                    <div className={`text-center p-2 w-32 ${shouldShowColors ? 'bg-green-50 dark:bg-green-900/20' : ''}`}>
+                      <div className="flex flex-col items-center h-32 justify-between">
                         <TeamLogo
                           teamName={winnerTeamName}
                           abbreviation={getUserInfoBySleeperId(winnerUserId)?.abbreviation || winnerAbbreviation}
-                          size="sm"
+                          size="md"
                         />
-                        <h4 className={`font-bold text-xs sm:text-sm leading-tight ${shouldShowColors ? 'text-green-700 dark:text-green-300' : 'text-gray-700 dark:text-gray-300'}`}>
-                          {winnerTeamName}
-                        </h4>
+                        <div className="flex-1 flex items-center justify-center">
+                          <h4 className={`font-bold text-xs sm:text-sm leading-tight text-center ${shouldShowColors ? 'text-green-700 dark:text-green-300' : 'text-gray-900 dark:text-gray-100'}`}>
+                            {winnerTeamName}
+                          </h4>
+                        </div>
+                        <div className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
+                          {formatScore(matchupData.winnerData.totalPoints)}
+                        </div>
                       </div>
                     </div>
-                    <div className="text-center">
-                      <div className="text-lg sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
-                        {matchupData.winnerData.totalPoints.toFixed(2)}
+                    
+                    <div className="flex flex-col items-center h-32 justify-between w-20">
+                      <div></div>
+                      <div className="flex-1 flex items-center justify-center">
+                        <h4 className="font-bold text-gray-900 dark:text-gray-100 text-sm">VS</h4>
                       </div>
+                      <h4 className="font-bold text-gray-900 dark:text-gray-100 text-xs sm:text-sm">Position</h4>
                     </div>
-                    <div className="text-center p-1 sm:p-3">
-                      <h4 className="font-bold text-gray-900 dark:text-gray-100 text-xs sm:text-base">Position</h4>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-lg sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
-                        {matchupData.loserData.totalPoints.toFixed(2)}
-                      </div>
-                    </div>
-                    <div className={`text-center p-2 sm:p-3 rounded-lg ${shouldShowColors ? 'bg-red-50 dark:bg-red-900/20' : 'bg-gray-50 dark:bg-gray-700/20'}`}>
-                      <div className="flex flex-col items-center space-y-1 sm:space-y-2">
+                    
+                    <div className={`text-center p-2 w-32 ${shouldShowColors ? 'bg-red-50 dark:bg-red-900/20' : ''}`}>
+                      <div className="flex flex-col items-center h-32 justify-between">
                         <TeamLogo
                           teamName={loserTeamName}
                           abbreviation={getUserInfoBySleeperId(loserUserId)?.abbreviation || loserAbbreviation}
-                          size="sm"
+                          size="md"
                         />
-                        <h4 className={`font-bold text-xs sm:text-sm leading-tight ${shouldShowColors ? 'text-red-700 dark:text-red-300' : 'text-gray-700 dark:text-gray-300'}`}>
-                          {loserTeamName}
-                        </h4>
+                        <div className="flex-1 flex items-center justify-center">
+                          <h4 className={`font-bold text-xs sm:text-sm leading-tight text-center ${shouldShowColors ? 'text-red-700 dark:text-red-300' : 'text-gray-900 dark:text-gray-100'}`}>
+                            {loserTeamName}
+                          </h4>
+                        </div>
+                        <div className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
+                          {formatScore(matchupData.loserData.totalPoints)}
+                        </div>
                       </div>
                     </div>
                   </div>
 
                   {/* Lineup Positions */}
-                  <div className="space-y-2">
+                  <div className="space-y-1">
                     {['QB', 'RB', 'RB', 'WR', 'WR', 'TE', 'FLEX', 'FLEX', 'DEF'].map((position, index) => {
                       const winnerPlayer = matchupData.winnerData.starters[index];
                       const loserPlayer = matchupData.loserData.starters[index];
@@ -286,58 +297,52 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
                       const loserPoints = loserPlayer ? getPlayerPoints(loserPlayer, matchupData.loserData) : 0;
 
                       return (
-                        <div key={index} className="grid grid-cols-5 gap-1 sm:gap-4 p-1 sm:p-2 bg-white dark:bg-gray-800 items-center">
-                          {/* Winner Player */}
-                          <div className="text-right">
-                            {winnerPlayerInfo ? (
-                              <div>
-                                <div className="font-medium text-xs sm:text-sm text-gray-900 dark:text-gray-100 leading-tight">
-                                  {winnerPlayerInfo.name}
+                        <div key={index} className="flex items-center justify-center gap-2 p-1 sm:p-2 bg-white dark:bg-[rgb(20,20,22)]">
+                          {/* Winner Player Info + Score */}
+                          <div className="flex items-center gap-2 flex-1 justify-end">
+                            <div className="text-right min-w-0 flex-1">
+                              {winnerPlayerInfo ? (
+                                <div>
+                                  <div className="font-medium text-xs sm:text-sm text-gray-900 dark:text-gray-100 leading-tight">
+                                    {winnerPlayerInfo.name}
+                                  </div>
+                                  <div className="text-xs text-gray-600 dark:text-gray-400 hidden sm:block">
+                                    {winnerPlayerInfo.position} • {winnerPlayerInfo.team}
+                                  </div>
                                 </div>
-                                <div className="text-xs text-gray-600 dark:text-gray-400 hidden sm:block">
-                                  {winnerPlayerInfo.position} • {winnerPlayerInfo.team}
-                                </div>
-                              </div>
-                            ) : (
-                              <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Empty</div>
-                            )}
-                          </div>
-
-                          {/* Winner Score */}
-                          <div className="text-center">
-                            <div className="text-sm sm:text-lg font-bold text-gray-900 dark:text-gray-100">
-                              {winnerPoints.toFixed(1)}
+                              ) : (
+                                <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Empty</div>
+                              )}
+                            </div>
+                            <div className="text-xs sm:text-sm font-bold text-gray-900 dark:text-gray-100 w-8 sm:w-10 text-right">
+                              {formatScore(winnerPoints)}
                             </div>
                           </div>
 
-                          {/* Position */}
-                          <div className="text-center">
-                            <div className={`font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded text-xs sm:text-sm ${getPositionBadgeClass(position)}`}>
-                              {position}
-                            </div>
+                          {/* Position - Fixed width, centered */}
+                          <div className={`font-bold py-0.5 sm:py-1 rounded text-xs text-center ${getPositionBadgeClass(position)}`} style={{width: '50px'}}>
+                            {position}
                           </div>
 
-                          {/* Loser Score */}
-                          <div className="text-center">
-                            <div className="text-sm sm:text-lg font-bold text-gray-900 dark:text-gray-100">
-                              {loserPoints.toFixed(1)}
+                          {/* Loser Score + Player Info */}
+                          <div className="flex items-center gap-2 flex-1 justify-start">
+                            <div className="text-xs sm:text-sm font-bold text-gray-900 dark:text-gray-100 w-8 sm:w-10 text-left">
+                              {formatScore(loserPoints)}
                             </div>
-                          </div>
-
-                          {/* Loser Player */}
-                          <div className="text-left">
-                            {loserPlayerInfo ? (
-                              <div>
-                                <div className="font-medium text-xs sm:text-sm text-gray-900 dark:text-gray-100 leading-tight">
-                                  {loserPlayerInfo.name}
+                            <div className="text-left min-w-0 flex-1">
+                              {loserPlayerInfo ? (
+                                <div>
+                                  <div className="font-medium text-xs sm:text-sm text-gray-900 dark:text-gray-100 leading-tight">
+                                    {loserPlayerInfo.name}
+                                  </div>
+                                  <div className="text-xs text-gray-600 dark:text-gray-400 hidden sm:block">
+                                    {loserPlayerInfo.position} • {loserPlayerInfo.team}
+                                  </div>
                                 </div>
-                                <div className="text-xs text-gray-600 dark:text-gray-400 hidden sm:block">
-                                  {loserPlayerInfo.position} • {loserPlayerInfo.team}
-                                </div>
-                              </div>
-                            ) : (
-                              <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Empty</div>
-                            )}
+                              ) : (
+                                <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Empty</div>
+                              )}
+                            </div>
                           </div>
                         </div>
                       );
@@ -356,35 +361,24 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
                   <div className="grid grid-cols-2 gap-3 sm:gap-6">
                     {/* Winner Bench */}
                     <div className="space-y-2 sm:space-y-4">
-                      <div className={`text-center p-2 sm:p-3 rounded-lg ${shouldShowColors ? 'bg-green-50 dark:bg-green-900/20' : 'bg-gray-50 dark:bg-gray-700/20'}`}>
-                        <h4 className={`font-bold text-sm sm:text-base ${shouldShowColors ? 'text-green-700 dark:text-green-300' : 'text-gray-700 dark:text-gray-300'}`}>
-                          {winnerTeamName}
-                        </h4>
-                        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                          {matchupData.winnerData.bench.length} players
-                        </p>
-                      </div>
                       <div className="space-y-1 sm:space-y-2">
                         {matchupData.winnerData.bench.map((playerId) => {
                           const playerInfo = getPlayerInfo(playerId);
                           const points = getPlayerPoints(playerId, matchupData.winnerData);
                           
                           return (
-                            <div key={playerId} className="flex items-center justify-between p-2 sm:p-3">
-                              <div className="flex-1 min-w-0">
-                                <div className="font-medium text-xs sm:text-sm text-gray-900 dark:text-gray-100 truncate">
-                                  {playerInfo.name}
+                            <div key={playerId} className="flex items-center p-2 sm:p-3">
+                              <div className="flex items-center justify-between w-full">
+                                <div className="text-right flex-1 mr-2">
+                                  <div className="font-medium text-xs sm:text-sm text-gray-900 dark:text-gray-100 leading-tight">
+                                    {playerInfo.name}
+                                  </div>
+                                  <div className="text-xs text-gray-600 dark:text-gray-400 hidden sm:block">
+                                    {playerInfo.position} • {playerInfo.team}
+                                  </div>
                                 </div>
-                                <div className="text-xs text-gray-600 dark:text-gray-400 hidden sm:block">
-                                  {playerInfo.position} • {playerInfo.team}
-                                </div>
-                              </div>
-                              <div className="text-right ml-2">
-                                <div className="font-bold text-sm sm:text-lg text-gray-900 dark:text-gray-100">
-                                  {points.toFixed(1)}
-                                </div>
-                                <div className="text-xs text-gray-500 dark:text-gray-400 hidden sm:block">
-                                  pts
+                                <div className="text-xs sm:text-sm font-bold text-gray-900 dark:text-gray-100 w-10 sm:w-12 text-right">
+                                  {formatScore(points)}
                                 </div>
                               </div>
                             </div>
@@ -400,35 +394,24 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
 
                     {/* Loser Bench */}
                     <div className="space-y-2 sm:space-y-4">
-                      <div className={`text-center p-2 sm:p-3 rounded-lg ${shouldShowColors ? 'bg-red-50 dark:bg-red-900/20' : 'bg-gray-50 dark:bg-gray-700/20'}`}>
-                        <h4 className={`font-bold text-sm sm:text-base ${shouldShowColors ? 'text-red-700 dark:text-red-300' : 'text-gray-700 dark:text-gray-300'}`}>
-                          {loserTeamName}
-                        </h4>
-                        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                          {matchupData.loserData.bench.length} players
-                        </p>
-                      </div>
                       <div className="space-y-1 sm:space-y-2">
                         {matchupData.loserData.bench.map((playerId) => {
                           const playerInfo = getPlayerInfo(playerId);
                           const points = getPlayerPoints(playerId, matchupData.loserData);
                           
                           return (
-                            <div key={playerId} className="flex items-center justify-between p-2 sm:p-3">
-                              <div className="flex-1 min-w-0">
-                                <div className="font-medium text-xs sm:text-sm text-gray-900 dark:text-gray-100 truncate">
-                                  {playerInfo.name}
+                            <div key={playerId} className="flex items-center p-2 sm:p-3">
+                              <div className="flex items-center justify-between w-full">
+                                <div className="text-xs sm:text-sm font-bold text-gray-900 dark:text-gray-100 w-10 sm:w-12 text-left">
+                                  {formatScore(points)}
                                 </div>
-                                <div className="text-xs text-gray-600 dark:text-gray-400 hidden sm:block">
-                                  {playerInfo.position} • {playerInfo.team}
-                                </div>
-                              </div>
-                              <div className="text-right ml-2">
-                                <div className="font-bold text-sm sm:text-lg text-gray-900 dark:text-gray-100">
-                                  {points.toFixed(1)}
-                                </div>
-                                <div className="text-xs text-gray-500 dark:text-gray-400 hidden sm:block">
-                                  pts
+                                <div className="text-left flex-1 ml-2">
+                                  <div className="font-medium text-xs sm:text-sm text-gray-900 dark:text-gray-100 leading-tight">
+                                    {playerInfo.name}
+                                  </div>
+                                  <div className="text-xs text-gray-600 dark:text-gray-400 hidden sm:block">
+                                    {playerInfo.position} • {playerInfo.team}
+                                  </div>
                                 </div>
                               </div>
                             </div>

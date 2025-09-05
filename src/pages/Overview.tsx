@@ -79,8 +79,8 @@ export const Overview = () => {
 
   return (
     <div className="space-y-8">
-      <div className="welcome-card-wrap">
-        <div className="welcome-card">
+      <div className="welcome-card-wrap ">
+        <div className="welcome-card ">
           <div className="max-w-2xl mx-auto">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Welcome to the FFU</h1>
             <p className="text-base sm:text-lg lg:text-xl text-red-100 mb-8">
@@ -89,28 +89,28 @@ export const Overview = () => {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-xlg mx-auto">
               <Link
                 to="/standings"
-                className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
+                className="bg-white/10 hover:bg-white/20 angular-cut-small  p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
               >
                 <Users className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
                 <div className="font-semibold text-sm sm:text-base">Standings</div>
               </Link>
               <Link
                 to="/drafts"
-                className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
+                className="bg-white/10 hover:bg-white/20 angular-cut-small  p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
               >
                 <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
                 <div className="font-semibold text-sm sm:text-base">Drafts</div>
               </Link>
               <Link
                 to="/records"
-                className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
+                className="bg-white/10 hover:bg-white/20 angular-cut-small  p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
               >
                 <Award className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
                 <div className="font-semibold text-sm sm:text-base">Records</div>
               </Link>
               <Link
                 to="/stats"
-                className="bg-white/10 hover:bg-white/20 angular-cut-small p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
+                className="bg-white/10 hover:bg-white/20 angular-cut-small  p-3 sm:p-4 transition-colors min-h-[80px] flex flex-col justify-center"
               >
                 <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
                 <div className="font-semibold text-sm sm:text-base">Stats</div>
@@ -137,8 +137,8 @@ export const Overview = () => {
               if (champions.length === 0) return null;
 
               return (
-                <div key={league} className={`${colors.bg} p-6`}>
-                  <div className={`${colors.iconBg} -mx-6 -mt-6 mb-4 p-4`}>
+                <div key={league} className={`${colors.bg}  p-6`}>
+                  <div className={`${colors.iconBg} -mx-6 -mt-6 mb-4 p-4 `}>
                     <h3 className="text-xl font-black text-white tracking-wide uppercase text-center">
                       {getLeagueName(league)} Champions
                     </h3>
@@ -147,7 +147,7 @@ export const Overview = () => {
                   <div className="space-y-4">
                     {champions.map((champion) => (
                       <div key={`${champion.year}-${champion.userId}`} className="flex items-center space-x-3">
-                        <span className={`w-12 h-8 flex items-center justify-center text-sm font-bold text-white ${colors.iconBg}`}>
+                        <span className={`w-12 h-8  flex items-center justify-center text-sm font-bold text-white ${colors.iconBg}`}>
                           {champion.year}
                         </span>
                         <div>

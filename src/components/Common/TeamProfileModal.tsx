@@ -308,7 +308,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
         />
 
         {/* Modal panel */}
-        <div className="relative inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+        <div className="relative inline-block align-bottom bg-white dark:bg-[rgb(20,20,22)] rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
           {/* Close button */}
           <button
             onClick={onClose}
@@ -318,7 +318,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
           </button>
 
           {/* Modal content */}
-          <div className="bg-white dark:bg-gray-800 px-6 pt-6 pb-6 max-h-[80vh] overflow-y-auto">
+          <div className="bg-white dark:bg-[rgb(20,20,22)] px-6 pt-6 pb-6 max-h-[80vh] overflow-y-auto">
             {isLoading ? (
               <div className="text-center py-12">
                 <LoadingSpinner size="lg" />
@@ -369,19 +369,19 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
                   <div className="space-y-4">
                     {/* Primary Stats */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                      <div className="text-center p-3 bg-gray-50 dark:bg-gray-700">
+                      <div className="text-center p-3 bg-gray-50 dark:bg-gray-800">
                         <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                           {selectedPlayer.totalWins}-{selectedPlayer.totalLosses}
                         </div>
                         <div className="text-xs font-medium text-gray-600 dark:text-gray-400">Record</div>
                       </div>
-                      <div className="text-center p-3 bg-gray-50 dark:bg-gray-700">
+                      <div className="text-center p-3 bg-gray-50 dark:bg-gray-800">
                         <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                           {selectedPlayer.winPercentage.toFixed(1)}%
                         </div>
                         <div className="text-xs font-medium text-gray-600 dark:text-gray-400">Win %</div>
                       </div>
-                      <div className="text-center p-3 bg-gray-50 dark:bg-gray-700">
+                      <div className="text-center p-3 bg-gray-50 dark:bg-gray-800">
                         <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                           {((selectedPlayer.totalWins + selectedPlayer.totalLosses) > 0 ?
                             (selectedPlayer.totalPointsFor / (selectedPlayer.totalWins + selectedPlayer.totalLosses)).toFixed(1) :
@@ -389,7 +389,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
                         </div>
                         <div className="text-xs font-medium text-gray-600 dark:text-gray-400">PPG</div>
                       </div>
-                      <div className="text-center p-3 bg-gray-50 dark:bg-gray-700">
+                      <div className="text-center p-3 bg-gray-50 dark:bg-gray-800">
                         <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                           {selectedPlayer.averageUPR ? selectedPlayer.averageUPR.toFixed(1) : '—'}
                         </div>
@@ -398,7 +398,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
                     </div>
 
                     {/* Additional Stats */}
-                    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 p-3">
+                    <div className="bg-white dark:bg-[rgb(20,20,22)] border border-gray-200 dark:border-gray-600 p-3">
                       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-3">
                         <div className="text-center">
                           <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
@@ -484,7 +484,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
                       <table className="min-w-full table">
                         <thead className="table-header">
                           <tr>
-                            <th className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none" onClick={() => handleSort('year')}>
+                            <th className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 select-none" onClick={() => handleSort('year')}>
                               <div className="flex items-center justify-center text-xs">
                                 Year
                                 <div className="flex flex-col ml-1">
@@ -493,7 +493,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
                                 </div>
                               </div>
                             </th>
-                            <th className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none" onClick={() => handleSort('league')}>
+                            <th className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 select-none" onClick={() => handleSort('league')}>
                               <div className="flex items-center justify-center text-xs">
                                 League
                                 <div className="flex flex-col ml-1">
@@ -502,7 +502,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
                                 </div>
                               </div>
                             </th>
-                            <th className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none" onClick={() => handleSort('wins')}>
+                            <th className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 select-none" onClick={() => handleSort('wins')}>
                               <div className="flex items-center justify-center text-xs">
                                 Record
                                 <div className="flex flex-col ml-1">
@@ -511,7 +511,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
                                 </div>
                               </div>
                             </th>
-                            <th className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none" onClick={() => handleSort('winPct')}>
+                            <th className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 select-none" onClick={() => handleSort('winPct')}>
                               <div className="flex items-center justify-center text-xs">
                                 Win %
                                 <div className="flex flex-col ml-1">
@@ -520,7 +520,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
                                 </div>
                               </div>
                             </th>
-                            <th className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none hidden sm:table-cell" onClick={() => handleSort('pointsFor')}>
+                            <th className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 select-none hidden sm:table-cell" onClick={() => handleSort('pointsFor')}>
                               <div className="flex items-center justify-center text-xs">
                                 Points For
                                 <div className="flex flex-col ml-1">
@@ -529,7 +529,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
                                 </div>
                               </div>
                             </th>
-                            <th className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none hidden sm:table-cell" onClick={() => handleSort('pointsAgainst')}>
+                            <th className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 select-none hidden sm:table-cell" onClick={() => handleSort('pointsAgainst')}>
                               <div className="flex items-center justify-center text-xs">
                                 Points Against
                                 <div className="flex flex-col ml-1">
@@ -538,7 +538,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
                                 </div>
                               </div>
                             </th>
-                            <th className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none" onClick={() => handleSort('upr')}>
+                            <th className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 select-none" onClick={() => handleSort('upr')}>
                               <div className="flex items-center justify-center text-xs">
                                 UPR
                                 <div className="flex flex-col ml-1">
@@ -547,7 +547,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
                                 </div>
                               </div>
                             </th>
-                            <th className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none" onClick={() => handleSort('placement')}>
+                            <th className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 select-none" onClick={() => handleSort('placement')}>
                               <div className="flex items-center justify-center text-xs">
                                 Rank
                                 <div className="flex flex-col ml-1">

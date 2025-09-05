@@ -200,7 +200,7 @@ export const ActiveWeekMatchups = () => {
           return (
             <div
               key={leagueData.league}
-              className={`champion-highlight p-4 lg:p-6 relative overflow-hidden border-l4 ${colors.highlight}`}
+              className={`champion-highlight  p-4 lg:p-6 relative overflow-hidden border-l4 ${colors.highlight}`}
             >
               <div className="mb-3 lg:mb-4">
                 <span className={`text-base lg:text-lg font-black ${colors.text} tracking-wide`}>
@@ -228,7 +228,7 @@ export const ActiveWeekMatchups = () => {
                   {leagueData.data.matchups.map((matchup, index) => (
                     <div
                       key={index}
-                      className={`${colors.matchupBg} rounded-lg p-1.5 lg:p-2 transition-colors cursor-pointer`}
+                      className={`${colors.matchupBg}  p-1.5 lg:p-2 transition-colors cursor-pointer`}
                       onClick={() => openMatchupRosterModal(matchup, currentNFLWeek, leagueData.league)}
                     >
                       {/* Compact Layout for Horizontal Display */}
