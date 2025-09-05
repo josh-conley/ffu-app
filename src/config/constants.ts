@@ -131,6 +131,10 @@ export const getLeagueId = (tier: LeagueTier, year: string): string | undefined 
   return league?.sleeperId;
 };
 
+export const getLeagueConfig = (tier: LeagueTier, year: string): LeagueConfig | undefined => {
+  return LEAGUES.find(l => l.tier === tier && l.year === year);
+};
+
 export const getLeaguesByTier = (tier: LeagueTier): LeagueConfig[] => {
   return LEAGUES.filter(l => l.tier === tier).sort((a, b) => b.startYear - a.startYear);
 };

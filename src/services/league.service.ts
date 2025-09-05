@@ -1,6 +1,7 @@
 import { SleeperService } from './sleeper.service';
 import { dataService } from './data.service';
-import { getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId, getUserInfoByFFUId, getFFUIdBySleeperId } from '../config/constants';
+import { getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId, getUserInfoByFFUId, getFFUIdBySleeperId, getLeagueConfig } from '../config/constants';
+import { getCurrentNFLWeek, getNFLScheduleDebugInfo } from '../utils/nfl-schedule';
 import type { 
   LeagueSeasonData, 
   WeekMatchup,
@@ -12,8 +13,10 @@ import type {
 } from '../types';
 
 export class LeagueService {
-  constructor(_sleeperService: SleeperService) {
-    // SleeperService parameter kept for API compatibility but not used in current implementation
+  private sleeperService: SleeperService;
+
+  constructor(sleeperService: SleeperService) {
+    this.sleeperService = sleeperService;
   }
 
   async getLeagueStandings(league: LeagueTier, year: string): Promise<LeagueSeasonData> {
@@ -67,9 +70,90 @@ export class LeagueService {
     throw new Error(`No static matchup data found for ${league} ${year} week ${week}. Please run the data generation script.`);
   }
 
+  // Method to update static matchups with live Sleeper API data for active week
+  private async updateWithLiveData(matchups: WeekMatchup[], league: LeagueTier, year: string, week: number): Promise<WeekMatchup[]> {
+    // Only update live data for 2025 season and current active NFL week
+    if (year !== '2025') {
+      return matchups;
+    }
+
+    const currentNFLWeek = getCurrentNFLWeek();
+    const debugInfo = getNFLScheduleDebugInfo();
+    
+    console.log(`Live data check for ${league} ${year} week ${week}:`, {
+      requestedWeek: week,
+      currentNFLWeek,
+      debugInfo,
+      shouldUpdate: currentNFLWeek === week
+    });
+    
+    if (currentNFLWeek !== week) {
+      return matchups;
+    }
+
+    try {
+      // Get league config for Sleeper ID
+      const leagueConfig = getLeagueConfig(league, year);
+      if (!leagueConfig) {
+        console.warn(`No league config found for ${league} ${year}`);
+        return matchups;
+      }
+
+      // Fetch live data from Sleeper API
+      const [liveMatchups, rosters] = await Promise.all([
+        this.sleeperService.getMatchupsForWeek(leagueConfig.sleeperId, week),
+        this.sleeperService.getLeagueRosters(leagueConfig.sleeperId)
+      ]);
+      
+      // Create mapping from user_id to roster_id
+      const userToRosterMap = new Map<string, number>();
+      rosters.forEach(roster => {
+        if (roster.owner_id && roster.roster_id) {
+          userToRosterMap.set(roster.owner_id, roster.roster_id);
+        }
+      });
+
+      // Create a map of roster_id to live points
+      const rosterToPointsMap = new Map<number, number>();
+      liveMatchups.forEach(matchup => {
+        if (matchup.roster_id && typeof matchup.points === 'number') {
+          rosterToPointsMap.set(matchup.roster_id, matchup.points);
+        }
+      });
+
+      // Update static matchups with live scores
+      const updatedMatchups = matchups.map(matchup => {
+        const updatedMatchup = { ...matchup };
+        
+        // Map user IDs to roster IDs, then get live scores
+        const winnerRosterId = userToRosterMap.get(matchup.winner);
+        const loserRosterId = userToRosterMap.get(matchup.loser);
+        
+        if (winnerRosterId && rosterToPointsMap.has(winnerRosterId)) {
+          updatedMatchup.winnerScore = rosterToPointsMap.get(winnerRosterId)!;
+        }
+        if (loserRosterId && rosterToPointsMap.has(loserRosterId)) {
+          updatedMatchup.loserScore = rosterToPointsMap.get(loserRosterId)!;
+        }
+
+        return updatedMatchup;
+      });
+
+      console.log(`Updated ${league} week ${week} matchups with live Sleeper data for ${updatedMatchups.length} matchups`);
+      return updatedMatchups;
+
+    } catch (error) {
+      console.warn(`Failed to update with live data for ${league} week ${week}:`, error);
+      return matchups; // Fall back to static data
+    }
+  }
+
   // Enhanced method to get matchups with user info
   async getWeekMatchupsWithUserInfo(league: LeagueTier, year: string, week: number) {
-    const matchups = await this.getWeekMatchups(league, year, week);
+    let matchups = await this.getWeekMatchups(league, year, week);
+    
+    // Update with live data if this is the active week of 2025 season
+    matchups = await this.updateWithLiveData(matchups, league, year, week);
     
     return {
       league,

@@ -5,6 +5,7 @@ import { LoadingSpinner } from './LoadingSpinner';
 import { ErrorMessage } from './ErrorMessage';
 import { TeamLogo } from './TeamLogo';
 import { getUserInfoBySleeperId } from '../../config/constants';
+import { shouldShowMatchupColors } from '../../utils/nfl-schedule';
 import type { SleeperRoster, SleeperUser, SleeperPlayer } from '../../types';
 
 interface RosterModalProps {
@@ -14,6 +15,7 @@ interface RosterModalProps {
   winnerUserId: string;
   loserUserId: string;
   week: number;
+  year: string;
   winnerTeamName: string;
   loserTeamName: string;
   winnerAbbreviation: string;
@@ -35,7 +37,7 @@ interface MatchupRosterData {
   players: Record<string, SleeperPlayer>;
 }
 
-export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUserId, week, winnerTeamName, loserTeamName, winnerAbbreviation, loserAbbreviation }: RosterModalProps) => {
+export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUserId, week, year, winnerTeamName, loserTeamName, winnerAbbreviation, loserAbbreviation }: RosterModalProps) => {
   const [matchupData, setMatchupData] = useState<MatchupRosterData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -48,6 +50,16 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
     if (!matchupData) return false;
     return matchupData.winnerData.totalPoints > 0 && matchupData.loserData.totalPoints > 0;
   }, [matchupData]);
+
+  // Check if we should show winner/loser color coding based on NFL schedule
+  const shouldShowColors = useMemo(() => {
+    // First check if matchup is complete (has scores)
+    const hasScores = isMatchupComplete;
+    // Then check if the NFL week has ended (Tuesday after)
+    const weekEnded = shouldShowMatchupColors(year, week);
+    // Show colors only if both conditions are met
+    return hasScores && weekEnded;
+  }, [isMatchupComplete, year, week]);
 
   useEffect(() => {
     if (!isOpen || !leagueId || !winnerUserId || !loserUserId) {
@@ -222,14 +234,14 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
 
                   {/* Team Headers */}
                   <div className="grid grid-cols-5 gap-2 sm:gap-4 mb-3 sm:mb-4 items-center">
-                    <div className={`text-center p-2 sm:p-3 rounded-lg ${isMatchupComplete ? 'bg-green-50 dark:bg-green-900/20' : 'bg-gray-50 dark:bg-gray-700/20'}`}>
+                    <div className={`text-center p-2 sm:p-3 rounded-lg ${shouldShowColors ? 'bg-green-50 dark:bg-green-900/20' : 'bg-gray-50 dark:bg-gray-700/20'}`}>
                       <div className="flex flex-col items-center space-y-1 sm:space-y-2">
                         <TeamLogo
                           teamName={winnerTeamName}
                           abbreviation={getUserInfoBySleeperId(winnerUserId)?.abbreviation || winnerAbbreviation}
                           size="sm"
                         />
-                        <h4 className={`font-bold text-xs sm:text-sm leading-tight ${isMatchupComplete ? 'text-green-700 dark:text-green-300' : 'text-gray-700 dark:text-gray-300'}`}>
+                        <h4 className={`font-bold text-xs sm:text-sm leading-tight ${shouldShowColors ? 'text-green-700 dark:text-green-300' : 'text-gray-700 dark:text-gray-300'}`}>
                           {winnerTeamName}
                         </h4>
                       </div>
@@ -247,14 +259,14 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
                         {matchupData.loserData.totalPoints.toFixed(2)}
                       </div>
                     </div>
-                    <div className={`text-center p-2 sm:p-3 rounded-lg ${isMatchupComplete ? 'bg-red-50 dark:bg-red-900/20' : 'bg-gray-50 dark:bg-gray-700/20'}`}>
+                    <div className={`text-center p-2 sm:p-3 rounded-lg ${shouldShowColors ? 'bg-red-50 dark:bg-red-900/20' : 'bg-gray-50 dark:bg-gray-700/20'}`}>
                       <div className="flex flex-col items-center space-y-1 sm:space-y-2">
                         <TeamLogo
                           teamName={loserTeamName}
                           abbreviation={getUserInfoBySleeperId(loserUserId)?.abbreviation || loserAbbreviation}
                           size="sm"
                         />
-                        <h4 className={`font-bold text-xs sm:text-sm leading-tight ${isMatchupComplete ? 'text-red-700 dark:text-red-300' : 'text-gray-700 dark:text-gray-300'}`}>
+                        <h4 className={`font-bold text-xs sm:text-sm leading-tight ${shouldShowColors ? 'text-red-700 dark:text-red-300' : 'text-gray-700 dark:text-gray-300'}`}>
                           {loserTeamName}
                         </h4>
                       </div>
@@ -344,8 +356,8 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
                   <div className="grid grid-cols-2 gap-3 sm:gap-6">
                     {/* Winner Bench */}
                     <div className="space-y-2 sm:space-y-4">
-                      <div className={`text-center p-2 sm:p-3 rounded-lg ${isMatchupComplete ? 'bg-green-50 dark:bg-green-900/20' : 'bg-gray-50 dark:bg-gray-700/20'}`}>
-                        <h4 className={`font-bold text-sm sm:text-base ${isMatchupComplete ? 'text-green-700 dark:text-green-300' : 'text-gray-700 dark:text-gray-300'}`}>
+                      <div className={`text-center p-2 sm:p-3 rounded-lg ${shouldShowColors ? 'bg-green-50 dark:bg-green-900/20' : 'bg-gray-50 dark:bg-gray-700/20'}`}>
+                        <h4 className={`font-bold text-sm sm:text-base ${shouldShowColors ? 'text-green-700 dark:text-green-300' : 'text-gray-700 dark:text-gray-300'}`}>
                           {winnerTeamName}
                         </h4>
                         <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
@@ -388,8 +400,8 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
 
                     {/* Loser Bench */}
                     <div className="space-y-2 sm:space-y-4">
-                      <div className={`text-center p-2 sm:p-3 rounded-lg ${isMatchupComplete ? 'bg-red-50 dark:bg-red-900/20' : 'bg-gray-50 dark:bg-gray-700/20'}`}>
-                        <h4 className={`font-bold text-sm sm:text-base ${isMatchupComplete ? 'text-red-700 dark:text-red-300' : 'text-gray-700 dark:text-gray-300'}`}>
+                      <div className={`text-center p-2 sm:p-3 rounded-lg ${shouldShowColors ? 'bg-red-50 dark:bg-red-900/20' : 'bg-gray-50 dark:bg-gray-700/20'}`}>
+                        <h4 className={`font-bold text-sm sm:text-base ${shouldShowColors ? 'text-red-700 dark:text-red-300' : 'text-gray-700 dark:text-gray-300'}`}>
                           {loserTeamName}
                         </h4>
                         <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
