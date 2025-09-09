@@ -3,8 +3,8 @@ name: Weekly Data Update
 on:
   workflow_dispatch:
   schedule:
-    # Runs every Wednesday at 4am EST
-    - cron: '0 9 * * 3' 
+    # Runs every Tuesday at 4am EST  
+    - cron: '0 9 * * 2' 
 
 permissions:
   contents: write

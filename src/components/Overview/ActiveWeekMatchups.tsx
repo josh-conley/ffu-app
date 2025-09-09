@@ -4,7 +4,7 @@ import { TeamLogo } from '../Common/TeamLogo';
 import { LoadingSpinner } from '../Common/LoadingSpinner';
 import { RosterModal } from '../Common/RosterModal';
 import { leagueApi } from '../../services/api';
-import { getCurrentNFLWeek } from '../../utils/nfl-schedule';
+import { getCurrentNFLWeek, shouldShowMatchupColors } from '../../utils/nfl-schedule';
 import { isSleeperEra } from '../../utils/era-detection';
 import { getLeagueId } from '../../config/constants';
 import type { LeagueTier, WeekMatchupsResponse } from '../../types';
@@ -197,16 +197,33 @@ export const ActiveWeekMatchups = () => {
 
   const { leagueHighScores } = getHighestScores();
 
+  // Check if matchup is complete (both teams have points > 0)
+  const isMatchupComplete = (matchup: any) => {
+    return matchup.winnerScore > 0 && matchup.loserScore > 0;
+  };
+
+  // Check if we should show winner/loser color coding based on NFL schedule
+  const shouldShowColors = (matchup: any, week: number) => {
+    // First check if matchup is complete (has scores)
+    const hasScores = isMatchupComplete(matchup);
+    // Then check if the NFL week has ended (Tuesday after)
+    const weekEnded = shouldShowMatchupColors('2025', week);
+    // Show colors only if both conditions are met
+    return hasScores && weekEnded;
+  };
+
   // Helper function to get score styling for league high scores
-  const getScoreDisplay = (score: number, league: LeagueTier) => {
+  const getScoreDisplay = (score: number, league: LeagueTier, isWinner?: boolean, showColors?: boolean) => {
     const isLeagueHigh = score === leagueHighScores[league] && score > 0;
     
-    let classes = 'text-xs lg:text-sm font-mono font-bold text-gray-800 dark:text-gray-200';
+    let classes = 'text-xs font-mono font-bold text-gray-800 dark:text-gray-200';
     let bgClasses = '';
     
     if (isLeagueHigh) {
-      classes = 'text-xs lg:text-sm font-mono font-bold text-yellow-600 dark:text-yellow-400';
-      bgClasses = 'bg-yellow-50 dark:bg-yellow-900/20 px-2 py-1 rounded-md border border-yellow-300 dark:border-yellow-700';
+      classes = 'text-xs font-mono font-bold text-yellow-600 dark:text-yellow-400';
+      bgClasses = 'bg-yellow-50 dark:bg-yellow-900/20 py-2 px-2 rounded-full';
+    } else if (isWinner && showColors) {
+      classes = 'text-xs font-mono font-bold text-green-700 dark:text-green-300';
     }
     
     return { classes, bgClasses };
@@ -243,7 +260,7 @@ export const ActiveWeekMatchups = () => {
           return (
             <div
               key={leagueData.league}
-              className={`champion-highlight  p-4 lg:p-6 relative overflow-hidden border-l4 ${colors.highlight}`}
+              className={`champion-highlight  py-4 lg:py-6 px-2 lg:px-3 relative overflow-hidden border-l4 ${colors.highlight}`}
             >
               <div className="mb-3 lg:mb-4">
                 <span className={`text-base lg:text-lg font-black ${colors.text} tracking-wide`}>
@@ -268,16 +285,18 @@ export const ActiveWeekMatchups = () => {
 
               {leagueData.data && leagueData.data.matchups && (
                 <div className="space-y-2 lg:space-y-3">
-                  {leagueData.data.matchups.map((matchup, index) => (
+                  {leagueData.data.matchups.map((matchup, index) => {
+                    const showColors = shouldShowColors(matchup, currentNFLWeek);
+                    return (
                     <div
                       key={index}
-                      className={`${colors.matchupBg}  p-1.5 lg:p-2 transition-colors cursor-pointer`}
+                      className={`${colors.matchupBg}  py-2 lg:py-3 px-2 transition-colors cursor-pointer`}
                       onClick={() => openMatchupRosterModal(matchup, currentNFLWeek, leagueData.league)}
                     >
                       {/* Compact Layout for Horizontal Display */}
                       <div className="space-y-1.5">
                         {/* Winner */}
-                        <div className="flex items-center justify-between">
+                        <div className={`flex items-center justify-between ${showColors ? 'bg-green-50 dark:bg-green-900/20 rounded-full' : ''}`}>
                           <div className="flex items-center space-x-1.5">
                             <TeamLogo
                               teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
@@ -291,22 +310,22 @@ export const ActiveWeekMatchups = () => {
                               }}
                             />
                             <div className="min-w-0 flex-1">
-                              <div className={`font-medium ${getTeamNameFontClass(matchup.winnerInfo?.teamName || 'Unknown Team')} text-gray-900 dark:text-gray-100 truncate`}>
+                              <div className={`font-medium ${getTeamNameFontClass(matchup.winnerInfo?.teamName || 'Unknown Team')} ${showColors ? 'text-green-700 dark:text-green-300' : 'text-gray-900 dark:text-gray-100'} truncate`}>
                                 {matchup.winnerInfo?.teamName || 'Unknown Team'}
                               </div>
                               {matchup.winnerRecord && (
-                                <div className="text-xs text-gray-500 dark:text-gray-400 font-mono hidden lg:block">
+                                <div className="text-[10px] text-gray-500 dark:text-gray-400 font-mono hidden lg:block">
                                   ({matchup.winnerRecord})
                                 </div>
                               )}
                             </div>
                           </div>
                           <div className={(() => {
-                            const { bgClasses } = getScoreDisplay(matchup.winnerScore || 0, leagueData.league);
-                            return bgClasses || '';
+                            const { bgClasses } = getScoreDisplay(matchup.winnerScore || 0, leagueData.league, true, showColors);
+                            return (bgClasses || '') + ' px-2';
                           })()}>
                             <div className={(() => {
-                              const { classes } = getScoreDisplay(matchup.winnerScore || 0, leagueData.league);
+                              const { classes } = getScoreDisplay(matchup.winnerScore || 0, leagueData.league, true, showColors);
                               return classes;
                             })()}>
                               {matchup.winnerScore?.toFixed(2)}
@@ -333,18 +352,18 @@ export const ActiveWeekMatchups = () => {
                                 {matchup.loserInfo?.teamName || 'Unknown Team'}
                               </div>
                               {matchup.loserRecord && (
-                                <div className="text-xs text-gray-500 dark:text-gray-400 font-mono hidden lg:block">
+                                <div className="text-[10px] text-gray-500 dark:text-gray-400 font-mono hidden lg:block">
                                   ({matchup.loserRecord})
                                 </div>
                               )}
                             </div>
                           </div>
                           <div className={(() => {
-                            const { bgClasses } = getScoreDisplay(matchup.loserScore || 0, leagueData.league);
-                            return bgClasses || '';
+                            const { bgClasses } = getScoreDisplay(matchup.loserScore || 0, leagueData.league, false, showColors);
+                            return (bgClasses || '') + ' px-2';
                           })()}>
                             <div className={(() => {
-                              const { classes } = getScoreDisplay(matchup.loserScore || 0, leagueData.league);
+                              const { classes } = getScoreDisplay(matchup.loserScore || 0, leagueData.league, false, showColors);
                               return classes;
                             })()}>
                               {matchup.loserScore?.toFixed(2)}
@@ -353,7 +372,8 @@ export const ActiveWeekMatchups = () => {
                         </div>
                       </div>
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
 

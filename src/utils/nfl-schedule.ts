@@ -1,11 +1,11 @@
 // NFL 2025 Season Schedule
 // Week dates based on typical NFL schedule pattern
-// Weeks typically run Thursday to Monday, with Tuesday being the "end" day
+// Weeks typically run Thursday to Monday, with Tuesday being when scores are final
 
 export interface NFLWeekDate {
   week: number;
   startDate: string; // ISO date string (YYYY-MM-DD)
-  endDate: string;   // Tuesday after the week ends
+  endDate: string;   // Tuesday after the week ends (scores final from 12:00 AM)
 }
 
 // 2025 NFL Season Week Schedule
@@ -32,10 +32,10 @@ export const NFL_2025_SCHEDULE: NFLWeekDate[] = [
 ];
 
 /**
- * Determines if an NFL week has ended (Tuesday morning after the week)
+ * Determines if an NFL week has ended (start of Tuesday after the week)
  * @param week - The NFL week number (1-18)
  * @param currentDate - Optional current date for testing, defaults to now
- * @returns true if the week has ended (it's Tuesday morning after the week or later)
+ * @returns true if the week has ended (it's Tuesday 12:00 AM or later)
  */
 export const isNFLWeekComplete = (week: number, currentDate?: Date): boolean => {
   const now = currentDate || new Date();
@@ -46,7 +46,7 @@ export const isNFLWeekComplete = (week: number, currentDate?: Date): boolean => 
     return true;
   }
   
-  const endDate = new Date(weekData.endDate + 'T06:00:00'); // 6 AM Tuesday morning
+  const endDate = new Date(weekData.endDate + 'T00:00:00'); // Start of Tuesday (12:00 AM)
   return now >= endDate;
 };
 
@@ -60,7 +60,7 @@ export const getCurrentNFLWeek = (currentDate?: Date): number | null => {
   
   for (const weekData of NFL_2025_SCHEDULE) {
     const startDate = new Date(weekData.startDate);
-    const endDate = new Date(weekData.endDate + 'T06:00:00'); // 6 AM Tuesday morning
+    const endDate = new Date(weekData.endDate + 'T23:59:59'); // End of Tuesday (11:59 PM)
     
     if (now >= startDate && now < endDate) {
       return weekData.week;

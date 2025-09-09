@@ -32,7 +32,9 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(python:*)",
-      "WebFetch(domain:www.nfl.com)"
+      "WebFetch(domain:www.nfl.com)",
+      "Bash(npx tsx:*)",
+      "Bash(npm run generate-current-season:*)"
     ],
     "deny": []
   }
