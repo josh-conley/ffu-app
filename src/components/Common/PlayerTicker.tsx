@@ -268,7 +268,7 @@ export const PlayerTicker = () => {
   // If no players have good scores, show message
   if (allPlayers.length === 0) {
     return (
-      <div className="card">
+      <div className="hidden md:block card">
         <div className="mb-4">
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
             Weekly Leaders
@@ -283,7 +283,7 @@ export const PlayerTicker = () => {
 
   return (
     <div 
-      className="card overflow-hidden"
+      className="hidden md:block card overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
