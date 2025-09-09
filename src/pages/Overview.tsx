@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAllStandings } from '../hooks/useLeagues';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { ActiveWeekMatchups } from '../components/Overview/ActiveWeekMatchups';
+import { PlayerTicker } from '../components/Common/PlayerTicker';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../config/constants';
 import { getLeagueName } from '../constants/leagues';
 import type { LeagueTier } from '../types';
@@ -120,6 +121,7 @@ export const Overview = () => {
         </div>
       </div>
       <ActiveWeekMatchups />
+      <PlayerTicker />
 
       {/* League Champions Section */}
       {!isLoading && !error && standings && (
