@@ -169,6 +169,49 @@ export const ActiveWeekMatchups = () => {
     }
   };
 
+  // Calculate highest scores for styling
+  const getHighestScores = () => {
+    const leagueHighScores: Record<LeagueTier, number> = {
+      PREMIER: 0,
+      MASTERS: 0,
+      NATIONAL: 0
+    };
+    
+    matchupsData.forEach(leagueData => {
+      if (leagueData.data?.matchups) {
+        let leagueHigh = 0;
+        
+        leagueData.data.matchups.forEach(matchup => {
+          const winnerScore = matchup.winnerScore || 0;
+          const loserScore = matchup.loserScore || 0;
+          
+          leagueHigh = Math.max(leagueHigh, winnerScore, loserScore);
+        });
+        
+        leagueHighScores[leagueData.league] = leagueHigh;
+      }
+    });
+    
+    return { leagueHighScores };
+  };
+
+  const { leagueHighScores } = getHighestScores();
+
+  // Helper function to get score styling for league high scores
+  const getScoreDisplay = (score: number, league: LeagueTier) => {
+    const isLeagueHigh = score === leagueHighScores[league] && score > 0;
+    
+    let classes = 'text-xs lg:text-sm font-mono font-bold text-gray-800 dark:text-gray-200';
+    let bgClasses = '';
+    
+    if (isLeagueHigh) {
+      classes = 'text-xs lg:text-sm font-mono font-bold text-yellow-600 dark:text-yellow-400';
+      bgClasses = 'bg-yellow-50 dark:bg-yellow-900/20 px-2 py-1 rounded-md border border-yellow-300 dark:border-yellow-700';
+    }
+    
+    return { classes, bgClasses };
+  };
+
   if (!currentNFLWeek) {
     return (
       <div className="card">
@@ -258,8 +301,16 @@ export const ActiveWeekMatchups = () => {
                               )}
                             </div>
                           </div>
-                          <div className="text-xs lg:text-sm font-mono font-bold text-gray-800 dark:text-gray-200">
-                            {matchup.winnerScore?.toFixed(2)}
+                          <div className={(() => {
+                            const { bgClasses } = getScoreDisplay(matchup.winnerScore || 0, leagueData.league);
+                            return bgClasses || '';
+                          })()}>
+                            <div className={(() => {
+                              const { classes } = getScoreDisplay(matchup.winnerScore || 0, leagueData.league);
+                              return classes;
+                            })()}>
+                              {matchup.winnerScore?.toFixed(2)}
+                            </div>
                           </div>
                         </div>
                         
@@ -288,8 +339,16 @@ export const ActiveWeekMatchups = () => {
                               )}
                             </div>
                           </div>
-                          <div className="text-xs lg:text-sm font-mono font-bold text-gray-800 dark:text-gray-200">
-                            {matchup.loserScore?.toFixed(2)}
+                          <div className={(() => {
+                            const { bgClasses } = getScoreDisplay(matchup.loserScore || 0, leagueData.league);
+                            return bgClasses || '';
+                          })()}>
+                            <div className={(() => {
+                              const { classes } = getScoreDisplay(matchup.loserScore || 0, leagueData.league);
+                              return classes;
+                            })()}>
+                              {matchup.loserScore?.toFixed(2)}
+                            </div>
                           </div>
                         </div>
                       </div>
