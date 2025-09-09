@@ -80,9 +80,9 @@ export class LeagueService {
     return matchups.map(matchup => {
       const neutralizedMatchup = { ...matchup };
       
-      // For active weeks, clear the records so they don't show premature win/loss records
-      neutralizedMatchup.winnerRecord = undefined;
-      neutralizedMatchup.loserRecord = undefined;
+      // Keep the records since they represent cumulative season record, not just current week
+      // neutralizedMatchup.winnerRecord = undefined;
+      // neutralizedMatchup.loserRecord = undefined;
       
       // Ensure teams are ordered by higher score first
       const shouldSwap = matchup.loserScore > matchup.winnerScore;

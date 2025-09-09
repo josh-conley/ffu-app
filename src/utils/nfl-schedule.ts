@@ -12,23 +12,23 @@ export interface NFLWeekDate {
 // Note: Update these dates based on official NFL schedule when available
 export const NFL_2025_SCHEDULE: NFLWeekDate[] = [
   { week: 1, startDate: '2025-09-04', endDate: '2025-09-09' }, // Sep 4 - Sep 9 (Tuesday)
-  { week: 2, startDate: '2025-09-11', endDate: '2025-09-16' },
-  { week: 3, startDate: '2025-09-18', endDate: '2025-09-23' },
-  { week: 4, startDate: '2025-09-25', endDate: '2025-09-30' },
-  { week: 5, startDate: '2025-10-02', endDate: '2025-10-07' },
-  { week: 6, startDate: '2025-10-09', endDate: '2025-10-14' },
-  { week: 7, startDate: '2025-10-16', endDate: '2025-10-21' },
-  { week: 8, startDate: '2025-10-23', endDate: '2025-10-28' },
-  { week: 9, startDate: '2025-10-30', endDate: '2025-11-04' },
-  { week: 10, startDate: '2025-11-06', endDate: '2025-11-11' },
-  { week: 11, startDate: '2025-11-13', endDate: '2025-11-18' },
-  { week: 12, startDate: '2025-11-20', endDate: '2025-11-25' }, // Thanksgiving week
-  { week: 13, startDate: '2025-11-27', endDate: '2025-12-02' },
-  { week: 14, startDate: '2025-12-04', endDate: '2025-12-09' },
-  { week: 15, startDate: '2025-12-11', endDate: '2025-12-16' }, // Playoffs start
-  { week: 16, startDate: '2025-12-18', endDate: '2025-12-23' },
-  { week: 17, startDate: '2025-12-25', endDate: '2025-12-30' }, // Christmas week
-  { week: 18, startDate: '2026-01-02', endDate: '2026-01-07' }, // Final week
+  { week: 2, startDate: '2025-09-10', endDate: '2025-09-16' }, // Sep 10 - Sep 16 (Tuesday)
+  { week: 3, startDate: '2025-09-17', endDate: '2025-09-23' }, // Sep 17 - Sep 23 (Tuesday)
+  { week: 4, startDate: '2025-09-24', endDate: '2025-09-30' }, // Sep 24 - Sep 30 (Tuesday)
+  { week: 5, startDate: '2025-10-01', endDate: '2025-10-07' }, // Oct 1 - Oct 7 (Tuesday)
+  { week: 6, startDate: '2025-10-08', endDate: '2025-10-14' }, // Oct 8 - Oct 14 (Tuesday)
+  { week: 7, startDate: '2025-10-15', endDate: '2025-10-21' }, // Oct 15 - Oct 21 (Tuesday)
+  { week: 8, startDate: '2025-10-22', endDate: '2025-10-28' }, // Oct 22 - Oct 28 (Tuesday)
+  { week: 9, startDate: '2025-10-29', endDate: '2025-11-04' }, // Oct 29 - Nov 4 (Tuesday)
+  { week: 10, startDate: '2025-11-05', endDate: '2025-11-11' }, // Nov 5 - Nov 11 (Tuesday)
+  { week: 11, startDate: '2025-11-12', endDate: '2025-11-18' }, // Nov 12 - Nov 18 (Tuesday)
+  { week: 12, startDate: '2025-11-19', endDate: '2025-11-25' }, // Nov 19 - Nov 25 (Tuesday) Thanksgiving week
+  { week: 13, startDate: '2025-11-26', endDate: '2025-12-02' }, // Nov 26 - Dec 2 (Tuesday)
+  { week: 14, startDate: '2025-12-03', endDate: '2025-12-09' }, // Dec 3 - Dec 9 (Tuesday)
+  { week: 15, startDate: '2025-12-10', endDate: '2025-12-16' }, // Dec 10 - Dec 16 (Tuesday) Playoffs start
+  { week: 16, startDate: '2025-12-17', endDate: '2025-12-23' }, // Dec 17 - Dec 23 (Tuesday)
+  { week: 17, startDate: '2025-12-24', endDate: '2025-12-30' }, // Dec 24 - Dec 30 (Tuesday) Christmas week
+  { week: 18, startDate: '2025-12-31', endDate: '2026-01-06' }, // Dec 31 - Jan 6 (Tuesday) Final week
 ];
 
 /**
