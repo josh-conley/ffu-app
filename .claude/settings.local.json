@@ -35,7 +35,8 @@
       "WebFetch(domain:www.nfl.com)",
       "Bash(npx tsx:*)",
       "Bash(npm run generate-current-season:*)",
-      "WebFetch(domain:docs.sleeper.com)"
+      "WebFetch(domain:docs.sleeper.com)",
+      "WebFetch(domain:sleeper.com)"
     ],
     "deny": []
   }

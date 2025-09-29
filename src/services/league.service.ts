@@ -93,7 +93,9 @@ export class LeagueService {
         neutralizedMatchup.loser = matchup.winner;
         neutralizedMatchup.winnerScore = matchup.loserScore;
         neutralizedMatchup.loserScore = matchup.winnerScore;
-        // Records are already cleared above
+        // Also swap the records so they stay with the correct teams
+        neutralizedMatchup.winnerRecord = matchup.loserRecord;
+        neutralizedMatchup.loserRecord = matchup.winnerRecord;
       }
       
       return neutralizedMatchup;

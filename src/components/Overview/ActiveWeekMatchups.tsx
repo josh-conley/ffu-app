@@ -314,7 +314,7 @@ export const ActiveWeekMatchups = () => {
                                 {matchup.winnerInfo?.teamName || 'Unknown Team'}
                               </div>
                               {matchup.winnerRecord && (
-                                <div className="text-[10px] text-gray-500 dark:text-gray-400 font-mono hidden lg:block">
+                                <div className="text-[10px] text-gray-500 dark:text-gray-400 font-mono">
                                   ({matchup.winnerRecord})
                                 </div>
                               )}
@@ -352,7 +352,7 @@ export const ActiveWeekMatchups = () => {
                                 {matchup.loserInfo?.teamName || 'Unknown Team'}
                               </div>
                               {matchup.loserRecord && (
-                                <div className="text-[10px] text-gray-500 dark:text-gray-400 font-mono hidden lg:block">
+                                <div className="text-[10px] text-gray-500 dark:text-gray-400 font-mono">
                                   ({matchup.loserRecord})
                                 </div>
                               )}
