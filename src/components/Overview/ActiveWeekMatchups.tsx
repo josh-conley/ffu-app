@@ -93,24 +93,37 @@ export const ActiveWeekMatchups = () => {
       }
 
       const leagues: LeagueTier[] = ['PREMIER', 'MASTERS', 'NATIONAL'];
-      
+
       // Fetch matchups for each league
       for (const league of leagues) {
         try {
+          // Try 2025 data first
           const data = await leagueApi.getWeekMatchups(league, '2025', currentNFLWeek);
-          
-          setMatchupsData(prev => prev.map(item => 
-            item.league === league 
+
+          setMatchupsData(prev => prev.map(item =>
+            item.league === league
               ? { ...item, data, isLoading: false, error: undefined }
               : item
           ));
         } catch (error) {
-          console.error(`Failed to fetch ${league} matchups:`, error);
-          setMatchupsData(prev => prev.map(item => 
-            item.league === league 
-              ? { ...item, isLoading: false, error: `Failed to load ${league} matchups` }
-              : item
-          ));
+          console.error(`Failed to fetch ${league} 2025 matchups, trying 2024:`, error);
+          // Fallback to 2024 data for development
+          try {
+            const fallbackData = await leagueApi.getWeekMatchups(league, '2024', currentNFLWeek);
+
+            setMatchupsData(prev => prev.map(item =>
+              item.league === league
+                ? { ...item, data: fallbackData, isLoading: false, error: undefined }
+                : item
+            ));
+          } catch (fallbackError) {
+            console.error(`Failed to fetch ${league} 2024 fallback matchups:`, fallbackError);
+            setMatchupsData(prev => prev.map(item =>
+              item.league === league
+                ? { ...item, isLoading: false, error: 'Sleeper API unavailable' }
+                : item
+            ));
+          }
         }
       }
     };
@@ -278,7 +291,7 @@ export const ActiveWeekMatchups = () => {
               {leagueData.error && (
                 <div className="py-3 lg:py-4">
                   <div className="text-center text-xs lg:text-sm text-red-500 dark:text-red-400">
-                    Failed to load
+                    {leagueData.error}
                   </div>
                 </div>
               )}

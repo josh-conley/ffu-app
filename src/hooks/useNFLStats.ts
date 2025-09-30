@@ -34,8 +34,8 @@ export const useNFLStats = (season: string = '2025'): UseNFLStatsReturn => {
         ].length;
         
         if (totalPlayers === 0) {
-          console.log(`Week ${currentWeek} has no data, showing Week 1 instead`);
-          weeklyLeaders = await nflStatsService.getWeeklyLeaders(season, 1);
+          console.log(`Week ${currentWeek} has no data, trying Week 3 instead`);
+          weeklyLeaders = await nflStatsService.getWeeklyLeaders(season, 3);
         }
         
         setData(weeklyLeaders);
