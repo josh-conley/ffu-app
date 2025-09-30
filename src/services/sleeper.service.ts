@@ -3,36 +3,72 @@ import type { SleeperLeague, SleeperUser, SleeperRoster, SleeperMatchup, Sleeper
 export class SleeperService {
   private baseUrl = 'https://api.sleeper.app/v1';
 
-  async getLeague(leagueId: string): Promise<SleeperLeague> {
-    const response = await fetch(`${this.baseUrl}/league/${leagueId}`);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch league ${leagueId}: ${response.statusText}`);
+  private async fetchWithRetry(url: string, maxRetries: number = 3): Promise<any> {
+    let lastError: Error | null = null;
+
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const text = await response.text();
+
+        // Check if response is empty or whitespace only
+        if (!text.trim()) {
+          throw new Error('Empty response from server');
+        }
+
+        try {
+          return JSON.parse(text);
+        } catch (parseError) {
+          console.error(`JSON parse error (attempt ${attempt}/${maxRetries})`);
+          console.error(`URL: ${url}`);
+          console.error(`Response text (first 500 chars):`, text.substring(0, 500));
+          console.error(`Parse error:`, parseError);
+
+          if (attempt === maxRetries) {
+            throw new Error(`Invalid JSON response after ${maxRetries} attempts: ${parseError instanceof Error ? parseError.message : 'Unknown error'}`);
+          }
+
+          lastError = parseError instanceof Error ? parseError : new Error(String(parseError));
+        }
+      } catch (error) {
+        console.warn(`Attempt ${attempt}/${maxRetries} failed for ${url}:`, error);
+        lastError = error instanceof Error ? error : new Error(String(error));
+
+        if (attempt === maxRetries) {
+          throw lastError;
+        }
+
+        // Exponential backoff: wait 1s, 2s, 4s, etc.
+        const waitTime = Math.pow(2, attempt - 1) * 1000;
+        await new Promise(resolve => setTimeout(resolve, waitTime));
+      }
     }
-    return response.json();
+
+    throw lastError || new Error('Unknown error during fetch retry');
+  }
+
+  async getLeague(leagueId: string): Promise<SleeperLeague> {
+    const url = `${this.baseUrl}/league/${leagueId}`;
+    return this.fetchWithRetry(url);
   }
 
   async getLeagueUsers(leagueId: string): Promise<SleeperUser[]> {
-    const response = await fetch(`${this.baseUrl}/league/${leagueId}/users`);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch users for league ${leagueId}: ${response.statusText}`);
-    }
-    return response.json();
+    const url = `${this.baseUrl}/league/${leagueId}/users`;
+    return this.fetchWithRetry(url);
   }
 
   async getLeagueRosters(leagueId: string): Promise<SleeperRoster[]> {
-    const response = await fetch(`${this.baseUrl}/league/${leagueId}/rosters`);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch rosters for league ${leagueId}: ${response.statusText}`);
-    }
-    return response.json();
+    const url = `${this.baseUrl}/league/${leagueId}/rosters`;
+    return this.fetchWithRetry(url);
   }
 
   async getMatchupsForWeek(leagueId: string, week: number): Promise<SleeperMatchup[]> {
-    const response = await fetch(`${this.baseUrl}/league/${leagueId}/matchups/${week}`);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch matchups for league ${leagueId} week ${week}: ${response.statusText}`);
-    }
-    return response.json();
+    const url = `${this.baseUrl}/league/${leagueId}/matchups/${week}`;
+    return this.fetchWithRetry(url);
   }
 
   async getWinnersBracket(leagueId: string): Promise<any[]> {

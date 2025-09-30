@@ -1,4 +1,6 @@
 import type { NFLWeeklyLeaders } from '../types/nfl-stats';
+import { sleeperService } from './api';
+import { getActiveLeagues, getUserById } from '../config/constants';
 
 export class NFLStatsService {
   private baseUrl = 'https://api.sleeper.com';
@@ -62,6 +64,60 @@ export class NFLStatsService {
     return points;
   }
 
+  /**
+   * Get all starter data for current week across all FFU leagues
+   */
+  private async getFFUStarterData(week: number): Promise<Map<string, { userId: string, teamName: string, abbreviation: string }[]>> {
+    const starterMap = new Map<string, { userId: string, teamName: string, abbreviation: string }[]>();
+
+    try {
+      // Get active leagues for 2025
+      const activeLeagues = getActiveLeagues().filter(league => league.year === '2025');
+
+      // Get matchups for all leagues in parallel
+      const leaguePromises = activeLeagues.map(async (league) => {
+        try {
+          const [matchups, rosters] = await Promise.all([
+            sleeperService.getMatchupsForWeek(league.sleeperId, week),
+            sleeperService.getLeagueRosters(league.sleeperId)
+          ]);
+
+          // Create roster lookup map
+          const rosterMap = new Map();
+          rosters.forEach((roster: any) => {
+            const user = getUserById(roster.owner_id);
+            if (user) {
+              rosterMap.set(roster.roster_id, {
+                userId: user.sleeperId,
+                teamName: user.teamName,
+                abbreviation: user.abbreviation
+              });
+            }
+          });
+
+          // Process each matchup to get starters
+          matchups.forEach((matchup: any) => {
+            const teamInfo = rosterMap.get(matchup.roster_id);
+            if (teamInfo && matchup.starters) {
+              matchup.starters.forEach((playerId: string) => {
+                const existing = starterMap.get(playerId) || [];
+                existing.push(teamInfo);
+                starterMap.set(playerId, existing);
+              });
+            }
+          });
+        } catch (error) {
+          console.warn(`Failed to fetch starter data for ${league.tier}:`, error);
+        }
+      });
+
+      await Promise.all(leaguePromises);
+    } catch (error) {
+      console.error('Failed to fetch FFU starter data:', error);
+    }
+
+    return starterMap;
+  }
 
   async getWeeklyStats(season: string, week: number): Promise<any[]> {
     try {
@@ -131,10 +187,20 @@ export class NFLStatsService {
   }
 
   async getWeeklyLeaders(season: string, week: number): Promise<NFLWeeklyLeaders> {
-    const stats = await this.getWeeklyStats(season, week);
+    // Fetch both NFL stats and FFU starter data in parallel
+    const [stats, starterData] = await Promise.all([
+      this.getWeeklyStats(season, week),
+      this.getFFUStarterData(week)
+    ]);
+
+    // Add FFU starter info to each player
+    const enrichedStats = stats.map(player => ({
+      ...player,
+      ffuStarters: starterData.get(player.player_id) || []
+    }));
     
     // Filter for players with meaningful scores (>= 1 point half PPR)
-    const playersWithPoints = stats.filter(player => (player.pts_half_ppr || 0) >= 1);
+    const playersWithPoints = enrichedStats.filter(player => (player.pts_half_ppr || 0) >= 1);
     
     console.log('Players with points:', playersWithPoints.length);
     

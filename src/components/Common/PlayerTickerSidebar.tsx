@@ -1,11 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNFLStats } from '../../hooks/useNFLStats';
 import { LoadingSpinner } from './LoadingSpinner';
+import { TeamLogo } from './TeamLogo';
+import { RosterModal } from './RosterModal';
+import { leagueApi } from '../../services/api';
+import { getCurrentNFLWeek } from '../../utils/nfl-schedule';
+import { isSleeperEra } from '../../utils/era-detection';
+import { getLeagueId, getUserById } from '../../config/constants';
 import type { NFLPlayerStats } from '../../types/nfl-stats';
+import type { LeagueTier, WeekMatchupsResponse } from '../../types';
 
 interface PlayerItemProps {
   player: NFLPlayerStats;
   position: string;
+  onTeamClick?: (userId: string, teamName: string, abbreviation: string) => void;
+  isLoadingMatchup?: boolean;
 }
 
 const getPositionColors = (position: string) => {
@@ -25,48 +34,23 @@ const getPositionColors = (position: string) => {
   }
 };
 
-const PlayerItem = ({ player, position }: PlayerItemProps) => {
+const PlayerItem = ({ player, position, onTeamClick, isLoadingMatchup }: PlayerItemProps) => {
   const displayName = player.player?.full_name ||
                      `${player.player?.first_name || ''} ${player.player?.last_name || ''}`.trim() ||
                      'Unknown Player';
 
   const team = player.player?.team || 'UNK';
   const points = player.pts_half_ppr?.toFixed(2) || '0.00';
+  const ffuStarters = (player as any).ffuStarters || [];
 
   // Show position-specific stats
   const getStatsDisplay = () => {
-    if (position === 'QB') {
-      return (
-        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          {player.pass_yd || 0} PY, {player.pass_td || 0} PTD, {player.pass_int || 0} INT
-          {player.rush_yd ? `, ${player.rush_yd} RY` : ''}
-          {player.rush_td ? `, ${player.rush_td} RTD` : ''}
-          {player.pass_fd ? `, ${player.pass_fd} PFD` : ''}
-          {player.rush_fd ? `, ${player.rush_fd} RFD` : ''}
-        </div>
-      );
-    } else if (position === 'RB') {
-      return (
-        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          {player.rush_yd || 0} RY, {player.rush_td || 0} RTD, {player.rush_att || 0} ATT
-          {player.rec ? `, ${player.rec} REC` : ''}
-          {player.rec_yd ? `, ${player.rec_yd} RECY` : ''}
-          {player.rec_td ? `, ${player.rec_td} RECTD` : ''}
-          {player.rush_fd ? `, ${player.rush_fd} RFD` : ''}
-          {player.rec_fd ? `, ${player.rec_fd} RECFD` : ''}
-        </div>
-      );
-    } else if (position === 'WR' || position === 'TE') {
-      return (
-        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          {player.rec || 0} REC, {player.rec_yd || 0} RECY, {player.rec_td || 0} RECTD
-          {player.rush_yd ? `, ${player.rush_yd} RY` : ''}
-          {player.rush_td ? `, ${player.rush_td} RTD` : ''}
-          {player.rec_fd ? `, ${player.rec_fd} RECFD` : ''}
-          {player.rush_fd ? `, ${player.rush_fd} RFD` : ''}
-        </div>
-      );
-    } else if (position === 'DEF') {
+    const hasPassingStats = (player.pass_yd || 0) > 0 || (player.pass_td || 0) > 0 || (player.pass_int || 0) > 0;
+    const hasRushingStats = (player.rush_yd || 0) > 0 || (player.rush_td || 0) > 0;
+    const hasReceivingStats = (player.rec_yd || 0) > 0 || (player.rec_td || 0) > 0 || (player.rec || 0) > 0;
+    const hasFumbles = (player.fum_lost || 0) > 0;
+
+    if (position === 'DEF') {
       return (
         <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           {player.def_sack || 0} SACK, {player.def_int || 0} INT, {player.def_fum_rec || 0} FR
@@ -77,16 +61,41 @@ const PlayerItem = ({ player, position }: PlayerItemProps) => {
         </div>
       );
     }
-    return null;
+
+    return (
+      <div className="text-xs text-gray-500 dark:text-gray-400 mt-1 space-y-0.5">
+        {hasPassingStats && (
+          <div>
+            {player.pass_yd || 0} PY, {player.pass_td || 0} PTD, {player.pass_int || 0} INT
+          </div>
+        )}
+        {hasRushingStats && (
+          <div>
+            {player.rush_att || 0} RUSH, {player.rush_yd || 0} YDS{(player.rush_td || 0) > 0 ? `, ${player.rush_td} TD` : ''}
+          </div>
+        )}
+        {hasReceivingStats && (
+          <div>
+            {player.rec || 0} REC, {player.rec_yd || 0} YDS{(player.rec_td || 0) > 0 ? `, ${player.rec_td} TD` : ''}
+          </div>
+        )}
+        {hasFumbles && (
+          <div>
+            {player.fum_lost} FUM
+          </div>
+        )}
+      </div>
+    );
   };
 
   return (
-    <div className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700 last:border-b-0">
-      <div className="flex-1 min-w-0">
-        <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
-          {displayName}
-        </div>
-        <div className="flex items-center space-x-2 mt-1">
+    <div className="py-2 border-b border-gray-100 dark:border-gray-700 last:border-b-0">
+      {/* Top row: Name, Position, Team, and Points */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-2 flex-1 min-w-0">
+          <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+            {displayName}
+          </div>
           <span className={`text-xs font-bold px-1.5 py-0.5 rounded ${getPositionColors(position)}`}>
             {position}
           </span>
@@ -94,15 +103,49 @@ const PlayerItem = ({ player, position }: PlayerItemProps) => {
             {team}
           </span>
         </div>
-        {getStatsDisplay()}
+        <div className="text-right">
+          <span className="text-lg font-bold text-gray-900 dark:text-gray-100">
+            {points}
+          </span>
+          <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">
+            pts
+          </span>
+        </div>
       </div>
-      <div className="text-right ml-2">
-        <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
-          {points}
+
+      {/* Bottom row: Stats and FFU Team Logos */}
+      <div className="flex items-center justify-between mt-1">
+        <div className="flex-1">
+          {getStatsDisplay()}
         </div>
-        <div className="text-xs text-gray-500 dark:text-gray-400">
-          pts
-        </div>
+
+        {/* FFU Team Logos */}
+        {ffuStarters.length > 0 && (
+          <div className="flex items-center space-x-1 ml-2">
+            {ffuStarters.map((starter: any, index: number) => (
+              <div key={`${starter.userId}-${index}`} className="flex flex-col items-center">
+                <div className="relative">
+                  <TeamLogo
+                    teamName={starter.teamName}
+                    abbreviation={starter.abbreviation}
+                    size="sm"
+                    clickable={!isLoadingMatchup}
+                    onClick={() => onTeamClick?.(starter.userId, starter.teamName, starter.abbreviation)}
+                    className={isLoadingMatchup ? 'opacity-50' : ''}
+                  />
+                  {isLoadingMatchup && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-3 h-3 border border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                  )}
+                </div>
+                <span className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 font-mono">
+                  {starter.abbreviation}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -112,6 +155,183 @@ export const PlayerTickerSidebar = () => {
   const { data: nflStats, isLoading, error } = useNFLStats();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [rosterModal, setRosterModal] = useState<{
+    isOpen: boolean;
+    leagueId: string;
+    winnerUserId: string;
+    loserUserId: string;
+    week: number;
+    year: string;
+    winnerTeamName: string;
+    loserTeamName: string;
+    winnerAbbreviation: string;
+    loserAbbreviation: string;
+  }>({
+    isOpen: false,
+    leagueId: '',
+    winnerUserId: '',
+    loserUserId: '',
+    week: 0,
+    year: '',
+    winnerTeamName: '',
+    loserTeamName: '',
+    winnerAbbreviation: '',
+    loserAbbreviation: ''
+  });
+  const [matchupsCache, setMatchupsCache] = useState<Map<LeagueTier, WeekMatchupsResponse>>(new Map());
+  const [isLoadingMatchup, setIsLoadingMatchup] = useState(false);
+
+  const currentNFLWeek = getCurrentNFLWeek();
+
+  // Pre-fetch matchup data for all leagues when component mounts
+  useEffect(() => {
+    const preloadMatchups = async () => {
+      if (!currentNFLWeek || !isSleeperEra('2025')) return;
+
+      const leagues: LeagueTier[] = ['PREMIER', 'MASTERS', 'NATIONAL'];
+
+      for (const league of leagues) {
+        try {
+          if (!matchupsCache.has(league)) {
+            console.log(`Pre-loading matchups for ${league}`);
+            const matchups = await leagueApi.getWeekMatchups(league, '2025', currentNFLWeek);
+
+            // Validate the response structure
+            if (matchups && typeof matchups === 'object' && Array.isArray(matchups.matchups)) {
+              setMatchupsCache(prev => new Map(prev).set(league, matchups));
+              console.log(`Successfully loaded ${matchups.matchups.length} matchups for ${league}`);
+            } else {
+              console.warn(`Invalid matchup data structure for ${league}:`, matchups);
+            }
+          }
+        } catch (error) {
+          console.error(`Failed to pre-load matchups for ${league}:`, error);
+          // Don't set partial/invalid data in the cache
+        }
+      }
+    };
+
+    preloadMatchups();
+  }, [currentNFLWeek, isSleeperEra]);
+
+  // Helper function to get league tier from user ID
+  const getLeagueTierForUser = async (userId: string): Promise<LeagueTier | null> => {
+    const user = getUserById(userId);
+    if (!user) return null;
+
+    // Check each league to see which one the user is in for 2025
+    const leagues: LeagueTier[] = ['PREMIER', 'MASTERS', 'NATIONAL'];
+
+    for (const league of leagues) {
+      const leagueId = getLeagueId(league, '2025');
+      if (!leagueId) continue;
+
+      try {
+        // Check if this league has matchups cached
+        if (matchupsCache.has(league)) {
+          const matchups = matchupsCache.get(league)!;
+          const userInLeague = matchups.matchups.some(m =>
+            m.winnerInfo.userId === userId || m.loserInfo.userId === userId
+          );
+          if (userInLeague) return league;
+        } else {
+          // Fetch and cache matchups for this league
+          console.log(`Fetching matchups for ${league}, week ${currentNFLWeek}`);
+          const matchups = await leagueApi.getWeekMatchups(league, '2025', currentNFLWeek || 1);
+          console.log(`Successfully fetched matchups for ${league}:`, matchups);
+          setMatchupsCache(prev => new Map(prev).set(league, matchups));
+
+          const userInLeague = matchups.matchups.some(m =>
+            m.winnerInfo.userId === userId || m.loserInfo.userId === userId
+          );
+          if (userInLeague) return league;
+        }
+      } catch (error) {
+        console.error(`Failed to fetch matchups for ${league}:`, error);
+      }
+    }
+    return null;
+  };
+
+  // Helper function to open roster modal for team
+  const openTeamMatchupModal = async (userId: string, teamName: string, _abbreviation: string) => {
+    if (!isSleeperEra('2025') || !currentNFLWeek) {
+      console.warn('Not in Sleeper era or no current NFL week');
+      return;
+    }
+
+    if (isLoadingMatchup) {
+      console.log('Already loading matchup data, ignoring click');
+      return;
+    }
+
+    try {
+      setIsLoadingMatchup(true);
+      console.log('Opening matchup modal for user:', userId, teamName);
+
+      const league = await getLeagueTierForUser(userId);
+      if (!league) {
+        console.warn('Could not find league for user:', userId);
+        return;
+      }
+
+      console.log('Found league:', league);
+
+      const leagueId = getLeagueId(league, '2025');
+      if (!leagueId) {
+        console.warn('No league ID found for:', league);
+        return;
+      }
+
+      const matchups = matchupsCache.get(league);
+      if (!matchups || !matchups.matchups || !Array.isArray(matchups.matchups)) {
+        console.warn('No cached matchups or invalid matchup data for league:', league);
+        return;
+      }
+
+      console.log('Found matchups:', matchups);
+
+      // Find the matchup containing this user
+      const matchup = matchups.matchups.find(m =>
+        m?.winnerInfo?.userId === userId || m?.loserInfo?.userId === userId
+      );
+
+      if (!matchup || !matchup.winnerInfo || !matchup.loserInfo) {
+        console.warn('No valid matchup found for user:', userId);
+        return;
+      }
+
+      console.log('Found matchup:', matchup);
+      console.log('About to open modal with:', {
+        winnerUserId: matchup.winnerInfo.userId,
+        loserUserId: matchup.loserInfo.userId,
+        leagueId,
+        week: currentNFLWeek
+      });
+
+      setRosterModal({
+        isOpen: true,
+        leagueId,
+        winnerUserId: matchup.winnerInfo.userId,
+        loserUserId: matchup.loserInfo.userId,
+        week: currentNFLWeek,
+        year: '2025',
+        winnerTeamName: matchup.winnerInfo.teamName,
+        loserTeamName: matchup.loserInfo.teamName,
+        winnerAbbreviation: matchup.winnerInfo.abbreviation,
+        loserAbbreviation: matchup.loserInfo.abbreviation
+      });
+    } catch (error) {
+      console.error('Failed to open team matchup modal:', error);
+      console.error('Error details:', error);
+    } finally {
+      setIsLoadingMatchup(false);
+    }
+  };
+
+  const closeRosterModal = () => {
+    setRosterModal(prev => ({ ...prev, isOpen: false }));
+  };
 
   // Combine all players into one array - top performers across all positions
   const allPlayers: (NFLPlayerStats & { positionLabel: string })[] = nflStats ? [
@@ -198,6 +418,8 @@ export const PlayerTickerSidebar = () => {
               key={`${player.player_id}-${index}`}
               player={player}
               position={player.positionLabel}
+              onTeamClick={openTeamMatchupModal}
+              isLoadingMatchup={isLoadingMatchup}
             />
           ))}
           <div className="h-32"></div>
@@ -215,6 +437,11 @@ export const PlayerTickerSidebar = () => {
           }
         `
       }} />
+
+      <RosterModal
+        {...rosterModal}
+        onClose={closeRosterModal}
+      />
     </div>
   );
 };

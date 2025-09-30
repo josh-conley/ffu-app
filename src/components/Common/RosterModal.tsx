@@ -80,11 +80,21 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
 
         const players = playersResponse.players || playersResponse;
 
+        console.log('RosterModal debugging:', {
+          winnerUserId,
+          loserUserId,
+          availableRosters: rosters.map(r => ({ owner_id: r.owner_id, roster_id: r.roster_id })),
+          availableUsers: users.map(u => ({ user_id: u.user_id, display_name: u.display_name }))
+        });
+
         // Find rosters for both teams
         const winnerRoster = rosters.find(r => r.owner_id === winnerUserId);
         const loserRoster = rosters.find(r => r.owner_id === loserUserId);
-        
+
+        console.log('Found rosters:', { winnerRoster: !!winnerRoster, loserRoster: !!loserRoster });
+
         if (!winnerRoster || !loserRoster) {
+          console.error('Missing rosters. Winner found:', !!winnerRoster, 'Loser found:', !!loserRoster);
           throw new Error('Could not find rosters for both teams');
         }
 

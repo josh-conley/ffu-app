@@ -56,8 +56,12 @@ export interface NFLPlayerStats {
   def_td?: number;
   def_sack?: number;
   def_safe?: number;
+  def_safety?: number;
   def_pa?: number; // Points allowed
+  def_pts_allowed?: number;
   def_ya?: number; // Yards allowed
+  def_tackled_for_loss?: number;
+  def_4_and_stop?: number;
   
   // Kicking
   fgm?: number; // Field goals made

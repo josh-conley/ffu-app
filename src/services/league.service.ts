@@ -180,13 +180,112 @@ export class LeagueService {
     }
   }
 
+  // Method to get live matchups directly from Sleeper API without static data
+  private async getLiveWeekMatchups(league: LeagueTier, year: string, week: number): Promise<WeekMatchup[]> {
+    const leagueConfig = getLeagueConfig(league, year);
+    if (!leagueConfig) {
+      throw new Error(`No league config found for ${league} ${year}`);
+    }
+
+    // Fetch live data from Sleeper API
+    const [liveMatchups, rosters] = await Promise.all([
+      this.sleeperService.getMatchupsForWeek(leagueConfig.sleeperId, week),
+      this.sleeperService.getLeagueRosters(leagueConfig.sleeperId)
+    ]);
+
+    // Create mapping from user_id to roster_id
+    const userToRosterMap = new Map<string, number>();
+    rosters.forEach(roster => {
+      if (roster.owner_id && roster.roster_id) {
+        userToRosterMap.set(roster.owner_id, roster.roster_id);
+      }
+    });
+
+    // Group live matchups by matchup_id to pair opponents
+    const matchupGroups = new Map<number, any[]>();
+    liveMatchups.forEach(matchup => {
+      if (!matchupGroups.has(matchup.matchup_id)) {
+        matchupGroups.set(matchup.matchup_id, []);
+      }
+      matchupGroups.get(matchup.matchup_id)!.push(matchup);
+    });
+
+    // Convert to WeekMatchup format
+    const weekMatchups: WeekMatchup[] = [];
+
+    for (const [_matchupId, matchupPair] of matchupGroups) {
+      if (matchupPair.length === 2) {
+        const [team1, team2] = matchupPair;
+
+        // Find user IDs for each roster
+        const user1 = [...userToRosterMap.entries()].find(([, rosterId]) => rosterId === team1.roster_id)?.[0];
+        const user2 = [...userToRosterMap.entries()].find(([, rosterId]) => rosterId === team2.roster_id)?.[0];
+
+        if (user1 && user2) {
+          // Determine winner/loser based on points (for completed weeks) or use neutral for active weeks
+          const isComplete = team1.points !== null && team2.points !== null;
+          let winner, loser, winnerPoints, loserPoints;
+
+          if (isComplete) {
+            if (team1.points > team2.points) {
+              winner = user1;
+              loser = user2;
+              winnerPoints = team1.points;
+              loserPoints = team2.points;
+            } else if (team2.points > team1.points) {
+              winner = user2;
+              loser = user1;
+              winnerPoints = team2.points;
+              loserPoints = team1.points;
+            } else {
+              // Tie game
+              winner = user1;
+              loser = user2;
+              winnerPoints = team1.points;
+              loserPoints = team2.points;
+            }
+          } else {
+            // For active/incomplete weeks, assign arbitrarily
+            winner = user1;
+            loser = user2;
+            winnerPoints = team1.points || 0;
+            loserPoints = team2.points || 0;
+          }
+
+          weekMatchups.push({
+            winner,
+            loser,
+            winnerScore: winnerPoints,
+            loserScore: loserPoints,
+            winnerRecord: '', // Records will be empty for live data - they're calculated elsewhere
+            loserRecord: ''
+          });
+        }
+      }
+    }
+
+    return weekMatchups;
+  }
+
   // Enhanced method to get matchups with user info
   async getWeekMatchupsWithUserInfo(league: LeagueTier, year: string, week: number) {
-    let matchups = await this.getWeekMatchups(league, year, week);
-    
+    let matchups: WeekMatchup[];
+
+    try {
+      matchups = await this.getWeekMatchups(league, year, week);
+    } catch (error) {
+      // If static data doesn't exist but this is 2025 current week, try to get live data only
+      if (year === '2025' && getCurrentNFLWeek() === week) {
+        console.log(`No static data for ${league} ${year} week ${week}, trying live data only`);
+        matchups = await this.getLiveWeekMatchups(league, year, week);
+      } else {
+        throw error;
+      }
+    }
+
     // Update with live data if this is the active week of 2025 season
     matchups = await this.updateWithLiveData(matchups, league, year, week);
-    
+
     // Neutralize winner/loser assignments for active weeks
     matchups = this.neutralizeActiveWeekMatchups(matchups, year, week);
     
