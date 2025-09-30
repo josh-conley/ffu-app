@@ -1,9 +1,8 @@
 import { useMemo, useEffect, useRef, useState } from 'react';
-import { Crown, Award } from 'lucide-react';
 import { useAllStandings } from '../../hooks/useLeagues';
 import { LoadingSpinner } from './LoadingSpinner';
 import { TeamLogo } from './TeamLogo';
-import { getCurrentNFLWeek, isNFLWeekComplete } from '../../utils/nfl-schedule';
+import { getCurrentNFLWeek } from '../../utils/nfl-schedule';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation } from '../../config/constants';
 import { useTeamProfileModal } from '../../contexts/TeamProfileModalContext';
 import type { LeagueTier, EnhancedSeasonStandings } from '../../types';
