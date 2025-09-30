@@ -4,6 +4,7 @@ import { useAllStandings } from '../hooks/useLeagues';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { ActiveWeekMatchups } from '../components/Overview/ActiveWeekMatchups';
 import { PlayerTickerSidebar } from '../components/Common/PlayerTickerSidebar';
+import { ActiveWeekUPR } from '../components/Common/ActiveWeekUPR';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../config/constants';
 import { getLeagueName } from '../constants/leagues';
 import type { LeagueTier } from '../types';
@@ -79,9 +80,18 @@ export const Overview = () => {
   const leagueChampions = getLeagueChampions();
 
   return (
-    <div className="relative">
-      {/* Main Content */}
-      <div className="space-y-8">
+    <div className="relative -mx-4 sm:-mx-6 lg:-mx-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative">
+          {/* Left Sidebar - UPR Rankings */}
+          <div className="absolute top-0 right-full mr-8 w-80 hidden xl:block">
+            <div className="sticky top-8">
+              <ActiveWeekUPR />
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="space-y-8">
         <div className="welcome-card-wrap ">
           <div className="welcome-card ">
             <div className="max-w-2xl mx-auto">
@@ -123,6 +133,11 @@ export const Overview = () => {
           </div>
         </div>
         <ActiveWeekMatchups />
+
+        {/* Temporary UPR Test - should show in main content */}
+        <div className="xl:hidden">
+          <ActiveWeekUPR />
+        </div>
 
         {/* League Champions Section */}
         {!isLoading && !error && standings && (
@@ -182,10 +197,12 @@ export const Overview = () => {
         )}
       </div>
 
-      {/* Right Sidebar - Weekly Leaders */}
-      <div className="absolute top-0 left-full ml-8 w-80 hidden xl:block">
-        <div className="sticky top-8">
-          <PlayerTickerSidebar />
+          {/* Right Sidebar - Weekly Leaders */}
+          <div className="absolute top-0 left-full ml-8 w-80 hidden xl:block">
+            <div className="sticky top-8">
+              <PlayerTickerSidebar />
+            </div>
+          </div>
         </div>
       </div>
     </div>

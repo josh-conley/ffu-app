@@ -271,20 +271,39 @@ export class LeagueService {
   async getWeekMatchupsWithUserInfo(league: LeagueTier, year: string, week: number) {
     let matchups: WeekMatchup[];
 
-    try {
-      matchups = await this.getWeekMatchups(league, year, week);
-    } catch (error) {
-      // If static data doesn't exist but this is 2025 current week, try to get live data only
-      if (year === '2025' && getCurrentNFLWeek() === week) {
-        console.log(`No static data for ${league} ${year} week ${week}, trying live data only`);
+    // For the current active week in 2025, prioritize live Sleeper API data
+    if (year === '2025' && getCurrentNFLWeek() === week) {
+      console.log(`Active week detected for ${league} ${year} week ${week}, using live Sleeper API data`);
+      try {
         matchups = await this.getLiveWeekMatchups(league, year, week);
-      } else {
-        throw error;
+        console.log(`Successfully fetched live data for ${league} week ${week}`);
+      } catch (liveError) {
+        console.warn(`Live data failed for ${league} week ${week}, falling back to static data:`, liveError);
+        try {
+          matchups = await this.getWeekMatchups(league, year, week);
+        } catch (staticError) {
+          console.error(`Both live and static data failed for ${league} week ${week}`);
+          throw staticError;
+        }
+      }
+    } else {
+      // For completed weeks or non-2025 seasons, use static data first
+      try {
+        matchups = await this.getWeekMatchups(league, year, week);
+      } catch (error) {
+        // If static data doesn't exist but this is a 2025 week, try live data as fallback
+        if (year === '2025') {
+          console.log(`No static data for ${league} ${year} week ${week}, trying live data as fallback`);
+          matchups = await this.getLiveWeekMatchups(league, year, week);
+        } else {
+          throw error;
+        }
+      }
+      // Update with live data if this is any 2025 week (to get most current scores)
+      if (year === '2025') {
+        matchups = await this.updateWithLiveData(matchups, league, year, week);
       }
     }
-
-    // Update with live data if this is the active week of 2025 season
-    matchups = await this.updateWithLiveData(matchups, league, year, week);
 
     // Neutralize winner/loser assignments for active weeks
     matchups = this.neutralizeActiveWeekMatchups(matchups, year, week);
