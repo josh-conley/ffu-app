@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useUrlParams } from '../hooks/useUrlParams';
-import { useAllStandings } from '../hooks/useLeagues';
+import { useAllStandings, useLeagueStandings } from '../hooks/useLeagues';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { StandingsTable } from '../components/League/StandingsTable';
@@ -10,6 +10,26 @@ import { getLeagueName } from '../constants/leagues';
 import { ChevronDown, Crown } from 'lucide-react';
 import type { LeagueTier } from '../types';
 import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
+import { calculateRankings } from '../utils/ranking';
+
+// Component to render StandingsTable with matchup data for active seasons
+const StandingsTableWithMatchups = ({ leagueData, league, year }: { leagueData: any, league: string, year: string }) => {
+  const { data: fullLeagueData } = useLeagueStandings(league as LeagueTier, year);
+
+  // For active seasons, use full league data if available to get matchups
+  const matchupsByWeek = (year === '2025' && fullLeagueData) ?
+    (fullLeagueData as any).matchupsByWeek : undefined;
+
+  return (
+    <StandingsTable
+      key={`${league}-${year}`}
+      standings={leagueData.standings}
+      league={league}
+      year={year}
+      matchupsByWeek={matchupsByWeek}
+    />
+  );
+};
 
 export const Standings = () => {
   const { getParam, updateParams } = useUrlParams();
@@ -134,8 +154,11 @@ export const Standings = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {['PREMIER', 'MASTERS', 'NATIONAL'].map(league => {
                 const leagueData = yearStandings.find(s => s.league === league);
-                
+
                 if (!leagueData) return null;
+
+                // Only calculate rankings for active seasons, use original for historical
+                const rankedStandings = isActiveSeason ? calculateRankings(leagueData.standings) : leagueData.standings;
 
                 const getLeagueColors = (leagueType: string) => {
                   const colorMap = {
@@ -177,11 +200,11 @@ export const Standings = () => {
                     
                     {/* All teams */}
                     <div className="space-y-3 mb-4">
-                      {leagueData.standings.map((standing, index) => (
+                      {rankedStandings.map((standing) => (
                         <div key={standing.userId} className="flex items-center space-x-3">
                           <span className={`w-8 h-8 flex items-center justify-center text-sm font-bold ${colors.iconBg} text-white relative`}>
-                            {index + 1}
-                            {!isActiveSeason && index === 0 && (
+                            {standing.rank}
+                            {!isActiveSeason && standing.rank === 1 && (
                               <Crown className="absolute -top-1 -right-1 w-3 h-3 text-yellow-400" />
                             )}
                           </span>
@@ -196,18 +219,18 @@ export const Standings = () => {
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className={`text-sm font-bold truncate flex items-center gap-1 ${
-                              !isActiveSeason && index === 0 
-                                ? `${colors.text} font-black` 
+                              !isActiveSeason && standing.rank === 1
+                                ? `${colors.text} font-black`
                                 : 'text-gray-900 dark:text-gray-100'
                             }`}>
                               {getDisplayTeamName(standing.userId, standing.userInfo.teamName, currentYear)}
-                              {!isActiveSeason && index === 0 && (
+                              {!isActiveSeason && standing.rank === 1 && (
                                 <Crown className="w-3 h-3 text-yellow-500" />
                               )}
                             </div>
                             <div className="text-xs text-gray-500 dark:text-gray-400">
                               {standing.wins}-{standing.losses}
-                              {!isActiveSeason && index === 0 && (
+                              {!isActiveSeason && standing.rank === 1 && (
                                 <span className={`ml-1 text-xs font-medium ${colors.text}`}>Champion</span>
                               )}
                             </div>
@@ -292,9 +315,8 @@ export const Standings = () => {
             const leagueData = yearStandings.find(s => s.league === selectedLeague);
             if (!leagueData) return null;
             return (
-              <StandingsTable
-                key={`${selectedLeague}-${currentYear}`}
-                standings={leagueData.standings}
+              <StandingsTableWithMatchups
+                leagueData={leagueData}
                 league={selectedLeague}
                 year={currentYear}
               />

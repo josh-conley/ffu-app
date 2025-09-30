@@ -9,6 +9,40 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+// NFL 2025 Season Week Schedule - simplified for script use
+const NFL_2025_SCHEDULE = [
+  { week: 1, startDate: '2025-09-04', endDate: '2025-09-09' },
+  { week: 2, startDate: '2025-09-10', endDate: '2025-09-16' },
+  { week: 3, startDate: '2025-09-17', endDate: '2025-09-23' },
+  { week: 4, startDate: '2025-09-24', endDate: '2025-09-30' },
+  { week: 5, startDate: '2025-10-01', endDate: '2025-10-07' },
+  { week: 6, startDate: '2025-10-08', endDate: '2025-10-14' },
+  { week: 7, startDate: '2025-10-15', endDate: '2025-10-21' },
+  { week: 8, startDate: '2025-10-22', endDate: '2025-10-28' },
+  { week: 9, startDate: '2025-10-29', endDate: '2025-11-04' },
+  { week: 10, startDate: '2025-11-05', endDate: '2025-11-11' },
+  { week: 11, startDate: '2025-11-12', endDate: '2025-11-18' },
+  { week: 12, startDate: '2025-11-19', endDate: '2025-11-25' },
+  { week: 13, startDate: '2025-11-26', endDate: '2025-12-02' },
+  { week: 14, startDate: '2025-12-03', endDate: '2025-12-09' },
+  { week: 15, startDate: '2025-12-10', endDate: '2025-12-16' },
+  { week: 16, startDate: '2025-12-17', endDate: '2025-12-23' },
+  { week: 17, startDate: '2025-12-24', endDate: '2025-12-30' },
+  { week: 18, startDate: '2025-12-31', endDate: '2026-01-06' },
+];
+
+const isNFLWeekComplete = (week, currentDate) => {
+  const now = currentDate || new Date();
+  const weekData = NFL_2025_SCHEDULE.find(w => w.week === week);
+
+  if (!weekData) {
+    return true; // If week not found, assume it's complete
+  }
+
+  const endDate = new Date(weekData.endDate + 'T00:00:00'); // Start of Tuesday (12:00 AM)
+  return now >= endDate;
+};
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -209,7 +243,7 @@ class HistoricalDataGenerator {
       this.addPlacementIndicators(matchupsByWeek, winnersBracket, losersBracket, rosters);
 
       // Calculate member game stats (high/low games)
-      const memberGameStats = this.calculateMemberGameStats(matchupsByWeek);
+      const memberGameStats = this.calculateMemberGameStats(matchupsByWeek, league.year);
 
       // Generate standings based on playoff results and include game stats
       const standings = this.generateStandings(rosters, playoffResults, memberGameStats);
@@ -665,12 +699,20 @@ class HistoricalDataGenerator {
     });
   }
 
-  calculateMemberGameStats(matchupsByWeek) {
+  calculateMemberGameStats(matchupsByWeek, year = null) {
     const memberStats = {};
 
     // Process all weeks of matchups
-    Object.values(matchupsByWeek).forEach(weekMatchups => {
+    Object.entries(matchupsByWeek).forEach(([weekStr, weekMatchups]) => {
+      const week = parseInt(weekStr);
+
+      // For active seasons (2025), only include completed weeks
+      if (year === '2025' && !isNFLWeekComplete(week)) {
+        return;
+      }
+
       weekMatchups.forEach(matchup => {
+
         // Track winner's score
         if (!memberStats[matchup.winner]) {
           memberStats[matchup.winner] = {

@@ -1,4 +1,5 @@
 import { isRegularSeasonWeek } from './era-detection';
+import { isNFLWeekComplete } from './nfl-schedule';
 import type { WeekMatchup } from '../types';
 
 export interface UPRCalculationData {
@@ -36,8 +37,13 @@ export const getRegularSeasonUPRData = (
 
   Object.entries(matchupsByWeek).forEach(([weekStr, matchups]) => {
     const week = parseInt(weekStr);
-    
+
     if (!isRegularSeasonWeek(week, year)) {
+      return;
+    }
+
+    // For active seasons (2025), only include completed weeks
+    if (year === '2025' && !isNFLWeekComplete(week)) {
       return;
     }
 
@@ -79,8 +85,13 @@ export const calculateRegularSeasonRecord = (
 
   Object.entries(matchupsByWeek).forEach(([weekStr, matchups]) => {
     const week = parseInt(weekStr);
-    
+
     if (!isRegularSeasonWeek(week, year)) {
+      return;
+    }
+
+    // For active seasons (2025), only include completed weeks
+    if (year === '2025' && !isNFLWeekComplete(week)) {
       return;
     }
 
@@ -109,8 +120,13 @@ export const calculateRegularSeasonStats = (
 
   Object.entries(matchupsByWeek).forEach(([weekStr, matchups]) => {
     const week = parseInt(weekStr);
-    
+
     if (!isRegularSeasonWeek(week, year)) {
+      return;
+    }
+
+    // For active seasons (2025), only include completed weeks
+    if (year === '2025' && !isNFLWeekComplete(week)) {
       return;
     }
 

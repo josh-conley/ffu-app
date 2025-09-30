@@ -4,17 +4,23 @@ import { Trophy, Medal, Award } from 'lucide-react';
 import { getLeagueName } from '../../constants/leagues';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../../config/constants';
 import { useTeamProfileModal } from '../../contexts/TeamProfileModalContext';
+import { calculateRankings } from '../../utils/ranking';
 
 
 interface StandingsTableProps {
   standings: EnhancedSeasonStandings[];
   league: string;
   year: string;
+  matchupsByWeek?: Record<number, any[]>;
 }
 
-export const StandingsTable = ({ standings, league, year }: StandingsTableProps) => {
+export const StandingsTable = ({ standings, league, year, matchupsByWeek }: StandingsTableProps) => {
   const isActiveSeason = isActiveYear(year);
   const { openTeamProfile } = useTeamProfileModal();
+
+  // Only calculate rankings for active seasons, use original for historical
+  const rankedStandings = isActiveSeason ? calculateRankings(standings, matchupsByWeek, year) : standings;
+
 
   const getLeagueColors = (leagueType: string) => {
     const colorMap = {
@@ -72,7 +78,7 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
   return (
     <div className="card">
       {/* Champion Highlight */}
-      {!isActiveSeason && standings[0] && (
+      {!isActiveSeason && rankedStandings[0] && (
         <div className={`champion-highlight angular-cut p-6 mb-6 relative overflow-hidden border-l4 ${leagueColors.highlight}`}>
           <div className="flex items-center space-x-3 mb-3">
             <div className={`p-2 ${leagueColors.iconBg} rounded-full`}>
@@ -84,20 +90,20 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
           </div>
           <div className="flex items-center space-x-4">
             <div className="relative">
-              <TeamLogo 
-                teamName={getCurrentTeamName(standings[0].userId, standings[0].userInfo.teamName)}
-                abbreviation={getCurrentAbbreviation(standings[0].userId, standings[0].userInfo.abbreviation)}
+              <TeamLogo
+                teamName={getCurrentTeamName(rankedStandings[0].userId, rankedStandings[0].userInfo.teamName)}
+                abbreviation={getCurrentAbbreviation(rankedStandings[0].userId, rankedStandings[0].userInfo.abbreviation)}
                 size="lg"
                 clickable
-                onClick={() => openTeamProfile(standings[0].userId, standings[0].userInfo.teamName)}
+                onClick={() => openTeamProfile(rankedStandings[0].userId, rankedStandings[0].userInfo.teamName)}
               />
             </div>
             <div>
               <div className="font-black text-gray-900 dark:text-gray-100 text-xl tracking-wide">
-                {getDisplayTeamName(standings[0].userId, standings[0].userInfo.teamName, year)}
+                {getDisplayTeamName(rankedStandings[0].userId, rankedStandings[0].userInfo.teamName, year)}
               </div>
               <div className={`text-lg font-bold ${leagueColors.text}`}>
-                {standings[0].wins}-{standings[0].losses} • {standings[0].pointsFor?.toFixed(2)} pts
+                {rankedStandings[0].wins}-{rankedStandings[0].losses} • {rankedStandings[0].pointsFor?.toFixed(2)} pts
               </div>
             </div>
           </div>
@@ -120,23 +126,25 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
               <th className="text-center text-white font-bold">Record</th>
               <th className="text-center text-white font-bold">Points For</th>
               <th className="text-center text-white font-bold">Points Against</th>
+              <th className="text-center text-white font-bold">High Game</th>
+              <th className="text-center text-white font-bold">Low Game</th>
               <th className="text-center text-white font-bold">UPR</th>
             </tr>
           </thead>
           <tbody>
-            {standings.map((standing) => (
+            {rankedStandings.map((standing) => (
               <tr key={standing.userId} className={getRowClasses(standing.rank)}>
                 <td className="text-center">
                   <div className="flex items-center justify-center space-x-2">
                     {!isActiveSeason && getRankIcon(standing.rank)}
+                    {isActiveSeason && (
+                      <span className="font-bold text-lg text-gray-900 dark:text-gray-100">
+                        {standing.rank}
+                      </span>
+                    )}
                     {!isActiveSeason && (
                       <span className={`font-black text-lg ${standing.rank === 1 ? leagueColors.text : 'text-gray-900 dark:text-gray-100'}`}>
                         #{standing.rank}
-                      </span>
-                    )}
-                    {isActiveSeason && (
-                      <span className="text-sm text-gray-500 dark:text-gray-400 italic">
-                        TBD
                       </span>
                     )}
                   </div>
@@ -174,15 +182,19 @@ export const StandingsTable = ({ standings, league, year }: StandingsTableProps)
                   </span>
                 </td>
                 <td className="text-center">
-                  {isActiveSeason ? (
-                    <span className="text-sm text-gray-500 dark:text-gray-400 italic">
-                      TBD
-                    </span>
-                  ) : (
-                    <span className="font-bold text-gray-900 dark:text-gray-100 font-mono">
-                      {standing.unionPowerRating?.toFixed(2) || '0.00'}
-                    </span>
-                  )}
+                  <span className="font-bold text-green-600 dark:text-green-400 font-mono">
+                    {standing.highGame?.toFixed(2) || '0.00'}
+                  </span>
+                </td>
+                <td className="text-center">
+                  <span className="font-bold text-red-600 dark:text-red-400 font-mono">
+                    {standing.lowGame?.toFixed(2) || '0.00'}
+                  </span>
+                </td>
+                <td className="text-center">
+                  <span className="font-bold text-blue-600 dark:text-blue-400 font-mono">
+                    {standing.unionPowerRating?.toFixed(2) || '0.00'}
+                  </span>
                 </td>
               </tr>
             ))}
