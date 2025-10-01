@@ -2,14 +2,15 @@ import { SleeperService } from './sleeper.service';
 import { dataService } from './data.service';
 import { getAllLeagueConfigs, validateLeagueAndYear, getUserInfoBySleeperId, getUserInfoByFFUId, getFFUIdBySleeperId, getLeagueConfig } from '../config/constants';
 import { getCurrentNFLWeek, getNFLScheduleDebugInfo, isNFLWeekComplete } from '../utils/nfl-schedule';
-import type { 
-  LeagueSeasonData, 
+import type {
+  LeagueSeasonData,
   WeekMatchup,
   LeagueTier,
   UserInfo,
   AllTimeRecords,
   GameRecord,
-  SeasonRecord
+  SeasonRecord,
+  SleeperRoster
 } from '../types';
 
 export class LeagueService {
@@ -193,11 +194,13 @@ export class LeagueService {
       this.sleeperService.getLeagueRosters(leagueConfig.sleeperId)
     ]);
 
-    // Create mapping from user_id to roster_id
+    // Create mapping from user_id to roster_id and roster data
     const userToRosterMap = new Map<string, number>();
+    const rosterIdToRosterMap = new Map<number, SleeperRoster>();
     rosters.forEach(roster => {
       if (roster.owner_id && roster.roster_id) {
         userToRosterMap.set(roster.owner_id, roster.roster_id);
+        rosterIdToRosterMap.set(roster.roster_id, roster);
       }
     });
 
@@ -222,9 +225,13 @@ export class LeagueService {
         const user2 = [...userToRosterMap.entries()].find(([, rosterId]) => rosterId === team2.roster_id)?.[0];
 
         if (user1 && user2) {
+          // Get roster data for both teams to extract records
+          const roster1 = rosterIdToRosterMap.get(team1.roster_id);
+          const roster2 = rosterIdToRosterMap.get(team2.roster_id);
+
           // Determine winner/loser based on points (for completed weeks) or use neutral for active weeks
           const isComplete = team1.points !== null && team2.points !== null;
-          let winner, loser, winnerPoints, loserPoints;
+          let winner, loser, winnerPoints, loserPoints, winnerRoster, loserRoster;
 
           if (isComplete) {
             if (team1.points > team2.points) {
@@ -232,17 +239,23 @@ export class LeagueService {
               loser = user2;
               winnerPoints = team1.points;
               loserPoints = team2.points;
+              winnerRoster = roster1;
+              loserRoster = roster2;
             } else if (team2.points > team1.points) {
               winner = user2;
               loser = user1;
               winnerPoints = team2.points;
               loserPoints = team1.points;
+              winnerRoster = roster2;
+              loserRoster = roster1;
             } else {
               // Tie game
               winner = user1;
               loser = user2;
               winnerPoints = team1.points;
               loserPoints = team2.points;
+              winnerRoster = roster1;
+              loserRoster = roster2;
             }
           } else {
             // For active/incomplete weeks, assign arbitrarily
@@ -250,15 +263,26 @@ export class LeagueService {
             loser = user2;
             winnerPoints = team1.points || 0;
             loserPoints = team2.points || 0;
+            winnerRoster = roster1;
+            loserRoster = roster2;
           }
+
+          // Format records from roster settings
+          const formatRecord = (roster: SleeperRoster | undefined): string => {
+            if (!roster?.settings) return '';
+            const wins = roster.settings.wins ?? 0;
+            const losses = roster.settings.losses ?? 0;
+            const ties = roster.settings.ties ?? 0;
+            return ties > 0 ? `${wins}-${losses}-${ties}` : `${wins}-${losses}`;
+          };
 
           weekMatchups.push({
             winner,
             loser,
             winnerScore: winnerPoints,
             loserScore: loserPoints,
-            winnerRecord: '', // Records will be empty for live data - they're calculated elsewhere
-            loserRecord: ''
+            winnerRecord: formatRecord(winnerRoster),
+            loserRecord: formatRecord(loserRoster)
           });
         }
       }

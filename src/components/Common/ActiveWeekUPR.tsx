@@ -219,16 +219,16 @@ export const ActiveWeekUPR = () => {
             uprData.map((entry, index) => (
               <div
                 key={`${entry.userId}-${entry.league}`}
-                className="flex items-center space-x-3 py-3 border-b border-gray-100 dark:border-gray-700 last:border-b-0 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg px-2 cursor-pointer transition-colors"
+                className="flex items-center gap-2 py-2 border-b border-gray-100 dark:border-gray-700 last:border-b-0 hover:bg-gray-50 dark:hover:bg-gray-800 rounded px-1.5 cursor-pointer transition-colors"
                 onClick={() => openTeamProfile(entry.userId, entry.teamName)}
               >
                 {/* Rank */}
-                <div className="flex items-center justify-center w-6 h-6 mr-1">
+                <div className="flex items-center justify-center w-5">
                   <span className="text-xs font-medium text-gray-500 dark:text-gray-400">{index + 1}</span>
                 </div>
 
                 {/* Team Logo */}
-                <div>
+                <div className="flex-shrink-0">
                   <TeamLogo
                     teamName={getCurrentTeamName(entry.userId, entry.teamName)}
                     abbreviation={getCurrentAbbreviation(entry.userId, entry.abbreviation)}
@@ -240,29 +240,21 @@ export const ActiveWeekUPR = () => {
 
                 {/* Team Info */}
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center space-x-2 mb-1">
-                    <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
-                      {getDisplayTeamName(entry.userId, entry.teamName, '2025')}
-                    </div>
-                    <span className={`text-xs font-bold px-1.5 py-0.5 rounded ${getLeagueColor(entry.league)}`}>
-                      {entry.league}
-                    </span>
+                  <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 leading-tight mb-0.5">
+                    {getDisplayTeamName(entry.userId, entry.teamName, '2025')}
                   </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
-                    {entry.wins}-{entry.losses} • {calculateAverageScore(entry.pointsFor, entry.wins, entry.losses).toFixed(1)} avg
-                    {entry.highGame && entry.lowGame && (
-                      <> • H: {entry.highGame.toFixed(1)} L: {entry.lowGame.toFixed(1)}</>
-                    )}
+                  <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
+                    <span className={`font-medium px-1 py-0.5 rounded text-[10px] ${getLeagueColor(entry.league)}`}>
+                      {entry.league.charAt(0)}
+                    </span>
+                    <span>{entry.wins}-{entry.losses} • {calculateAverageScore(entry.pointsFor, entry.wins, entry.losses).toFixed(1)} avg</span>
                   </div>
                 </div>
 
                 {/* UPR Score */}
-                <div className="text-right">
+                <div className="text-right flex-shrink-0">
                   <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
                     {entry.upr.toFixed(1)}
-                  </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
-                    UPR
                   </div>
                 </div>
               </div>

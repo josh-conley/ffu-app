@@ -13,6 +13,8 @@ import type { LeagueTier, WeekMatchupsResponse } from '../../types';
 interface PlayerItemProps {
   player: NFLPlayerStats;
   position: string;
+  positionRank: number;
+  overallRank: number;
   onTeamClick?: (userId: string, teamName: string, abbreviation: string) => void;
   isLoadingMatchup?: boolean;
 }
@@ -34,7 +36,7 @@ const getPositionColors = (position: string) => {
   }
 };
 
-const PlayerItem = ({ player, position, onTeamClick, isLoadingMatchup }: PlayerItemProps) => {
+const PlayerItem = ({ player, position, positionRank, overallRank, onTeamClick, isLoadingMatchup }: PlayerItemProps) => {
   const displayName = player.player?.full_name ||
                      `${player.player?.first_name || ''} ${player.player?.last_name || ''}`.trim() ||
                      'Unknown Player';
@@ -89,33 +91,37 @@ const PlayerItem = ({ player, position, onTeamClick, isLoadingMatchup }: PlayerI
   };
 
   return (
-    <div className="py-2 border-b border-gray-100 dark:border-gray-700 last:border-b-0">
-      {/* Top row: Name, Position, Team, and Points */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-2 flex-1 min-w-0">
-          <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-            {displayName}
-          </div>
-          <span className={`text-xs font-bold px-1.5 py-0.5 rounded ${getPositionColors(position)}`}>
-            {position}
-          </span>
-          <span className="text-xs text-gray-500 dark:text-gray-400 font-mono">
-            {team}
-          </span>
-        </div>
-        <div className="text-right">
-          <span className="text-lg font-bold text-gray-900 dark:text-gray-100">
-            {points}
-          </span>
-          <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">
-            pts
-          </span>
-        </div>
+    <div className="py-1.5 border-b border-gray-100 dark:border-gray-700 last:border-b-0 flex items-center gap-2">
+      {/* Overall Rank - Far Left */}
+      <div className="flex items-center justify-center w-6 flex-shrink-0 self-stretch">
+        <span className="text-xs font-medium text-gray-500 dark:text-gray-400">{overallRank}</span>
       </div>
 
-      {/* Bottom row: Stats and FFU Team Logos */}
-      <div className="flex items-center justify-between mt-1">
-        <div className="flex-1">
+      {/* Player Content */}
+      <div className="flex-1 min-w-0">
+        {/* Top row: Name, Position, Team, and Points */}
+        <div className="flex items-baseline justify-between">
+          <div className="flex items-baseline gap-2 flex-1 min-w-0">
+            <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+              {displayName}
+            </div>
+            <span className={`text-xs font-bold px-1.5 py-0.5 rounded leading-none ${getPositionColors(position)}`}>
+              {position} {positionRank}
+            </span>
+            <span className="text-xs text-gray-500 dark:text-gray-400 font-mono">
+              {team}
+            </span>
+          </div>
+          <div className="text-right flex-shrink-0 ml-2">
+            <span className="text-sm font-bold text-gray-900 dark:text-gray-100">
+              {points}
+            </span>
+          </div>
+        </div>
+
+        {/* Bottom row: Stats and FFU Team Logos */}
+        <div className="flex items-center justify-between mt-1">
+          <div className="flex-1">
           {getStatsDisplay()}
         </div>
 
@@ -146,6 +152,7 @@ const PlayerItem = ({ player, position, onTeamClick, isLoadingMatchup }: PlayerI
             ))}
           </div>
         )}
+        </div>
       </div>
     </div>
   );
@@ -333,13 +340,13 @@ export const PlayerTickerSidebar = () => {
     setRosterModal(prev => ({ ...prev, isOpen: false }));
   };
 
-  // Combine all players into one array - top performers across all positions
-  const allPlayers: (NFLPlayerStats & { positionLabel: string })[] = nflStats ? [
-    ...nflStats.quarterbacks.map(p => ({ ...p, positionLabel: 'QB' })),
-    ...nflStats.runningBacks.map(p => ({ ...p, positionLabel: 'RB' })),
-    ...nflStats.wideReceivers.map(p => ({ ...p, positionLabel: 'WR' })),
-    ...nflStats.tightEnds.map(p => ({ ...p, positionLabel: 'TE' })),
-    ...nflStats.defenses.map(p => ({ ...p, positionLabel: 'DEF' }))
+  // Combine players by position with limits and positional ranks
+  const allPlayers: (NFLPlayerStats & { positionLabel: string; positionRank: number })[] = nflStats ? [
+    ...nflStats.quarterbacks.slice(0, 12).map((p, i) => ({ ...p, positionLabel: 'QB', positionRank: i + 1 })),
+    ...nflStats.runningBacks.slice(0, 24).map((p, i) => ({ ...p, positionLabel: 'RB', positionRank: i + 1 })),
+    ...nflStats.wideReceivers.slice(0, 24).map((p, i) => ({ ...p, positionLabel: 'WR', positionRank: i + 1 })),
+    ...nflStats.tightEnds.slice(0, 12).map((p, i) => ({ ...p, positionLabel: 'TE', positionRank: i + 1 })),
+    ...nflStats.defenses.slice(0, 12).map((p, i) => ({ ...p, positionLabel: 'DEF', positionRank: i + 1 }))
   ].sort((a, b) => (b.pts_half_ppr || 0) - (a.pts_half_ppr || 0)) : [];
 
   useEffect(() => {
@@ -401,23 +408,25 @@ export const PlayerTickerSidebar = () => {
 
   return (
     <div
-      className="card h-[calc(100vh-12rem)] overflow-hidden flex flex-col"
+      className="card h-[calc(100vh-12rem)] overflow-hidden flex flex-col p-4"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="mb-6">
+      <div className="mb-4">
         <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
           Weekly Leaders
         </h3>
       </div>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto scrollbar-hide">
-        <div className="space-y-1">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto scrollbar-hide -mx-2">
+        <div className="px-2">
           {allPlayers.map((player, index) => (
             <PlayerItem
               key={`${player.player_id}-${index}`}
               player={player}
               position={player.positionLabel}
+              positionRank={player.positionRank}
+              overallRank={index + 1}
               onTeamClick={openTeamMatchupModal}
               isLoadingMatchup={isLoadingMatchup}
             />
