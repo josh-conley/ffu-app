@@ -1,5 +1,6 @@
 import { Users, BarChart3, Award, TrendingUp, Crown } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { useAllStandings } from '../hooks/useLeagues';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { ActiveWeekMatchups } from '../components/Overview/ActiveWeekMatchups';
@@ -13,6 +14,17 @@ import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 export const Overview = () => {
   const { data: standings, isLoading, error } = useAllStandings();
   const { openTeamProfile } = useTeamProfileModal();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // When scrolled past the header (roughly 128px), move sidebars to top
+      setScrolled(window.scrollY > 128);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const colorMap = {
     PREMIER: {
@@ -80,17 +92,26 @@ export const Overview = () => {
   const leagueChampions = getLeagueChampions();
 
   return (
-    <div className="relative -mx-4 sm:-mx-6 lg:-mx-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative">
-          {/* Left Sidebar - UPR Rankings */}
-          <div className="absolute top-0 right-full mr-8 w-80 hidden xl:block">
-            <div className="sticky top-8">
-              <ActiveWeekUPR />
-            </div>
-          </div>
+    <div className="relative">
+      {/* Left Sidebar - UPR Rankings - Fixed positioning */}
+      <div
+        className="fixed left-8 w-80 hidden 2xl:block z-10 transition-all duration-300"
+        style={{ top: scrolled ? '1rem' : '8rem' }}
+      >
+        <ActiveWeekUPR />
+      </div>
 
-          {/* Main Content */}
+      {/* Right Sidebar - Weekly Leaders - Fixed positioning */}
+      <div
+        className="fixed right-8 w-80 hidden 2xl:block z-10 transition-all duration-300"
+        style={{ top: scrolled ? '1rem' : '8rem' }}
+      >
+        <PlayerTickerSidebar />
+      </div>
+
+      {/* Main Content */}
+      <div className="relative -mx-4 sm:-mx-6 lg:-mx-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-8">
         <div className="welcome-card-wrap ">
           <div className="welcome-card ">
@@ -135,7 +156,7 @@ export const Overview = () => {
         <ActiveWeekMatchups />
 
         {/* Temporary UPR Test - should show in main content */}
-        <div className="xl:hidden">
+        <div className="2xl:hidden">
           <ActiveWeekUPR />
         </div>
 
@@ -195,13 +216,6 @@ export const Overview = () => {
             </div>
           </div>
         )}
-      </div>
-
-          {/* Right Sidebar - Weekly Leaders */}
-          <div className="absolute top-0 left-full ml-8 w-80 hidden xl:block">
-            <div className="sticky top-8">
-              <PlayerTickerSidebar />
-            </div>
           </div>
         </div>
       </div>

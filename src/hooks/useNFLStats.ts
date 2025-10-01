@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react';
 import { nflStatsService } from '../services/nfl-stats.service';
-import { getCurrentNFLWeek } from '../utils/nfl-schedule';
+import { getCurrentNFLWeek, isNFLWeekComplete } from '../utils/nfl-schedule';
 import type { NFLWeeklyLeaders, UseNFLStatsReturn } from '../types/nfl-stats';
 
 export const useNFLStats = (season: string = '2025'): UseNFLStatsReturn => {
   const [data, setData] = useState<NFLWeeklyLeaders | null>(null);
+  const [week, setWeek] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string>();
 
   useEffect(() => {
     const fetchNFLStats = async () => {
       const currentWeek = getCurrentNFLWeek();
-      
+
       if (!currentWeek) {
         setIsLoading(false);
         setError('No active NFL week');
@@ -21,10 +22,16 @@ export const useNFLStats = (season: string = '2025'): UseNFLStatsReturn => {
       try {
         setIsLoading(true);
         setError(undefined);
-        
-        let weeklyLeaders = await nflStatsService.getWeeklyLeaders(season, currentWeek);
-        
-        // If current week has no meaningful data, try Week 1 (we know it has data)
+
+        // Show current week's stats if complete, otherwise show previous week
+        let targetWeek = currentWeek;
+        if (!isNFLWeekComplete(currentWeek)) {
+          targetWeek = Math.max(1, currentWeek - 1);
+        }
+
+        let weeklyLeaders = await nflStatsService.getWeeklyLeaders(season, targetWeek);
+
+        // If target week has no meaningful data, fallback to previous weeks
         const totalPlayers = [
           ...weeklyLeaders.quarterbacks,
           ...weeklyLeaders.runningBacks,
@@ -32,13 +39,30 @@ export const useNFLStats = (season: string = '2025'): UseNFLStatsReturn => {
           ...weeklyLeaders.tightEnds,
           ...weeklyLeaders.defenses
         ].length;
-        
+
         if (totalPlayers === 0) {
-          console.log(`Week ${currentWeek} has no data, trying Week 3 instead`);
-          weeklyLeaders = await nflStatsService.getWeeklyLeaders(season, 3);
+          // Try going back one week at a time until we find data
+          for (let fallbackWeek = targetWeek - 1; fallbackWeek >= 1; fallbackWeek--) {
+            console.log(`Week ${targetWeek} has no data, trying Week ${fallbackWeek} instead`);
+            weeklyLeaders = await nflStatsService.getWeeklyLeaders(season, fallbackWeek);
+
+            const fallbackTotal = [
+              ...weeklyLeaders.quarterbacks,
+              ...weeklyLeaders.runningBacks,
+              ...weeklyLeaders.wideReceivers,
+              ...weeklyLeaders.tightEnds,
+              ...weeklyLeaders.defenses
+            ].length;
+
+            if (fallbackTotal > 0) {
+              targetWeek = fallbackWeek;
+              break;
+            }
+          }
         }
-        
+
         setData(weeklyLeaders);
+        setWeek(targetWeek);
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : 'Failed to fetch NFL stats';
         setError(errorMessage);
@@ -51,5 +75,5 @@ export const useNFLStats = (season: string = '2025'): UseNFLStatsReturn => {
     fetchNFLStats();
   }, [season]);
 
-  return { data, isLoading, error };
+  return { data, week, isLoading, error };
 };

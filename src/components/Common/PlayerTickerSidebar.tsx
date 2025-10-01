@@ -159,9 +159,11 @@ const PlayerItem = ({ player, position, positionRank, overallRank, onTeamClick, 
 };
 
 export const PlayerTickerSidebar = () => {
-  const { data: nflStats, isLoading, error } = useNFLStats();
+  const { data: nflStats, week: statsWeek, isLoading, error } = useNFLStats();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [selectedPosition, setSelectedPosition] = useState<string>('ALL');
+  const [selectedTeamMember, setSelectedTeamMember] = useState<string>('ALL');
   const [rosterModal, setRosterModal] = useState<{
     isOpen: boolean;
     leagueId: string;
@@ -341,13 +343,27 @@ export const PlayerTickerSidebar = () => {
   };
 
   // Combine players by position with limits and positional ranks
-  const allPlayers: (NFLPlayerStats & { positionLabel: string; positionRank: number })[] = nflStats ? [
+  const allPlayersUnfiltered: (NFLPlayerStats & { positionLabel: string; positionRank: number })[] = nflStats ? [
     ...nflStats.quarterbacks.slice(0, 12).map((p, i) => ({ ...p, positionLabel: 'QB', positionRank: i + 1 })),
     ...nflStats.runningBacks.slice(0, 24).map((p, i) => ({ ...p, positionLabel: 'RB', positionRank: i + 1 })),
     ...nflStats.wideReceivers.slice(0, 24).map((p, i) => ({ ...p, positionLabel: 'WR', positionRank: i + 1 })),
     ...nflStats.tightEnds.slice(0, 12).map((p, i) => ({ ...p, positionLabel: 'TE', positionRank: i + 1 })),
     ...nflStats.defenses.slice(0, 12).map((p, i) => ({ ...p, positionLabel: 'DEF', positionRank: i + 1 }))
   ].sort((a, b) => (b.pts_half_ppr || 0) - (a.pts_half_ppr || 0)) : [];
+
+  // Get unique team members who started players with full names
+  const teamMembers = Array.from(new Map(
+    allPlayersUnfiltered.flatMap(p =>
+      (p as any).ffuStarters?.map((s: any) => [s.userId, { teamName: s.teamName, abbreviation: s.abbreviation }]) || []
+    )
+  ).values()).sort((a, b) => a.teamName.localeCompare(b.teamName));
+
+  // Apply filters
+  const allPlayers = allPlayersUnfiltered.filter(player => {
+    const positionMatch = selectedPosition === 'ALL' || player.positionLabel === selectedPosition;
+    const teamMatch = selectedTeamMember === 'ALL' || (player as any).ffuStarters?.some((s: any) => s.teamName === selectedTeamMember);
+    return positionMatch && teamMatch;
+  });
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
@@ -391,7 +407,7 @@ export const PlayerTickerSidebar = () => {
     );
   }
 
-  if (error || !nflStats || allPlayers.length === 0) {
+  if (error || !nflStats || allPlayersUnfiltered.length === 0) {
     return (
       <div className="card">
         <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-6">
@@ -412,37 +428,90 @@ export const PlayerTickerSidebar = () => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="mb-4">
+      <div className="mb-3">
         <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-          Weekly Leaders
+          {statsWeek ? `Week ${statsWeek} Leaders` : 'Weekly Leaders'}
         </h3>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          Top 12 QB/TE/DEF • Top 24 RB/WR
+        </p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 italic mb-2">
+          DEF scoring not accurate due to data provider limitations
+        </p>
+
+        {/* Compact Filters */}
+        <div className="flex gap-2">
+          <select
+            value={selectedPosition}
+            onChange={(e) => setSelectedPosition(e.target.value)}
+            className="flex-1 text-xs py-1 px-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-ffu-red"
+          >
+            <option value="ALL">All Positions</option>
+            <option value="QB">QB</option>
+            <option value="RB">RB</option>
+            <option value="WR">WR</option>
+            <option value="TE">TE</option>
+            <option value="DEF">DEF</option>
+          </select>
+
+          <select
+            value={selectedTeamMember}
+            onChange={(e) => setSelectedTeamMember(e.target.value)}
+            className="flex-1 text-xs py-1 px-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-ffu-red"
+          >
+            <option value="ALL">All Teams</option>
+            {teamMembers.map(member => (
+              <option key={member.teamName} value={member.teamName}>{member.teamName}</option>
+            ))}
+          </select>
+        </div>
       </div>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto scrollbar-hide -mx-2">
-        <div className="px-2">
-          {allPlayers.map((player, index) => (
-            <PlayerItem
-              key={`${player.player_id}-${index}`}
-              player={player}
-              position={player.positionLabel}
-              positionRank={player.positionRank}
-              overallRank={index + 1}
-              onTeamClick={openTeamMatchupModal}
-              isLoadingMatchup={isLoadingMatchup}
-            />
-          ))}
-          <div className="h-32"></div>
+      <div ref={scrollRef} className="flex-1 overflow-y-auto scrollbar-thin -mx-2">
+        <div className="px-2 pr-1">
+          {allPlayers.length === 0 ? (
+            <div className="text-center py-8">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                No players match the selected filters
+              </p>
+            </div>
+          ) : (
+            <>
+              {allPlayers.map((player, index) => (
+                <PlayerItem
+                  key={`${player.player_id}-${index}`}
+                  player={player}
+                  position={player.positionLabel}
+                  positionRank={player.positionRank}
+                  overallRank={index + 1}
+                  onTeamClick={openTeamMatchupModal}
+                  isLoadingMatchup={isLoadingMatchup}
+                />
+              ))}
+              <div className="h-32"></div>
+            </>
+          )}
         </div>
       </div>
 
       <style dangerouslySetInnerHTML={{
         __html: `
-          .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+          .scrollbar-thin {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
           }
-          .scrollbar-hide::-webkit-scrollbar {
-            display: none;
+          .scrollbar-thin::-webkit-scrollbar {
+            width: 6px;
+          }
+          .scrollbar-thin::-webkit-scrollbar-track {
+            background: transparent;
+          }
+          .scrollbar-thin::-webkit-scrollbar-thumb {
+            background-color: rgba(156, 163, 175, 0.3);
+            border-radius: 3px;
+          }
+          .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(156, 163, 175, 0.5);
           }
         `
       }} />

@@ -80,6 +80,7 @@ export interface NFLWeeklyLeaders {
 
 export interface UseNFLStatsReturn {
   data: NFLWeeklyLeaders | null;
+  week: number | null;
   isLoading: boolean;
   error?: string;
 }

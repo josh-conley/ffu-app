@@ -208,27 +208,27 @@ export class NFLStatsService {
     const qbs = playersWithPoints
       .filter(player => player.player?.position === 'QB')
       .sort((a, b) => (b.pts_half_ppr || 0) - (a.pts_half_ppr || 0))
-      .slice(0, 10);
+      .slice(0, 12);
 
     const rbs = playersWithPoints
       .filter(player => player.player?.position === 'RB')
       .sort((a, b) => (b.pts_half_ppr || 0) - (a.pts_half_ppr || 0))
-      .slice(0, 20);
+      .slice(0, 24);
 
     const wrs = playersWithPoints
       .filter(player => player.player?.position === 'WR')
       .sort((a, b) => (b.pts_half_ppr || 0) - (a.pts_half_ppr || 0))
-      .slice(0, 20);
+      .slice(0, 24);
 
     const tes = playersWithPoints
       .filter(player => player.player?.position === 'TE')
       .sort((a, b) => (b.pts_half_ppr || 0) - (a.pts_half_ppr || 0))
-      .slice(0, 10);
+      .slice(0, 12);
 
     const defs = playersWithPoints
       .filter(player => player.player?.position === 'DEF')
       .sort((a, b) => (b.pts_half_ppr || 0) - (a.pts_half_ppr || 0))
-      .slice(0, 10);
+      .slice(0, 12);
 
     console.log('Top QBs:', qbs.slice(0, 2));
     console.log('Top RBs:', rbs.slice(0, 2));

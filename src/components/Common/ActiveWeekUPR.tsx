@@ -2,7 +2,7 @@ import { useMemo, useEffect, useRef, useState } from 'react';
 import { useAllStandings } from '../../hooks/useLeagues';
 import { LoadingSpinner } from './LoadingSpinner';
 import { TeamLogo } from './TeamLogo';
-import { getCurrentNFLWeek } from '../../utils/nfl-schedule';
+import { getCurrentNFLWeek, isNFLWeekComplete } from '../../utils/nfl-schedule';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation } from '../../config/constants';
 import { useTeamProfileModal } from '../../contexts/TeamProfileModalContext';
 import type { LeagueTier, EnhancedSeasonStandings } from '../../types';
@@ -29,15 +29,29 @@ export const ActiveWeekUPR = () => {
 
   const currentNFLWeek = getCurrentNFLWeek();
 
+  // UPR should show the current week if its games are complete (Tue/Wed), otherwise show previous week
+  const completedWeek = useMemo(() => {
+    if (!currentNFLWeek) return null;
+
+    // Check if current week's games are complete (it's Tuesday or later)
+    if (isNFLWeekComplete(currentNFLWeek)) {
+      return currentNFLWeek;
+    }
+
+    // Games not complete yet, show previous week
+    return currentNFLWeek - 1;
+  }, [currentNFLWeek]);
+
   const uprData = useMemo(() => {
     console.log('UPR DEBUG: Starting calculation', {
       currentNFLWeek,
+      completedWeek,
       allStandings: !!allStandings,
       allStandingsLength: allStandings?.length
     });
 
-    if (!currentNFLWeek || !allStandings) {
-      console.log('UPR DEBUG: Missing data', { currentNFLWeek, allStandings: !!allStandings });
+    if (!completedWeek || !allStandings) {
+      console.log('UPR DEBUG: Missing data', { completedWeek, allStandings: !!allStandings });
       return [];
     }
 
@@ -95,9 +109,9 @@ export const ActiveWeekUPR = () => {
   }, [allStandings, currentNFLWeek]);
 
   const shouldShow = useMemo(() => {
-    if (!currentNFLWeek) return false;
-    return true; // Always show for now - can add week completion check later
-  }, [currentNFLWeek]);
+    if (!completedWeek || completedWeek < 1) return false;
+    return true; // Show UPR once at least one week is completed
+  }, [completedWeek]);
 
   // Auto-scroll functionality like Weekly Leaders
   useEffect(() => {
@@ -203,12 +217,12 @@ export const ActiveWeekUPR = () => {
           </h3>
         </div>
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-          Through Week {currentNFLWeek}
+          Through Week {completedWeek}
         </p>
       </div>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto scrollbar-hide">
-        <div className="space-y-1">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto scrollbar-thin">
+        <div className="space-y-1 pr-1">
           {uprData.length === 0 ? (
             <div className="text-center py-8">
               <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -262,6 +276,28 @@ export const ActiveWeekUPR = () => {
           )}
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          .scrollbar-thin {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
+          }
+          .scrollbar-thin::-webkit-scrollbar {
+            width: 6px;
+          }
+          .scrollbar-thin::-webkit-scrollbar-track {
+            background: transparent;
+          }
+          .scrollbar-thin::-webkit-scrollbar-thumb {
+            background-color: rgba(156, 163, 175, 0.3);
+            border-radius: 3px;
+          }
+          .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(156, 163, 175, 0.5);
+          }
+        `
+      }} />
     </div>
   );
 };
