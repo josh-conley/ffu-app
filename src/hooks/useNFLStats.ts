@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { nflStatsService } from '../services/nfl-stats.service';
-import { getCurrentNFLWeek, isNFLWeekComplete } from '../utils/nfl-schedule';
+import { getCurrentNFLWeek, getNFLWeekInfo } from '../utils/nfl-schedule';
 import type { NFLWeeklyLeaders, UseNFLStatsReturn } from '../types/nfl-stats';
 
 export const useNFLStats = (season: string = '2025'): UseNFLStatsReturn => {
@@ -23,10 +23,19 @@ export const useNFLStats = (season: string = '2025'): UseNFLStatsReturn => {
         setIsLoading(true);
         setError(undefined);
 
-        // Show current week's stats if complete, otherwise show previous week
+        // Show current week's stats starting Thursday (when TNF begins)
+        // If before Thursday, show previous week's stats
         let targetWeek = currentWeek;
-        if (!isNFLWeekComplete(currentWeek)) {
-          targetWeek = Math.max(1, currentWeek - 1);
+        const weekInfo = getNFLWeekInfo(currentWeek);
+        const now = new Date();
+
+        if (weekInfo) {
+          const startDate = new Date(weekInfo.startDate); // Thursday
+          if (now < startDate) {
+            // Before Thursday, show previous week
+            targetWeek = Math.max(1, currentWeek - 1);
+          }
+          // On or after Thursday, show current week (even if games haven't finished)
         }
 
         let weeklyLeaders = await nflStatsService.getWeeklyLeaders(season, targetWeek);
