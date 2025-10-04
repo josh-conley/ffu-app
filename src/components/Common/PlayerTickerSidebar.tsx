@@ -356,7 +356,11 @@ export const PlayerTickerSidebar = () => {
     allPlayersUnfiltered.flatMap(p =>
       (p as any).ffuStarters?.map((s: any) => [s.userId, { teamName: s.teamName, abbreviation: s.abbreviation }]) || []
     )
-  ).values()).sort((a, b) => a.teamName.localeCompare(b.teamName));
+  ).values()).sort((a, b) => {
+    const memberA = a as { teamName: string; abbreviation: string };
+    const memberB = b as { teamName: string; abbreviation: string };
+    return memberA.teamName.localeCompare(memberB.teamName);
+  });
 
   // Apply filters
   const allPlayers = allPlayersUnfiltered.filter(player => {
@@ -460,9 +464,12 @@ export const PlayerTickerSidebar = () => {
             className="flex-1 text-xs py-1 px-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-ffu-red"
           >
             <option value="ALL">All Teams</option>
-            {teamMembers.map(member => (
-              <option key={member.teamName} value={member.teamName}>{member.teamName}</option>
-            ))}
+            {teamMembers.map(member => {
+              const typedMember = member as { teamName: string; abbreviation: string };
+              return (
+                <option key={typedMember.teamName} value={typedMember.teamName}>{typedMember.teamName}</option>
+              );
+            })}
           </select>
         </div>
       </div>
