@@ -535,9 +535,12 @@ export const Matchups = () => {
 
           <div className="space-y-6 sm:space-y-8">
             {allWeeksData.map((weekData) => {
+              // For 2025 season, don't show playoff weeks (15-17) as they're TBD
+              if (selectedYear === '2025' && weekData.week >= 15) return null;
+
               const filteredMatchups = filterMatchupsByTeam(weekData.matchups || []);
               if (filteredMatchups.length === 0) return null; // Hide weeks with no matching games
-              
+
               return (
               <div key={weekData.week}>
                 <h3 className="text-sm sm:text-base font-semibold text-gray-800 dark:text-gray-200 mb-4 border-b border-gray-200 dark:border-gray-600 pb-2">
