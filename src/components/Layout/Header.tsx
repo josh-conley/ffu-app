@@ -26,7 +26,7 @@ export const Header = () => {
             <Link to="/" className="flex items-center space-x-4 group">
               <div className="relative">
                 <img
-                  src="/league-logos/NationalLogo.png"
+                  src={`${import.meta.env.BASE_URL}league-logos/NationalLogo.png`}
                   alt="FFU Logo"
                   className="h-12 w-12 sm:h-16 sm:w-16 object-contain transition-all duration-300"
                 />

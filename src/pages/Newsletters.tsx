@@ -21,7 +21,7 @@ export const Newsletters = () => {
     const loadNewsletters = async () => {
       try {
         // Fetch all newsletter metadata files
-        const response = await fetch('/newsletters/index.json');
+        const response = await fetch(`${import.meta.env.BASE_URL}newsletters/index.json`);
         if (response.ok) {
           const data = await response.json();
           setNewsletters(data);
