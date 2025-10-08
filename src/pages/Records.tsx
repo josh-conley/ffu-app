@@ -15,8 +15,7 @@ export const Records = () => {
   const [selectedLeague, setSelectedLeague] = useState<LeagueTier | 'ALL'>('ALL');
   const [selectedYear, setSelectedYear] = useState<string>('ALL');
   const [, setImageError] = useState(false);
-  const basePath = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
-  const dakUrl = `${basePath}/dak-head.png`;
+  const dakUrl = `${import.meta.env.BASE_URL}dak-head.png`;
   const { openTeamProfile } = useTeamProfileModal();
 
   const { data: records, isLoading, error } = useAllTimeRecords(

@@ -5,8 +5,7 @@ export const SecretDak = () => {
   // Extract video ID from YouTube URL
   const videoUrl = 'https://www.youtube.com/watch?v=GpJW1vv-0y4';
   const videoId = videoUrl.split('v=')[1]?.split('&')[0] || 'GpJW1vv-0y4';
-  const basePath = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
-  const dakUrl = `${basePath}/dak-head.png`;
+  const dakUrl = `${import.meta.env.BASE_URL}dak-head.png`;
 
   return (
     <div className="min-h-screen p-8">

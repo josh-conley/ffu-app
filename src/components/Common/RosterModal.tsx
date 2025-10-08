@@ -43,7 +43,7 @@ export const RosterModal = ({ isOpen, onClose, leagueId, winnerUserId, loserUser
   const [error, setError] = useState<string | null>(null);
 
   const sleeperService = useMemo(() => new SleeperService(), []);
-  const baseUrl = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
+  const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   // Check if matchup is complete (both teams have points > 0)
   const isMatchupComplete = useMemo(() => {

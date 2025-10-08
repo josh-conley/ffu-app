@@ -23,7 +23,7 @@ export class HistoricalTeamResolver {
   private historicalTeamData: HistoricalTeamData | null = null;
   private playerMappings: Map<string, PlayerTeamMapping> = new Map();
   private dataLoaded = false;
-  private baseUrl = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
+  private baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   // Sleeper era years (when historical team data is needed)
   private readonly SLEEPER_ERA_START = 2021;

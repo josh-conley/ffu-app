@@ -16,7 +16,7 @@ export interface HistoricalLeagueData {
 }
 
 export class DataService {
-  private baseUrl = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
+  private baseUrl = import.meta.env.BASE_URL.replace(/\/$/, ''); // Remove trailing slash
 
   /**
    * Load league data from static JSON file (works for all years - no live API calls)

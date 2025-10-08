@@ -21,7 +21,7 @@ export const Draft: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [, setError] = useState<string | undefined>();
 
-  const baseUrl = import.meta.env.MODE === 'production' ? '/ffu-app' : '';
+  const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
   
   // Get initial values from URL params
   const [selectedLeague, setSelectedLeague] = useState<string>(
