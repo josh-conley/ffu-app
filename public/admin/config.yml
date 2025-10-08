@@ -1,9 +1,6 @@
 backend:
-  name: github
-  repo: josh-conley/ffu-app
+  name: git-gateway
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
 
 media_folder: "public/newsletters"
 public_folder: "/newsletters"
