@@ -13,18 +13,18 @@ export default defineConfig(({ command }) => ({
       manifest: {
         name: 'Fantasy Football Union',
         short_name: 'FFU',
-        start_url: '/ffu-app/',
+        start_url: '/',
         display: 'standalone',
         background_color: 'rgba(20, 20, 22, 1)',
         theme_color: 'rgba(20, 20, 22, 1)',
         icons: [
           {
-            src: '/ffu-app/league-logos/NationalLogo.png',
+            src: '/league-logos/NationalLogo.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: '/ffu-app/league-logos/NationalLogo.png',
+            src: '/league-logos/NationalLogo.png',
             sizes: '512x512',
             type: 'image/png'
           }
@@ -32,5 +32,5 @@ export default defineConfig(({ command }) => ({
       }
     })
   ],
-  base: command === 'build' ? '/ffu-app/' : '/',
+  base: '/',
 }))
