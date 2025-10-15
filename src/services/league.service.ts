@@ -516,16 +516,21 @@ export class LeagueService {
       }
     }
 
+    // Filter out 2025 data for single game, season, and special game records
+    const gameRecordsExcluding2025 = allGameRecords.filter(record => record.year !== '2025');
+    const seasonRecordsExcluding2025 = allSeasonRecords.filter(record => record.year !== '2025');
+    const matchupsExcluding2025 = allMatchups.filter(matchup => matchup.year !== '2025');
+
     // Calculate records
     const records: AllTimeRecords = {
-      highestSingleGame: this.findHighestScore(allGameRecords),
-      lowestSingleGame: this.findLowestScore(allGameRecords),
-      mostPointsSeason: this.findMostPointsSeason(allSeasonRecords),
-      leastPointsSeason: this.findLeastPointsSeason(allSeasonRecords),
-      mostPointsInLoss: this.findMostPointsInLoss(allGameRecords),
-      fewestPointsInWin: this.findFewestPointsInWin(allGameRecords),
-      closestGame: this.findClosestGame(allMatchups),
-      biggestBlowout: this.findBiggestBlowout(allMatchups),
+      highestSingleGame: this.findHighestScore(gameRecordsExcluding2025),
+      lowestSingleGame: this.findLowestScore(gameRecordsExcluding2025),
+      mostPointsSeason: this.findMostPointsSeason(seasonRecordsExcluding2025),
+      leastPointsSeason: this.findLeastPointsSeason(seasonRecordsExcluding2025),
+      mostPointsInLoss: this.findMostPointsInLoss(gameRecordsExcluding2025),
+      fewestPointsInWin: this.findFewestPointsInWin(gameRecordsExcluding2025),
+      closestGame: this.findClosestGame(matchupsExcluding2025),
+      biggestBlowout: this.findBiggestBlowout(matchupsExcluding2025),
       topScores: this.findTopScores(allGameRecords, 100),
       topClosestMatchups: this.findTopClosestMatchups(allMatchups, 25)
     };
