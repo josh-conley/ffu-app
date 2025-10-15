@@ -597,7 +597,7 @@ export const UPRHorserace = ({ league, year, onLeagueChange, onYearChange }: UPR
                     </div>
                     {weekData && (
                       <div className="text-xs text-gray-500 dark:text-gray-400">
-                        {weekData.wins}-{weekData.losses}
+                        {weekData.wins}-{weekData.losses}{weekData.ties ? `-${weekData.ties}` : ''}
                       </div>
                     )}
                   </div>

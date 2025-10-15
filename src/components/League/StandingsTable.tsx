@@ -103,7 +103,7 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek }: Stan
                 {getDisplayTeamName(rankedStandings[0].userId, rankedStandings[0].userInfo.teamName, year)}
               </div>
               <div className={`text-lg font-bold ${leagueColors.text}`}>
-                {rankedStandings[0].wins}-{rankedStandings[0].losses} • {rankedStandings[0].pointsFor?.toFixed(2)} pts
+                {rankedStandings[0].wins}-{rankedStandings[0].losses}{rankedStandings[0].ties ? `-${rankedStandings[0].ties}` : ''} • {rankedStandings[0].pointsFor?.toFixed(2)} pts
               </div>
             </div>
           </div>
@@ -168,7 +168,7 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek }: Stan
                 </td>
                 <td className="text-center">
                   <span className="font-black text-gray-900 dark:text-gray-100 font-mono">
-                    {standing.wins}-{standing.losses}
+                    {standing.wins}-{standing.losses}{standing.ties ? `-${standing.ties}` : ''}
                   </span>
                 </td>
                 <td className="text-center">

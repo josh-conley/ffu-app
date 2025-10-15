@@ -9,6 +9,7 @@ interface PlayerOption {
   };
   totalWins: number;
   totalLosses: number;
+  totalTies: number;
   winPercentage: number;
   championships: number;
   isSelected?: boolean;
@@ -63,7 +64,7 @@ export function PlayerSelector({
               <option value="">{placeholder}</option>
               {players.map((player) => (
                 <option key={player.sleeperId} value={player.sleeperId}>
-                  {player.userInfo.teamName} ({player.userInfo.abbreviation}) - {player.totalWins}-{player.totalLosses}
+                  {player.userInfo.teamName} ({player.userInfo.abbreviation}) - {player.totalWins}-{player.totalLosses}{player.totalTies > 0 ? `-${player.totalTies}` : ''}
                 </option>
               ))}
             </select>
@@ -97,7 +98,7 @@ export function PlayerSelector({
                   .filter(p => p.sleeperId !== selectedPlayer2Id)
                   .map((player) => (
                     <option key={player.sleeperId} value={player.sleeperId}>
-                      {player.userInfo.teamName} ({player.userInfo.abbreviation}) - {player.totalWins}-{player.totalLosses}
+                      {player.userInfo.teamName} ({player.userInfo.abbreviation}) - {player.totalWins}-{player.totalLosses}{player.totalTies > 0 ? `-${player.totalTies}` : ''}
                     </option>
                   ))}
               </select>
@@ -123,7 +124,7 @@ export function PlayerSelector({
                   .filter(p => p.sleeperId !== selectedPlayerId)
                   .map((player) => (
                     <option key={player.sleeperId} value={player.sleeperId}>
-                      {player.userInfo.teamName} ({player.userInfo.abbreviation}) - {player.totalWins}-{player.totalLosses}
+                      {player.userInfo.teamName} ({player.userInfo.abbreviation}) - {player.totalWins}-{player.totalLosses}{player.totalTies > 0 ? `-${player.totalTies}` : ''}
                     </option>
                   ))}
               </select>

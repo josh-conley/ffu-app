@@ -203,7 +203,7 @@ export const Overview = () => {
                               {getDisplayTeamName(champion.userId, champion.userInfo.teamName, champion.year)}
                             </div>
                             <div className="text-xs text-gray-500 dark:text-gray-400">
-                              {champion.wins}-{champion.losses} • {champion.pointsFor?.toFixed(1)} pts
+                              {champion.wins}-{champion.losses}{champion.ties ? `-${champion.ties}` : ''} • {champion.pointsFor?.toFixed(1)} pts
                             </div>
                           </div>
                         </div>

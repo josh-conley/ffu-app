@@ -229,7 +229,7 @@ export const Standings = () => {
                               )}
                             </div>
                             <div className="text-xs text-gray-500 dark:text-gray-400">
-                              {standing.wins}-{standing.losses}
+                              {standing.wins}-{standing.losses}{standing.ties ? `-${standing.ties}` : ''}
                               {!isActiveSeason && standing.rank === 1 && (
                                 <span className={`ml-1 text-xs font-medium ${colors.text}`}>Champion</span>
                               )}

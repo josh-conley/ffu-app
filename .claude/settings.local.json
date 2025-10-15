@@ -38,7 +38,8 @@
       "WebFetch(domain:docs.sleeper.com)",
       "WebFetch(domain:sleeper.com)",
       "WebSearch",
-      "WebFetch(domain:pagescms.org)"
+      "WebFetch(domain:pagescms.org)",
+      "Bash(cat:*)"
     ],
     "deny": []
   }

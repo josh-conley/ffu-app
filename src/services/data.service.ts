@@ -101,6 +101,7 @@ export class DataService {
         const unionPowerRating = calculateUPR({
           wins: regularSeasonRecord.wins,
           losses: regularSeasonRecord.losses,
+          ties: regularSeasonRecord.ties,
           averageScore: uprGameData.averageScore,
           highGame: uprGameData.highGame,
           lowGame: uprGameData.lowGame
@@ -115,12 +116,13 @@ export class DataService {
       } else {
         // Fallback: use standing data if no matchup data available
         // Calculate average from total points and games played
-        const totalGames = (standing.wins || 0) + (standing.losses || 0);
+        const totalGames = (standing.wins || 0) + (standing.losses || 0) + (standing.ties || 0);
         const averageScore = totalGames > 0 ? (standing.pointsFor || 0) / totalGames : 0;
         
         const unionPowerRating = calculateUPR({
           wins: standing.wins || 0,
           losses: standing.losses || 0,
+          ties: standing.ties || 0,
           averageScore,
           highGame: standing.highGame || 0,
           lowGame: standing.lowGame || 0

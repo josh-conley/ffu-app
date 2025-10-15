@@ -34,6 +34,7 @@ interface AllTimePlayerStats {
   userInfo: UserInfo;
   totalWins: number;
   totalLosses: number;
+  totalTies: number;
   totalPointsFor: number;
   totalPointsAgainst: number;
   firstPlaceFinishes: number;
@@ -263,6 +264,7 @@ export const AllTimeStats = () => {
             userInfo: standing.userInfo,
             totalWins: 0,
             totalLosses: 0,
+            totalTies: 0,
             totalPointsFor: 0,
             totalPointsAgainst: 0,
             firstPlaceFinishes: 0,
@@ -292,6 +294,7 @@ export const AllTimeStats = () => {
         // Accumulate totals
         player.totalWins += standing.wins;
         player.totalLosses += standing.losses;
+        player.totalTies += standing.ties || 0;
         player.totalPointsFor += standing.pointsFor || 0;
         player.totalPointsAgainst += standing.pointsAgainst || 0;
         player.seasonsPlayed += 1;
@@ -359,8 +362,8 @@ export const AllTimeStats = () => {
       player.seasonHistory.sort((a, b) => b.year.localeCompare(a.year));
 
       // Calculate win percentage
-      const totalGames = player.totalWins + player.totalLosses;
-      player.winPercentage = totalGames > 0 ? (player.totalWins / totalGames) * 100 : 0;
+      const totalGames = player.totalWins + player.totalLosses + player.totalTies;
+      player.winPercentage = totalGames > 0 ? ((player.totalWins + player.totalTies * 0.5) / totalGames) * 100 : 0;
 
       // Calculate average points per game
       player.averagePointsPerGame = totalGames > 0 ? player.totalPointsFor / totalGames : 0;
@@ -427,7 +430,7 @@ export const AllTimeStats = () => {
 
     const seasonEntries = filtered.flatMap(leagueData =>
       leagueData.standings.map(standing => {
-        const totalGames = standing.wins + standing.losses;
+        const totalGames = standing.wins + standing.losses + (standing.ties || 0);
         const avgScore = totalGames > 0 ? (standing.pointsFor || 0) / totalGames : 0;
 
         return {
@@ -437,6 +440,7 @@ export const AllTimeStats = () => {
           league: leagueData.league as LeagueTier,
           wins: standing.wins,
           losses: standing.losses,
+          ties: standing.ties,
           pointsFor: standing.pointsFor || 0,
           pointsAgainst: standing.pointsAgainst || 0,
           rank: standing.rank,
@@ -885,7 +889,7 @@ export const AllTimeStats = () => {
                         </div>
                       </td>
                       <td className="text-center align-middle">
-                        <span className="text-sm font-medium font-mono">{player.totalWins}-{player.totalLosses}</span>
+                        <span className="text-sm font-medium font-mono">{player.totalWins}-{player.totalLosses}{player.totalTies > 0 ? `-${player.totalTies}` : ''}</span>
                       </td>
                       <td className="text-center align-middle">
                         <span className="text-sm font-medium font-mono">{player.winPercentage.toFixed(1)}%</span>
@@ -1223,7 +1227,7 @@ export const AllTimeStats = () => {
                           <LeagueBadge league={season.league} />
                         </td>
                         <td className="text-center align-middle">
-                          <span className="text-sm font-medium font-mono">{season.wins}-{season.losses}</span>
+                          <span className="text-sm font-medium font-mono">{season.wins}-{season.losses}{season.ties ? `-${season.ties}` : ''}</span>
                         </td>
                         <td className="text-center align-middle">
                           <span className="text-sm font-medium font-mono">{season.pointsFor.toFixed(2)}</span>

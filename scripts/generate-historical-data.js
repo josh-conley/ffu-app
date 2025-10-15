@@ -293,6 +293,7 @@ class HistoricalDataGenerator {
         userId: roster.owner_id,
         wins: roster.settings?.wins || 0,
         losses: roster.settings?.losses || 0,
+        ties: roster.settings?.ties || 0,
         pointsFor: (roster.settings?.fpts || 0) + (roster.settings?.fpts_decimal || 0) / 100,
         pointsAgainst: (roster.settings?.fpts_against || 0) + (roster.settings?.fpts_against_decimal || 0) / 100,
         rank: 0, // Will be calculated after sorting
@@ -548,25 +549,36 @@ class HistoricalDataGenerator {
       weekMatchups.forEach(matchup => {
         // Initialize records if first time seeing these users
         if (!userRecords[matchup.winner]) {
-          userRecords[matchup.winner] = { wins: 0, losses: 0 };
+          userRecords[matchup.winner] = { wins: 0, losses: 0, ties: 0 };
         }
         if (!userRecords[matchup.loser]) {
-          userRecords[matchup.loser] = { wins: 0, losses: 0 };
+          userRecords[matchup.loser] = { wins: 0, losses: 0, ties: 0 };
         }
-        
+
         // Only update records if the matchup has actual scores (skip games with 0-0 scores)
         if (matchup.winnerScore > 0 || matchup.loserScore > 0) {
-          // Update records AFTER this game (inclusive)
-          userRecords[matchup.winner].wins++;
-          userRecords[matchup.loser].losses++;
+          // Check if it's a tie game
+          if (matchup.winnerScore === matchup.loserScore) {
+            // Tie game - both teams get a tie
+            userRecords[matchup.winner].ties++;
+            userRecords[matchup.loser].ties++;
+          } else {
+            // Normal game - update records AFTER this game (inclusive)
+            userRecords[matchup.winner].wins++;
+            userRecords[matchup.loser].losses++;
+          }
         }
-        
+
         // Add updated records to the matchup (AFTER updating for this game)
         const winnerRecord = userRecords[matchup.winner];
         const loserRecord = userRecords[matchup.loser];
-        
-        matchup.winnerRecord = `${winnerRecord.wins}-${winnerRecord.losses}`;
-        matchup.loserRecord = `${loserRecord.wins}-${loserRecord.losses}`;
+
+        matchup.winnerRecord = winnerRecord.ties > 0
+          ? `${winnerRecord.wins}-${winnerRecord.losses}-${winnerRecord.ties}`
+          : `${winnerRecord.wins}-${winnerRecord.losses}`;
+        matchup.loserRecord = loserRecord.ties > 0
+          ? `${loserRecord.wins}-${loserRecord.losses}-${loserRecord.ties}`
+          : `${loserRecord.wins}-${loserRecord.losses}`;
       });
     });
 

@@ -55,6 +55,7 @@ export interface SeasonStandings {
   ffuUserId: string; // Primary identifier
   wins: number;
   losses: number;
+  ties?: number;
   pointsFor: number;
   pointsAgainst: number;
   rank: number;
@@ -244,6 +245,7 @@ export interface RawSeasonStandings {
   ffuUserId: string; // Primary identifier
   wins: number;
   losses: number;
+  ties?: number;
   pointsFor: number;
   pointsAgainst: number;
   rank: number;
@@ -400,6 +402,7 @@ export interface SeasonRecord {
   league: LeagueTier;
   wins?: number;
   losses?: number;
+  ties?: number;
 }
 
 export interface AllTimeRecords {

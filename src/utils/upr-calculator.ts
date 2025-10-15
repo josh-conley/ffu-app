@@ -5,25 +5,26 @@ import type { WeekMatchup } from '../types';
 export interface UPRCalculationData {
   wins: number;
   losses: number;
+  ties?: number;
   averageScore: number;
   highGame: number;
   lowGame: number;
 }
 
 export const calculateUPR = (data: UPRCalculationData): number => {
-  const { wins, losses, averageScore, highGame, lowGame } = data;
-  
-  const totalGames = wins + losses;
-  const winPercentage = totalGames > 0 ? wins / totalGames : 0;
-  
+  const { wins, losses, ties = 0, averageScore, highGame, lowGame } = data;
+
+  const totalGames = wins + losses + ties;
+  const winPercentage = totalGames > 0 ? (wins + ties * 0.5) / totalGames : 0;
+
   const upr = ((averageScore * 6) + ((highGame + lowGame) * 2) + (winPercentage * 400)) / 10;
-  
+
   return Math.round(upr * 100) / 100;
 };
 
-export const calculateWinPercentage = (wins: number, losses: number): number => {
-  const totalGames = wins + losses;
-  return totalGames > 0 ? wins / totalGames : 0;
+export const calculateWinPercentage = (wins: number, losses: number, ties: number = 0): number => {
+  const totalGames = wins + losses + ties;
+  return totalGames > 0 ? (wins + ties * 0.5) / totalGames : 0;
 };
 
 export const getRegularSeasonUPRData = (
@@ -79,9 +80,10 @@ export const calculateRegularSeasonRecord = (
   userId: string,
   matchupsByWeek: Record<number, WeekMatchup[]>,
   year: string
-): { wins: number; losses: number } => {
+): { wins: number; losses: number; ties: number } => {
   let wins = 0;
   let losses = 0;
+  let ties = 0;
 
   Object.entries(matchupsByWeek).forEach(([weekStr, matchups]) => {
     const week = parseInt(weekStr);
@@ -97,23 +99,35 @@ export const calculateRegularSeasonRecord = (
 
     matchups.forEach(matchup => {
       if (matchup.winner === userId) {
-        wins++;
+        // Check if it's a tie game (same score)
+        if (matchup.winnerScore === matchup.loserScore) {
+          ties++;
+        } else {
+          wins++;
+        }
       } else if (matchup.loser === userId) {
-        losses++;
+        // Check if it's a tie game (same score)
+        if (matchup.winnerScore === matchup.loserScore) {
+          // Already counted above, don't double count
+          return;
+        } else {
+          losses++;
+        }
       }
     });
   });
 
-  return { wins, losses };
+  return { wins, losses, ties };
 };
 
 export const calculateRegularSeasonStats = (
   userId: string,
   matchupsByWeek: Record<number, WeekMatchup[]>,
   year: string
-): { wins: number; losses: number; averageScore: number; highGame: number; lowGame: number } => {
+): { wins: number; losses: number; ties: number; averageScore: number; highGame: number; lowGame: number } => {
   let wins = 0;
   let losses = 0;
+  let ties = 0;
   let highGame = 0;
   let lowGame = Number.MAX_SAFE_INTEGER;
   const userScores: number[] = [];
@@ -135,10 +149,21 @@ export const calculateRegularSeasonStats = (
 
       if (matchup.winner === userId) {
         userScore = matchup.winnerScore;
-        wins++;
+        // Check if it's a tie game (same score)
+        if (matchup.winnerScore === matchup.loserScore) {
+          ties++;
+        } else {
+          wins++;
+        }
       } else if (matchup.loser === userId) {
         userScore = matchup.loserScore;
-        losses++;
+        // Check if it's a tie game (same score)
+        if (matchup.winnerScore === matchup.loserScore) {
+          // Already counted above, don't double count
+          return;
+        } else {
+          losses++;
+        }
       }
 
       if (userScore !== null) {
@@ -149,13 +174,14 @@ export const calculateRegularSeasonStats = (
     });
   });
 
-  const averageScore = userScores.length > 0 
-    ? userScores.reduce((sum, score) => sum + score, 0) / userScores.length 
+  const averageScore = userScores.length > 0
+    ? userScores.reduce((sum, score) => sum + score, 0) / userScores.length
     : 0;
 
   return {
     wins,
     losses,
+    ties,
     averageScore,
     highGame: highGame > 0 ? highGame : 0,
     lowGame: lowGame < Number.MAX_SAFE_INTEGER ? lowGame : 0

@@ -6,6 +6,7 @@ export interface RankingTiebreakers {
   pointsAgainst: number;
   wins: number;
   losses: number;
+  ties?: number;
 }
 
 /**
@@ -61,12 +62,12 @@ export function calculateRankings(
 ): EnhancedSeasonStandings[] {
   // Sort standings with head-to-head tiebreakers for active season
   const sortedStandings = [...standings].sort((a, b) => {
-    const aTotalGames = a.wins + a.losses;
-    const bTotalGames = b.wins + b.losses;
+    const aTotalGames = a.wins + a.losses + (a.ties || 0);
+    const bTotalGames = b.wins + b.losses + (b.ties || 0);
 
-    // Calculate win percentages
-    const aWinPct = aTotalGames > 0 ? a.wins / aTotalGames : 0;
-    const bWinPct = bTotalGames > 0 ? b.wins / bTotalGames : 0;
+    // Calculate win percentages (ties count as 0.5 wins)
+    const aWinPct = aTotalGames > 0 ? (a.wins + (a.ties || 0) * 0.5) / aTotalGames : 0;
+    const bWinPct = bTotalGames > 0 ? (b.wins + (b.ties || 0) * 0.5) / bTotalGames : 0;
 
     // 1. Primary: Win percentage
     if (aWinPct !== bWinPct) {
@@ -103,11 +104,11 @@ export function calculateRankings(
     if (i > 0) {
       const prevStanding = sortedStandings[i - 1];
 
-      // Calculate win percentages for comparison
-      const currentTotalGames = currentStanding.wins + currentStanding.losses;
-      const prevTotalGames = prevStanding.wins + prevStanding.losses;
-      const currentWinPct = currentTotalGames > 0 ? currentStanding.wins / currentTotalGames : 0;
-      const prevWinPct = prevTotalGames > 0 ? prevStanding.wins / prevTotalGames : 0;
+      // Calculate win percentages for comparison (ties count as 0.5 wins)
+      const currentTotalGames = currentStanding.wins + currentStanding.losses + (currentStanding.ties || 0);
+      const prevTotalGames = prevStanding.wins + prevStanding.losses + (prevStanding.ties || 0);
+      const currentWinPct = currentTotalGames > 0 ? (currentStanding.wins + (currentStanding.ties || 0) * 0.5) / currentTotalGames : 0;
+      const prevWinPct = prevTotalGames > 0 ? (prevStanding.wins + (prevStanding.ties || 0) * 0.5) / prevTotalGames : 0;
 
       // Check if not tied with previous team
       let isNotTied = currentWinPct !== prevWinPct;
@@ -143,10 +144,10 @@ export function calculateRankings(
  * Check if two teams are tied based on standard tiebreaker criteria
  */
 export function areTeamsTied(teamA: RankingTiebreakers, teamB: RankingTiebreakers): boolean {
-  const aTotalGames = teamA.wins + teamA.losses;
-  const bTotalGames = teamB.wins + teamB.losses;
-  const aWinPct = aTotalGames > 0 ? teamA.wins / aTotalGames : 0;
-  const bWinPct = bTotalGames > 0 ? teamB.wins / bTotalGames : 0;
+  const aTotalGames = teamA.wins + teamA.losses + (teamA.ties || 0);
+  const bTotalGames = teamB.wins + teamB.losses + (teamB.ties || 0);
+  const aWinPct = aTotalGames > 0 ? (teamA.wins + (teamA.ties || 0) * 0.5) / aTotalGames : 0;
+  const bWinPct = bTotalGames > 0 ? (teamB.wins + (teamB.ties || 0) * 0.5) / bTotalGames : 0;
 
   return (
     aWinPct === bWinPct &&

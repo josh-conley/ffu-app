@@ -13,6 +13,7 @@ interface UPREntry {
   abbreviation: string;
   wins: number;
   losses: number;
+  ties?: number;
   pointsFor: number;
   pointsAgainst: number;
   highGame?: number;
@@ -92,6 +93,7 @@ export const ActiveWeekUPR = () => {
           abbreviation: standing.userInfo.abbreviation,
           wins: standing.wins,
           losses: standing.losses,
+          ties: standing.ties,
           pointsFor: standing.pointsFor,
           pointsAgainst: standing.pointsAgainst,
           highGame: standing.highGame,
@@ -199,8 +201,8 @@ export const ActiveWeekUPR = () => {
     }
   };
 
-  const calculateAverageScore = (pointsFor: number, wins: number, losses: number) => {
-    const totalGames = wins + losses;
+  const calculateAverageScore = (pointsFor: number, wins: number, losses: number, ties: number = 0) => {
+    const totalGames = wins + losses + ties;
     return totalGames > 0 ? pointsFor / totalGames : 0;
   };
 
@@ -261,7 +263,7 @@ export const ActiveWeekUPR = () => {
                     <span className={`font-medium px-1 py-0.5 rounded text-[10px] ${getLeagueColor(entry.league)}`}>
                       {entry.league.charAt(0)}
                     </span>
-                    <span>{entry.wins}-{entry.losses} • {calculateAverageScore(entry.pointsFor, entry.wins, entry.losses).toFixed(1)} avg</span>
+                    <span>{entry.wins}-{entry.losses}{entry.ties ? `-${entry.ties}` : ''} • {calculateAverageScore(entry.pointsFor, entry.wins, entry.losses, entry.ties).toFixed(1)} avg</span>
                   </div>
                 </div>
 

@@ -226,19 +226,25 @@ export const ActiveWeekMatchups = () => {
   };
 
   // Helper function to get score styling for league high scores
-  const getScoreDisplay = (score: number, league: LeagueTier, isWinner?: boolean, showColors?: boolean) => {
+  const getScoreDisplay = (score: number, league: LeagueTier, isWinner?: boolean, showColors?: boolean, isTie?: boolean) => {
     const isLeagueHigh = score === leagueHighScores[league] && score > 0;
-    
+
     let classes = 'text-xs font-mono font-bold text-gray-800 dark:text-gray-200';
     let bgClasses = '';
-    
-    if (isLeagueHigh) {
+
+    // Priority order: tie > league high > winner
+    // Ties should always be gray, even if it's the league high score
+    if (showColors && isTie) {
+      // Both teams in a tie get gray
+      classes = 'text-xs font-mono font-bold text-gray-700 dark:text-gray-300';
+    } else if (isLeagueHigh) {
       classes = 'text-xs font-mono font-bold text-yellow-600 dark:text-yellow-400';
       bgClasses = 'bg-yellow-50 dark:bg-yellow-900/20 py-2 px-2 rounded-full';
-    } else if (isWinner && showColors) {
+    } else if (showColors && isWinner) {
+      // Winner gets green
       classes = 'text-xs font-mono font-bold text-green-700 dark:text-green-300';
     }
-    
+
     return { classes, bgClasses };
   };
 
@@ -308,8 +314,8 @@ export const ActiveWeekMatchups = () => {
                     >
                       {/* Compact Layout for Horizontal Display */}
                       <div className="space-y-1.5">
-                        {/* Winner */}
-                        <div className={`flex items-center justify-between ${showColors ? 'bg-green-50 dark:bg-green-900/20 rounded-full' : ''}`}>
+                        {/* Winner (or Team 1 in tie) */}
+                        <div className={`flex items-center justify-between ${showColors ? (matchup.winnerScore === matchup.loserScore ? 'bg-gray-100 dark:bg-gray-700/30 rounded-full' : 'bg-green-50 dark:bg-green-900/20 rounded-full') : ''}`}>
                           <div className="flex items-center space-x-1.5">
                             <TeamLogo
                               teamName={matchup.winnerInfo?.teamName || 'Unknown Team'}
@@ -323,7 +329,7 @@ export const ActiveWeekMatchups = () => {
                               }}
                             />
                             <div className="min-w-0 flex-1">
-                              <div className={`font-medium ${getTeamNameFontClass(matchup.winnerInfo?.teamName || 'Unknown Team')} ${showColors ? 'text-green-700 dark:text-green-300' : 'text-gray-900 dark:text-gray-100'} truncate`}>
+                              <div className={`font-medium ${getTeamNameFontClass(matchup.winnerInfo?.teamName || 'Unknown Team')} ${showColors ? (matchup.winnerScore === matchup.loserScore ? 'text-gray-700 dark:text-gray-300' : 'text-green-700 dark:text-green-300') : 'text-gray-900 dark:text-gray-100'} truncate`}>
                                 {matchup.winnerInfo?.teamName || 'Unknown Team'}
                               </div>
                               {matchup.winnerRecord && (
@@ -334,11 +340,13 @@ export const ActiveWeekMatchups = () => {
                             </div>
                           </div>
                           <div className={(() => {
-                            const { bgClasses } = getScoreDisplay(matchup.winnerScore || 0, leagueData.league, true, showColors);
+                            const isTie = matchup.winnerScore === matchup.loserScore;
+                            const { bgClasses } = getScoreDisplay(matchup.winnerScore || 0, leagueData.league, !isTie, showColors, isTie);
                             return (bgClasses || '') + ' px-2';
                           })()}>
                             <div className={(() => {
-                              const { classes } = getScoreDisplay(matchup.winnerScore || 0, leagueData.league, true, showColors);
+                              const isTie = matchup.winnerScore === matchup.loserScore;
+                              const { classes } = getScoreDisplay(matchup.winnerScore || 0, leagueData.league, !isTie, showColors, isTie);
                               return classes;
                             })()}>
                               {matchup.winnerScore?.toFixed(2)}
@@ -346,8 +354,8 @@ export const ActiveWeekMatchups = () => {
                           </div>
                         </div>
                         
-                        {/* Loser */}
-                        <div className="flex items-center justify-between">
+                        {/* Loser (or Team 2 in tie) */}
+                        <div className={`flex items-center justify-between ${showColors && matchup.winnerScore === matchup.loserScore ? 'bg-gray-100 dark:bg-gray-700/30 rounded-full' : ''}`}>
                           <div className="flex items-center space-x-1.5">
                             <TeamLogo
                               teamName={matchup.loserInfo?.teamName || 'Unknown Team'}
@@ -372,11 +380,13 @@ export const ActiveWeekMatchups = () => {
                             </div>
                           </div>
                           <div className={(() => {
-                            const { bgClasses } = getScoreDisplay(matchup.loserScore || 0, leagueData.league, false, showColors);
+                            const isTie = matchup.winnerScore === matchup.loserScore;
+                            const { bgClasses } = getScoreDisplay(matchup.loserScore || 0, leagueData.league, false, showColors, isTie);
                             return (bgClasses || '') + ' px-2';
                           })()}>
                             <div className={(() => {
-                              const { classes } = getScoreDisplay(matchup.loserScore || 0, leagueData.league, false, showColors);
+                              const isTie = matchup.winnerScore === matchup.loserScore;
+                              const { classes } = getScoreDisplay(matchup.loserScore || 0, leagueData.league, false, showColors, isTie);
                               return classes;
                             })()}>
                               {matchup.loserScore?.toFixed(2)}

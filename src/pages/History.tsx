@@ -87,7 +87,7 @@ export const History = () => {
                                 {leagueData.standings[0].userInfo?.teamName || 'Unknown Team'}
                               </div>
                               <div className="text-sm text-gray-600">
-                                {leagueData.standings[0].wins}-{leagueData.standings[0].losses} • {leagueData.standings[0].pointsFor?.toFixed(2)} pts
+                                {leagueData.standings[0].wins}-{leagueData.standings[0].losses}{leagueData.standings[0].ties ? `-${leagueData.standings[0].ties}` : ''} • {leagueData.standings[0].pointsFor?.toFixed(2)} pts
                               </div>
                             </div>
                           </div>
@@ -109,7 +109,7 @@ export const History = () => {
                                 {team.userInfo?.teamName || 'Unknown Team'}
                               </span>
                             </div>
-                            <span className="text-gray-600">{team.wins}-{team.losses}</span>
+                            <span className="text-gray-600">{team.wins}-{team.losses}{team.ties ? `-${team.ties}` : ''}</span>
                           </div>
                         ))}
                         {leagueData.standings && leagueData.standings.length > 5 && (

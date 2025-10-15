@@ -57,6 +57,7 @@ interface PlayerCareerStats {
   userInfo: UserInfo;
   totalWins: number;
   totalLosses: number;
+  totalTies: number;
   totalPointsFor: number;
   totalPointsAgainst: number;
   firstPlaceFinishes: number;
@@ -78,6 +79,7 @@ interface PlayerCareerStats {
     league: LeagueTier;
     wins: number;
     losses: number;
+    ties?: number;
     pointsFor: number;
     pointsAgainst: number;
     rank: number;
@@ -116,6 +118,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
             userInfo: standing.userInfo,
             totalWins: 0,
             totalLosses: 0,
+            totalTies: 0,
             totalPointsFor: 0,
             totalPointsAgainst: 0,
             firstPlaceFinishes: 0,
@@ -141,6 +144,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
         // Accumulate totals
         player.totalWins += standing.wins;
         player.totalLosses += standing.losses;
+        player.totalTies += standing.ties || 0;
         player.totalPointsFor += standing.pointsFor || 0;
         player.totalPointsAgainst += standing.pointsAgainst || 0;
 
@@ -190,6 +194,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
           league: leagueData.league as LeagueTier,
           wins: standing.wins,
           losses: standing.losses,
+          ties: standing.ties,
           pointsFor: standing.pointsFor || 0,
           pointsAgainst: standing.pointsAgainst || 0,
           rank: standing.rank,
@@ -204,8 +209,8 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
       player.pastTeamNames = getPastTeamNames(standings, player.userInfo.teamName, player.ffuUserId);
       player.seasonHistory.sort((a, b) => b.year.localeCompare(a.year));
 
-      const totalGames = player.totalWins + player.totalLosses;
-      player.winPercentage = totalGames > 0 ? (player.totalWins / totalGames) * 100 : 0;
+      const totalGames = player.totalWins + player.totalLosses + player.totalTies;
+      player.winPercentage = totalGames > 0 ? ((player.totalWins + player.totalTies * 0.5) / totalGames) * 100 : 0;
 
       if (player.seasonHistory.length > 0) {
         const completedSeasons = player.seasonHistory.filter(season => !isActiveYear(season.year));
@@ -282,7 +287,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
       case 'wins':
         return season.wins;
       case 'winPct':
-        return (season.wins + season.losses) > 0 ? (season.wins / (season.wins + season.losses)) : 0;
+        return (season.wins + season.losses + (season.ties || 0)) > 0 ? ((season.wins + (season.ties || 0) * 0.5) / (season.wins + season.losses + (season.ties || 0))) : 0;
       case 'pointsFor':
         return season.pointsFor;
       case 'pointsAgainst':
@@ -371,7 +376,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       <div className="text-center p-3 bg-gray-50 dark:bg-gray-800">
                         <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                          {selectedPlayer.totalWins}-{selectedPlayer.totalLosses}
+                          {selectedPlayer.totalWins}-{selectedPlayer.totalLosses}{selectedPlayer.totalTies > 0 ? `-${selectedPlayer.totalTies}` : ''}
                         </div>
                         <div className="text-xs font-medium text-gray-600 dark:text-gray-400">Record</div>
                       </div>
@@ -383,8 +388,8 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
                       </div>
                       <div className="text-center p-3 bg-gray-50 dark:bg-gray-800">
                         <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                          {((selectedPlayer.totalWins + selectedPlayer.totalLosses) > 0 ?
-                            (selectedPlayer.totalPointsFor / (selectedPlayer.totalWins + selectedPlayer.totalLosses)).toFixed(1) :
+                          {((selectedPlayer.totalWins + selectedPlayer.totalLosses + selectedPlayer.totalTies) > 0 ?
+                            (selectedPlayer.totalPointsFor / (selectedPlayer.totalWins + selectedPlayer.totalLosses + selectedPlayer.totalTies)).toFixed(1) :
                             '0.0')}
                         </div>
                         <div className="text-xs font-medium text-gray-600 dark:text-gray-400">PPG</div>
@@ -583,12 +588,12 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
                                   <LeagueBadge league={season.league} />
                                 </td>
                                 <td>
-                                  <span className="font-mono">{season.wins}-{season.losses}</span>
+                                  <span className="font-mono">{season.wins}-{season.losses}{season.ties ? `-${season.ties}` : ''}</span>
                                 </td>
                                 <td>
                                   <span className="font-mono">
-                                    {((season.wins + season.losses) > 0 ?
-                                      ((season.wins / (season.wins + season.losses)) * 100).toFixed(1) :
+                                    {((season.wins + season.losses + (season.ties || 0)) > 0 ?
+                                      (((season.wins + (season.ties || 0) * 0.5) / (season.wins + season.losses + (season.ties || 0))) * 100).toFixed(1) :
                                       '0.0')}%
                                   </span>
                                 </td>
@@ -600,7 +605,7 @@ export const TeamProfileModal = ({ isOpen, onClose, teamUserId }: TeamProfileMod
                                 </td>
                                 <td>
                                   <span className="font-mono">
-                                    {isActiveYear(season.year) ? 'TBD' : (season.unionPowerRating ? season.unionPowerRating.toFixed(2) : '—')}
+                                    {season.unionPowerRating ? season.unionPowerRating.toFixed(2) : (isActiveYear(season.year) ? 'TBD' : '—')}
                                   </span>
                                 </td>
                                 <td>
