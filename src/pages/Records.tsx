@@ -8,7 +8,7 @@ import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 import type { LeagueTier } from '../types';
-import { Target, TrendingDown, TrendingUp, Calendar, ChevronDown, Crown, Sparkles, Gauge, Zap, Skull, Laugh, Swords, Angry, Bomb, ArrowUp, ArrowDown} from 'lucide-react';
+import { Target, TrendingDown, TrendingUp, Calendar, ChevronDown, Crown, Sparkles, Gauge, Zap, Skull, Laugh, Swords, Angry, Bomb, ArrowUp, ArrowDown, ChevronUp} from 'lucide-react';
 
 export const Records = () => {
   const { getParam, updateParams } = useUrlParams();
@@ -18,6 +18,14 @@ export const Records = () => {
   const [topScoresYear, setTopScoresYear] = useState<string>('ALL');
   const [topScoresTeam, setTopScoresTeam] = useState<string>('ALL');
   const [sortOrder, setSortOrder] = useState<'desc' | 'asc'>('desc');
+  const [closestMatchupsLeague, setClosestMatchupsLeague] = useState<LeagueTier | 'ALL'>('ALL');
+  const [closestMatchupsYear, setClosestMatchupsYear] = useState<string>('ALL');
+  const [closestMatchupsTeam, setClosestMatchupsTeam] = useState<string>('ALL');
+  const [singleGameCollapsed, setSingleGameCollapsed] = useState(false);
+  const [seasonCollapsed, setSeasonCollapsed] = useState(false);
+  const [specialGameCollapsed, setSpecialGameCollapsed] = useState(false);
+  const [topScoresCollapsed, setTopScoresCollapsed] = useState(true);
+  const [closestMatchupsCollapsed, setClosestMatchupsCollapsed] = useState(true);
   const [, setImageError] = useState(false);
   const dakUrl = `${import.meta.env.BASE_URL}dak-head.png`;
   const { openTeamProfile } = useTeamProfileModal();
@@ -67,6 +75,17 @@ export const Records = () => {
     return Array.from(teams).sort();
   }, [records?.topScores]);
 
+  // Get all unique teams from closest matchups
+  const allMatchupTeams = useMemo(() => {
+    if (!records?.topClosestMatchups) return [];
+    const teams = new Set<string>();
+    records.topClosestMatchups.forEach(matchup => {
+      teams.add(matchup.winner.teamName);
+      teams.add(matchup.loser.teamName);
+    });
+    return Array.from(teams).sort();
+  }, [records?.topClosestMatchups]);
+
   // Filter and sort top scores
   const filteredAndSortedTopScores = useMemo(() => {
     if (!records?.topScores) return [];
@@ -95,6 +114,33 @@ export const Records = () => {
 
     return filtered;
   }, [records?.topScores, topScoresLeague, topScoresYear, topScoresTeam, sortOrder]);
+
+  // Filter closest matchups
+  const filteredClosestMatchups = useMemo(() => {
+    if (!records?.topClosestMatchups) return [];
+
+    let filtered = [...records.topClosestMatchups];
+
+    // Filter by league
+    if (closestMatchupsLeague !== 'ALL') {
+      filtered = filtered.filter(matchup => matchup.league === closestMatchupsLeague);
+    }
+
+    // Filter by year
+    if (closestMatchupsYear !== 'ALL') {
+      filtered = filtered.filter(matchup => matchup.year === closestMatchupsYear);
+    }
+
+    // Filter by team (either winner or loser)
+    if (closestMatchupsTeam !== 'ALL') {
+      filtered = filtered.filter(matchup =>
+        matchup.winner.teamName === closestMatchupsTeam ||
+        matchup.loser.teamName === closestMatchupsTeam
+      );
+    }
+
+    return filtered;
+  }, [records?.topClosestMatchups, closestMatchupsLeague, closestMatchupsYear, closestMatchupsTeam]);
 
   const toggleSortOrder = () => {
     setSortOrder(prev => prev === 'desc' ? 'asc' : 'desc');
@@ -240,11 +286,18 @@ export const Records = () => {
         <div className="space-y-6">
           {/* Single Game Records */}
           <div className="card">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
-              <Gauge className="h-6 w-6 mr-3 text-ffu-red" />
-              Single Game Records
+            <h2
+              className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center justify-between cursor-pointer hover:text-ffu-red transition-colors"
+              onClick={() => setSingleGameCollapsed(!singleGameCollapsed)}
+            >
+              <div className="flex items-center">
+                <Gauge className="h-6 w-6 mr-3 text-ffu-red" />
+                Single Game Records
+              </div>
+              {singleGameCollapsed ? <ChevronDown className="h-6 w-6" /> : <ChevronUp className="h-6 w-6" />}
             </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {!singleGameCollapsed && (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Highest Single Game */}
               <div className="bg-green-50 dark:bg-green-900/30 angular-cut-medium p-6 border-l-4 border-green-500 relative overflow-hidden">
                 <div className="flex items-center justify-between mb-3">
@@ -307,15 +360,23 @@ export const Records = () => {
                 </div>
               </div>
             </div>
+            )}
           </div>
 
           {/* Season Records */}
           <div className="card">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
-              <Zap className="h-6 w-6 mr-3 text-ffu-red" />
-              Season Records
+            <h2
+              className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center justify-between cursor-pointer hover:text-ffu-red transition-colors"
+              onClick={() => setSeasonCollapsed(!seasonCollapsed)}
+            >
+              <div className="flex items-center">
+                <Zap className="h-6 w-6 mr-3 text-ffu-red" />
+                Season Records
+              </div>
+              {seasonCollapsed ? <ChevronDown className="h-6 w-6" /> : <ChevronUp className="h-6 w-6" />}
             </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {!seasonCollapsed && (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Most Points Season */}
               <div className="bg-blue-50 dark:bg-blue-900/30 angular-cut-medium p-6 border-l-4 border-blue-500 relative overflow-hidden">
                 <div className="flex items-center justify-between mb-3">
@@ -378,14 +439,23 @@ export const Records = () => {
                 </div>
               </div>
             </div>
+            )}
           </div>
 
           {/* Special Game Records */}
           <div className="card">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
-              <Sparkles className="h-6 w-6 mr-3 text-ffu-red" />
-              Special Game Records
+            <h2
+              className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center justify-between cursor-pointer hover:text-ffu-red transition-colors"
+              onClick={() => setSpecialGameCollapsed(!specialGameCollapsed)}
+            >
+              <div className="flex items-center">
+                <Sparkles className="h-6 w-6 mr-3 text-ffu-red" />
+                Special Game Records
+              </div>
+              {specialGameCollapsed ? <ChevronDown className="h-6 w-6" /> : <ChevronUp className="h-6 w-6" />}
             </h2>
+            {!specialGameCollapsed && (
+              <div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Most Points in Loss */}
               <div className="bg-orange-50 dark:bg-orange-900/30 angular-cut-medium p-6 border-l-4 border-orange-500 relative overflow-hidden">
@@ -599,15 +669,24 @@ export const Records = () => {
                 </div>
               </div>
             </div>
+          </div>
+            )}
+          </div>
 
-            {/* Top 100 Highest Scores Table */}
-            <div className="col-span-1 lg:col-span-2">
-              <div className="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 angular-cut-medium p-6 border-l-4 border-indigo-500 relative overflow-hidden">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-heading font-bold text-indigo-800 dark:text-indigo-300 uppercase tracking-wide text-lg">Top 100 Highest Scores</h3>
-                  <Crown className="h-6 w-6 text-indigo-600" />
-                </div>
-
+          {/* Top 100 Highest Scores */}
+          <div className="card">
+            <h2
+              className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center justify-between cursor-pointer hover:text-ffu-red transition-colors"
+              onClick={() => setTopScoresCollapsed(!topScoresCollapsed)}
+            >
+              <div className="flex items-center">
+                <Crown className="h-6 w-6 mr-3 text-ffu-red" />
+                Top 100 Highest Scores
+              </div>
+              {topScoresCollapsed ? <ChevronDown className="h-6 w-6" /> : <ChevronUp className="h-6 w-6" />}
+            </h2>
+            {!topScoresCollapsed && (
+              <div>
                 {/* Filters for Top Scores Table */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                   <div className="space-y-2">
@@ -787,7 +866,196 @@ export const Records = () => {
                   </table>
                 </div>
               </div>
+            )}
+          </div>
+
+          {/* Top 25 Closest Matchups */}
+          <div className="card">
+            <h2
+              className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center justify-between cursor-pointer hover:text-ffu-red transition-colors"
+              onClick={() => setClosestMatchupsCollapsed(!closestMatchupsCollapsed)}
+            >
+              <div className="flex items-center">
+                <Swords className="h-6 w-6 mr-3 text-ffu-red" />
+                Top 25 Closest Matchups
+              </div>
+              {closestMatchupsCollapsed ? <ChevronDown className="h-6 w-6" /> : <ChevronUp className="h-6 w-6" />}
+            </h2>
+            {!closestMatchupsCollapsed && (
+            <div>
+              {/* Filters for Closest Matchups */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div className="space-y-2">
+                  <label className="block text-xs font-heading font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Filter by League</label>
+                  <div className="relative">
+                    <select
+                      value={closestMatchupsLeague}
+                      onChange={(e) => setClosestMatchupsLeague(e.target.value as LeagueTier | 'ALL')}
+                      className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                    >
+                      {leagues.map(league => (
+                        <option key={league} value={league}>{getLeagueName(league)}</option>
+                      ))}
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                      <ChevronDown className="h-4 w-4 text-gray-400" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block text-xs font-heading font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Filter by Year</label>
+                  <div className="relative">
+                    <select
+                      value={closestMatchupsYear}
+                      onChange={(e) => setClosestMatchupsYear(e.target.value)}
+                      className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                    >
+                      {years.map(year => (
+                        <option key={year} value={year}>{year === 'ALL' ? 'All Years' : year}</option>
+                      ))}
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                      <ChevronDown className="h-4 w-4 text-gray-400" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block text-xs font-heading font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Filter by Team</label>
+                  <div className="relative">
+                    <select
+                      value={closestMatchupsTeam}
+                      onChange={(e) => setClosestMatchupsTeam(e.target.value)}
+                      className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                    >
+                      <option value="ALL">All Teams</option>
+                      {allMatchupTeams.map(team => (
+                        <option key={team} value={team}>{team}</option>
+                      ))}
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                      <ChevronDown className="h-4 w-4 text-gray-400" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <thead className="bg-gray-50 dark:bg-gray-800/50">
+                  <tr>
+                    <th scope="col" className="px-3 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                      Rank
+                    </th>
+                    <th scope="col" className="px-3 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                      Winner
+                    </th>
+                    <th scope="col" className="px-3 py-3 text-right text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                      Winner Score
+                    </th>
+                    <th scope="col" className="px-3 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                      Loser
+                    </th>
+                    <th scope="col" className="px-3 py-3 text-right text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                      Loser Score
+                    </th>
+                    <th scope="col" className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                      Margin
+                    </th>
+                    <th scope="col" className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                      Year
+                    </th>
+                    <th scope="col" className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                      Week
+                    </th>
+                    <th scope="col" className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                      League
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+                  {filteredClosestMatchups.map((matchup, index) => (
+                    <tr
+                      key={`${matchup.winner.userId}-${matchup.loser.userId}-${matchup.year}-${matchup.week}-${index}`}
+                      className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                    >
+                      <td className="px-3 py-3 whitespace-nowrap">
+                        <div className="text-sm font-bold text-gray-900 dark:text-gray-100">
+                          {index + 1}
+                        </div>
+                      </td>
+                      <td className="px-3 py-3 whitespace-nowrap">
+                        <div className="flex items-center space-x-2">
+                          <TeamLogo
+                            teamName={matchup.winner.teamName}
+                            size="sm"
+                            clickable
+                            onClick={() => openTeamProfile(matchup.winner.userId, matchup.winner.teamName)}
+                          />
+                          <div>
+                            <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                              {matchup.winner.teamName}
+                            </div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400">
+                              {matchup.winner.abbreviation}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-3 py-3 whitespace-nowrap text-right">
+                        <div className="text-sm font-bold text-gray-900 dark:text-gray-100 font-mono">
+                          {matchup.winnerScore.toFixed(2)}
+                        </div>
+                      </td>
+                      <td className="px-3 py-3 whitespace-nowrap">
+                        <div className="flex items-center space-x-2">
+                          <TeamLogo
+                            teamName={matchup.loser.teamName}
+                            size="sm"
+                            clickable
+                            onClick={() => openTeamProfile(matchup.loser.userId, matchup.loser.teamName)}
+                          />
+                          <div>
+                            <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                              {matchup.loser.teamName}
+                            </div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400">
+                              {matchup.loser.abbreviation}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-3 py-3 whitespace-nowrap text-right">
+                        <div className="text-sm font-bold text-gray-600 dark:text-gray-400 font-mono">
+                          {matchup.loserScore.toFixed(2)}
+                        </div>
+                      </td>
+                      <td className="px-3 py-3 whitespace-nowrap text-center">
+                        <div className="text-sm font-bold text-yellow-600 dark:text-yellow-400 font-mono">
+                          {matchup.margin.toFixed(2)}
+                        </div>
+                      </td>
+                      <td className="px-3 py-3 whitespace-nowrap text-center">
+                        <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                          {matchup.year}
+                        </div>
+                      </td>
+                      <td className="px-3 py-3 whitespace-nowrap text-center">
+                        <div className="text-sm text-gray-900 dark:text-gray-100">
+                          Week {matchup.week}
+                        </div>
+                      </td>
+                      <td className="px-3 py-3 whitespace-nowrap text-center">
+                        <LeagueBadge league={matchup.league} />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
+            </div>
+            )}
           </div>
 
         </div>

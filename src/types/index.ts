@@ -405,6 +405,17 @@ export interface SeasonRecord {
   ties?: number;
 }
 
+export interface ClosestMatchup {
+  winner: UserInfo;
+  loser: UserInfo;
+  winnerScore: number;
+  loserScore: number;
+  margin: number;
+  week: number;
+  year: string;
+  league: LeagueTier;
+}
+
 export interface AllTimeRecords {
   highestSingleGame: GameRecord;
   lowestSingleGame: GameRecord;
@@ -412,16 +423,7 @@ export interface AllTimeRecords {
   leastPointsSeason: SeasonRecord;
   mostPointsInLoss: GameRecord;
   fewestPointsInWin: GameRecord;
-  closestGame: {
-    winner: UserInfo;
-    loser: UserInfo;
-    winnerScore: number;
-    loserScore: number;
-    margin: number;
-    week: number;
-    year: string;
-    league: LeagueTier;
-  };
+  closestGame: ClosestMatchup;
   biggestBlowout: {
     winner: UserInfo;
     loser: UserInfo;
@@ -433,6 +435,7 @@ export interface AllTimeRecords {
     league: LeagueTier;
   };
   topScores: GameRecord[];
+  topClosestMatchups: ClosestMatchup[];
 }
 
 // Draft-related application types

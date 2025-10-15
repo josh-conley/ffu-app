@@ -526,7 +526,8 @@ export class LeagueService {
       fewestPointsInWin: this.findFewestPointsInWin(allGameRecords),
       closestGame: this.findClosestGame(allMatchups),
       biggestBlowout: this.findBiggestBlowout(allMatchups),
-      topScores: this.findTopScores(allGameRecords, 100)
+      topScores: this.findTopScores(allGameRecords, 100),
+      topClosestMatchups: this.findTopClosestMatchups(allMatchups, 25)
     };
 
     return records;
@@ -650,6 +651,41 @@ export class LeagueService {
     return [...gameRecords]
       .sort((a, b) => b.score - a.score)
       .slice(0, limit);
+  }
+
+  private findTopClosestMatchups(matchups: (WeekMatchup & {
+    week: number,
+    year: string,
+    league: LeagueTier,
+    margin: number,
+    winnerInfo: UserInfo,
+    loserInfo: UserInfo
+  })[], limit: number): AllTimeRecords['topClosestMatchups'] {
+    if (matchups.length === 0) {
+      return [];
+    }
+
+    // Filter out incomplete games (where both scores are 0 or total score is unrealistically low)
+    const completedMatchups = matchups.filter(matchup => {
+      const totalScore = matchup.winnerScore + matchup.loserScore;
+      // Exclude games where both teams scored 0 or total is less than 20 (likely incomplete)
+      return totalScore >= 20;
+    });
+
+    // Sort by margin in ascending order (smallest margin first) and take top N
+    return [...completedMatchups]
+      .sort((a, b) => a.margin - b.margin)
+      .slice(0, limit)
+      .map(matchup => ({
+        winner: matchup.winnerInfo,
+        loser: matchup.loserInfo,
+        winnerScore: matchup.winnerScore,
+        loserScore: matchup.loserScore,
+        margin: matchup.margin,
+        week: matchup.week,
+        year: matchup.year,
+        league: matchup.league
+      }));
   }
 
 
