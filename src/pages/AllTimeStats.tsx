@@ -321,7 +321,8 @@ export const AllTimeStats = () => {
         }
 
         // Check for playoff appearance (rank 6 or better = playoff berth)
-        if (standing.rank <= 6) {
+        // Only count playoff records for completed seasons
+        if (standing.rank <= 6 && !isActiveYear(leagueData.year)) {
           player.playoffAppearances++;
 
           // Use playoff results if available, otherwise use regular season rank
