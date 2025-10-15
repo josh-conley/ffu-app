@@ -48,7 +48,7 @@ export const History = () => {
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {['PREMIER', 'MASTERS', 'NATIONAL'].map(league => {
-                const leagueData = (history as Record<string, Record<string, { standings?: Array<{ userId: string; wins: number; losses: number; pointsFor?: number; userInfo?: { teamName: string } }> }>>)[year]?.[league];
+                const leagueData = (history as Record<string, Record<string, { standings?: Array<{ userId: string; wins: number; losses: number; ties?: number; pointsFor?: number; userInfo?: { teamName: string } }> }>>)[year]?.[league];
                 
                 if (!leagueData) return (
                   <div key={league} className="card">

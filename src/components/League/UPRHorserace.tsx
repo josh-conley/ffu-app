@@ -16,6 +16,7 @@ interface WeeklyUPRData {
   upr: number;
   wins: number;
   losses: number;
+  ties?: number;
 }
 
 interface TeamUPRProgress {
