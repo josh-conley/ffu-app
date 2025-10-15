@@ -8,12 +8,16 @@ import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 import type { LeagueTier } from '../types';
-import { Target, TrendingDown, TrendingUp, Calendar, ChevronDown, Crown, Sparkles, Gauge, Zap, Skull, Laugh, Swords, Angry, Bomb} from 'lucide-react';
+import { Target, TrendingDown, TrendingUp, Calendar, ChevronDown, Crown, Sparkles, Gauge, Zap, Skull, Laugh, Swords, Angry, Bomb, ArrowUp, ArrowDown} from 'lucide-react';
 
 export const Records = () => {
   const { getParam, updateParams } = useUrlParams();
   const [selectedLeague, setSelectedLeague] = useState<LeagueTier | 'ALL'>('ALL');
   const [selectedYear, setSelectedYear] = useState<string>('ALL');
+  const [topScoresLeague, setTopScoresLeague] = useState<LeagueTier | 'ALL'>('ALL');
+  const [topScoresYear, setTopScoresYear] = useState<string>('ALL');
+  const [topScoresTeam, setTopScoresTeam] = useState<string>('ALL');
+  const [sortOrder, setSortOrder] = useState<'desc' | 'asc'>('desc');
   const [, setImageError] = useState(false);
   const dakUrl = `${import.meta.env.BASE_URL}dak-head.png`;
   const { openTeamProfile } = useTeamProfileModal();
@@ -34,12 +38,12 @@ export const Records = () => {
   }, []); // Empty dependency array - only run on mount
 
   const leagues: (LeagueTier | 'ALL')[] = ['ALL', 'PREMIER', 'MASTERS', 'NATIONAL'];
-  const years = ['ALL', '2024', '2023', '2022', '2021', '2020', '2019', '2018'];
+  const years = ['ALL', '2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018'];
   const validYearsByLeague: Record<string, string[]> = {
     ALL: years,
     PREMIER: years,
     NATIONAL: years,
-    MASTERS: ['ALL', '2024', '2023', '2022'], // no 2021, 2020
+    MASTERS: ['ALL', '2025', '2024', '2023', '2022'], // no 2021, 2020
   };
 
   const filteredYears = useMemo(() => {
@@ -52,6 +56,49 @@ export const Records = () => {
       updateParams({ year: null });
     }
   }, [selectedLeague, filteredYears, selectedYear, updateParams]);
+
+  // Get all unique teams from top scores
+  const allTeams = useMemo(() => {
+    if (!records?.topScores) return [];
+    const teams = new Set<string>();
+    records.topScores.forEach(record => {
+      teams.add(record.userInfo.teamName);
+    });
+    return Array.from(teams).sort();
+  }, [records?.topScores]);
+
+  // Filter and sort top scores
+  const filteredAndSortedTopScores = useMemo(() => {
+    if (!records?.topScores) return [];
+
+    let filtered = [...records.topScores];
+
+    // Filter by league
+    if (topScoresLeague !== 'ALL') {
+      filtered = filtered.filter(record => record.league === topScoresLeague);
+    }
+
+    // Filter by year
+    if (topScoresYear !== 'ALL') {
+      filtered = filtered.filter(record => record.year === topScoresYear);
+    }
+
+    // Filter by team
+    if (topScoresTeam !== 'ALL') {
+      filtered = filtered.filter(record => record.userInfo.teamName === topScoresTeam);
+    }
+
+    // Sort by score
+    filtered.sort((a, b) => {
+      return sortOrder === 'desc' ? b.score - a.score : a.score - b.score;
+    });
+
+    return filtered;
+  }, [records?.topScores, topScoresLeague, topScoresYear, topScoresTeam, sortOrder]);
+
+  const toggleSortOrder = () => {
+    setSortOrder(prev => prev === 'desc' ? 'asc' : 'desc');
+  };
 
   const getLeagueName = (league: LeagueTier | 'ALL'): string => {
     switch (league) {
@@ -549,6 +596,195 @@ export const Records = () => {
                     <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">Week {records.biggestBlowout.week}</span>
                     <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{records.biggestBlowout.year}</span>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Top 100 Highest Scores Table */}
+            <div className="col-span-1 lg:col-span-2">
+              <div className="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 angular-cut-medium p-6 border-l-4 border-indigo-500 relative overflow-hidden">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-heading font-bold text-indigo-800 dark:text-indigo-300 uppercase tracking-wide text-lg">Top 100 Highest Scores</h3>
+                  <Crown className="h-6 w-6 text-indigo-600" />
+                </div>
+
+                {/* Filters for Top Scores Table */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                  <div className="space-y-2">
+                    <label className="block text-xs font-heading font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Filter by League</label>
+                    <div className="relative">
+                      <select
+                        value={topScoresLeague}
+                        onChange={(e) => setTopScoresLeague(e.target.value as LeagueTier | 'ALL')}
+                        className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                      >
+                        {leagues.map(league => (
+                          <option key={league} value={league}>{getLeagueName(league)}</option>
+                        ))}
+                      </select>
+                      <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                        <ChevronDown className="h-4 w-4 text-gray-400" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="block text-xs font-heading font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Filter by Year</label>
+                    <div className="relative">
+                      <select
+                        value={topScoresYear}
+                        onChange={(e) => setTopScoresYear(e.target.value)}
+                        className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                      >
+                        {years.map(year => (
+                          <option key={year} value={year}>{year === 'ALL' ? 'All Years' : year}</option>
+                        ))}
+                      </select>
+                      <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                        <ChevronDown className="h-4 w-4 text-gray-400" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="block text-xs font-heading font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Filter by Team</label>
+                    <div className="relative">
+                      <select
+                        value={topScoresTeam}
+                        onChange={(e) => setTopScoresTeam(e.target.value)}
+                        className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                      >
+                        <option value="ALL">All Teams</option>
+                        {allTeams.map(team => (
+                          <option key={team} value={team}>{team}</option>
+                        ))}
+                      </select>
+                      <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                        <ChevronDown className="h-4 w-4 text-gray-400" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead className="bg-gray-50 dark:bg-gray-800/50">
+                      <tr>
+                        <th scope="col" className="px-3 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                          Rank
+                        </th>
+                        <th scope="col" className="px-3 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                          Team
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-3 py-3 text-right text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors select-none"
+                          onClick={toggleSortOrder}
+                        >
+                          <div className="flex items-center justify-end space-x-1">
+                            <span>Score</span>
+                            {sortOrder === 'desc' ? (
+                              <ArrowDown className="h-4 w-4" />
+                            ) : (
+                              <ArrowUp className="h-4 w-4" />
+                            )}
+                          </div>
+                        </th>
+                        <th scope="col" className="px-3 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                          vs
+                        </th>
+                        <th scope="col" className="px-3 py-3 text-right text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                          Opp Score
+                        </th>
+                        <th scope="col" className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                          Year
+                        </th>
+                        <th scope="col" className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                          Week
+                        </th>
+                        <th scope="col" className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                          League
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+                      {filteredAndSortedTopScores.map((record, index) => (
+                        <tr
+                          key={`${record.userInfo.userId}-${record.year}-${record.week}-${index}`}
+                          className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                        >
+                          <td className="px-3 py-3 whitespace-nowrap">
+                            <div className="text-sm font-bold text-gray-900 dark:text-gray-100">
+                              {index + 1}
+                            </div>
+                          </td>
+                          <td className="px-3 py-3 whitespace-nowrap">
+                            <div className="flex items-center space-x-2">
+                              <TeamLogo
+                                teamName={record.userInfo.teamName}
+                                size="sm"
+                                clickable
+                                onClick={() => openTeamProfile(record.userInfo.userId, record.userInfo.teamName)}
+                              />
+                              <div>
+                                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                  {record.userInfo.teamName}
+                                </div>
+                                <div className="text-xs text-gray-500 dark:text-gray-400">
+                                  {record.userInfo.abbreviation}
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-3 py-3 whitespace-nowrap text-right">
+                            <div className="text-sm font-bold text-gray-900 dark:text-gray-100 font-mono">
+                              {record.score.toFixed(2)}
+                            </div>
+                          </td>
+                          <td className="px-3 py-3 whitespace-nowrap">
+                            {record.opponent && (
+                              <div className="flex items-center space-x-2">
+                                <TeamLogo
+                                  teamName={record.opponent.teamName}
+                                  size="sm"
+                                  clickable
+                                  onClick={() => openTeamProfile(record.opponent!.userId, record.opponent!.teamName)}
+                                />
+                                <div>
+                                  <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                    {record.opponent.teamName}
+                                  </div>
+                                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                                    {record.opponent.abbreviation}
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+                          </td>
+                          <td className="px-3 py-3 whitespace-nowrap text-right">
+                            {record.opponentScore !== undefined && (
+                              <div className="text-sm font-bold text-gray-600 dark:text-gray-400 font-mono">
+                                {record.opponentScore.toFixed(2)}
+                              </div>
+                            )}
+                          </td>
+                          <td className="px-3 py-3 whitespace-nowrap text-center">
+                            <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                              {record.year}
+                            </div>
+                          </td>
+                          <td className="px-3 py-3 whitespace-nowrap text-center">
+                            <div className="text-sm text-gray-900 dark:text-gray-100">
+                              Week {record.week}
+                            </div>
+                          </td>
+                          <td className="px-3 py-3 whitespace-nowrap text-center">
+                            <LeagueBadge league={record.league} />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

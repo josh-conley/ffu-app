@@ -432,6 +432,7 @@ export interface AllTimeRecords {
     year: string;
     league: LeagueTier;
   };
+  topScores: GameRecord[];
 }
 
 // Draft-related application types

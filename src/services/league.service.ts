@@ -418,14 +418,11 @@ export class LeagueService {
 
   async getAllTimeRecords(league?: LeagueTier, year?: string): Promise<AllTimeRecords> {
     const allLeagues = getAllLeagueConfigs();
-    
-    // Filter leagues based on parameters, excluding active seasons for meaningful records
+
+    // Filter leagues based on parameters
     const filteredLeagues = allLeagues.filter(config => {
       if (league && league !== config.tier) return false;
       if (year && year !== config.year) return false;
-      // Exclude active seasons (status: 'active') for records calculation
-      // as they have no meaningful scores yet
-      if (config.status === 'active') return false;
       return true;
     });
 
@@ -528,7 +525,8 @@ export class LeagueService {
       mostPointsInLoss: this.findMostPointsInLoss(allGameRecords),
       fewestPointsInWin: this.findFewestPointsInWin(allGameRecords),
       closestGame: this.findClosestGame(allMatchups),
-      biggestBlowout: this.findBiggestBlowout(allMatchups)
+      biggestBlowout: this.findBiggestBlowout(allMatchups),
+      topScores: this.findTopScores(allGameRecords, 100)
     };
 
     return records;
@@ -617,18 +615,18 @@ export class LeagueService {
     };
   }
 
-  private findBiggestBlowout(matchups: (WeekMatchup & { 
-    week: number, 
-    year: string, 
+  private findBiggestBlowout(matchups: (WeekMatchup & {
+    week: number,
+    year: string,
     league: LeagueTier,
     margin: number,
     winnerInfo: UserInfo,
-    loserInfo: UserInfo 
+    loserInfo: UserInfo
   })[]): AllTimeRecords['biggestBlowout'] {
     if (matchups.length === 0) {
       throw new Error('No matchup records available for biggest blowout calculation');
     }
-    const biggest = matchups.reduce((biggest, current) => 
+    const biggest = matchups.reduce((biggest, current) =>
       current.margin > biggest.margin ? current : biggest
     );
 
@@ -642,6 +640,16 @@ export class LeagueService {
       year: biggest.year,
       league: biggest.league
     };
+  }
+
+  private findTopScores(gameRecords: GameRecord[], limit: number): GameRecord[] {
+    if (gameRecords.length === 0) {
+      return [];
+    }
+    // Sort by score in descending order and take top N
+    return [...gameRecords]
+      .sort((a, b) => b.score - a.score)
+      .slice(0, limit);
   }
 
 
