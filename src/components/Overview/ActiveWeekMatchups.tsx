@@ -309,7 +309,7 @@ export const ActiveWeekMatchups = () => {
                     return (
                     <div
                       key={index}
-                      className={`${colors.matchupBg}  py-2 lg:py-3 px-2 transition-colors cursor-pointer`}
+                      className={`${colors.matchupBg} py-2 lg:py-3 px-2 transition-colors cursor-pointer rounded-lg`}
                       onClick={() => openMatchupRosterModal(matchup, currentNFLWeek, leagueData.league)}
                     >
                       {/* Compact Layout for Horizontal Display */}
