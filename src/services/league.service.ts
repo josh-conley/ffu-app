@@ -531,7 +531,7 @@ export class LeagueService {
       fewestPointsInWin: this.findFewestPointsInWin(gameRecordsExcluding2025),
       closestGame: this.findClosestGame(matchupsExcluding2025),
       biggestBlowout: this.findBiggestBlowout(matchupsExcluding2025),
-      topScores: this.findTopScores(allGameRecords, 100),
+      topScores: this.findTopScores(allGameRecords, allGameRecords.length), // Return all scores
       topClosestMatchups: this.findTopClosestMatchups(allMatchups, 25)
     };
 
@@ -652,8 +652,16 @@ export class LeagueService {
     if (gameRecords.length === 0) {
       return [];
     }
+
+    // Filter out incomplete games (where both scores are 0 or total score is unrealistically low)
+    const completedGames = gameRecords.filter(record => {
+      const totalScore = record.score + (record.opponentScore || 0);
+      // Exclude games where both teams scored 0 or total is less than 20 (likely incomplete)
+      return totalScore >= 20;
+    });
+
     // Sort by score in descending order and take top N
-    return [...gameRecords]
+    return [...completedGames]
       .sort((a, b) => b.score - a.score)
       .slice(0, limit);
   }
