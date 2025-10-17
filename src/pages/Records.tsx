@@ -18,7 +18,7 @@ export const Records = () => {
   const [topScoresLeague, setTopScoresLeague] = useState<LeagueTier | 'ALL'>('ALL');
   const [topScoresYear, setTopScoresYear] = useState<string>('ALL');
   const [topScoresTeam, setTopScoresTeam] = useState<string>('ALL');
-  const [sortMode, setSortMode] = useState<'highest' | 'lowest' | 'closest' | 'blowout'>('highest');
+  const [sortMode, setSortMode] = useState<'highest' | 'lowest' | 'closest' | 'blowout' | 'most-combined' | 'least-combined'>('highest');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(50);
   const [, setImageError] = useState(false);
@@ -150,7 +150,8 @@ export const Records = () => {
         winner,
         loser,
         highestScore: Math.max(team1.score, team2.score),
-        lowestScore: Math.min(team1.score, team2.score)
+        lowestScore: Math.min(team1.score, team2.score),
+        combinedScore: team1.score + team2.score
       });
     });
 
@@ -190,6 +191,10 @@ export const Records = () => {
           return a.margin - b.margin;
         case 'blowout':
           return b.margin - a.margin;
+        case 'most-combined':
+          return b.combinedScore - a.combinedScore;
+        case 'least-combined':
+          return a.combinedScore - b.combinedScore;
         default:
           return 0;
       }
@@ -812,13 +817,15 @@ export const Records = () => {
                     <div className="relative">
                       <select
                         value={sortMode}
-                        onChange={(e) => setSortMode(e.target.value as 'highest' | 'lowest' | 'closest' | 'blowout')}
+                        onChange={(e) => setSortMode(e.target.value as 'highest' | 'lowest' | 'closest' | 'blowout' | 'most-combined' | 'least-combined')}
                         className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
                       >
                         <option value="highest">Highest Score</option>
                         <option value="lowest">Lowest Score</option>
                         <option value="closest">Closest Game</option>
                         <option value="blowout">Biggest Blowout</option>
+                        <option value="most-combined">Most Combined Points</option>
+                        <option value="least-combined">Least Combined Points</option>
                       </select>
                       <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                         <ChevronDown className="h-4 w-4 text-gray-400" />
@@ -886,22 +893,15 @@ export const Records = () => {
                     <thead className="bg-gray-50 dark:bg-gray-800/50">
                       <tr>
                         <th scope="col" className="px-3 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                          Rank
                         </th>
-                        <th scope="col" className="px-3 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                          Team 1
-                        </th>
-                        <th scope="col" className="px-3 py-3 text-right text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                          Team 1 Score
-                        </th>
-                        <th scope="col" className="px-3 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                          Team 2 Score
-                        </th>
-                        <th scope="col" className="px-3 py-3 text-right text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                          Team 2
+                        <th scope="col" colSpan={2} className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                          Winner
                         </th>
                         <th scope="col" className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                           Margin
+                        </th>
+                        <th scope="col" colSpan={2} className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                          Loser
                         </th>
                         <th scope="col" className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                           Year
@@ -918,35 +918,49 @@ export const Records = () => {
                       {paginatedMatchups.map((matchup, index) => {
                         const startRank = (currentPage - 1) * itemsPerPage + index + 1;
 
-                        // Helper to render score with rank badge
-                        const renderScoreWithBadge = (score: number, highRank: number, lowRank: number, isWinner: boolean) => {
+                        // Determine winner and loser
+                        const isTeam1Winner = matchup.team1Score > matchup.team2Score;
+                        const winnerTeam = isTeam1Winner ? matchup.team1 : matchup.team2;
+                        const loserTeam = isTeam1Winner ? matchup.team2 : matchup.team1;
+                        const winnerScore = isTeam1Winner ? matchup.team1Score : matchup.team2Score;
+                        const loserScore = isTeam1Winner ? matchup.team2Score : matchup.team1Score;
+                        const winnerHighRank = isTeam1Winner ? matchup.team1HighRank : matchup.team2HighRank;
+                        const winnerLowRank = isTeam1Winner ? matchup.team1LowRank : matchup.team2LowRank;
+                        const loserHighRank = isTeam1Winner ? matchup.team2HighRank : matchup.team1HighRank;
+                        const loserLowRank = isTeam1Winner ? matchup.team2LowRank : matchup.team1LowRank;
+
+                        // Helper to render score with badge
+                        const renderScoreWithBadge = (score: number, highRank: number, lowRank: number, alignment: 'left' | 'right') => {
                           let showBadge = false;
                           let badgeRank = 0;
                           let badgeColor = '';
 
-                          // Show high rank badge for highest/closest/blowout sorts
-                          if ((sortMode === 'highest' || sortMode === 'closest' || sortMode === 'blowout') && highRank <= 100) {
+                          // Show high rank badge if in top 100 highest scores
+                          if (highRank <= 100 && highRank > 0) {
                             showBadge = true;
                             badgeRank = highRank;
                             badgeColor = 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300';
                           }
-                          // Show low rank badge for lowest sort
-                          else if (sortMode === 'lowest' && lowRank <= 100) {
+                          // Show low rank badge if in bottom 100 lowest scores
+                          else if (lowRank <= 100 && lowRank > 0) {
                             showBadge = true;
                             badgeRank = lowRank;
                             badgeColor = 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300';
                           }
 
+                          const badge = showBadge ? (
+                            <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-bold ${badgeColor}`}>
+                              #{badgeRank}
+                            </span>
+                          ) : null;
+
                           return (
-                            <div className="flex items-center justify-end space-x-2">
-                              <div className={`text-sm font-bold font-mono ${isWinner ? 'text-gray-900 dark:text-gray-100' : 'text-gray-600 dark:text-gray-400'}`}>
+                            <div className={`flex items-center gap-2 ${alignment === 'right' ? 'justify-end' : 'justify-start'}`}>
+                              {alignment === 'right' && badge}
+                              <span className="text-sm font-bold font-mono text-gray-900 dark:text-gray-100">
                                 {score.toFixed(2)}
-                              </div>
-                              {showBadge && (
-                                <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-bold ${badgeColor}`}>
-                                  #{badgeRank}
-                                </span>
-                              )}
+                              </span>
+                              {alignment === 'left' && badge}
                             </div>
                           );
                         };
@@ -964,58 +978,48 @@ export const Records = () => {
                             <td className="px-3 py-3 whitespace-nowrap">
                               <div className="flex items-center space-x-2">
                                 <TeamLogo
-                                  teamName={matchup.team1.teamName}
+                                  teamName={winnerTeam.teamName}
                                   size="sm"
                                   clickable
-                                  onClick={() => openTeamProfile(matchup.team1.userId, matchup.team1.teamName)}
+                                  onClick={() => openTeamProfile(winnerTeam.userId, winnerTeam.teamName)}
                                 />
                                 <div>
                                   <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                                    {matchup.team1.teamName}
+                                    {winnerTeam.teamName}
                                   </div>
                                   <div className="text-xs text-gray-500 dark:text-gray-400">
-                                    {matchup.team1.abbreviation}
+                                    {winnerTeam.abbreviation}
                                   </div>
                                 </div>
                               </div>
-                            </td>
-                            <td className="px-3 py-3 whitespace-nowrap text-right">
-                              {renderScoreWithBadge(
-                                matchup.team1Score,
-                                matchup.team1HighRank,
-                                matchup.team1LowRank,
-                                matchup.team1Score > matchup.team2Score
-                              )}
                             </td>
                             <td className="px-3 py-3 whitespace-nowrap">
-                              <div className="flex items-center space-x-2">
-                                <TeamLogo
-                                  teamName={matchup.team2.teamName}
-                                  size="sm"
-                                  clickable
-                                  onClick={() => openTeamProfile(matchup.team2.userId, matchup.team2.teamName)}
-                                />
-                                <div>
-                                  <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                                    {matchup.team2.teamName}
-                                  </div>
-                                  <div className="text-xs text-gray-500 dark:text-gray-400">
-                                    {matchup.team2.abbreviation}
-                                  </div>
-                                </div>
-                              </div>
-                            </td>
-                            <td className="px-3 py-3 whitespace-nowrap text-right">
-                              {renderScoreWithBadge(
-                                matchup.team2Score,
-                                matchup.team2HighRank,
-                                matchup.team2LowRank,
-                                matchup.team2Score > matchup.team1Score
-                              )}
+                              {renderScoreWithBadge(winnerScore, winnerHighRank, winnerLowRank, 'right')}
                             </td>
                             <td className="px-3 py-3 whitespace-nowrap text-center">
                               <div className="text-sm font-bold text-yellow-600 dark:text-yellow-400 font-mono">
                                 {matchup.margin.toFixed(2)}
+                              </div>
+                            </td>
+                            <td className="px-3 py-3 whitespace-nowrap">
+                              {renderScoreWithBadge(loserScore, loserHighRank, loserLowRank, 'left')}
+                            </td>
+                            <td className="px-3 py-3 whitespace-nowrap">
+                              <div className="flex items-center justify-end space-x-2">
+                                <div>
+                                  <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 text-right">
+                                    {loserTeam.teamName}
+                                  </div>
+                                  <div className="text-xs text-gray-500 dark:text-gray-400 text-right">
+                                    {loserTeam.abbreviation}
+                                  </div>
+                                </div>
+                                <TeamLogo
+                                  teamName={loserTeam.teamName}
+                                  size="sm"
+                                  clickable
+                                  onClick={() => openTeamProfile(loserTeam.userId, loserTeam.teamName)}
+                                />
                               </div>
                             </td>
                             <td className="px-3 py-3 whitespace-nowrap text-center">
