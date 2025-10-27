@@ -98,21 +98,24 @@ export const calculateRegularSeasonRecord = (
     }
 
     matchups.forEach(matchup => {
-      if (matchup.winner === userId) {
-        // Check if it's a tie game (same score)
-        if (matchup.winnerScore === matchup.loserScore) {
-          ties++;
-        } else {
-          wins++;
-        }
-      } else if (matchup.loser === userId) {
-        // Check if it's a tie game (same score)
-        if (matchup.winnerScore === matchup.loserScore) {
-          // Already counted above, don't double count
-          return;
-        } else {
-          losses++;
-        }
+      const isTie = matchup.winnerScore === matchup.loserScore;
+      const isUserWinner = matchup.winner === userId;
+      const isUserLoser = matchup.loser === userId;
+      const isUserInMatchup = isUserWinner || isUserLoser;
+
+      if (!isUserInMatchup) {
+        return;
+      }
+
+      // Count the result
+      if (isTie) {
+        // For ties, always count when user is involved
+        // Each matchup appears once in the array, so no double-counting
+        ties++;
+      } else if (isUserWinner) {
+        wins++;
+      } else {
+        losses++;
       }
     });
   });
@@ -146,24 +149,22 @@ export const calculateRegularSeasonStats = (
 
     matchups.forEach(matchup => {
       let userScore: number | null = null;
+      const isTie = matchup.winnerScore === matchup.loserScore;
 
       if (matchup.winner === userId) {
         userScore = matchup.winnerScore;
-        // Check if it's a tie game (same score)
-        if (matchup.winnerScore === matchup.loserScore) {
+        if (isTie) {
           ties++;
         } else {
           wins++;
         }
       } else if (matchup.loser === userId) {
         userScore = matchup.loserScore;
-        // Check if it's a tie game (same score)
-        if (matchup.winnerScore === matchup.loserScore) {
-          // Already counted above, don't double count
-          return;
-        } else {
+        if (!isTie) {
           losses++;
         }
+        // Note: For ties, don't count the record (already counted above)
+        // but DO include the score below for avg/high/low calculations
       }
 
       if (userScore !== null) {

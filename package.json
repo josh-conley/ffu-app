@@ -21,7 +21,8 @@
     "generate-data": "node scripts/generate-historical-data.js",
     "generate-current-season": "node scripts/generate-current-season.js",
     "generate-espn-data": "node scripts/generate-espn-data.js",
-    "fetch-players": "node scripts/fetch-player-data.js"
+    "fetch-players": "node scripts/fetch-player-data.js",
+    "export-weekly-scores": "node scripts/export-weekly-scores.cjs"
   },
   "dependencies": {
     "axios": "^1.7.2",
