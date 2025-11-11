@@ -207,7 +207,7 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
               {/* Division Header */}
               <div className="mb-3 relative pb-2">
                 <h4 className={`text-lg font-bold tracking-wide uppercase ${leagueColors.text}`}>
-                  {divisionGroup.name}
+                  {divisionGroup.name} Division
                 </h4>
                 <div className={`absolute bottom-0 left-0 right-0 h-0.5 ${leagueColors.iconBg} opacity-50`}></div>
               </div>
