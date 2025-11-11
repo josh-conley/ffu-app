@@ -8,11 +8,10 @@ import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 import type { LeagueTier } from '../types';
-import { ChevronDown, Crown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 export const Records = () => {
   const { getParam, updateParams } = useUrlParams();
-  const [activeView, setActiveView] = useState<'all-scores' | 'new-tab'>('all-scores');
   const [selectedLeague, setSelectedLeague] = useState<LeagueTier | 'ALL'>('ALL');
   const [selectedYear, setSelectedYear] = useState<string>('ALL');
   const [topScoresLeague, setTopScoresLeague] = useState<LeagueTier | 'ALL'>('ALL');
@@ -33,11 +32,6 @@ export const Records = () => {
 
   // Initialize from URL params on mount
   useEffect(() => {
-    const view = getParam('view', 'all-scores');
-    if (['all-scores', 'new-tab'].includes(view)) {
-      setActiveView(view as 'all-scores' | 'new-tab');
-    }
-
     const league = getParam('league', 'ALL');
     if (['ALL', 'PREMIER', 'MASTERS', 'NATIONAL'].includes(league)) {
       setSelectedLeague(league as LeagueTier | 'ALL');
@@ -276,55 +270,16 @@ export const Records = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">All-Time Records</h1>
-      </div>
-
-      {/* Tab Navigation */}
-      <div className="mb-6">
-        <div className="border-b border-gray-200 dark:border-gray-700">
-          <nav className="-mb-px flex space-x-8" aria-label="Tabs">
-            <button
-              onClick={() => {
-                setActiveView('all-scores');
-                updateParams({ view: 'all-scores' });
-              }}
-              className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
-                activeView === 'all-scores'
-                  ? 'border-ffu-red text-ffu-red dark:text-ffu-red'
-                  : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
-              }`}
-            >
-              All Scores
-            </button>
-            <button
-              onClick={() => {
-                setActiveView('new-tab');
-                updateParams({ view: 'new-tab' });
-              }}
-              className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
-                activeView === 'new-tab'
-                  ? 'border-ffu-red text-ffu-red dark:text-ffu-red'
-                  : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
-              }`}
-            >
-              New Tab
-            </button>
-          </nav>
+    <div className="max-w-7xl mx-auto">
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">All-Time Records</h1>
         </div>
-      </div>
 
-      {/* All Scores Tab Content */}
-      {activeView === 'all-scores' && records && (
-        <div className="space-y-6">
-          {/* All Game Scores */}
-          <div className="card">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
-              <Crown className="h-6 w-6 mr-3 text-ffu-red" />
-              All Game Scores
-            </h2>
-            <div>
+        {records && (
+          <div className="space-y-6">
+            <div className="card">
+              <div>
                 {/* Pagination Controls - Top */}
                 {totalPages > 1 && (
                   <div className="mb-4 flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-4">
@@ -392,79 +347,79 @@ export const Records = () => {
                         </div>
                       </div>
                     </div>
-                  <div className="space-y-2">
-                    <label className="block text-xs font-heading font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Filter by League</label>
-                    <div className="relative">
-                      <select
-                        value={topScoresLeague}
-                        onChange={(e) => setTopScoresLeague(e.target.value as LeagueTier | 'ALL')}
-                        className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
-                      >
-                        {leagues.map(league => (
-                          <option key={league} value={league}>{getLeagueName(league)}</option>
-                        ))}
-                      </select>
-                      <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                        <ChevronDown className="h-4 w-4 text-gray-400" />
+                    <div className="space-y-2">
+                      <label className="block text-xs font-heading font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Filter by League</label>
+                      <div className="relative">
+                        <select
+                          value={topScoresLeague}
+                          onChange={(e) => setTopScoresLeague(e.target.value as LeagueTier | 'ALL')}
+                          className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                        >
+                          {leagues.map(league => (
+                            <option key={league} value={league}>{getLeagueName(league)}</option>
+                          ))}
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                          <ChevronDown className="h-4 w-4 text-gray-400" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="block text-xs font-heading font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Filter by Year</label>
+                      <div className="relative">
+                        <select
+                          value={topScoresYear}
+                          onChange={(e) => setTopScoresYear(e.target.value)}
+                          className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                        >
+                          {years.map(year => (
+                            <option key={year} value={year}>{year === 'ALL' ? 'All Years' : year}</option>
+                          ))}
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                          <ChevronDown className="h-4 w-4 text-gray-400" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="block text-xs font-heading font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Filter by Team</label>
+                      <div className="relative">
+                        <select
+                          value={topScoresTeam}
+                          onChange={(e) => setTopScoresTeam(e.target.value)}
+                          className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                        >
+                          <option value="ALL">All Teams</option>
+                          {allTeams.map(team => (
+                            <option key={team} value={team}>{team}</option>
+                          ))}
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                          <ChevronDown className="h-4 w-4 text-gray-400" />
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="block text-xs font-heading font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Filter by Year</label>
-                    <div className="relative">
-                      <select
-                        value={topScoresYear}
-                        onChange={(e) => setTopScoresYear(e.target.value)}
-                        className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
-                      >
-                        {years.map(year => (
-                          <option key={year} value={year}>{year === 'ALL' ? 'All Years' : year}</option>
-                        ))}
-                      </select>
-                      <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                        <ChevronDown className="h-4 w-4 text-gray-400" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="block text-xs font-heading font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Filter by Team</label>
-                    <div className="relative">
-                      <select
-                        value={topScoresTeam}
-                        onChange={(e) => setTopScoresTeam(e.target.value)}
-                        className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
-                      >
-                        <option value="ALL">All Teams</option>
-                        {allTeams.map(team => (
-                          <option key={team} value={team}>{team}</option>
-                        ))}
-                      </select>
-                      <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                        <ChevronDown className="h-4 w-4 text-gray-400" />
-                      </div>
-                    </div>
+                  {/* Playoff Filter Checkbox */}
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      id="excludePlayoffs"
+                      checked={excludePlayoffs}
+                      onChange={(e) => setExcludePlayoffs(e.target.checked)}
+                      className="h-4 w-4 text-ffu-red focus:ring-ffu-red border-gray-300 dark:border-gray-600 rounded cursor-pointer"
+                    />
+                    <label
+                      htmlFor="excludePlayoffs"
+                      className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer select-none"
+                    >
+                      Exclude Playoff & Consolation Games
+                    </label>
                   </div>
                 </div>
-
-                {/* Playoff Filter Checkbox */}
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    id="excludePlayoffs"
-                    checked={excludePlayoffs}
-                    onChange={(e) => setExcludePlayoffs(e.target.checked)}
-                    className="h-4 w-4 text-ffu-red focus:ring-ffu-red border-gray-300 dark:border-gray-600 rounded cursor-pointer"
-                  />
-                  <label
-                    htmlFor="excludePlayoffs"
-                    className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer select-none"
-                  >
-                    Exclude Playoff & Consolation Games
-                  </label>
-                </div>
-              </div>
 
                 <div className="overflow-x-auto">
                   <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
@@ -664,57 +619,46 @@ export const Records = () => {
                   </div>
                 )}
               </div>
-          </div>
-        </div>
-      )}
-
-      {/* New Tab Placeholder */}
-      {activeView === 'new-tab' && (
-        <div className="card">
-          <div className="text-center py-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Coming Soon</h2>
-            <p className="text-gray-600 dark:text-gray-400">
-              This tab will be used for additional content in the future.
-            </p>
-          </div>
-        </div>
-      )}
-
-      {!records && (
-        <div className="text-center py-12">
-          <div className="text-gray-500 dark:text-gray-400">
-            No records available. Data is being processed...
-          </div>
-        </div>
-      )}
-
-      {/* Secret Dak Trigger - Bottom Right */}
-      <Link
-        to="/secret-dak"
-        className="fixed bottom-4 right-4 group"
-        title="Secret Dak"
-      >
-        <div className="relative">
-          {/* You'll need to add the Dak image here */}
-          <div className="w-16 h-16 flex items-center justify-center text-white font-bold text-xs transition-all duration-300 transform hover:scale-105">
-            <img
-              src={dakUrl}
-              alt={`dak`}
-              className="w-full h-full object-cover transition-colors"
-              onError={() => setImageError(true)}
-              onLoad={() => setImageError(false)}
-            />
-          </div>
-
-          {/* Speech bubble */}
-          <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-            <div className="bg-gray-800 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap relative">
-              pssst! pick me 1.01!
-              <div className="absolute top-full right-4 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
             </div>
           </div>
-        </div>
-      </Link>
+        )}
+
+        {!records && (
+          <div className="text-center py-12">
+            <div className="text-gray-500 dark:text-gray-400">
+              No records available. Data is being processed...
+            </div>
+          </div>
+        )}
+
+        {/* Secret Dak Trigger - Bottom Right */}
+        <Link
+          to="/secret-dak"
+          className="fixed bottom-4 right-4 group"
+          title="Secret Dak"
+        >
+          <div className="relative">
+            {/* You'll need to add the Dak image here */}
+            <div className="w-16 h-16 flex items-center justify-center text-white font-bold text-xs transition-all duration-300 transform hover:scale-105">
+              <img
+                src={dakUrl}
+                alt={`dak`}
+                className="w-full h-full object-cover transition-colors"
+                onError={() => setImageError(true)}
+                onLoad={() => setImageError(false)}
+              />
+            </div>
+
+            {/* Speech bubble */}
+            <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+              <div className="bg-gray-800 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap relative">
+                pssst! pick me 1.01!
+                <div className="absolute top-full right-4 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </div>
     </div>
   );
 };

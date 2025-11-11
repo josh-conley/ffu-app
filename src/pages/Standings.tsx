@@ -126,7 +126,8 @@ export const Standings = () => {
   const isActiveSeason = isActiveYear(currentYear);
 
   return (
-    <div className="space-y-6">
+    <div className="max-w-5xl mx-auto">
+      <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">League Standings</h1>
@@ -421,6 +422,7 @@ export const Standings = () => {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

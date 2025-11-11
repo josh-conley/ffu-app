@@ -390,7 +390,8 @@ export const Members = () => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="max-w-5xl mx-auto">
+      <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
           {isCompareMode ? 'Compare Members' : 'Members'}
@@ -808,6 +809,7 @@ export const Members = () => {
         </div>
       )}
 
+      </div>
     </div>
   );
 }
