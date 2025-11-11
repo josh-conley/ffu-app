@@ -7,10 +7,10 @@ import { StandingsTable } from '../components/League/StandingsTable';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../config/constants';
 import { getLeagueName } from '../constants/leagues';
-import { ChevronDown, Crown } from 'lucide-react';
+import { ChevronDown, Crown, Star } from 'lucide-react';
 import type { LeagueTier } from '../types';
 import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
-import { calculateRankings, getTiebreakerInfo } from '../utils/ranking';
+import { calculateRankings, getTiebreakerInfo, identifyDivisionLeaders, getDivisionName } from '../utils/ranking';
 import { StandingsTooltip } from '../components/Common/StandingsTooltip';
 
 // Component to render StandingsTable with matchup data for active seasons
@@ -179,6 +179,11 @@ export const Standings = () => {
                 // Only calculate rankings for active seasons, use original for historical
                 const rankedStandings = isActiveSeason ? calculateRankings(leagueData.standings, matchupsByWeek, currentYear) : leagueData.standings;
 
+                // Get division data (Sleeper era only, 2021+)
+                const divisionNames = (leagueData as any).divisionNames;
+                const hasDivisions = rankedStandings.some(s => s.division !== undefined && s.division !== null);
+                const divisionLeaders = hasDivisions ? identifyDivisionLeaders(rankedStandings, matchupsByWeek, currentYear) : null;
+
                 const getLeagueColors = (leagueType: string) => {
                   const colorMap = {
                     PREMIER: {
@@ -221,6 +226,19 @@ export const Standings = () => {
                     <div className="space-y-3 mb-4">
                       {rankedStandings.map((standing, index) => {
                         const tiebreakerInfo = getTiebreakerInfo(rankedStandings, index, matchupsByWeek, currentYear);
+                        const isTop2Leader = divisionLeaders?.top2Leaders.has(standing.userId);
+                        const isDivisionLeader = divisionLeaders?.allLeaders.has(standing.userId);
+
+                        // Division indicator dot colors (very subtle)
+                        const getDivisionDotColor = (divNum: number) => {
+                          const dotColors: Record<number, string> = {
+                            1: 'bg-blue-400 dark:bg-blue-500',
+                            2: 'bg-green-400 dark:bg-green-500',
+                            3: 'bg-orange-400 dark:bg-orange-500',
+                            4: 'bg-purple-400 dark:bg-purple-500'
+                          };
+                          return dotColors[divNum] || dotColors[1];
+                        };
 
                         return (
                           <div key={standing.userId} className="flex items-center space-x-3">
@@ -249,14 +267,26 @@ export const Standings = () => {
                               {!isActiveSeason && standing.rank === 1 && (
                                 <Crown className="w-3 h-3 text-yellow-500" />
                               )}
+                              {isTop2Leader && (
+                                <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
+                              )}
                             </div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                            <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1 flex-wrap">
                               <span>
                                 {standing.wins}-{standing.losses}{standing.ties ? `-${standing.ties}` : ''}
                                 {!isActiveSeason && standing.rank === 1 && (
                                   <span className={`ml-1 text-xs font-medium ${colors.text}`}>Champion</span>
                                 )}
                               </span>
+                              {hasDivisions && standing.division && (
+                                <>
+                                  <span className="text-gray-400 dark:text-gray-500">•</span>
+                                  <span className="inline-flex items-center gap-1">
+                                    <span className={`w-1.5 h-1.5 rounded-full ${getDivisionDotColor(standing.division)}`}></span>
+                                    <span className="text-gray-500 dark:text-gray-400">{getDivisionName(standing.division, divisionNames)}</span>
+                                  </span>
+                                </>
+                              )}
                               {tiebreakerInfo && (
                                 <StandingsTooltip tiebreakerInfo={tiebreakerInfo} size="sm" />
                               )}

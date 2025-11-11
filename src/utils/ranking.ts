@@ -10,10 +10,15 @@ export interface RankingTiebreakers {
   ties?: number;
 }
 
-export interface TiebreakerInfo {
+export interface TiebreakerLayer {
+  context: 'division-leaders' | 'wild-card';
   h2hRecords: string[];
   usesPointsFor: boolean;
   pointsFor?: number;
+}
+
+export interface TiebreakerInfo {
+  layers: TiebreakerLayer[]; // Multiple tiebreaker contexts
 }
 
 export interface DivisionGroup {
@@ -371,8 +376,51 @@ export function getDisplayRank(rank: number): string {
 }
 
 /**
+ * Identify division leaders and top 2 division leaders
+ * Used to determine tiebreaker context
+ */
+export function identifyDivisionLeaders(
+  standings: EnhancedSeasonStandings[],
+  matchupsByWeek?: Record<number, any[]>,
+  year?: string
+): { top2Leaders: Set<string>; allLeaders: Set<string> } {
+  // Group by division
+  const divisionMap = new Map<number, EnhancedSeasonStandings[]>();
+  standings.forEach(standing => {
+    const division = standing.division ?? 0;
+    if (!divisionMap.has(division)) {
+      divisionMap.set(division, []);
+    }
+    divisionMap.get(division)!.push(standing);
+  });
+
+  // Find division leaders (best record in each division)
+  const divisionLeaders: EnhancedSeasonStandings[] = [];
+  divisionMap.forEach(divisionTeams => {
+    const sortedDivision = sortWithTiebreakers(divisionTeams, matchupsByWeek, year);
+    if (sortedDivision.length > 0) {
+      divisionLeaders.push(sortedDivision[0]);
+    }
+  });
+
+  // Sort division leaders by record
+  const sortedDivisionLeaders = sortWithTiebreakers(divisionLeaders, matchupsByWeek, year);
+
+  // Top 2 leaders
+  const top2Leaders = sortedDivisionLeaders.slice(0, 2);
+
+  return {
+    top2Leaders: new Set(top2Leaders.map(leader => leader.userId)),
+    allLeaders: new Set(divisionLeaders.map(leader => leader.userId))
+  };
+}
+
+/**
  * Get tiebreaker information for a team to display in tooltips
  * Returns null if team is not tied with any other teams
+ * Two-tier approach:
+ *  1. Division leaders (seeds 1-2): show tiebreakers vs other division leaders
+ *  2. Everyone else (seeds 3-12): show tiebreakers vs all other non-leaders, regardless of division
  */
 export function getTiebreakerInfo(
   standings: EnhancedSeasonStandings[],
@@ -387,14 +435,73 @@ export function getTiebreakerInfo(
   const currentStanding = standings[currentIndex];
   const currentWinPct = getWinPct(currentStanding);
 
-  // Find ALL teams with the same win percentage (tied teams)
-  const tiedTeams = standings.filter((standing, idx) =>
-    idx !== currentIndex && getWinPct(standing) === currentWinPct
-  );
+  // Check if we have divisions
+  const hasDivisions = standings.some(s => s.division !== undefined && s.division !== null);
 
-  if (tiedTeams.length === 0) {
-    return null; // No tied teams
+  if (!hasDivisions) {
+    // No divisions: compare with all teams at same win percentage
+    const tiedTeams = standings.filter((standing, idx) =>
+      idx !== currentIndex && getWinPct(standing) === currentWinPct
+    );
+
+    if (tiedTeams.length === 0) return null;
+
+    const layer = buildTiebreakerLayer(currentStanding, tiedTeams, matchupsByWeek, year, 'wild-card');
+    return layer ? { layers: [layer] } : null;
   }
+
+  // With divisions: two-tier approach with potential multiple layers
+  const leaders = identifyDivisionLeaders(standings, matchupsByWeek, year);
+  const isCurrentTeamTop2Leader = leaders.top2Leaders.has(currentStanding.userId);
+  const isCurrentTeamDivisionLeader = leaders.allLeaders.has(currentStanding.userId);
+
+  const layers: TiebreakerLayer[] = [];
+
+  // Check if team is a division leader (any rank)
+  if (isCurrentTeamDivisionLeader) {
+    // First, check against all other division leaders with same record
+    const otherDivisionLeadersTied = standings.filter((standing, idx) =>
+      idx !== currentIndex &&
+      leaders.allLeaders.has(standing.userId) &&
+      getWinPct(standing) === currentWinPct
+    );
+
+    if (otherDivisionLeadersTied.length > 0) {
+      // Show how this team ranks among division leaders
+      const layer = buildTiebreakerLayer(currentStanding, otherDivisionLeadersTied, matchupsByWeek, year, 'division-leaders');
+      if (layer) layers.push(layer);
+    }
+  }
+
+  // If not a top 2 leader, also check against seeds 3-12 pool
+  if (!isCurrentTeamTop2Leader) {
+    const otherNonTop2Tied = standings.filter((standing, idx) =>
+      idx !== currentIndex &&
+      !leaders.top2Leaders.has(standing.userId) &&
+      getWinPct(standing) === currentWinPct
+    );
+
+    if (otherNonTop2Tied.length > 0) {
+      // Show how this team ranks in the seeds 3-12 pool
+      const layer = buildTiebreakerLayer(currentStanding, otherNonTop2Tied, matchupsByWeek, year, 'wild-card');
+      if (layer) layers.push(layer);
+    }
+  }
+
+  return layers.length > 0 ? { layers } : null;
+}
+
+/**
+ * Build a single tiebreaker layer from a list of tied teams
+ */
+function buildTiebreakerLayer(
+  currentStanding: EnhancedSeasonStandings,
+  tiedTeams: EnhancedSeasonStandings[],
+  matchupsByWeek: Record<number, any[]>,
+  year: string,
+  context: 'division-leaders' | 'wild-card'
+): TiebreakerLayer | null {
+  if (tiedTeams.length === 0) return null;
 
   // Build individual H2H records against each tied team
   const h2hRecords: string[] = [];
@@ -417,20 +524,20 @@ export function getTiebreakerInfo(
   if (h2hRecords.length > 0) {
     // Show individual H2H records if any games were played
     if (totalWins !== totalLosses) {
-      return { h2hRecords, usesPointsFor: false };
+      return { context, h2hRecords, usesPointsFor: false };
     }
     // H2H is tied overall, so points for is the tiebreaker
-    return { h2hRecords, usesPointsFor: true, pointsFor: currentStanding.pointsFor };
+    return { context, h2hRecords, usesPointsFor: true, pointsFor: currentStanding.pointsFor };
   }
 
   // No H2H games played, points for is the tiebreaker
-  return { h2hRecords: [], usesPointsFor: true, pointsFor: currentStanding.pointsFor };
+  return { context, h2hRecords: [], usesPointsFor: true, pointsFor: currentStanding.pointsFor };
 }
 
 /**
  * Get division name for display
  */
-function getDivisionName(divisionNumber: number, customNames?: Record<number, string>): string {
+export function getDivisionName(divisionNumber: number, customNames?: Record<number, string>): string {
   // Use custom name if provided, otherwise default to "Division N"
   if (customNames && customNames[divisionNumber]) {
     return customNames[divisionNumber];
