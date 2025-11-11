@@ -39,16 +39,6 @@ export function PlayerSelector({
   label = "Select Member"
 }: PlayerSelectorProps) {
 
-  const handlePlayer1Change = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onSelectPlayer(e.target.value);
-  };
-
-  const handlePlayer2Change = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (onSelectPlayer2) {
-      onSelectPlayer2(e.target.value);
-    }
-  };
-
   // Group players by league
   const groupedPlayers = {
     PREMIER: players.filter(p => p.currentLeague === 'PREMIER'),
