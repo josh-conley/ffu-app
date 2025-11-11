@@ -12,6 +12,7 @@ import { getSeasonLength, isSleeperEra } from '../utils/era-detection';
 import { ChevronDown, Filter } from 'lucide-react';
 import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 import { shouldShowMatchupColors } from '../utils/nfl-schedule';
+import { TeamSelector } from '../components/Common/TeamSelector';
 
 // Placement Tag Component
 const PlacementTag = ({ placementType }: { placementType: string }) => {
@@ -353,39 +354,26 @@ export const Matchups = () => {
             </div>
           </div>
 
-          <div className="space-y-2">
-            <label className="block text-xs sm:text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Team</label>
-            <div className="relative">
-              <select
-                value={selectedTeam}
-                onChange={(e) => {
-                  const team = e.target.value;
-                  setSelectedTeam(team);
-                  updateParams({ team: team === 'ALL' ? null : team });
-                }}
-                className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
-              >
-                <option value="ALL">All Teams</option>
-                {groupedTeamOptions[selectedLeague]?.length > 0 && (
-                  <optgroup label={`${getLeagueName(selectedLeague)} (${selectedYear})`}>
-                    {groupedTeamOptions[selectedLeague].map(team => (
-                      <option key={team.sleeperId} value={team.sleeperId}>{team.teamName}</option>
-                    ))}
-                  </optgroup>
-                )}
-                {groupedTeamOptions.PAST?.length > 0 && (
-                  <optgroup label="Other Members">
-                    {groupedTeamOptions.PAST.map(team => (
-                      <option key={team.sleeperId} value={team.sleeperId}>{team.teamName}</option>
-                    ))}
-                  </optgroup>
-                )}
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                <ChevronDown className="h-4 w-4 text-gray-400" />
-              </div>
-            </div>
-          </div>
+          <TeamSelector
+            label="Team"
+            value={selectedTeam}
+            onChange={(team) => {
+              setSelectedTeam(team);
+              updateParams({ team: team === 'ALL' ? null : team });
+            }}
+            groupedTeams={{
+              [selectedLeague]: groupedTeamOptions[selectedLeague]?.map(t => ({
+                teamName: t.teamName,
+                abbreviation: t.abbreviation,
+                userId: t.sleeperId
+              })) || [],
+              PAST: groupedTeamOptions.PAST?.map(t => ({
+                teamName: t.teamName,
+                abbreviation: t.abbreviation,
+                userId: t.sleeperId
+              })) || []
+            }}
+          />
         </div>
       </div>
 

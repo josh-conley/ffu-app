@@ -10,6 +10,7 @@ import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 import type { LeagueTier } from '../types';
 import { ChevronDown } from 'lucide-react';
 import { USERS, CURRENT_YEAR } from '../config/constants';
+import { TeamSelector } from '../components/Common/TeamSelector';
 
 export const Records = () => {
   const { getParam, updateParams } = useUrlParams();
@@ -85,13 +86,14 @@ export const Records = () => {
   const groupedTeams = useMemo(() => {
     if (!records?.topScores) return { PREMIER: [], MASTERS: [], NATIONAL: [], PAST: [] };
 
-    // Get unique teams with their userId
-    const teamsMap = new Map<string, { teamName: string; userId: string }>();
+    // Get unique teams with their userId and abbreviation
+    const teamsMap = new Map<string, { teamName: string; userId: string; abbreviation: string }>();
     records.topScores.forEach(record => {
       if (!teamsMap.has(record.userInfo.userId)) {
         teamsMap.set(record.userInfo.userId, {
           teamName: record.userInfo.teamName,
-          userId: record.userInfo.userId
+          userId: record.userInfo.userId,
+          abbreviation: record.userInfo.abbreviation
         });
       }
     });
@@ -419,49 +421,12 @@ export const Records = () => {
                       </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="block text-xs font-heading font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Filter by Team</label>
-                      <div className="relative">
-                        <select
-                          value={topScoresTeam}
-                          onChange={(e) => setTopScoresTeam(e.target.value)}
-                          className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
-                        >
-                          <option value="ALL">All Teams</option>
-                          {groupedTeams.PREMIER.length > 0 && (
-                            <optgroup label="Premier League">
-                              {groupedTeams.PREMIER.map(team => (
-                                <option key={team.teamName} value={team.teamName}>{team.teamName}</option>
-                              ))}
-                            </optgroup>
-                          )}
-                          {groupedTeams.MASTERS.length > 0 && (
-                            <optgroup label="Masters League">
-                              {groupedTeams.MASTERS.map(team => (
-                                <option key={team.teamName} value={team.teamName}>{team.teamName}</option>
-                              ))}
-                            </optgroup>
-                          )}
-                          {groupedTeams.NATIONAL.length > 0 && (
-                            <optgroup label="National League">
-                              {groupedTeams.NATIONAL.map(team => (
-                                <option key={team.teamName} value={team.teamName}>{team.teamName}</option>
-                              ))}
-                            </optgroup>
-                          )}
-                          {groupedTeams.PAST.length > 0 && (
-                            <optgroup label="Past Members">
-                              {groupedTeams.PAST.map(team => (
-                                <option key={team.teamName} value={team.teamName}>{team.teamName}</option>
-                              ))}
-                            </optgroup>
-                          )}
-                        </select>
-                        <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                          <ChevronDown className="h-4 w-4 text-gray-400" />
-                        </div>
-                      </div>
-                    </div>
+                    <TeamSelector
+                      label="Filter by Team"
+                      value={topScoresTeam}
+                      onChange={setTopScoresTeam}
+                      groupedTeams={groupedTeams}
+                    />
                   </div>
 
                   {/* Playoff Filter Checkbox */}

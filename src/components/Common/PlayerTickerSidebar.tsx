@@ -9,6 +9,7 @@ import { isSleeperEra } from '../../utils/era-detection';
 import { getLeagueId, getUserById } from '../../config/constants';
 import type { NFLPlayerStats } from '../../types/nfl-stats';
 import type { LeagueTier, WeekMatchupsResponse } from '../../types';
+import { TeamSelector } from './TeamSelector';
 
 interface PlayerItemProps {
   player: NFLPlayerStats;
@@ -487,41 +488,14 @@ export const PlayerTickerSidebar = () => {
             <option value="DEF">DEF</option>
           </select>
 
-          <select
-            value={selectedTeamMember}
-            onChange={(e) => setSelectedTeamMember(e.target.value)}
-            className="flex-1 text-xs py-1 px-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-ffu-red"
-          >
-            <option value="ALL">All Teams</option>
-            {groupedTeamMembers.PREMIER.length > 0 && (
-              <optgroup label="Premier League">
-                {groupedTeamMembers.PREMIER.map(member => (
-                  <option key={member.teamName} value={member.teamName}>{member.teamName}</option>
-                ))}
-              </optgroup>
-            )}
-            {groupedTeamMembers.MASTERS.length > 0 && (
-              <optgroup label="Masters League">
-                {groupedTeamMembers.MASTERS.map(member => (
-                  <option key={member.teamName} value={member.teamName}>{member.teamName}</option>
-                ))}
-              </optgroup>
-            )}
-            {groupedTeamMembers.NATIONAL.length > 0 && (
-              <optgroup label="National League">
-                {groupedTeamMembers.NATIONAL.map(member => (
-                  <option key={member.teamName} value={member.teamName}>{member.teamName}</option>
-                ))}
-              </optgroup>
-            )}
-            {groupedTeamMembers.PAST.length > 0 && (
-              <optgroup label="Past Members">
-                {groupedTeamMembers.PAST.map(member => (
-                  <option key={member.teamName} value={member.teamName}>{member.teamName}</option>
-                ))}
-              </optgroup>
-            )}
-          </select>
+          <div className="flex-1">
+            <TeamSelector
+              value={selectedTeamMember}
+              onChange={setSelectedTeamMember}
+              groupedTeams={groupedTeamMembers}
+              compact={true}
+            />
+          </div>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
-import { ChevronDown } from 'lucide-react';
 import type { LeagueTier } from '../../types';
+import { TeamSelector } from '../Common/TeamSelector';
 
 interface PlayerOption {
   sleeperId: string;
@@ -57,69 +57,66 @@ export function PlayerSelector({
     PAST: players.filter(p => p.currentLeague === 'PAST')
   };
 
-  // Helper to render player options
-  const renderPlayerOption = (player: PlayerOption) => (
-    <option key={player.sleeperId} value={player.sleeperId}>
-      {player.userInfo.teamName} ({player.userInfo.abbreviation}) - {player.totalWins}-{player.totalLosses}{player.totalTies > 0 ? `-${player.totalTies}` : ''}
-    </option>
-  );
+  // Convert to TeamSelector format
+  const getTeamSelectorGroups = (excludePlayerId?: string) => {
+    return {
+      PREMIER: groupedPlayers.PREMIER
+        .filter(p => p.sleeperId !== excludePlayerId)
+        .map(p => ({
+          teamName: p.userInfo.teamName,
+          abbreviation: p.userInfo.abbreviation,
+          userId: p.sleeperId
+        })),
+      MASTERS: groupedPlayers.MASTERS
+        .filter(p => p.sleeperId !== excludePlayerId)
+        .map(p => ({
+          teamName: p.userInfo.teamName,
+          abbreviation: p.userInfo.abbreviation,
+          userId: p.sleeperId
+        })),
+      NATIONAL: groupedPlayers.NATIONAL
+        .filter(p => p.sleeperId !== excludePlayerId)
+        .map(p => ({
+          teamName: p.userInfo.teamName,
+          abbreviation: p.userInfo.abbreviation,
+          userId: p.sleeperId
+        })),
+      PAST: groupedPlayers.PAST
+        .filter(p => p.sleeperId !== excludePlayerId)
+        .map(p => ({
+          teamName: p.userInfo.teamName,
+          abbreviation: p.userInfo.abbreviation,
+          userId: p.sleeperId
+        }))
+    };
+  };
 
-  // Helper to render grouped options
-  const renderGroupedOptions = (excludePlayerId?: string) => (
-    <>
-      {groupedPlayers.PREMIER.length > 0 && (
-        <optgroup label="Premier League">
-          {groupedPlayers.PREMIER
-            .filter(p => p.sleeperId !== excludePlayerId)
-            .map(renderPlayerOption)}
-        </optgroup>
-      )}
-      {groupedPlayers.MASTERS.length > 0 && (
-        <optgroup label="Masters League">
-          {groupedPlayers.MASTERS
-            .filter(p => p.sleeperId !== excludePlayerId)
-            .map(renderPlayerOption)}
-        </optgroup>
-      )}
-      {groupedPlayers.NATIONAL.length > 0 && (
-        <optgroup label="National League">
-          {groupedPlayers.NATIONAL
-            .filter(p => p.sleeperId !== excludePlayerId)
-            .map(renderPlayerOption)}
-        </optgroup>
-      )}
-      {groupedPlayers.PAST.length > 0 && (
-        <optgroup label="Past Members">
-          {groupedPlayers.PAST
-            .filter(p => p.sleeperId !== excludePlayerId)
-            .map(renderPlayerOption)}
-        </optgroup>
-      )}
-    </>
-  );
+  // Get selected player info
+  const getSelectedPlayerTeamName = (playerId?: string) => {
+    if (!playerId) return 'ALL';
+    const player = players.find(p => p.sleeperId === playerId);
+    return player?.userInfo.teamName || 'ALL';
+  };
 
   if (!isCompareMode) {
     // Single player selector
     return (
       <div className="card">
-        <div className="space-y-2">
-          <label className="block text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">
-            {label}
-          </label>
-          <div className="relative">
-            <select
-              value={selectedPlayerId || ''}
-              onChange={handlePlayer1Change}
-              className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 rounded appearance-none focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red"
-            >
-              <option value="">{placeholder}</option>
-              {renderGroupedOptions()}
-            </select>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-              <ChevronDown className="h-5 w-5 text-gray-400" />
-            </div>
-          </div>
-        </div>
+        <TeamSelector
+          label={label}
+          value={getSelectedPlayerTeamName(selectedPlayerId)}
+          onChange={(teamName) => {
+            if (teamName === 'ALL') {
+              onSelectPlayer('');
+            } else {
+              const player = players.find(p => p.userInfo.teamName === teamName);
+              if (player) onSelectPlayer(player.sleeperId);
+            }
+          }}
+          groupedTeams={getTeamSelectorGroups()}
+          allTeamsLabel={placeholder}
+          placeholder={placeholder}
+        />
       </div>
     );
   }
@@ -130,44 +127,38 @@ export function PlayerSelector({
       <div className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Player 1 Selector */}
-          <div className="space-y-2">
-            <label className="block text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">
-              First Member
-            </label>
-            <div className="relative">
-              <select
-                value={selectedPlayerId || ''}
-                onChange={handlePlayer1Change}
-                className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 rounded appearance-none focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red"
-              >
-                <option value="">Choose first member...</option>
-                {renderGroupedOptions(selectedPlayer2Id)}
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <ChevronDown className="h-5 w-5 text-gray-400" />
-              </div>
-            </div>
-          </div>
+          <TeamSelector
+            label="First Member"
+            value={getSelectedPlayerTeamName(selectedPlayerId)}
+            onChange={(teamName) => {
+              if (teamName === 'ALL') {
+                onSelectPlayer('');
+              } else {
+                const player = players.find(p => p.userInfo.teamName === teamName);
+                if (player) onSelectPlayer(player.sleeperId);
+              }
+            }}
+            groupedTeams={getTeamSelectorGroups(selectedPlayer2Id)}
+            allTeamsLabel="Choose first member..."
+            placeholder="Choose first member..."
+          />
 
           {/* Player 2 Selector */}
-          <div className="space-y-2">
-            <label className="block text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">
-              Second Member
-            </label>
-            <div className="relative">
-              <select
-                value={selectedPlayer2Id || ''}
-                onChange={handlePlayer2Change}
-                className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 rounded appearance-none focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red"
-              >
-                <option value="">Choose second member...</option>
-                {renderGroupedOptions(selectedPlayerId)}
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <ChevronDown className="h-5 w-5 text-gray-400" />
-              </div>
-            </div>
-          </div>
+          <TeamSelector
+            label="Second Member"
+            value={getSelectedPlayerTeamName(selectedPlayer2Id)}
+            onChange={(teamName) => {
+              if (teamName === 'ALL') {
+                if (onSelectPlayer2) onSelectPlayer2('');
+              } else {
+                const player = players.find(p => p.userInfo.teamName === teamName);
+                if (player && onSelectPlayer2) onSelectPlayer2(player.sleeperId);
+              }
+            }}
+            groupedTeams={getTeamSelectorGroups(selectedPlayerId)}
+            allTeamsLabel="Choose second member..."
+            placeholder="Choose second member..."
+          />
         </div>
       </div>
     </div>
