@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import { useNFLStats } from '../../hooks/useNFLStats';
 import { LoadingSpinner } from './LoadingSpinner';
 import { TeamLogo } from './TeamLogo';
@@ -351,16 +351,45 @@ export const PlayerTickerSidebar = () => {
     ...nflStats.defenses.slice(0, 12).map((p, i) => ({ ...p, positionLabel: 'DEF', positionRank: i + 1 }))
   ].sort((a, b) => (b.pts_half_ppr || 0) - (a.pts_half_ppr || 0)) : [];
 
-  // Get unique team members who started players with full names
-  const teamMembers = Array.from(new Map(
-    allPlayersUnfiltered.flatMap(p =>
-      (p as any).ffuStarters?.map((s: any) => [s.userId, { teamName: s.teamName, abbreviation: s.abbreviation }]) || []
-    )
-  ).values()).sort((a, b) => {
-    const memberA = a as { teamName: string; abbreviation: string };
-    const memberB = b as { teamName: string; abbreviation: string };
-    return memberA.teamName.localeCompare(memberB.teamName);
-  });
+  // Get unique team members who started players with full names and their league
+  const teamMembers = useMemo(() => {
+    const uniqueMembers = Array.from(new Map(
+      allPlayersUnfiltered.flatMap(p =>
+        (p as any).ffuStarters?.map((s: any) => [s.userId, { teamName: s.teamName, abbreviation: s.abbreviation, userId: s.userId }]) || []
+      )
+    ).values());
+
+    // Determine league for each member based on matchups cache
+    return uniqueMembers.map(member => {
+      const typedMember = member as { teamName: string; abbreviation: string; userId: string };
+      let league: LeagueTier | 'PAST' = 'PAST';
+
+      // Check which league this user is in based on matchups cache
+      for (const [leagueTier, matchups] of matchupsCache.entries()) {
+        if (matchups && matchups.matchups) {
+          const userInLeague = matchups.matchups.some(m =>
+            m?.winnerInfo?.userId === typedMember.userId || m?.loserInfo?.userId === typedMember.userId
+          );
+          if (userInLeague) {
+            league = leagueTier;
+            break;
+          }
+        }
+      }
+
+      return { ...typedMember, league };
+    }).sort((a, b) => a.teamName.localeCompare(b.teamName));
+  }, [allPlayersUnfiltered, matchupsCache]);
+
+  // Group team members by league
+  const groupedTeamMembers = useMemo(() => {
+    return {
+      PREMIER: teamMembers.filter(m => m.league === 'PREMIER'),
+      MASTERS: teamMembers.filter(m => m.league === 'MASTERS'),
+      NATIONAL: teamMembers.filter(m => m.league === 'NATIONAL'),
+      PAST: teamMembers.filter(m => m.league === 'PAST')
+    };
+  }, [teamMembers]);
 
   // Apply filters
   const allPlayers = allPlayersUnfiltered.filter(player => {
@@ -464,12 +493,34 @@ export const PlayerTickerSidebar = () => {
             className="flex-1 text-xs py-1 px-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-ffu-red"
           >
             <option value="ALL">All Teams</option>
-            {teamMembers.map(member => {
-              const typedMember = member as { teamName: string; abbreviation: string };
-              return (
-                <option key={typedMember.teamName} value={typedMember.teamName}>{typedMember.teamName}</option>
-              );
-            })}
+            {groupedTeamMembers.PREMIER.length > 0 && (
+              <optgroup label="Premier League">
+                {groupedTeamMembers.PREMIER.map(member => (
+                  <option key={member.teamName} value={member.teamName}>{member.teamName}</option>
+                ))}
+              </optgroup>
+            )}
+            {groupedTeamMembers.MASTERS.length > 0 && (
+              <optgroup label="Masters League">
+                {groupedTeamMembers.MASTERS.map(member => (
+                  <option key={member.teamName} value={member.teamName}>{member.teamName}</option>
+                ))}
+              </optgroup>
+            )}
+            {groupedTeamMembers.NATIONAL.length > 0 && (
+              <optgroup label="National League">
+                {groupedTeamMembers.NATIONAL.map(member => (
+                  <option key={member.teamName} value={member.teamName}>{member.teamName}</option>
+                ))}
+              </optgroup>
+            )}
+            {groupedTeamMembers.PAST.length > 0 && (
+              <optgroup label="Past Members">
+                {groupedTeamMembers.PAST.map(member => (
+                  <option key={member.teamName} value={member.teamName}>{member.teamName}</option>
+                ))}
+              </optgroup>
+            )}
           </select>
         </div>
       </div>

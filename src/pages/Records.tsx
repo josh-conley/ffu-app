@@ -9,6 +9,7 @@ import { LeagueBadge } from '../components/League/LeagueBadge';
 import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 import type { LeagueTier } from '../types';
 import { ChevronDown } from 'lucide-react';
+import { USERS, CURRENT_YEAR } from '../config/constants';
 
 export const Records = () => {
   const { getParam, updateParams } = useUrlParams();
@@ -80,14 +81,49 @@ export const Records = () => {
     }
   }, [selectedLeague, filteredYears, selectedYear, updateParams]);
 
-  // Get all unique teams from top scores
-  const allTeams = useMemo(() => {
-    if (!records?.topScores) return [];
-    const teams = new Set<string>();
+  // Get all unique teams from top scores, grouped by league
+  const groupedTeams = useMemo(() => {
+    if (!records?.topScores) return { PREMIER: [], MASTERS: [], NATIONAL: [], PAST: [] };
+
+    // Get unique teams with their userId
+    const teamsMap = new Map<string, { teamName: string; userId: string }>();
     records.topScores.forEach(record => {
-      teams.add(record.userInfo.teamName);
+      if (!teamsMap.has(record.userInfo.userId)) {
+        teamsMap.set(record.userInfo.userId, {
+          teamName: record.userInfo.teamName,
+          userId: record.userInfo.userId
+        });
+      }
     });
-    return Array.from(teams).sort();
+
+    // Categorize teams by their current league (2025)
+    const categorizedTeams = Array.from(teamsMap.values()).map(team => {
+      const user = USERS.find(u => u.sleeperId === team.userId);
+
+      // Determine current league based on standings/league data for current year
+      // For now, we'll look at the most recent record to determine league
+      const currentYearRecords = records.topScores.filter(
+        r => r.userInfo.userId === team.userId && r.year === CURRENT_YEAR
+      );
+
+      let league: LeagueTier | 'PAST' = 'PAST';
+      if (currentYearRecords.length > 0) {
+        league = currentYearRecords[0].league as LeagueTier;
+      } else if (user && user.isActive) {
+        // If active but no current year records, they're still categorized as past for now
+        league = 'PAST';
+      }
+
+      return { ...team, league };
+    });
+
+    // Group by league
+    return {
+      PREMIER: categorizedTeams.filter(t => t.league === 'PREMIER').sort((a, b) => a.teamName.localeCompare(b.teamName)),
+      MASTERS: categorizedTeams.filter(t => t.league === 'MASTERS').sort((a, b) => a.teamName.localeCompare(b.teamName)),
+      NATIONAL: categorizedTeams.filter(t => t.league === 'NATIONAL').sort((a, b) => a.teamName.localeCompare(b.teamName)),
+      PAST: categorizedTeams.filter(t => t.league === 'PAST').sort((a, b) => a.teamName.localeCompare(b.teamName))
+    };
   }, [records?.topScores]);
 
   // Create score rankings for badge display
@@ -392,9 +428,34 @@ export const Records = () => {
                           className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
                         >
                           <option value="ALL">All Teams</option>
-                          {allTeams.map(team => (
-                            <option key={team} value={team}>{team}</option>
-                          ))}
+                          {groupedTeams.PREMIER.length > 0 && (
+                            <optgroup label="Premier League">
+                              {groupedTeams.PREMIER.map(team => (
+                                <option key={team.teamName} value={team.teamName}>{team.teamName}</option>
+                              ))}
+                            </optgroup>
+                          )}
+                          {groupedTeams.MASTERS.length > 0 && (
+                            <optgroup label="Masters League">
+                              {groupedTeams.MASTERS.map(team => (
+                                <option key={team.teamName} value={team.teamName}>{team.teamName}</option>
+                              ))}
+                            </optgroup>
+                          )}
+                          {groupedTeams.NATIONAL.length > 0 && (
+                            <optgroup label="National League">
+                              {groupedTeams.NATIONAL.map(team => (
+                                <option key={team.teamName} value={team.teamName}>{team.teamName}</option>
+                              ))}
+                            </optgroup>
+                          )}
+                          {groupedTeams.PAST.length > 0 && (
+                            <optgroup label="Past Members">
+                              {groupedTeams.PAST.map(team => (
+                                <option key={team.teamName} value={team.teamName}>{team.teamName}</option>
+                              ))}
+                            </optgroup>
+                          )}
                         </select>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                           <ChevronDown className="h-4 w-4 text-gray-400" />

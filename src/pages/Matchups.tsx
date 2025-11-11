@@ -153,15 +153,50 @@ export const Matchups = () => {
     return allWeeks;
   }, [selectedYear]);
 
-  // Get sorted list of active team members
-  const teamOptions = useMemo(() => {
-    const activeUsers = USERS.filter(user => user.isActive)
-      .sort((a, b) => a.teamName.localeCompare(b.teamName));
-    return [
-      { sleeperId: 'ALL', teamName: 'All Teams', abbreviation: 'ALL' },
-      ...activeUsers
-    ];
-  }, []);
+  // Get sorted list of active team members grouped by league
+  const groupedTeamOptions = useMemo(() => {
+    // Extract unique users from the actual matchup/season data for the selected league/year
+    const usersInCurrentSelection = new Set<string>();
+
+    // Try to get users from matchup data if available
+    if (isShowingAllWeeks && allWeeksData) {
+      allWeeksData.forEach(weekData => {
+        weekData.matchups?.forEach(matchup => {
+          if (matchup.winnerInfo?.userId) usersInCurrentSelection.add(matchup.winnerInfo.userId);
+          if (matchup.loserInfo?.userId) usersInCurrentSelection.add(matchup.loserInfo.userId);
+        });
+      });
+    } else if (!isShowingAllWeeks && matchupsData?.matchups) {
+      matchupsData.matchups.forEach(matchup => {
+        if (matchup.winnerInfo?.userId) usersInCurrentSelection.add(matchup.winnerInfo.userId);
+        if (matchup.loserInfo?.userId) usersInCurrentSelection.add(matchup.loserInfo.userId);
+      });
+    }
+
+    // Map users to include their league for the selected year
+    const usersWithLeagues = USERS.map(user => {
+      // Determine if this user played in the selected league/year
+      const inSelectedLeague = usersInCurrentSelection.has(user.sleeperId);
+
+      // Assign league based on the selected league if they're in it, otherwise PAST
+      const league: LeagueTier | 'PAST' = inSelectedLeague ? selectedLeague : 'PAST';
+
+      return { ...user, league };
+    });
+
+    // Group by league - for matchups page, we categorize based on current season (like 2025)
+    // But show users who played in the selected league in a special group
+    const grouped = {
+      [selectedLeague]: usersWithLeagues
+        .filter(u => u.league === selectedLeague)
+        .sort((a, b) => a.teamName.localeCompare(b.teamName)),
+      PAST: usersWithLeagues
+        .filter(u => u.league === 'PAST' && u.isActive)
+        .sort((a, b) => a.teamName.localeCompare(b.teamName))
+    };
+
+    return grouped;
+  }, [selectedYear, selectedLeague, isShowingAllWeeks, allWeeksData, matchupsData]);
 
   // Filter matchups by selected team
   const filterMatchupsByTeam = (matchups: any[]) => {
@@ -330,9 +365,21 @@ export const Matchups = () => {
                 }}
                 className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
               >
-                {teamOptions.map(team => (
-                  <option key={team.sleeperId} value={team.sleeperId}>{team.teamName}</option>
-                ))}
+                <option value="ALL">All Teams</option>
+                {groupedTeamOptions[selectedLeague]?.length > 0 && (
+                  <optgroup label={`${getLeagueName(selectedLeague)} (${selectedYear})`}>
+                    {groupedTeamOptions[selectedLeague].map(team => (
+                      <option key={team.sleeperId} value={team.sleeperId}>{team.teamName}</option>
+                    ))}
+                  </optgroup>
+                )}
+                {groupedTeamOptions.PAST?.length > 0 && (
+                  <optgroup label="Other Members">
+                    {groupedTeamOptions.PAST.map(team => (
+                      <option key={team.sleeperId} value={team.sleeperId}>{team.teamName}</option>
+                    ))}
+                  </optgroup>
+                )}
               </select>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <ChevronDown className="h-4 w-4 text-gray-400" />

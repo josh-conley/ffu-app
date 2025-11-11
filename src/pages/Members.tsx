@@ -8,7 +8,7 @@ import { LeagueBadge } from '../components/League/LeagueBadge';
 import { CompareMembers } from '../components/Members/CompareMembers';
 import { PlayerSelector } from '../components/Members/PlayerSelector';
 import { LeagueProgressionChart } from '../components/Members/LeagueProgressionChart';
-import { getFFUIdBySleeperId, isActiveYear } from '../config/constants';
+import { getFFUIdBySleeperId, isActiveYear, CURRENT_YEAR } from '../config/constants';
 import type { LeagueTier, UserInfo } from '../types';
 import { Trophy, Medal, Award, TrendingDown, ChevronDown, ChevronUp, Share2, Check } from 'lucide-react';
 
@@ -434,15 +434,22 @@ export const Members = () => {
 
       {/* Player Selection */}
       <PlayerSelector
-        players={playerStats.map(player => ({
-          sleeperId: player.userId,
-          userInfo: player.userInfo,
-          totalWins: player.totalWins,
-          totalLosses: player.totalLosses,
-          totalTies: player.totalTies,
-          winPercentage: player.winPercentage,
-          championships: player.firstPlaceFinishes
-        }))}
+        players={playerStats.map(player => {
+          // Determine current league based on most recent season
+          const currentSeasonData = player.seasonHistory.find(season => season.year === CURRENT_YEAR);
+          const currentLeague = currentSeasonData ? currentSeasonData.league : 'PAST' as const;
+
+          return {
+            sleeperId: player.userId,
+            userInfo: player.userInfo,
+            totalWins: player.totalWins,
+            totalLosses: player.totalLosses,
+            totalTies: player.totalTies,
+            winPercentage: player.winPercentage,
+            championships: player.firstPlaceFinishes,
+            currentLeague
+          };
+        })}
         selectedPlayerId={selectedPlayerId}
         selectedPlayer2Id={selectedPlayer2Id}
         onSelectPlayer={setSelectedPlayer}

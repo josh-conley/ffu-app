@@ -1,4 +1,5 @@
 import { ChevronDown } from 'lucide-react';
+import type { LeagueTier } from '../../types';
 
 interface PlayerOption {
   sleeperId: string;
@@ -13,6 +14,7 @@ interface PlayerOption {
   winPercentage: number;
   championships: number;
   isSelected?: boolean;
+  currentLeague?: LeagueTier | 'PAST'; // Add league categorization
 }
 
 interface PlayerSelectorProps {
@@ -47,6 +49,55 @@ export function PlayerSelector({
     }
   };
 
+  // Group players by league
+  const groupedPlayers = {
+    PREMIER: players.filter(p => p.currentLeague === 'PREMIER'),
+    MASTERS: players.filter(p => p.currentLeague === 'MASTERS'),
+    NATIONAL: players.filter(p => p.currentLeague === 'NATIONAL'),
+    PAST: players.filter(p => p.currentLeague === 'PAST')
+  };
+
+  // Helper to render player options
+  const renderPlayerOption = (player: PlayerOption) => (
+    <option key={player.sleeperId} value={player.sleeperId}>
+      {player.userInfo.teamName} ({player.userInfo.abbreviation}) - {player.totalWins}-{player.totalLosses}{player.totalTies > 0 ? `-${player.totalTies}` : ''}
+    </option>
+  );
+
+  // Helper to render grouped options
+  const renderGroupedOptions = (excludePlayerId?: string) => (
+    <>
+      {groupedPlayers.PREMIER.length > 0 && (
+        <optgroup label="Premier League">
+          {groupedPlayers.PREMIER
+            .filter(p => p.sleeperId !== excludePlayerId)
+            .map(renderPlayerOption)}
+        </optgroup>
+      )}
+      {groupedPlayers.MASTERS.length > 0 && (
+        <optgroup label="Masters League">
+          {groupedPlayers.MASTERS
+            .filter(p => p.sleeperId !== excludePlayerId)
+            .map(renderPlayerOption)}
+        </optgroup>
+      )}
+      {groupedPlayers.NATIONAL.length > 0 && (
+        <optgroup label="National League">
+          {groupedPlayers.NATIONAL
+            .filter(p => p.sleeperId !== excludePlayerId)
+            .map(renderPlayerOption)}
+        </optgroup>
+      )}
+      {groupedPlayers.PAST.length > 0 && (
+        <optgroup label="Past Members">
+          {groupedPlayers.PAST
+            .filter(p => p.sleeperId !== excludePlayerId)
+            .map(renderPlayerOption)}
+        </optgroup>
+      )}
+    </>
+  );
+
   if (!isCompareMode) {
     // Single player selector
     return (
@@ -62,11 +113,7 @@ export function PlayerSelector({
               className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 rounded appearance-none focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red"
             >
               <option value="">{placeholder}</option>
-              {players.map((player) => (
-                <option key={player.sleeperId} value={player.sleeperId}>
-                  {player.userInfo.teamName} ({player.userInfo.abbreviation}) - {player.totalWins}-{player.totalLosses}{player.totalTies > 0 ? `-${player.totalTies}` : ''}
-                </option>
-              ))}
+              {renderGroupedOptions()}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
               <ChevronDown className="h-5 w-5 text-gray-400" />
@@ -94,13 +141,7 @@ export function PlayerSelector({
                 className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 rounded appearance-none focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red"
               >
                 <option value="">Choose first member...</option>
-                {players
-                  .filter(p => p.sleeperId !== selectedPlayer2Id)
-                  .map((player) => (
-                    <option key={player.sleeperId} value={player.sleeperId}>
-                      {player.userInfo.teamName} ({player.userInfo.abbreviation}) - {player.totalWins}-{player.totalLosses}{player.totalTies > 0 ? `-${player.totalTies}` : ''}
-                    </option>
-                  ))}
+                {renderGroupedOptions(selectedPlayer2Id)}
               </select>
               <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                 <ChevronDown className="h-5 w-5 text-gray-400" />
@@ -120,13 +161,7 @@ export function PlayerSelector({
                 className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 rounded appearance-none focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red"
               >
                 <option value="">Choose second member...</option>
-                {players
-                  .filter(p => p.sleeperId !== selectedPlayerId)
-                  .map((player) => (
-                    <option key={player.sleeperId} value={player.sleeperId}>
-                      {player.userInfo.teamName} ({player.userInfo.abbreviation}) - {player.totalWins}-{player.totalLosses}{player.totalTies > 0 ? `-${player.totalTies}` : ''}
-                    </option>
-                  ))}
+                {renderGroupedOptions(selectedPlayerId)}
               </select>
               <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                 <ChevronDown className="h-5 w-5 text-gray-400" />
