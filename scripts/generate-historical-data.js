@@ -86,6 +86,14 @@ class SleeperAPIService {
     this.baseUrl = 'https://api.sleeper.app/v1';
   }
 
+  async getLeague(leagueId) {
+    const response = await fetch(`${this.baseUrl}/league/${leagueId}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch league ${leagueId}: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
   async getLeagueRosters(leagueId) {
     const response = await fetch(`${this.baseUrl}/league/${leagueId}/rosters`);
     if (!response.ok) {
@@ -216,11 +224,23 @@ class HistoricalDataGenerator {
 
     try {
       // Get basic league data
-      const [rosters, winnersBracket, losersBracket] = await Promise.all([
+      const [leagueInfo, rosters, winnersBracket, losersBracket] = await Promise.all([
+        this.sleeperService.getLeague(league.sleeperId),
         this.sleeperService.getLeagueRosters(league.sleeperId),
         this.sleeperService.getWinnersBracket(league.sleeperId).catch(() => []),
         this.sleeperService.getLosersBracket(league.sleeperId).catch(() => [])
       ]);
+
+      // Extract division names from league metadata
+      const divisionNames = {};
+      if (leagueInfo.metadata) {
+        for (let i = 1; i <= 4; i++) {
+          const divisionKey = `division_${i}`;
+          if (leagueInfo.metadata[divisionKey]) {
+            divisionNames[i] = leagueInfo.metadata[divisionKey];
+          }
+        }
+      }
 
       // Generate playoff results first
       const playoffResults = this.parsePlayoffResults(winnersBracket, losersBracket, rosters);
@@ -272,7 +292,8 @@ class HistoricalDataGenerator {
         relegations: relegations,
         matchupsByWeek: matchupsByWeek,
         memberGameStats: memberGameStats,
-        draftData: draftData
+        draftData: draftData,
+        divisionNames: Object.keys(divisionNames).length > 0 ? divisionNames : undefined
       };
 
       // Save to file
@@ -298,7 +319,8 @@ class HistoricalDataGenerator {
         pointsAgainst: (roster.settings?.fpts_against || 0) + (roster.settings?.fpts_against_decimal || 0) / 100,
         rank: 0, // Will be calculated after sorting
         highGame: memberGameStats[roster.owner_id]?.highGame || 0,
-        lowGame: memberGameStats[roster.owner_id]?.lowGame || 0
+        lowGame: memberGameStats[roster.owner_id]?.lowGame || 0,
+        division: roster.settings?.division // Division number (Sleeper era only, 2021+)
       }));
 
     // Sort standings based on playoff results if available, otherwise by regular season

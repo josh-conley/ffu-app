@@ -1,6 +1,6 @@
 import type { EnhancedSeasonStandings } from '../types';
 import { isNFLWeekComplete } from './nfl-schedule';
-import { isActiveYear } from '../config/constants';
+import { isActiveYear, getDisplayTeamName } from '../config/constants';
 
 export interface RankingTiebreakers {
   pointsFor: number;
@@ -8,6 +8,18 @@ export interface RankingTiebreakers {
   wins: number;
   losses: number;
   ties?: number;
+}
+
+export interface TiebreakerInfo {
+  h2hRecords: string[];
+  usesPointsFor: boolean;
+  pointsFor?: number;
+}
+
+export interface DivisionGroup {
+  division: number;
+  name: string;
+  standings: EnhancedSeasonStandings[];
 }
 
 /**
@@ -162,4 +174,126 @@ export function areTeamsTied(teamA: RankingTiebreakers, teamB: RankingTiebreaker
  */
 export function getDisplayRank(rank: number): string {
   return `#${rank}`;
+}
+
+/**
+ * Calculate win percentage for a team
+ */
+function getWinPct(standing: EnhancedSeasonStandings): number {
+  const totalGames = standing.wins + standing.losses + (standing.ties || 0);
+  if (totalGames === 0) return 0;
+  return (standing.wins + (standing.ties || 0) * 0.5) / totalGames;
+}
+
+/**
+ * Get tiebreaker information for a team to display in tooltips
+ * Returns null if team is not tied with any other teams
+ */
+export function getTiebreakerInfo(
+  standings: EnhancedSeasonStandings[],
+  currentIndex: number,
+  matchupsByWeek?: Record<number, any[]>,
+  year?: string
+): TiebreakerInfo | null {
+  if (!year || !isActiveYear(year) || !matchupsByWeek) {
+    return null;
+  }
+
+  const currentStanding = standings[currentIndex];
+  const currentWinPct = getWinPct(currentStanding);
+
+  // Find ALL teams with the same win percentage (tied teams)
+  const tiedTeams = standings.filter((standing, idx) =>
+    idx !== currentIndex && getWinPct(standing) === currentWinPct
+  );
+
+  if (tiedTeams.length === 0) {
+    return null; // No tied teams
+  }
+
+  // Build individual H2H records against each tied team
+  const h2hRecords: string[] = [];
+  let totalWins = 0;
+  let totalLosses = 0;
+  let totalGames = 0;
+
+  tiedTeams.forEach(tiedTeam => {
+    const h2h = getHeadToHeadRecord(currentStanding.userId, tiedTeam.userId, matchupsByWeek, year);
+    totalWins += h2h.team1Wins;
+    totalLosses += h2h.team2Wins;
+    totalGames += h2h.totalGames;
+
+    if (h2h.totalGames > 0) {
+      const teamName = getDisplayTeamName(tiedTeam.userId, tiedTeam.userInfo.teamName, year);
+      h2hRecords.push(`${h2h.team1Wins}-${h2h.team2Wins} vs ${teamName}`);
+    }
+  });
+
+  if (h2hRecords.length > 0) {
+    // Show individual H2H records if any games were played
+    if (totalWins !== totalLosses) {
+      return { h2hRecords, usesPointsFor: false };
+    }
+    // H2H is tied overall, so points for is the tiebreaker
+    return { h2hRecords, usesPointsFor: true, pointsFor: currentStanding.pointsFor };
+  }
+
+  // No H2H games played, points for is the tiebreaker
+  return { h2hRecords: [], usesPointsFor: true, pointsFor: currentStanding.pointsFor };
+}
+
+/**
+ * Get division name for display
+ */
+function getDivisionName(divisionNumber: number, customNames?: Record<number, string>): string {
+  // Use custom name if provided, otherwise default to "Division N"
+  if (customNames && customNames[divisionNumber]) {
+    return customNames[divisionNumber];
+  }
+
+  const divisionNames: Record<number, string> = {
+    1: 'Division 1',
+    2: 'Division 2',
+    3: 'Division 3',
+    4: 'Division 4'
+  };
+  return divisionNames[divisionNumber] || `Division ${divisionNumber}`;
+}
+
+/**
+ * Group standings by division (Sleeper era only, 2021+)
+ * Returns null if no division data is present
+ */
+export function groupStandingsByDivision(
+  standings: EnhancedSeasonStandings[],
+  divisionNames?: Record<number, string>
+): DivisionGroup[] | null {
+  // Check if any standings have division data
+  const hasDivisions = standings.some(s => s.division !== undefined && s.division !== null);
+
+  if (!hasDivisions) {
+    return null; // No divisions, return null to indicate single-table display
+  }
+
+  // Group by division
+  const divisionMap = new Map<number, EnhancedSeasonStandings[]>();
+
+  standings.forEach(standing => {
+    const division = standing.division ?? 0; // Default to 0 if undefined
+    if (!divisionMap.has(division)) {
+      divisionMap.set(division, []);
+    }
+    divisionMap.get(division)!.push(standing);
+  });
+
+  // Convert to array and sort divisions
+  const divisions = Array.from(divisionMap.entries())
+    .sort(([a], [b]) => a - b)
+    .map(([division, divisionStandings]) => ({
+      division,
+      name: getDivisionName(division, divisionNames),
+      standings: divisionStandings
+    }));
+
+  return divisions;
 }

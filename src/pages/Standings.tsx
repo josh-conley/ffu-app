@@ -7,10 +7,11 @@ import { StandingsTable } from '../components/League/StandingsTable';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../config/constants';
 import { getLeagueName } from '../constants/leagues';
-import { ChevronDown, Crown, Info } from 'lucide-react';
+import { ChevronDown, Crown } from 'lucide-react';
 import type { LeagueTier } from '../types';
 import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
-import { calculateRankings, getHeadToHeadRecord } from '../utils/ranking';
+import { calculateRankings, getTiebreakerInfo } from '../utils/ranking';
+import { StandingsTooltip } from '../components/Common/StandingsTooltip';
 
 // Component to render StandingsTable with matchup data for active seasons
 const StandingsTableWithMatchups = ({ leagueData, league, year }: { leagueData: any, league: string, year: string }) => {
@@ -20,13 +21,17 @@ const StandingsTableWithMatchups = ({ leagueData, league, year }: { leagueData: 
   const matchupsByWeek = (isActiveYear(year) && fullLeagueData) ?
     (fullLeagueData as any).matchupsByWeek : undefined;
 
+  // Get division names from either fullLeagueData or leagueData
+  const divisionNames = fullLeagueData?.divisionNames || leagueData.divisionNames;
+
   console.log('📋 StandingsTableWithMatchups:', {
     league,
     year,
     isActiveYear: isActiveYear(year),
     hasFullLeagueData: !!fullLeagueData,
     hasMatchupsByWeek: !!matchupsByWeek,
-    matchupsByWeekKeys: matchupsByWeek ? Object.keys(matchupsByWeek) : []
+    matchupsByWeekKeys: matchupsByWeek ? Object.keys(matchupsByWeek) : [],
+    hasDivisionNames: !!divisionNames
   });
 
   return (
@@ -36,6 +41,7 @@ const StandingsTableWithMatchups = ({ leagueData, league, year }: { leagueData: 
       league={league}
       year={year}
       matchupsByWeek={matchupsByWeek}
+      divisionNames={divisionNames}
     />
   );
 };
@@ -173,55 +179,6 @@ export const Standings = () => {
                 // Only calculate rankings for active seasons, use original for historical
                 const rankedStandings = isActiveSeason ? calculateRankings(leagueData.standings, matchupsByWeek, currentYear) : leagueData.standings;
 
-                // Helper to calculate win percentage
-                const getWinPct = (standing: any) => {
-                  const totalGames = standing.wins + standing.losses + (standing.ties || 0);
-                  if (totalGames === 0) return 0;
-                  return (standing.wins + (standing.ties || 0) * 0.5) / totalGames;
-                };
-
-                // Helper to get tiebreaker text
-                const getTiebreaker = (currentIndex: number): { h2hRecords: string[]; usesPointsFor: boolean; pointsFor?: number } | null => {
-                  if (!isActiveSeason || !matchupsByWeek) return null;
-
-                  const currentStanding = rankedStandings[currentIndex];
-                  const currentWinPct = getWinPct(currentStanding);
-
-                  // Find ALL teams with the same win percentage
-                  const tiedTeams = rankedStandings.filter((standing: any, idx: number) =>
-                    idx !== currentIndex && getWinPct(standing) === currentWinPct
-                  );
-
-                  if (tiedTeams.length === 0) return null;
-
-                  // Build individual H2H records
-                  const h2hRecords: string[] = [];
-                  let totalWins = 0;
-                  let totalLosses = 0;
-                  let totalGames = 0;
-
-                  tiedTeams.forEach((tiedTeam: any) => {
-                    const h2h = getHeadToHeadRecord(currentStanding.userId, tiedTeam.userId, matchupsByWeek, currentYear);
-                    totalWins += h2h.team1Wins;
-                    totalLosses += h2h.team2Wins;
-                    totalGames += h2h.totalGames;
-
-                    if (h2h.totalGames > 0) {
-                      const teamName = getDisplayTeamName(tiedTeam.userId, tiedTeam.userInfo.teamName, currentYear);
-                      h2hRecords.push(`${h2h.team1Wins}-${h2h.team2Wins} vs ${teamName}`);
-                    }
-                  });
-
-                  if (h2hRecords.length > 0) {
-                    if (totalWins !== totalLosses) {
-                      return { h2hRecords, usesPointsFor: false };
-                    }
-                    return { h2hRecords, usesPointsFor: true, pointsFor: currentStanding.pointsFor };
-                  }
-
-                  return { h2hRecords: [], usesPointsFor: true, pointsFor: currentStanding.pointsFor };
-                };
-
                 const getLeagueColors = (leagueType: string) => {
                   const colorMap = {
                     PREMIER: {
@@ -263,7 +220,7 @@ export const Standings = () => {
                     {/* All teams */}
                     <div className="space-y-3 mb-4">
                       {rankedStandings.map((standing, index) => {
-                        const tiebreakerText = getTiebreaker(index);
+                        const tiebreakerInfo = getTiebreakerInfo(rankedStandings, index, matchupsByWeek, currentYear);
 
                         return (
                           <div key={standing.userId} className="flex items-center space-x-3">
@@ -274,7 +231,7 @@ export const Standings = () => {
                               )}
                             </span>
                           <div className="hidden sm:block">
-                            <TeamLogo 
+                            <TeamLogo
                               teamName={getCurrentTeamName(standing.userId, standing.userInfo.teamName)}
                               abbreviation={getCurrentAbbreviation(standing.userId, standing.userInfo.abbreviation)}
                               size="sm"
@@ -300,27 +257,8 @@ export const Standings = () => {
                                   <span className={`ml-1 text-xs font-medium ${colors.text}`}>Champion</span>
                                 )}
                               </span>
-                              {tiebreakerText && (
-                                <div className="group relative inline-block">
-                                  <Info className="h-3.5 w-3.5 text-gray-600 dark:text-gray-300 cursor-help" />
-                                  <div className="invisible group-hover:visible absolute z-[9999] w-56 px-3 py-2 text-xs text-white bg-gray-900/75 dark:bg-gray-800/75 rounded-lg shadow-xl whitespace-normal pointer-events-none left-full ml-2 top-1/2 -translate-y-1/2 backdrop-blur-sm">
-                                    <div className="font-bold mb-2 pb-2 border-b border-gray-700">Tiebreaker</div>
-                                    {tiebreakerText.h2hRecords.length > 0 && (
-                                      <div className="space-y-1 mb-2">
-                                        {tiebreakerText.h2hRecords.map((record, idx) => (
-                                          <div key={idx} className="text-xs">{record}</div>
-                                        ))}
-                                      </div>
-                                    )}
-                                    {tiebreakerText.usesPointsFor && (
-                                      <div className="text-xs mt-2 pt-2 border-t border-gray-700">
-                                        {tiebreakerText.h2hRecords.length > 0 && '(H2H tied) '}
-                                        Using Points For {tiebreakerText.pointsFor ? `(${tiebreakerText.pointsFor.toFixed(2)})` : ''}
-                                      </div>
-                                    )}
-                                    <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-gray-900/75 dark:bg-gray-800/75 transform rotate-45"></div>
-                                  </div>
-                                </div>
+                              {tiebreakerInfo && (
+                                <StandingsTooltip tiebreakerInfo={tiebreakerInfo} size="sm" />
                               )}
                             </div>
                           </div>

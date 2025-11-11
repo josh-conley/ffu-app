@@ -13,6 +13,7 @@ export interface HistoricalLeagueData {
   matchupsByWeek: Record<number, any[]>; // All matchups for each week
   memberGameStats?: Record<string, { highGame: number; lowGame: number; games: number[] }>; // High/low game stats per member
   draftData?: import('../types').DraftData; // Draft data if available
+  divisionNames?: Record<number, string>; // Division number to name mapping (Sleeper era only)
 }
 
 export class DataService {
@@ -143,7 +144,8 @@ export class DataService {
       playoffResults: historicalData.playoffResults,
       promotions: historicalData.promotions,
       relegations: historicalData.relegations,
-      matchupsByWeek: historicalData.matchupsByWeek // Preserve matchups for tiebreaker logic
+      matchupsByWeek: historicalData.matchupsByWeek, // Preserve matchups for tiebreaker logic
+      divisionNames: historicalData.divisionNames // Preserve division names for UI display
     };
   }
 

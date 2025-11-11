@@ -12,7 +12,8 @@
       "pointsAgainst": 1126.35,
       "rank": 1,
       "highGame": 168.5,
-      "lowGame": 110.45
+      "lowGame": 110.45,
+      "division": 2
     },
     {
       "userId": "856248808915480576",
@@ -23,7 +24,8 @@
       "pointsAgainst": 1183.95,
       "rank": 2,
       "highGame": 174.4,
-      "lowGame": 111.2
+      "lowGame": 111.2,
+      "division": 1
     },
     {
       "userId": "639877229681147904",
@@ -34,7 +36,8 @@
       "pointsAgainst": 1159.2,
       "rank": 3,
       "highGame": 143.25,
-      "lowGame": 82.35
+      "lowGame": 82.35,
+      "division": 3
     },
     {
       "userId": "396808818157182976",
@@ -45,7 +48,8 @@
       "pointsAgainst": 1108.75,
       "rank": 4,
       "highGame": 177.05,
-      "lowGame": 90.55
+      "lowGame": 90.55,
+      "division": 3
     },
     {
       "userId": "472876832719368192",
@@ -56,7 +60,8 @@
       "pointsAgainst": 1222.9,
       "rank": 5,
       "highGame": 148.6,
-      "lowGame": 70.15
+      "lowGame": 70.15,
+      "division": 1
     },
     {
       "userId": "462383465753473024",
@@ -67,7 +72,8 @@
       "pointsAgainst": 1277.3,
       "rank": 6,
       "highGame": 149.25,
-      "lowGame": 89.55
+      "lowGame": 89.55,
+      "division": 3
     },
     {
       "userId": "1124071986805829632",
@@ -78,7 +84,8 @@
       "pointsAgainst": 1300.65,
       "rank": 7,
       "highGame": 153.75,
-      "lowGame": 88.3
+      "lowGame": 88.3,
+      "division": 2
     },
     {
       "userId": "864966364937461760",
@@ -89,7 +96,8 @@
       "pointsAgainst": 1169.9,
       "rank": 8,
       "highGame": 173.15,
-      "lowGame": 91.75
+      "lowGame": 91.75,
+      "division": 2
     },
     {
       "userId": "325766631336714240",
@@ -100,7 +108,8 @@
       "pointsAgainst": 1213.3,
       "rank": 9,
       "highGame": 159.85,
-      "lowGame": 84.9
+      "lowGame": 84.9,
+      "division": 2
     },
     {
       "userId": "1133491276038426624",
@@ -111,7 +120,8 @@
       "pointsAgainst": 1305.3,
       "rank": 10,
       "highGame": 146.9,
-      "lowGame": 90.7
+      "lowGame": 90.7,
+      "division": 1
     },
     {
       "userId": "860973514839199744",
@@ -122,7 +132,8 @@
       "pointsAgainst": 1252.25,
       "rank": 11,
       "highGame": 149.45,
-      "lowGame": 81.75
+      "lowGame": 81.75,
+      "division": 3
     },
     {
       "userId": "1133492104077946880",
@@ -133,7 +144,8 @@
       "pointsAgainst": 1267.3,
       "rank": 12,
       "highGame": 154.55,
-      "lowGame": 76.7
+      "lowGame": 76.7,
+      "division": 1
     }
   ],
   "playoffResults": [],
@@ -4799,5 +4811,10 @@
     },
     "startTime": 1756429201759,
     "status": "complete"
+  },
+  "divisionNames": {
+    "1": "North",
+    "2": "Central",
+    "3": "South"
   }
 }

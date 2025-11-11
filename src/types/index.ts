@@ -62,6 +62,7 @@ export interface SeasonStandings {
   highGame?: number;
   lowGame?: number;
   unionPowerRating?: number;
+  division?: number; // Division number (Sleeper era only, 2021+)
 }
 
 export interface PlayoffResult {
@@ -79,6 +80,7 @@ export interface LeagueSeasonData {
   playoffResults: PlayoffResult[];
   promotions: string[]; // User IDs promoted to higher league
   relegations: string[]; // User IDs relegated to lower league
+  divisionNames?: Record<number, string>; // Division number to name mapping (Sleeper era only)
 }
 
 export interface MemberHistory {
@@ -107,6 +109,14 @@ export interface SleeperLeague {
   settings: {
     playoff_week_start: number;
     league_average_match: number;
+    divisions?: number; // Number of divisions
+  };
+  metadata?: {
+    division_1?: string; // Custom division name for division 1
+    division_2?: string; // Custom division name for division 2
+    division_3?: string; // Custom division name for division 3
+    division_4?: string; // Custom division name for division 4
+    [key: string]: any; // Other metadata fields
   };
 }
 
@@ -131,6 +141,7 @@ export interface SleeperRoster {
     fpts_against?: number;
     fpts_decimal?: number;
     fpts_against_decimal?: number;
+    division?: number; // Division number (Sleeper era only, 2021+)
   };
 }
 
@@ -251,6 +262,7 @@ export interface RawSeasonStandings {
   rank: number;
   highGame?: number;
   lowGame?: number;
+  division?: number; // Division number (Sleeper era only, 2021+)
   userInfo?: UserInfo;
 }
 
@@ -490,6 +502,7 @@ export interface HistoricalLeagueDataWithDrafts {
   matchupsByWeek: Record<number, WeekMatchup[]>;
   memberGameStats?: Record<string, { highGame: number; lowGame: number; games: number[] }>;
   draftData?: DraftData;
+  divisionNames?: Record<number, string>; // Division number to name mapping (Sleeper era only)
 }
 
 export interface PlayerData {
