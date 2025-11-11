@@ -92,7 +92,7 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek }: Stan
   };
 
   // Check if current team is tied with another team (same record)
-  const getTiebreaker = (currentIndex: number): string | null => {
+  const getTiebreaker = (currentIndex: number): { h2hRecords: string[]; usesPointsFor: boolean; pointsFor?: number } | null => {
     if (!isActiveSeason || !matchupsByWeek) {
       return null;
     }
@@ -130,14 +130,14 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek }: Stan
     if (h2hRecords.length > 0) {
       // Show individual H2H records if any games were played
       if (totalWins !== totalLosses) {
-        return `Tiebreaker: ${h2hRecords.join(', ')}`;
+        return { h2hRecords, usesPointsFor: false };
       }
       // H2H is tied overall, so points for is the tiebreaker
-      return `Tiebreaker: H2H tied (${h2hRecords.join(', ')}), using Points For`;
+      return { h2hRecords, usesPointsFor: true, pointsFor: currentStanding.pointsFor };
     }
 
     // No H2H games played, points for is the tiebreaker
-    return `Tiebreaker: Points For (${currentStanding.pointsFor?.toFixed(2)})`;
+    return { h2hRecords: [], usesPointsFor: true, pointsFor: currentStanding.pointsFor };
   };
 
   return (
@@ -217,9 +217,22 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek }: Stan
                       )}
                       {tiebreakerText && (
                         <div className="group relative inline-block">
-                          <Info className="h-4 w-4 text-white cursor-help" />
-                          <div className="invisible group-hover:visible absolute z-[9999] w-64 px-3 py-2 text-sm leading-relaxed text-white bg-gray-900/75 dark:bg-gray-800/75 rounded-lg shadow-xl whitespace-normal pointer-events-none left-full ml-2 top-1/2 -translate-y-1/2 backdrop-blur-sm">
-                            {tiebreakerText}
+                          <Info className="h-4 w-4 text-gray-600 dark:text-gray-300 cursor-help" />
+                          <div className="invisible group-hover:visible absolute z-[9999] w-64 px-3 py-2 text-sm text-white bg-gray-900/75 dark:bg-gray-800/75 rounded-lg shadow-xl whitespace-normal pointer-events-none left-full ml-2 top-1/2 -translate-y-1/2 backdrop-blur-sm">
+                            <div className="font-bold mb-2 pb-2 border-b border-gray-700">Tiebreaker</div>
+                            {tiebreakerText.h2hRecords.length > 0 && (
+                              <div className="space-y-1 mb-2">
+                                {tiebreakerText.h2hRecords.map((record, idx) => (
+                                  <div key={idx} className="text-sm">{record}</div>
+                                ))}
+                              </div>
+                            )}
+                            {tiebreakerText.usesPointsFor && (
+                              <div className="text-sm mt-2 pt-2 border-t border-gray-700">
+                                {tiebreakerText.h2hRecords.length > 0 && '(H2H tied) '}
+                                Using Points For {tiebreakerText.pointsFor ? `(${tiebreakerText.pointsFor.toFixed(2)})` : ''}
+                              </div>
+                            )}
                             <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-gray-900/75 dark:bg-gray-800/75 transform rotate-45"></div>
                           </div>
                         </div>

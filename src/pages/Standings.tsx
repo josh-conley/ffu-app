@@ -180,7 +180,7 @@ export const Standings = () => {
                 };
 
                 // Helper to get tiebreaker text
-                const getTiebreaker = (currentIndex: number): string | null => {
+                const getTiebreaker = (currentIndex: number): { h2hRecords: string[]; usesPointsFor: boolean; pointsFor?: number } | null => {
                   if (!isActiveSeason || !matchupsByWeek) return null;
 
                   const currentStanding = rankedStandings[currentIndex];
@@ -213,12 +213,12 @@ export const Standings = () => {
 
                   if (h2hRecords.length > 0) {
                     if (totalWins !== totalLosses) {
-                      return `Tiebreaker: ${h2hRecords.join(', ')}`;
+                      return { h2hRecords, usesPointsFor: false };
                     }
-                    return `Tiebreaker: H2H tied (${h2hRecords.join(', ')}), using Points For`;
+                    return { h2hRecords, usesPointsFor: true, pointsFor: currentStanding.pointsFor };
                   }
 
-                  return `Tiebreaker: Points For (${currentStanding.pointsFor?.toFixed(2)})`;
+                  return { h2hRecords: [], usesPointsFor: true, pointsFor: currentStanding.pointsFor };
                 };
 
                 const getLeagueColors = (leagueType: string) => {
@@ -301,9 +301,22 @@ export const Standings = () => {
                               </span>
                               {tiebreakerText && (
                                 <div className="group relative inline-block">
-                                  <Info className="h-3.5 w-3.5 text-white cursor-help" />
-                                  <div className="invisible group-hover:visible absolute z-[9999] w-56 px-3 py-2 text-xs leading-relaxed text-white bg-gray-900/75 dark:bg-gray-800/75 rounded-lg shadow-xl whitespace-normal pointer-events-none left-full ml-2 top-1/2 -translate-y-1/2 backdrop-blur-sm">
-                                    {tiebreakerText}
+                                  <Info className="h-3.5 w-3.5 text-gray-600 dark:text-gray-300 cursor-help" />
+                                  <div className="invisible group-hover:visible absolute z-[9999] w-56 px-3 py-2 text-xs text-white bg-gray-900/75 dark:bg-gray-800/75 rounded-lg shadow-xl whitespace-normal pointer-events-none left-full ml-2 top-1/2 -translate-y-1/2 backdrop-blur-sm">
+                                    <div className="font-bold mb-2 pb-2 border-b border-gray-700">Tiebreaker</div>
+                                    {tiebreakerText.h2hRecords.length > 0 && (
+                                      <div className="space-y-1 mb-2">
+                                        {tiebreakerText.h2hRecords.map((record, idx) => (
+                                          <div key={idx} className="text-xs">{record}</div>
+                                        ))}
+                                      </div>
+                                    )}
+                                    {tiebreakerText.usesPointsFor && (
+                                      <div className="text-xs mt-2 pt-2 border-t border-gray-700">
+                                        {tiebreakerText.h2hRecords.length > 0 && '(H2H tied) '}
+                                        Using Points For {tiebreakerText.pointsFor ? `(${tiebreakerText.pointsFor.toFixed(2)})` : ''}
+                                      </div>
+                                    )}
                                     <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-gray-900/75 dark:bg-gray-800/75 transform rotate-45"></div>
                                   </div>
                                 </div>
