@@ -227,7 +227,7 @@ export const Standings = () => {
                       {rankedStandings.map((standing, index) => {
                         const tiebreakerInfo = getTiebreakerInfo(rankedStandings, index, matchupsByWeek, currentYear);
                         const isTop2Leader = divisionLeaders?.top2Leaders.has(standing.userId);
-                        const isDivisionLeader = divisionLeaders?.allLeaders.has(standing.userId);
+                        // const isDivisionLeader = divisionLeaders?.allLeaders.has(standing.userId);
 
                         // Division indicator dot colors (very subtle)
                         const getDivisionDotColor = (divNum: number) => {
