@@ -314,6 +314,7 @@ export interface EnhancedPlayoffResult extends PlayoffResult {
 export interface EnhancedLeagueSeasonData extends Omit<LeagueSeasonData, 'standings' | 'playoffResults'> {
   standings: EnhancedSeasonStandings[];
   playoffResults: EnhancedPlayoffResult[];
+  matchupsByWeek?: Record<number, any[]>; // Include matchups for active seasons
 }
 
 export interface MatchupWithUserInfo {

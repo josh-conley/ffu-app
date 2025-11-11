@@ -1,5 +1,6 @@
 import type { EnhancedSeasonStandings } from '../types';
 import { isNFLWeekComplete } from './nfl-schedule';
+import { isActiveYear } from '../config/constants';
 
 export interface RankingTiebreakers {
   pointsFor: number;
@@ -12,13 +13,13 @@ export interface RankingTiebreakers {
 /**
  * Get head-to-head record between two teams for current season only
  */
-function getHeadToHeadRecord(
+export function getHeadToHeadRecord(
   team1Id: string,
   team2Id: string,
   matchupsByWeek?: Record<number, any[]>,
   year?: string
 ): { team1Wins: number; team2Wins: number; totalGames: number } {
-  if (!matchupsByWeek || year !== '2025') {
+  if (!matchupsByWeek || !year || !isActiveYear(year)) {
     return { team1Wins: 0, team2Wins: 0, totalGames: 0 };
   }
 
@@ -75,7 +76,7 @@ export function calculateRankings(
     }
 
     // 2. Tiebreaker for active season: Head-to-head record
-    if (year === '2025' && matchupsByWeek) {
+    if (year && isActiveYear(year) && matchupsByWeek) {
       const h2h = getHeadToHeadRecord(a.userId, b.userId, matchupsByWeek, year);
       if (h2h.totalGames > 0) {
         if (h2h.team1Wins !== h2h.team2Wins) {
@@ -114,7 +115,7 @@ export function calculateRankings(
       let isNotTied = currentWinPct !== prevWinPct;
 
       // For active season, also check head-to-head and points for
-      if (!isNotTied && year === '2025' && matchupsByWeek) {
+      if (!isNotTied && year && isActiveYear(year) && matchupsByWeek) {
         const h2h = getHeadToHeadRecord(currentStanding.userId, prevStanding.userId, matchupsByWeek, year);
         if (h2h.totalGames > 0 && h2h.team1Wins !== h2h.team2Wins) {
           isNotTied = true;

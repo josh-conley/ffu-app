@@ -1,10 +1,10 @@
 import type { EnhancedSeasonStandings, LeagueTier } from '../../types';
 import { TeamLogo } from '../Common/TeamLogo';
-import { Trophy, Medal, Award } from 'lucide-react';
+import { Trophy, Medal, Award, Info } from 'lucide-react';
 import { getLeagueName } from '../../constants/leagues';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../../config/constants';
 import { useTeamProfileModal } from '../../contexts/TeamProfileModalContext';
-import { calculateRankings } from '../../utils/ranking';
+import { calculateRankings, getHeadToHeadRecord } from '../../utils/ranking';
 
 
 interface StandingsTableProps {
@@ -17,6 +17,15 @@ interface StandingsTableProps {
 export const StandingsTable = ({ standings, league, year, matchupsByWeek }: StandingsTableProps) => {
   const isActiveSeason = isActiveYear(year);
   const { openTeamProfile } = useTeamProfileModal();
+
+  console.log('🏈 StandingsTable props:', {
+    league,
+    year,
+    isActiveSeason,
+    hasMatchupsByWeek: !!matchupsByWeek,
+    matchupsByWeekKeys: matchupsByWeek ? Object.keys(matchupsByWeek).length : 0,
+    standingsCount: standings.length
+  });
 
   // Only calculate rankings for active seasons, use original for historical
   const rankedStandings = isActiveSeason ? calculateRankings(standings, matchupsByWeek, year) : standings;
@@ -75,6 +84,62 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek }: Stan
     return null;
   };
 
+  // Calculate win percentage for a team
+  const getWinPct = (standing: EnhancedSeasonStandings) => {
+    const totalGames = standing.wins + standing.losses + (standing.ties || 0);
+    if (totalGames === 0) return 0;
+    return (standing.wins + (standing.ties || 0) * 0.5) / totalGames;
+  };
+
+  // Check if current team is tied with another team (same record)
+  const getTiebreaker = (currentIndex: number): string | null => {
+    if (!isActiveSeason || !matchupsByWeek) {
+      return null;
+    }
+
+    const currentStanding = rankedStandings[currentIndex];
+    const currentWinPct = getWinPct(currentStanding);
+
+    // Find ALL teams with the same win percentage (tied teams)
+    const tiedTeams = rankedStandings.filter((standing, idx) =>
+      idx !== currentIndex && getWinPct(standing) === currentWinPct
+    );
+
+    if (tiedTeams.length === 0) {
+      return null; // No tied teams
+    }
+
+    // Build individual H2H records against each tied team
+    const h2hRecords: string[] = [];
+    let totalWins = 0;
+    let totalLosses = 0;
+    let totalGames = 0;
+
+    tiedTeams.forEach(tiedTeam => {
+      const h2h = getHeadToHeadRecord(currentStanding.userId, tiedTeam.userId, matchupsByWeek, year);
+      totalWins += h2h.team1Wins;
+      totalLosses += h2h.team2Wins;
+      totalGames += h2h.totalGames;
+
+      if (h2h.totalGames > 0) {
+        const teamName = getDisplayTeamName(tiedTeam.userId, tiedTeam.userInfo.teamName, year);
+        h2hRecords.push(`${h2h.team1Wins}-${h2h.team2Wins} vs ${teamName}`);
+      }
+    });
+
+    if (h2hRecords.length > 0) {
+      // Show individual H2H records if any games were played
+      if (totalWins !== totalLosses) {
+        return `Tiebreaker: ${h2hRecords.join(', ')}`;
+      }
+      // H2H is tied overall, so points for is the tiebreaker
+      return `Tiebreaker: H2H tied (${h2hRecords.join(', ')}), using Points For`;
+    }
+
+    // No H2H games played, points for is the tiebreaker
+    return `Tiebreaker: Points For (${currentStanding.pointsFor?.toFixed(2)})`;
+  };
+
   return (
     <div className="card">
       {/* Champion Highlight */}
@@ -117,11 +182,11 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek }: Stan
         <div className={`absolute bottom-0 left-0 right-0 h-0.5 ${leagueColors.iconBg}`}></div>
       </div>
       
-      <div className="table-container">
+      <div className="table-container overflow-visible">
         <table className="table">
           <thead className={`table-header ${leagueColors.iconBg} border-0`}>
             <tr>
-              <th className="text-center text-white font-bold">Rank</th>
+              <th className="text-left text-white font-bold pl-4">Rank</th>
               <th className="text-white font-bold">Team</th>
               <th className="text-center text-white font-bold">Record</th>
               <th className="text-center text-white font-bold">Points For</th>
@@ -132,23 +197,35 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek }: Stan
             </tr>
           </thead>
           <tbody>
-            {rankedStandings.map((standing) => (
-              <tr key={standing.userId} className={getRowClasses(standing.rank)}>
-                <td className="text-center">
-                  <div className="flex items-center justify-center space-x-2">
-                    {!isActiveSeason && getRankIcon(standing.rank)}
-                    {isActiveSeason && (
-                      <span className="font-bold text-lg text-gray-900 dark:text-gray-100">
-                        {standing.rank}
-                      </span>
-                    )}
-                    {!isActiveSeason && (
-                      <span className={`font-black text-lg ${standing.rank === 1 ? leagueColors.text : 'text-gray-900 dark:text-gray-100'}`}>
-                        #{standing.rank}
-                      </span>
-                    )}
-                  </div>
-                </td>
+            {rankedStandings.map((standing, index) => {
+              const tiebreakerText = getTiebreaker(index);
+
+              return (
+                <tr key={standing.userId} className={getRowClasses(standing.rank)}>
+                  <td className="text-left pl-4">
+                    <div className="flex items-center space-x-1">
+                      {!isActiveSeason && getRankIcon(standing.rank)}
+                      {isActiveSeason && (
+                        <span className="font-bold text-lg text-gray-900 dark:text-gray-100">
+                          {standing.rank}
+                        </span>
+                      )}
+                      {!isActiveSeason && (
+                        <span className={`font-black text-lg ${standing.rank === 1 ? leagueColors.text : 'text-gray-900 dark:text-gray-100'}`}>
+                          #{standing.rank}
+                        </span>
+                      )}
+                      {tiebreakerText && (
+                        <div className="group relative inline-block">
+                          <Info className="h-4 w-4 text-white cursor-help" />
+                          <div className="invisible group-hover:visible absolute z-[9999] w-64 px-3 py-2 text-sm leading-relaxed text-white bg-gray-900/75 dark:bg-gray-800/75 rounded-lg shadow-xl whitespace-normal pointer-events-none left-full ml-2 top-1/2 -translate-y-1/2 backdrop-blur-sm">
+                            {tiebreakerText}
+                            <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-gray-900/75 dark:bg-gray-800/75 transform rotate-45"></div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </td>
                 <td>
                   <div className="flex items-center space-x-3">
                     <TeamLogo 
@@ -197,7 +274,8 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek }: Stan
                   </span>
                 </td>
               </tr>
-            ))}
+              );
+            })}
           </tbody>
         </table>
       </div>

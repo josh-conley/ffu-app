@@ -142,7 +142,8 @@ export class DataService {
       standings: standingsWithUPR,
       playoffResults: historicalData.playoffResults,
       promotions: historicalData.promotions,
-      relegations: historicalData.relegations
+      relegations: historicalData.relegations,
+      matchupsByWeek: historicalData.matchupsByWeek // Preserve matchups for tiebreaker logic
     };
   }
 

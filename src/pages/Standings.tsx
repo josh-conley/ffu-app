@@ -7,18 +7,27 @@ import { StandingsTable } from '../components/League/StandingsTable';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../config/constants';
 import { getLeagueName } from '../constants/leagues';
-import { ChevronDown, Crown } from 'lucide-react';
+import { ChevronDown, Crown, Info } from 'lucide-react';
 import type { LeagueTier } from '../types';
 import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
-import { calculateRankings } from '../utils/ranking';
+import { calculateRankings, getHeadToHeadRecord } from '../utils/ranking';
 
 // Component to render StandingsTable with matchup data for active seasons
 const StandingsTableWithMatchups = ({ leagueData, league, year }: { leagueData: any, league: string, year: string }) => {
   const { data: fullLeagueData } = useLeagueStandings(league as LeagueTier, year);
 
   // For active seasons, use full league data if available to get matchups
-  const matchupsByWeek = (year === '2025' && fullLeagueData) ?
+  const matchupsByWeek = (isActiveYear(year) && fullLeagueData) ?
     (fullLeagueData as any).matchupsByWeek : undefined;
+
+  console.log('📋 StandingsTableWithMatchups:', {
+    league,
+    year,
+    isActiveYear: isActiveYear(year),
+    hasFullLeagueData: !!fullLeagueData,
+    hasMatchupsByWeek: !!matchupsByWeek,
+    matchupsByWeekKeys: matchupsByWeek ? Object.keys(matchupsByWeek) : []
+  });
 
   return (
     <StandingsTable
@@ -157,8 +166,60 @@ export const Standings = () => {
 
                 if (!leagueData) return null;
 
+                // Get matchupsByWeek for tiebreaker logic
+                const matchupsByWeek = (leagueData as any).matchupsByWeek;
+
                 // Only calculate rankings for active seasons, use original for historical
-                const rankedStandings = isActiveSeason ? calculateRankings(leagueData.standings) : leagueData.standings;
+                const rankedStandings = isActiveSeason ? calculateRankings(leagueData.standings, matchupsByWeek, currentYear) : leagueData.standings;
+
+                // Helper to calculate win percentage
+                const getWinPct = (standing: any) => {
+                  const totalGames = standing.wins + standing.losses + (standing.ties || 0);
+                  if (totalGames === 0) return 0;
+                  return (standing.wins + (standing.ties || 0) * 0.5) / totalGames;
+                };
+
+                // Helper to get tiebreaker text
+                const getTiebreaker = (currentIndex: number): string | null => {
+                  if (!isActiveSeason || !matchupsByWeek) return null;
+
+                  const currentStanding = rankedStandings[currentIndex];
+                  const currentWinPct = getWinPct(currentStanding);
+
+                  // Find ALL teams with the same win percentage
+                  const tiedTeams = rankedStandings.filter((standing: any, idx: number) =>
+                    idx !== currentIndex && getWinPct(standing) === currentWinPct
+                  );
+
+                  if (tiedTeams.length === 0) return null;
+
+                  // Build individual H2H records
+                  const h2hRecords: string[] = [];
+                  let totalWins = 0;
+                  let totalLosses = 0;
+                  let totalGames = 0;
+
+                  tiedTeams.forEach((tiedTeam: any) => {
+                    const h2h = getHeadToHeadRecord(currentStanding.userId, tiedTeam.userId, matchupsByWeek, currentYear);
+                    totalWins += h2h.team1Wins;
+                    totalLosses += h2h.team2Wins;
+                    totalGames += h2h.totalGames;
+
+                    if (h2h.totalGames > 0) {
+                      const teamName = getDisplayTeamName(tiedTeam.userId, tiedTeam.userInfo.teamName, currentYear);
+                      h2hRecords.push(`${h2h.team1Wins}-${h2h.team2Wins} vs ${teamName}`);
+                    }
+                  });
+
+                  if (h2hRecords.length > 0) {
+                    if (totalWins !== totalLosses) {
+                      return `Tiebreaker: ${h2hRecords.join(', ')}`;
+                    }
+                    return `Tiebreaker: H2H tied (${h2hRecords.join(', ')}), using Points For`;
+                  }
+
+                  return `Tiebreaker: Points For (${currentStanding.pointsFor?.toFixed(2)})`;
+                };
 
                 const getLeagueColors = (leagueType: string) => {
                   const colorMap = {
@@ -200,14 +261,17 @@ export const Standings = () => {
                     
                     {/* All teams */}
                     <div className="space-y-3 mb-4">
-                      {rankedStandings.map((standing) => (
-                        <div key={standing.userId} className="flex items-center space-x-3">
-                          <span className={`w-8 h-8 flex items-center justify-center text-sm font-bold ${colors.iconBg} text-white relative`}>
-                            {standing.rank}
-                            {!isActiveSeason && standing.rank === 1 && (
-                              <Crown className="absolute -top-1 -right-1 w-3 h-3 text-yellow-400" />
-                            )}
-                          </span>
+                      {rankedStandings.map((standing, index) => {
+                        const tiebreakerText = getTiebreaker(index);
+
+                        return (
+                          <div key={standing.userId} className="flex items-center space-x-3">
+                            <span className={`w-8 h-8 flex items-center justify-center text-sm font-bold ${colors.iconBg} text-white relative`}>
+                              {standing.rank}
+                              {!isActiveSeason && standing.rank === 1 && (
+                                <Crown className="absolute -top-1 -right-1 w-3 h-3 text-yellow-400" />
+                              )}
+                            </span>
                           <div className="hidden sm:block">
                             <TeamLogo 
                               teamName={getCurrentTeamName(standing.userId, standing.userInfo.teamName)}
@@ -228,15 +292,27 @@ export const Standings = () => {
                                 <Crown className="w-3 h-3 text-yellow-500" />
                               )}
                             </div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400">
-                              {standing.wins}-{standing.losses}{standing.ties ? `-${standing.ties}` : ''}
-                              {!isActiveSeason && standing.rank === 1 && (
-                                <span className={`ml-1 text-xs font-medium ${colors.text}`}>Champion</span>
+                            <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                              <span>
+                                {standing.wins}-{standing.losses}{standing.ties ? `-${standing.ties}` : ''}
+                                {!isActiveSeason && standing.rank === 1 && (
+                                  <span className={`ml-1 text-xs font-medium ${colors.text}`}>Champion</span>
+                                )}
+                              </span>
+                              {tiebreakerText && (
+                                <div className="group relative inline-block">
+                                  <Info className="h-3.5 w-3.5 text-white cursor-help" />
+                                  <div className="invisible group-hover:visible absolute z-[9999] w-56 px-3 py-2 text-xs leading-relaxed text-white bg-gray-900/75 dark:bg-gray-800/75 rounded-lg shadow-xl whitespace-normal pointer-events-none left-full ml-2 top-1/2 -translate-y-1/2 backdrop-blur-sm">
+                                    {tiebreakerText}
+                                    <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-gray-900/75 dark:bg-gray-800/75 transform rotate-45"></div>
+                                  </div>
+                                </div>
                               )}
                             </div>
                           </div>
                         </div>
-                      ))}
+                        );
+                      })}
                     </div>
                     
                     {/* View full table button */}

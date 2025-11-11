@@ -1,0 +1,478 @@
+# FFU App - Comprehensive Project Documentation
+
+## Project Overview
+Fantasy Football Union (FFU) is a React + TypeScript static web application that tracks and displays historical league data, standings, matchups, drafts, and statistics across a three-tier fantasy football league system (Premier, Masters, National) spanning from 2018 to present.
+
+**Key Purpose**: Static historical data website with real-time active season support from Sleeper API
+
+---
+
+## 1. Project Structure
+
+### Root Directories
+```
+/ffu-app
+├── src/              # Main React application
+├── public/           # Static assets (served as-is)
+│   └── data/        # Pre-generated JSON league data
+├── discord-bot/      # Separate Discord bot application
+├── scripts/          # Data generation and utility scripts
+├── dist/             # Build output
+└── node_modules/     # Dependencies
+```
+
+### Source Code Organization (`src/`)
+```
+src/
+├── pages/              # Route components (Overview, Standings, Members, etc.)
+├── components/         # Reusable UI components
+│   ├── Common/        # Shared components (TeamLogo, Modals, etc.)
+│   ├── Layout/        # Header, Layout wrapper
+│   ├── League/        # League-specific (StandingsTable, UPRHorserace)
+│   ├── Members/       # Member pages (Compare, Progression)
+│   ├── Draft/         # Draft board and display
+│   ├── Overview/      # Homepage components
+│   └── Players/       # Player tables and stats
+├── services/          # Business logic & API integration
+├── hooks/             # React custom hooks
+├── utils/             # Utility functions and helpers
+├── contexts/          # React contexts (Theme, Modal)
+├── config/            # Configuration (league IDs, user mappings)
+├── constants/         # Constants (league names, etc.)
+├── types/             # TypeScript type definitions
+├── adapters/          # Adapter patterns (currently empty)
+└── assets/            # Images and static assets
+```
+
+---
+
+## 2. Technology Stack
+
+### Frontend Framework
+- **React 19.1.0** - UI library
+- **TypeScript ~5.8.3** - Type safety
+- **Vite 7.0.4** - Build tool & dev server
+- **React Router v6.26.1** - Routing and navigation
+
+### UI & Styling
+- **Tailwind CSS 3.4.7** - Utility-first CSS
+- **Lucide React 0.427.0** - Icon library
+- **PostCSS 8.4.40** - CSS transformation
+
+### HTTP & API
+- **Axios 1.7.2** - HTTP client
+- **Sleeper API** - Primary live data source (JSON REST API)
+
+### Development Tools
+- **ESLint 9.30.1** - Code linting
+- **TypeScript ESLint** - TS-aware linting
+- **Autoprefixer 10.4.20** - CSS vendor prefixes
+- **Vite PWA 1.0.2** - Progressive Web App support
+
+---
+
+## 3. Key Entry Points
+
+### Main Application
+- `src/main.tsx` - React entry (createRoot, StrictMode)
+- `src/App.tsx` - Root component with React Router (HashRouter)
+  - Provides Theme and TeamProfileModal contexts
+  - Defines all main routes
+
+### Route Pages
+| File | Route | Purpose |
+|------|-------|---------|
+| `Overview.tsx` | `/` | Homepage with recent champions |
+| `Standings.tsx` | `/standings` | League standings by year/tier |
+| `Members.tsx` | `/members` | Member profiles and stats |
+| `Matchups.tsx` | `/matchups` | Weekly matchups by league/week |
+| `Draft.tsx` | `/drafts` | Draft history and boards |
+| `DraftFunFacts.tsx` | `/draft-fun-facts` | Draft statistics |
+| `Records.tsx` | `/records` | All-time records and leaderboards |
+| `AllTimeStats.tsx` | `/stats` | Comprehensive statistics |
+| `SecretDak.tsx` | `/secret-dak` | Easter egg page |
+
+---
+
+## 4. Core Data Models
+
+### User/Team Models
+- `FFUUser` - Unified user (ffuId primary, sleeperId/espnId optional)
+- `UserInfo` - Team name, abbreviation, ffuUserId
+- `SeasonStandings` - Wins, losses, points, rank, UPR
+
+### League Models
+- `LeagueTier = 'PREMIER' | 'MASTERS' | 'NATIONAL'`
+- `LeagueSeasonData` - Standings, playoff results, promotions, relegations
+- `HistoricalLeagueDataWithDrafts` - Complete season data including matchups
+
+### Matchup Models
+- `WeekMatchup` - Winner, loser, scores, records
+- `MatchupWithUserInfo` - WeekMatchup + UserInfo details
+
+### Draft Models
+- `DraftPick` - Round, pick number, player, draft slot
+- `DraftData` - Full draft metadata and all picks
+
+### Record Types
+- `AllTimeRecords` - Highest/lowest game, closest match, blowouts, etc.
+
+### Sleeper API Types
+- `SleeperLeague`, `SleeperUser`, `SleeperRoster`, `SleeperMatchup`
+- `SleeperDraft`, `SleeperDraftPick`, `SleeperPlayer`
+
+### ESPN Era Types
+- `EspnLeagueData` - Legacy structure
+- `ParsedEspnTeam`, `ParsedEspnMatchup`, `ParsedEspnDraftPick`
+
+---
+
+## 5. Services & API Layer
+
+### `SleeperService` - Sleeper API Wrapper
+- Wraps Sleeper API with retry logic (3 attempts, exponential backoff)
+- Methods: `getLeague()`, `getLeagueUsers()`, `getLeagueRosters()`, `getMatchupsForWeek()`
+- `getDraft()`, `getDraftPicks()`, `getNFLPlayers()`, `getAllSeasonMatchups()`
+
+### `LeagueService` - Core Business Logic
+- `getLeagueStandings()` - Single league standings
+- `getAllLeagueStandings()` - All years/leagues
+- `getWeekMatchups()` - Specific week matchups
+- `getAllTimeRecords()` - Historical records
+- **Design**: Static data first, throws error if not found
+
+### `DataService` - Static Data Loading
+- `loadHistoricalLeagueData()` - Load from `/public/data/{year}/{league}.json`
+- `convertHistoricalToEnhanced()` - Add UPR calculations
+
+### `api.ts` Facade
+Exports `leagueApi` with high-level methods:
+- `getAllStandings()`, `getLeagueStandings()`, `getWeekMatchups()`
+- `getAllTimeRecords()`, `getAllSeasonMatchups()`
+
+### Supporting Services
+- `nfl-stats.service.ts` - NFL player stats
+- `nflverse.service.ts` - Historical team data
+- `player-mapping.service.ts` - Sleeper to historical teams mapping
+
+---
+
+## 6. Configuration & Constants
+
+### League Configuration (`src/config/constants.ts`)
+**Master arrays as single source of truth:**
+
+```typescript
+LEAGUES: Array of 24+ league configs with sleeperId, year, tier, status
+USERS: Array of 56 users with ffuId, sleeperId, teamName, historicalNames
+
+Helper functions:
+- getLeagueId(tier, year) - Get Sleeper ID
+- getUserById(sleeperId) - Lookup user
+- getFFUIdBySleeperId() - FFU ID lookup
+- getAvailableLeagues(year) - Era-aware
+- validateLeagueAndYear() - Validation
+- isActiveYear(year) - Current season check
+```
+
+### Era Detection (`src/utils/era-detection.ts`)
+
+**ESPN Era (2018-2020):**
+- 16 regular season weeks, playoff weeks [14, 15, 16]
+- No Masters league, CSV data format
+
+**Sleeper Era (2021+):**
+- 17 regular season weeks, playoff weeks [15, 16, 17]
+- Masters league from 2022+, JSON data format
+
+**Key functions:**
+- `isEspnEra()` / `isSleeperEra()`
+- `getSeasonLength()` - 16 or 17
+- `getPlayoffWeeks()`, `getAvailableLeagues()`
+
+---
+
+## 7. Key Utilities
+
+### `upr-calculator.ts` - Union Power Rating
+```
+UPR = ((avgScore × 6) + ((highGame + lowGame) × 2) + (winPct × 400)) / 10
+```
+- `calculateUPR()` - Compute score
+- `calculateRegularSeasonStats()` - Exclude playoffs
+- `getRegularSeasonUPRData()` - High/low extraction
+
+### `matchup-indexer.ts` - Head-to-Head Analysis
+- `getHeadToHeadMatchups()` - Filter H2H games
+- `calculateHeadToHeadStats()` - Win/loss record
+- `getMostRecentMatchups()` - Latest games
+
+### `historical-team-resolver.ts` - Player Team Mapping
+- Loads `/data/historical-teams/` JSON files
+- Maps Sleeper players to their NFL draft-year teams
+- Handles team relocations (Raiders OAK→LV, etc.)
+
+### `nfl-schedule.ts` - Current Week Detection
+- Hard-coded 2025 schedule
+- `getCurrentNFLWeek()` - Determine active week
+- `isNFLWeekComplete()` - Check completion status
+
+### `teamLogos.ts` - Logo Resolution
+- Maps team names to `/public/team-logos/` filenames
+
+---
+
+## 8. React Hooks
+
+### `useLeagues.ts` - Core Data Fetching
+- `useAllStandings()` - All standings
+- `useLeagueStandings(league, year)` - Single league
+- `useWeekMatchups(league, year, week)` - Week matchups
+- `useAllSeasonMatchups(league, year)` - All weeks
+- `useAllTimeRecords(league?, year?)` - Records/leaderboards
+- `useHeadToHeadStats(user1, user2)` - H2H stats
+- `useLeagueHistory()` - Organized by year
+
+### Other Hooks
+- `useMatchupCache.ts` - Caches matchup data
+- `useNFLStats.ts` - Current week NFL stats
+- `useTheme.ts` - Theme context access
+- `useUrlParams.ts` - URL query param sync
+- `useUrlPlayerState.ts` - Player selection state
+
+---
+
+## 9. Component Hierarchy
+
+### Layout
+- `Layout.tsx` - Wrapper with sidebar
+- `Header.tsx` - Navigation bar
+
+### Common (Shared)
+- `TeamLogo.tsx` - Logo with abbreviation fallback
+- `TeamProfileModal.tsx` - Team modal
+- `RosterModal.tsx` - Week roster details
+- `PlayerTicker.tsx` - Desktop player info
+- `PlayerTickerSidebar.tsx` - Mobile player info
+- `ActiveWeekUPR.tsx` - Current week UPR standings
+- `ActiveWeekMatchups.tsx` - Current week matchups
+- `LoadingSpinner.tsx`, `ErrorMessage.tsx`, `ThemeToggle.tsx`
+
+### League-Specific
+- `StandingsTable.tsx` - Standings with sorting
+- `LeagueBadge.tsx` - Tier indicator
+- `UPRHorserace.tsx` - UPR visualization
+
+### Member-Specific
+- `CompareMembers.tsx` - H2H comparison
+- `LeagueProgressionChart.tsx` - Year-over-year stats
+
+### Draft
+- `DraftBoard.tsx`, `MobileDraftBoard.tsx`, `DraftList.tsx`
+
+---
+
+## 10. Context & State
+
+### ThemeContext
+```typescript
+{ theme: 'light' | 'dark', toggleTheme: () => void }
+```
+- Persists to localStorage as `ffu-theme`
+- Updates document.documentElement class
+
+### TeamProfileModalContext
+```typescript
+{
+  isOpen: boolean
+  teamUserId: string | null
+  teamName: string | null
+  openTeamProfile(userId, teamName?)
+  closeTeamProfile()
+}
+```
+
+---
+
+## 11. Data Sources
+
+### External APIs
+- **Sleeper API** (`https://api.sleeper.app/v1`)
+  - `/league/{leagueId}` - Metadata
+  - `/league/{leagueId}/rosters` - Standings
+  - `/league/{leagueId}/matchups/{week}` - Matchups
+  - `/league/{leagueId}/drafts`, `/draft/{draftId}/picks` - Drafts
+  - `/players/nfl` - Player roster
+
+### Static JSON Data (`/public/data/`)
+```
+/data/
+├── 2018-2025/               # By year
+│   ├── premier.json         # League standings & matchups
+│   ├── masters.json         # (2022+)
+│   └── national.json
+├── players/
+│   ├── nfl-players.json     # Current players
+│   └── nfl-players-compressed.json
+└── historical-teams/
+    ├── historical-teams.json
+    └── player-mappings.json
+```
+
+**Data Format**: `{ league, year, leagueId, standings[], playoffResults[], matchupsByWeek, draftData? }`
+
+---
+
+## 12. Data Generation Scripts
+
+### `generate-historical-data.js` - Main Script
+Fetches from Sleeper, processes rosters, matchups, drafts:
+```bash
+npm run generate-data
+```
+Outputs: `/public/data/{year}/{league}.json` for all configured leagues
+
+### `generate-current-season.js` - Active Season Only
+```bash
+npm run generate-current-season
+```
+
+### `generate-espn-data.js` - ESPN CSV Conversion
+```bash
+npm run generate-espn-data
+```
+
+### Other Scripts
+- `fetch-player-data.js` - Update player roster
+- `fetch-historical-teams.js` - Historical team data
+- `fetch-team-logos.js` - Team logo downloads
+- `export-weekly-scores.cjs` - CSV export
+
+---
+
+## 13. Build & Deployment
+
+### Configuration Files
+- `vite.config.ts` - Build config with PWA manifest
+- `tsconfig.app.json` - TS compilation (ES2022, React JSX)
+- `tailwind.config.js` - Tailwind setup
+- `eslint.config.js` - Linting rules
+
+### Build Commands
+```bash
+npm run dev           # Dev server (http://localhost:5173)
+npm run build         # Type check + production build
+npm run lint          # ESLint check
+npm run preview       # Preview prod build
+```
+
+### Deployment
+- **Hosted**: GitHub Pages (`josh-conley.github.io/ffu-app`)
+- **Base Path**: `/ffu-app/` in vite.config.ts
+- **Output**: `/dist/` directory
+- **PWA**: Auto-update support
+
+---
+
+## 14. Patterns & Best Practices
+
+### Architectural Patterns
+1. **Service Layer** - SleeperService, LeagueService, DataService separate concerns
+2. **API Facade** - `leagueApi` aggregates services
+3. **Custom Hooks** - React Query-like data fetching pattern
+4. **Context API** - Global theme/modal state
+5. **Type-First Design** - Extensive TypeScript interfaces
+
+### Code Conventions
+- **Files**: PascalCase for components, camelCase for utils
+- **User IDs**: `userId` (legacy), `ffuUserId` (primary), `sleeperId`, `espnId`
+- **State**: URL parameters sync with `?year=2025&league=PREMIER`
+- **Error Handling**: Services throw, components display ErrorMessage
+
+### Performance
+- Static data preferred over API calls
+- Matchup caching in useMatchupCache
+- Parallel week fetching in Sleeper service
+- Lazy load historical team data
+
+---
+
+## 15. Development Workflow
+
+### Setup
+```bash
+npm install
+npm run dev
+```
+
+### Add New Member
+1. Add to `USERS[]` in `src/config/constants.ts` (ffuId, sleeperId)
+2. Run `npm run generate-data`
+
+### Update Current Season
+```bash
+npm run generate-current-season
+```
+
+### Add Historical Data (ESPN)
+1. Export CSV from ESPN league manager
+2. Place in `/scripts/data/espn-*`
+3. Update USERS[] mappings
+4. Run `npm run generate-espn-data`
+5. Manual review output JSON
+
+---
+
+## 16. Key Files Reference
+
+| Path | Purpose |
+|------|---------|
+| `src/config/constants.ts` | League & user master data |
+| `src/types/index.ts` | Core type definitions |
+| `src/services/api.ts` | API facade |
+| `src/services/league.service.ts` | Business logic |
+| `src/services/data.service.ts` | Static data loading |
+| `src/utils/upr-calculator.ts` | UPR metric |
+| `src/utils/era-detection.ts` | Era-specific logic |
+| `src/App.tsx` | Router setup |
+| `vite.config.ts` | Build config |
+| `scripts/generate-historical-data.js` | Main data generation |
+| `public/data/` | Pre-generated league data |
+
+---
+
+## 17. Important Design Decisions
+
+1. **Static Data Strategy** - Pre-generate JSON to reduce live API calls
+2. **Era Separation** - ESPN (2018-2020) and Sleeper (2021+) are separate systems
+3. **Three-Tier System** - Premier > Masters > National hierarchy
+4. **Unified FFU ID** - Abstract away Sleeper/ESPN platform IDs
+5. **Client-Side Routing** - HashRouter for GitHub Pages compatibility
+6. **TypeScript-Strict** - Type safety for maintainability
+7. **Tailwind + Dark Mode** - Utility-first CSS with theme support
+8. **Context-Based State** - Minimal global state (theme, modal)
+
+---
+
+## 18. Quick Navigation
+
+### Finding Things
+- **Data Loading**: `src/services/data.service.ts`
+- **League Logic**: `src/services/league.service.ts`
+- **API Calls**: `src/services/sleeper.service.ts`
+- **Data Fetching Hooks**: `src/hooks/useLeagues.ts`
+- **Configuration**: `src/config/constants.ts`
+- **Type Definitions**: `src/types/index.ts`
+- **UPR Calculation**: `src/utils/upr-calculator.ts`
+- **Era Logic**: `src/utils/era-detection.ts`
+
+### Adding Features
+1. Define types in `src/types/`
+2. Add service methods in `src/services/`
+3. Create custom hook in `src/hooks/`
+4. Build components in `src/components/`
+5. Add page route in `src/pages/`
+
+---
+
+This documentation provides a complete reference for working with the FFU App codebase.
