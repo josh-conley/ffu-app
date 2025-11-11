@@ -20,6 +20,7 @@ export interface DivisionGroup {
   division: number;
   name: string;
   standings: EnhancedSeasonStandings[];
+  leader?: EnhancedSeasonStandings; // Division leader (best record in division)
 }
 
 /**
@@ -64,49 +65,242 @@ export function getHeadToHeadRecord(
 }
 
 /**
+ * Compare two teams by record, using tiebreakers
+ */
+function compareTeamRecords(
+  a: EnhancedSeasonStandings,
+  b: EnhancedSeasonStandings,
+  matchupsByWeek?: Record<number, any[]>,
+  year?: string
+): number {
+  const aTotalGames = a.wins + a.losses + (a.ties || 0);
+  const bTotalGames = b.wins + b.losses + (b.ties || 0);
+
+  // Calculate win percentages (ties count as 0.5 wins)
+  const aWinPct = aTotalGames > 0 ? (a.wins + (a.ties || 0) * 0.5) / aTotalGames : 0;
+  const bWinPct = bTotalGames > 0 ? (b.wins + (b.ties || 0) * 0.5) / bTotalGames : 0;
+
+  // 1. Primary: Win percentage
+  if (aWinPct !== bWinPct) {
+    return bWinPct - aWinPct;
+  }
+
+  // 2. Tiebreaker for active season: Head-to-head record
+  if (year && isActiveYear(year) && matchupsByWeek) {
+    const h2h = getHeadToHeadRecord(a.userId, b.userId, matchupsByWeek, year);
+    if (h2h.totalGames > 0) {
+      if (h2h.team1Wins !== h2h.team2Wins) {
+        return h2h.team2Wins - h2h.team1Wins; // Team with more head-to-head wins ranks higher
+      }
+    }
+  }
+
+  // 3. Secondary tiebreaker: Points for (higher is better)
+  if (a.pointsFor !== b.pointsFor) {
+    return b.pointsFor - a.pointsFor;
+  }
+
+  // 4. If still tied, maintain original order (stable sort)
+  return 0;
+}
+
+/**
  * Calculate rankings for standings with proper tie handling
- * For active seasons, uses head-to-head records as tiebreakers
- * For historical seasons, this shouldn't be called as they have final rankings
+ * For leagues with divisions (Sleeper era):
+ *   - Top 2 division leaders get seeds 1-2
+ *   - Remaining teams (including 3rd+ division leaders) get seeds 3-12 by record
+ * For leagues without divisions (ESPN era):
+ *   - All teams ranked by record
  */
 export function calculateRankings(
   standings: EnhancedSeasonStandings[],
   matchupsByWeek?: Record<number, any[]>,
   year?: string
 ): EnhancedSeasonStandings[] {
-  // Sort standings with head-to-head tiebreakers for active season
-  const sortedStandings = [...standings].sort((a, b) => {
-    const aTotalGames = a.wins + a.losses + (a.ties || 0);
-    const bTotalGames = b.wins + b.losses + (b.ties || 0);
+  // Check if we have divisions
+  const hasDivisions = standings.some(s => s.division !== undefined && s.division !== null);
 
-    // Calculate win percentages (ties count as 0.5 wins)
-    const aWinPct = aTotalGames > 0 ? (a.wins + (a.ties || 0) * 0.5) / aTotalGames : 0;
-    const bWinPct = bTotalGames > 0 ? (b.wins + (b.ties || 0) * 0.5) / bTotalGames : 0;
+  if (!hasDivisions) {
+    // No divisions: rank all teams by record
+    return rankByRecord(standings, matchupsByWeek, year);
+  }
 
-    // 1. Primary: Win percentage
-    if (aWinPct !== bWinPct) {
-      return bWinPct - aWinPct;
+  // With divisions: special ranking logic
+  return rankWithDivisions(standings, matchupsByWeek, year);
+}
+
+/**
+ * Sort standings handling multi-way ties properly
+ * When teams are in a 3+ way tie with equal aggregate H2H, use points for
+ */
+function sortWithTiebreakers(
+  standings: EnhancedSeasonStandings[],
+  matchupsByWeek?: Record<number, any[]>,
+  year?: string
+): EnhancedSeasonStandings[] {
+  // Group teams by win percentage
+  const winPctGroups = new Map<number, EnhancedSeasonStandings[]>();
+
+  standings.forEach(standing => {
+    const totalGames = standing.wins + standing.losses + (standing.ties || 0);
+    const winPct = totalGames > 0 ? Math.round((standing.wins + (standing.ties || 0) * 0.5) / totalGames * 10000) / 10000 : 0;
+
+    if (!winPctGroups.has(winPct)) {
+      winPctGroups.set(winPct, []);
     }
-
-    // 2. Tiebreaker for active season: Head-to-head record
-    if (year && isActiveYear(year) && matchupsByWeek) {
-      const h2h = getHeadToHeadRecord(a.userId, b.userId, matchupsByWeek, year);
-      if (h2h.totalGames > 0) {
-        if (h2h.team1Wins !== h2h.team2Wins) {
-          return h2h.team2Wins - h2h.team1Wins; // Team with more head-to-head wins ranks higher
-        }
-      }
-    }
-
-    // 3. Secondary tiebreaker: Points for (higher is better)
-    if (a.pointsFor !== b.pointsFor) {
-      return b.pointsFor - a.pointsFor;
-    }
-
-    // 4. If still tied, maintain original order (stable sort)
-    return 0;
+    winPctGroups.get(winPct)!.push(standing);
   });
 
+  // Sort each group appropriately
+  const sortedGroups: EnhancedSeasonStandings[][] = [];
+
+  winPctGroups.forEach((group) => {
+    if (group.length === 1) {
+      // No tie, just add the single team
+      sortedGroups.push(group);
+    } else if (group.length === 2) {
+      // 2-way tie, use normal comparison (H2H then points)
+      sortedGroups.push(group.sort((a, b) => compareTeamRecords(a, b, matchupsByWeek, year)));
+    } else {
+      // 3+ way tie, check if aggregate H2H is tied
+      const aggregateH2H = checkAggregateH2H(group, matchupsByWeek, year);
+
+      if (aggregateH2H.isTied) {
+        // All teams have equal aggregate H2H, sort by points for
+        sortedGroups.push(group.sort((a, b) => b.pointsFor - a.pointsFor));
+      } else {
+        // Aggregate H2H distinguishes teams, use normal comparison
+        sortedGroups.push(group.sort((a, b) => compareTeamRecords(a, b, matchupsByWeek, year)));
+      }
+    }
+  });
+
+  // Sort groups by win percentage (descending) and flatten
+  return sortedGroups
+    .sort((a, b) => {
+      const aWinPct = getWinPct(a[0]);
+      const bWinPct = getWinPct(b[0]);
+      return bWinPct - aWinPct;
+    })
+    .flat();
+}
+
+/**
+ * Calculate win percentage for a team
+ */
+function getWinPct(standing: EnhancedSeasonStandings): number {
+  const totalGames = standing.wins + standing.losses + (standing.ties || 0);
+  return totalGames > 0 ? (standing.wins + (standing.ties || 0) * 0.5) / totalGames : 0;
+}
+
+/**
+ * Check if teams in a multi-way tie have equal aggregate H2H records
+ * Returns true if all teams have the same number of H2H wins against the group
+ */
+function checkAggregateH2H(
+  tiedTeams: EnhancedSeasonStandings[],
+  matchupsByWeek?: Record<number, any[]>,
+  year?: string
+): { isTied: boolean; records: Map<string, number> } {
+  if (!matchupsByWeek || !year || !isActiveYear(year)) {
+    return { isTied: true, records: new Map() };
+  }
+
+  // Calculate H2H wins for each team against all other tied teams
+  const h2hWins = new Map<string, number>();
+
+  tiedTeams.forEach(team => {
+    let wins = 0;
+    tiedTeams.forEach(opponent => {
+      if (team.userId !== opponent.userId) {
+        const h2h = getHeadToHeadRecord(team.userId, opponent.userId, matchupsByWeek, year);
+        wins += h2h.team1Wins;
+      }
+    });
+    h2hWins.set(team.userId, wins);
+  });
+
+  // Check if all teams have the same number of wins
+  const winCounts = Array.from(h2hWins.values());
+  const allEqual = winCounts.every(w => w === winCounts[0]);
+
+  return { isTied: allEqual, records: h2hWins };
+}
+
+/**
+ * Rank teams by record (no division logic)
+ */
+function rankByRecord(
+  standings: EnhancedSeasonStandings[],
+  matchupsByWeek?: Record<number, any[]>,
+  year?: string
+): EnhancedSeasonStandings[] {
+  // Sort by record, handling multi-way ties
+  const sortedStandings = sortWithTiebreakers(standings, matchupsByWeek, year);
+
   // Assign ranks, allowing for ties
+  return assignRanks(sortedStandings, matchupsByWeek, year);
+}
+
+/**
+ * Rank teams with division logic:
+ * - Top 2 division leaders get seeds 1-2
+ * - Remaining teams get seeds 3+ by record
+ */
+function rankWithDivisions(
+  standings: EnhancedSeasonStandings[],
+  matchupsByWeek?: Record<number, any[]>,
+  year?: string
+): EnhancedSeasonStandings[] {
+  // Group by division
+  const divisionMap = new Map<number, EnhancedSeasonStandings[]>();
+  standings.forEach(standing => {
+    const division = standing.division ?? 0;
+    if (!divisionMap.has(division)) {
+      divisionMap.set(division, []);
+    }
+    divisionMap.get(division)!.push(standing);
+  });
+
+  // Find division leaders (best record in each division)
+  const divisionLeaders: EnhancedSeasonStandings[] = [];
+  divisionMap.forEach(divisionTeams => {
+    // Sort teams within division by record using proper tiebreakers
+    const sortedDivision = sortWithTiebreakers(divisionTeams, matchupsByWeek, year);
+    // First team is the division leader
+    if (sortedDivision.length > 0) {
+      divisionLeaders.push(sortedDivision[0]);
+    }
+  });
+
+  // Sort division leaders by record using proper tiebreakers
+  const sortedDivisionLeaders = sortWithTiebreakers(divisionLeaders, matchupsByWeek, year);
+
+  // Top 2 division leaders get seeds 1-2
+  const top2Leaders = sortedDivisionLeaders.slice(0, 2);
+
+  // Everyone else (non-top-2-leaders)
+  const divisionLeaderIds = new Set(top2Leaders.map(leader => leader.userId));
+  const otherTeams = standings.filter(standing => !divisionLeaderIds.has(standing.userId));
+
+  // Sort other teams by record using proper tiebreakers
+  const sortedOtherTeams = sortWithTiebreakers(otherTeams, matchupsByWeek, year);
+
+  // Combine: top 2 leaders first, then everyone else
+  const finalOrder = [...top2Leaders, ...sortedOtherTeams];
+
+  // Assign ranks
+  return assignRanks(finalOrder, matchupsByWeek, year);
+}
+
+/**
+ * Assign rank numbers to sorted standings, allowing for ties
+ */
+function assignRanks(
+  sortedStandings: EnhancedSeasonStandings[],
+  matchupsByWeek?: Record<number, any[]>,
+  year?: string
+): EnhancedSeasonStandings[] {
   const rankedStandings: EnhancedSeasonStandings[] = [];
   let currentRank = 1;
 
@@ -174,15 +368,6 @@ export function areTeamsTied(teamA: RankingTiebreakers, teamB: RankingTiebreaker
  */
 export function getDisplayRank(rank: number): string {
   return `#${rank}`;
-}
-
-/**
- * Calculate win percentage for a team
- */
-function getWinPct(standing: EnhancedSeasonStandings): number {
-  const totalGames = standing.wins + standing.losses + (standing.ties || 0);
-  if (totalGames === 0) return 0;
-  return (standing.wins + (standing.ties || 0) * 0.5) / totalGames;
 }
 
 /**
@@ -263,6 +448,7 @@ function getDivisionName(divisionNumber: number, customNames?: Record<number, st
 /**
  * Group standings by division (Sleeper era only, 2021+)
  * Returns null if no division data is present
+ * Identifies division leaders (best record in each division)
  */
 export function groupStandingsByDivision(
   standings: EnhancedSeasonStandings[],
@@ -289,11 +475,18 @@ export function groupStandingsByDivision(
   // Convert to array and sort divisions
   const divisions = Array.from(divisionMap.entries())
     .sort(([a], [b]) => a - b)
-    .map(([division, divisionStandings]) => ({
-      division,
-      name: getDivisionName(division, divisionNames),
-      standings: divisionStandings
-    }));
+    .map(([division, divisionStandings]) => {
+      // Sort teams within division by overall rank for display
+      const sortedByRank = [...divisionStandings].sort((a, b) => a.rank - b.rank);
+      const leader = sortedByRank[0];
+
+      return {
+        division,
+        name: getDivisionName(division, divisionNames),
+        standings: sortedByRank, // Use sorted standings for display
+        leader
+      };
+    });
 
   return divisions;
 }

@@ -33,6 +33,12 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
   // Only calculate rankings for active seasons, use original for historical
   const rankedStandings = isActiveSeason ? calculateRankings(standings, matchupsByWeek, year) : standings;
 
+  console.log('🏈 Ranked standings sample (4-6 teams):',
+    rankedStandings
+      .filter(s => s.wins === 4 && s.losses === 6)
+      .map(s => ({ rank: s.rank, userId: s.userId.substring(0, 8), pointsFor: s.pointsFor, division: s.division }))
+  );
+
   // Group by divisions if division data exists (Sleeper era only, 2021+)
   const divisionGroups = groupStandingsByDivision(rankedStandings, divisionNames);
 
