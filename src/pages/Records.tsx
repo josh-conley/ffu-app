@@ -515,7 +515,7 @@ export const Records = () => {
                         const loserLowRank = isTeam1Winner ? matchup.team2LowRank : matchup.team1LowRank;
 
                         // Helper to render score with badge
-                        const renderScoreWithBadge = (score: number, highRank: number, lowRank: number, alignment: 'left' | 'right') => {
+                        const renderScoreWithBadge = (score: number, highRank: number, lowRank: number) => {
                           let showBadge = false;
                           let badgeRank = 0;
                           let badgeColor = '';
@@ -590,7 +590,7 @@ export const Records = () => {
                               </div>
                             </td>
                             <td className="px-1 sm:px-3 py-2 sm:py-3 whitespace-nowrap">
-                              <div className="text-xs sm:text-sm">{renderScoreWithBadge(winnerScore, winnerHighRank, winnerLowRank, 'right')}</div>
+                              <div className="text-xs sm:text-sm">{renderScoreWithBadge(winnerScore, winnerHighRank, winnerLowRank)}</div>
                             </td>
                             <td className="px-1 sm:px-3 py-2 sm:py-3 whitespace-nowrap text-center">
                               <div className="text-xs sm:text-sm font-bold text-yellow-600 dark:text-yellow-400 font-mono">
@@ -598,7 +598,7 @@ export const Records = () => {
                               </div>
                             </td>
                             <td className="px-1 sm:px-3 py-2 sm:py-3 whitespace-nowrap">
-                              <div className="text-xs sm:text-sm">{renderScoreWithBadge(loserScore, loserHighRank, loserLowRank, 'left')}</div>
+                              <div className="text-xs sm:text-sm">{renderScoreWithBadge(loserScore, loserHighRank, loserLowRank)}</div>
                             </td>
                             <td className="px-2 sm:px-3 py-2 sm:py-3 whitespace-nowrap">
                               {/* Mobile: Logo with abbreviation underneath */}
