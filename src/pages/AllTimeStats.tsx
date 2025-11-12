@@ -628,7 +628,11 @@ export const AllTimeStats = () => {
               </div>
             </div>
 
-            <div className="overflow-x-auto table-container">
+            <div className="overflow-x-auto table-container" style={{
+              WebkitOverflowScrolling: 'touch',
+              marginLeft: 'calc(-1 * (100vw - 100%) / 2)',
+              marginRight: 'calc(-1 * (100vw - 100%) / 2)'
+            }}>
               <table className="table md:table-fixed w-full min-w-[1400px]">
                 <colgroup className="hidden md:table-column-group">
                   <col className="w-[12%]" />
@@ -1051,7 +1055,11 @@ export const AllTimeStats = () => {
                 </div>
               </div>
 
-              <div className="overflow-x-auto table-container">
+              <div className="overflow-x-auto table-container" style={{
+                WebkitOverflowScrolling: 'touch',
+                marginLeft: 'calc(-1 * (100vw - 100%) / 2)',
+                marginRight: 'calc(-1 * (100vw - 100%) / 2)'
+              }}>
                 <table className="table md:table-fixed w-full min-w-[800px]">
                   <colgroup className="hidden md:table-column-group">
                     <col className="w-[18%]" />

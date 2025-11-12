@@ -8,7 +8,7 @@ import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 import type { LeagueTier } from '../types';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Filter } from 'lucide-react';
 import { USERS, CURRENT_YEAR } from '../config/constants';
 import { TeamSelector } from '../components/Common/TeamSelector';
 
@@ -24,6 +24,7 @@ export const Records = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(50);
   const [, setImageError] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
   const dakUrl = `${import.meta.env.BASE_URL}dak-head.png`;
   const { openTeamProfile } = useTeamProfileModal();
 
@@ -316,45 +317,45 @@ export const Records = () => {
 
         {records && (
           <div className="space-y-6">
-            <div className="card">
+            <div className="card overflow-visible -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
               <div>
                 {/* Pagination Controls - Top */}
                 {totalPages > 1 && (
-                  <div className="mb-4 flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-4">
+                  <div className="mb-3 sm:mb-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 border-b border-gray-200 dark:border-gray-700 pb-3 sm:pb-4">
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm text-gray-700 dark:text-gray-300">
-                        Showing {((currentPage - 1) * itemsPerPage) + 1} to {Math.min(currentPage * itemsPerPage, filteredAndSortedMatchups.length)} of {filteredAndSortedMatchups.length} games
+                      <span className="text-xs sm:text-sm text-gray-700 dark:text-gray-300">
+                        <span className="hidden sm:inline">Showing </span>{((currentPage - 1) * itemsPerPage) + 1}-{Math.min(currentPage * itemsPerPage, filteredAndSortedMatchups.length)} <span className="hidden sm:inline">of {filteredAndSortedMatchups.length}</span>
                       </span>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-1 sm:space-x-2">
                       <button
                         onClick={() => setCurrentPage(1)}
                         disabled={currentPage === 1}
-                        className="px-3 py-1 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                       >
                         First
                       </button>
                       <button
                         onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                         disabled={currentPage === 1}
-                        className="px-3 py-1 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                       >
                         Previous
                       </button>
-                      <span className="px-3 py-1 text-sm font-medium text-gray-900 dark:text-gray-100">
-                        Page {currentPage} of {totalPages}
+                      <span className="px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium text-gray-900 dark:text-gray-100">
+                        {currentPage}/{totalPages}
                       </span>
                       <button
                         onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                         disabled={currentPage === totalPages}
-                        className="px-3 py-1 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                       >
                         Next
                       </button>
                       <button
                         onClick={() => setCurrentPage(totalPages)}
                         disabled={currentPage === totalPages}
-                        className="px-3 py-1 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                       >
                         Last
                       </button>
@@ -362,16 +363,30 @@ export const Records = () => {
                   </div>
                 )}
 
+                {/* Filter Toggle Button - Mobile Only */}
+                <div className="md:hidden mb-4">
+                  <button
+                    onClick={() => setShowFilters(!showFilters)}
+                    className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Filter className="h-4 w-4" />
+                      <span>Filters & Sort</span>
+                    </div>
+                    <ChevronDown className={`h-4 w-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+                  </button>
+                </div>
+
                 {/* Filters and Sort for Matchups Table */}
-                <div className="space-y-4 mb-4">
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div className="space-y-2">
+                <div className={`space-y-3 sm:space-y-4 mb-4 ${showFilters ? 'block' : 'hidden md:block'}`}>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
+                    <div className="space-y-1 sm:space-y-2">
                       <label className="block text-xs font-heading font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Sort By</label>
                       <div className="relative">
                         <select
                           value={sortMode}
                           onChange={(e) => setSortMode(e.target.value as 'highest' | 'lowest' | 'closest' | 'blowout' | 'most-combined' | 'least-combined')}
-                          className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                          className="block w-full pl-2 sm:pl-3 pr-8 sm:pr-10 py-1.5 sm:py-2 text-xs sm:text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
                         >
                           <option value="highest">Highest Score</option>
                           <option value="lowest">Lowest Score</option>
@@ -380,53 +395,55 @@ export const Records = () => {
                           <option value="most-combined">Most Combined Points</option>
                           <option value="least-combined">Least Combined Points</option>
                         </select>
-                        <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                          <ChevronDown className="h-4 w-4 text-gray-400" />
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-1 sm:pr-2 pointer-events-none">
+                          <ChevronDown className="h-3 w-3 sm:h-4 sm:w-4 text-gray-400" />
                         </div>
                       </div>
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-1 sm:space-y-2">
                       <label className="block text-xs font-heading font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Filter by League</label>
                       <div className="relative">
                         <select
                           value={topScoresLeague}
                           onChange={(e) => setTopScoresLeague(e.target.value as LeagueTier | 'ALL')}
-                          className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                          className="block w-full pl-2 sm:pl-3 pr-8 sm:pr-10 py-1.5 sm:py-2 text-xs sm:text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
                         >
                           {leagues.map(league => (
                             <option key={league} value={league}>{getLeagueName(league)}</option>
                           ))}
                         </select>
-                        <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                          <ChevronDown className="h-4 w-4 text-gray-400" />
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-1 sm:pr-2 pointer-events-none">
+                          <ChevronDown className="h-3 w-3 sm:h-4 sm:w-4 text-gray-400" />
                         </div>
                       </div>
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-1 sm:space-y-2 col-span-2 md:col-span-1">
                       <label className="block text-xs font-heading font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Filter by Year</label>
                       <div className="relative">
                         <select
                           value={topScoresYear}
                           onChange={(e) => setTopScoresYear(e.target.value)}
-                          className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                          className="block w-full pl-2 sm:pl-3 pr-8 sm:pr-10 py-1.5 sm:py-2 text-xs sm:text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
                         >
                           {years.map(year => (
                             <option key={year} value={year}>{year === 'ALL' ? 'All Years' : year}</option>
                           ))}
                         </select>
-                        <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                          <ChevronDown className="h-4 w-4 text-gray-400" />
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-1 sm:pr-2 pointer-events-none">
+                          <ChevronDown className="h-3 w-3 sm:h-4 sm:w-4 text-gray-400" />
                         </div>
                       </div>
                     </div>
 
-                    <TeamSelector
-                      label="Filter by Team"
-                      value={topScoresTeam}
-                      onChange={setTopScoresTeam}
-                      groupedTeams={groupedTeams}
-                    />
+                    <div className="col-span-2 md:col-span-1">
+                      <TeamSelector
+                        label="Filter by Team"
+                        value={topScoresTeam}
+                        onChange={setTopScoresTeam}
+                        groupedTeams={groupedTeams}
+                      />
+                    </div>
                   </div>
 
                   {/* Playoff Filter Checkbox */}
@@ -436,40 +453,49 @@ export const Records = () => {
                       id="excludePlayoffs"
                       checked={excludePlayoffs}
                       onChange={(e) => setExcludePlayoffs(e.target.checked)}
-                      className="h-4 w-4 text-ffu-red focus:ring-ffu-red border-gray-300 dark:border-gray-600 rounded cursor-pointer"
+                      className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-ffu-red focus:ring-ffu-red border-gray-300 dark:border-gray-600 rounded cursor-pointer"
                     />
                     <label
                       htmlFor="excludePlayoffs"
-                      className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer select-none"
+                      className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer select-none"
                     >
                       Exclude Playoff & Consolation Games
                     </label>
                   </div>
                 </div>
 
-                <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <div className="overflow-x-auto" style={{
+                  WebkitOverflowScrolling: 'touch',
+                  marginLeft: 'calc(-1 * (100vw - 100%) / 2)',
+                  marginRight: 'calc(-1 * (100vw - 100%) / 2)'
+                }}>
+                  <div className="inline-block min-w-full align-middle">
+                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead className="bg-gray-50 dark:bg-gray-800/50">
                       <tr>
-                        <th scope="col" className="px-3 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                        <th scope="col" className="px-1 sm:px-3 py-2 sm:py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                          #
                         </th>
-                        <th scope="col" colSpan={2} className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                        <th scope="col" colSpan={2} className="px-1 sm:px-3 py-2 sm:py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                           Winner
                         </th>
-                        <th scope="col" className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                          Margin
+                        <th scope="col" className="px-1 sm:px-3 py-2 sm:py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                          <span className="hidden sm:inline">Margin</span>
+                          <span className="sm:hidden">Diff</span>
                         </th>
-                        <th scope="col" colSpan={2} className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                        <th scope="col" colSpan={2} className="px-1 sm:px-3 py-2 sm:py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                           Loser
                         </th>
-                        <th scope="col" className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                        <th scope="col" className="px-1 sm:px-3 py-2 sm:py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                           Year
                         </th>
-                        <th scope="col" className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                          Week
+                        <th scope="col" className="px-1 sm:px-3 py-2 sm:py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                          <span className="hidden sm:inline">Week</span>
+                          <span className="sm:hidden">Wk</span>
                         </th>
-                        <th scope="col" className="px-3 py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                          League
+                        <th scope="col" className="px-1 sm:px-3 py-2 sm:py-3 text-center text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                          <span className="hidden sm:inline">League</span>
+                          <span className="sm:hidden">Lg</span>
                         </th>
                       </tr>
                     </thead>
@@ -507,19 +533,16 @@ export const Records = () => {
                             badgeColor = 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300';
                           }
 
-                          const badge = showBadge ? (
-                            <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-bold ${badgeColor}`}>
-                              #{badgeRank}
-                            </span>
-                          ) : null;
-
                           return (
-                            <div className={`flex items-center gap-2 ${alignment === 'right' ? 'justify-end' : 'justify-start'}`}>
-                              {alignment === 'right' && badge}
-                              <span className="text-sm font-bold font-mono text-gray-900 dark:text-gray-100">
+                            <div className="relative flex items-center justify-center">
+                              {showBadge && (
+                                <span className={`absolute -top-5 inline-flex items-center justify-center px-1.5 sm:px-2 py-0.5 rounded text-[10px] sm:text-xs font-bold ${badgeColor}`}>
+                                  #{badgeRank}
+                                </span>
+                              )}
+                              <span className="text-xs sm:text-sm font-bold font-mono text-gray-900 dark:text-gray-100">
                                 {score.toFixed(2)}
                               </span>
-                              {alignment === 'left' && badge}
                             </div>
                           );
                         };
@@ -529,13 +552,27 @@ export const Records = () => {
                             key={`${matchup.year}-${matchup.week}-${matchup.team1.userId}-${matchup.team2.userId}`}
                             className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                           >
-                            <td className="px-3 py-3 whitespace-nowrap">
-                              <div className="text-sm font-bold text-gray-900 dark:text-gray-100">
+                            <td className="px-2 sm:px-3 py-2 sm:py-3 whitespace-nowrap">
+                              <div className="text-xs sm:text-sm font-bold text-gray-900 dark:text-gray-100">
                                 {startRank}
                               </div>
                             </td>
-                            <td className="px-3 py-3 whitespace-nowrap">
-                              <div className="flex items-center space-x-2">
+                            <td className="px-2 sm:px-3 py-2 sm:py-3 whitespace-nowrap">
+                              {/* Mobile: Logo with abbreviation underneath */}
+                              <div className="flex sm:hidden flex-col items-center">
+                                <TeamLogo
+                                  teamName={winnerTeam.teamName}
+                                  abbreviation={winnerTeam.abbreviation}
+                                  size="sm"
+                                  clickable
+                                  onClick={() => openTeamProfile(winnerTeam.userId, winnerTeam.teamName)}
+                                />
+                                <div className="text-xs font-medium text-gray-900 dark:text-gray-100 mt-1">
+                                  {winnerTeam.abbreviation}
+                                </div>
+                              </div>
+                              {/* Desktop: Logo + full name */}
+                              <div className="hidden sm:flex items-center space-x-2">
                                 <TeamLogo
                                   teamName={winnerTeam.teamName}
                                   size="sm"
@@ -552,19 +589,33 @@ export const Records = () => {
                                 </div>
                               </div>
                             </td>
-                            <td className="px-3 py-3 whitespace-nowrap">
-                              {renderScoreWithBadge(winnerScore, winnerHighRank, winnerLowRank, 'right')}
+                            <td className="px-1 sm:px-3 py-2 sm:py-3 whitespace-nowrap">
+                              <div className="text-xs sm:text-sm">{renderScoreWithBadge(winnerScore, winnerHighRank, winnerLowRank, 'right')}</div>
                             </td>
-                            <td className="px-3 py-3 whitespace-nowrap text-center">
-                              <div className="text-sm font-bold text-yellow-600 dark:text-yellow-400 font-mono">
+                            <td className="px-1 sm:px-3 py-2 sm:py-3 whitespace-nowrap text-center">
+                              <div className="text-xs sm:text-sm font-bold text-yellow-600 dark:text-yellow-400 font-mono">
                                 {matchup.margin.toFixed(2)}
                               </div>
                             </td>
-                            <td className="px-3 py-3 whitespace-nowrap">
-                              {renderScoreWithBadge(loserScore, loserHighRank, loserLowRank, 'left')}
+                            <td className="px-1 sm:px-3 py-2 sm:py-3 whitespace-nowrap">
+                              <div className="text-xs sm:text-sm">{renderScoreWithBadge(loserScore, loserHighRank, loserLowRank, 'left')}</div>
                             </td>
-                            <td className="px-3 py-3 whitespace-nowrap">
-                              <div className="flex items-center justify-end space-x-2">
+                            <td className="px-2 sm:px-3 py-2 sm:py-3 whitespace-nowrap">
+                              {/* Mobile: Logo with abbreviation underneath */}
+                              <div className="flex sm:hidden flex-col items-center">
+                                <TeamLogo
+                                  teamName={loserTeam.teamName}
+                                  abbreviation={loserTeam.abbreviation}
+                                  size="sm"
+                                  clickable
+                                  onClick={() => openTeamProfile(loserTeam.userId, loserTeam.teamName)}
+                                />
+                                <div className="text-xs font-medium text-gray-900 dark:text-gray-100 mt-1">
+                                  {loserTeam.abbreviation}
+                                </div>
+                              </div>
+                              {/* Desktop: Full name + logo */}
+                              <div className="hidden sm:flex items-center justify-end space-x-2">
                                 <div>
                                   <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 text-right">
                                     {loserTeam.teamName}
@@ -581,63 +632,64 @@ export const Records = () => {
                                 />
                               </div>
                             </td>
-                            <td className="px-3 py-3 whitespace-nowrap text-center">
-                              <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                            <td className="px-2 sm:px-3 py-2 sm:py-3 whitespace-nowrap text-center">
+                              <div className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-gray-100">
                                 {matchup.year}
                               </div>
                             </td>
-                            <td className="px-3 py-3 whitespace-nowrap text-center">
-                              <div className="text-sm text-gray-900 dark:text-gray-100">
-                                Week {matchup.week}
+                            <td className="px-1 sm:px-3 py-2 sm:py-3 whitespace-nowrap text-center">
+                              <div className="text-xs sm:text-sm text-gray-900 dark:text-gray-100">
+                                <span className="hidden sm:inline">Week </span>{matchup.week}
                               </div>
                             </td>
-                            <td className="px-3 py-3 whitespace-nowrap text-center">
+                            <td className="px-2 sm:px-3 py-2 sm:py-3 whitespace-nowrap text-center">
                               <LeagueBadge league={matchup.league} />
                             </td>
                           </tr>
                         );
                       })}
                     </tbody>
-                  </table>
+                    </table>
+                  </div>
                 </div>
 
                 {/* Pagination Controls */}
                 {totalPages > 1 && (
-                  <div className="mt-6 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-4">
+                  <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 border-t border-gray-200 dark:border-gray-700 pt-3 sm:pt-4">
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm text-gray-700 dark:text-gray-300">
-                        Showing {((currentPage - 1) * itemsPerPage) + 1} to {Math.min(currentPage * itemsPerPage, filteredAndSortedMatchups.length)} of {filteredAndSortedMatchups.length} games
+                      <span className="text-xs sm:text-sm text-gray-700 dark:text-gray-300">
+                        <span className="hidden sm:inline">Showing </span>{((currentPage - 1) * itemsPerPage) + 1}-{Math.min(currentPage * itemsPerPage, filteredAndSortedMatchups.length)} <span className="hidden sm:inline">of {filteredAndSortedMatchups.length}</span>
                       </span>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-1 sm:space-x-2">
                       <button
                         onClick={() => setCurrentPage(1)}
                         disabled={currentPage === 1}
-                        className="px-3 py-1 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                       >
                         First
                       </button>
                       <button
                         onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                         disabled={currentPage === 1}
-                        className="px-3 py-1 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                       >
                         Previous
                       </button>
-                      <span className="px-3 py-1 text-sm font-medium text-gray-900 dark:text-gray-100">
-                        Page {currentPage} of {totalPages}
+                      <span className="px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium text-gray-900 dark:text-gray-100">
+                        {currentPage}/{totalPages}
                       </span>
                       <button
                         onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                         disabled={currentPage === totalPages}
-                        className="px-3 py-1 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                       >
                         Next
                       </button>
                       <button
                         onClick={() => setCurrentPage(totalPages)}
                         disabled={currentPage === totalPages}
-                        className="px-3 py-1 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                       >
                         Last
                       </button>

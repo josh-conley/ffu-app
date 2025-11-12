@@ -132,6 +132,23 @@
 
   .table-container {
     @apply overflow-x-auto shadow-none dark:shadow-gray-900/20 rounded-none;
+    overflow-y: visible !important;
+    touch-action: pan-x;
+  }
+
+  .table-container::-webkit-scrollbar-vertical {
+    display: none;
+  }
+
+  /* Custom class to hide vertical scrollbar */
+  .no-vertical-scroll {
+    overflow-y: visible !important;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  .no-vertical-scroll::-webkit-scrollbar-track-piece:vertical {
+    display: none;
   }
 
   @media (max-width: 640px) {
@@ -140,8 +157,14 @@
       /* Ensure horizontal scrolling works smoothly */
       -webkit-overflow-scrolling: touch;
       scrollbar-width: thin;
+      overflow-y: visible !important;
+      touch-action: pan-x;
     }
-    
+
+    .table-container::-webkit-scrollbar-vertical {
+      display: none;
+    }
+
     /* Make sure table doesn't collapse on mobile */
     .table {
       min-width: 500px; /* Ensure all columns stay visible */

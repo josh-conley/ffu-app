@@ -91,7 +91,7 @@ export function PlayerSelector({
   if (!isCompareMode) {
     // Single player selector
     return (
-      <div className="card">
+      <div className="card overflow-visible">
         <TeamSelector
           label={label}
           value={getSelectedPlayerTeamName(selectedPlayerId)}
@@ -113,7 +113,7 @@ export function PlayerSelector({
 
   // Compare mode - dual selectors
   return (
-    <div className="card">
+    <div className="card overflow-visible">
       <div className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Player 1 Selector */}

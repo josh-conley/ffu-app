@@ -72,13 +72,7 @@ export const Standings = () => {
     }
   }, [availableYears, selectedYear]);
 
-  // On mobile, default to showing Premier league
-  useEffect(() => {
-    const isMobile = window.innerWidth < 768;
-    if (isMobile && !selectedLeague) {
-      setSelectedLeague('PREMIER');
-    }
-  }, [selectedLeague]);
+  // Removed auto-selection on mobile - let users see overview first
 
   if (isLoading) {
     return (
@@ -163,11 +157,10 @@ export const Standings = () => {
         </div>
       </div>
 
-      {/* Overview cards - hidden on mobile */}
-      <div className="hidden md:block">
-        {!selectedLeague && (
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Overview cards */}
+      {!selectedLeague && (
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {['PREMIER', 'MASTERS', 'NATIONAL'].map(league => {
                 const leagueData = yearStandings.find(s => s.league === league);
 
@@ -307,10 +300,9 @@ export const Standings = () => {
                   </div>
                 );
               })}
-            </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Tab/Full table view */}
       {selectedLeague && (
@@ -320,7 +312,7 @@ export const Standings = () => {
           <div className="flex flex-wrap items-center gap-2 mb-6">
             <button
               onClick={() => setSelectedLeague(null)}
-              className="hidden md:block px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
             >
               ← Back to Overview
             </button>

@@ -86,16 +86,16 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
 
       return (
         <tr key={standing.userId} className={getRowClasses(standing.rank)}>
-          <td className="text-left pl-4">
+          <td className="text-left pl-2 sm:pl-4">
             <div className="flex items-center space-x-1">
               {!isActiveSeason && getRankIcon(standing.rank)}
               {isActiveSeason && (
-                <span className="font-bold text-lg text-gray-900 dark:text-gray-100">
+                <span className="font-bold text-sm sm:text-lg text-gray-900 dark:text-gray-100">
                   {standing.rank}
                 </span>
               )}
               {!isActiveSeason && (
-                <span className={`font-black text-lg ${standing.rank === 1 ? leagueColors.text : 'text-gray-900 dark:text-gray-100'}`}>
+                <span className={`font-black text-sm sm:text-lg ${standing.rank === 1 ? leagueColors.text : 'text-gray-900 dark:text-gray-100'}`}>
                   #{standing.rank}
                 </span>
               )}
@@ -105,7 +105,7 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
             </div>
           </td>
         <td>
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 sm:space-x-3">
             <TeamLogo
               teamName={getCurrentTeamName(standing.userId, standing.userInfo.teamName)}
               abbreviation={getCurrentAbbreviation(standing.userId, standing.userInfo.abbreviation)}
@@ -114,7 +114,7 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
               onClick={() => openTeamProfile(standing.userId, standing.userInfo.teamName)}
             />
             <div>
-              <div className="font-bold text-gray-900 dark:text-gray-100 text-sm">
+              <div className="font-bold text-gray-900 dark:text-gray-100 text-xs sm:text-sm">
                 {getDisplayTeamName(standing.userId, standing.userInfo.teamName, year)}
               </div>
               <div className="text-xs text-gray-500 dark:text-gray-400 sm:hidden font-mono">{getCurrentAbbreviation(standing.userId, standing.userInfo.abbreviation)}</div>
@@ -122,32 +122,32 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
           </div>
         </td>
         <td className="text-center">
-          <span className="font-black text-gray-900 dark:text-gray-100 font-mono">
+          <span className="font-black text-gray-900 dark:text-gray-100 font-mono text-xs sm:text-sm">
             {standing.wins}-{standing.losses}{standing.ties ? `-${standing.ties}` : ''}
           </span>
         </td>
         <td className="text-center">
-          <span className="font-bold text-gray-900 dark:text-gray-100 font-mono">
+          <span className="font-bold text-gray-900 dark:text-gray-100 font-mono text-xs sm:text-sm">
             {standing.pointsFor?.toFixed(2) || '0.00'}
           </span>
         </td>
         <td className="text-center">
-          <span className="font-bold text-gray-900 dark:text-gray-100 font-mono">
+          <span className="font-bold text-gray-900 dark:text-gray-100 font-mono text-xs sm:text-sm">
             {standing.pointsAgainst?.toFixed(2) || '0.00'}
           </span>
         </td>
-        <td className="text-center">
-          <span className="font-bold text-green-600 dark:text-green-400 font-mono">
+        <td className="text-center hidden lg:table-cell">
+          <span className="font-bold text-green-600 dark:text-green-400 font-mono text-xs sm:text-sm">
             {standing.highGame?.toFixed(2) || '0.00'}
           </span>
         </td>
-        <td className="text-center">
-          <span className="font-bold text-red-600 dark:text-red-400 font-mono">
+        <td className="text-center hidden lg:table-cell">
+          <span className="font-bold text-red-600 dark:text-red-400 font-mono text-xs sm:text-sm">
             {standing.lowGame?.toFixed(2) || '0.00'}
           </span>
         </td>
         <td className="text-center">
-          <span className="font-bold text-blue-600 dark:text-blue-400 font-mono">
+          <span className="font-bold text-blue-600 dark:text-blue-400 font-mono text-xs sm:text-sm">
             {standing.unionPowerRating?.toFixed(2) || '0.00'}
           </span>
         </td>
@@ -157,7 +157,7 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
   };
 
   return (
-    <div className="card">
+    <div className="card" style={{ overflow: 'visible', height: 'auto' }}>
       {/* Champion Highlight */}
       {!isActiveSeason && rankedStandings[0] && (
         <div className={`champion-highlight angular-cut p-6 mb-6 relative overflow-hidden border-l4 ${leagueColors.highlight}`}>
@@ -212,48 +212,52 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
                 <div className={`absolute bottom-0 left-0 right-0 h-0.5 ${leagueColors.iconBg} opacity-50`}></div>
               </div>
 
-              <div className="table-container overflow-visible">
-                <table className="table">
-                  <thead className={`table-header ${leagueColors.iconBg} border-0`}>
-                    <tr>
-                      <th className="text-left text-white font-bold pl-4">Rank</th>
-                      <th className="text-white font-bold">Team</th>
-                      <th className="text-center text-white font-bold">Record</th>
-                      <th className="text-center text-white font-bold">Points For</th>
-                      <th className="text-center text-white font-bold">Points Against</th>
-                      <th className="text-center text-white font-bold">High Game</th>
-                      <th className="text-center text-white font-bold">Low Game</th>
-                      <th className="text-center text-white font-bold">UPR</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {renderStandingsRows(divisionGroup.standings)}
-                  </tbody>
-                </table>
+              <div className="overflow-x-auto -mx-4 sm:mx-0" style={{ overflowY: 'visible', height: 'auto', touchAction: 'pan-x' }}>
+                <div className="inline-block min-w-full align-middle px-4 sm:px-0">
+                  <table className="table min-w-full">
+                    <thead className={`table-header ${leagueColors.iconBg} border-0`}>
+                      <tr>
+                        <th className="text-left text-white font-bold pl-2 sm:pl-4 text-xs sm:text-sm">Rank</th>
+                        <th className="text-white font-bold text-xs sm:text-sm">Team</th>
+                        <th className="text-center text-white font-bold text-xs sm:text-sm">Record</th>
+                        <th className="text-center text-white font-bold text-xs sm:text-sm">PF</th>
+                        <th className="text-center text-white font-bold text-xs sm:text-sm">PA</th>
+                        <th className="text-center text-white font-bold hidden lg:table-cell text-xs sm:text-sm">High</th>
+                        <th className="text-center text-white font-bold hidden lg:table-cell text-xs sm:text-sm">Low</th>
+                        <th className="text-center text-white font-bold text-xs sm:text-sm">UPR</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {renderStandingsRows(divisionGroup.standings)}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           ))}
         </div>
       ) : (
         // No divisions - single table
-        <div className="table-container overflow-visible">
-          <table className="table">
-            <thead className={`table-header ${leagueColors.iconBg} border-0`}>
-              <tr>
-                <th className="text-left text-white font-bold pl-4">Rank</th>
-                <th className="text-white font-bold">Team</th>
-                <th className="text-center text-white font-bold">Record</th>
-                <th className="text-center text-white font-bold">Points For</th>
-                <th className="text-center text-white font-bold">Points Against</th>
-                <th className="text-center text-white font-bold">High Game</th>
-                <th className="text-center text-white font-bold">Low Game</th>
-                <th className="text-center text-white font-bold">UPR</th>
-              </tr>
-            </thead>
-            <tbody>
-              {renderStandingsRows(rankedStandings)}
-            </tbody>
-          </table>
+        <div className="overflow-x-auto -mx-4 sm:mx-0" style={{ overflowY: 'visible', height: 'auto', touchAction: 'pan-x' }}>
+          <div className="inline-block min-w-full align-middle px-4 sm:px-0">
+            <table className="table min-w-full">
+              <thead className={`table-header ${leagueColors.iconBg} border-0`}>
+                <tr>
+                  <th className="text-left text-white font-bold pl-2 sm:pl-4 text-xs sm:text-sm">Rank</th>
+                  <th className="text-white font-bold text-xs sm:text-sm">Team</th>
+                  <th className="text-center text-white font-bold text-xs sm:text-sm">Record</th>
+                  <th className="text-center text-white font-bold text-xs sm:text-sm">PF</th>
+                  <th className="text-center text-white font-bold text-xs sm:text-sm">PA</th>
+                  <th className="text-center text-white font-bold hidden lg:table-cell text-xs sm:text-sm">High</th>
+                  <th className="text-center text-white font-bold hidden lg:table-cell text-xs sm:text-sm">Low</th>
+                  <th className="text-center text-white font-bold text-xs sm:text-sm">UPR</th>
+                </tr>
+              </thead>
+              <tbody>
+                {renderStandingsRows(rankedStandings)}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>

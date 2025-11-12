@@ -114,7 +114,7 @@ export const TeamSelector = ({
 
         {/* Dropdown Menu */}
         {isOpen && (
-          <div className={`absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg max-h-80 overflow-y-auto ${compact ? 'text-xs' : 'text-sm'}`}>
+          <div className={`absolute z-[9999] w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg max-h-80 overflow-y-auto ${compact ? 'text-xs' : 'text-sm'}`}>
             {/* All Teams Option */}
             <button
               type="button"
