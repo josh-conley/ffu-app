@@ -6,8 +6,7 @@ import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import { ChevronDown, X, Calendar, ArrowUpDown, RotateCcw } from 'lucide-react';
 import { useUrlParams } from '../hooks/useUrlParams';
-import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
-import { USERS, CURRENT_YEAR } from '../config/constants';
+import { CURRENT_YEAR } from '../config/constants';
 import type { LeagueTier } from '../types';
 
 interface H2HRecord {
@@ -55,7 +54,6 @@ export const H2HMatrix = () => {
   const [modalTeam1, setModalTeam1] = useState<TeamInfo | null>(null);
   const [modalTeam2, setModalTeam2] = useState<TeamInfo | null>(null);
   const { data: standings, isLoading, error } = useAllStandings();
-  const { openTeamProfile } = useTeamProfileModal();
 
   // Initialize from URL params on mount
   useEffect(() => {
@@ -235,7 +233,7 @@ export const H2HMatrix = () => {
             if (winnerTeam && loserTeam) {
               details.get(key)?.push({
                 year: leagueData.year,
-                league: leagueData.league,
+                league: leagueData.league as LeagueTier,
                 week: parseInt(weekStr),
                 winner,
                 loser,
@@ -350,8 +348,10 @@ export const H2HMatrix = () => {
                 meetsThreshold = closeness >= highlightThreshold;
               }
             } else if (highlightOption === 'most_played') {
-              value = totalGames;
-              meetsThreshold = totalGames >= highlightThreshold;
+              if (totalGames >= minGames) {
+                value = totalGames;
+                meetsThreshold = totalGames >= highlightThreshold;
+              }
             }
 
             if (meetsThreshold) {
@@ -547,21 +547,21 @@ export const H2HMatrix = () => {
                           />
                         </div>
                       )}
-                      <div className="flex items-center gap-3">
-                        <label className="text-sm font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">
-                          {highlightOption === 'lopsided' && `Win % ≥ ${highlightThreshold}%`}
-                          {highlightOption === 'closest' && `Closeness ≥ ${highlightThreshold}%`}
-                          {highlightOption === 'most_played' && `Games ≥ ${highlightThreshold}`}
-                        </label>
-                        <input
-                          type="range"
-                          min={highlightOption === 'most_played' ? 5 : 50}
-                          max={highlightOption === 'most_played' ? 30 : 100}
-                          value={highlightThreshold}
-                          onChange={(e) => setHighlightThreshold(parseInt(e.target.value))}
-                          className="w-32 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-purple-500"
-                        />
-                      </div>
+                    <div className="flex items-center gap-3">
+                      <label className="text-sm font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">
+                        {highlightOption === 'lopsided' && `Win % ≥ ${highlightThreshold}%`}
+                        {highlightOption === 'closest' && `Closeness ≥ ${highlightThreshold}%`}
+                        {highlightOption === 'most_played' && `Games ≥ ${highlightThreshold}`}
+                      </label>
+                      <input
+                        type="range"
+                        min={highlightOption === 'most_played' ? 5 : 50}
+                        max={highlightOption === 'most_played' ? 30 : 100}
+                        value={highlightThreshold}
+                        onChange={(e) => setHighlightThreshold(parseInt(e.target.value))}
+                        className="w-32 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-purple-500"
+                      />
+                    </div>
                     </>
                   )}
                 </div>
@@ -704,7 +704,7 @@ export const H2HMatrix = () => {
         ) : (
           <div className="card">
             <p className="text-center text-gray-500 dark:text-gray-400">
-              No data available for {getLeagueName(selectedLeague)} league in {CURRENT_YEAR}
+              No data available for {selectedFilter === 'ALL_TIME' ? 'All Members' : getLeagueName(selectedFilter as LeagueTier)} league in {CURRENT_YEAR}
             </p>
           </div>
         )}
