@@ -46,7 +46,10 @@ export const H2HMatrix = () => {
   const [sortByTeam, setSortByTeam] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
   const [filterBySeasons, setFilterBySeasons] = useState(false);
+  const [excludePlayoffs, setExcludePlayoffs] = useState(false);
   const [highlightOption, setHighlightOption] = useState<HighlightOption>('none');
+  const [highlightThreshold, setHighlightThreshold] = useState(75); // Percentage threshold (0-100)
+  const [minGames, setMinGames] = useState(3); // Minimum games for lopsided/closest
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedMatchups, setSelectedMatchups] = useState<MatchupDetail[]>([]);
   const [modalTeam1, setModalTeam1] = useState<TeamInfo | null>(null);
@@ -74,6 +77,18 @@ export const H2HMatrix = () => {
       case 'PREMIER': return 'Premier';
       case 'MASTERS': return 'Masters';
       case 'NATIONAL': return 'National';
+    }
+  };
+
+  // Determine if a week is a playoff week based on year
+  const isPlayoffWeek = (year: string, week: number): boolean => {
+    const yearNum = parseInt(year);
+    // ESPN era: 2018-2020 had playoffs in weeks 14, 15, 16
+    // Sleeper era: 2021+ has playoffs in weeks 15, 16, 17
+    if (yearNum >= 2021) {
+      return week >= 15;
+    } else {
+      return week >= 14;
     }
   };
 
@@ -162,6 +177,11 @@ export const H2HMatrix = () => {
       Object.entries(leagueData.matchupsByWeek).forEach(([weekStr, weekMatchups]: [string, any]) => {
         if (!Array.isArray(weekMatchups)) return;
 
+        const week = parseInt(weekStr);
+
+        // Skip playoff weeks if exclude checkbox is enabled
+        if (excludePlayoffs && isPlayoffWeek(leagueData.year, week)) return;
+
         weekMatchups.forEach((matchup: any) => {
           const winner = matchup.winner;
           const loser = matchup.loser;
@@ -241,7 +261,7 @@ export const H2HMatrix = () => {
     });
 
     return { h2hMatrix: matrix, matchupDetails: details };
-  }, [standings, currentSeasonMembers]);
+  }, [standings, currentSeasonMembers, excludePlayoffs, isPlayoffWeek]);
 
   // Sort members based on selected team's record
   const sortedMembers = useMemo(() => {
@@ -310,25 +330,31 @@ export const H2HMatrix = () => {
             const wins2 = record1.totalGames - record1.wins - (record1.ties || 0);
 
             let value = 0;
+            let meetsThreshold = false;
 
             if (highlightOption === 'lopsided') {
               // Lopsidedness = max wins / total games (0.5 = even, 1.0 = total domination)
-              if (totalGames >= 3) {
+              if (totalGames >= minGames) {
                 const maxWins = Math.max(wins1, wins2);
-                value = maxWins / totalGames;
+                const winPct = (maxWins / totalGames) * 100;
+                value = winPct;
+                meetsThreshold = winPct >= highlightThreshold;
               }
             } else if (highlightOption === 'closest') {
-              // Closeness = inverse of lopsidedness (closer to 0.5 = more even)
-              if (totalGames >= 5) {
+              // Closeness = how close to 50/50 (100 = perfectly even, 0 = totally lopsided)
+              if (totalGames >= minGames) {
                 const maxWins = Math.max(wins1, wins2);
                 const winPct = maxWins / totalGames;
-                value = 1 - Math.abs(winPct - 0.5) * 2; // Convert to 0-1 where 1 is most even
+                const closeness = (1 - Math.abs(winPct - 0.5) * 2) * 100; // 0-100 scale
+                value = closeness;
+                meetsThreshold = closeness >= highlightThreshold;
               }
             } else if (highlightOption === 'most_played') {
               value = totalGames;
+              meetsThreshold = totalGames >= highlightThreshold;
             }
 
-            if (value > 0) {
+            if (meetsThreshold) {
               matchupStats.push({ key, value });
             }
           }
@@ -336,14 +362,9 @@ export const H2HMatrix = () => {
       });
     });
 
-    // Get top 10
-    const top10 = matchupStats
-      .sort((a, b) => b.value - a.value)
-      .slice(0, 10)
-      .map(m => m.key);
-
-    return new Set(top10);
-  }, [highlightOption, currentSeasonMembers, h2hMatrix]);
+    // Return all matchups that meet threshold
+    return new Set(matchupStats.map(m => m.key));
+  }, [highlightOption, currentSeasonMembers, h2hMatrix, highlightThreshold, minGames]);
 
   // Check if a matchup should be highlighted
   const isHighlighted = (team1Id: string, team2Id: string): boolean => {
@@ -409,75 +430,141 @@ export const H2HMatrix = () => {
               </div>
 
               {/* Filter Dropdown and Controls */}
-              <div className="flex flex-wrap items-center gap-3">
-                <div className="flex items-center gap-3">
-                  <label className="text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide whitespace-nowrap">
-                    View
-                  </label>
-                  <div className="relative w-48">
-                    <select
-                      value={selectedFilter}
-                      onChange={(e) => {
-                        const filter = e.target.value as LeagueFilter;
-                        setSelectedFilter(filter);
-                        updateParams({ filter });
-                      }}
-                      className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
-                    >
-                      {filterOptions.map(option => (
-                        <option key={option.value} value={option.value}>{option.label}</option>
-                      ))}
-                    </select>
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                      <ChevronDown className="h-4 w-4 text-gray-400" />
+              <div className="flex flex-col gap-3">
+                {/* Dropdowns Row */}
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex items-center gap-3">
+                    <label className="text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide whitespace-nowrap">
+                      View
+                    </label>
+                    <div className="relative w-48">
+                      <select
+                        value={selectedFilter}
+                        onChange={(e) => {
+                          const filter = e.target.value as LeagueFilter;
+                          setSelectedFilter(filter);
+                          updateParams({ filter });
+                        }}
+                        className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                      >
+                        {filterOptions.map(option => (
+                          <option key={option.value} value={option.value}>{option.label}</option>
+                        ))}
+                      </select>
+                      <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                        <ChevronDown className="h-4 w-4 text-gray-400" />
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="flex items-center gap-3">
-                  <label className="text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide whitespace-nowrap">
-                    Highlight
-                  </label>
-                  <div className="relative w-48">
-                    <select
-                      value={highlightOption}
-                      onChange={(e) => setHighlightOption(e.target.value as HighlightOption)}
-                      className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
-                    >
-                      <option value="none">None</option>
-                      <option value="lopsided">Most Lopsided</option>
-                      <option value="closest">Closest Records</option>
-                      <option value="most_played">Most Played</option>
-                    </select>
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                      <ChevronDown className="h-4 w-4 text-gray-400" />
+                  <div className="flex items-center gap-3">
+                    <label className="text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide whitespace-nowrap">
+                      Highlight
+                    </label>
+                    <div className="relative w-48">
+                      <select
+                        value={highlightOption}
+                        onChange={(e) => {
+                          const option = e.target.value as HighlightOption;
+                          setHighlightOption(option);
+                          // Set default threshold based on option
+                          if (option === 'lopsided') {
+                            setHighlightThreshold(75);
+                            setMinGames(3);
+                          } else if (option === 'closest') {
+                            setHighlightThreshold(80);
+                            setMinGames(5);
+                          } else if (option === 'most_played') {
+                            setHighlightThreshold(10);
+                          }
+                        }}
+                        className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                      >
+                        <option value="none">None</option>
+                        <option value="lopsided">Most Lopsided</option>
+                        <option value="closest">Closest Records</option>
+                        <option value="most_played">Most Played</option>
+                      </select>
+                      <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                        <ChevronDown className="h-4 w-4 text-gray-400" />
+                      </div>
                     </div>
                   </div>
+
+                  {sortByTeam && (
+                    <button
+                      onClick={handleResetSort}
+                      className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      <RotateCcw className="h-4 w-4" />
+                      Reset Sort
+                    </button>
+                  )}
                 </div>
 
-                {selectedFilter === 'ALL_TIME' && (
+                {/* Checkboxes and Slider Row */}
+                <div className="flex flex-wrap items-center gap-4">
+                  {selectedFilter === 'ALL_TIME' && (
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={filterBySeasons}
+                        onChange={(e) => setFilterBySeasons(e.target.checked)}
+                        className="w-4 h-4 text-ffu-red bg-gray-100 border-gray-300 rounded focus:ring-ffu-red dark:focus:ring-ffu-red dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      />
+                      <span className="text-sm font-medium text-gray-800 dark:text-gray-200 whitespace-nowrap">
+                        5+ Seasons
+                      </span>
+                    </label>
+                  )}
+
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
                       type="checkbox"
-                      checked={filterBySeasons}
-                      onChange={(e) => setFilterBySeasons(e.target.checked)}
+                      checked={excludePlayoffs}
+                      onChange={(e) => setExcludePlayoffs(e.target.checked)}
                       className="w-4 h-4 text-ffu-red bg-gray-100 border-gray-300 rounded focus:ring-ffu-red dark:focus:ring-ffu-red dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     />
                     <span className="text-sm font-medium text-gray-800 dark:text-gray-200 whitespace-nowrap">
-                      5+ Seasons
+                      Exclude Playoffs
                     </span>
                   </label>
-                )}
 
-                {sortByTeam && (
-                  <button
-                    onClick={handleResetSort}
-                    className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                  >
-                    <RotateCcw className="h-4 w-4" />
-                    Reset Sort
-                  </button>
-                )}
+                  {highlightOption !== 'none' && (
+                    <>
+                      {(highlightOption === 'lopsided' || highlightOption === 'closest') && (
+                        <div className="flex items-center gap-3">
+                          <label className="text-sm font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">
+                            Min Games ≥ {minGames}
+                          </label>
+                          <input
+                            type="range"
+                            min={1}
+                            max={15}
+                            value={minGames}
+                            onChange={(e) => setMinGames(parseInt(e.target.value))}
+                            className="w-32 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-purple-500"
+                          />
+                        </div>
+                      )}
+                      <div className="flex items-center gap-3">
+                        <label className="text-sm font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">
+                          {highlightOption === 'lopsided' && `Win % ≥ ${highlightThreshold}%`}
+                          {highlightOption === 'closest' && `Closeness ≥ ${highlightThreshold}%`}
+                          {highlightOption === 'most_played' && `Games ≥ ${highlightThreshold}`}
+                        </label>
+                        <input
+                          type="range"
+                          min={highlightOption === 'most_played' ? 5 : 50}
+                          max={highlightOption === 'most_played' ? 30 : 100}
+                          value={highlightThreshold}
+                          onChange={(e) => setHighlightThreshold(parseInt(e.target.value))}
+                          className="w-32 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-purple-500"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
 
