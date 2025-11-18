@@ -6,95 +6,107 @@
     {
       "userId": "865323291064291328",
       "wins": 9,
-      "losses": 1,
+      "losses": 2,
       "ties": 0,
-      "pointsFor": 1300.35,
-      "pointsAgainst": 1126.35,
+      "pointsFor": 1391.9,
+      "pointsAgainst": 1224.5,
       "rank": 1,
       "highGame": 168.5,
-      "lowGame": 110.45,
+      "lowGame": 91.55,
       "division": 2
     },
     {
       "userId": "856248808915480576",
-      "wins": 7,
+      "wins": 8,
       "losses": 3,
       "ties": 0,
-      "pointsFor": 1432.45,
-      "pointsAgainst": 1183.95,
+      "pointsFor": 1554.9,
+      "pointsAgainst": 1268.4,
       "rank": 2,
       "highGame": 174.4,
       "lowGame": 111.2,
       "division": 1
     },
     {
-      "userId": "639877229681147904",
-      "wins": 7,
-      "losses": 3,
-      "ties": 0,
-      "pointsFor": 1236.3,
-      "pointsAgainst": 1159.2,
-      "rank": 3,
-      "highGame": 143.25,
-      "lowGame": 82.35,
-      "division": 3
-    },
-    {
       "userId": "396808818157182976",
-      "wins": 7,
+      "wins": 8,
       "losses": 3,
       "ties": 0,
-      "pointsFor": 1234,
-      "pointsAgainst": 1108.75,
-      "rank": 4,
+      "pointsFor": 1353.25,
+      "pointsAgainst": 1214,
+      "rank": 3,
       "highGame": 177.05,
       "lowGame": 90.55,
       "division": 3
     },
     {
-      "userId": "472876832719368192",
-      "wins": 6,
-      "losses": 4,
+      "userId": "639877229681147904",
+      "wins": 8,
+      "losses": 3,
       "ties": 0,
-      "pointsFor": 1168.65,
-      "pointsAgainst": 1222.9,
-      "rank": 5,
-      "highGame": 148.6,
-      "lowGame": 70.15,
-      "division": 1
+      "pointsFor": 1334.45,
+      "pointsAgainst": 1250.75,
+      "rank": 4,
+      "highGame": 143.25,
+      "lowGame": 82.35,
+      "division": 3
     },
     {
       "userId": "462383465753473024",
-      "wins": 5,
+      "wins": 6,
       "losses": 5,
       "ties": 0,
-      "pointsFor": 1240.8,
-      "pointsAgainst": 1277.3,
-      "rank": 6,
+      "pointsFor": 1345.8,
+      "pointsAgainst": 1358.15,
+      "rank": 5,
       "highGame": 149.25,
       "lowGame": 89.55,
       "division": 3
     },
     {
+      "userId": "472876832719368192",
+      "wins": 6,
+      "losses": 5,
+      "ties": 0,
+      "pointsFor": 1249.5,
+      "pointsAgainst": 1327.9,
+      "rank": 6,
+      "highGame": 148.6,
+      "lowGame": 70.15,
+      "division": 1
+    },
+    {
+      "userId": "1133491276038426624",
+      "wins": 4,
+      "losses": 7,
+      "ties": 0,
+      "pointsFor": 1362.99,
+      "pointsAgainst": 1420.6,
+      "rank": 7,
+      "highGame": 146.9,
+      "lowGame": 90.7,
+      "division": 1
+    },
+    {
       "userId": "1124071986805829632",
       "wins": 4,
-      "losses": 6,
+      "losses": 7,
       "ties": 0,
-      "pointsFor": 1258.65,
-      "pointsAgainst": 1300.65,
-      "rank": 7,
+      "pointsFor": 1343.1,
+      "pointsAgainst": 1423.1,
+      "rank": 8,
       "highGame": 153.75,
-      "lowGame": 88.3,
+      "lowGame": 84.45,
       "division": 2
     },
     {
       "userId": "864966364937461760",
       "wins": 4,
-      "losses": 6,
+      "losses": 7,
       "ties": 0,
-      "pointsFor": 1168.45,
-      "pointsAgainst": 1169.9,
-      "rank": 8,
+      "pointsFor": 1273.7,
+      "pointsAgainst": 1289.15,
+      "rank": 9,
       "highGame": 173.15,
       "lowGame": 91.75,
       "division": 2
@@ -102,34 +114,22 @@
     {
       "userId": "325766631336714240",
       "wins": 4,
-      "losses": 6,
+      "losses": 7,
       "ties": 0,
-      "pointsFor": 1153.45,
-      "pointsAgainst": 1213.3,
-      "rank": 9,
+      "pointsFor": 1268.75,
+      "pointsAgainst": 1345.75,
+      "rank": 10,
       "highGame": 159.85,
       "lowGame": 84.9,
       "division": 2
     },
     {
-      "userId": "1133491276038426624",
-      "wins": 3,
-      "losses": 7,
-      "ties": 0,
-      "pointsFor": 1230.55,
-      "pointsAgainst": 1305.3,
-      "rank": 10,
-      "highGame": 146.9,
-      "lowGame": 90.7,
-      "division": 1
-    },
-    {
       "userId": "860973514839199744",
-      "wins": 2,
+      "wins": 3,
       "losses": 8,
       "ties": 0,
-      "pointsFor": 1134.65,
-      "pointsAgainst": 1252.25,
+      "pointsFor": 1269.99,
+      "pointsAgainst": 1370.2,
       "rank": 11,
       "highGame": 149.45,
       "lowGame": 81.75,
@@ -138,10 +138,10 @@
     {
       "userId": "1133492104077946880",
       "wins": 2,
-      "losses": 8,
+      "losses": 9,
       "ties": 0,
-      "pointsFor": 1028.85,
-      "pointsAgainst": 1267.3,
+      "pointsFor": 1146.8,
+      "pointsAgainst": 1402.65,
       "rank": 12,
       "highGame": 154.55,
       "lowGame": 76.7,
@@ -660,52 +660,52 @@
     ],
     "11": [
       {
-        "winner": "1133492104077946880",
-        "loser": "860973514839199744",
-        "winnerScore": 0,
-        "loserScore": 0,
-        "winnerRecord": "2-8",
-        "loserRecord": "2-8"
+        "winner": "860973514839199744",
+        "loser": "1133492104077946880",
+        "winnerScore": 135.35,
+        "loserScore": 117.95,
+        "winnerRecord": "3-8",
+        "loserRecord": "2-9"
       },
       {
         "winner": "462383465753473024",
         "loser": "472876832719368192",
-        "winnerScore": 0,
-        "loserScore": 0,
-        "winnerRecord": "5-5",
-        "loserRecord": "6-4"
+        "winnerScore": 105,
+        "loserScore": 80.85,
+        "winnerRecord": "6-5",
+        "loserRecord": "6-5"
       },
       {
         "winner": "639877229681147904",
         "loser": "865323291064291328",
-        "winnerScore": 0,
-        "loserScore": 0,
-        "winnerRecord": "7-3",
-        "loserRecord": "9-1"
+        "winnerScore": 98.15,
+        "loserScore": 91.55,
+        "winnerRecord": "8-3",
+        "loserRecord": "9-2"
       },
       {
-        "winner": "864966364937461760",
-        "loser": "396808818157182976",
-        "winnerScore": 0,
-        "loserScore": 0,
-        "winnerRecord": "4-6",
-        "loserRecord": "7-3"
+        "winner": "396808818157182976",
+        "loser": "864966364937461760",
+        "winnerScore": 119.25,
+        "loserScore": 105.25,
+        "winnerRecord": "8-3",
+        "loserRecord": "4-7"
       },
       {
         "winner": "1133491276038426624",
         "loser": "325766631336714240",
-        "winnerScore": 0,
-        "loserScore": 0,
-        "winnerRecord": "3-7",
-        "loserRecord": "4-6"
+        "winnerScore": 132.45,
+        "loserScore": 115.3,
+        "winnerRecord": "4-7",
+        "loserRecord": "4-7"
       },
       {
         "winner": "856248808915480576",
         "loser": "1124071986805829632",
-        "winnerScore": 0,
-        "loserScore": 0,
-        "winnerRecord": "7-3",
-        "loserRecord": "4-6"
+        "winnerScore": 122.45,
+        "loserScore": 84.45,
+        "winnerRecord": "8-3",
+        "loserRecord": "4-7"
       }
     ],
     "12": [
@@ -714,48 +714,48 @@
         "loser": "860973514839199744",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "7-3",
-        "loserRecord": "2-8"
+        "winnerRecord": "8-3",
+        "loserRecord": "3-8"
       },
       {
         "winner": "462383465753473024",
         "loser": "396808818157182976",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "5-5",
-        "loserRecord": "7-3"
+        "winnerRecord": "6-5",
+        "loserRecord": "8-3"
       },
       {
         "winner": "865323291064291328",
         "loser": "325766631336714240",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "9-1",
-        "loserRecord": "4-6"
+        "winnerRecord": "9-2",
+        "loserRecord": "4-7"
       },
       {
         "winner": "1124071986805829632",
         "loser": "864966364937461760",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "4-6",
-        "loserRecord": "4-6"
+        "winnerRecord": "4-7",
+        "loserRecord": "4-7"
       },
       {
         "winner": "856248808915480576",
         "loser": "472876832719368192",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "7-3",
-        "loserRecord": "6-4"
+        "winnerRecord": "8-3",
+        "loserRecord": "6-5"
       },
       {
         "winner": "1133492104077946880",
         "loser": "1133491276038426624",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "2-8",
-        "loserRecord": "3-7"
+        "winnerRecord": "2-9",
+        "loserRecord": "4-7"
       }
     ],
     "13": [
@@ -764,48 +764,48 @@
         "loser": "396808818157182976",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "2-8",
-        "loserRecord": "7-3"
+        "winnerRecord": "3-8",
+        "loserRecord": "8-3"
       },
       {
         "winner": "639877229681147904",
         "loser": "462383465753473024",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "7-3",
-        "loserRecord": "5-5"
+        "winnerRecord": "8-3",
+        "loserRecord": "6-5"
       },
       {
         "winner": "865323291064291328",
         "loser": "1124071986805829632",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "9-1",
-        "loserRecord": "4-6"
+        "winnerRecord": "9-2",
+        "loserRecord": "4-7"
       },
       {
         "winner": "325766631336714240",
         "loser": "864966364937461760",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "4-6",
-        "loserRecord": "4-6"
+        "winnerRecord": "4-7",
+        "loserRecord": "4-7"
       },
       {
         "winner": "1133492104077946880",
         "loser": "472876832719368192",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "2-8",
-        "loserRecord": "6-4"
+        "winnerRecord": "2-9",
+        "loserRecord": "6-5"
       },
       {
         "winner": "856248808915480576",
         "loser": "1133491276038426624",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "7-3",
-        "loserRecord": "3-7"
+        "winnerRecord": "8-3",
+        "loserRecord": "4-7"
       }
     ],
     "14": [
@@ -814,48 +814,48 @@
         "loser": "462383465753473024",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "2-8",
-        "loserRecord": "5-5"
+        "winnerRecord": "3-8",
+        "loserRecord": "6-5"
       },
       {
         "winner": "639877229681147904",
         "loser": "396808818157182976",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "7-3",
-        "loserRecord": "7-3"
+        "winnerRecord": "8-3",
+        "loserRecord": "8-3"
       },
       {
         "winner": "865323291064291328",
         "loser": "864966364937461760",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "9-1",
-        "loserRecord": "4-6"
+        "winnerRecord": "9-2",
+        "loserRecord": "4-7"
       },
       {
         "winner": "1124071986805829632",
         "loser": "325766631336714240",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "4-6",
-        "loserRecord": "4-6"
+        "winnerRecord": "4-7",
+        "loserRecord": "4-7"
       },
       {
         "winner": "1133491276038426624",
         "loser": "472876832719368192",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "3-7",
-        "loserRecord": "6-4"
+        "winnerRecord": "4-7",
+        "loserRecord": "6-5"
       },
       {
         "winner": "1133492104077946880",
         "loser": "856248808915480576",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "2-8",
-        "loserRecord": "7-3"
+        "winnerRecord": "2-9",
+        "loserRecord": "8-3"
       }
     ],
     "15": [
@@ -864,48 +864,48 @@
         "loser": "860973514839199744",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "4-6",
-        "loserRecord": "2-8"
+        "winnerRecord": "4-7",
+        "loserRecord": "3-8"
       },
       {
         "winner": "325766631336714240",
         "loser": "462383465753473024",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "4-6",
-        "loserRecord": "5-5"
+        "winnerRecord": "4-7",
+        "loserRecord": "6-5"
       },
       {
         "winner": "396808818157182976",
         "loser": "472876832719368192",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "7-3",
-        "loserRecord": "6-4"
+        "winnerRecord": "8-3",
+        "loserRecord": "6-5"
       },
       {
         "winner": "1133492104077946880",
         "loser": "639877229681147904",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "2-8",
-        "loserRecord": "7-3"
+        "winnerRecord": "2-9",
+        "loserRecord": "8-3"
       },
       {
         "winner": "865323291064291328",
         "loser": "856248808915480576",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "9-1",
-        "loserRecord": "7-3"
+        "winnerRecord": "9-2",
+        "loserRecord": "8-3"
       },
       {
         "winner": "1133491276038426624",
         "loser": "864966364937461760",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "3-7",
-        "loserRecord": "4-6"
+        "winnerRecord": "4-7",
+        "loserRecord": "4-7"
       }
     ],
     "16": [
@@ -914,48 +914,48 @@
         "loser": "860973514839199744",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "4-6",
-        "loserRecord": "2-8"
+        "winnerRecord": "4-7",
+        "loserRecord": "3-8"
       },
       {
         "winner": "1124071986805829632",
         "loser": "462383465753473024",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "4-6",
-        "loserRecord": "5-5"
+        "winnerRecord": "4-7",
+        "loserRecord": "6-5"
       },
       {
         "winner": "1133492104077946880",
         "loser": "396808818157182976",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "2-8",
-        "loserRecord": "7-3"
+        "winnerRecord": "2-9",
+        "loserRecord": "8-3"
       },
       {
         "winner": "639877229681147904",
         "loser": "472876832719368192",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "7-3",
-        "loserRecord": "6-4"
+        "winnerRecord": "8-3",
+        "loserRecord": "6-5"
       },
       {
         "winner": "865323291064291328",
         "loser": "1133491276038426624",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "9-1",
-        "loserRecord": "3-7"
+        "winnerRecord": "9-2",
+        "loserRecord": "4-7"
       },
       {
         "winner": "856248808915480576",
         "loser": "864966364937461760",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "7-3",
-        "loserRecord": "4-6"
+        "winnerRecord": "8-3",
+        "loserRecord": "4-7"
       }
     ],
     "17": [
@@ -964,48 +964,48 @@
         "loser": "860973514839199744",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "9-1",
-        "loserRecord": "2-8"
+        "winnerRecord": "9-2",
+        "loserRecord": "3-8"
       },
       {
         "winner": "864966364937461760",
         "loser": "462383465753473024",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "4-6",
-        "loserRecord": "5-5"
+        "winnerRecord": "4-7",
+        "loserRecord": "6-5"
       },
       {
         "winner": "856248808915480576",
         "loser": "396808818157182976",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "7-3",
-        "loserRecord": "7-3"
+        "winnerRecord": "8-3",
+        "loserRecord": "8-3"
       },
       {
         "winner": "639877229681147904",
         "loser": "1133491276038426624",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "7-3",
-        "loserRecord": "3-7"
+        "winnerRecord": "8-3",
+        "loserRecord": "4-7"
       },
       {
         "winner": "1124071986805829632",
         "loser": "472876832719368192",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "4-6",
-        "loserRecord": "6-4"
+        "winnerRecord": "4-7",
+        "loserRecord": "6-5"
       },
       {
         "winner": "1133492104077946880",
         "loser": "325766631336714240",
         "winnerScore": 0,
         "loserScore": 0,
-        "winnerRecord": "2-8",
-        "loserRecord": "4-6"
+        "winnerRecord": "2-9",
+        "loserRecord": "4-7"
       }
     ]
   },
@@ -1023,7 +1023,8 @@
         112.2,
         149.45,
         130.45,
-        104.3
+        104.3,
+        135.35
       ]
     },
     "462383465753473024": {
@@ -1039,7 +1040,8 @@
         139.4,
         144.15,
         113.4,
-        89.55
+        89.55,
+        105
       ]
     },
     "396808818157182976": {
@@ -1055,7 +1057,8 @@
         125.6,
         102.05,
         94.55,
-        177.05
+        177.05,
+        119.25
       ]
     },
     "639877229681147904": {
@@ -1071,12 +1074,13 @@
         129.75,
         106.95,
         133.2,
-        140.8
+        140.8,
+        98.15
       ]
     },
     "1124071986805829632": {
       "highGame": 153.75,
-      "lowGame": 88.3,
+      "lowGame": 84.45,
       "games": [
         103.15,
         136.6,
@@ -1087,7 +1091,8 @@
         134.1,
         88.3,
         113.85,
-        141.1
+        141.1,
+        84.45
       ]
     },
     "325766631336714240": {
@@ -1103,12 +1108,13 @@
         84.9,
         117.4,
         143.3,
-        131.4
+        131.4,
+        115.3
       ]
     },
     "865323291064291328": {
       "highGame": 168.5,
-      "lowGame": 110.45,
+      "lowGame": 91.55,
       "games": [
         117.75,
         144.95,
@@ -1119,7 +1125,8 @@
         117.15,
         168.5,
         120.7,
-        147.8
+        147.8,
+        91.55
       ]
     },
     "864966364937461760": {
@@ -1135,7 +1142,8 @@
         158.65,
         91.75,
         92.2,
-        101
+        101,
+        105.25
       ]
     },
     "856248808915480576": {
@@ -1151,7 +1159,8 @@
         150.3,
         133.35,
         174.4,
-        137.7
+        137.7,
+        122.45
       ]
     },
     "1133492104077946880": {
@@ -1167,7 +1176,8 @@
         83.35,
         93.15,
         133.85,
-        76.7
+        76.7,
+        117.95
       ]
     },
     "472876832719368192": {
@@ -1183,7 +1193,8 @@
         88.3,
         103.55,
         89.55,
-        117.55
+        117.55,
+        80.85
       ]
     },
     "1133491276038426624": {
@@ -1199,7 +1210,8 @@
         94.6,
         142.55,
         100.25,
-        126.1
+        126.1,
+        132.45
       ]
     }
   },
