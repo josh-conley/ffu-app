@@ -202,8 +202,8 @@ export const Matchups = () => {
   // Filter matchups by selected team
   const filterMatchupsByTeam = (matchups: any[]) => {
     if (selectedTeam === 'ALL') return matchups;
-    return matchups.filter(matchup => 
-      matchup.winner === selectedTeam || matchup.loser === selectedTeam
+    return matchups.filter(matchup =>
+      matchup.winnerInfo?.teamName === selectedTeam || matchup.loserInfo?.teamName === selectedTeam
     );
   };
 

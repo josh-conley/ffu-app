@@ -464,10 +464,8 @@ export const Records = () => {
                   </div>
                 </div>
 
-                <div className="overflow-x-auto" style={{
+                <div className="overflow-x-auto md:overflow-visible" style={{
                   WebkitOverflowScrolling: 'touch',
-                  marginLeft: 'calc(-1 * (100vw - 100%) / 2)',
-                  marginRight: 'calc(-1 * (100vw - 100%) / 2)'
                 }}>
                   <div className="inline-block min-w-full align-middle">
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
