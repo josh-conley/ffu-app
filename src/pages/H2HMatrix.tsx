@@ -4,7 +4,7 @@ import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { ErrorMessage } from '../components/Common/ErrorMessage';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
-import { ChevronDown, X, Calendar } from 'lucide-react';
+import { ChevronDown, X, Calendar, ArrowUpDown, RotateCcw } from 'lucide-react';
 import { useUrlParams } from '../hooks/useUrlParams';
 import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 import { USERS, CURRENT_YEAR } from '../config/constants';
@@ -37,9 +37,16 @@ interface MatchupDetail {
   isTie?: boolean;
 }
 
+type LeagueFilter = LeagueTier | 'ALL_TIME';
+type HighlightOption = 'none' | 'lopsided' | 'closest' | 'most_played';
+
 export const H2HMatrix = () => {
   const { getParam, updateParams } = useUrlParams();
-  const [selectedLeague, setSelectedLeague] = useState<LeagueTier>('PREMIER');
+  const [selectedFilter, setSelectedFilter] = useState<LeagueFilter>('PREMIER');
+  const [sortByTeam, setSortByTeam] = useState<string | null>(null);
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
+  const [filterBySeasons, setFilterBySeasons] = useState(false);
+  const [highlightOption, setHighlightOption] = useState<HighlightOption>('none');
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedMatchups, setSelectedMatchups] = useState<MatchupDetail[]>([]);
   const [modalTeam1, setModalTeam1] = useState<TeamInfo | null>(null);
@@ -49,13 +56,18 @@ export const H2HMatrix = () => {
 
   // Initialize from URL params on mount
   useEffect(() => {
-    const league = getParam('league', 'PREMIER');
-    if (['PREMIER', 'MASTERS', 'NATIONAL'].includes(league)) {
-      setSelectedLeague(league as LeagueTier);
+    const filter = getParam('filter', 'PREMIER');
+    if (['PREMIER', 'MASTERS', 'NATIONAL', 'ALL_TIME'].includes(filter)) {
+      setSelectedFilter(filter as LeagueFilter);
     }
   }, []);
 
-  const leagues: LeagueTier[] = ['PREMIER', 'MASTERS', 'NATIONAL'];
+  const filterOptions: { value: LeagueFilter; label: string }[] = [
+    { value: 'PREMIER', label: 'Premier - 2025' },
+    { value: 'MASTERS', label: 'Masters - 2025' },
+    { value: 'NATIONAL', label: 'National - 2025' },
+    { value: 'ALL_TIME', label: 'All Members' },
+  ];
 
   const getLeagueName = (league: LeagueTier): string => {
     switch (league) {
@@ -65,27 +77,57 @@ export const H2HMatrix = () => {
     }
   };
 
-  // Get current season members for the selected league
+  // Get members for the selected league/filter
   const currentSeasonMembers = useMemo(() => {
     if (!standings || standings.length === 0) return [];
 
-    // Find the current year standings for the selected league
-    const currentLeagueData = standings.find(
-      s => s.league === selectedLeague && s.year === CURRENT_YEAR
-    );
+    let members: TeamInfo[] = [];
 
-    if (!currentLeagueData) return [];
+    if (selectedFilter === 'ALL_TIME') {
+      // Get all unique users who have ever played across ALL leagues
+      const userMap = new Map<string, { info: TeamInfo; seasonCount: number }>();
 
-    // Get team info for each member
-    const members: TeamInfo[] = currentLeagueData.standings.map(standing => ({
-      userId: standing.userId,
-      teamName: standing.userInfo.teamName,
-      abbreviation: standing.userInfo.abbreviation
-    }));
+      standings.forEach(leagueData => {
+        leagueData.standings.forEach(standing => {
+          if (!userMap.has(standing.userId)) {
+            userMap.set(standing.userId, {
+              info: {
+                userId: standing.userId,
+                teamName: standing.userInfo.teamName,
+                abbreviation: standing.userInfo.abbreviation
+              },
+              seasonCount: 1
+            });
+          } else {
+            const existing = userMap.get(standing.userId)!;
+            existing.seasonCount++;
+          }
+        });
+      });
+
+      // Filter by season count if checkbox is enabled
+      members = Array.from(userMap.values())
+        .filter(user => !filterBySeasons || user.seasonCount >= 5)
+        .map(user => user.info);
+    } else {
+      // Find the current year standings for the selected league
+      const currentLeagueData = standings.find(
+        s => s.league === selectedFilter && s.year === CURRENT_YEAR
+      );
+
+      if (!currentLeagueData) return [];
+
+      // Get team info for each member
+      members = currentLeagueData.standings.map(standing => ({
+        userId: standing.userId,
+        teamName: standing.userInfo.teamName,
+        abbreviation: standing.userInfo.abbreviation
+      }));
+    }
 
     // Sort alphabetically by team name
     return members.sort((a, b) => a.teamName.localeCompare(b.teamName));
-  }, [standings, selectedLeague]);
+  }, [standings, selectedFilter, filterBySeasons]);
 
   // Calculate H2H records and store matchup details for all matchups across all time
   const { h2hMatrix, matchupDetails } = useMemo(() => {
@@ -201,6 +243,115 @@ export const H2HMatrix = () => {
     return { h2hMatrix: matrix, matchupDetails: details };
   }, [standings, currentSeasonMembers]);
 
+  // Sort members based on selected team's record
+  const sortedMembers = useMemo(() => {
+    if (!sortByTeam) {
+      return currentSeasonMembers;
+    }
+
+    const sorted = [...currentSeasonMembers].sort((a, b) => {
+      // Don't sort the selected team itself
+      if (a.userId === sortByTeam) return -1;
+      if (b.userId === sortByTeam) return 1;
+
+      const recordA = h2hMatrix.get(a.userId)?.get(sortByTeam);
+      const recordB = h2hMatrix.get(b.userId)?.get(sortByTeam);
+
+      const winPctA = recordA && recordA.totalGames > 0 ? recordA.wins / recordA.totalGames : 0;
+      const winPctB = recordB && recordB.totalGames > 0 ? recordB.wins / recordB.totalGames : 0;
+
+      if (sortDirection === 'desc') {
+        return winPctB - winPctA;
+      } else {
+        return winPctA - winPctB;
+      }
+    });
+
+    return sorted;
+  }, [currentSeasonMembers, h2hMatrix, sortByTeam, sortDirection]);
+
+  // Handle team header click for sorting
+  const handleTeamSort = (teamId: string) => {
+    if (sortByTeam === teamId) {
+      // Toggle direction if same team
+      setSortDirection(sortDirection === 'desc' ? 'asc' : 'desc');
+    } else {
+      // New team, default to descending
+      setSortByTeam(teamId);
+      setSortDirection('desc');
+    }
+  };
+
+  // Reset sorting
+  const handleResetSort = () => {
+    setSortByTeam(null);
+    setSortDirection('desc');
+  };
+
+  // Calculate interesting matchups for highlighting - SIMPLIFIED
+  const highlightedMatchups = useMemo(() => {
+    if (highlightOption === 'none') return new Set<string>();
+
+    const matchupStats: Array<{
+      key: string;
+      value: number; // The metric we're highlighting by
+    }> = [];
+
+    // Calculate stats for all unique matchups
+    currentSeasonMembers.forEach(team1 => {
+      currentSeasonMembers.forEach(team2 => {
+        if (team1.userId < team2.userId) { // Only process each pair once
+          const record1 = h2hMatrix.get(team1.userId)?.get(team2.userId);
+
+          if (record1 && record1.totalGames > 0) {
+            const key = [team1.userId, team2.userId].sort().join('-');
+            const totalGames = record1.totalGames;
+            const wins1 = record1.wins;
+            const wins2 = record1.totalGames - record1.wins - (record1.ties || 0);
+
+            let value = 0;
+
+            if (highlightOption === 'lopsided') {
+              // Lopsidedness = max wins / total games (0.5 = even, 1.0 = total domination)
+              if (totalGames >= 3) {
+                const maxWins = Math.max(wins1, wins2);
+                value = maxWins / totalGames;
+              }
+            } else if (highlightOption === 'closest') {
+              // Closeness = inverse of lopsidedness (closer to 0.5 = more even)
+              if (totalGames >= 5) {
+                const maxWins = Math.max(wins1, wins2);
+                const winPct = maxWins / totalGames;
+                value = 1 - Math.abs(winPct - 0.5) * 2; // Convert to 0-1 where 1 is most even
+              }
+            } else if (highlightOption === 'most_played') {
+              value = totalGames;
+            }
+
+            if (value > 0) {
+              matchupStats.push({ key, value });
+            }
+          }
+        }
+      });
+    });
+
+    // Get top 10
+    const top10 = matchupStats
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 10)
+      .map(m => m.key);
+
+    return new Set(top10);
+  }, [highlightOption, currentSeasonMembers, h2hMatrix]);
+
+  // Check if a matchup should be highlighted
+  const isHighlighted = (team1Id: string, team2Id: string): boolean => {
+    if (team1Id === team2Id) return false;
+    const key = [team1Id, team2Id].sort().join('-');
+    return highlightedMatchups.has(key);
+  };
+
   // Handle cell click to show matchup details
   const handleCellClick = (team1: TeamInfo, team2: TeamInfo) => {
     const key = [team1.userId, team2.userId].sort().join('-');
@@ -248,36 +399,85 @@ export const H2HMatrix = () => {
             <div className="mb-4 flex items-start justify-between gap-4">
               <div>
                 <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                  {getLeagueName(selectedLeague)} League - {CURRENT_YEAR}
+                  {selectedFilter === 'ALL_TIME' ? 'All Members' : `${getLeagueName(selectedFilter as LeagueTier)} League - ${CURRENT_YEAR}`}
                 </h2>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                  All-time records between current season members (rows beat columns)
+                  {selectedFilter === 'ALL_TIME'
+                    ? 'All-time records between all FFU members (rows beat columns)'
+                    : 'All-time records between current season members (rows beat columns)'}
                 </p>
               </div>
 
-              {/* League Filter */}
-              <div className="flex items-center gap-3">
-                <label className="text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide whitespace-nowrap">
-                  League
-                </label>
-                <div className="relative w-40">
-                  <select
-                    value={selectedLeague}
-                    onChange={(e) => {
-                      const league = e.target.value as LeagueTier;
-                      setSelectedLeague(league);
-                      updateParams({ league });
-                    }}
-                    className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
-                  >
-                    {leagues.map(league => (
-                      <option key={league} value={league}>{getLeagueName(league)}</option>
-                    ))}
-                  </select>
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                    <ChevronDown className="h-4 w-4 text-gray-400" />
+              {/* Filter Dropdown and Controls */}
+              <div className="flex flex-wrap items-center gap-3">
+                <div className="flex items-center gap-3">
+                  <label className="text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide whitespace-nowrap">
+                    View
+                  </label>
+                  <div className="relative w-48">
+                    <select
+                      value={selectedFilter}
+                      onChange={(e) => {
+                        const filter = e.target.value as LeagueFilter;
+                        setSelectedFilter(filter);
+                        updateParams({ filter });
+                      }}
+                      className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                    >
+                      {filterOptions.map(option => (
+                        <option key={option.value} value={option.value}>{option.label}</option>
+                      ))}
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                      <ChevronDown className="h-4 w-4 text-gray-400" />
+                    </div>
                   </div>
                 </div>
+
+                <div className="flex items-center gap-3">
+                  <label className="text-sm font-heading font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide whitespace-nowrap">
+                    Highlight
+                  </label>
+                  <div className="relative w-48">
+                    <select
+                      value={highlightOption}
+                      onChange={(e) => setHighlightOption(e.target.value as HighlightOption)}
+                      className="block w-full pl-3 pr-10 py-2 text-sm font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+                    >
+                      <option value="none">None</option>
+                      <option value="lopsided">Most Lopsided</option>
+                      <option value="closest">Closest Records</option>
+                      <option value="most_played">Most Played</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                      <ChevronDown className="h-4 w-4 text-gray-400" />
+                    </div>
+                  </div>
+                </div>
+
+                {selectedFilter === 'ALL_TIME' && (
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={filterBySeasons}
+                      onChange={(e) => setFilterBySeasons(e.target.checked)}
+                      className="w-4 h-4 text-ffu-red bg-gray-100 border-gray-300 rounded focus:ring-ffu-red dark:focus:ring-ffu-red dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <span className="text-sm font-medium text-gray-800 dark:text-gray-200 whitespace-nowrap">
+                      5+ Seasons
+                    </span>
+                  </label>
+                )}
+
+                {sortByTeam && (
+                  <button
+                    onClick={handleResetSort}
+                    className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    <RotateCcw className="h-4 w-4" />
+                    Reset Sort
+                  </button>
+                )}
               </div>
             </div>
 
@@ -286,42 +486,50 @@ export const H2HMatrix = () => {
                 <thead>
                   <tr>
                     <th className="sticky left-0 z-20 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 p-2 text-xs font-bold text-gray-700 dark:text-gray-300">
-                      Team
+                      <div className="flex items-center justify-center gap-1">
+                        <span>Team</span>
+                        <ArrowUpDown className="h-3 w-3 text-gray-400" />
+                      </div>
                     </th>
-                    {currentSeasonMembers.map(team => (
+                    {sortedMembers.map(team => (
                       <th
                         key={team.userId}
-                        className="bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 p-2 min-w-[60px]"
+                        className={`bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 p-2 min-w-[60px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${sortByTeam === team.userId ? 'ring-2 ring-ffu-red ring-inset' : ''}`}
+                        onClick={() => handleTeamSort(team.userId)}
                       >
                         <div className="flex flex-col items-center gap-1">
                           <TeamLogo
                             teamName={team.teamName}
                             abbreviation={team.abbreviation}
                             size="xs"
-                            clickable
-                            onClick={() => openTeamProfile(team.userId, team.teamName)}
                           />
-                          <span className="text-xs font-bold text-gray-900 dark:text-gray-100 font-mono">
-                            {team.abbreviation}
-                          </span>
+                          <div className="flex items-center gap-1">
+                            <span className="text-xs font-bold text-gray-900 dark:text-gray-100 font-mono">
+                              {team.abbreviation}
+                            </span>
+                            {sortByTeam === team.userId && (
+                              <ArrowUpDown className="h-3 w-3 text-ffu-red" />
+                            )}
+                          </div>
                         </div>
                       </th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
-                  {currentSeasonMembers.map(rowTeam => (
+                  {sortedMembers.map(rowTeam => (
                     <tr key={rowTeam.userId} className="hover:bg-gray-50 dark:hover:bg-gray-800/50">
-                      <td className="sticky left-0 z-10 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 p-2">
+                      <td
+                        className={`sticky left-0 z-10 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 p-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors ${sortByTeam === rowTeam.userId ? 'ring-2 ring-ffu-red ring-inset' : ''}`}
+                        onClick={() => handleTeamSort(rowTeam.userId)}
+                      >
                         <div className="flex items-center gap-2">
                           <TeamLogo
                             teamName={rowTeam.teamName}
                             abbreviation={rowTeam.abbreviation}
                             size="sm"
-                            clickable
-                            onClick={() => openTeamProfile(rowTeam.userId, rowTeam.teamName)}
                           />
-                          <div className="min-w-0">
+                          <div className="min-w-0 flex-1">
                             <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
                               {rowTeam.teamName}
                             </div>
@@ -329,9 +537,12 @@ export const H2HMatrix = () => {
                               {rowTeam.abbreviation}
                             </div>
                           </div>
+                          {sortByTeam === rowTeam.userId && (
+                            <ArrowUpDown className="h-4 w-4 text-ffu-red flex-shrink-0" />
+                          )}
                         </div>
                       </td>
-                      {currentSeasonMembers.map(colTeam => {
+                      {sortedMembers.map(colTeam => {
                         if (rowTeam.userId === colTeam.userId) {
                           return (
                             <td
@@ -348,10 +559,15 @@ export const H2HMatrix = () => {
                         const losses = record?.losses || 0;
                         const ties = record?.ties || 0;
                         const totalGames = record?.totalGames || 0;
+                        const highlighted = isHighlighted(rowTeam.userId, colTeam.userId);
 
                         // Determine cell color based on record
                         let cellColor = 'bg-white dark:bg-gray-900';
-                        if (totalGames > 0) {
+
+                        if (highlighted) {
+                          // Simple purple highlight for top 10
+                          cellColor = 'bg-purple-200 dark:bg-purple-900/40';
+                        } else if (totalGames > 0) {
                           const winPct = wins / totalGames;
                           if (winPct > 0.6) {
                             cellColor = 'bg-green-50 dark:bg-green-900/20';
@@ -362,10 +578,14 @@ export const H2HMatrix = () => {
                           }
                         }
 
+                        const borderClass = highlighted
+                          ? 'border-2 border-purple-500 dark:border-purple-400'
+                          : 'border border-gray-300 dark:border-gray-600';
+
                         return (
                           <td
                             key={colTeam.userId}
-                            className={`${cellColor} border border-gray-300 dark:border-gray-600 p-2 text-center ${totalGames > 0 ? 'cursor-pointer hover:opacity-75 transition-opacity' : ''}`}
+                            className={`${cellColor} ${borderClass} p-2 text-center ${totalGames > 0 ? 'cursor-pointer hover:opacity-75 transition-opacity' : ''}`}
                             onClick={() => totalGames > 0 && handleCellClick(rowTeam, colTeam)}
                           >
                             {totalGames > 0 ? (
