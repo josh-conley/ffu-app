@@ -8,6 +8,7 @@ import { Draft } from './pages/Draft';
 import { DraftFunFacts } from './pages/DraftFunFacts';
 import { Records } from './pages/Records';
 import { AllTimeStats } from './pages/AllTimeStats';
+import { H2HMatrix } from './pages/H2HMatrix';
 import { SecretDak } from './pages/SecretDak';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { TeamProfileModalProvider, useTeamProfileModal } from './contexts/TeamProfileModalContext';
@@ -29,6 +30,7 @@ const AppContent = () => {
             <Route path="draft-fun-facts" element={<DraftFunFacts />} />
             <Route path="records" element={<Records />} />
             <Route path="stats" element={<AllTimeStats />} />
+            <Route path="h2h-matrix" element={<H2HMatrix />} />
             <Route path="secret-dak" element={<SecretDak />} />
           </Route>
         </Routes>
