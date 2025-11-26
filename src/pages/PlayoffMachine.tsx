@@ -317,11 +317,11 @@ export const PlayoffMachine = () => {
                       key={matchupKey}
                       className="bg-gradient-to-r from-gray-100 to-gray-50 dark:from-gray-800 dark:to-gray-900 p-3 rounded border-l-4 border-gray-300 dark:border-gray-600"
                     >
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2 sm:gap-3">
                         {/* Team 1 Button */}
                         <button
                           onClick={() => handleMatchupSelect(matchupKey, matchup.winner)}
-                          className={`flex-1 px-4 py-3 text-sm font-bold rounded transition-all ${
+                          className={`w-[calc(50%-1.5rem)] sm:flex-1 px-2 sm:px-4 py-3 text-xs sm:text-sm font-bold rounded transition-all ${
                             selectedWinner === matchup.winner
                               ? 'bg-green-500 text-white shadow-lg scale-105'
                               : selectedWinner === matchup.loser
@@ -332,14 +332,14 @@ export const PlayoffMachine = () => {
                           <div className="text-left truncate">{team1Name}</div>
                         </button>
 
-                        <div className="flex flex-col items-center">
+                        <div className="flex flex-col items-center flex-shrink-0 w-6">
                           <span className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">vs</span>
                         </div>
 
                         {/* Team 2 Button */}
                         <button
                           onClick={() => handleMatchupSelect(matchupKey, matchup.loser)}
-                          className={`flex-1 px-4 py-3 text-sm font-bold rounded transition-all ${
+                          className={`w-[calc(50%-1.5rem)] sm:flex-1 px-2 sm:px-4 py-3 text-xs sm:text-sm font-bold rounded transition-all ${
                             selectedWinner === matchup.loser
                               ? 'bg-green-500 text-white shadow-lg scale-105'
                               : selectedWinner === matchup.winner

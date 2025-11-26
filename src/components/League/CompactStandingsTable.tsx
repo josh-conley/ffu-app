@@ -91,7 +91,7 @@ export const CompactStandingsTable = ({ standings, league, year, matchupsByWeek,
     <div className="space-y-4">
       {/* Display divisions side by side if available */}
       {divisionGroups ? (
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {divisionGroups.map((divisionGroup) => (
             <div key={divisionGroup.division} className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
               {/* Division Header */}
