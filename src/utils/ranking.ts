@@ -17,6 +17,7 @@ export interface TeamH2HSummary {
   h2hRecord: string; // e.g., "3-2"
   pointsFor: number;
   isCurrentTeam: boolean;
+  isBumpedThirdLeader?: boolean; // True if this team is the bumped 3rd division leader
 }
 
 export interface TiebreakerLayer {
@@ -27,6 +28,8 @@ export interface TiebreakerLayer {
   h2hWinPct?: number;
   usesPointsFor: boolean;
   pointsFor?: number;
+  hasBumpedThirdLeader?: boolean; // True if a 3rd division leader was bumped to 6th in this group
+  bumpedThirdLeaderName?: string; // Name of the bumped 3rd leader (for display)
 }
 
 export interface TiebreakerInfo {
@@ -315,6 +318,7 @@ function rankWithDivisions(
 
   // Top 2 division leaders get seeds 1-2
   const top2Leaders = sortedDivisionLeaders.slice(0, 2);
+  const thirdLeader = sortedDivisionLeaders[2]; // 3rd division leader (if exists)
 
   // Everyone else (non-top-2-leaders)
   const divisionLeaderIds = new Set(top2Leaders.map(leader => leader.userId));
@@ -324,7 +328,20 @@ function rankWithDivisions(
   const sortedOtherTeams = sortWithTiebreakers(otherTeams, matchupsByWeek, year);
 
   // Combine: top 2 leaders first, then everyone else
-  const finalOrder = [...top2Leaders, ...sortedOtherTeams];
+  let finalOrder = [...top2Leaders, ...sortedOtherTeams];
+
+  // Special case: If 3rd division leader is ranked 7th or worse, bump them to 6th
+  if (thirdLeader) {
+    const thirdLeaderIndex = finalOrder.findIndex(team => team.userId === thirdLeader.userId);
+
+    if (thirdLeaderIndex >= 6) { // 7th position or worse (0-indexed, so 6+)
+      // Remove 3rd leader from their current position
+      finalOrder.splice(thirdLeaderIndex, 1);
+      // Insert at position 6 (6th seed, index 5) and mark as bumped
+      const bumpedLeader = { ...thirdLeader, isThirdDivisionLeaderBumped: true };
+      finalOrder.splice(5, 0, bumpedLeader);
+    }
+  }
 
   // Assign ranks
   return assignRanks(finalOrder, matchupsByWeek, year);
@@ -415,7 +432,13 @@ export function identifyDivisionLeaders(
   standings: EnhancedSeasonStandings[],
   matchupsByWeek?: Record<number, any[]>,
   year?: string
-): { top2Leaders: Set<string>; allLeaders: Set<string> } {
+): {
+  top2Leaders: Set<string>;
+  allLeaders: Set<string>;
+  firstDivisionLeader?: string;
+  secondDivisionLeader?: string;
+  thirdDivisionLeader?: string;
+} {
   // Group by division
   const divisionMap = new Map<number, EnhancedSeasonStandings[]>();
   standings.forEach(standing => {
@@ -443,7 +466,10 @@ export function identifyDivisionLeaders(
 
   return {
     top2Leaders: new Set(top2Leaders.map(leader => leader.userId)),
-    allLeaders: new Set(divisionLeaders.map(leader => leader.userId))
+    allLeaders: new Set(divisionLeaders.map(leader => leader.userId)),
+    firstDivisionLeader: sortedDivisionLeaders[0]?.userId,
+    secondDivisionLeader: sortedDivisionLeaders[1]?.userId,
+    thirdDivisionLeader: sortedDivisionLeaders[2]?.userId
   };
 }
 
@@ -507,14 +533,52 @@ export function getTiebreakerInfo(
 
   // If not a top 2 leader, also check against seeds 3-12 pool
   if (!isCurrentTeamTop2Leader) {
-    const otherNonTop2Tied = standings.filter((standing, idx) =>
+    let otherNonTop2Tied = standings.filter((standing, idx) =>
       idx !== currentIndex &&
       !leaders.top2Leaders.has(standing.userId) &&
       getWinPct(standing) === currentWinPct
     );
 
+    // Check if there's a bumped 3rd division leader in this group
+    const bumpedThirdLeader = otherNonTop2Tied.find(s => s.isThirdDivisionLeaderBumped);
+    const isCurrentTeamBumpedLeader = currentStanding.isThirdDivisionLeaderBumped;
+
+    // If current team IS the bumped 3rd leader, only show division tiebreaker
+    if (isCurrentTeamBumpedLeader) {
+      const divisionTeamsTied = otherNonTop2Tied.filter(s => s.division === currentStanding.division);
+      if (divisionTeamsTied.length > 0) {
+        const divisionLayer = buildTiebreakerLayer(
+          currentStanding,
+          divisionTeamsTied,
+          matchupsByWeek,
+          year,
+          'division-leaders'
+        );
+        if (divisionLayer) layers.push(divisionLayer);
+      }
+      // Don't show cross-division layer for the bumped leader
+      return layers.length > 0 ? { layers } : null;
+    }
+
+    // If current team is in same division as bumped 3rd leader, show division tiebreaker first
+    if (bumpedThirdLeader && currentStanding.division === bumpedThirdLeader.division) {
+      // Layer 1: Show division-only tiebreaker to explain who won the division
+      const divisionTeamsTied = otherNonTop2Tied.filter(s => s.division === currentStanding.division);
+      if (divisionTeamsTied.length > 0) {
+        const divisionLayer = buildTiebreakerLayer(
+          currentStanding,
+          divisionTeamsTied,
+          matchupsByWeek,
+          year,
+          'division-leaders' // Mark as division-specific
+        );
+        if (divisionLayer) layers.push(divisionLayer);
+      }
+    }
+
+    // Layer 2 (or only layer): Cross-division tiebreaker
+    // Always show all tied teams (including bumped 3rd leader if present)
     if (otherNonTop2Tied.length > 0) {
-      // Show how this team ranks in the seeds 3-12 pool
       const layer = buildTiebreakerLayer(currentStanding, otherNonTop2Tied, matchupsByWeek, year, 'wild-card');
       if (layer) layers.push(layer);
     }
@@ -534,6 +598,14 @@ function buildTiebreakerLayer(
   context: 'division-leaders' | 'wild-card'
 ): TiebreakerLayer | null {
   if (tiedTeams.length === 0) return null;
+
+  // Check if there's a bumped 3rd division leader in this group
+  const allTeamsInGroup = [currentStanding, ...tiedTeams];
+  const bumpedLeader = allTeamsInGroup.find(t => t.isThirdDivisionLeaderBumped);
+  const hasBumpedThirdLeader = !!bumpedLeader;
+  const bumpedThirdLeaderName = bumpedLeader
+    ? getDisplayTeamName(bumpedLeader.userId, bumpedLeader.userInfo.teamName, year)
+    : undefined;
 
   // Build individual H2H records against each tied team
   const h2hRecords: string[] = [];
@@ -586,7 +658,8 @@ function buildTiebreakerLayer(
           h2hWinPct: teamWinPct,
           h2hRecord: `${teamWins}-${teamLosses}`,
           pointsFor: team.pointsFor,
-          isCurrentTeam: team.userId === currentStanding.userId
+          isCurrentTeam: team.userId === currentStanding.userId,
+          isBumpedThirdLeader: team.isThirdDivisionLeaderBumped
         };
       })
       .sort((a, b) => {
@@ -604,7 +677,9 @@ function buildTiebreakerLayer(
         tiedRecord,
         h2hWinPct: currentH2hWinPct,
         usesPointsFor: true,
-        pointsFor: currentStanding.pointsFor
+        pointsFor: currentStanding.pointsFor,
+        hasBumpedThirdLeader,
+        bumpedThirdLeaderName
       };
     } else {
       // H2H distinguishes some teams, but check if current team is tied with anyone
@@ -623,7 +698,9 @@ function buildTiebreakerLayer(
           tiedRecord,
           h2hWinPct: currentH2hWinPct,
           usesPointsFor: true,
-          pointsFor: currentStanding.pointsFor
+          pointsFor: currentStanding.pointsFor,
+          hasBumpedThirdLeader,
+          bumpedThirdLeaderName
         };
       } else {
         // Current team's H2H win% is unique, don't use points for
@@ -633,7 +710,9 @@ function buildTiebreakerLayer(
           allTeamsH2H,
           tiedRecord,
           h2hWinPct: currentH2hWinPct,
-          usesPointsFor: false
+          usesPointsFor: false,
+          hasBumpedThirdLeader,
+          bumpedThirdLeaderName
         };
       }
     }

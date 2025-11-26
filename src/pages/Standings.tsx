@@ -219,8 +219,9 @@ export const Standings = () => {
                     <div className="space-y-3 mb-4">
                       {rankedStandings.map((standing, index) => {
                         const tiebreakerInfo = getTiebreakerInfo(rankedStandings, index, matchupsByWeek, currentYear);
-                        const isTop2Leader = divisionLeaders?.top2Leaders.has(standing.userId);
-                        // const isDivisionLeader = divisionLeaders?.allLeaders.has(standing.userId);
+                        const isFirstDivisionLeader = divisionLeaders?.firstDivisionLeader === standing.userId;
+                        const isSecondDivisionLeader = divisionLeaders?.secondDivisionLeader === standing.userId;
+                        const isThirdDivisionLeader = divisionLeaders?.thirdDivisionLeader === standing.userId;
 
                         // Division indicator dot colors (very subtle)
                         const getDivisionDotColor = (divNum: number) => {
@@ -260,8 +261,14 @@ export const Standings = () => {
                               {!isActiveSeason && standing.rank === 1 && (
                                 <Crown className="w-3 h-3 text-yellow-500" />
                               )}
-                              {isTop2Leader && (
+                              {isActiveSeason && isFirstDivisionLeader && (
                                 <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
+                              )}
+                              {isActiveSeason && isSecondDivisionLeader && (
+                                <Star className="w-3 h-3 text-gray-400 fill-gray-400" />
+                              )}
+                              {isActiveSeason && isThirdDivisionLeader && (
+                                <Star className="w-3 h-3 text-amber-600 fill-amber-600" />
                               )}
                             </div>
                             <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1 flex-wrap">

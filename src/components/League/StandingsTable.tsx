@@ -1,10 +1,10 @@
 import type { EnhancedSeasonStandings, LeagueTier } from '../../types';
 import { TeamLogo } from '../Common/TeamLogo';
-import { Trophy, Medal, Award } from 'lucide-react';
+import { Trophy, Medal, Award, Star } from 'lucide-react';
 import { getLeagueName } from '../../constants/leagues';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../../config/constants';
 import { useTeamProfileModal } from '../../contexts/TeamProfileModalContext';
-import { calculateRankings, getTiebreakerInfo, groupStandingsByDivision } from '../../utils/ranking';
+import { calculateRankings, getTiebreakerInfo, groupStandingsByDivision, identifyDivisionLeaders } from '../../utils/ranking';
 import { StandingsTooltip } from '../Common/StandingsTooltip';
 
 
@@ -25,6 +25,9 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
 
   // Group by divisions if division data exists (Sleeper era only, 2021+)
   const divisionGroups = groupStandingsByDivision(rankedStandings, divisionNames);
+
+  // Identify division leaders for star icons (only for active season)
+  const divisionLeaderInfo = isActiveSeason ? identifyDivisionLeaders(rankedStandings, matchupsByWeek, year) : null;
 
   const getLeagueColors = (leagueType: string) => {
     const colorMap = {
@@ -72,10 +75,24 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
     return classes;
   };
 
-  const getRankIcon = (rank: number) => {
-    if (rank === 1) return <Trophy className={`h-5 w-5 ${leagueColors.text}`} />;
-    if (rank === 2) return <Medal className="h-4 w-4 text-gray-600 dark:text-gray-300" />;
-    if (rank === 3) return <Award className="h-4 w-4 text-amber-600 dark:text-amber-400" />;
+  const getRankIcon = (standing: EnhancedSeasonStandings) => {
+    // For active seasons, show division leader stars
+    if (isActiveSeason && divisionLeaderInfo) {
+      if (standing.userId === divisionLeaderInfo.firstDivisionLeader) {
+        return <Star className="h-4 w-4 text-yellow-500" fill="currentColor" />;
+      }
+      if (standing.userId === divisionLeaderInfo.secondDivisionLeader) {
+        return <Star className="h-4 w-4 text-gray-400" fill="currentColor" />;
+      }
+      if (standing.userId === divisionLeaderInfo.thirdDivisionLeader) {
+        return <Star className="h-4 w-4 text-amber-600" fill="currentColor" />;
+      }
+    }
+
+    // For historical seasons, show trophy/medals
+    if (standing.rank === 1) return <Trophy className={`h-5 w-5 ${leagueColors.text}`} />;
+    if (standing.rank === 2) return <Medal className="h-4 w-4 text-gray-600 dark:text-gray-300" />;
+    if (standing.rank === 3) return <Award className="h-4 w-4 text-amber-600 dark:text-amber-400" />;
     return null;
   };
 
@@ -88,11 +105,22 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
         <tr key={standing.userId} className={getRowClasses(standing.rank)}>
           <td className="text-left pl-2 sm:pl-4">
             <div className="flex items-center space-x-1">
-              {!isActiveSeason && getRankIcon(standing.rank)}
+              {!isActiveSeason && getRankIcon(standing)}
               {isActiveSeason && (
-                <span className="font-bold text-sm sm:text-lg text-gray-900 dark:text-gray-100">
-                  {standing.rank}
-                </span>
+                <>
+                  <span className="font-bold text-sm sm:text-lg text-gray-900 dark:text-gray-100">
+                    {standing.rank}
+                  </span>
+                  {divisionLeaderInfo?.firstDivisionLeader === standing.userId && (
+                    <Star className="h-3 w-3 text-yellow-500" fill="currentColor" />
+                  )}
+                  {divisionLeaderInfo?.secondDivisionLeader === standing.userId && (
+                    <Star className="h-3 w-3 text-gray-400" fill="currentColor" />
+                  )}
+                  {divisionLeaderInfo?.thirdDivisionLeader === standing.userId && (
+                    <Star className="h-3 w-3 text-amber-600" fill="currentColor" />
+                  )}
+                </>
               )}
               {!isActiveSeason && (
                 <span className={`font-black text-sm sm:text-lg ${standing.rank === 1 ? leagueColors.text : 'text-gray-900 dark:text-gray-100'}`}>

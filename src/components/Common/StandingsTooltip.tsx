@@ -1,4 +1,4 @@
-import { Info } from 'lucide-react';
+import { Info, Star } from 'lucide-react';
 import type { TiebreakerInfo } from '../../utils/ranking';
 
 interface StandingsTooltipProps {
@@ -16,10 +16,20 @@ export const StandingsTooltip = ({ tiebreakerInfo, size = 'md' }: StandingsToolt
   const fontSize = size === 'sm' ? 'text-xs' : 'text-sm';
 
   // Get context label for a layer
-  const getContextLabel = (context: 'division-leaders' | 'wild-card') => {
-    switch (context) {
+  const getContextLabel = (layer: any, layerIdx: number, totalLayers: number) => {
+    // If this is a division layer with bumped leader AND there are 2 layers, show step 1
+    if (layer.context === 'division-leaders' && layer.hasBumpedThirdLeader && totalLayers === 2) {
+      return 'Step 1: Division Tiebreaker';
+    }
+
+    // If this is the second layer after a division layer, show step 2
+    if (layerIdx === 1 && totalLayers === 2) {
+      return 'Step 2: Cross-Division Ranking';
+    }
+
+    switch (layer.context) {
       case 'division-leaders':
-        return 'Top 2 Seeds';
+        return 'Division Tiebreaker';
       case 'wild-card':
         return 'Seeds 3-12';
       default:
@@ -35,7 +45,7 @@ export const StandingsTooltip = ({ tiebreakerInfo, size = 'md' }: StandingsToolt
 
         {tiebreakerInfo.layers.map((layer, layerIdx) => (
           <div key={layerIdx} className={layerIdx > 0 ? 'mt-3 pt-3 border-t border-gray-600' : ''}>
-            <div className="font-semibold text-yellow-400 mb-1">{getContextLabel(layer.context)}</div>
+            <div className="font-semibold text-yellow-400 mb-1">{getContextLabel(layer, layerIdx, tiebreakerInfo.layers.length)}</div>
 
             {layer.allTeamsH2H && layer.allTeamsH2H.length > 0 && (
               <div className="mt-2 space-y-1">
@@ -47,7 +57,12 @@ export const StandingsTooltip = ({ tiebreakerInfo, size = 'md' }: StandingsToolt
                     key={idx}
                     className={`${fontSize} flex justify-between gap-3 ${team.isCurrentTeam ? 'font-bold text-yellow-300' : 'text-gray-200'}`}
                   >
-                    <span className="truncate">{team.teamName}</span>
+                    <span className="flex items-center gap-1 min-w-0">
+                      <span className="truncate">{team.teamName}</span>
+                      {team.isBumpedThirdLeader && (
+                        <Star className="h-3 w-3 text-gray-400 flex-shrink-0" fill="currentColor" />
+                      )}
+                    </span>
                     <span className="whitespace-nowrap">
                       {team.h2hRecord} ({(team.h2hWinPct * 100).toFixed(1)}%) • {team.pointsFor.toFixed(2)} PF
                     </span>
@@ -59,6 +74,33 @@ export const StandingsTooltip = ({ tiebreakerInfo, size = 'md' }: StandingsToolt
             {layer.usesPointsFor && (
               <div className={`${fontSize} mt-2 text-blue-300 italic`}>
                 Tiebreaker: Points For
+              </div>
+            )}
+
+            {layer.hasBumpedThirdLeader && layer.context === 'division-leaders' && (
+              <div className={`${fontSize} mt-2 pt-2 border-t border-gray-600 text-orange-300`}>
+                {tiebreakerInfo.layers.length === 1 ? (
+                  // Single layer case: current team is the bumped 3rd leader
+                  <>
+                    <div className="font-semibold mb-1">⭐ Division Winner</div>
+                    <div className="mb-2">This team won the division via H2H tiebreaker</div>
+                    <div className="font-semibold mb-1">Special Playoff Rule:</div>
+                    <div>As the 3rd division winner, this team receives the 6th seed at minimum</div>
+                  </>
+                ) : (
+                  // Two layer case: showing division tiebreaker for other teams in division
+                  <>
+                    <div className="font-semibold mb-1">⭐ Division Winner</div>
+                    <div>This team won the division via H2H tiebreaker</div>
+                  </>
+                )}
+              </div>
+            )}
+
+            {layer.hasBumpedThirdLeader && layer.context === 'wild-card' && (
+              <div className={`${fontSize} mt-2 pt-2 border-t border-gray-600 text-orange-300`}>
+                <div className="font-semibold mb-1">Special Playoff Rule:</div>
+                <div>⭐ Team gets 6th seed as 3rd division winner, bypassing this cross-division tiebreaker</div>
               </div>
             )}
           </div>

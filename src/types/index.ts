@@ -63,6 +63,7 @@ export interface SeasonStandings {
   lowGame?: number;
   unionPowerRating?: number;
   division?: number; // Division number (Sleeper era only, 2021+)
+  isThirdDivisionLeaderBumped?: boolean; // True if 3rd division leader was bumped to 6th seed
 }
 
 export interface PlayoffResult {
