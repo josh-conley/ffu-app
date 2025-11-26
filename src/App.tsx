@@ -10,6 +10,7 @@ import { Records } from './pages/Records';
 import { AllTimeStats } from './pages/AllTimeStats';
 import { H2HMatrix } from './pages/H2HMatrix';
 import { SecretDak } from './pages/SecretDak';
+import { PlayoffMachine } from './pages/PlayoffMachine';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { TeamProfileModalProvider, useTeamProfileModal } from './contexts/TeamProfileModalContext';
 import { TeamProfileModal } from './components/Common/TeamProfileModal';
@@ -24,6 +25,7 @@ const AppContent = () => {
           <Route path="/" element={<Layout />}>
             <Route index element={<Overview />} />
             <Route path="standings" element={<Standings />} />
+            <Route path="playoff-machine" element={<PlayoffMachine />} />
             <Route path="members" element={<Members />} />
             <Route path="matchups" element={<Matchups />} />
             <Route path="drafts" element={<Draft />} />

@@ -1,4 +1,4 @@
-import { Users, BarChart3, Award, TrendingUp, Crown } from 'lucide-react';
+import { Users, BarChart3, Award, TrendingUp, Crown, Calculator } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useAllStandings } from '../hooks/useLeagues';
@@ -148,6 +148,24 @@ export const Overview = () => {
                     >
                       <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 mx-auto mb-2" />
                       <div className="font-semibold text-sm sm:text-base">Stats</div>
+                    </Link>
+                  </div>
+
+                  {/* Playoff Machine Section */}
+                  <div className="mt-6 pt-6 border-t border-white/20">
+                    <Link
+                      to="/playoff-machine"
+                      className="block bg-white/10 hover:bg-white/20 angular-cut p-4 transition-colors group"
+                    >
+                      <div className="flex items-center justify-center gap-3">
+                        <Calculator className="h-5 w-5 text-blue-300" />
+                        <div>
+                          <div className="font-bold text-base">Playoff Machine</div>
+                          <div className="text-sm text-white/80 group-hover:text-white transition-colors">
+                            Simulate remaining matchups and predict playoff scenarios
+                          </div>
+                        </div>
+                      </div>
                     </Link>
                   </div>
                 </div>

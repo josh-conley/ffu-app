@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useUrlParams } from '../hooks/useUrlParams';
 import { useAllStandings, useLeagueStandings } from '../hooks/useLeagues';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
@@ -7,7 +8,7 @@ import { StandingsTable } from '../components/League/StandingsTable';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../config/constants';
 import { getLeagueName } from '../constants/leagues';
-import { ChevronDown, Crown, Star } from 'lucide-react';
+import { ChevronDown, Crown, Star, Calculator } from 'lucide-react';
 import type { LeagueTier } from '../types';
 import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 import { calculateRankings, getTiebreakerInfo, identifyDivisionLeaders, getDivisionName } from '../utils/ranking';
@@ -47,6 +48,7 @@ const StandingsTableWithMatchups = ({ leagueData, league, year }: { leagueData: 
 };
 
 export const Standings = () => {
+  const navigate = useNavigate();
   const { getParam, updateParams } = useUrlParams();
   const { data: standings, isLoading, error } = useAllStandings();
   const [selectedYear, setSelectedYear] = useState<string>('');
@@ -128,30 +130,40 @@ export const Standings = () => {
   return (
     <div className="max-w-5xl mx-auto">
       <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">League Standings</h1>
         </div>
-        
-        <div className="mt-4 sm:mt-0">
-          <div className="space-y-2">
-            <div className="relative">
-              <select
-                value={currentYear}
-                onChange={(e) => {
-                  const year = e.target.value;
-                  setSelectedYear(year);
-                  updateParams({ year });
-                }}
-                className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
-              >
-                {availableYears.map(year => (
-                  <option key={year} value={year}>{year} Season</option>
-                ))}
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <ChevronDown className="h-5 w-5 text-gray-400" />
-              </div>
+
+        <div className="flex items-center gap-3">
+          {/* Playoff Machine Button - only show for current season */}
+          {isActiveSeason && (
+            <button
+              onClick={() => navigate('/playoff-machine')}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded transition-colors"
+            >
+              <Calculator className="h-4 w-4" />
+              <span className="hidden sm:inline">Playoff Machine</span>
+            </button>
+          )}
+
+          {/* Year Selector */}
+          <div className="relative">
+            <select
+              value={currentYear}
+              onChange={(e) => {
+                const year = e.target.value;
+                setSelectedYear(year);
+                updateParams({ year });
+              }}
+              className="block w-full pl-4 pr-12 py-3 text-base font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-ffu-red focus:border-ffu-red rounded hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 appearance-none"
+            >
+              {availableYears.map(year => (
+                <option key={year} value={year}>{year} Season</option>
+              ))}
+            </select>
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+              <ChevronDown className="h-5 w-5 text-gray-400" />
             </div>
           </div>
         </div>
