@@ -37,18 +37,28 @@ export const StandingsTooltip = ({ tiebreakerInfo, size = 'md' }: StandingsToolt
           <div key={layerIdx} className={layerIdx > 0 ? 'mt-3 pt-3 border-t border-gray-600' : ''}>
             <div className="font-semibold text-yellow-400 mb-1">{getContextLabel(layer.context)}</div>
 
-            {layer.h2hRecords.length > 0 && (
-              <div className="space-y-1 mb-2">
-                {layer.h2hRecords.map((record, idx) => (
-                  <div key={idx} className={fontSize}>{record}</div>
+            {layer.allTeamsH2H && layer.allTeamsH2H.length > 0 && (
+              <div className="mt-2 space-y-1">
+                <div className="text-xs font-semibold text-gray-300 mb-1">
+                  All Tied {layer.tiedRecord || ''} Teams:
+                </div>
+                {layer.allTeamsH2H.map((team, idx) => (
+                  <div
+                    key={idx}
+                    className={`${fontSize} flex justify-between gap-3 ${team.isCurrentTeam ? 'font-bold text-yellow-300' : 'text-gray-200'}`}
+                  >
+                    <span className="truncate">{team.teamName}</span>
+                    <span className="whitespace-nowrap">
+                      {team.h2hRecord} ({(team.h2hWinPct * 100).toFixed(1)}%) • {team.pointsFor.toFixed(2)} PF
+                    </span>
+                  </div>
                 ))}
               </div>
             )}
 
             {layer.usesPointsFor && (
-              <div className={fontSize}>
-                {layer.h2hRecords.length > 0 && '(H2H tied) '}
-                Using Points For {layer.pointsFor ? `(${layer.pointsFor.toFixed(2)})` : ''}
+              <div className={`${fontSize} mt-2 text-blue-300 italic`}>
+                Tiebreaker: Points For
               </div>
             )}
           </div>

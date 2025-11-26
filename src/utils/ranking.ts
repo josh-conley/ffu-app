@@ -10,9 +10,21 @@ export interface RankingTiebreakers {
   ties?: number;
 }
 
+export interface TeamH2HSummary {
+  teamName: string;
+  userId: string;
+  h2hWinPct: number;
+  h2hRecord: string; // e.g., "3-2"
+  pointsFor: number;
+  isCurrentTeam: boolean;
+}
+
 export interface TiebreakerLayer {
   context: 'division-leaders' | 'wild-card';
-  h2hRecords: string[];
+  h2hRecords: string[]; // Individual matchup records for current team
+  allTeamsH2H?: TeamH2HSummary[]; // Summary of all tied teams' H2H records
+  tiedRecord?: string; // The overall record all teams are tied at (e.g., "6-6")
+  h2hWinPct?: number;
   usesPointsFor: boolean;
   pointsFor?: number;
 }
@@ -171,11 +183,21 @@ function sortWithTiebreakers(
       const aggregateH2H = checkAggregateH2H(group, matchupsByWeek, year);
 
       if (aggregateH2H.isTied) {
-        // All teams have equal aggregate H2H, sort by points for
+        // All teams have equal aggregate H2H win%, sort by points for
         sortedGroups.push(group.sort((a, b) => b.pointsFor - a.pointsFor));
       } else {
-        // Aggregate H2H distinguishes teams, use normal comparison
-        sortedGroups.push(group.sort((a, b) => compareTeamRecords(a, b, matchupsByWeek, year)));
+        // Aggregate H2H distinguishes teams, sort by H2H win% then points for
+        sortedGroups.push(group.sort((a, b) => {
+          const aH2hWinPct = aggregateH2H.winPcts?.get(a.userId) ?? 0;
+          const bH2hWinPct = aggregateH2H.winPcts?.get(b.userId) ?? 0;
+
+          if (aH2hWinPct !== bH2hWinPct) {
+            return bH2hWinPct - aH2hWinPct; // Higher H2H win% ranks better
+          }
+
+          // If H2H win% is equal, use points for
+          return b.pointsFor - a.pointsFor;
+        }));
       }
     }
   });
@@ -200,36 +222,46 @@ function getWinPct(standing: EnhancedSeasonStandings): number {
 
 /**
  * Check if teams in a multi-way tie have equal aggregate H2H records
- * Returns true if all teams have the same number of H2H wins against the group
+ * Returns true if all teams have the same H2H win percentage against the group
  */
 function checkAggregateH2H(
   tiedTeams: EnhancedSeasonStandings[],
   matchupsByWeek?: Record<number, any[]>,
   year?: string
-): { isTied: boolean; records: Map<string, number> } {
+): { isTied: boolean; records: Map<string, number>; winPcts?: Map<string, number> } {
   if (!matchupsByWeek || !year || !isActiveYear(year)) {
     return { isTied: true, records: new Map() };
   }
 
-  // Calculate H2H wins for each team against all other tied teams
+  // Calculate H2H wins and losses for each team against all other tied teams
   const h2hWins = new Map<string, number>();
+  const h2hLosses = new Map<string, number>();
+  const h2hWinPcts = new Map<string, number>();
 
   tiedTeams.forEach(team => {
     let wins = 0;
+    let losses = 0;
     tiedTeams.forEach(opponent => {
       if (team.userId !== opponent.userId) {
         const h2h = getHeadToHeadRecord(team.userId, opponent.userId, matchupsByWeek, year);
         wins += h2h.team1Wins;
+        losses += h2h.team2Wins;
       }
     });
     h2hWins.set(team.userId, wins);
+    h2hLosses.set(team.userId, losses);
+
+    // Calculate win percentage
+    const totalGames = wins + losses;
+    const winPct = totalGames > 0 ? wins / totalGames : 0;
+    h2hWinPcts.set(team.userId, winPct);
   });
 
-  // Check if all teams have the same number of wins
-  const winCounts = Array.from(h2hWins.values());
-  const allEqual = winCounts.every(w => w === winCounts[0]);
+  // Check if all teams have the same H2H win percentage
+  const winPctValues = Array.from(h2hWinPcts.values());
+  const allEqual = winPctValues.every(pct => pct === winPctValues[0]);
 
-  return { isTied: allEqual, records: h2hWins };
+  return { isTied: allEqual, records: h2hWins, winPcts: h2hWinPcts };
 }
 
 /**
@@ -505,14 +537,10 @@ function buildTiebreakerLayer(
 
   // Build individual H2H records against each tied team
   const h2hRecords: string[] = [];
-  let totalWins = 0;
-  let totalLosses = 0;
   let totalGames = 0;
 
   tiedTeams.forEach(tiedTeam => {
     const h2h = getHeadToHeadRecord(currentStanding.userId, tiedTeam.userId, matchupsByWeek, year);
-    totalWins += h2h.team1Wins;
-    totalLosses += h2h.team2Wins;
     totalGames += h2h.totalGames;
 
     if (h2h.totalGames > 0) {
@@ -522,15 +550,96 @@ function buildTiebreakerLayer(
   });
 
   if (h2hRecords.length > 0) {
-    // Show individual H2H records if any games were played
-    if (totalWins !== totalLosses) {
-      return { context, h2hRecords, usesPointsFor: false };
+    // Check aggregate H2H among all tied teams (including current team)
+    const allTiedTeams = [currentStanding, ...tiedTeams];
+    const aggregateH2H = checkAggregateH2H(allTiedTeams, matchupsByWeek, year);
+    const currentH2hWinPct = aggregateH2H.winPcts?.get(currentStanding.userId) ?? 0;
+
+    // Get the tied record (e.g., "6-6")
+    const tiedRecord = `${currentStanding.wins}-${currentStanding.losses}${currentStanding.ties ? `-${currentStanding.ties}` : ''}`;
+
+    // Build summary of all teams' H2H records for display
+    const allTeamsH2H: TeamH2HSummary[] = allTiedTeams
+      .map(team => {
+        const teamWinPct = aggregateH2H.winPcts?.get(team.userId) ?? 0;
+        const teamWins = aggregateH2H.records?.get(team.userId) ?? 0;
+
+        // Calculate losses from win percentage and wins
+        let teamLosses = 0;
+        if (teamWinPct < 1 && teamWins > 0) {
+          teamLosses = Math.round(teamWins / teamWinPct - teamWins);
+        } else if (teamWinPct === 0) {
+          // Count losses directly for 0% win rate
+          let losses = 0;
+          allTiedTeams.forEach(opponent => {
+            if (team.userId !== opponent.userId) {
+              const h2h = getHeadToHeadRecord(team.userId, opponent.userId, matchupsByWeek, year);
+              losses += h2h.team2Wins;
+            }
+          });
+          teamLosses = losses;
+        }
+
+        return {
+          teamName: getDisplayTeamName(team.userId, team.userInfo.teamName, year),
+          userId: team.userId,
+          h2hWinPct: teamWinPct,
+          h2hRecord: `${teamWins}-${teamLosses}`,
+          pointsFor: team.pointsFor,
+          isCurrentTeam: team.userId === currentStanding.userId
+        };
+      })
+      .sort((a, b) => {
+        // Sort by H2H win% desc, then points for desc
+        if (a.h2hWinPct !== b.h2hWinPct) return b.h2hWinPct - a.h2hWinPct;
+        return b.pointsFor - a.pointsFor;
+      });
+
+    if (aggregateH2H.isTied) {
+      // All teams have equal H2H win% against each other, use points for
+      return {
+        context,
+        h2hRecords,
+        allTeamsH2H,
+        tiedRecord,
+        h2hWinPct: currentH2hWinPct,
+        usesPointsFor: true,
+        pointsFor: currentStanding.pointsFor
+      };
+    } else {
+      // H2H distinguishes some teams, but check if current team is tied with anyone
+      // Check if any other team has the same H2H win% as current team
+      const teamsWithSameH2hWinPct = allTiedTeams.filter(team => {
+        const teamWinPct = aggregateH2H.winPcts?.get(team.userId) ?? 0;
+        return team.userId !== currentStanding.userId && teamWinPct === currentH2hWinPct;
+      });
+
+      if (teamsWithSameH2hWinPct.length > 0) {
+        // Current team is tied with at least one other team on H2H win%, use points for
+        return {
+          context,
+          h2hRecords,
+          allTeamsH2H,
+          tiedRecord,
+          h2hWinPct: currentH2hWinPct,
+          usesPointsFor: true,
+          pointsFor: currentStanding.pointsFor
+        };
+      } else {
+        // Current team's H2H win% is unique, don't use points for
+        return {
+          context,
+          h2hRecords,
+          allTeamsH2H,
+          tiedRecord,
+          h2hWinPct: currentH2hWinPct,
+          usesPointsFor: false
+        };
+      }
     }
-    // H2H is tied overall, so points for is the tiebreaker
-    return { context, h2hRecords, usesPointsFor: true, pointsFor: currentStanding.pointsFor };
   }
 
-  // No H2H games played, points for is the tiebreaker
+  // No H2H games played, use points for as tiebreaker
   return { context, h2hRecords: [], usesPointsFor: true, pointsFor: currentStanding.pointsFor };
 }
 
