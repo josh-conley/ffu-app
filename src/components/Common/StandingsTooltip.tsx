@@ -55,7 +55,7 @@ export const StandingsTooltip = ({ tiebreakerInfo, size = 'md' }: StandingsToolt
                 {layer.allTeamsH2H.map((team, idx) => (
                   <div
                     key={idx}
-                    className={`${fontSize} flex justify-between gap-3 ${team.isCurrentTeam ? 'font-bold text-yellow-300' : 'text-gray-200'}`}
+                    className={`${fontSize} flex justify-between gap-3 ${team.isCurrentTeam ? 'font-bold' : ''} text-gray-200`}
                   >
                     <span className="flex items-center gap-1 min-w-0">
                       <span className="truncate">{team.teamName}</span>
@@ -64,7 +64,7 @@ export const StandingsTooltip = ({ tiebreakerInfo, size = 'md' }: StandingsToolt
                       )}
                     </span>
                     <span className="whitespace-nowrap">
-                      {team.h2hRecord} ({(team.h2hWinPct * 100).toFixed(1)}%) • {team.pointsFor.toFixed(2)} PF
+                      {team.h2hRecord} ({(team.h2hWinPct * 100).toFixed(0)}%) • {team.pointsFor.toFixed(2)} PF
                     </span>
                   </div>
                 ))}
@@ -79,28 +79,15 @@ export const StandingsTooltip = ({ tiebreakerInfo, size = 'md' }: StandingsToolt
 
             {layer.hasBumpedThirdLeader && layer.context === 'division-leaders' && (
               <div className={`${fontSize} mt-2 pt-2 border-t border-gray-600 text-orange-300`}>
-                {tiebreakerInfo.layers.length === 1 ? (
-                  // Single layer case: current team is the bumped 3rd leader
-                  <>
-                    <div className="font-semibold mb-1">⭐ Division Winner</div>
-                    <div className="mb-2">This team won the division via H2H tiebreaker</div>
-                    <div className="font-semibold mb-1">Special Playoff Rule:</div>
-                    <div>As the 3rd division winner, this team receives the 6th seed at minimum</div>
-                  </>
-                ) : (
-                  // Two layer case: showing division tiebreaker for other teams in division
-                  <>
-                    <div className="font-semibold mb-1">⭐ Division Winner</div>
-                    <div>This team won the division via H2H tiebreaker</div>
-                  </>
-                )}
+                <div className="font-semibold mb-1">⭐ Division Winner</div>
+                <div>This team won the division via H2H tiebreaker</div>
               </div>
             )}
 
             {layer.hasBumpedThirdLeader && layer.context === 'wild-card' && (
               <div className={`${fontSize} mt-2 pt-2 border-t border-gray-600 text-orange-300`}>
-                <div className="font-semibold mb-1">Special Playoff Rule:</div>
-                <div>⭐ Team gets 6th seed as 3rd division winner, bypassing this cross-division tiebreaker</div>
+                <div className="font-semibold mb-1">⭐ Special Playoff Rule:</div>
+                <div>3rd division winner is guaranteed a playoff spot (top 6), but exact seed determined by tiebreakers</div>
               </div>
             )}
           </div>

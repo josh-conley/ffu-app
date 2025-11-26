@@ -543,8 +543,9 @@ export function getTiebreakerInfo(
     const bumpedThirdLeader = otherNonTop2Tied.find(s => s.isThirdDivisionLeaderBumped);
     const isCurrentTeamBumpedLeader = currentStanding.isThirdDivisionLeaderBumped;
 
-    // If current team IS the bumped 3rd leader, only show division tiebreaker
-    if (isCurrentTeamBumpedLeader) {
+    // If current team is in same division as a bumped 3rd leader (or is the bumped leader themselves)
+    if ((bumpedThirdLeader && currentStanding.division === bumpedThirdLeader.division) || isCurrentTeamBumpedLeader) {
+      // Layer 1: Show division-only tiebreaker to explain who won the division
       const divisionTeamsTied = otherNonTop2Tied.filter(s => s.division === currentStanding.division);
       if (divisionTeamsTied.length > 0) {
         const divisionLayer = buildTiebreakerLayer(
@@ -556,28 +557,10 @@ export function getTiebreakerInfo(
         );
         if (divisionLayer) layers.push(divisionLayer);
       }
-      // Don't show cross-division layer for the bumped leader
-      return layers.length > 0 ? { layers } : null;
-    }
-
-    // If current team is in same division as bumped 3rd leader, show division tiebreaker first
-    if (bumpedThirdLeader && currentStanding.division === bumpedThirdLeader.division) {
-      // Layer 1: Show division-only tiebreaker to explain who won the division
-      const divisionTeamsTied = otherNonTop2Tied.filter(s => s.division === currentStanding.division);
-      if (divisionTeamsTied.length > 0) {
-        const divisionLayer = buildTiebreakerLayer(
-          currentStanding,
-          divisionTeamsTied,
-          matchupsByWeek,
-          year,
-          'division-leaders' // Mark as division-specific
-        );
-        if (divisionLayer) layers.push(divisionLayer);
-      }
     }
 
     // Layer 2 (or only layer): Cross-division tiebreaker
-    // Always show all tied teams (including bumped 3rd leader if present)
+    // Show for everyone, including the bumped 3rd leader (they still compete in tiebreakers)
     if (otherNonTop2Tied.length > 0) {
       const layer = buildTiebreakerLayer(currentStanding, otherNonTop2Tied, matchupsByWeek, year, 'wild-card');
       if (layer) layers.push(layer);
