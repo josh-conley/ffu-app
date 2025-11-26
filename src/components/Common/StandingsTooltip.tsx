@@ -1,4 +1,5 @@
-import { Info, Star } from 'lucide-react';
+import { Info, Star, X } from 'lucide-react';
+import { useState } from 'react';
 import type { TiebreakerInfo } from '../../utils/ranking';
 
 interface StandingsTooltipProps {
@@ -7,12 +8,12 @@ interface StandingsTooltipProps {
 }
 
 /**
- * Displays a tooltip with standings information
+ * Displays a clickable popup with standings information
  * Shows head-to-head records and indicates whether Points For is being used as tiebreaker
  */
 export const StandingsTooltip = ({ tiebreakerInfo, size = 'md' }: StandingsTooltipProps) => {
+  const [isOpen, setIsOpen] = useState(false);
   const iconSize = size === 'sm' ? 'h-3.5 w-3.5' : 'h-4 w-4';
-  const tooltipWidth = size === 'sm' ? 'w-64' : 'w-72';
   const fontSize = size === 'sm' ? 'text-xs' : 'text-sm';
 
   // Get context label for a layer
@@ -38,10 +39,41 @@ export const StandingsTooltip = ({ tiebreakerInfo, size = 'md' }: StandingsToolt
   };
 
   return (
-    <div className="group relative inline-block">
-      <Info className={`${iconSize} text-gray-600 dark:text-gray-300 cursor-help`} />
-      <div className={`invisible group-hover:visible absolute z-[9999] ${tooltipWidth} px-3 py-2 ${fontSize} text-white bg-gray-900/75 dark:bg-gray-800/75 rounded-lg shadow-xl whitespace-normal pointer-events-none left-full ml-2 top-1/2 -translate-y-1/2 backdrop-blur-sm`}>
-        <div className="font-bold mb-2 pb-2 border-b border-gray-700">Tiebreakers</div>
+    <>
+      {/* Clickable Info Icon */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="inline-flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full p-0.5 transition-colors"
+        aria-label="Show tiebreaker information"
+      >
+        <Info className={`${iconSize} text-gray-600 dark:text-gray-300 cursor-pointer`} />
+      </button>
+
+      {/* Modal Overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-[9998] flex items-center justify-center p-4"
+          onClick={() => setIsOpen(false)}
+        >
+          {/* Modal Content */}
+          <div
+            className="bg-gray-900 dark:bg-gray-800 rounded-lg shadow-2xl max-w-md w-full max-h-[80vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="sticky top-0 bg-gray-900 dark:bg-gray-800 px-4 py-3 border-b border-gray-700 flex items-center justify-between">
+              <div className="font-bold text-white">Tiebreakers</div>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="text-gray-400 hover:text-white transition-colors"
+                aria-label="Close"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="px-4 py-3 text-white">
 
         {tiebreakerInfo.layers.map((layer, layerIdx) => (
           <div key={layerIdx} className={layerIdx > 0 ? 'mt-3 pt-3 border-t border-gray-600' : ''}>
@@ -92,10 +124,10 @@ export const StandingsTooltip = ({ tiebreakerInfo, size = 'md' }: StandingsToolt
             )}
           </div>
         ))}
-
-        {/* Tooltip arrow */}
-        <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-gray-900/75 dark:bg-gray-800/75 transform rotate-45"></div>
-      </div>
-    </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
