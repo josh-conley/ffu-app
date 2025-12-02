@@ -20,17 +20,17 @@ export const StandingsTooltip = ({ tiebreakerInfo, size = 'md' }: StandingsToolt
   const getContextLabel = (layer: any, layerIdx: number, totalLayers: number) => {
     // If this is a division layer with bumped leader AND there are 2 layers, show step 1
     if (layer.context === 'division-leaders' && layer.hasBumpedThirdLeader && totalLayers === 2) {
-      return 'Step 1: Division Tiebreaker';
+      return 'Division Leaders';
     }
 
     // If this is the second layer after a division layer, show step 2
     if (layerIdx === 1 && totalLayers === 2) {
-      return 'Step 2: Cross-Division Ranking';
+      return 'Cross-Division Ranking';
     }
 
     switch (layer.context) {
       case 'division-leaders':
-        return 'Top 2 Seeds';
+        return 'Division Leaders';
       case 'wild-card':
         return 'Seeds 3-12';
       default:
@@ -89,7 +89,8 @@ export const StandingsTooltip = ({ tiebreakerInfo, size = 'md' }: StandingsToolt
                     key={idx}
                     className={`${fontSize} flex justify-between gap-3 ${team.isCurrentTeam ? 'font-bold' : ''} text-gray-200`}
                   >
-                    <span className="flex items-center gap-1 min-w-0">
+                    <span className="flex items-center gap-1.5 min-w-0">
+                      <span className="text-gray-400 font-semibold flex-shrink-0">#{team.rank}</span>
                       <span className="truncate">{team.teamName}</span>
                       {team.isBumpedThirdLeader && (
                         <Star className="h-3 w-3 text-gray-400 flex-shrink-0" fill="currentColor" />
