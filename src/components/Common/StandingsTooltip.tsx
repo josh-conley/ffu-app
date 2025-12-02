@@ -30,7 +30,7 @@ export const StandingsTooltip = ({ tiebreakerInfo, size = 'md' }: StandingsToolt
 
     switch (layer.context) {
       case 'division-leaders':
-        return 'Division Tiebreaker';
+        return 'Top 2 Seeds';
       case 'wild-card':
         return 'Seeds 3-12';
       default:

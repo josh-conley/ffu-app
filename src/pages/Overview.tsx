@@ -155,13 +155,13 @@ export const Overview = () => {
                   <div className="mt-6 pt-6 border-t border-white/20">
                     <Link
                       to="/playoff-machine"
-                      className="block bg-blue-500/20 hover:bg-blue-500/30 angular-cut p-4 transition-colors group border border-blue-400/30"
+                      className="block bg-white/10 hover:bg-white/20 p-4 transition-colors group"
                     >
                       <div className="flex items-center justify-center gap-3">
-                        <Calculator className="h-5 w-5 text-blue-200" />
+                        <Calculator className="h-5 w-5 text-white" />
                         <div>
                           <div className="font-bold text-base">Playoff Machine</div>
-                          <div className="text-sm text-blue-100 group-hover:text-white transition-colors">
+                          <div className="text-sm text-red-100 group-hover:text-white transition-colors">
                             Simulate remaining matchups and predict playoff scenarios
                           </div>
                         </div>
