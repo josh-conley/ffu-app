@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useUrlParams } from '../hooks/useUrlParams';
 import { useAllStandings, useLeagueStandings } from '../hooks/useLeagues';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
@@ -8,7 +7,7 @@ import { StandingsTable } from '../components/League/StandingsTable';
 import { TeamLogo } from '../components/Common/TeamLogo';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../config/constants';
 import { getLeagueName } from '../constants/leagues';
-import { ChevronDown, Crown, Star, Calculator } from 'lucide-react';
+import { ChevronDown, Crown, Star } from 'lucide-react';
 import type { LeagueTier } from '../types';
 import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
 import { calculateRankings, getTiebreakerInfo, identifyDivisionLeaders, getDivisionName } from '../utils/ranking';
@@ -48,7 +47,6 @@ const StandingsTableWithMatchups = ({ leagueData, league, year }: { leagueData: 
 };
 
 export const Standings = () => {
-  const navigate = useNavigate();
   const { getParam, updateParams } = useUrlParams();
   const { data: standings, isLoading, error } = useAllStandings();
   const [selectedYear, setSelectedYear] = useState<string>('');
@@ -136,8 +134,8 @@ export const Standings = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          {/* Playoff Machine Button - only show for current season */}
-          {isActiveSeason && (
+          {/* Playoff Machine Button - Hidden */}
+          {/* {isActiveSeason && (
             <button
               onClick={() => navigate('/playoff-machine')}
               className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded transition-colors"
@@ -145,7 +143,7 @@ export const Standings = () => {
               <Calculator className="h-4 w-4" />
               <span className="hidden sm:inline">Playoff Machine</span>
             </button>
-          )}
+          )} */}
 
           {/* Year Selector */}
           <div className="relative">

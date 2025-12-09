@@ -1,12 +1,15 @@
+import { useState, useMemo } from 'react';
 import type { EnhancedSeasonStandings, LeagueTier } from '../../types';
 import { TeamLogo } from '../Common/TeamLogo';
-import { Trophy, Medal, Award, Star } from 'lucide-react';
+import { Trophy, Medal, Award, Star, LayoutGrid, List, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 import { getLeagueName } from '../../constants/leagues';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../../config/constants';
 import { useTeamProfileModal } from '../../contexts/TeamProfileModalContext';
 import { calculateRankings, getTiebreakerInfo, groupStandingsByDivision, identifyDivisionLeaders } from '../../utils/ranking';
 import { StandingsTooltip } from '../Common/StandingsTooltip';
 
+type SortField = 'rank' | 'team' | 'wins' | 'pointsFor' | 'pointsAgainst' | 'highGame' | 'lowGame' | 'upr';
+type SortDirection = 'asc' | 'desc';
 
 interface StandingsTableProps {
   standings: EnhancedSeasonStandings[];
@@ -19,15 +22,96 @@ interface StandingsTableProps {
 export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisionNames }: StandingsTableProps) => {
   const isActiveSeason = isActiveYear(year);
   const { openTeamProfile } = useTeamProfileModal();
+  const [viewMode, setViewMode] = useState<'all' | 'divisions'>('divisions');
+  const [sortField, setSortField] = useState<SortField>('rank');
+  const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
 
   // Only calculate rankings for active seasons, use original for historical
   const rankedStandings = isActiveSeason ? calculateRankings(standings, matchupsByWeek, year) : standings;
 
   // Group by divisions if division data exists (Sleeper era only, 2021+)
   const divisionGroups = groupStandingsByDivision(rankedStandings, divisionNames);
+  const hasDivisions = divisionGroups !== null;
 
   // Identify division leaders for star icons (only for active season)
   const divisionLeaderInfo = isActiveSeason ? identifyDivisionLeaders(rankedStandings, matchupsByWeek, year) : null;
+
+  // Determine which view to show based on toggle
+  const shouldShowDivisions = hasDivisions && viewMode === 'divisions';
+
+  // Handle column sorting
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      // Toggle direction if clicking same field
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    } else {
+      // Set new field with appropriate default direction
+      setSortField(field);
+      // Most fields should default to descending (higher is better), except rank
+      setSortDirection(field === 'rank' || field === 'lowGame' ? 'asc' : 'desc');
+    }
+  };
+
+  // Sort standings when in "all teams" view
+  const sortedStandings = useMemo(() => {
+    if (viewMode === 'divisions') {
+      return rankedStandings; // Don't sort in division view
+    }
+
+    const sorted = [...rankedStandings].sort((a, b) => {
+      let aVal: number | string = 0;
+      let bVal: number | string = 0;
+
+      switch (sortField) {
+        case 'rank':
+          aVal = a.rank;
+          bVal = b.rank;
+          break;
+        case 'team':
+          aVal = getDisplayTeamName(a.userId, a.userInfo.teamName, year);
+          bVal = getDisplayTeamName(b.userId, b.userInfo.teamName, year);
+          break;
+        case 'wins':
+          aVal = a.wins;
+          bVal = b.wins;
+          break;
+        case 'pointsFor':
+          aVal = a.pointsFor || 0;
+          bVal = b.pointsFor || 0;
+          break;
+        case 'pointsAgainst':
+          aVal = a.pointsAgainst || 0;
+          bVal = b.pointsAgainst || 0;
+          break;
+        case 'highGame':
+          aVal = a.highGame || 0;
+          bVal = b.highGame || 0;
+          break;
+        case 'lowGame':
+          aVal = a.lowGame || 0;
+          bVal = b.lowGame || 0;
+          break;
+        case 'upr':
+          aVal = a.unionPowerRating || 0;
+          bVal = b.unionPowerRating || 0;
+          break;
+      }
+
+      // Handle string vs number comparison
+      if (typeof aVal === 'string' && typeof bVal === 'string') {
+        return sortDirection === 'asc'
+          ? aVal.localeCompare(bVal)
+          : bVal.localeCompare(aVal);
+      }
+
+      return sortDirection === 'asc' ? (aVal as number) - (bVal as number) : (bVal as number) - (aVal as number);
+    });
+
+    return sorted;
+  }, [rankedStandings, sortField, sortDirection, viewMode, year]);
+
+  // Get the standings to display based on view mode
+  const displayStandings = viewMode === 'all' ? sortedStandings : rankedStandings;
 
   const getLeagueColors = (leagueType: string) => {
     const colorMap = {
@@ -94,6 +178,18 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
     if (standing.rank === 2) return <Medal className="h-4 w-4 text-gray-600 dark:text-gray-300" />;
     if (standing.rank === 3) return <Award className="h-4 w-4 text-amber-600 dark:text-amber-400" />;
     return null;
+  };
+
+  // Helper to render sort icon
+  const getSortIcon = (field: SortField) => {
+    if (viewMode === 'divisions') return null; // Don't show sort icons in division view
+
+    if (sortField === field) {
+      return sortDirection === 'asc'
+        ? <ArrowUp className="h-3 w-3 inline-block ml-1" />
+        : <ArrowDown className="h-3 w-3 inline-block ml-1" />;
+    }
+    return <ArrowUpDown className="h-3 w-3 inline-block ml-1 opacity-0 group-hover:opacity-50" />;
   };
 
   // Helper function to render table rows for standings
@@ -219,15 +315,46 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
         </div>
       )}
 
-      <div className="mb-6 relative pb-3">
-        <h3 className={`text-xl font-black tracking-wide uppercase ${leagueColors.text}`}>
-          {getLeagueName(league as LeagueTier)} League
-        </h3>
-        <div className={`absolute bottom-0 left-0 right-0 h-0.5 ${leagueColors.iconBg}`}></div>
+      {/* Header with toggle */}
+      <div className="mb-6">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className={`text-xl font-black tracking-wide uppercase ${leagueColors.text}`}>
+            {getLeagueName(league as LeagueTier)} League
+          </h3>
+
+          {/* Toggle button - only show if divisions exist */}
+          {hasDivisions && (
+            <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 rounded p-1">
+              <button
+                onClick={() => setViewMode('all')}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded transition-colors ${
+                  viewMode === 'all'
+                    ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
+                }`}
+              >
+                <List className="h-3.5 w-3.5" />
+                All Teams
+              </button>
+              <button
+                onClick={() => setViewMode('divisions')}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded transition-colors ${
+                  viewMode === 'divisions'
+                    ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
+                }`}
+              >
+                <LayoutGrid className="h-3.5 w-3.5" />
+                By Division
+              </button>
+            </div>
+          )}
+        </div>
+        <div className={`h-0.5 ${leagueColors.iconBg}`}></div>
       </div>
-      
-      {/* Display divisions if available, otherwise single table */}
-      {divisionGroups ? (
+
+      {/* Display divisions if toggle is set to divisions, otherwise single table */}
+      {shouldShowDivisions ? (
         // Multiple divisions - show separate tables
         <div className="space-y-6">
           {divisionGroups.map((divisionGroup) => (
@@ -265,24 +392,64 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
           ))}
         </div>
       ) : (
-        // No divisions - single table
+        // No divisions - single table with sortable columns
         <div className="overflow-x-auto -mx-4 sm:mx-0" style={{ overflowY: 'visible', height: 'auto', touchAction: 'pan-x' }}>
           <div className="inline-block min-w-full align-middle px-4 sm:px-0">
             <table className="table min-w-full">
               <thead className={`table-header ${leagueColors.iconBg} border-0`}>
                 <tr>
-                  <th className="text-left text-white font-bold pl-2 sm:pl-4 text-xs sm:text-sm">Rank</th>
-                  <th className="text-white font-bold text-xs sm:text-sm">Team</th>
-                  <th className="text-center text-white font-bold text-xs sm:text-sm">Record</th>
-                  <th className="text-center text-white font-bold text-xs sm:text-sm">PF</th>
-                  <th className="text-center text-white font-bold text-xs sm:text-sm">PA</th>
-                  <th className="text-center text-white font-bold hidden lg:table-cell text-xs sm:text-sm">High</th>
-                  <th className="text-center text-white font-bold hidden lg:table-cell text-xs sm:text-sm">Low</th>
-                  <th className="text-center text-white font-bold text-xs sm:text-sm">UPR</th>
+                  <th
+                    className="text-left text-white font-bold pl-2 sm:pl-4 text-xs sm:text-sm cursor-pointer hover:bg-white/10 transition-colors group"
+                    onClick={() => handleSort('rank')}
+                  >
+                    Rank{getSortIcon('rank')}
+                  </th>
+                  <th
+                    className="text-white font-bold text-xs sm:text-sm cursor-pointer hover:bg-white/10 transition-colors group"
+                    onClick={() => handleSort('team')}
+                  >
+                    Team{getSortIcon('team')}
+                  </th>
+                  <th
+                    className="text-center text-white font-bold text-xs sm:text-sm cursor-pointer hover:bg-white/10 transition-colors group"
+                    onClick={() => handleSort('wins')}
+                  >
+                    Record{getSortIcon('wins')}
+                  </th>
+                  <th
+                    className="text-center text-white font-bold text-xs sm:text-sm cursor-pointer hover:bg-white/10 transition-colors group"
+                    onClick={() => handleSort('pointsFor')}
+                  >
+                    PF{getSortIcon('pointsFor')}
+                  </th>
+                  <th
+                    className="text-center text-white font-bold text-xs sm:text-sm cursor-pointer hover:bg-white/10 transition-colors group"
+                    onClick={() => handleSort('pointsAgainst')}
+                  >
+                    PA{getSortIcon('pointsAgainst')}
+                  </th>
+                  <th
+                    className="text-center text-white font-bold hidden lg:table-cell text-xs sm:text-sm cursor-pointer hover:bg-white/10 transition-colors group"
+                    onClick={() => handleSort('highGame')}
+                  >
+                    High{getSortIcon('highGame')}
+                  </th>
+                  <th
+                    className="text-center text-white font-bold hidden lg:table-cell text-xs sm:text-sm cursor-pointer hover:bg-white/10 transition-colors group"
+                    onClick={() => handleSort('lowGame')}
+                  >
+                    Low{getSortIcon('lowGame')}
+                  </th>
+                  <th
+                    className="text-center text-white font-bold text-xs sm:text-sm cursor-pointer hover:bg-white/10 transition-colors group"
+                    onClick={() => handleSort('upr')}
+                  >
+                    UPR{getSortIcon('upr')}
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                {renderStandingsRows(rankedStandings)}
+                {renderStandingsRows(displayStandings)}
               </tbody>
             </table>
           </div>

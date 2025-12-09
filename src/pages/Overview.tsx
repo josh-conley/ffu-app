@@ -1,9 +1,9 @@
-import { Users, BarChart3, Award, TrendingUp, Crown, Calculator } from 'lucide-react';
+import { Users, BarChart3, Award, TrendingUp, Crown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useAllStandings } from '../hooks/useLeagues';
 import { TeamLogo } from '../components/Common/TeamLogo';
-import { ActiveWeekMatchups } from '../components/Overview/ActiveWeekMatchups';
+import { PlayoffSeeding } from '../components/Overview/PlayoffSeeding';
 import { PlayerTickerSidebar } from '../components/Common/PlayerTickerSidebar';
 import { ActiveWeekUPR } from '../components/Common/ActiveWeekUPR';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../config/constants';
@@ -151,8 +151,8 @@ export const Overview = () => {
                     </Link>
                   </div>
 
-                  {/* Playoff Machine Section */}
-                  <div className="mt-6 pt-6 border-t border-white/20">
+                  {/* Playoff Machine Section - Hidden */}
+                  {/* <div className="mt-6 pt-6 border-t border-white/20">
                     <Link
                       to="/playoff-machine"
                       className="block bg-white/10 hover:bg-white/20 p-4 transition-colors group"
@@ -167,11 +167,11 @@ export const Overview = () => {
                         </div>
                       </div>
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
-            <ActiveWeekMatchups />
+            <PlayoffSeeding />
 
             {/* Temporary UPR Test - should show in main content */}
             <div className="2xl:hidden">
