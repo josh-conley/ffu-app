@@ -196,14 +196,14 @@ export const PlayoffSeeding = () => {
                     );
                   })}
 
-                  {/* Wild Card Round Divider */}
+                  {/* Quarterfinals Divider */}
                   <div className="relative py-2">
                     <div className="absolute inset-0 flex items-center">
                       <div className="w-full border-t-2 border-gray-400 dark:border-gray-500"></div>
                     </div>
                     <div className="relative flex justify-center">
                       <span className="bg-gray-50 dark:bg-gray-900 px-3 text-xs font-medium text-gray-600 dark:text-gray-400">
-                        Wild Card Round
+                        Quarterfinals
                       </span>
                     </div>
                   </div>
