@@ -430,7 +430,7 @@ export const PlayoffMatchupList = () => {
               Playoff Brackets
             </h1>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              Weeks 15-17 • Click any matchup to view rosters
+              Weeks 15-17 • Unofficial matchups (waiting on Sleeper updates)
             </p>
           </div>
         </div>
