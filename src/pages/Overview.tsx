@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useAllStandings } from '../hooks/useLeagues';
 import { TeamLogo } from '../components/Common/TeamLogo';
-import { PlayoffSeeding } from '../components/Overview/PlayoffSeeding';
-import { PlayoffBrackets } from '../components/Overview/PlayoffBrackets';
+import { PlayoffMatchupList } from '../components/Overview/PlayoffMatchupList';
 import { PlayerTickerSidebar } from '../components/Common/PlayerTickerSidebar';
 import { ActiveWeekUPR } from '../components/Common/ActiveWeekUPR';
 import { getDisplayTeamName, getCurrentTeamName, getCurrentAbbreviation, isActiveYear } from '../config/constants';
@@ -172,8 +171,7 @@ export const Overview = () => {
                 </div>
               </div>
             </div>
-            <PlayoffSeeding />
-            {import.meta.env.VITE_SHOW_PLAYOFF_BRACKETS === 'true' && <PlayoffBrackets />}
+            {import.meta.env.VITE_SHOW_PLAYOFF_BRACKETS === 'true' && <PlayoffMatchupList />}
 
             {/* Temporary UPR Test - should show in main content */}
             <div className="2xl:hidden">

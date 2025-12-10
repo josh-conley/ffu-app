@@ -3,6 +3,7 @@ import { Trophy, Award } from 'lucide-react';
 import { TeamLogo } from '../Common/TeamLogo';
 import { LoadingSpinner } from '../Common/LoadingSpinner';
 import { RosterModal } from '../Common/RosterModal';
+import { PlayoffBracket } from './PlayoffBracket';
 import { SleeperService } from '../../services/sleeper.service';
 import { getLeagueId, getUserInfoBySleeperId, getCurrentTeamName, getCurrentAbbreviation } from '../../config/constants';
 import { getLeagueName } from '../../constants/leagues';
@@ -58,8 +59,9 @@ interface LeagueBrackets {
 const PLAYOFF_WEEKS = [15, 16, 17];
 const CURRENT_YEAR = '2025';
 
-export const PlayoffBrackets = () => {
+export const PlayoffMatchupList = () => {
   const { data: allStandings } = useAllStandings();
+  const [selectedLeague, setSelectedLeague] = useState<LeagueTier>('PREMIER');
   const [bracketsData, setBracketsData] = useState<LeagueBrackets[]>([
     { league: 'PREMIER', playoffMatchups: [], consolationMatchups: [], playoffByeTeams: [], consolationByeTeams: [], isLoading: true },
     { league: 'MASTERS', playoffMatchups: [], consolationMatchups: [], playoffByeTeams: [], consolationByeTeams: [], isLoading: true },
@@ -432,18 +434,66 @@ export const PlayoffBrackets = () => {
             </p>
           </div>
         </div>
+
+        {/* League Tabs */}
+        <div className="flex gap-2 border-b border-gray-200 dark:border-gray-700">
+          {(['PREMIER', 'MASTERS', 'NATIONAL'] as LeagueTier[]).map((league) => {
+            const colors = colorMap[league];
+            const isActive = selectedLeague === league;
+            return (
+              <button
+                key={league}
+                onClick={() => setSelectedLeague(league)}
+                className={`px-4 py-2 font-semibold text-sm transition-colors relative ${
+                  isActive
+                    ? `${colors.text} border-b-2 ${colors.border}`
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                }`}
+              >
+                {getLeagueName(league)}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
-        {bracketsData.map((leagueData) => {
+      {/* Show only selected league */}
+      {bracketsData
+        .filter((leagueData) => leagueData.league === selectedLeague)
+        .map((leagueData) => {
           const colors = colorMap[leagueData.league];
-          const week15Matchups = leagueData.playoffMatchups.filter(m => m.week === 15);
-          const week15ConsolationMatchups = leagueData.consolationMatchups.filter(m => m.week === 15);
+
+          // Group matchups by week for bracket display
+          const playoffByWeek = {
+            15: leagueData.playoffMatchups.filter(m => m.week === 15),
+            16: leagueData.playoffMatchups.filter(m => m.week === 16),
+            17: leagueData.playoffMatchups.filter(m => m.week === 17)
+          };
+
+          const consolationByWeek = {
+            15: leagueData.consolationMatchups.filter(m => m.week === 15),
+            16: leagueData.consolationMatchups.filter(m => m.week === 16),
+            17: leagueData.consolationMatchups.filter(m => m.week === 17)
+          };
 
           return (
-            <div key={leagueData.league} className="space-y-4">
+            <div key={leagueData.league} className="py-4">
+              {/* Desktop: Bracket View */}
+              <div className="hidden md:block">
+                <PlayoffBracket
+                  league={leagueData.league}
+                  playoffByeTeams={leagueData.playoffByeTeams}
+                  consolationByeTeams={leagueData.consolationByeTeams}
+                  playoffMatchups={leagueData.playoffMatchups}
+                  consolationMatchups={leagueData.consolationMatchups}
+                  onMatchupClick={(matchup) => openMatchupRosterModal(matchup, leagueData.league)}
+                />
+              </div>
+
+              {/* Mobile: List View */}
+              <div className="md:hidden space-y-4">
               {/* Playoff Bracket */}
-              <div className={`champion-highlight py-4 px-3 relative overflow-hidden border-l-4 ${colors.highlight}`}>
+              <div className={`champion-highlight py-4 px-4 relative overflow-hidden border-l-4 ${colors.highlight}`}>
                 <div className="mb-3">
                   <div className="flex items-center gap-2 mb-2">
                     <Trophy className={`h-5 w-5 ${colors.text}`} />
@@ -470,37 +520,51 @@ export const PlayoffBrackets = () => {
 
                 {!leagueData.isLoading && !leagueData.error && (
                   <div className="space-y-3">
-                    {/* First Round Byes */}
+                    {/* Byes */}
                     <div className="text-center py-2 border-b border-gray-300 dark:border-gray-600">
-                      <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">
-                        First Round Bye
-                      </span>
+                      <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">First Round Bye</span>
                     </div>
                     <div className="space-y-2">
                       {leagueData.playoffByeTeams.map(byeTeam => renderByeTeam(byeTeam, leagueData.league))}
                     </div>
 
-                    {/* Quarterfinals (Week 15) */}
+                    {/* Week 15 */}
                     <div className="text-center py-2 border-b border-gray-300 dark:border-gray-600 mt-3">
-                      <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">
-                        Quarterfinals • Week 15
-                      </span>
+                      <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Quarterfinals • Week 15</span>
                     </div>
                     <div className="space-y-2">
-                      {week15Matchups.length > 0 ? (
-                        week15Matchups.map(matchup => renderMatchup(matchup, leagueData.league))
-                      ) : (
-                        <div className="text-center py-3 text-xs text-gray-500 dark:text-gray-400">
-                          No matchups available
-                        </div>
-                      )}
+                      {playoffByWeek[15].map(matchup => renderMatchup(matchup, leagueData.league))}
                     </div>
+
+                    {/* Week 16 */}
+                    {playoffByWeek[16].length > 0 && (
+                      <>
+                        <div className="text-center py-2 border-b border-gray-300 dark:border-gray-600 mt-3">
+                          <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Semifinals • Week 16</span>
+                        </div>
+                        <div className="space-y-2">
+                          {playoffByWeek[16].map(matchup => renderMatchup(matchup, leagueData.league))}
+                        </div>
+                      </>
+                    )}
+
+                    {/* Week 17 */}
+                    {playoffByWeek[17].length > 0 && (
+                      <>
+                        <div className="text-center py-2 border-b border-gray-300 dark:border-gray-600 mt-3">
+                          <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Championship • Week 17</span>
+                        </div>
+                        <div className="space-y-2">
+                          {playoffByWeek[17].map(matchup => renderMatchup(matchup, leagueData.league))}
+                        </div>
+                      </>
+                    )}
                   </div>
                 )}
               </div>
 
               {/* Consolation Bracket */}
-              <div className={`champion-highlight py-4 px-3 relative overflow-hidden border-l-4 ${colors.highlight}`}>
+              <div className={`champion-highlight py-4 px-4 relative overflow-hidden border-l-4 ${colors.highlight}`}>
                 <div className="mb-3">
                   <div className="flex items-center gap-2 mb-2">
                     <Award className={`h-5 w-5 ${colors.text}`} />
@@ -522,38 +586,52 @@ export const PlayoffBrackets = () => {
 
                 {!leagueData.isLoading && !leagueData.error && (
                   <div className="space-y-3">
-                    {/* First Round Byes (seeds 11-12) */}
+                    {/* Byes */}
                     <div className="text-center py-2 border-b border-gray-300 dark:border-gray-600">
-                      <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">
-                        First Round Bye (Seeds 11-12)
-                      </span>
+                      <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">First Round Bye (Seeds 11-12)</span>
                     </div>
                     <div className="space-y-2">
                       {leagueData.consolationByeTeams.map(byeTeam => renderByeTeam(byeTeam, leagueData.league))}
                     </div>
 
-                    {/* Round 1 (Week 15) - 9 vs 10 */}
+                    {/* Week 15 */}
                     <div className="text-center py-2 border-b border-gray-300 dark:border-gray-600 mt-3">
-                      <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">
-                        Round 1 • Week 15
-                      </span>
+                      <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Round 1 • Week 15</span>
                     </div>
                     <div className="space-y-2">
-                      {week15ConsolationMatchups.length > 0 ? (
-                        week15ConsolationMatchups.map(matchup => renderMatchup(matchup, leagueData.league))
-                      ) : (
-                        <div className="text-center py-3 text-xs text-gray-500 dark:text-gray-400">
-                          No matchups available
-                        </div>
-                      )}
+                      {consolationByWeek[15].map(matchup => renderMatchup(matchup, leagueData.league))}
                     </div>
+
+                    {/* Week 16 */}
+                    {consolationByWeek[16].length > 0 && (
+                      <>
+                        <div className="text-center py-2 border-b border-gray-300 dark:border-gray-600 mt-3">
+                          <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Round 2 • Week 16</span>
+                        </div>
+                        <div className="space-y-2">
+                          {consolationByWeek[16].map(matchup => renderMatchup(matchup, leagueData.league))}
+                        </div>
+                      </>
+                    )}
+
+                    {/* Week 17 */}
+                    {consolationByWeek[17].length > 0 && (
+                      <>
+                        <div className="text-center py-2 border-b border-gray-300 dark:border-gray-600 mt-3">
+                          <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Finals • Week 17</span>
+                        </div>
+                        <div className="space-y-2">
+                          {consolationByWeek[17].map(matchup => renderMatchup(matchup, leagueData.league))}
+                        </div>
+                      </>
+                    )}
                   </div>
                 )}
+              </div>
               </div>
             </div>
           );
         })}
-      </div>
 
       {/* Roster Modal */}
       <RosterModal
