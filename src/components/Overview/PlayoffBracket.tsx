@@ -339,7 +339,7 @@ export const PlayoffBracket = ({
               {/* 8th Place Game */}
               <div className="mt-8">
                 <div className="text-center mb-2">
-                  <span className="text-[10px] font-semibold text-gray-500 dark:text-gray-400">8th Place</span>
+                  <span className="text-[10px] font-semibold text-gray-500 dark:text-gray-400">8th Place (to loser)</span>
                 </div>
                 <div>
                   {consolationByWeek[16][2] ? renderMatchup(consolationByWeek[16][2]) : renderEmptyMatchup()}
@@ -363,7 +363,7 @@ export const PlayoffBracket = ({
               {/* 10th Place Game - aligned with 8th place */}
               <div style={{ marginTop: '78px' }}>
                 <div className="text-center mb-2">
-                  <span className="text-[10px] font-semibold text-gray-500 dark:text-gray-400">10th Place</span>
+                  <span className="text-[10px] font-semibold text-gray-500 dark:text-gray-400">10th Place (to loser)</span>
                 </div>
                 <div>
                   {consolationByWeek[17][1] ? renderMatchup(consolationByWeek[17][1]) : renderEmptyMatchup()}
