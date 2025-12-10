@@ -44,7 +44,8 @@
       "Bash(do echo \"=== $year ===\")",
       "Bash(xargs:*)",
       "Bash(done)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(git rm:*)"
     ],
     "deny": []
   },

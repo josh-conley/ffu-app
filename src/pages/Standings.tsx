@@ -281,7 +281,7 @@ export const Standings = () => {
                                 <Star className="w-3 h-3 text-amber-600 fill-amber-600" />
                               )}
                             </div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1 flex-wrap">
+                            <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1 flex-wrap min-h-[20px]">
                               <span>
                                 {standing.wins}-{standing.losses}{standing.ties ? `-${standing.ties}` : ''}
                                 {!isActiveSeason && standing.rank === 1 && (
@@ -297,9 +297,11 @@ export const Standings = () => {
                                   </span>
                                 </>
                               )}
-                              {tiebreakerInfo && (
-                                <StandingsTooltip tiebreakerInfo={tiebreakerInfo} size="sm" />
-                              )}
+                              <span className="inline-flex items-center" style={{ minWidth: tiebreakerInfo ? 'auto' : '20px', minHeight: '20px' }}>
+                                {tiebreakerInfo && (
+                                  <StandingsTooltip tiebreakerInfo={tiebreakerInfo} size="sm" />
+                                )}
+                              </span>
                             </div>
                           </div>
                         </div>

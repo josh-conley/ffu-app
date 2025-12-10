@@ -200,7 +200,7 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
       return (
         <tr key={standing.userId} className={getRowClasses(standing.rank)}>
           <td className="text-left pl-2 sm:pl-4">
-            <div className="flex items-center space-x-1">
+            <div className="flex items-center space-x-1 min-h-[28px]">
               {!isActiveSeason && getRankIcon(standing)}
               {isActiveSeason && (
                 <>
@@ -223,9 +223,11 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
                   #{standing.rank}
                 </span>
               )}
-              {tiebreakerInfo && (
-                <StandingsTooltip tiebreakerInfo={tiebreakerInfo} size="md" />
-              )}
+              <span className="inline-flex items-center" style={{ minWidth: tiebreakerInfo ? 'auto' : '24px', minHeight: '24px' }}>
+                {tiebreakerInfo && (
+                  <StandingsTooltip tiebreakerInfo={tiebreakerInfo} size="md" />
+                )}
+              </span>
             </div>
           </td>
         <td>
