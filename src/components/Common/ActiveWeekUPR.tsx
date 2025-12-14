@@ -30,17 +30,23 @@ export const ActiveWeekUPR = () => {
 
   const currentNFLWeek = getCurrentNFLWeek();
 
-  // UPR should show the current week if its games are complete (Tue/Wed), otherwise show previous week
+  // UPR is a regular season stat (weeks 1-14), so cap at week 14
+  // Show the current week if its games are complete (Tue/Wed), otherwise show previous week
   const completedWeek = useMemo(() => {
     if (!currentNFLWeek) return null;
 
+    let week: number;
+
     // Check if current week's games are complete (it's Tuesday or later)
     if (isNFLWeekComplete(currentNFLWeek)) {
-      return currentNFLWeek;
+      week = currentNFLWeek;
+    } else {
+      // Games not complete yet, show previous week
+      week = currentNFLWeek - 1;
     }
 
-    // Games not complete yet, show previous week
-    return currentNFLWeek - 1;
+    // Cap at week 14 (end of regular season)
+    return Math.min(week, 14);
   }, [currentNFLWeek]);
 
   const uprData = useMemo(() => {
@@ -219,7 +225,10 @@ export const ActiveWeekUPR = () => {
           </h3>
         </div>
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-          Through Week {completedWeek}
+          {completedWeek === 14 && currentNFLWeek && currentNFLWeek > 14
+            ? 'Regular Season'
+            : `Through Week ${completedWeek}`
+          }
         </p>
       </div>
 

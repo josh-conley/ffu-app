@@ -11,6 +11,7 @@ import { useAllStandings } from '../../hooks/useLeagues';
 import { calculateRankings } from '../../utils/ranking';
 import type { LeagueTier } from '../../types';
 import { useTeamProfileModal } from '../../contexts/TeamProfileModalContext';
+import { shouldShowMatchupColors } from '../../utils/nfl-schedule';
 
 interface BracketMatch {
   r: number; // round
@@ -357,6 +358,7 @@ export const PlayoffMatchupList = () => {
     const hasScores = matchup.team1Score > 0 || matchup.team2Score > 0;
     const isTeam1Winner = matchup.team1Score > matchup.team2Score;
     const isTie = matchup.team1Score === matchup.team2Score;
+    const showColors = shouldShowMatchupColors(CURRENT_YEAR, matchup.week);
 
     return (
       <div
@@ -373,7 +375,7 @@ export const PlayoffMatchupList = () => {
         )}
         <div className="space-y-1">
           {/* Team 1 */}
-          <div className={`flex items-center justify-between ${hasScores && isTeam1Winner && !isTie ? 'bg-green-50 dark:bg-green-900/20 rounded-full' : ''}`}>
+          <div className={`flex items-center justify-between ${showColors && hasScores && isTeam1Winner && !isTie ? 'bg-green-50 dark:bg-green-900/20 rounded-full' : ''}`}>
             <div className="flex items-center space-x-1.5 min-w-0 flex-1">
               <TeamLogo
                 teamName={matchup.team1Name}
@@ -383,7 +385,7 @@ export const PlayoffMatchupList = () => {
                 onClick={() => openTeamProfile(matchup.team1UserId, matchup.team1Name)}
               />
               <div className="min-w-0 flex-1">
-                <div className={`font-medium text-xs truncate ${hasScores && isTeam1Winner && !isTie ? 'text-green-700 dark:text-green-300' : 'text-gray-900 dark:text-gray-100'}`}>
+                <div className={`font-medium text-xs truncate ${showColors && hasScores && isTeam1Winner && !isTie ? 'text-green-700 dark:text-green-300' : 'text-gray-900 dark:text-gray-100'}`}>
                   {matchup.team1Seed && <span className="font-bold mr-1">#{matchup.team1Seed}</span>}
                   {matchup.team1Name}
                 </div>
@@ -395,7 +397,7 @@ export const PlayoffMatchupList = () => {
           </div>
 
           {/* Team 2 */}
-          <div className={`flex items-center justify-between ${hasScores && !isTeam1Winner && !isTie ? 'bg-green-50 dark:bg-green-900/20 rounded-full' : ''}`}>
+          <div className={`flex items-center justify-between ${showColors && hasScores && !isTeam1Winner && !isTie ? 'bg-green-50 dark:bg-green-900/20 rounded-full' : ''}`}>
             <div className="flex items-center space-x-1.5 min-w-0 flex-1">
               <TeamLogo
                 teamName={matchup.team2Name}
@@ -405,7 +407,7 @@ export const PlayoffMatchupList = () => {
                 onClick={() => openTeamProfile(matchup.team2UserId, matchup.team2Name)}
               />
               <div className="min-w-0 flex-1">
-                <div className={`font-medium text-xs truncate ${hasScores && !isTeam1Winner && !isTie ? 'text-green-700 dark:text-green-300' : 'text-gray-900 dark:text-gray-100'}`}>
+                <div className={`font-medium text-xs truncate ${showColors && hasScores && !isTeam1Winner && !isTie ? 'text-green-700 dark:text-green-300' : 'text-gray-900 dark:text-gray-100'}`}>
                   {matchup.team2Seed && <span className="font-bold mr-1">#{matchup.team2Seed}</span>}
                   {matchup.team2Name}
                 </div>
@@ -482,6 +484,7 @@ export const PlayoffMatchupList = () => {
               <div className="hidden md:block">
                 <PlayoffBracket
                   league={leagueData.league}
+                  year={CURRENT_YEAR}
                   playoffByeTeams={leagueData.playoffByeTeams}
                   consolationByeTeams={leagueData.consolationByeTeams}
                   playoffMatchups={leagueData.playoffMatchups}
