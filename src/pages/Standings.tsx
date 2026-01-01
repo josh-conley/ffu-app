@@ -288,7 +288,7 @@ export const Standings = () => {
                                   <span className={`ml-1 text-xs font-medium ${colors.text}`}>Champion</span>
                                 )}
                               </span>
-                              {hasDivisions && standing.division && (
+                              {isActiveSeason && hasDivisions && standing.division && (
                                 <>
                                   <span className="text-gray-400 dark:text-gray-500">•</span>
                                   <span className="inline-flex items-center gap-1">

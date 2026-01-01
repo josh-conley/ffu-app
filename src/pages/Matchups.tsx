@@ -7,7 +7,7 @@ import { TeamLogo } from '../components/Common/TeamLogo';
 import { LeagueBadge } from '../components/League/LeagueBadge';
 import { RosterModal } from '../components/Common/RosterModal';
 import type { LeagueTier } from '../types';
-import { USERS, getAllYears, getAvailableLeagues, getLeagueId } from '../config/constants';
+import { USERS, getAllYears, getAvailableLeagues, getLeagueId, isActiveYear } from '../config/constants';
 import { getSeasonLength, isSleeperEra } from '../utils/era-detection';
 import { ChevronDown, Filter } from 'lucide-react';
 import { useTeamProfileModal } from '../contexts/TeamProfileModalContext';
@@ -90,19 +90,19 @@ export const Matchups = () => {
     const week = getParam('week', '0');
     const weekNum = week === 'ALL' ? 0 : parseInt(week);
     let validWeekNum = isNaN(weekNum) ? 0 : weekNum;
-    
-    // For 2025 season, if selected week is playoff week (15-17), reset to All Weeks
-    if (year === '2025' && validWeekNum >= 15) {
+
+    // For active seasons, if selected week is playoff week (15-17), reset to All Weeks
+    if (isActiveYear(year) && validWeekNum >= 15) {
       validWeekNum = 0;
     }
-    
+
     setSelectedWeek(validWeekNum);
     setSelectedTeam(getParam('team', 'ALL'));
   }, []); // Empty dependency array - only run on mount
 
   // Reset week selection if it becomes invalid when year changes
   useEffect(() => {
-    if (selectedYear === '2025' && typeof selectedWeek === 'number' && selectedWeek >= 15 && selectedWeek !== 0) {
+    if (isActiveYear(selectedYear) && typeof selectedWeek === 'number' && selectedWeek >= 15 && selectedWeek !== 0) {
       setSelectedWeek(0); // Reset to All Weeks
       updateParams({ week: '0' });
     }
@@ -145,12 +145,12 @@ export const Matchups = () => {
   const weeks = useMemo(() => {
     const totalWeeks = getSeasonLength(selectedYear);
     const allWeeks = Array.from({ length: totalWeeks }, (_, i) => i + 1);
-    
-    // For active season (2025), exclude playoff weeks 15-17 since they're TBD
-    if (selectedYear === '2025') {
+
+    // For active seasons, exclude playoff weeks 15-17 since they're TBD
+    if (isActiveYear(selectedYear)) {
       return allWeeks.filter(week => week < 15);
     }
-    
+
     return allWeeks;
   }, [selectedYear]);
 
@@ -571,8 +571,8 @@ export const Matchups = () => {
 
           <div className="space-y-6 sm:space-y-8">
             {allWeeksData.map((weekData) => {
-              // For 2025 season, don't show playoff weeks (15-17) as they're TBD
-              if (selectedYear === '2025' && weekData.week >= 15) return null;
+              // For active seasons, don't show playoff weeks (15-17) as they're TBD
+              if (isActiveYear(selectedYear) && weekData.week >= 15) return null;
 
               const filteredMatchups = filterMatchupsByTeam(weekData.matchups || []);
               if (filteredMatchups.length === 0) return null; // Hide weeks with no matching games

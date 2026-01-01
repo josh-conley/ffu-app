@@ -2,9 +2,10 @@ name: Weekly Data Update
 
 on:
   workflow_dispatch:
-  schedule:
-    # Runs every Tuesday at 4am EST  
-    - cron: '0 9 * * 2' 
+  # Disabled: 2025 season has ended
+  # schedule:
+  #   # Runs every Tuesday at 4am EST
+  #   - cron: '0 9 * * 2' 
 
 permissions:
   contents: write

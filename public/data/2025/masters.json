@@ -4,49 +4,13 @@
   "leagueId": "1256011253583708161",
   "standings": [
     {
-      "userId": "396808818157182976",
-      "wins": 9,
-      "losses": 5,
-      "ties": 0,
-      "pointsFor": 1700.25,
-      "pointsAgainst": 1572.9,
-      "rank": 1,
-      "highGame": 177.05,
-      "lowGame": 70.15,
-      "division": 3
-    },
-    {
-      "userId": "865323291064291328",
-      "wins": 9,
-      "losses": 5,
-      "ties": 0,
-      "pointsFor": 1717.5,
-      "pointsAgainst": 1603.9,
-      "rank": 2,
-      "highGame": 168.5,
-      "lowGame": 77.4,
-      "division": 2
-    },
-    {
-      "userId": "864966364937461760",
-      "wins": 6,
-      "losses": 8,
-      "ties": 0,
-      "pointsFor": 1709.45,
-      "pointsAgainst": 1606.15,
-      "rank": 3,
-      "highGame": 186.6,
-      "lowGame": 91.75,
-      "division": 2
-    },
-    {
       "userId": "856248808915480576",
       "wins": 11,
       "losses": 3,
       "ties": 0,
       "pointsFor": 1943.3,
       "pointsAgainst": 1564.9,
-      "rank": 4,
+      "rank": 1,
       "highGame": 174.4,
       "lowGame": 111.2,
       "division": 1
@@ -58,10 +22,46 @@
       "ties": 0,
       "pointsFor": 1707.55,
       "pointsAgainst": 1639.2,
-      "rank": 5,
+      "rank": 2,
       "highGame": 149.25,
       "lowGame": 89.55,
       "division": 3
+    },
+    {
+      "userId": "865323291064291328",
+      "wins": 9,
+      "losses": 5,
+      "ties": 0,
+      "pointsFor": 1717.5,
+      "pointsAgainst": 1603.9,
+      "rank": 3,
+      "highGame": 168.5,
+      "lowGame": 77.4,
+      "division": 2
+    },
+    {
+      "userId": "396808818157182976",
+      "wins": 9,
+      "losses": 5,
+      "ties": 0,
+      "pointsFor": 1700.25,
+      "pointsAgainst": 1572.9,
+      "rank": 4,
+      "highGame": 177.05,
+      "lowGame": 70.15,
+      "division": 3
+    },
+    {
+      "userId": "864966364937461760",
+      "wins": 6,
+      "losses": 8,
+      "ties": 0,
+      "pointsFor": 1709.45,
+      "pointsAgainst": 1606.15,
+      "rank": 5,
+      "highGame": 186.6,
+      "lowGame": 91.75,
+      "division": 2
     },
     {
       "userId": "639877229681147904",
@@ -100,28 +100,28 @@
       "division": 2
     },
     {
+      "userId": "1133492104077946880",
+      "wins": 4,
+      "losses": 10,
+      "ties": 0,
+      "pointsFor": 1482.15,
+      "pointsAgainst": 1726.1,
+      "rank": 9,
+      "highGame": 154.55,
+      "lowGame": 76.7,
+      "division": 1
+    },
+    {
       "userId": "472876832719368192",
       "wins": 6,
       "losses": 8,
       "ties": 0,
       "pointsFor": 1601.35,
       "pointsAgainst": 1754.4,
-      "rank": 9,
+      "rank": 10,
       "highGame": 164.05,
       "lowGame": 70.15,
       "division": 1
-    },
-    {
-      "userId": "325766631336714240",
-      "wins": 6,
-      "losses": 8,
-      "ties": 0,
-      "pointsFor": 1604.75,
-      "pointsAgainst": 1670.6,
-      "rank": 10,
-      "highGame": 159.85,
-      "lowGame": 79.1,
-      "division": 2
     },
     {
       "userId": "860973514839199744",
@@ -136,26 +136,36 @@
       "division": 3
     },
     {
-      "userId": "1133492104077946880",
-      "wins": 4,
-      "losses": 10,
+      "userId": "325766631336714240",
+      "wins": 6,
+      "losses": 8,
       "ties": 0,
-      "pointsFor": 1482.15,
-      "pointsAgainst": 1726.1,
+      "pointsFor": 1604.75,
+      "pointsAgainst": 1670.6,
       "rank": 12,
-      "highGame": 154.55,
-      "lowGame": 76.7,
-      "division": 1
+      "highGame": 159.85,
+      "lowGame": 79.1,
+      "division": 2
     }
   ],
   "playoffResults": [
     {
-      "userId": "396808818157182976",
+      "userId": "856248808915480576",
+      "placement": 1,
+      "placementName": "1st"
+    },
+    {
+      "userId": "462383465753473024",
+      "placement": 2,
+      "placementName": "2nd"
+    },
+    {
+      "userId": "865323291064291328",
       "placement": 3,
       "placementName": "3rd"
     },
     {
-      "userId": "865323291064291328",
+      "userId": "396808818157182976",
       "placement": 4,
       "placementName": "4th"
     },
@@ -165,17 +175,7 @@
       "placementName": "5th"
     },
     {
-      "userId": "856248808915480576",
-      "placement": 5,
-      "placementName": "5th"
-    },
-    {
       "userId": "639877229681147904",
-      "placement": 6,
-      "placementName": "6th"
-    },
-    {
-      "userId": "462383465753473024",
       "placement": 6,
       "placementName": "6th"
     },
@@ -190,23 +190,33 @@
       "placementName": "8th"
     },
     {
-      "userId": "472876832719368192",
+      "userId": "1133492104077946880",
       "placement": 9,
       "placementName": "9th"
     },
     {
-      "userId": "325766631336714240",
+      "userId": "472876832719368192",
       "placement": 10,
       "placementName": "10th"
+    },
+    {
+      "userId": "860973514839199744",
+      "placement": 11,
+      "placementName": "11th"
+    },
+    {
+      "userId": "325766631336714240",
+      "placement": 12,
+      "placementName": "12th"
     }
   ],
   "promotions": [
-    "396808818157182976",
-    "865323291064291328"
+    "856248808915480576",
+    "462383465753473024"
   ],
   "relegations": [
     "860973514839199744",
-    "1133492104077946880"
+    "325766631336714240"
   ],
   "matchupsByWeek": {
     "1": [
@@ -1010,7 +1020,8 @@
         "winnerScore": 152.35,
         "loserScore": 137.5,
         "winnerRecord": "11-3",
-        "loserRecord": "9-5"
+        "loserRecord": "9-5",
+        "placementType": "Championship"
       },
       {
         "winner": "865323291064291328",
@@ -1018,7 +1029,8 @@
         "winnerScore": 77.4,
         "loserScore": 72.5,
         "winnerRecord": "9-5",
-        "loserRecord": "9-5"
+        "loserRecord": "9-5",
+        "placementType": "3rd Place"
       },
       {
         "winner": "860973514839199744",
@@ -1026,7 +1038,8 @@
         "winnerScore": 159.55,
         "loserScore": 117.45,
         "winnerRecord": "5-9",
-        "loserRecord": "6-8"
+        "loserRecord": "6-8",
+        "placementType": "Last Place"
       },
       {
         "winner": "1133492104077946880",
@@ -1034,7 +1047,8 @@
         "winnerScore": 112.4,
         "loserScore": 84.2,
         "winnerRecord": "4-10",
-        "loserRecord": "6-8"
+        "loserRecord": "6-8",
+        "placementType": "9th Place"
       }
     ]
   },

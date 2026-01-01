@@ -26,7 +26,7 @@ interface UserConfig {
 // Master league configuration - single source of truth
 export const LEAGUES: LeagueConfig[] = [
   // PREMIER LEAGUE
-  { sleeperId: '1256010768692805632', year: '2025', tier: 'PREMIER', status: 'active', startYear: 2025 },
+  { sleeperId: '1256010768692805632', year: '2025', tier: 'PREMIER', status: 'completed', startYear: 2025 },
   { sleeperId: '1124841088360660992', year: '2024', tier: 'PREMIER', status: 'completed', startYear: 2024 },
   { sleeperId: '989237166217723904', year: '2023', tier: 'PREMIER', status: 'completed', startYear: 2023 },
   { sleeperId: '856271024054996992', year: '2022', tier: 'PREMIER', status: 'completed', startYear: 2022 },
@@ -35,15 +35,15 @@ export const LEAGUES: LeagueConfig[] = [
   { sleeperId: 'espn-2019-premier', year: '2019', tier: 'PREMIER', status: 'completed', startYear: 2019 },
   { sleeperId: 'espn-2018-premier', year: '2018', tier: 'PREMIER', status: 'completed', startYear: 2018 },
   
-  // MASTERS LEAGUE  
-  { sleeperId: '1256011253583708161', year: '2025', tier: 'MASTERS', status: 'active', startYear: 2025 },
+  // MASTERS LEAGUE
+  { sleeperId: '1256011253583708161', year: '2025', tier: 'MASTERS', status: 'completed', startYear: 2025 },
   { sleeperId: '1124833010697379840', year: '2024', tier: 'MASTERS', status: 'completed', startYear: 2024 },
   { sleeperId: '989238596353794048', year: '2023', tier: 'MASTERS', status: 'completed', startYear: 2023 },
   { sleeperId: '856271401471029248', year: '2022', tier: 'MASTERS', status: 'completed', startYear: 2022 },
   // Note: No Masters league in ESPN era (2018-2020)
   
   // NATIONAL LEAGUE
-  { sleeperId: '1256012193275576320', year: '2025', tier: 'NATIONAL', status: 'active', startYear: 2025 },
+  { sleeperId: '1256012193275576320', year: '2025', tier: 'NATIONAL', status: 'completed', startYear: 2025 },
   { sleeperId: '1124834889196134400', year: '2024', tier: 'NATIONAL', status: 'completed', startYear: 2024 },
   { sleeperId: '989240797381951488', year: '2023', tier: 'NATIONAL', status: 'completed', startYear: 2023 },
   { sleeperId: '856271753788403712', year: '2022', tier: 'NATIONAL', status: 'completed', startYear: 2022 },
@@ -259,8 +259,8 @@ export const getAllLeagueConfigs = (): LeagueConfig[] => {
 export const LEAGUE_HIERARCHY = ['PREMIER', 'MASTERS', 'NATIONAL'] as const;
 
 // Define which years are historical (cached) vs current (live API)
-export const HISTORICAL_YEARS = ['2018', '2019', '2020', '2021', '2022', '2023', '2024'] as const;
-export const CURRENT_YEAR = '2025'; // Update this when the new season starts
+export const HISTORICAL_YEARS = ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'] as const;
+export const CURRENT_YEAR = '2026'; // Update this when the new season starts
 
 export const isHistoricalYear = (year: string): boolean => {
   return HISTORICAL_YEARS.includes(year as any);

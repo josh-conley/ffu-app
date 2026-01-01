@@ -36,8 +36,8 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
   // Identify division leaders for star icons (only for active season)
   const divisionLeaderInfo = isActiveSeason ? identifyDivisionLeaders(rankedStandings, matchupsByWeek, year) : null;
 
-  // Determine which view to show based on toggle
-  const shouldShowDivisions = hasDivisions && viewMode === 'divisions';
+  // Determine which view to show based on toggle (only for active seasons)
+  const shouldShowDivisions = isActiveSeason && hasDivisions && viewMode === 'divisions';
 
   // Handle column sorting
   const handleSort = (field: SortField) => {
@@ -324,8 +324,8 @@ export const StandingsTable = ({ standings, league, year, matchupsByWeek, divisi
             {getLeagueName(league as LeagueTier)} League
           </h3>
 
-          {/* Toggle button - only show if divisions exist */}
-          {hasDivisions && (
+          {/* Toggle button - only show if divisions exist and season is active */}
+          {isActiveSeason && hasDivisions && (
             <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 rounded p-1">
               <button
                 onClick={() => setViewMode('all')}
