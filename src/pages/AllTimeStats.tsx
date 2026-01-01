@@ -84,7 +84,7 @@ export const AllTimeStats = () => {
   const [seasonSortKey, setSeasonSortKey] = useState<SeasonHistorySortKey>('year');
   const [seasonSortOrder, setSeasonSortOrder] = useState<SortOrder>('desc');
   const [horseraceLeague, setHorseraceLeague] = useState<LeagueTier>('PREMIER');
-  const [horseraceYear, setHorseraceYear] = useState<string>('2024');
+  const [horseraceYear, setHorseraceYear] = useState<string>('2025');
 
   // Initialize from URL params on mount
   useEffect(() => {
@@ -125,7 +125,7 @@ export const AllTimeStats = () => {
       setHorseraceLeague(horseLeague as LeagueTier);
     }
 
-    setHorseraceYear(getParam('horseraceYear', '2024'));
+    setHorseraceYear(getParam('horseraceYear', '2025'));
   }, []); // Empty dependency array - only run on mount
 
   // Mobile touch state for showing full team names (now unused since we use modal)
@@ -137,12 +137,12 @@ export const AllTimeStats = () => {
   };
 
   const leagues: (LeagueTier | 'ALL')[] = ['ALL', 'PREMIER', 'MASTERS', 'NATIONAL'];
-  const years = ['ALL', '2024', '2023', '2022', '2021', '2020', '2019', '2018'];
+  const years = ['ALL', '2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018'];
   const validYearsByLeague: Record<string, string[]> = {
     ALL: years,
     PREMIER: years,
     NATIONAL: years,
-    MASTERS: ['ALL', '2024', '2023', '2022'], // no 2021, 2020
+    MASTERS: ['ALL', '2025', '2024', '2023', '2022'], // no 2021, 2020
   };
 
   const filteredYears = useMemo(() => {

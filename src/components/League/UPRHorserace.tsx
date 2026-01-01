@@ -52,9 +52,9 @@ const TEAM_COLORS = [
 export const UPRHorserace = ({ league, year, onLeagueChange, onYearChange }: UPRHorseraceProps) => {
   // Valid years by league - matches the logic from AllTimeStats
   const validYearsByLeague: Record<string, string[]> = {
-    PREMIER: ['2024', '2023', '2022', '2021', '2020', '2019', '2018'],
-    NATIONAL: ['2024', '2023', '2022', '2021', '2020', '2019', '2018'],
-    MASTERS: ['2024', '2023', '2022'], // Masters started in 2022
+    PREMIER: ['2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018'],
+    NATIONAL: ['2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018'],
+    MASTERS: ['2025', '2024', '2023', '2022'], // Masters started in 2022
   };
   const { data: allStandings, isLoading: standingsLoading, error: standingsError } = useAllStandings();
   const [teamData, setTeamData] = useState<TeamUPRProgress[]>([]);
@@ -69,10 +69,10 @@ export const UPRHorserace = ({ league, year, onLeagueChange, onYearChange }: UPR
 
   // Get valid years for current league
   const validYears = validYearsByLeague[league] || [];
-  
+
   // Get current league standings to determine teams
   const leagueStandings = allStandings?.find(s => s.league === league && s.year === year);
-  const maxWeek = year === '2024' ? 14 : (parseInt(year) >= 2021 ? 14 : 13); // Era-aware week count
+  const maxWeek = parseInt(year) >= 2021 ? 14 : 13; // Era-aware week count (14 regular season weeks for Sleeper era)
   
 
   useEffect(() => {
